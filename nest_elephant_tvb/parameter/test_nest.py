@@ -1,6 +1,6 @@
 import numpy as np
 
-path ="/home/kusch/Documents/project/co_simulation/mouse_brain_co_simulation/nest_elephant_tvb/parameter/data_mouse/"
+path ="/home/kusch/Documents/project/co_simulation/co-simulation_mouse/nest_elephant_tvb/parameter/data_mouse/"
 
 param_co_simulation={
     'co-simulation':False,
