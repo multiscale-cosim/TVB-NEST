@@ -310,10 +310,7 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
     else:
         param_spike_dec= {"start": min_time,
                           "stop": time_simulation,
-                          "withtime": True,
-                          "withgid": True,
-                          'to_file': True,
-                          'to_memory': False,
+                          "record_to":['memory','ascii'],
                           'label': 'spike_detector'
                           }
         nest.CopyModel('spike_detector','spike_detector_record')
