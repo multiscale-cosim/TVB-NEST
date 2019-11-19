@@ -1,0 +1,6 @@
+.idea
+*/*/*.pyc
+*/*.pyc
+*.pyc
+*/test_file/*
+
