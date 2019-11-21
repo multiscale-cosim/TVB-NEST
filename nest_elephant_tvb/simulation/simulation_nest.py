@@ -401,9 +401,9 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
             'delay' : nest.GetKernelStatus("min_delay"), # without delay
         }
 
-        noise_generator = nest.Create('noise_generator_global')
         for name_pops,list_pops in dic_layer.items():
             for index,population in enumerate(list_pops['list']):
+                noise_generator = nest.Create('noise_generator_global')
                 nest.Connect(noise_generator,population['region'],syn_spec=syn_spec_noise)
 
     return spike_detector
