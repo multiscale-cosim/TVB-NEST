@@ -30,7 +30,7 @@ from ..ll_api import *
 from .. import pynestkernel as kernel
 from .hl_api_helper import *
 from .hl_api_nodes import Create
-from .hl_api_types import GIDCollection, Connectome, Mask, Parameter
+from .hl_api_types import NodeCollection, SynapseCollection, Mask, Parameter
 from .hl_api_info import GetStatus
 from .hl_api_simulation import GetKernelStatus, SetKernelStatus
 
@@ -47,18 +47,18 @@ __all__ = [
 @check_stack
 def GetConnections(source=None, target=None, synapse_model=None,
                    synapse_label=None):
-    """Return a `Connectome` representing the connection identifiers.
+    """Return a `SynapseCollection` representing the connection identifiers.
 
     Any combination of source, target, synapse_model and
     synapse_label parameters is permitted.
 
     Parameters
     ----------
-    source : GIDCollection or list, optional
-        Source GIDs, only connections from these
+    source : NodeCollection or list, optional
+        Source node IDs, only connections from these
         pre-synaptic neurons are returned
-    target : GIDCollection or list, optional
-        Target GIDs, only connections to these
+    target : NodeCollection or list, optional
+        Target node IDs, only connections to these
         post-synaptic neurons are returned
     synapse_model : str, optional
         Only connections with this synapse type are returned
@@ -67,9 +67,9 @@ def GetConnections(source=None, target=None, synapse_model=None,
 
     Returns
     -------
-    Connectome:
-        Object representing the source-gid, target-gid, target-thread, synapse-id, port of connections, see
-        :py:class:`Connectome`.
+    SynapseCollection:
+        Object representing the source-node_id, target-node_id, target-thread, synapse-id, port of connections, see
+        :py:class:`SynapseCollection`.
 
     Notes
     -----
@@ -85,16 +85,16 @@ def GetConnections(source=None, target=None, synapse_model=None,
     params = {}
 
     if source is not None:
-        if isinstance(source, GIDCollection):
+        if isinstance(source, NodeCollection):
             params['source'] = source
         else:
-            raise TypeError("source must be GIDCollection.")
+            raise TypeError("source must be NodeCollection.")
 
     if target is not None:
-        if isinstance(target, GIDCollection):
+        if isinstance(target, NodeCollection):
             params['target'] = target
         else:
-            raise TypeError("target must be GIDCollection.")
+            raise TypeError("target must be NodeCollection.")
 
     if synapse_model is not None:
         params['synapse_model'] = kernel.SLILiteral(synapse_model)
@@ -108,7 +108,7 @@ def GetConnections(source=None, target=None, synapse_model=None,
     conns = spp()
 
     if isinstance(conns, tuple):
-        conns = Connectome(None)
+        conns = SynapseCollection(None)
 
     return conns
 
@@ -308,7 +308,7 @@ def _connect_nonunique(syn_spec):
 
 @check_stack
 def Connect(pre, post, conn_spec=None, syn_spec=None,
-            return_connectome=False):
+            return_synapsecollection=False):
     """
     Connect pre nodes to post nodes.
 
@@ -318,16 +318,16 @@ def Connect(pre, post, conn_spec=None, syn_spec=None,
 
     Parameters
     ----------
-    pre : GIDCollection
+    pre : NodeCollection
         Presynaptic nodes, as object representing the global IDs of the nodes
-    post : GIDCollection
+    post : NodeCollection
         Postsynaptic nodes, as object representing the global IDs of the nodes
     conn_spec : str or dict, optional
         Specifies connectivity rule, see below
     syn_spec : str or dict, optional
         Specifies synapse model, see below
-    return_connectome: bool
-        Specifies whether or not we should return a Connectome of pre and post connections
+    return_synapsecollection: bool
+        Specifies whether or not we should return a SynapseCollection of pre and post connections
 
     Raises
     ------
@@ -335,7 +335,7 @@ def Connect(pre, post, conn_spec=None, syn_spec=None,
 
     Notes
     -----
-    It is possible to connect arrays of GIDs with nonunique GIDs by
+    It is possible to connect arrays of node IDs with nonunique node IDs by
     passing the arrays as pre and post, together with a syn_spec dictionary.
     However this should only be done if you know what you're doing. This will
     connect all nodes in pre to all nodes in post and apply the specified
@@ -476,17 +476,18 @@ def Connect(pre, post, conn_spec=None, syn_spec=None,
     processed_syn_spec = _process_syn_spec(
         syn_spec, processed_conn_spec, len(pre), len(post))
 
-    pre_is_array_of_gids = isinstance(pre, (list, tuple, numpy.ndarray))
-    post_is_array_of_gids = isinstance(post, (list, tuple, numpy.ndarray))
-    # If pre and post are arrays of GIDs and no conn_spec is specified,
-    # the GIDs are connected all_to_all. If the arrays contain unique
-    # GIDs, a warning is issued.
-    if pre_is_array_of_gids and post_is_array_of_gids and conn_spec is None:
-        if return_connectome:
-            raise ValueError("Connectome cannot be returned when connecting two arrays of GIDs")
+    pre_is_array_of_node_ids = isinstance(pre, (list, tuple, numpy.ndarray))
+    post_is_array_of_node_ids = isinstance(post, (list, tuple, numpy.ndarray))
+    # If pre and post are arrays of node IDs and no conn_spec is specified,
+    # the node IDs are connected all_to_all. If the arrays contain unique
+    # node IDs, a warning is issued.
+    if pre_is_array_of_node_ids and post_is_array_of_node_ids and conn_spec is None:
+        if return_synapsecollection:
+            raise ValueError("SynapseCollection cannot be returned when connecting two arrays of node IDs")
         if len(numpy.unique(pre)) == len(pre) and len(numpy.unique(post)) == len(post):
-            warnings.warn('Connecting two arrays of GIDs should only be done in cases where one or both the arrays '
-                          'contain non-unique GIDs. Use GIDCollections when connecting two collections of unique GIDs.')
+            warnings.warn('Connecting two arrays of node IDs should only be done in cases where one or both the arrays '
+                          'contain non-unique node IDs. Use NodeCollections when connecting two collections of '
+                          'unique node IDs.')
         # Connect_nonunique doesn't support connecting numpy arrays
         sps(list(pre))
         sps(list(post))
@@ -496,22 +497,22 @@ def Connect(pre, post, conn_spec=None, syn_spec=None,
     sps(pre)
     sps(post)
 
-    if not isinstance(pre, GIDCollection):
+    if not isinstance(pre, NodeCollection):
         raise TypeError("Not implemented, presynaptic nodes must be a "
-                        "GIDCollection")
-    if not isinstance(post, GIDCollection):
+                        "NodeCollection")
+    if not isinstance(post, NodeCollection):
         raise TypeError("Not implemented, postsynaptic nodes must be a "
-                        "GIDCollection")
+                        "NodeCollection")
 
     # In some cases we must connect with ConnectLayers instead.
     if _connect_layers_needed(processed_conn_spec, processed_syn_spec):
         # Check that pre and post are layers
         if pre.spatial is None:
             raise TypeError(
-                "Presynaptic GIDCollection must have spatial information")
+                "Presynaptic NodeCollection must have spatial information")
         if post.spatial is None:
             raise TypeError(
-                "Presynaptic GIDCollection must have spatial information")
+                "Presynaptic NodeCollection must have spatial information")
 
         # Create the projection dictionary
         spatial_projections = _process_spatial_projections(
@@ -525,7 +526,7 @@ def Connect(pre, post, conn_spec=None, syn_spec=None,
             sps(processed_syn_spec)
         sr('Connect')
 
-    if return_connectome:
+    if return_synapsecollection:
         return GetConnections(pre, post)
 
 
@@ -553,10 +554,10 @@ def CGConnect(pre, post, cg, parameter_map=None, model="static_synapse"):
 
     Parameters
     ----------
-    pre : GIDCollection
-        GIDs of presynaptic nodes
-    post : GIDCollection
-        GIDs of postsynaptic nodes
+    pre : NodeCollection
+        node IDs of presynaptic nodes
+    post : NodeCollection
+        node IDs of postsynaptic nodes
     cg : connection generator
         libneurosim connection generator to use
     parameter_map : dict, optional
@@ -652,10 +653,10 @@ def Disconnect(pre, post, conn_spec='one_to_one', syn_spec='static_synapse'):
 
     Parameters
     ----------
-    pre : GIDCollection
-        Presynaptic nodes, given as GIDCollection
-    post : GIDCollection
-        Postsynaptic nodes, given as GIDCollection
+    pre : NodeCollection
+        Presynaptic nodes, given as NodeCollection
+    post : NodeCollection
+        Postsynaptic nodes, given as NodeCollection
     conn_spec : str or dict
         Disconnection rule, see below
     syn_spec : str or dict

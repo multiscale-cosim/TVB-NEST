@@ -53,8 +53,8 @@ cdef string SLI_TYPE_VECTOR_INT = b"intvectortype"
 cdef string SLI_TYPE_VECTOR_DOUBLE = b"doublevectortype"
 cdef string SLI_TYPE_MASK = b"masktype"
 cdef string SLI_TYPE_PARAMETER = b"parametertype"
-cdef string SLI_TYPE_GIDCOLLECTION = b"gidcollectiontype"
-cdef string SLI_TYPE_GIDCOLLECTIONITERATOR = b"gidcollectioniteratortype"
+cdef string SLI_TYPE_NODECOLLECTION = b"nodecollectiontype"
+cdef string SLI_TYPE_NODECOLLECTIONITERATOR = b"nodecollectioniteratortype"
 
 
 DEF CONN_ELMS = 5
@@ -494,10 +494,10 @@ cdef inline Datum* python_object_to_datum(obj) except NULL:
             ret = <Datum*> new MaskDatum(deref(<MaskDatum*> (<SLIDatum> obj).thisptr))
         elif (<SLIDatum> obj).dtype == SLI_TYPE_PARAMETER.decode():
             ret = <Datum*> new ParameterDatum(deref(<ParameterDatum*> (<SLIDatum> obj).thisptr))
-        elif (<SLIDatum> obj).dtype == SLI_TYPE_GIDCOLLECTION.decode():
-            ret = <Datum*> new GIDCollectionDatum(deref(<GIDCollectionDatum*> (<SLIDatum> obj).thisptr))
-        elif (<SLIDatum> obj).dtype == SLI_TYPE_GIDCOLLECTIONITERATOR.decode():
-            ret = <Datum*> new GIDCollectionIteratorDatum(deref(<GIDCollectionIteratorDatum*> (<SLIDatum> obj).thisptr))
+        elif (<SLIDatum> obj).dtype == SLI_TYPE_NODECOLLECTION.decode():
+            ret = <Datum*> new NodeCollectionDatum(deref(<NodeCollectionDatum*> (<SLIDatum> obj).thisptr))
+        elif (<SLIDatum> obj).dtype == SLI_TYPE_NODECOLLECTIONITERATOR.decode():
+            ret = <Datum*> new NodeCollectionIteratorDatum(deref(<NodeCollectionIteratorDatum*> (<SLIDatum> obj).thisptr))
         elif (<SLIDatum> obj).dtype == SLI_TYPE_CONNECTION.decode():
             ret = <Datum*> new ConnectionDatum(deref(<ConnectionDatum*> (<SLIDatum> obj).thisptr))
         else:
@@ -612,7 +612,7 @@ cdef inline object sli_datum_to_object(Datum* dat):
     elif datum_type == SLI_TYPE_CONNECTION:
         datum = SLIDatum()
         (<SLIDatum> datum)._set_datum(<Datum*> new ConnectionDatum(deref(<ConnectionDatum*> dat)), SLI_TYPE_CONNECTION.decode())
-        ret = nest.Connectome(datum)
+        ret = nest.SynapseCollection(datum)
     elif datum_type == SLI_TYPE_VECTOR_INT:
         ret = sli_vector_to_object[sli_vector_int_ptr_t, long](<IntVectorDatum*> dat)
     elif datum_type == SLI_TYPE_VECTOR_DOUBLE:
@@ -625,13 +625,13 @@ cdef inline object sli_datum_to_object(Datum* dat):
         datum = SLIDatum()
         (<SLIDatum> datum)._set_datum(<Datum*> new ParameterDatum(deref(<ParameterDatum*> dat)), SLI_TYPE_PARAMETER.decode())
         ret = nest.Parameter(datum)
-    elif datum_type == SLI_TYPE_GIDCOLLECTION:
+    elif datum_type == SLI_TYPE_NODECOLLECTION:
         datum = SLIDatum()
-        (<SLIDatum> datum)._set_datum(<Datum*> new GIDCollectionDatum(deref(<GIDCollectionDatum*> dat)), SLI_TYPE_GIDCOLLECTION.decode())
-        ret = nest.GIDCollection(datum)
-    elif datum_type == SLI_TYPE_GIDCOLLECTIONITERATOR:
+        (<SLIDatum> datum)._set_datum(<Datum*> new NodeCollectionDatum(deref(<NodeCollectionDatum*> dat)), SLI_TYPE_NODECOLLECTION.decode())
+        ret = nest.NodeCollection(datum)
+    elif datum_type == SLI_TYPE_NODECOLLECTIONITERATOR:
         ret = SLIDatum()
-        (<SLIDatum> ret)._set_datum(<Datum*> new GIDCollectionIteratorDatum(deref(<GIDCollectionIteratorDatum*> dat)), SLI_TYPE_GIDCOLLECTIONITERATOR.decode())
+        (<SLIDatum> ret)._set_datum(<Datum*> new NodeCollectionIteratorDatum(deref(<NodeCollectionIteratorDatum*> dat)), SLI_TYPE_NODECOLLECTIONITERATOR.decode())
     else:
         raise NESTErrors.PyNESTError("unknown SLI type: {0}".format(datum_type.decode()))
 
@@ -662,7 +662,7 @@ cdef inline object sli_array_to_object(ArrayDatum* dat):
             tmp[i] = datum
             # Increment
             inc(tok)
-        return nest.Connectome(tmp)
+        return nest.SynapseCollection(tmp)
     else:
         for i in range(n):
             tmp[i] = sli_datum_to_object(tok.datum())
