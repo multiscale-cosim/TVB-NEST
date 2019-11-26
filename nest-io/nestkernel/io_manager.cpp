@@ -42,6 +42,7 @@
 #include "recording_backend_ascii.h"
 #include "recording_backend_memory.h"
 #include "recording_backend_screen.h"
+#include "recording_backend_mpi.h"
 #ifdef HAVE_MPI
 #include "recording_backend_arbor.h"
 #endif
@@ -311,6 +312,7 @@ IOManager::register_recording_backends_()
   recording_backends_.insert( std::make_pair( "screen", new RecordingBackendScreen() ) );
 #ifdef HAVE_MPI
   recording_backends_.insert( std::make_pair( "arbor", new RecordingBackendArbor() ) );
+  recording_backends_.insert( std::make_pair( "mpi", new RecordingBackendMPI() ) );
 #endif
 #ifdef HAVE_SIONLIB
   recording_backends_.insert( std::make_pair( "sionlib", new RecordingBackendSIONlib() ) );
