@@ -241,6 +241,8 @@ extern const Name indegree;
 extern const Name index_map;
 extern const Name individual_spike_trains;
 extern const Name init_flag;
+extern const Name input_backends;
+extern const Name input_from;
 extern const Name instant_unblock_NMDA;
 extern const Name instantiations;
 extern const Name Interpol_Order;

@@ -59,7 +59,7 @@ nest.SetKernelStatus({"overwrite_files": True,
 # function.
 
 print("iaf_cond_alpha recordables: {0}".format(
-      nest.GetDefaults("iaf_cond_alpha")["recordables"]))
+      nest.GetDefaults("iaf_psc_alpha")["recordables"]))
 
 ###############################################################################
 # A neuron, a multimeter as recording device and two spike generators for
@@ -86,13 +86,13 @@ print("iaf_cond_alpha recordables: {0}".format(
 #  * For the spike generators, the spike times in ms (`spike_times`) are given
 #    explicitly.
 
-n = nest.Create("iaf_cond_alpha",
+n = nest.Create("iaf_psc_alpha",
                 params={"tau_syn_ex": 1.0, "V_reset": -70.0})
 
 m = nest.Create("multimeter",
                 params={"interval": 0.1,
                         "record_from": ["V_m", "g_ex", "g_in"],
-                        "record_to": "ascii",
+                        "record_to": "mpi",
                         "label": "my_multimeter"})
 
 s_ex = nest.Create("spike_generator",

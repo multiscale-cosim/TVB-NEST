@@ -98,6 +98,9 @@ set( nestkernel_sources
     source_table.h source_table.cpp
     source_table_position.h
     spike_data.h
+    input_device.h input_device.cpp
+    input_backend.h input_backend.cpp
+    input_backend_internal.h input_backend_internal.cpp
     )
 
 if ( HAVE_SIONLIB )
@@ -111,6 +114,7 @@ if ( HAVE_MPI )
   set( nestkernel_sources
     ${nestkernel_sources}
     recording_backend_arbor.h recording_backend_arbor.cpp
+    input_backend_mpi.h input_backend_mpi.cpp
   )
 endif ()
 

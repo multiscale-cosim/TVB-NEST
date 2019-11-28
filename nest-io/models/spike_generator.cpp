@@ -288,7 +288,7 @@ nest::spike_generator::Parameters_::set( const DictionaryDatum& d,
  * ---------------------------------------------------------------- */
 
 nest::spike_generator::spike_generator()
-  : DeviceNode()
+  : InputDevice()
   , device_()
   , P_()
   , S_()
@@ -296,7 +296,7 @@ nest::spike_generator::spike_generator()
 }
 
 nest::spike_generator::spike_generator( const spike_generator& n )
-  : DeviceNode( n )
+  : InputDevice( n )
   , device_( n.device_ )
   , P_( n.P_ )
   , S_( n.S_ )
@@ -326,7 +326,8 @@ nest::spike_generator::init_buffers_()
 void
 nest::spike_generator::calibrate()
 {
-  device_.calibrate();
+  InputDevice::calibrate( InputBackend::NO_DOUBLE_VALUE_NAMES, InputBackend::NO_LONG_VALUE_NAMES );
+
 }
 
 
@@ -440,4 +441,10 @@ nest::spike_generator::set_status( const DictionaryDatum& d )
 
   // if we get here, temporary contains consistent set of properties
   P_ = ptmp;
+}
+
+nest::InputDevice::Type
+nest::spike_generator::get_type() const
+{
+  return InputDevice::SPIKE_GENERATOR;
 }

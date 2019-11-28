@@ -220,6 +220,8 @@ const Name indegree( "indegree" );
 const Name index_map( "index_map" );
 const Name individual_spike_trains( "individual_spike_trains" );
 const Name init_flag( "init_flag" );
+const Name input_backends( "input_backends" );
+const Name input_from( "input_from" );
 const Name instant_unblock_NMDA( "instant_unblock_NMDA" );
 const Name instantiations( "instantiations" );
 const Name Interpol_Order( "Interpol_Order" );

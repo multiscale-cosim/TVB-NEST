@@ -34,6 +34,7 @@
 #include "nest_time.h"
 #include "nest_types.h"
 #include "stimulating_device.h"
+#include "input_device.h"
 
 namespace nest
 {
@@ -190,7 +191,7 @@ Author: Gewaltig, Diesmann, Eppler
 
 SeeAlso: Device, StimulatingDevice, testsuite::test_spike_generator
 */
-class spike_generator : public DeviceNode
+class spike_generator : public InputDevice
 {
 
 public:
@@ -213,6 +214,7 @@ public:
   void get_status( DictionaryDatum& ) const;
   void set_status( const DictionaryDatum& );
 
+  Type get_type() const;
   /**
    * Import sets of overloaded virtual functions.
    * @see Technical Issues / Virtual Functions: Overriding, Overloading, and

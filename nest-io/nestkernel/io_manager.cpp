@@ -42,9 +42,11 @@
 #include "recording_backend_ascii.h"
 #include "recording_backend_memory.h"
 #include "recording_backend_screen.h"
-#include "recording_backend_mpi.h"
+#include "input_backend_internal.h"
 #ifdef HAVE_MPI
 #include "recording_backend_arbor.h"
+#include "recording_backend_mpi.h"
+#include "input_backend_mpi.h"
 #endif
 #ifdef HAVE_SIONLIB
 #include "recording_backend_sionlib.h"
@@ -65,6 +67,10 @@ IOManager::IOManager()
 IOManager::~IOManager()
 {
   for ( auto& it : recording_backends_ )
+  {
+    delete it.second;
+  }
+  for ( auto& it : input_backends_ )
   {
     delete it.second;
   }
@@ -179,6 +185,19 @@ IOManager::set_status( const DictionaryDatum& d )
       }
     }
   }
+  DictionaryDatum input_backends;
+  if ( updateValue< DictionaryDatum >( d, names::input_backends, input_backends ) )
+  {
+    std::map< Name, InputBackend* >::const_iterator iti;
+    for ( iti = input_backends_.begin(); iti != input_backends_.end(); ++iti )
+    {
+      DictionaryDatum input_backend_status;
+      if ( updateValue< DictionaryDatum >(input_backends, iti->first, input_backend_status ) )
+      {
+	iti->second->set_status( input_backend_status );
+      }
+    }
+  }
 }
 
 void
@@ -196,12 +215,25 @@ IOManager::get_status( DictionaryDatum& d )
     ( *recording_backends )[ it.first ] = recording_backend_status;
   }
   ( *d )[ names::recording_backends ] = recording_backends;
+
+  DictionaryDatum input_backends( new Dictionary );
+  for (const auto& it : input_backends_ )
+  {
+    DictionaryDatum input_backend_status( new Dictionary );
+    it.second->get_status( input_backend_status );
+    ( *input_backends )[ it.first ] = input_backend_status;
+  }
+  ( *d )[ names::input_backends ] = input_backends;
 }
 
 void
 IOManager::pre_run_hook()
 {
   for ( auto& it : recording_backends_ )
+  {
+    it.second->pre_run_hook();
+  }
+  for ( auto& it : input_backends_ )
   {
     it.second->pre_run_hook();
   }
@@ -214,12 +246,20 @@ IOManager::post_run_hook()
   {
     it.second->post_run_hook();
   }
+  for ( auto& it : input_backends_ )
+  {
+    it.second->post_run_hook();
+  }
 }
 
 void
 IOManager::post_step_hook()
 {
   for ( auto& it : recording_backends_ )
+  {
+    it.second->post_step_hook();
+  }
+  for ( auto& it : input_backends_ )
   {
     it.second->post_step_hook();
   }
@@ -232,12 +272,20 @@ IOManager::prepare()
   {
     it.second->prepare();
   }
+  for ( auto& it : input_backends_ )
+  {
+    it.second->prepare();
+  }
 }
 
 void
 IOManager::cleanup()
 {
   for ( auto& it : recording_backends_ )
+  {
+    it.second->cleanup();
+  }
+  for ( auto& it : input_backends_ )
   {
     it.second->cleanup();
   }
@@ -251,6 +299,29 @@ IOManager::is_valid_recording_backend( Name backend_name ) const
   return backend != recording_backends_.end();
 }
 
+bool
+IOManager::is_valid_input_backend( Name backend_name ) const
+{
+  std::map< Name, InputBackend* >::const_iterator backend;
+  backend = input_backends_.find( backend_name );
+  return backend != input_backends_.end();
+}
+
+nest::InputBackend*
+nest::IOManager::get_input_backend_( Name backend_name )
+{
+  nest::InputBackend *back;
+  std::map< Name, InputBackend* >::const_iterator backend;
+  printf("This is the backend name: %s\n",backend_name.toString().c_str());
+  backend = input_backends_.find( backend_name );
+  if( backend != input_backends_.end() )
+  	back = ( backend->second );
+  else 
+        back = 0;
+  return back;
+}
+
+
 void
 IOManager::write( Name backend_name,
   const RecordingDevice& device,
@@ -259,6 +330,19 @@ IOManager::write( Name backend_name,
   const std::vector< long >& long_values )
 {
   recording_backends_[ backend_name ]->write( device, event, double_values, long_values );
+}
+
+std::vector <double>
+nest::IOManager::read( InputDevice& device )
+{
+  std::vector <double> result;
+  std::map< Name, InputBackend* >::const_iterator it;
+  for ( it = input_backends_.begin(); it != input_backends_.end(); ++it )
+  {
+    result = it->second->read( device);
+  }
+  //Fix for multiple input backends
+  return result;
 }
 
 void
@@ -278,12 +362,40 @@ IOManager::enroll_recorder( Name backend_name, const RecordingDevice& device, co
 }
 
 void
+nest::IOManager::enroll_input( Name backend_name, const InputDevice& device, const DictionaryDatum& params )
+{
+  for ( auto& it : input_backends_ )
+  {
+    printf("%s %s", it.first, backend_name);
+    if ( it.first == backend_name )
+    {
+      it.second->enroll( device, params );
+    }
+    //else
+    //{
+    //  it.second->disenroll( device );
+    //}
+  }
+
+}
+
+
+void
 IOManager::set_recording_value_names( Name backend_name,
   const RecordingDevice& device,
   const std::vector< Name >& double_value_names,
   const std::vector< Name >& long_value_names )
 {
   recording_backends_[ backend_name ]->set_value_names( device, double_value_names, long_value_names );
+}
+
+void
+IOManager::set_input_value_names( Name backend_name,
+  const InputDevice& device,
+  const std::vector< Name >& double_value_names,
+  const std::vector< Name >& long_value_names )
+{
+  input_backends_[ backend_name ]->set_value_names( device, double_value_names, long_value_names );
 }
 
 void
@@ -305,14 +417,28 @@ IOManager::get_recording_backend_device_status( Name backend_name, const Recordi
 }
 
 void
+IOManager::get_input_backend_device_defaults( Name backend_name, DictionaryDatum& params )
+{
+  input_backends_[ backend_name ]->get_device_defaults( params );
+}
+
+void
+IOManager::get_input_backend_device_status( Name backend_name, const InputDevice& device, DictionaryDatum& d )
+{
+  input_backends_[ backend_name ]->get_device_status( device, d );
+}
+
+void
 IOManager::register_recording_backends_()
 {
   recording_backends_.insert( std::make_pair( "ascii", new RecordingBackendASCII() ) );
   recording_backends_.insert( std::make_pair( "memory", new RecordingBackendMemory() ) );
   recording_backends_.insert( std::make_pair( "screen", new RecordingBackendScreen() ) );
+  input_backends_.insert(std::make_pair( "internal", new InputBackendInternal() ) );  
 #ifdef HAVE_MPI
   recording_backends_.insert( std::make_pair( "arbor", new RecordingBackendArbor() ) );
   recording_backends_.insert( std::make_pair( "mpi", new RecordingBackendMPI() ) );
+  input_backends_.insert(std::make_pair( "mpi", new InputBackendMPI() ) );  
 #endif
 #ifdef HAVE_SIONLIB
   recording_backends_.insert( std::make_pair( "sionlib", new RecordingBackendSIONlib() ) );
