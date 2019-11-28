@@ -1,7 +1,5 @@
 from tvb.simulator.noise import Additive
-from tvb.datatypes import arrays
 import numpy
-from tvb.basic.traits import types_basic as basic
 
 class  Ornstein_Ulhenbeck_process (Additive):
 

@@ -1,8 +1,8 @@
 import datetime
 import os
 import nest
-from simulation_nest import simulate,config_mpi_record,simulate_mpi_record
-from simulation_zerlaut import simulate_tvb
+from nest_elephant_tvb.simulation.simulation_nest import simulate,config_mpi_record,simulate_mpi_record
+from nest_elephant_tvb.simulation.simulation_zerlaut import simulate_tvb
 import subprocess
 import numpy as np
 
@@ -45,13 +45,13 @@ def run(results_path,parameter_default,dict_variable,begin,end):
     #create the folder for result is not exist
     newpath = os.path.join(os.getcwd(),results_path)
     if nest.Rank() == 0:
-    	if not os.path.exists(newpath):
+        if not os.path.exists(newpath):
             os.makedirs(newpath)
         if not os.path.exists(newpath+'/tvb'):
             os.makedirs(newpath+'/tvb')
     else:
-	    while not os.path.exists(newpath+'/tvb'):
-		    pass
+        while not os.path.exists(newpath+'/tvb'):
+            pass
 
     param_nest,param_topology,param_connection,param_background,param_tvb,param_zerlaut = generate_parameter(parameter_default,dict_variable)
 

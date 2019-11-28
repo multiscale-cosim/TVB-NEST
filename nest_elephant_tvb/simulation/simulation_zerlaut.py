@@ -1,8 +1,8 @@
-import file_tvb.Zerlaut as Zerlaut
+import nest_elephant_tvb.simulation.file_tvb.Zerlaut as Zerlaut
 import tvb.simulator.lab as lab
 import numpy.random as rgn
 import numpy as np
-import file_tvb.noise as my_noise
+import nest_elephant_tvb.simulation.file_tvb.noise as my_noise
 import json
 import os
 import subprocess
@@ -30,42 +30,42 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
     else:
         raise Exception('Bad order for the model')
 
-    model.g_L=param_topology['param_neuron_excitatory']['g_L']
-    model.E_L_e=param_topology['param_neuron_excitatory']['E_L']
-    model.E_L_i=param_topology['param_neuron_inhibitory']['E_L']
-    model.C_m=param_topology['param_neuron_excitatory']['C_m']
-    model.b_e=param_topology['param_neuron_excitatory']['b']
-    model.a_e=param_topology['param_neuron_excitatory']['a']
-    model.b_i=param_topology['param_neuron_inhibitory']['b']
-    model.a_i=param_topology['param_neuron_inhibitory']['a']
-    model.tau_w_e=param_topology['param_neuron_excitatory']['tau_w']
-    model.tau_w_i=param_topology['param_neuron_inhibitory']['tau_w']
-    model.E_e=param_topology['param_neuron_excitatory']['E_ex']
-    model.E_i=param_topology['param_neuron_excitatory']['E_in']
-    model.Q_e=param_connection['weight_local']
-    model.Q_i=param_connection['weight_local']*param_connection['g']
-    model.tau_e=param_topology['param_neuron_excitatory']['tau_syn_ex']
-    model.tau_i=param_topology['param_neuron_excitatory']['tau_syn_in']
-    model.N_tot=param_topology['nb_neuron_by_region']
-    model.p_connect=param_connection['p_connect']
-    model.g=param_topology['percentage_inhibitory']
-    model.T=param_zerlaut['T']
-    model.P_e=param_zerlaut['P_e']
-    model.P_i=param_zerlaut['P_i']
-    model.K_ext_e=param_connection['nb_external_synapse']
-    model.K_ext_i=0.0
-    model.external_input_ex_ex=param_background['poisson']*param_background['rate']-(1.0e-3+5.0e-6)
-    model.external_input_ex_in=param_background['poisson']*param_background['rate']-(1.0e-3+5.0e-6)
-    model.external_input_in_ex=0.0
-    model.external_input_in_in=0.0
-    model.state_variable_range['E'] = param_zerlaut['initial_condition']['E']
-    model.state_variable_range['I'] = param_zerlaut['initial_condition']['I']
+    model.g_L=np.array(param_topology['param_neuron_excitatory']['g_L'])
+    model.E_L_e=np.array(param_topology['param_neuron_excitatory']['E_L'])
+    model.E_L_i=np.array(param_topology['param_neuron_inhibitory']['E_L'])
+    model.C_m=np.array(param_topology['param_neuron_excitatory']['C_m'])
+    model.b_e=np.array(param_topology['param_neuron_excitatory']['b'])
+    model.a_e=np.array(param_topology['param_neuron_excitatory']['a'])
+    model.b_i=np.array(param_topology['param_neuron_inhibitory']['b'])
+    model.a_i=np.array(param_topology['param_neuron_inhibitory']['a'])
+    model.tau_w_e=np.array(param_topology['param_neuron_excitatory']['tau_w'])
+    model.tau_w_i=np.array(param_topology['param_neuron_inhibitory']['tau_w'])
+    model.E_e=np.array(param_topology['param_neuron_excitatory']['E_ex'])
+    model.E_i=np.array(param_topology['param_neuron_excitatory']['E_in'])
+    model.Q_e=np.array(param_connection['weight_local'])
+    model.Q_i=np.array(param_connection['weight_local']*param_connection['g'])
+    model.tau_e=np.array(param_topology['param_neuron_excitatory']['tau_syn_ex'])
+    model.tau_i=np.array(param_topology['param_neuron_excitatory']['tau_syn_in'])
+    model.N_tot=np.array(param_topology['nb_neuron_by_region'])
+    model.p_connect=np.array(param_connection['p_connect'])
+    model.g=np.array(param_topology['percentage_inhibitory'])
+    model.T=np.array(param_zerlaut['T'])
+    model.P_e=np.array(param_zerlaut['P_e'])
+    model.P_i=np.array(param_zerlaut['P_i'])
+    model.K_ext_e=np.array(param_connection['nb_external_synapse'])
+    model.K_ext_i=np.array(0)
+    model.external_input_ex_ex=np.array(0.)
+    model.external_input_ex_in=np.array(0.)
+    model.external_input_in_ex=np.array(0.0)
+    model.external_input_in_in=np.array(0.0)
+    model.state_variable_range['E'] =np.array( param_zerlaut['initial_condition']['E'])
+    model.state_variable_range['I'] =np.array( param_zerlaut['initial_condition']['I'])
     if param_zerlaut['order'] == 2:
-        model.state_variable_range['C_ee'] = param_zerlaut['initial_condition']['C_ee']
-        model.state_variable_range['C_ei'] = param_zerlaut['initial_condition']['C_ei']
-        model.state_variable_range['C_ii'] = param_zerlaut['initial_condition']['C_ii']
-    model.state_variable_range['W_e'] = param_zerlaut['initial_condition']['W_e']
-    model.state_variable_range['W_i'] = param_zerlaut['initial_condition']['W_i']
+        model.state_variable_range['C_ee'] = np.array(param_zerlaut['initial_condition']['C_ee'])
+        model.state_variable_range['C_ei'] = np.array(param_zerlaut['initial_condition']['C_ei'])
+        model.state_variable_range['C_ii'] = np.array(param_zerlaut['initial_condition']['C_ii'])
+    model.state_variable_range['W_e'] = np.array(param_zerlaut['initial_condition']['W_e'])
+    model.state_variable_range['W_i'] = np.array(param_zerlaut['initial_condition']['W_i'])
 
     ## Connection
     tract_lengths = np.load(param_connection['path_distance'])
@@ -73,15 +73,18 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
     nb_region = int(param_topology['nb_region'])
     connection = lab.connectivity.Connectivity(number_of_regions=nb_region,
                                                    tract_lengths=tract_lengths[:nb_region,:nb_region],
-                                                   weights=weights[:nb_region,:nb_region])
+                                                   weights=weights[:nb_region,:nb_region],
+                                               region_labels=np.array([],dtype=np.dtype('<U128')),
+                                               centres=np.array([])
+                                               )
 
     ## Coupling
-    coupling = lab.coupling.Linear(a=param_connection['weight_global'],
-                                       b=0.0)
+    coupling = lab.coupling.Linear(a=np.array(param_connection['weight_global']),
+                                       b=np.array(0.0))
 
     ## Integrator
-    noise = my_noise.Ornstein_Ulhenbeck_process(nsig=param_zerlaut['noise_parameter']['nsig'],
-                                                    ntau=param_zerlaut['noise_parameter']['ntau'],)
+    noise = my_noise.Ornstein_Ulhenbeck_process(nsig=np.array(param_zerlaut['noise_parameter']['nsig']),
+                                                    ntau=param_zerlaut['noise_parameter']['ntau'])
     noise.random_stream.seed(param_nest['master_seed']-1)
     integrator = lab.integrators.HeunStochastic(noise=noise,dt=param_nest['sim_resolution'])
 
@@ -96,7 +99,7 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
         monitors.append(monitor_TAVG)
     if param_tvb['Bold']:
         monitor_Bold = lab.monitors.Bold(
-            variables_of_interest=param_tvb['parameter_Bold']['variables_of_interest'],
+            variables_of_interest=np.array(param_tvb['parameter_Bold']['variables_of_interest']),
             period=param_tvb['parameter_Bold']['period'])
         monitors.append(monitor_Bold)
 

@@ -116,41 +116,41 @@ def network_initialisation_neurons(results_path,pyrngs,param_topology,return_gid
         pop_file.close()
 
     # external input and initial condition
-    for thread in np.arange(nest.GetKernelStatus('local_num_threads')):
-        for neuron_type in {neuron_type_ex,neuron_type_in}:
-            # Get all nodes on the local thread
-            # Using GetNodes is a work-around until NEST 3.0 is released. It
-            # will issue a deprecation warning.
-            local_nodes = nest.GetNodes([0], {
-                'model': neuron_type,
-                'thread': thread
-            }, local_only=True
-                                        )[0]
-            # Get number of current virtual process
-            # vp is the same for all local nodes on the same thread
-            vp = nest.GetStatus(local_nodes)[0]['vp']
-            # Create random initial conditions using pyrngs
-            nest.SetStatus(
-                local_nodes, 'I_e', pyrngs[vp].normal(
-                    mean_I_ext,
-                    sigma_I_ext,
-                    len(local_nodes)
-                )
-            )
-            nest.SetStatus(
-                local_nodes, 'V_m', pyrngs[vp].normal(
-                    nest.GetDefaults(neuron_type)['E_L'],
-                    sigma_init_V0,
-                    len(local_nodes)
-                )
-            )
-            nest.SetStatus(
-                local_nodes, 'w', pyrngs[vp].normal(
-                    mean_init_w0,
-                    mean_init_w0,
-                    len(local_nodes)
-                )
-            )
+    # for thread in np.arange(nest.GetKernelStatus('local_num_threads')):
+    #     for neuron_type in {neuron_type_ex,neuron_type_in}:
+    #         # Get all nodes on the local thread
+    #         # Using GetNodes is a work-around until NEST 3.0 is released. It
+    #         # will issue a deprecation warning.
+    #         local_nodes = nest.GetNodes([0], {
+    #             'model': neuron_type,
+    #             'thread': thread
+    #         }, local_only=True
+    #                                     )[0]
+    #         # Get number of current virtual process
+    #         # vp is the same for all local nodes on the same thread
+    #         vp = nest.GetStatus(local_nodes)[0]['vp']
+    #         # Create random initial conditions using pyrngs
+    #         nest.SetStatus(
+    #             local_nodes, 'I_e', pyrngs[vp].normal(
+    #                 mean_I_ext,
+    #                 sigma_I_ext,
+    #                 len(local_nodes)
+    #             )
+    #         )
+    #         nest.SetStatus(
+    #             local_nodes, 'V_m', pyrngs[vp].normal(
+    #                 nest.GetDefaults(neuron_type)['E_L'],
+    #                 sigma_init_V0,
+    #                 len(local_nodes)
+    #             )
+    #         )
+    #         nest.SetStatus(
+    #             local_nodes, 'w', pyrngs[vp].normal(
+    #                 mean_init_w0,
+    #                 mean_init_w0,
+    #                 len(local_nodes)
+    #             )
+    #         )
 
     if return_gids:
         return dic_layer,gids_ex + gids_in
@@ -210,12 +210,12 @@ def create_homogenous_connection(dic_layer,param_connection,save=False,init=None
     #connection inside population of neurons
     for i in range(len(list_layer_ex)):
         if nest.Rank() == 0:
-    	    tic = time.time()
+            tic = time.time()
             print('homogenous connection between population not mesh :' + str(i),file=sys.stderr)
         nest.Connect(list_layer_ex[i]['region'], list_layer_ex[i]['region'], conn_spec=conn_params_ex_inside, syn_spec="excitatory_inside")
         nest.Connect(list_layer_ex[i]['region'], list_layer_in[i]['region'], conn_spec=conn_params_ex_inside, syn_spec="excitatory_inside")
         nest.Connect(list_layer_in[i]['region'], list_layer_ex[i]['region'], conn_spec=conn_params_in_inside, syn_spec="inhibitory_inside")
-        # nest.Connect(list_layer_in[i]['region'], list_layer_in[i]['region'], conn_spec=conn_params_in_inside, syn_spec="inhibitory_inside") #no link between inhibitory neurons
+        nest.Connect(list_layer_in[i]['region'], list_layer_in[i]['region'], conn_spec=conn_params_in_inside, syn_spec="inhibitory_inside") #no link between inhibitory neurons
         if nest.Rank() == 0:
             toc = time.time() - tic
             print("Time: %.2f s" % toc, file=sys.stderr)
@@ -243,7 +243,7 @@ def create_heterogenous_connection(dic_layer,param_topology,param_connection,sav
     ## connection between region
     for i in range(len(list_layer_ex)):
         if nest.Rank() == 0:
-    	    tic = time.time()
+            tic = time.time()
             print('connection between layer :'+str(i),file=sys.stderr)
         # compute the number of synapse receiving by the regions
         nb_synapses = param_topology['nb_neuron_by_region'] * param_connection['nb_external_synapse']
@@ -260,7 +260,8 @@ def create_heterogenous_connection(dic_layer,param_topology,param_connection,sav
                         nest.Connect(neurons_source,neurons_target,
                                      conn_spec={'rule': 'fixed_total_number',
                                                 'N': nb_connection},
-                                     syn_spec={"model": "static_synapse",
+                                     syn_spec={
+                                         #"model": "static_synapse",
                                                "weight":param_connection['weight_global'],
                                                "delay":delays[j,i],
                                                }
@@ -301,7 +302,8 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
     if mpi:
        param_spike_dec= {"start": min_time,
                           "stop": time_simulation,
-                          "record_to": ["mpi"],
+                          # "record_to": ["mpi"],
+
                           'label': 'config_mpi_spike_detector'
                           }
        nest.CopyModel('spike_detector', 'spike_detector_record_mpi')
@@ -310,8 +312,12 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
     else:
         param_spike_dec= {"start": min_time,
                           "stop": time_simulation,
-                          "record_to":['memory','ascii'],
-                          'label': 'spike_detector'
+                          #"withtime": True,
+                          #"withgid": True,
+                          #'to_file': True,
+                          #'to_memory': False,
+                          "record_to":"ascii",
+                          'label': "spike_detector"
                           }
         nest.CopyModel('spike_detector','spike_detector_record')
         nest.SetDefaults("spike_detector_record",param_spike_dec)
@@ -362,12 +368,18 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
 
     #poisson_generator input
     if param_background['poisson']:
-        param_poisson_generator = {
-            "rate": param_background['rate']*param_background['nb_connection'],
+        param_poisson_generator_ex = {
+            "rate": param_background['rate']*param_background['nb_connection_ex'],
             "start": 0.0,
             "stop": time_simulation}
-        nest.CopyModel("poisson_generator",'poisson_generator_by_population')
-        nest.SetDefaults('poisson_generator_by_population',param_poisson_generator)
+        nest.CopyModel("poisson_generator",'poisson_generator_ex_by_population')
+        nest.SetDefaults('poisson_generator_ex_by_population',param_poisson_generator_ex)
+        param_poisson_generator_in = {
+            "rate": param_background['rate']*param_background['nb_connection_in'],
+            "start": 0.0,
+            "stop": time_simulation}
+        nest.CopyModel("poisson_generator",'poisson_generator_in_by_population')
+        nest.SetDefaults('poisson_generator_in_by_population',param_poisson_generator_in)
 
         conndict_poisson_generator = {'connection_type': 'divergent',
                        'weights' :param_background['weight_poisson'],
@@ -377,10 +389,16 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
                         'weight' :param_background['weight_poisson'],
                         'delay' : nest.GetKernelStatus("min_delay"), # without delay
                         }
+        syn_spec_in_poisson_generator ={
+            'weight' :-param_background['weight_poisson']*5,
+            'delay' : nest.GetKernelStatus("min_delay"), # without delay
+        }
         for name_pops,list_pops in dic_layer.items():
             for index,population in enumerate(list_pops['list']):
-                poisson_generator = nest.Create('poisson_generator_by_population')
+                poisson_generator = nest.Create('poisson_generator_ex_by_population')
                 nest.Connect(poisson_generator,population['region'],syn_spec=syn_spec_poisson_generator)
+                poisson_generator = nest.Create('poisson_generator_in_by_population')
+                nest.Connect(poisson_generator,population['region'],syn_spec=syn_spec_in_poisson_generator)
 
         #add noise in current
     if param_background['noise']:

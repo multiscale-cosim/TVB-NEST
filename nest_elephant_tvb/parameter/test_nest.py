@@ -69,7 +69,7 @@ param_topology={
         'g_L':10.0,
         'I_e':0.0,
         'a':0.0,
-        'b':100.0,
+        'b':30.0,
         'Delta_T':2.0,
         'tau_w':500.0,
         'V_th':-50.0,
@@ -85,7 +85,7 @@ param_topology={
         'C_m':200.0,
         't_ref':5.0,
         'V_reset':-65.0,
-        'E_L':-70.0,
+        'E_L':-60.0, #-60 good bi-stable between 50 and 70
         'g_L':10.0,
         'I_e':0.0,
         'a':0.0,
@@ -135,17 +135,18 @@ param_background={
     #define if the simulation use or not a poisson generator
     'poisson':True,
     #the firing rate of poisson_generator
-    'rate': 1.0e-3,
+    'rate': 0.13, #150
     #the number of connexion from other region of the brain
-    'nb_connection':400,
+    'nb_connection_ex':400.0,
+    'nb_connection_in':200.0,
     #the weight on the connexion
     'weight_poisson':param_connection['weight_local'],
     #define if the simulation have or not noise
-    'noise':True,
+    'noise':False,
     # Mean of the noise in pA
     'mean_noise':0.0,
     # Standard deviation of the noise
-    'sigma_noise':290.0,
+    'sigma_noise':400.0,
     #the weight on the connexion
     'weight_noise':1.0,
     #stimulus
@@ -173,7 +174,7 @@ param_zerlaut={
     # Polynome for inhibitory neurons | WARNING: should be change when the parameter of neurons change)
     'P_i':[-0.0514, 0.004, -0.0083, 0.0002, -0.0005, 0.0014, -0.0146, 0.0045, 0.0028, -0.0153],
     # initial condition, should be simmilar than nest #TODO
-    'initial_condition':{"E": [1e-5, 1e-5], "I": [1e-5, 1e-5], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
+    'initial_condition':{"E": [0.0, 0.0], "I": [0., 0.], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
     # Should be link with noise in Nest #TODO
     'noise_parameter':{
         'nsig':[5e-09, 5e-09, 0.0, 0.0, 0.0, 0.0, 0.0],
