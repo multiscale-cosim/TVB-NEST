@@ -97,12 +97,32 @@ def network_initialisation_neurons(results_path,pyrngs,param_topology,return_gid
         list_region_ex.append({'region': reg_ex, 'index':j, 'nb_neurons':nb_ex})
         gids_ex.append([previous_layer, previous_layer + nb_ex])
         previous_layer = previous_layer + nb_ex
+        if sigma_I_ext > 0:
+            reg_ex.set(I_e=nest.random.normal(mean=mean_I_ext,std=sigma_I_ext))
+        else:
+            reg_ex.set(I_e=mean_I_ext)
+        if sigma_init_V0>0:
+            reg_ex.set(V_m=nest.random.normal(mean=nest.GetDefaults(neuron_type_ex)['E_L'],std=sigma_init_V0))
+        else:
+            reg_ex.set(V_m=nest.GetDefaults(neuron_type_ex)['E_L'] )
+        if mean_init_w0 >0:
+            reg_ex.set(w=nest.random.normal(mean=mean_init_w0,std=mean_init_w0))
+        else:
+           reg_ex.set(w=mean_init_w0)
 
         # Inhibitory region
         reg_in = nest.Create(neuron_type_in, nb_in)
         list_region_in.append({'region': reg_in, 'index':j, 'nb_neurons':nb_in})
         gids_in.append([previous_layer, previous_layer + nb_in])
         previous_layer = previous_layer + nb_in
+        if sigma_I_ext > 0:
+            reg_in.set(I_e=nest.random.normal(mean=mean_I_ext,std=sigma_I_ext))
+        else:
+            reg_in.set(I_e=mean_I_ext)
+        if sigma_init_V0>0:
+            reg_in.set(V_m=nest.random.normal(mean=nest.GetDefaults(neuron_type_in)['E_L'],std=sigma_init_V0))
+        else:
+            reg_in.set(V_m=nest.GetDefaults(neuron_type_in)['E_L'] )
 
     dic_layer = {'excitatory': {'list':list_region_ex,'nb':nb_ex}, 'inhibitory': {'list':list_region_in,'nb':nb_in}}
 
@@ -114,43 +134,6 @@ def network_initialisation_neurons(results_path,pyrngs,param_topology,return_gid
         for gid in gids_in:
             pop_file.write('%d  %d %s\n' % (gid[0], gid[1],'inhibitory'))
         pop_file.close()
-
-    # external input and initial condition
-    # for thread in np.arange(nest.GetKernelStatus('local_num_threads')):
-    #     for neuron_type in {neuron_type_ex,neuron_type_in}:
-    #         # Get all nodes on the local thread
-    #         # Using GetNodes is a work-around until NEST 3.0 is released. It
-    #         # will issue a deprecation warning.
-    #         local_nodes = nest.GetNodes([0], {
-    #             'model': neuron_type,
-    #             'thread': thread
-    #         }, local_only=True
-    #                                     )[0]
-    #         # Get number of current virtual process
-    #         # vp is the same for all local nodes on the same thread
-    #         vp = nest.GetStatus(local_nodes)[0]['vp']
-    #         # Create random initial conditions using pyrngs
-    #         nest.SetStatus(
-    #             local_nodes, 'I_e', pyrngs[vp].normal(
-    #                 mean_I_ext,
-    #                 sigma_I_ext,
-    #                 len(local_nodes)
-    #             )
-    #         )
-    #         nest.SetStatus(
-    #             local_nodes, 'V_m', pyrngs[vp].normal(
-    #                 nest.GetDefaults(neuron_type)['E_L'],
-    #                 sigma_init_V0,
-    #                 len(local_nodes)
-    #             )
-    #         )
-    #         nest.SetStatus(
-    #             local_nodes, 'w', pyrngs[vp].normal(
-    #                 mean_init_w0,
-    #                 mean_init_w0,
-    #                 len(local_nodes)
-    #             )
-    #         )
 
     if return_gids:
         return dic_layer,gids_ex + gids_in
@@ -390,7 +373,7 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
                         'delay' : nest.GetKernelStatus("min_delay"), # without delay
                         }
         syn_spec_in_poisson_generator ={
-            'weight' :-param_background['weight_poisson']*5,
+            'weight' :-param_background['weight_poisson']*5, #TODO need to replace the number
             'delay' : nest.GetKernelStatus("min_delay"), # without delay
         }
         for name_pops,list_pops in dic_layer.items():
