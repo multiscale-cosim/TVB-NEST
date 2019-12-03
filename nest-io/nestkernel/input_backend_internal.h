@@ -39,18 +39,13 @@ public:
    * InputBackend constructor
    * The actual initialization is happening in RecordingBackend::initialize()
    */
-  InputBackendInternal()
-  {
-  }
+  InputBackendInternal()=default;
 
   /**
    * InputBackend destructor
    * The actual finalization is happening in RecordingBackend::finalize()
    */
-  ~InputBackendInternal() throw()
-  {
-  }
-
+  ~InputBackendInternal() noexcept = default;
 
   /**
    * Write functions simply dumping all recorded data to standard output.
@@ -88,21 +83,7 @@ public:
   void get_device_status( const InputDevice& device, DictionaryDatum& params_dictionary ) const override;
 
 private:
-  struct Parameters_
-  {
-    int refresh_rate_;
-    Parameters_();
 
-    void get( const InputBackendInternal&, DictionaryDatum& ) const;
-    void set( const InputBackendInternal&, const DictionaryDatum& );
-  };
-
-
-  bool enrolled_;
-  bool prepared_;
-  Parameters_ P_;
-  int connected_input;
-  
   /**
    * A map for the enrolled devices. We have a vector with one map per local
    * thread. The map associates the gid of a device on a given thread
@@ -112,12 +93,6 @@ private:
   device_map devices_;
 
 };
-
-inline void
-InputBackendInternal::get_status( DictionaryDatum& d ) const
-{
-  P_.get( *this, d );
-}
 
 } // namespace
 
