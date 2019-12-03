@@ -45,18 +45,13 @@ public:
    * InputBackend constructor
    * The actual initialization is happening in RecordingBackend::initialize()
    */
-  InputBackendMPI()
-  {
-  }
+  InputBackendMPI()=default;
 
   /**
    * InputBackend destructor
    * The actual finalization is happening in RecordingBackend::finalize()
    */
-  ~InputBackendMPI() throw()
-  {
-  }
-
+  ~InputBackendMPI() noexcept = default;
 
   /**
    * Write functions simply dumping all recorded data to standard output.
@@ -94,25 +89,10 @@ public:
   void get_device_status( const InputDevice& device, DictionaryDatum& params_dictionary ) const override;
 
 private:
-  struct Parameters_
-  {
-    int refresh_rate_;
-
-    Parameters_();
-
-    void get( const InputBackendMPI&, DictionaryDatum& ) const;
-    void set( const InputBackendMPI&, const DictionaryDatum& );
-  };
-
-
-  bool enrolled_;
-  bool prepared_;
-
-  Parameters_ P_;
   MPI_Comm newcomm_input;
   MPI_Info info;
   char port_name[MPI_MAX_PORT_NAME];
-  int connected_input;
+  bool connected_input=false;
   
   /**
    * A map for the enrolled devices. We have a vector with one map per local
@@ -121,26 +101,7 @@ private:
   */
   typedef std::vector< std::map< int, const InputDevice* > > device_map;
   device_map devices_;
-
-  void prepare_stream_();
-
-  std::ios::fmtflags old_fmtflags_;
-  long old_precision_;
 };
-
-inline void
-InputBackendMPI::get_status( DictionaryDatum& d ) const
-{
-  P_.get( *this, d );
-}
-
-
-inline void
-InputBackendMPI::prepare_stream_()
-{
-    
-}
-
 
 } // namespace
 

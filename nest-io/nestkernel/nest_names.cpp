@@ -226,6 +226,7 @@ const Name instant_unblock_NMDA( "instant_unblock_NMDA" );
 const Name instantiations( "instantiations" );
 const Name Interpol_Order( "Interpol_Order" );
 const Name interval( "interval" );
+const Name internal( "internal" );
 const Name is_refractory( "is_refractory" );
 
 const Name keep_source_table( "keep_source_table" );

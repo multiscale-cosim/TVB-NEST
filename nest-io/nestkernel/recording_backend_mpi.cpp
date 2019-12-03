@@ -29,8 +29,7 @@
 #include "recording_backend_mpi.h"
 
 nest::RecordingBackendMPI::RecordingBackendMPI()
-  : enrolled_( false )
-  , prepared_( false )
+  : prepared_( false )
 {
 }
 
@@ -45,10 +44,10 @@ nest::RecordingBackendMPI::enroll( const RecordingDevice& device,
 {
   if ( device.get_type() == RecordingDevice::SPIKE_DETECTOR )
   {
-    const auto tid = device.get_thread();
-    const auto node_id = device.get_node_id();
+    thread tid = device.get_thread();
+    index node_id = device.get_node_id();
 
-    auto device_it = devices_[ tid ].find( node_id );
+    device_map::value_type::iterator device_it = devices_[ tid ].find( node_id );
     if ( device_it != devices_[ tid ].end() )
     {
       devices_[ tid ].erase( device_it );
@@ -58,9 +57,8 @@ nest::RecordingBackendMPI::enroll( const RecordingDevice& device,
   }
   else
   {
-    throw BadProperty( "Only spike detectors can record to recording backend 'arbor'." );
+    throw BadProperty( "Only spike detectors can record to recording backend 'mpi'." );
   }
-  enrolled_ = true;
 }
 
 void
@@ -74,7 +72,6 @@ nest::RecordingBackendMPI::disenroll( const RecordingDevice& device )
   {
     devices_[ tid ].erase( device_it );
   }
-  enrolled_ = false;
 }
 
 void
@@ -82,12 +79,7 @@ nest::RecordingBackendMPI::set_value_names( const RecordingDevice& device,
   const std::vector< Name >& double_value_names,
   const std::vector< Name >& long_value_names)
 {
-  const thread t = device.get_thread();
-  const thread node_id = device.get_node_id();
-
-  //data_map::value_type::iterator device_data = device_data_[ t ].find( node_id );
-  //assert( device_data != device_data_[ t ].end() );
-  //device_data->second.set_value_names( double_value_names, long_value_names );
+  // nothing to do
 }
 
 void
@@ -133,11 +125,6 @@ nest::RecordingBackendMPI::get_device_status( const nest::RecordingDevice& devic
 void
 nest::RecordingBackendMPI::prepare()
 {
-  if ( not enrolled_ )
-  {
-    return;
-  }
-
   if ( prepared_ )
   {
     throw BackendPrepared( "RecordingBackendMPI" );
@@ -151,15 +138,6 @@ nest::RecordingBackendMPI::cleanup()
 {
   if ( prepared_ )
   {
-    if ( not enrolled_ )
-    {
-      return;
-    }
-
-    if ( not prepared_ )
-    {
-      throw BackendNotPrepared( "RecordingBackendMPI" );
-    }
     prepared_ = false;
 
     int index_sp=0;
@@ -178,6 +156,10 @@ nest::RecordingBackendMPI::cleanup()
     _list_label.clear();
     printf("Closing\n" );
   }
+  else
+    {
+      throw BackendNotPrepared( "RecordingBackendMPI" );
+    }
 }
 
 
@@ -201,13 +183,6 @@ nest::RecordingBackendMPI::write( const RecordingDevice& device,
   const std::vector< double >&,
   const std::vector< long >& )
 {
-  const thread t = device.get_thread();
-  const index gid = device.get_node_id();
-
-  if ( ! enrolled_ )
-  {
-    return;
-  }
 
   const index sender = event.get_sender_node_id();
   const Time stamp = event.get_stamp();
@@ -238,7 +213,7 @@ nest::RecordingBackendMPI::write( const RecordingDevice& device,
       char port_name[MPI_MAX_PORT_NAME];
       get_port(device,port_name);
       fflush(stdout);
-      printf("ID to %d\n", device.get_node_id());
+      printf("ID to %d\n", int(device.get_node_id()));
       printf("Connect to %s\n", port_name);
       fflush(stdout);
       int status = MPI_Comm_connect(port_name, MPI_INFO_NULL, 0, MPI_COMM_WORLD, newcomm);
@@ -252,38 +227,16 @@ nest::RecordingBackendMPI::write( const RecordingDevice& device,
 /* ----------------------------------------------------------------
  * Parameter extraction and manipulation functions
  * ---------------------------------------------------------------- */
-
-nest::RecordingBackendMPI::Parameters_::Parameters_()
-  //: precision_( 3 )
-{
-}
-
 void
-nest::RecordingBackendMPI::Parameters_::get( const RecordingBackendMPI&,
-  DictionaryDatum& d ) const
+nest::RecordingBackendMPI::get_status( DictionaryDatum& d ) const
 {
-  //( *d )[ names::precision ] = precision_;
-}
-
-void
-nest::RecordingBackendMPI::Parameters_::set( const RecordingBackendMPI&,
-  const DictionaryDatum& d )
-{
-  /*if ( updateValue< long >( d, names::precision, precision_ ) )
-  {
-    std::cout << std::fixed;
-    std::cout << std::setprecision( precision_ );
-  }*/
+  //nothing to do
 }
 
 void
 nest::RecordingBackendMPI::set_status( const DictionaryDatum& d )
 {
-  Parameters_ ptmp = P_; // temporary copy in case of errors
-  ptmp.set( *this, d );  // throws if BadProperty
-
-  // if we get here, temporaries contain consistent set of properties
-  P_ = ptmp;
+  //nothing to do
 }
 
 void

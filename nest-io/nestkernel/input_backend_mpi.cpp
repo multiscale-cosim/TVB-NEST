@@ -29,39 +29,6 @@
 #include "input_device.h"
 #include <fstream>
 
-void
-nest::InputBackendMPI::enroll( const InputDevice& device,
-  const DictionaryDatum& params )
-{
-  if ( device.get_type() == InputDevice::SPIKE_GENERATOR ){
-	  const auto tid = device.get_thread();
-	  const auto node_id = device.get_node_id();
-
-	  auto device_it = devices_[ tid ].find( node_id );
-	  if ( device_it != devices_[ tid ].end() )
-	  {
-	    devices_[ tid ].erase( device_it );
-	  }
-	  devices_[ tid ].insert( std::make_pair( node_id, &device ) );
-
-	  enrolled_ = true;
-  }
-}
-
-void
-nest::InputBackendMPI::disenroll( const InputDevice& device )
-{
-  const auto tid = device.get_thread();
-  const auto node_id = device.get_node_id();
-
-  auto device_it = devices_[ tid ].find( node_id );
-  if ( device_it != devices_[ tid ].end() )
-  {
-    devices_[ tid ].erase( device_it );
-  }
-  enrolled_ = false;
-}
-
 
 void
 nest::InputBackendMPI::initialize()
@@ -69,35 +36,68 @@ nest::InputBackendMPI::initialize()
   auto nthreads = kernel().vp_manager.get_num_threads();
   device_map devices( nthreads );
   devices_.swap( devices );
-  
 }
-
-void
-nest::InputBackendMPI::prepare()
-{
-  if ( not enrolled_ )
-  {
-    return;
-  }
-
-  if ( prepared_ )
-  {
-    throw BackendPrepared( "InputBackendMPI" );
-  }
-  prepared_ = true;
-}
-
-void
-nest::InputBackendMPI::cleanup()
-{
-}
-
 
 void
 nest::InputBackendMPI::finalize()
 {
-    printf("Closing\n\n" );
-    //MPI_Close_port(port_name);
+  printf("Closing\n\n" );
+}
+
+void
+nest::InputBackendMPI::enroll( const InputDevice& device,
+  const DictionaryDatum& params )
+{
+  if ( device.get_type() == InputDevice::SPIKE_GENERATOR ){
+	  thread tid = device.get_thread();
+	  index node_id = device.get_node_id();
+
+	  device_map::value_type::iterator device_it = devices_[ tid ].find( node_id );
+	  if ( device_it != devices_[ tid ].end() )
+	  {
+	    devices_[ tid ].erase( device_it );
+	  }
+	  devices_[ tid ].insert( std::make_pair( node_id, &device ) );
+  }
+  else
+  {
+    throw BadProperty( "Only spike generators can have input backend 'mpi'." );
+  }
+}
+
+void
+nest::InputBackendMPI::disenroll( const InputDevice& device )
+{
+  thread tid = device.get_thread();
+  index node_id = device.get_node_id();
+
+  device_map::value_type::iterator device_it = devices_[ tid ].find( node_id );
+  if ( device_it != devices_[ tid ].end() )
+  {
+    devices_[ tid ].erase( device_it );
+  }
+}
+
+void
+nest::InputBackendMPI::set_value_names( const InputDevice& device,
+                                        const std::vector< Name >& double_value_names,
+                                        const std::vector< Name >& long_value_names)
+{
+  // nothing to do
+}
+
+
+void
+nest::InputBackendMPI::pre_run_hook()
+{
+  // nothing to do
+}
+
+
+void
+nest::InputBackendMPI::cleanup()
+{
+  // nothing to do
 }
 
 std::vector <double>
@@ -147,29 +147,6 @@ nest::InputBackendMPI::read( InputDevice& device )
   return result;
 }
 
-/* ----------------------------------------------------------------
- * Parameter extraction and manipulation functions
- * ---------------------------------------------------------------- */
-
-nest::InputBackendMPI::Parameters_::Parameters_()
-  //: precision_( 3 )
-{
-
-}
-
-void
-nest::InputBackendMPI::set_value_names( const InputDevice& device,
-  const std::vector< Name >& double_value_names,
-  const std::vector< Name >& long_value_names)
-{
-  const thread t = device.get_thread();
-  const thread node_id = device.get_node_id();
-
-  //data_map::value_type::iterator device_data = device_data_[ t ].find( node_id );
-  //assert( device_data != device_data_[ t ].end() );
-  //device_data->second.set_value_names( double_value_names, long_value_names );
-}
-
 void
 nest::InputBackendMPI::check_device_status( const DictionaryDatum& params ) const
 {
@@ -177,35 +154,14 @@ nest::InputBackendMPI::check_device_status( const DictionaryDatum& params ) cons
 }
 
 void
-nest::InputBackendMPI::Parameters_::get( const InputBackendMPI&,
-  DictionaryDatum& d ) const
+nest::InputBackendMPI::get_device_defaults( DictionaryDatum& params ) const
 {
-  //( *d )[ names::precision ] = precision_;
+  // nothing to do
 }
 
 void
-nest::InputBackendMPI::Parameters_::set( const InputBackendMPI&,
-  const DictionaryDatum& d )
-{
-  /*if ( updateValue< long >( d, names::precision, precision_ ) )
-  {
-    std::cout << std::fixed;
-    std::cout << std::setprecision( precision_ );
-  }*/
-}
-
-void
-nest::InputBackendMPI::set_status( const DictionaryDatum& d )
-{
-  Parameters_ ptmp = P_; // temporary copy in case of errors
-  ptmp.set( *this, d );  // throws if BadProperty
-
-  // if we get here, temporaries contain consistent set of properties
-  P_ = ptmp;
-}
-
-void
-nest::InputBackendMPI::pre_run_hook()
+nest::InputBackendMPI::get_device_status( const nest::InputDevice& device,
+                                          DictionaryDatum& params_dictionary ) const
 {
   // nothing to do
 }
@@ -223,16 +179,19 @@ nest::InputBackendMPI::post_step_hook()
 }
 
 void
-nest::InputBackendMPI::get_device_defaults( DictionaryDatum& params ) const
+nest::InputBackendMPI::get_status( lockPTRDatum< Dictionary, &SLIInterpreter::Dictionarytype >& ) const
 {
   // nothing to do
 }
 
 void
-nest::InputBackendMPI::get_device_status( const nest::InputDevice& device,
-  DictionaryDatum& params_dictionary ) const
+nest::InputBackendMPI::set_status( const DictionaryDatum& d )
 {
   // nothing to do
 }
 
-
+void
+nest::InputBackendMPI::prepare()
+{
+  // nothing to do
+}

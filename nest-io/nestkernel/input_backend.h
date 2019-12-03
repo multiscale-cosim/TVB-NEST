@@ -44,7 +44,7 @@ public:
   {
   }
 
-  ~InputBackend() throw()
+  virtual ~InputBackend() throw()
   {
   }
 

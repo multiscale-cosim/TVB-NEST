@@ -23,7 +23,6 @@
 // Includes from libnestutil:
 #include "compose.hpp"
 #include "kernel_manager.h"
-
 #include "recording_device.h"
 
 nest::RecordingDevice::RecordingDevice()

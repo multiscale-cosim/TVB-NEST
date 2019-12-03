@@ -91,8 +91,8 @@ n = nest.Create("iaf_psc_alpha",
 
 m = nest.Create("multimeter",
                 params={"interval": 0.1,
-                        "record_from": ["V_m", "g_ex", "g_in"],
-                        "record_to": "mpi",
+                        "record_from": ["V_m",'I_syn_ex', 'I_syn_in'],
+                        "record_to": "memory",
                         "label": "my_multimeter"})
 
 s_ex = nest.Create("spike_generator",
@@ -136,7 +136,7 @@ pylab.axis([0, 100, -75, -53])
 pylab.ylabel("membrane potential (mV)")
 
 pylab.subplot(212)
-pylab.plot(t, events["g_ex"], t, events["g_in"])
+pylab.plot(t, events["I_syn_ex"], t, events["I_syn_in"])
 pylab.axis([0, 100, 0, 45])
 pylab.xlabel("time (ms)")
 pylab.ylabel("synaptic conductance (nS)")

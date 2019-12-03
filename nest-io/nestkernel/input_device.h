@@ -69,10 +69,12 @@ public:
 
   virtual Type get_type() const = 0;
 
+  const std::string& get_label() const;
+
   void set_status( const DictionaryDatum& );
   void get_status( DictionaryDatum& ) const;
-  
-  
+
+
 protected:
   std::vector <double> read();
   void set_initialized_() override;
@@ -86,8 +88,9 @@ private:
     Name input_from_; //!< Array of input backends to use
 
     Parameters_();
-    void get( const InputDevice&, DictionaryDatum& ) const;
-    void set( const InputDevice&, const DictionaryDatum&, long );
+    Parameters_( const Parameters_& );
+    void get( DictionaryDatum& ) const;
+    void set( const DictionaryDatum& );
   } P_;
 
   struct State_
@@ -96,35 +99,14 @@ private:
 
     State_();
     void get( DictionaryDatum& ) const;
-    void set( const DictionaryDatum&, const InputDevice& );
+    void set( const DictionaryDatum&);
   } S_;
 
   DictionaryDatum backend_params_;
 };
 
-inline void
-InputDevice::get_status( DictionaryDatum& d ) const
-{
-  P_.get( *this, d );
-  S_.get( d );
-
-  Device::get_status( d );
-
-  ( *d )[ names::element_type ] = LiteralDatum( names::recorder );
-
-  kernel().io_manager.get_input_backend_device_status(P_.input_from_, *this, d );
-}
-
 inline bool
-InputDevice::is_active( Time const& T ) const
-{
-  const long stamp = T.get_steps();
-
-  return get_t_min_() < stamp && stamp <= get_t_max_();
-}
-
-inline bool
-InputDevice::get_time_in_steps() const
+nest::InputDevice::get_time_in_steps() const
 {
   return P_.time_in_steps_;
 }

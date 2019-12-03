@@ -338,18 +338,45 @@ nest::spike_generator::calibrate()
 void
 nest::spike_generator::update( Time const& sliceT0, const long from, const long to )
 {
+  assert( not P_.precise_times_ || P_.spike_stamps_.size() == P_.spike_offsets_.size() );
+  assert( P_.spike_weights_.empty() || P_.spike_stamps_.size() == P_.spike_weights_.size() );
+  assert( P_.spike_multiplicities_.empty() || P_.spike_stamps_.size() == P_.spike_multiplicities_.size() );
+
+  // For the recording backend
+  std::vector<double> input_spikes = InputDevice::read();
+  const Time tstart = sliceT0 + Time::step( from );
+  const Time tstop = sliceT0 + Time::step( to );
+  const Time& origin = device_.get_origin();
+
+  if ( !input_spikes.empty() ){
+
+    DictionaryDatum d = DictionaryDatum( new Dictionary );
+    std::vector< double > times_ms;
+    const size_t n_spikes = P_.spike_stamps_.size();
+    for ( size_t n = 0; n < n_spikes; ++n )
+    {
+      times_ms.push_back( P_.spike_stamps_[ n ].get_ms() );
+      if ( P_.precise_times_ )
+        times_ms[ n ] -= P_.spike_offsets_[ n ];
+    }
+    for ( size_t n = 0; n < input_spikes.size(); ++n )
+    {
+      times_ms.push_back( input_spikes[n] );
+      if ( P_.precise_times_ )
+          printf("precise not supported\n");
+    }
+    ( *d )[ names::spike_times ] = DoubleVectorDatum( times_ms );
+
+    P_.set( d, S_, origin,Time::step( times_ms[times_ms.size()-1] ), this );
+
+  }
+
+  // normal update
   if ( P_.spike_stamps_.empty() )
   {
     return;
   }
 
-  assert( not P_.precise_times_ || P_.spike_stamps_.size() == P_.spike_offsets_.size() );
-  assert( P_.spike_weights_.empty() || P_.spike_stamps_.size() == P_.spike_weights_.size() );
-  assert( P_.spike_multiplicities_.empty() || P_.spike_stamps_.size() == P_.spike_multiplicities_.size() );
-
-  const Time tstart = sliceT0 + Time::step( from );
-  const Time tstop = sliceT0 + Time::step( to );
-  const Time& origin = device_.get_origin();
 
   // We fire all spikes with time stamps up to including sliceT0 + to
   while ( S_.position_ < P_.spike_stamps_.size() )
@@ -433,6 +460,8 @@ nest::spike_generator::set_status( const DictionaryDatum& d )
 
   // throws if BadProperty
   ptmp.set( d, S_, origin, kernel().simulation_manager.get_time(), this );
+
+  InputDevice::set_status(d);
 
   // We now know that ptmp is consistent. We do not write it back
   // to P_ before we are also sure that the properties to be set

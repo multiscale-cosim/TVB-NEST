@@ -121,6 +121,7 @@ public:
   void check_recording_backend_device_status( Name, const DictionaryDatum& );
   void get_recording_backend_device_defaults( Name, DictionaryDatum& );
   void get_recording_backend_device_status( Name, const RecordingDevice&, DictionaryDatum& );
+  void check_input_backend_device_status( Name, const DictionaryDatum& );
   void get_input_backend_device_defaults( Name, DictionaryDatum& );
   void get_input_backend_device_status( Name, const InputDevice&, DictionaryDatum& );
 

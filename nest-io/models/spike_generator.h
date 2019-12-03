@@ -323,6 +323,7 @@ spike_generator::send_test_event( Node& target, rport receptor_type, synindex sy
 inline void
 spike_generator::get_status( DictionaryDatum& d ) const
 {
+  InputDevice::get_status(d);
   P_.get( d );
   device_.get_status( d );
 }

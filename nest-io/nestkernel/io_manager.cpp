@@ -146,6 +146,10 @@ IOManager::initialize()
   {
     it.second->initialize();
   }
+  for ( const auto& it : input_backends_ )
+  {
+    it.second->initialize();
+  }
 }
 
 void
@@ -194,7 +198,7 @@ IOManager::set_status( const DictionaryDatum& d )
       DictionaryDatum input_backend_status;
       if ( updateValue< DictionaryDatum >(input_backends, iti->first, input_backend_status ) )
       {
-	iti->second->set_status( input_backend_status );
+        iti->second->set_status( input_backend_status );
       }
     }
   }
@@ -366,15 +370,14 @@ nest::IOManager::enroll_input( Name backend_name, const InputDevice& device, con
 {
   for ( auto& it : input_backends_ )
   {
-    printf("%s %s", it.first, backend_name);
     if ( it.first == backend_name )
     {
       it.second->enroll( device, params );
     }
-    //else
-    //{
-    //  it.second->disenroll( device );
-    //}
+    else
+    {
+      it.second->disenroll( device );
+    }
   }
 
 }
@@ -414,6 +417,12 @@ void
 IOManager::get_recording_backend_device_status( Name backend_name, const RecordingDevice& device, DictionaryDatum& d )
 {
   recording_backends_[ backend_name ]->get_device_status( device, d );
+}
+
+void
+IOManager::check_input_backend_device_status( Name backend_name, const DictionaryDatum& params )
+{
+  input_backends_[ backend_name ]->check_device_status( params );
 }
 
 void
