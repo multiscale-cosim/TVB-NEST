@@ -114,35 +114,36 @@ nest::InputBackendMPI::read( InputDevice& device )
 
 #pragma omp critical
   {
-
-    if(!connected_input){
-      MPI_Info_create(&info);
-      MPI_Info_set(info,"ip_port","8082");
-      MPI_Info_set(info,"ip_address", "127.0.0.1");
-      MPI_Open_port(info, port_name);
-      printf("%s\n\n", port_name); 
-      std::ofstream file;
-      file.open ("./nest_port.txt");
-      //char buff[100];
-      //snprintf(buff, sizeof(buff), "%s", port_name);
-      file.write(port_name,strlen(port_name));
-      //file.write(buff,sizeof(buff));
-      file.close();
-      fflush(stdout);
-      int status = MPI_Comm_accept(port_name, MPI_INFO_NULL, 0, MPI_COMM_WORLD, &newcomm_input);
-      printf("Accepted MPI Input Comm backend: %d\n", status); 
-      fflush(stdout);
-      connected_input = 1;
+    bool ending = false;
+    int index_list = 0 ;
+    for (index it : _list_spike_detector){
+      if (it == device.get_node_id()){
+        MPI_Comm* newcomm = _list_communication[index_list];
+        if(newcomm == NULL) {
+          printf("Error %x\n", newcomm);
+          break;
+        }
+        receive_spike_train(kernel().simulation_manager.get_clock(),result,newcomm);
+        ending=true;
+      }
+      index_list++;
     }
-    int passed_num= 10;
-    if(newcomm_input == NULL){
-        throw IllegalConnection("Communicator for MPI input failed\n");
+    if (not ending) {
+      _list_spike_detector.push_back(device.get_node_id());
+      _list_label.push_back(device.get_label());
+      MPI_Comm* newcomm = new MPI_Comm; //TODO need to free memory after
+      _list_communication.push_back(newcomm);
+      char port_name[MPI_MAX_PORT_NAME];
+      get_port(device,port_name);
+      fflush(stdout);
+      printf("ID to %d\n", int(device.get_node_id()));
+      printf("Connect to %s\n", port_name);
+      fflush(stdout);
+      int status = MPI_Comm_connect(port_name, MPI_INFO_NULL, 0, MPI_COMM_WORLD, newcomm);
+      printf("Connect MPI Output Comm 3 status: %d\n",status);
+      fflush(stdout);
+      receive_spike_train(kernel().simulation_manager.get_clock(),result,newcomm);
     }
-    MPI_Recv(&passed_num, 1, MPI_INT, 0, 0, newcomm_input, MPI_STATUS_IGNORE);
-    printf("Message Received %d\n", passed_num); 
-    result.push_back(double(passed_num));
-    fflush(stdout);
-    
   }
   return result;
 }
@@ -194,4 +195,57 @@ void
 nest::InputBackendMPI::prepare()
 {
   // nothing to do
+}
+void
+nest::InputBackendMPI::get_port(const InputDevice& device, char* port_name) {
+  get_port(device.get_node_id(),device.get_label(),port_name);
+}
+
+void
+nest::InputBackendMPI::get_port(const index index_node, const std::string& label, char* port_name){
+  std::ostringstream basename;
+  const std::string& path = kernel().io_manager.get_data_path();
+  if ( not path.empty() )
+  {
+    basename << path << '/';
+  }
+  basename << kernel().io_manager.get_data_prefix();
+
+  if ( not label.empty() )
+  {
+    basename << label;
+  }
+  else {
+     //TODO take in count this case
+  }
+  char add_path[150];
+  sprintf(add_path, "/%zu.txt", index_node);
+  basename << add_path;
+  std::cout << basename.rdbuf() << std::endl;
+  std::ifstream file(basename.str());
+  if (file.is_open()) {
+    file.getline(port_name, 256);
+  }
+  file.close();
+}
+
+void
+nest::InputBackendMPI::receive_spike_train(Time clock,std::vector<double>& result,MPI_Comm* newcomm){
+  double time_currrent =clock.get_ms() ;
+  MPI_Send(&time_currrent, 1, MPI_DOUBLE, 0, 0, *newcomm);
+  MPI_Status status_mpi;
+  double receive_num[1];
+  MPI_Recv(&receive_num, 1, MPI_DOUBLE,0 ,MPI_ANY_TAG ,*newcomm ,&status_mpi);
+  if(status_mpi.MPI_TAG == 1){
+    return;
+  }
+  while (status_mpi.MPI_TAG == 0 or status_mpi.MPI_TAG == -1){
+    if (status_mpi.MPI_TAG == 0) {
+      result.push_back(receive_num[0]);
+    }
+    printf("Message Received %.6f\n", receive_num[0]);
+    MPI_Recv(&receive_num, 1, MPI_DOUBLE,0 ,MPI_ANY_TAG ,*newcomm ,&status_mpi);
+  }
+  fflush(stdout);
+  //restore_cout_();
 }

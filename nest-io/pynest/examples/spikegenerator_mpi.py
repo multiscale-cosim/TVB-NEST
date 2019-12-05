@@ -100,16 +100,24 @@ m = nest.Create("spike_detector",
                 params={
                         "record_to": "mpi",
                         "label": "conf"})
-
 m_2 = nest.Create("spike_detector",
                 params={
-                    "record_to": "memory",
+                    "record_to": "mpi",
                     "label":"conf"})
+m_3 = nest.Create("spike_detector",
+                  params={
+                      "record_to": "memory",
+                      "label":"conf"})
+m_4 = nest.Create("spike_detector",
+                  params={
+                      "record_to": "memory",
+                      "label":"conf"})
 
 sys.stdout.flush()
 s_ex = nest.Create("spike_generator",
-                   params={"spike_times": numpy.array([10.0, 20.0, 50.0]),
-                           'input_from':'mpi'})
+                   params={"spike_times": numpy.array([]),
+                           'input_from':'mpi',
+                           "label":"conf_gen"})
 s_in = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([15.0, 25.0, 55.0])})
 
@@ -125,13 +133,16 @@ Note that it is positive for excitatory and negative for inhibitory
 connections.
 '''
 
-nest.Connect(s_ex, n, syn_spec={"weight": 100.0})
-nest.Connect(s_in, n, syn_spec={"weight": 0.0})
-nest.Connect(dc,n)
-nest.Connect(dc_2,n_2)
-# nest.Connect(m, n)
+nest.Connect(s_ex, n, syn_spec={"weight": 1000.0})
+nest.Connect(s_in, n_2, syn_spec={"weight": 1000.0})
 nest.Connect(n,m)
-nest.Connect(n_2,m_2)
+nest.Connect(n_2,m)
+nest.Connect(s_ex,m_2)
+nest.Connect(s_in,m_2)
+nest.Connect(n,m_3)
+nest.Connect(n_2,m_3)
+nest.Connect(s_ex,m_4)
+nest.Connect(s_in,m_4)
 
 
 '''
@@ -139,39 +150,13 @@ A network simulation with a duration of 100 ms is started with `Simulate`.
 '''
 print("Spike generator 1 {} and 2 {}".format(s_in, s_ex))
 nest.Simulate(100.)
-time.sleep(10.)
+# time.sleep(10.)
 nest.Simulate(100.)
-time.sleep(10.)
+# time.sleep(10.)
 nest.Simulate(100.)
-time.sleep(10.)
+# time.sleep(10.)
 nest.Simulate(100.)
-time.sleep(10.)
-# '''
-# After the simulation, the recordings are obtained from the multimeter via the
-# key `events` of the status dictionary accessed by `GetStatus`. `times`
-# indicates the recording times stored for each data point.
-# '''
-#
-# print(nest.GetStatus(m))
-#
-# events = nest.GetStatus(m)[0]["events"]
-# t = events["times"]
-#
-# '''
-# Finally, the time courses of the membrane voltage and the synaptic
-# conductance are displayed.
-# '''
-#
-# pylab.clf()
-#
-# pylab.subplot(211)
-# pylab.plot(t, events["V_m"])
-# pylab.axis([0, 100, -75, -53])
-# pylab.ylabel("membrane potential (mV)")
-#
-# pylab.subplot(212)
-# pylab.plot(t, events["g_ex"], t, events["g_in"])
-# pylab.axis([0, 100, 0, 45])
-# pylab.xlabel("time (ms)")
-# pylab.ylabel("synaptic conductance (nS)")
-# pylab.legend(("g_exc", "g_inh"))
+# time.sleep(10.)
+print(nest.GetStatus(m_3)[0]['events'])
+print(nest.GetStatus(m_4)[0]['events'])
+

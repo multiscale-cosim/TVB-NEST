@@ -27,6 +27,7 @@ def analyse(path,nb_spike_detector):
         comm.Recv([data,2, MPI.INT],source=0,tag=MPI.ANY_TAG,status=status_)
         if status_.Get_tag() == 0:
             print(data)
+            sys.stdout.flush()
         else:
             comm.Disconnect()
             comm = MPI.COMM_WORLD.Accept(port, info, root)

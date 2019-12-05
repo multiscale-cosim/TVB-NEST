@@ -24,6 +24,8 @@
 #define INPUT_BACKEND_MPI_H
 
 #include "input_backend.h"
+#include "nest_types.h"
+#include "nest_time.h"
 #include <set>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -89,11 +91,10 @@ public:
   void get_device_status( const InputDevice& device, DictionaryDatum& params_dictionary ) const override;
 
 private:
-  MPI_Comm newcomm_input;
-  MPI_Info info;
-  char port_name[MPI_MAX_PORT_NAME];
-  bool connected_input=false;
-  
+  std::list<index> _list_spike_detector;
+  std::vector<std::string> _list_label;
+  std::vector<MPI_Comm*> _list_communication;
+
   /**
    * A map for the enrolled devices. We have a vector with one map per local
    * thread. The map associates the gid of a device on a given thread
@@ -101,6 +102,10 @@ private:
   */
   typedef std::vector< std::map< int, const InputDevice* > > device_map;
   device_map devices_;
+
+  void get_port(const InputDevice& device,char* port_name);
+  void get_port(const index index_node, const std::string& label,char* port_name);
+  void receive_spike_train(Time clock,std::vector<double>& result,MPI_Comm* newcomm);
 };
 
 } // namespace
