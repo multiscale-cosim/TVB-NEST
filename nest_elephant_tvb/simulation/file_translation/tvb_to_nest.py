@@ -40,6 +40,7 @@ def send(path,id_spike_generator,dt,delay_min,status_data,buffer):
     current_step = np.empty(1, dtype='d')
     starting = 1
     while True:
+        # Waiting for ready to receive signal with current time step from NEST
         comm.Recv([current_step, 1, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
         if current_step[0] < starting:
             data = np.array([0],dtype='d')
@@ -51,14 +52,17 @@ def send(path,id_spike_generator,dt,delay_min,status_data,buffer):
                     pass
                 # Go through all rates
                 for rate in buffer[0]:
-                    data = rates_to_spikes(rate, starting, starting + (delay_min/len(buffer[0])))
+                    # Translate rates into spikes
+                    data = rates_to_spikes(rate, current_step[0], current_step[0] + (delay_min/len(buffer[0])))
                     for time in data:
                         comm.Send([time, MPI.DOUBLE], dest=0, tag=0)
                         print(" send data ", time)
+                # Finished sending all spike times, send tag 1 to finalize
                 comm.Send([time, MPI.DOUBLE], dest=0, tag=1)
                 print(" ending", time)
                 sys.stdout.flush();
                 starting += delay_min;
+                # Set lock back to False
                 with lock_status:
                     print("status false")
                     status_data[0] = False
@@ -100,17 +104,21 @@ def receive(path,TVB_config,status_data,buffer):
     while True:
         data = np.empty(1, dtype='d')
         hist = np.zeros(buffer[0].shape)
+        # Receive first rate which should have a tag 0
         comm.Recv([data, 1, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
         while status_.Get_tag() == 0:
             print("status ", data[0])
             sys.stdout.flush()
-            #Think how to fill the history buffer with rates
+            # Think how to fill the history buffer with rates
             hist[starting] = data[0]
             starting +=1
+            # Receive more rates until we recieve a tag 1
             comm.Recv([data, 1, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
         if status_.Get_tag() == 1:
+            # Wait for lock to be set to False
             while (status_data[0]):
                 pass
+            # Set lock to true and put the data in the shared buffer
             with lock_status:
                 status_data[0] = True
             buffer[0] = copy.copy(hist)
