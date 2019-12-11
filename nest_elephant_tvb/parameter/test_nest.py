@@ -65,11 +65,11 @@ param_topology={
         'C_m':200.0,
         't_ref':5.0,
         'V_reset':-65.0,
-        'E_L':-54.5,
+        'E_L':-54.0,
         'g_L':10.0,
         'I_e':0.0,
         'a':0.0,
-        'b':18.0,
+        'b':30.0,
         'Delta_T':2.0,
         'tau_w':500.0,
         'V_th':-50.0,
@@ -85,7 +85,7 @@ param_topology={
         'C_m':200.0,
         't_ref':5.0,
         'V_reset':-65.0,
-        'E_L':-55.0, #-60 good bi-stable between 50 and 70
+        'E_L':-54.5, #-60 good bi-stable between 50 and 70
         'g_L':10.0,
         'I_e':0.0,
         'a':0.0,
@@ -103,7 +103,7 @@ param_topology={
     # Standard deviation of the external input
     'sigma_I_ext':0.0,
     # Standard deviation of initial condition
-    'sigma_V_0':0.0,
+    'sigma_V_0':0.,
     # Mean deviation of initial condition
     'mean_w_0':0.0,
 }
@@ -135,7 +135,7 @@ param_background={
     #define if the simulation use or not a poisson generator
     'poisson':True,
     #the firing rate of poisson_generator
-    'rate': 0.09+1.0e-3, #150
+    'rate': 0.052+1.0e-3, #150
     #the number of connexion from other region of the brain
     'nb_connection_ex':400.0,
     'nb_connection_in':200.0,
