@@ -373,7 +373,7 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
                         'delay' : nest.GetKernelStatus("min_delay"), # without delay
                         }
         syn_spec_in_poisson_generator ={
-            'weight' :-param_background['weight_poisson']*5, #TODO need to replace the number
+            'weight' :-param_background['weight_poisson']*3, #TODO need to replace the number
             'delay' : nest.GetKernelStatus("min_delay"), # without delay
         }
         for name_pops,list_pops in dic_layer.items():
