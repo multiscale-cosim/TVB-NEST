@@ -30,9 +30,9 @@ def receive(path,id_spike_detector,dt,delay_min,status_data,buffer):
         data = np.empty(2, dtype='d')
         data[0]=starting
         hist = np.zeros(buffer[0].shape)
-        comm.Send([data[0], MPI.DOUBLE], dest=0, tag=0)
+        #comm.Send([data[0], MPI.DOUBLE], dest=0, tag=0)
         comm.Recv([data, 2, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
-        while ( status_.Get_tag() == 0):
+        while status_.Get_tag() == 0:
             print("status ",int(data[1]/dt-starting) )
             sys.stdout.flush()
             hist[int(data[1]/dt-starting)]+=1
