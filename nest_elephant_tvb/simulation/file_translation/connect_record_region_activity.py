@@ -5,8 +5,6 @@ from mpi4py import MPI
 
 def analyse(path,nb_spike_detector):
     #Start communication channels
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/nest-io/pynest/examples/"
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/translator/test/config_mpi/" + nb_spike_detector + ".txt"
     path_to_files = path + nb_spike_detector + ".txt"
     #For NEST
     # Init connection

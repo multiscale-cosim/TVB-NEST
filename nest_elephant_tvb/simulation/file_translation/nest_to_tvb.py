@@ -30,13 +30,12 @@ def receive(path,id_spike_detector,dt,delay_min,status_data,buffer):
         data = np.empty(2, dtype='d')
         data[0]=starting
         hist = np.zeros(buffer[0].shape)
-        #comm.Send([data[0], MPI.DOUBLE], dest=0, tag=0)
-        comm.Recv([data, 2, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
+        comm.Send([data[0], MPI.DOUBLE], dest=0, tag=0)
+        comm.Recv([data, 2, MPI.DOUBLE], source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status_)
         while status_.Get_tag() == 0:
-            print("status ",int(data[1]/dt-starting) )
             sys.stdout.flush()
-            hist[int(data[1]/dt-starting)]+=1
-            comm.Recv([data,2, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
+            hist[int((data[1]-starting)/dt)]+=1
+            comm.Recv([data,2, MPI.DOUBLE],source=status_.Get_source(),tag=MPI.ANY_TAG,status=status_)
         if status_.Get_tag() == 1:
             while(status_data[0]):
                 pass
@@ -44,7 +43,6 @@ def receive(path,id_spike_detector,dt,delay_min,status_data,buffer):
                 status_data[0]=True
             buffer[0]=copy.copy(hist)
             starting+=delay_min
-            print("status ", starting)
         else:
             break
     comm.Disconnect()
@@ -73,14 +71,14 @@ def send(path,TVB_config,status_data,buffer):
     sys.stdout.flush()
     while(True):
         accept = np.empty(1, dtype='b')
-        comm.Recv([accept,1, MPI.BOOL],source=0,tag=MPI.ANY_TAG,status=status_)
+        comm.Recv([accept,1, MPI.BOOL],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
         if status_.Get_tag() == 0:
             while(not status_data[0]):
                 pass
             size = np.array(int(buffer[0].shape[0]),dtype='i')
-            comm.Send([size,MPI.INT],dest=0,tag=0)
+            comm.Send([size,MPI.INT],dest=status_.Get_source(),tag=0)
             sys.stdout.flush()
-            comm.Send([buffer[0], MPI.DOUBLE], dest=0, tag=0)
+            comm.Send([buffer[0], MPI.DOUBLE], dest=status_.Get_source(), tag=0)
             with lock_status:
                 print("status false")
                 status_data[0]=False

@@ -5,9 +5,8 @@ from mpi4py import MPI
 
 def input(path,nb_spike_detector):
     #Start communication channels
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/nest-io/pynest/examples/"
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/translator/test/config_mpi/" + nb_spike_detector + ".txt"
     path_to_files = path + nb_spike_detector + ".txt"
+    min_delay = 200.0
     #For NEST
     # Init connection
     print("Waiting for port details")
@@ -33,7 +32,7 @@ def input(path,nb_spike_detector):
                 sys.stdout.flush()
             else:
                 size= np.random.randint(0,1000)
-                time = starting+np.random.rand(size)*100
+                time = starting+np.random.rand(size)*(min_delay-0.2)
                 time = np.around(np.sort(np.array(time)),decimals=1)
                 id = np.random.randint(0,10,size)
                 data = np.ascontiguousarray(np.swapaxes([id,time],0,1),dtype='d')
@@ -43,7 +42,7 @@ def input(path,nb_spike_detector):
                 comm.Send([i, MPI.DOUBLE], dest=0, tag=1)
                 print(" ending", i)
                 sys.stdout.flush();
-                starting+=200;
+                starting+=min_delay;
                 if starting > 10000:
                     break
     print("ending" )
