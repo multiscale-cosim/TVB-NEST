@@ -3,7 +3,7 @@ from mpi4py import MPI
 
 def simulate_TVB_reception(path):
     '''
-    simulate the output of the translator for nest to TVB
+    simulate the receptor of the translator for nest to TVB
     :param path: the path to the file for the connections
     :return:
     '''
@@ -20,7 +20,8 @@ def simulate_TVB_reception(path):
     status_ = MPI.Status()
     while(True):
         # send to the translator, I want the next part
-        comm.Send([np.array([True],dtype='b'), MPI.BOOL], dest=0, tag=0)
+        req = comm.isend(True, dest=0, tag=0)
+        req.wait()
         # get the size of the rate
         size=np.empty(1,dtype='i')
         comm.Recv([size, MPI.INT], source=0, tag=0)

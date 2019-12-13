@@ -10,7 +10,7 @@ def receive(path,file_spike_detector,dt,delay_min,status_data,buffer):
     '''
     the receive part of the translator
     :param path: folder which will contain the configuration file
-    :param id_spike_detector: the relative path which contains the txt file
+    :param file_spike_detector: the relative path which contains the txt file
     :param dt: the time step of the integration
     :param delay_min: the minium of delay
     :param status_data: the status of the buffer (SHARED between thread)
@@ -18,7 +18,7 @@ def receive(path,file_spike_detector,dt,delay_min,status_data,buffer):
     :return:
     '''
     # Open the MPI port connection
-    print("Waiting for port details");sys.stdout.flush()
+    print("Receive : Waiting for port details");sys.stdout.flush()
     info = MPI.INFO_NULL
     root=0
     port = MPI.Open_port(info)
@@ -28,14 +28,14 @@ def receive(path,file_spike_detector,dt,delay_min,status_data,buffer):
     fport.write(port)
     fport.close()
     # Wait until connection
-    print('wait connection '+port);sys.stdout.flush()
+    print('Receive : wait connection '+port);sys.stdout.flush()
     comm = MPI.COMM_WORLD.Accept(port, info, root)
-    print('connect to '+port);sys.stdout.flush()
+    print('Receive : connect to '+port);sys.stdout.flush()
 
     status_ = MPI.Status() # status of the different message
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
-    starting=0.0 # the beging of each time of synchronization
-    while(True):
+    starting=0.0 # the begging of each time of synchronization
+    while True:
         hist = np.zeros(buffer[0].shape) # empty histogram of one region
         # send the confirmation of the processus can send data
         requests=[]
@@ -49,8 +49,12 @@ def receive(path,file_spike_detector,dt,delay_min,status_data,buffer):
             comm.Recv([data,2, MPI.DOUBLE],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
             if status_.Get_tag() == 1:
                 count_ending+=1
-            else:
+            elif status_.Get_tag() == 0:
                 hist[int((data[1]-starting)/dt)]+=1 # put the spike in the histogram
+            else:
+                break
+        if count_ending !=len(source_sending):
+            break
         # wait until the data can be send to the sender thread
         while(status_data[0]):
             pass
@@ -58,50 +62,64 @@ def receive(path,file_spike_detector,dt,delay_min,status_data,buffer):
             status_data[0]=True
         buffer[0]=copy.copy(hist)
         starting+=delay_min
-    #TODO need to take in count the end of the simulation (add shared variable for close the simulation)
+    print('Receive : ending');sys.stdout.flush()
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    print('exit');sys.stdout.flush()
+    print('Receive : exit');sys.stdout.flush()
     MPI.Finalize()
 
 def send(path,TVB_config,status_data,buffer):
-    #Start communication channels
-    path_to_files = path + TVB_config
-    #For TVB
-    # Init connection
-    print("Waiting for port details")
+    '''
+    the sending part of the translator
+    :param path:  folder which will contain the configuration file
+    :param TVB_config:  the relative path which contains the txt file
+    :param status_data: the status of the buffer (SHARED between thread)
+    :param buffer: the bufffer which contains the data (SHARED between thread)
+    :return:
+    '''
+    # Open the MPI port connection
+    print("Send : Waiting for port details");sys.stdout.flush()
     info = MPI.INFO_NULL
     root=0
     port = MPI.Open_port(info)
+    # Write file configuration of the port
+    path_to_files = path + TVB_config
     fport = open(path_to_files, "w+")
     fport.write(port)
     fport.close()
-    print('wait connection '+port)
+    print('Send : wait connection '+port);sys.stdout.flush()
     comm = MPI.COMM_WORLD.Accept(port, info, root)
-    print('connect to '+port)
-    #test one rate
+    print('Send : connect to '+port);sys.stdout.flush()
+
     status_ = MPI.Status()
-    sys.stdout.flush()
-    while(True):
-        accept = np.empty(1, dtype='b')
-        comm.Recv([accept,1, MPI.BOOL],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
+    while True:
+        # wait until the translator accept the connections
+        accept = False
+        while not accept:
+            req = comm.irecv(source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG)
+            accept = req.wait(status_)
         if status_.Get_tag() == 0:
+            # send the rate when there ready
             while(not status_data[0]):
                 pass
+            # send the size of the rate
             size = np.array(int(buffer[0].shape[0]),dtype='i')
             comm.Send([size,MPI.INT],dest=status_.Get_source(),tag=0)
-            sys.stdout.flush()
+            # send the rates
             comm.Send([buffer[0], MPI.DOUBLE], dest=status_.Get_source(), tag=0)
             with lock_status:
                 status_data[0]=False
         else:
-            comm.Disconnect()
-            comm = MPI.COMM_WORLD.Accept(port, info, root)
+            # disconnect when everything is ending
+            #TODO testing
+            break
+    print('Send : ending');sys.stdout.flush()
+    comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    print('exit');
     MPI.Finalize()
+    print('Send : exit');
 
 
 if __name__ == "__main__":

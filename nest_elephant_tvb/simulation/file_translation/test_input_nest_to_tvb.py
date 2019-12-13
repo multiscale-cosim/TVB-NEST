@@ -18,8 +18,7 @@ def simulate_spike_detector(path,min_delay):
     comm = MPI.COMM_WORLD.Connect(port)
     print('connect to '+ port) ;sys.stdout.flush()
 
-    current_step = np.empty(1, dtype='d')
-    starting = 0.0
+    starting = 0.0 # the begging of each time of synchronization
     while True:
         # wait until the translatro acept the connections
         accept = False
@@ -46,7 +45,7 @@ def simulate_spike_detector(path,min_delay):
     # closing the connection at this end
     print("ending" );sys.stdout.flush()
     # send the signal for end the translation
-    comm.Send([current_step, MPI.DOUBLE], dest=0, tag=2)
+    comm.Send([i, MPI.DOUBLE], dest=0, tag=2)
     comm.Disconnect()
     MPI.Close_port(port)
     MPI.Finalize()

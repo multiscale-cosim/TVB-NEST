@@ -1,49 +1,52 @@
 import numpy as np
-import os
-import numpy.random as rgn
 from mpi4py import MPI
 
-def analyse(path,nb_spike_detector):
-    #Start communication channels
-    path_to_files = path + nb_spike_detector + ".txt"
-    #For NEST
+def simulate_nest_generator(path):
+    '''
+    simulate the spike generator of the translator for tvb to nest
+    :param path: the path to the file for the connections
+    :return:
+    '''
     # Init connection
-    print(path_to_files)
-    print("Waiting for port details")
-    fport = open(path_to_files, "r")
+    print(path)
+    print("Waiting for port details");sys.stdout.flush()
+    fport = open(path, "r")
     port=fport.readline()
     fport.close()
-    print("wait connection "+port)
+    print("wait connection "+port);sys.stdout.flush()
     comm = MPI.COMM_WORLD.Connect(port)
-    print('connect to '+port)
-    sys.stdout.flush()
-    #test one rate
-    status_ = MPI.Status()
-    while(True):
-        accept_connection = np.array([True],dtype='b')
-        comm.Send([accept_connection, MPI.BOOL], dest=0, tag=0)
-        size=np.empty(1,dtype='i')
-        comm.Recv([size, MPI.INT], source=0, tag=0)
-        sys.stdout.flush()
-        data = np.empty(size, dtype='d')
-        comm.Recv([data,size, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
-        if status_.Get_tag() == 0:
-            print(data)
-            print(np.sum(data))
-            sys.stdout.flush()
-        else:
-            break
+    print('connect to '+port);sys.stdout.flush()
 
+    status_ = MPI.Status()
+    ids=np.arange(0,10,1) # random id of spike detector
+    print(ids);sys.stdout.flush()
+    while(True):
+        for id in ids:
+            # send ID of spike generator
+            comm.Send([np.array(id,dtype='i'), MPI.INT], dest=0, tag=0)
+            # receive the number of spikes for updating the spike detector
+            size=np.empty(1,dtype='i')
+            comm.Recv([size, MPI.INT], source=0, tag=id,status=status_)
+            # receive the spikes for updating the spike detector
+            data = np.empty(size, dtype='d')
+            comm.Recv([data,size, MPI.DOUBLE],source=0,tag=id,status=status_)
+            # printing value and exist
+            if status_.Get_tag() == id:
+                print(id, data,np.sum(data));sys.stdout.flush()
+            else:
+                break
+        #send ending the the run of the simulation
+        comm.Send([np.array(id,dtype='i'), MPI.INT], dest=0, tag=1)
+    # closing the connection at this end
     comm.Disconnect()
     MPI.Close_port(port)
-    os.remove(path_to_files)
     print('exit');
     MPI.Finalize()
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==3:
-        analyse(sys.argv[1],sys.argv[2])
+    if len(sys.argv)==2:
+        simulate_nest_generator(sys.argv[1])
     else:
         print('missing argument')
 

@@ -1,62 +1,56 @@
 import numpy as np
-import os
-import numpy.random as rgn
 from mpi4py import MPI
 
-def input(path,nb_spike_detector):
-    #Start communication channels
-    path_to_files = path + nb_spike_detector + ".txt"
-    min_delay = 200.0
-    #For NEST
-    # Init connection
-    print("Waiting for port details")
-    fport = open(path_to_files, "r")
+def simulate_TVB_output(path,min_delay):
+    '''
+    simulate the input of the translator tvb_to_nest
+    :param path: the path to the file for the connections
+    :param nb_spike_detector:
+    :return:
+    '''
+    # Init connection from file connection
+    print("Waiting for port details");sys.stdout.flush()
+    fport = open(path, "r")
     port = fport.readline()
     fport.close()
-    print('wait connection '+port)
-    sys.stdout.flush()
+    print('wait connection '+port);sys.stdout.flush()
     comm = MPI.COMM_WORLD.Connect(port)
-    print('connect to '+port)
-    #test one rate
+    print('connect to '+port);sys.stdout.flush()
 
     status_ = MPI.Status()
-    current_step = np.empty(1, dtype='d')
-    starting = 0.0
+    starting = 0.0 # the begging of each time of synchronization
     while True:
-        print("wait for send data")
-        comm.Recv([current_step, 1, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
-        if status_.Get_tag() == 0:
-            if current_step[0] < starting:
-                data = np.array([0],dtype='d')
-                comm.Send([data, MPI.DOUBLE], dest=0, tag=1)
-                sys.stdout.flush()
-            else:
-                size= np.random.randint(0,1000)
-                time = starting+np.random.rand(size)*(min_delay-0.2)
-                time = np.around(np.sort(np.array(time)),decimals=1)
-                id = np.random.randint(0,10,size)
-                data = np.ascontiguousarray(np.swapaxes([id,time],0,1),dtype='d')
-                for i in data:
-                    comm.Send([i, MPI.DOUBLE], dest=0, tag=0)
-                    print(" send data ",i)
-                comm.Send([i, MPI.DOUBLE], dest=0, tag=1)
-                print(" ending", i)
-                sys.stdout.flush();
-                starting+=min_delay;
-                if starting > 10000:
-                    break
-    print("ending" )
-    comm.Send([current_step, MPI.DOUBLE], dest=0, tag=2)
+        # wait until the translator accept the connections
+        accept = False
+        while not accept:
+            req = comm.irecv(source=0,tag=0)
+            accept = req.wait(status_)
+        source = status_.Get_source() # the id of the excepted source
+        # create random data
+        size= int(min_delay/0.1 )
+        rate = np.random.rand(size)*400
+        data = np.ascontiguousarray(rate,dtype='d') # format the rate for sending
+        shape = np.array(data.shape[0],dtype='i') # size of data
+        times = np.array([starting,starting+min_delay],dtype='d') # time of stating and ending step
+        comm.Send([times,MPI.DOUBLE],dest=source,tag=0)
+        comm.Send([shape,MPI.INT],dest=source,tag=0)
+        comm.Send([data, MPI.DOUBLE], dest=source, tag=0)
+        # print result and go to the next run
+        print(data,times,shape);sys.stdout.flush() # printing summary of the data
+        starting+=min_delay
+        if starting > 10000:
+            break
+    print("ending" );sys.stdout.flush()
+    comm.Send([times, MPI.DOUBLE], dest=0, tag=1)
     comm.Disconnect()
     MPI.Close_port(port)
-    os.remove(path_to_files)
     print('exit');
     MPI.Finalize()
 
 if __name__ == "__main__":
     import sys
     if len(sys.argv)==3:
-        input(sys.argv[1],sys.argv[2])
+        simulate_TVB_output(sys.argv[1],float(sys.argv[2]))
     else:
         print('missing argument')
 
