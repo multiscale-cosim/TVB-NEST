@@ -5,8 +5,6 @@ from mpi4py import MPI
 
 def input(path,nb_spike_detector):
     #Start communication channels
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/nest-io/pynest/examples/"
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/translator/test/config_mpi/" + nb_spike_detector + ".txt"
     path_to_files = path + nb_spike_detector + ".txt"
     #For NEST
     # Init connection
@@ -24,28 +22,25 @@ def input(path,nb_spike_detector):
     #test one rate
 
     status_ = MPI.Status()
-    current_step = np.empty(1, dtype='d')
+    ids = np.empty(2, dtype='i')
+    thread_id = np.empty(1, dtype='i')
     starting = 1
     while True:
-        comm.Recv([current_step, 1, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
-        if current_step[0] < starting:
-            data = np.array([0],dtype='d')
-            comm.Send([data, MPI.DOUBLE], dest=0, tag=1)
-            sys.stdout.flush()
+        comm.Recv([ids, 2, MPI.INT], source=0, tag=MPI.ANY_TAG, status=status_)
+        if status_.Get_tag() == 0 :
+            shape = np.random.randint(0,100,1,dtype='i')
+            data = starting+np.random.rand(shape[0])*100
+            data = np.around(np.sort(np.array(data,dtype='d')),decimals=1)
+            comm.Send([shape, MPI.INT], dest=status_.Get_source(), tag=ids[1])
+            print(" shape data ",shape)
+            comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=ids[1])
+            print(" send data", data)
+            sys.stdout.flush();
+            comm.Recv([thread_id, 1, MPI.INT], source=status_.Get_source(), tag=MPI.ANY_TAG, status=status_)
+            starting+=200;
         else:
-            if status_.Get_tag() == 0 :
-                data = starting+np.random.rand(20)*100
-                data = np.around(np.sort(np.array(data,dtype='d')),decimals=1)
-                for i in data:
-                    comm.Send([i, MPI.DOUBLE], dest=0, tag=0)
-                    print(" send data ",i)
-                comm.Send([i, MPI.DOUBLE], dest=0, tag=1)
-                print(" ending", i)
-                sys.stdout.flush();
-                starting+=100;
-            else:
-                comm.Disconnect()
-                comm = MPI.COMM_WORLD.Accept(port, info, root)
+            comm.Disconnect()
+            comm = MPI.COMM_WORLD.Accept(port, info, root)
 
     comm.Disconnect()
     comm = MPI.COMM_WORLD.Accept(port, info, root)

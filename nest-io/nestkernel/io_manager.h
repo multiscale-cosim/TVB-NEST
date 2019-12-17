@@ -106,7 +106,7 @@ public:
   std::vector <double> read( InputDevice& );
 
   void enroll_recorder( Name, const RecordingDevice&, const DictionaryDatum& );
-  void enroll_input( Name, const InputDevice&, const DictionaryDatum& );
+  void enroll_input( Name, InputDevice&, const DictionaryDatum& );
 
   void set_recording_value_names( Name backend_name,
   const RecordingDevice& device,

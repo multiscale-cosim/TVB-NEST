@@ -84,7 +84,7 @@ public:
    *
    * @ingroup NESTio
    */
-  virtual void enroll( const InputDevice& device, const DictionaryDatum& params ) = 0;
+  virtual void enroll( InputDevice& device, const DictionaryDatum& params ) = 0;
 
   /**
    * Disenroll an `InputDevice` from the `InputBackend`.
@@ -102,7 +102,7 @@ public:
    *
    * @ingroup NESTio
    */
-  virtual void disenroll( const InputDevice& device ) = 0;
+  virtual void disenroll( InputDevice& device ) = 0;
 
   /**
    * To make the names of input quantities known to the
@@ -200,8 +200,6 @@ public:
   clear( const InputDevice& )
   {
   }
-
-  virtual std::vector <double> read( InputDevice& device ) = 0;
 
    /**
    * Check if the given per-device properties are valid and usable by

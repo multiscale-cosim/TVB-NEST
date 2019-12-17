@@ -73,6 +73,7 @@ public:
 
   void set_status( const DictionaryDatum& );
   void get_status( DictionaryDatum& ) const;
+  virtual void update_from_backend(const std::vector<double> input_spikes) =0;
 
 
 protected:

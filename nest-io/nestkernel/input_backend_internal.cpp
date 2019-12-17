@@ -29,7 +29,7 @@
 #include "input_device.h"
 
 void
-nest::InputBackendInternal::enroll( const InputDevice& device,
+nest::InputBackendInternal::enroll( InputDevice& device,
   const DictionaryDatum& params )
 {
 	  thread tid = device.get_thread();
@@ -44,7 +44,7 @@ nest::InputBackendInternal::enroll( const InputDevice& device,
 }
 
 void
-nest::InputBackendInternal::disenroll( const InputDevice& device )
+nest::InputBackendInternal::disenroll( InputDevice& device )
 {
   thread tid = device.get_thread();
   index node_id = device.get_node_id();
@@ -82,14 +82,6 @@ nest::InputBackendInternal::finalize()
 {
     printf("Closing\n\n" );
 }
-
-std::vector <double>
-nest::InputBackendInternal::read( InputDevice& device )
-{
-  std::vector< double > result;
-  return result;
-}
-
 
 void
 nest::InputBackendInternal::set_value_names( const InputDevice& device,

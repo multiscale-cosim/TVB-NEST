@@ -336,19 +336,6 @@ IOManager::write( Name backend_name,
   recording_backends_[ backend_name ]->write( device, event, double_values, long_values );
 }
 
-std::vector <double>
-nest::IOManager::read( InputDevice& device )
-{
-  std::vector <double> result;
-  std::map< Name, InputBackend* >::const_iterator it;
-  for ( it = input_backends_.begin(); it != input_backends_.end(); ++it )
-  {
-    result = it->second->read( device);
-  }
-  //Fix for multiple input backends
-  return result;
-}
-
 void
 IOManager::enroll_recorder( Name backend_name, const RecordingDevice& device, const DictionaryDatum& params )
 {
@@ -366,7 +353,7 @@ IOManager::enroll_recorder( Name backend_name, const RecordingDevice& device, co
 }
 
 void
-nest::IOManager::enroll_input( Name backend_name, const InputDevice& device, const DictionaryDatum& params )
+nest::IOManager::enroll_input( Name backend_name, InputDevice& device, const DictionaryDatum& params )
 {
   for ( auto& it : input_backends_ )
   {

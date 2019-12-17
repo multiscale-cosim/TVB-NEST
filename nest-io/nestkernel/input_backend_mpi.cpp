@@ -36,16 +36,27 @@ nest::InputBackendMPI::initialize()
   auto nthreads = kernel().vp_manager.get_num_threads();
   device_map devices( nthreads );
   devices_.swap( devices );
+  comm_map comms(nthreads);
+  commMap_.swap(comms);
 }
 
 void
 nest::InputBackendMPI::finalize()
 {
-  printf("Closing\n\n" );
+  device_map::iterator it_device;
+  for(it_device = devices_.begin();it_device!=devices_.end();it_device++){
+    it_device->clear();
+  }
+  comm_map::iterator it_comm;
+  for(it_comm = commMap_.begin();it_comm!=commMap_.end();it_comm++){
+    it_comm->clear();
+  }
+  devices_.clear();
+  commMap_.clear();
 }
 
 void
-nest::InputBackendMPI::enroll( const InputDevice& device,
+nest::InputBackendMPI::enroll( InputDevice& device,
   const DictionaryDatum& params )
 {
   if ( device.get_type() == InputDevice::SPIKE_GENERATOR ){
@@ -57,7 +68,8 @@ nest::InputBackendMPI::enroll( const InputDevice& device,
 	  {
 	    devices_[ tid ].erase( device_it );
 	  }
-	  devices_[ tid ].insert( std::make_pair( node_id, &device ) );
+	  std::pair< MPI_Comm*, InputDevice*> pair = std::make_pair(nullptr,&device);
+	  devices_[ tid ].insert( std::make_pair( node_id,  pair) );
   }
   else
   {
@@ -66,7 +78,7 @@ nest::InputBackendMPI::enroll( const InputDevice& device,
 }
 
 void
-nest::InputBackendMPI::disenroll( const InputDevice& device )
+nest::InputBackendMPI::disenroll( InputDevice& device )
 {
   thread tid = device.get_thread();
   index node_id = device.get_node_id();
@@ -86,66 +98,92 @@ nest::InputBackendMPI::set_value_names( const InputDevice& device,
   // nothing to do
 }
 
+void
+nest::InputBackendMPI::prepare()
+{
+  thread thread_id = kernel().vp_manager.get_thread_id();
+
+  //get port and update the list of device
+  device_map::value_type::iterator it_device;
+  for(it_device=devices_[thread_id].begin();it_device != devices_[thread_id].end();it_device++){
+    // add the link between MPI communicator and the device (device can share the same MPI communicator
+	  char port_name [MPI_MAX_PORT_NAME];
+	  get_port(it_device->second.second,port_name);
+	  comm_map::value_type::iterator comm_it = commMap_[ thread_id ].find(port_name);
+	  MPI_Comm * comm;
+	  if (comm_it != commMap_[ thread_id ].end())
+    {
+	    comm = comm_it->second.first;
+	    comm_it->second.second+=1;
+    } else {
+      comm = new MPI_Comm;
+      std::pair< MPI_Comm*, int> comm_count = std::make_pair(comm,1);
+      commMap_[thread_id].insert(std::make_pair(port_name, comm_count));
+	  }
+	  it_device->second.first=comm;
+  }
+
+  // connect the thread with MPI process it need to be connected
+  // WARNING can be a bug if it's need all the thread to be connected in MPI
+  comm_map::value_type::iterator it_comm;
+  for ( it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++){
+    printf("Connect to %s\n", it_comm->first);fflush(stdout);
+    MPI_Comm_connect(it_comm->first, MPI_INFO_NULL, 0, MPI_COMM_WORLD, it_comm->second.first); // should use the status for handle error
+  }
+}
 
 void
 nest::InputBackendMPI::pre_run_hook()
 {
+  // connect take information of MPI process
+  const thread thread_id = kernel().vp_manager.get_thread_id();
+  device_map::value_type::iterator it_device;
+  for (it_device = devices_[thread_id].begin(); it_device != devices_[thread_id].end(); it_device++) {
+    receive_spike_train(*(it_device->second.first), *(it_device->second.second));
+  }
+
+}
+
+void
+nest::InputBackendMPI::post_step_hook()
+{
   // nothing to do
 }
 
+void
+nest::InputBackendMPI::post_run_hook()
+{
+  thread thread_id = kernel().vp_manager.get_thread_id();
+  // WARNING can be a bug if all the thread to send ending connection of MPI
+  comm_map::value_type::iterator it_comm;
+  for (it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++) {
+    int value[1];
+    value[0] = thread_id;
+    MPI_Send(value, 1, MPI_INT, 0, 1, *it_comm->second.first);
+  }
+}
 
 void
 nest::InputBackendMPI::cleanup()
 {
-  // nothing to do
-}
-
-std::vector <double>
-nest::InputBackendMPI::read( InputDevice& device )
-{
-  std::vector< double > result;
-  const thread t = device.get_thread();
-  const index gid = device.get_node_id();
-
-  if ( devices_[ t ].find( gid ) == devices_[ t ].end() )
-  {
-    return result;
+  thread thread_id = kernel().vp_manager.get_thread_id();
+  // WARNING can be a bug if all the thread to send ending connection of MPI
+  //disconnect MPI
+  comm_map::value_type::iterator it_comm;
+  for (it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++) {
+    int value[1];
+    value[0] = thread_id;
+    MPI_Send(value, 1, MPI_INT, 0, 1, *it_comm->second.first);
+    MPI_Comm_disconnect(it_comm->second.first);
+    delete(it_comm->second.first);
+  }
+  // clear map of device
+  commMap_[thread_id].clear();
+  device_map::value_type::iterator it_device;
+  for (it_device = devices_[thread_id].begin(); it_device != devices_[thread_id].end(); it_device++) {
+    it_device->second.first= nullptr;
   }
 
-#pragma omp critical
-  {
-    bool ending = false;
-    int index_list = 0 ;
-    for (index it : _list_spike_detector){
-      if (it == device.get_node_id()){
-        MPI_Comm* newcomm = _list_communication[index_list];
-        if(newcomm == NULL) {
-          printf("Error %x\n", newcomm);
-          break;
-        }
-        receive_spike_train(kernel().simulation_manager.get_clock(),result,newcomm);
-        ending=true;
-      }
-      index_list++;
-    }
-    if (not ending) {
-      _list_spike_detector.push_back(device.get_node_id());
-      _list_label.push_back(device.get_label());
-      MPI_Comm* newcomm = new MPI_Comm; //TODO need to free memory after
-      _list_communication.push_back(newcomm);
-      char port_name[MPI_MAX_PORT_NAME];
-      get_port(device,port_name);
-      fflush(stdout);
-      printf("ID to %d\n", int(device.get_node_id()));
-      printf("Connect to %s\n", port_name);
-      fflush(stdout);
-      int status = MPI_Comm_connect(port_name, MPI_INFO_NULL, 0, MPI_COMM_WORLD, newcomm);
-      printf("Connect MPI Output Comm 3 status: %d\n",status);
-      fflush(stdout);
-      receive_spike_train(kernel().simulation_manager.get_clock(),result,newcomm);
-    }
-  }
-  return result;
 }
 
 void
@@ -167,17 +205,6 @@ nest::InputBackendMPI::get_device_status( const nest::InputDevice& device,
   // nothing to do
 }
 
-void
-nest::InputBackendMPI::post_run_hook()
-{
-  // nothing to do
-}
-
-void
-nest::InputBackendMPI::post_step_hook()
-{
-  // nothing to do
-}
 
 void
 nest::InputBackendMPI::get_status( lockPTRDatum< Dictionary, &SLIInterpreter::Dictionarytype >& ) const
@@ -191,14 +218,10 @@ nest::InputBackendMPI::set_status( const DictionaryDatum& d )
   // nothing to do
 }
 
+
 void
-nest::InputBackendMPI::prepare()
-{
-  // nothing to do
-}
-void
-nest::InputBackendMPI::get_port(const InputDevice& device, char* port_name) {
-  get_port(device.get_node_id(),device.get_label(),port_name);
+nest::InputBackendMPI::get_port(InputDevice *device, char* port_name) {
+  get_port(device->get_node_id(),device->get_label(),port_name);
 }
 
 void
@@ -230,22 +253,16 @@ nest::InputBackendMPI::get_port(const index index_node, const std::string& label
 }
 
 void
-nest::InputBackendMPI::receive_spike_train(Time clock,std::vector<double>& result,MPI_Comm* newcomm){
-  double time_currrent =clock.get_ms() ;
-  MPI_Send(&time_currrent, 1, MPI_DOUBLE, 0, 0, *newcomm);
+nest::InputBackendMPI::receive_spike_train(const MPI_Comm& comm, InputDevice& device){
+  int message[2];
+  message[0] = device.get_node_id();
+  message[0] = kernel().vp_manager.get_thread_id();
   MPI_Status status_mpi;
-  double receive_num[1];
-  MPI_Recv(&receive_num, 1, MPI_DOUBLE,0 ,MPI_ANY_TAG ,*newcomm ,&status_mpi);
-  if(status_mpi.MPI_TAG == 1){
-    return;
-  }
-  while (status_mpi.MPI_TAG == 0 or status_mpi.MPI_TAG == -1){
-    if (status_mpi.MPI_TAG == 0) {
-      result.push_back(receive_num[0]);
-    }
-    printf("Message Received %.6f\n", receive_num[0]);
-    MPI_Recv(&receive_num, 1, MPI_DOUBLE,0 ,MPI_ANY_TAG ,*newcomm ,&status_mpi);
-  }
-  fflush(stdout);
-  //restore_cout_();
+  MPI_Send(message , 2, MPI_INT, 0, 0, comm);
+  int shape[1];
+  MPI_Recv(&shape, 1, MPI_INT, MPI_ANY_SOURCE,message[1] ,comm ,&status_mpi);
+  double spikes[shape[0]];
+  MPI_Recv(&spikes, shape[0], MPI_DOUBLE,status_mpi.MPI_SOURCE,message[1],comm ,&status_mpi);
+  std::vector<double> spikes_list(spikes, spikes + sizeof(spikes) / sizeof(spikes[0]));
+  device.update_from_backend(spikes_list);
 }

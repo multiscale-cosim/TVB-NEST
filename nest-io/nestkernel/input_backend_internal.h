@@ -47,18 +47,13 @@ public:
    */
   ~InputBackendInternal() noexcept = default;
 
-  /**
-   * Write functions simply dumping all recorded data to standard output.
-   */
-  std::vector <double> read( InputDevice& device ) override;
-
 
   void initialize() override;
   void finalize() override;
 
-  void enroll( const InputDevice& device, const DictionaryDatum& params ) override;
+  void enroll( InputDevice& device, const DictionaryDatum& params ) override;
 
-  void disenroll( const InputDevice& device ) override;
+  void disenroll( InputDevice& device ) override;
 
   void cleanup() override;
 
