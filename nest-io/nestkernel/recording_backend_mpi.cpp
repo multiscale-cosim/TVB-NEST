@@ -182,7 +182,7 @@ nest::RecordingBackendMPI::cleanup()
   for (it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++) {
     int value[1];
     value[0] = thread_id;
-    MPI_Send(value, 1, MPI_INT, 0, 1, *it_comm->second.first);
+    MPI_Send(value, 1, MPI_INT, 0, 2, *it_comm->second.first);
     MPI_Comm_disconnect(it_comm->second.first);
     delete(it_comm->second.first);
     delete[](it_comm->first);
