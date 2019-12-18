@@ -41,7 +41,7 @@ def simulate_TVB_output(path,min_delay):
         if starting > 10000:
             break
     print("ending" );sys.stdout.flush()
-    comm.Send([times, MPI.DOUBLE], dest=0, tag=1)
+    comm.Send([times, MPI.DOUBLE], dest=0, tag=2)
     comm.Disconnect()
     MPI.Close_port(port)
     print('exit');

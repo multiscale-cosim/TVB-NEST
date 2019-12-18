@@ -19,19 +19,21 @@ def simulate_nest_generator(path):
 
     status_ = MPI.Status()
     ids=np.arange(0,10,1) # random id of spike detector
+    thread=0
     print(ids);sys.stdout.flush()
     while(True):
         for id in ids:
+            message_ids = np.array([id,thread],dtype='i')
             # send ID of spike generator
-            comm.Send([np.array(id,dtype='i'), MPI.INT], dest=0, tag=0)
+            comm.Send([np.array(message_ids,dtype='i'), MPI.INT], dest=0, tag=0)
             # receive the number of spikes for updating the spike detector
             size=np.empty(1,dtype='i')
-            comm.Recv([size, MPI.INT], source=0, tag=id,status=status_)
+            comm.Recv([size,1, MPI.INT], source=0, tag=thread,status=status_)
             # receive the spikes for updating the spike detector
             data = np.empty(size, dtype='d')
-            comm.Recv([data,size, MPI.DOUBLE],source=0,tag=id,status=status_)
+            comm.Recv([data,size, MPI.DOUBLE],source=0,tag=thread,status=status_)
             # printing value and exist
-            if status_.Get_tag() == id:
+            if status_.Get_tag() == thread:
                 print(id, data,np.sum(data));sys.stdout.flush()
             else:
                 break
