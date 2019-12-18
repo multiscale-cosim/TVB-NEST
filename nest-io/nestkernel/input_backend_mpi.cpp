@@ -107,7 +107,7 @@ nest::InputBackendMPI::prepare()
   device_map::value_type::iterator it_device;
   for(it_device=devices_[thread_id].begin();it_device != devices_[thread_id].end();it_device++){
     // add the link between MPI communicator and the device (device can share the same MPI communicator
-	  char port_name [MPI_MAX_PORT_NAME];
+	  char * port_name = new char [MPI_MAX_PORT_NAME];
 	  get_port(it_device->second.second,port_name);
 	  comm_map::value_type::iterator comm_it = commMap_[ thread_id ].find(port_name);
 	  MPI_Comm * comm;
@@ -115,6 +115,7 @@ nest::InputBackendMPI::prepare()
     {
 	    comm = comm_it->second.first;
 	    comm_it->second.second+=1;
+	    delete[](port_name);
     } else {
       comm = new MPI_Comm;
       std::pair< MPI_Comm*, int> comm_count = std::make_pair(comm,1);
@@ -141,7 +142,6 @@ nest::InputBackendMPI::pre_run_hook()
   for (it_device = devices_[thread_id].begin(); it_device != devices_[thread_id].end(); it_device++) {
     receive_spike_train(*(it_device->second.first), *(it_device->second.second));
   }
-
 }
 
 void
@@ -176,6 +176,7 @@ nest::InputBackendMPI::cleanup()
     MPI_Send(value, 1, MPI_INT, 0, 1, *it_comm->second.first);
     MPI_Comm_disconnect(it_comm->second.first);
     delete(it_comm->second.first);
+    delete[](it_comm->first);
   }
   // clear map of device
   commMap_[thread_id].clear();

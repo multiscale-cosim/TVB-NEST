@@ -51,7 +51,7 @@ specified. The following properties are related to writing to file:
 '''
 
 nest.SetKernelStatus({"overwrite_files": True,
-                      "data_path": "/home/sandra/Documents/Cosim/CodeJam10/test_path",
+                      "data_path": "/home/kusch/Documents/project/co_simulation/co-simulation_mouse/test_nest/test_file/data/",
                       # "data_prefix": ""
                       })
 
@@ -141,14 +141,17 @@ print("create connect")
 A network simulation with a duration of 100 ms is started with `Simulate`.
 '''
 print("Spike detector 1 {} and 2 {}".format(n, n_2))
-nest.Simulate(100.)
-time.sleep(10.)
-nest.Simulate(100.)
-time.sleep(10.)
-nest.Simulate(100.)
-time.sleep(10.)
-nest.Simulate(100.)
-time.sleep(10.)
+nest.Prepare()
+nest.Run(200.)
+# time.sleep(10.)
+nest.Run(200.)
+# time.sleep(10.)
+nest.Run(200.)
+# time.sleep(10.)
+nest.Run(200.)
+# time.sleep(10.)
+nest.Cleanup()
+nest.Simulate(200.)
 # '''
 # After the simulation, the recordings are obtained from the multimeter via the
 # key `events` of the status dictionary accessed by `GetStatus`. `times`

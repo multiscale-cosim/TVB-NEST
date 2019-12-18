@@ -5,8 +5,6 @@ from mpi4py import MPI
 
 def analyse(path,nb_spike_detector):
     #Start communication channels
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/nest-io/pynest/examples/"
-    # path_to_files = "/home/kusch/Documents/project/co_simulation/cosim_TVB_NEST/translator/test/config_mpi/" + nb_spike_detector + ".txt"
     path_to_files = path + nb_spike_detector + ".txt"
     #For NEST
     # Init connection
@@ -23,8 +21,10 @@ def analyse(path,nb_spike_detector):
     #test one rate
     status_ = MPI.Status()
     while(True):
-        data = np.empty(2, dtype='i')
-        comm.Recv([data,2, MPI.INT],source=0,tag=MPI.ANY_TAG,status=status_)
+        accept = np.array([True],dtype='b')
+        comm.Send([accept,MPI.BOOL],dest=0,tag=0)
+        data = np.empty(2, dtype='d')
+        comm.Recv([data,2, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
         if status_.Get_tag() == 0:
             print(data)
             sys.stdout.flush()

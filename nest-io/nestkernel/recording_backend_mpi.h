@@ -41,8 +41,8 @@ namespace nest
 class RecordingBackendMPI : public RecordingBackend
 {
 public:
-  RecordingBackendMPI();
-  ~RecordingBackendMPI() throw();
+  RecordingBackendMPI() = default;
+  ~RecordingBackendMPI() noexcept = default;
 
   void initialize() override;
   void finalize() override;
@@ -76,17 +76,15 @@ public:
   void get_device_status( const RecordingDevice& device, DictionaryDatum& params_dictionary ) const override;
 
 private:
-  bool prepared_;
 
-  std::list<index> _list_spike_detector;
-  std::vector<std::string> _list_label;
-  std::vector<MPI_Comm*> _list_communication;
-
-  typedef std::vector< std::map< index, const RecordingDevice* > > device_map;
+  typedef std::vector< std::map< char *, std::pair< MPI_Comm*, int> > > comm_map;
+  typedef std::vector< std::map< index, std::pair<MPI_Comm*, const RecordingDevice* > > > device_map;
   device_map devices_;
+  comm_map commMap_;
 
-  void get_port(const RecordingDevice& device,char* port_name);
-  void get_port(const index index_node, const std::string& label,char* port_name);
+
+  static void get_port(const RecordingDevice* device,char* port_name);
+  static void get_port(const index index_node, const std::string& label,char* port_name);
 
 };
 

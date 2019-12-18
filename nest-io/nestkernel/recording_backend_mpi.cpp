@@ -28,15 +28,30 @@
 #include "recording_device.h"
 #include "recording_backend_mpi.h"
 
-nest::RecordingBackendMPI::RecordingBackendMPI()
-  : prepared_( false )
+void
+nest::RecordingBackendMPI::initialize()
 {
+  auto nthreads = kernel().vp_manager.get_num_threads();
+  device_map devices( nthreads );
+  devices_.swap( devices );
+  comm_map comms(nthreads);
+  commMap_.swap(comms);
 }
 
-nest::RecordingBackendMPI::~RecordingBackendMPI() throw()
+void
+nest::RecordingBackendMPI::finalize()
 {
+  device_map::iterator it_device;
+  for(it_device = devices_.begin();it_device!=devices_.end();it_device++){
+    it_device->clear();
+  }
+  comm_map::iterator it_comm;
+  for(it_comm = commMap_.begin();it_comm!=commMap_.end();it_comm++){
+    it_comm->clear();
+  }
+  devices_.clear();
+  commMap_.clear();
 }
-
 
 void
 nest::RecordingBackendMPI::enroll( const RecordingDevice& device,
@@ -53,7 +68,8 @@ nest::RecordingBackendMPI::enroll( const RecordingDevice& device,
       devices_[ tid ].erase( device_it );
     }
 
-    devices_[ tid ].insert( std::make_pair( node_id, &device ) );
+    std::pair< MPI_Comm*, const RecordingDevice*> pair = std::make_pair(nullptr,&device);
+    devices_[ tid ].insert( std::make_pair( node_id,  pair) );
   }
   else
   {
@@ -83,7 +99,56 @@ nest::RecordingBackendMPI::set_value_names( const RecordingDevice& device,
 }
 
 void
+nest::RecordingBackendMPI::prepare()
+{
+  thread thread_id = kernel().vp_manager.get_thread_id();
+  //get port and update the list of device
+  device_map::value_type::iterator it_device;
+  for(it_device=devices_[thread_id].begin();it_device != devices_[thread_id].end();it_device++){
+    // add the link between MPI communicator and the device (device can share the same MPI communicator
+	  char * port_name =new char [MPI_MAX_PORT_NAME];
+	  get_port(it_device->second.second,port_name);
+	  comm_map::value_type::iterator comm_it = commMap_[ thread_id ].find(port_name);
+	  MPI_Comm * comm;
+	  if (comm_it != commMap_[ thread_id ].end())
+    {
+	    comm = comm_it->second.first;
+	    comm_it->second.second+=1;
+	    delete[](port_name);
+    } else {
+      comm = new MPI_Comm;
+      std::pair< MPI_Comm*, int> comm_count = std::make_pair(comm,1);
+      commMap_[thread_id].insert(std::make_pair(port_name, comm_count));
+	  }
+	  it_device->second.first=comm;
+  }
+
+  // connect the thread with MPI process it need to be connected
+  // WARNING can be a bug if it's need all the thread to be connected in MPI
+  comm_map::value_type::iterator it_comm;
+  for ( it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++){
+    printf("Connect to %s\n", it_comm->first);fflush(stdout);
+    MPI_Comm_connect(it_comm->first, MPI_INFO_NULL, 0, MPI_COMM_WORLD, it_comm->second.first); // should use the status for handle error
+  }
+}
+
+void
 nest::RecordingBackendMPI::pre_run_hook()
+{
+  // Waiting until all the receptor are ready to receive information
+  const thread thread_id = kernel().vp_manager.get_thread_id();
+  device_map::value_type::iterator it_device;
+  for (it_device = devices_[thread_id].begin(); it_device != devices_[thread_id].end(); it_device++) {
+    bool accept_starting[1];
+    MPI_Status status_mpi;
+    MPI_Recv(accept_starting, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG , *it_device->second.first ,&status_mpi);
+  }
+  // future improvement is to save the source of the signal (meaning can be different MPI sources to send also)
+}
+
+
+void
+nest::RecordingBackendMPI::post_step_hook()
 {
   // nothing to do
 }
@@ -91,16 +156,37 @@ nest::RecordingBackendMPI::pre_run_hook()
 void
 nest::RecordingBackendMPI::post_run_hook()
 {
-#pragma omp single
-  {
-
+  thread thread_id = kernel().vp_manager.get_thread_id();
+  // WARNING can be a bug if all the thread to send ending connection of MPI
+  comm_map::value_type::iterator it_comm;
+  for (it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++) {
+    int value[1];
+    value[0] = thread_id;
+    MPI_Send(value, 1, MPI_INT, 0, 1, *it_comm->second.first);
   }
 }
 
 void
-nest::RecordingBackendMPI::post_step_hook()
+nest::RecordingBackendMPI::cleanup()
 {
-  // nothing to do
+  thread thread_id = kernel().vp_manager.get_thread_id();
+  // WARNING can be a bug if all the thread to send ending connection of MPI
+  //disconnect MPI
+  comm_map::value_type::iterator it_comm;
+  for (it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++) {
+    int value[1];
+    value[0] = thread_id;
+    MPI_Send(value, 1, MPI_INT, 0, 1, *it_comm->second.first);
+    MPI_Comm_disconnect(it_comm->second.first);
+    delete(it_comm->second.first);
+    delete[](it_comm->first);
+  }
+  // clear map of device
+  commMap_[thread_id].clear();
+  device_map::value_type::iterator it_device;
+  for (it_device = devices_[thread_id].begin(); it_device != devices_[thread_id].end(); it_device++) {
+    it_device->second.first= nullptr;
+  }
 }
 
 void
@@ -122,59 +208,6 @@ nest::RecordingBackendMPI::get_device_status( const nest::RecordingDevice& devic
   // nothing to do
 }
 
-void
-nest::RecordingBackendMPI::prepare()
-{
-  if ( prepared_ )
-  {
-    throw BackendPrepared( "RecordingBackendMPI" );
-  }
-  prepared_ = true;
-  // Can we prepare the MPI communicators here?
-}
-
-void
-nest::RecordingBackendMPI::cleanup()
-{
-  if ( prepared_ )
-  {
-    prepared_ = false;
-
-    int index_sp=0;
-    for (index it : _list_spike_detector){
-      char  port_name[MPI_MAX_PORT_NAME];
-      get_port(it,_list_label[index_sp],port_name);
-      printf("disconnect port %s\n",port_name);
-      MPI_Send(0, 0, MPI_INT, 0, 1, *_list_communication[index_sp]);
-      MPI_Comm_disconnect(_list_communication[index_sp]);
-      printf("disconnect port %s\n",port_name);
-      delete _list_communication[index_sp];
-      index_sp++;
-    }
-    _list_spike_detector.clear();
-    _list_communication.clear();
-    _list_label.clear();
-    printf("Closing\n" );
-  }
-  else
-    {
-      throw BackendNotPrepared( "RecordingBackendMPI" );
-    }
-}
-
-
-void
-nest::RecordingBackendMPI::initialize()
-{
-  auto nthreads = kernel().vp_manager.get_num_threads();
-  device_map devices( nthreads );
-  devices_.swap( devices );  
-}
-
-void
-nest::RecordingBackendMPI::finalize()
-{
-}
 
 
 void
@@ -183,45 +216,19 @@ nest::RecordingBackendMPI::write( const RecordingDevice& device,
   const std::vector< double >&,
   const std::vector< long >& )
 {
-
+  const thread thread_id = kernel().get_kernel_manager().vp_manager.get_thread_id();
   const index sender = event.get_sender_node_id();
   const Time stamp = event.get_stamp();
-  const double offset = event.get_offset();
 
-    bool ending = false;
-    int index_list = 0 ;
-    for (index it : _list_spike_detector){
-      if (it == device.get_node_id()){
-        MPI_Comm newcomm = *_list_communication[index_list];
-        int passed_num[2]= {int(sender), int(stamp.get_ms() - offset)};
-        if(newcomm == NULL) {
-          printf("Error %x\n", newcomm);
-          break;
-        }
-        MPI_Send(&passed_num, 2, MPI_INT, 0, 0, newcomm);
-        fflush(stdout);
-        //restore_cout_();
-        ending=true;
-      }
-      index_list++;
-    }
-    if (not ending) {
-      _list_spike_detector.push_back(device.get_node_id());
-      _list_label.push_back(device.get_label());
-      MPI_Comm* newcomm = new MPI_Comm; //TODO need to free memory after
-      _list_communication.push_back(newcomm);
-      char port_name[MPI_MAX_PORT_NAME];
-      get_port(device,port_name);
-      fflush(stdout);
-      printf("ID to %d\n", int(device.get_node_id()));
-      printf("Connect to %s\n", port_name);
-      fflush(stdout);
-      int status = MPI_Comm_connect(port_name, MPI_INFO_NULL, 0, MPI_COMM_WORLD, newcomm);
-      printf("Connect MPI Output Comm 3 status: %d\n",status);
-      fflush(stdout);
-      int passed_num[2]= {int(sender), int(stamp.get_ms() - offset)};
-      MPI_Send(&passed_num, 2, MPI_INT, 0, 0, *newcomm);
-    }
+  MPI_Comm* comm;
+  device_map::value_type::iterator it_devices = devices_[thread_id].find(device.get_node_id());
+  if (it_devices != devices_[thread_id].end()) {
+    comm = it_devices->second.first;
+  } else {
+    throw BackendPrepared( " Internal error " );
+  }
+  double passed_num[2]= {double(sender), stamp.get_ms()};
+  MPI_Send(&passed_num, 2, MPI_DOUBLE, 0, thread_id, *comm);
 }
 
 /* ----------------------------------------------------------------
@@ -240,8 +247,8 @@ nest::RecordingBackendMPI::set_status( const DictionaryDatum& d )
 }
 
 void
-nest::RecordingBackendMPI::get_port(const RecordingDevice& device, char* port_name) {
-  get_port(device.get_node_id(),device.get_label(),port_name);
+nest::RecordingBackendMPI::get_port(const RecordingDevice* device, char* port_name) {
+  get_port(device->get_node_id(),device->get_label(),port_name);
 }
 
 void
