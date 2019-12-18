@@ -54,15 +54,15 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
         count_ending=0
         while count_ending != len(source_sending) or list_id[-1] == -1:
             # Waiting for some processus ask for receive the spikes
-            id_spike_detector = np.empty(1, dtype='i')
-            comm.Recv([id_spike_detector,1, MPI.INT],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
+            ids = np.empty(2, dtype='i')
+            comm.Recv([ids,2, MPI.INT],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
             if status_.Get_tag() == 0:
                 # create or find the index of the spike generator
-                if id_spike_detector in list_id:
-                    index = np.where(id_spike_detector==list_id)[0][0]
+                if ids[0] in list_id:
+                    index = np.where(ids[0]==list_id)[0][0]
                 else:
                     index = np.where(list_id==-1)[0][0]
-                    list_id[index]=id_spike_detector
+                    list_id[index]=ids[0]
                 # wait until the data are ready to use
                 while (not status_data[0]):
                     pass
@@ -70,9 +70,9 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
                 data = buffer_spike[0][index]
                 shape = np.array(data.shape[0], dtype='i')
                 # firstly send the size of the spikes train
-                comm.Send([shape,MPI.INT],dest=status_.Get_source(),tag=id_spike_detector[0])
+                comm.Send([shape,MPI.INT],dest=status_.Get_source(),tag=ids[1])
                 # secondly send the spikes train
-                comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=id_spike_detector[0])
+                comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=ids[1])
             elif  status_.Get_tag() == 1:
                 # ending the update of the all the spike train from one processus
                 count_ending += 1
