@@ -21,10 +21,10 @@ def simulate_spike_detector(path,min_delay):
     starting = 0.0 # the begging of each time of synchronization
     while True:
         # wait until the translatro acept the connections
-        accept = False
-        while not accept:
-            req = comm.irecv(source=0,tag=0)
-            accept = req.wait()
+        accept = np.array([False],dtype='b')
+        while not accept[0]:
+            req = comm.Irecv([accept,1,MPI.BOOL],source=0,tag=0)
+            req.wait()
         # create random data
         size= np.random.randint(0,1000)
         time = starting+np.random.rand(size)*(min_delay-0.2)

@@ -40,7 +40,7 @@ def receive(path,file_spike_detector,dt,delay_min,status_data,buffer):
         # send the confirmation of the processus can send data
         requests=[]
         for source in source_sending:
-            requests.append(comm.isend(True,dest=source,tag=0))
+            requests.append(comm.Isend([np.array(True,dtype='b'),MPI.BOOL],dest=source,tag=0))
         MPI.Request.Waitall(requests)
         #  Get the data/ spike
         data = np.empty(2, dtype='d')
