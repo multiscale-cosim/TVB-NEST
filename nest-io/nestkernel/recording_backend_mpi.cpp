@@ -41,6 +41,7 @@ nest::RecordingBackendMPI::initialize()
 void
 nest::RecordingBackendMPI::finalize()
 {
+  // clear vector of map
   device_map::iterator it_device;
   for(it_device = devices_.begin();it_device!=devices_.end();it_device++){
     it_device->clear();
@@ -101,6 +102,8 @@ nest::RecordingBackendMPI::set_value_names( const RecordingDevice& device,
 void
 nest::RecordingBackendMPI::prepare()
 {
+  // Create the connection with MPI by thread ( I am not sure is the best)
+  // 1) take all the port of the connections
   thread thread_id = kernel().vp_manager.get_thread_id();
   //get port and update the list of device
   device_map::value_type::iterator it_device;
@@ -123,7 +126,7 @@ nest::RecordingBackendMPI::prepare()
 	  it_device->second.first=comm;
   }
 
-  // connect the thread with MPI process it need to be connected
+  // 2) connect the thread with MPI process it need to be connected
   // WARNING can be a bug if it's need all the thread to be connected in MPI
   comm_map::value_type::iterator it_comm;
   for ( it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++){
@@ -143,7 +146,7 @@ nest::RecordingBackendMPI::pre_run_hook()
     MPI_Status status_mpi;
     MPI_Recv(accept_starting, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG , *it_device->second.first ,&status_mpi);
   }
-  // future improvement is to save the source of the signal (meaning can be different MPI sources to send also)
+  // future improvement is to save the source of the signal (meaning the MPI source can an option of the backend)
 }
 
 
@@ -156,6 +159,7 @@ nest::RecordingBackendMPI::post_step_hook()
 void
 nest::RecordingBackendMPI::post_run_hook()
 {
+  // Send information about the end of the running part
   thread thread_id = kernel().vp_manager.get_thread_id();
   // WARNING can be a bug if all the thread to send ending connection of MPI
   comm_map::value_type::iterator it_comm;
@@ -169,6 +173,8 @@ nest::RecordingBackendMPI::post_run_hook()
 void
 nest::RecordingBackendMPI::cleanup()
 {
+  //Disconnect all the MPI connection and send information about this disconnection
+  // Clean all the list of map
   thread thread_id = kernel().vp_manager.get_thread_id();
   // WARNING can be a bug if all the thread to send ending connection of MPI
   //disconnect MPI
@@ -216,6 +222,7 @@ nest::RecordingBackendMPI::write( const RecordingDevice& device,
   const std::vector< double >&,
   const std::vector< long >& )
 {
+  // For each events send a message at through the good MPI communicator
   const thread thread_id = kernel().get_kernel_manager().vp_manager.get_thread_id();
   const index sender = event.get_sender_node_id();
   const Time stamp = event.get_stamp();
@@ -253,7 +260,7 @@ nest::RecordingBackendMPI::get_port(const RecordingDevice* device, char* port_na
 
 void
 nest::RecordingBackendMPI::get_port(const index index_node, const std::string& label, char* port_name){
-  std::ostringstream basename;
+  std::ostringstream basename; // path of the file : path+label+id+.txt (file contains only one line with name of the port
   const std::string& path = kernel().io_manager.get_data_path();
   if ( not path.empty() )
   {

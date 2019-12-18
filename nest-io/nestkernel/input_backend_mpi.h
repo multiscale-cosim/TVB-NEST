@@ -91,11 +91,15 @@ private:
   /**
    * A map for the enrolled devices. We have a vector with one map per local
    * thread. The map associates the gid of a device on a given thread
-   * with its recordings.
+   * with its MPI connection and device.
   */
-  typedef std::vector< std::map< char *, std::pair< MPI_Comm*, int> > > comm_map;
   typedef std::vector< std::map< index, std::pair<const MPI_Comm*, InputDevice* > > > device_map;
   device_map devices_;
+  /**
+   * A map of MPI communicator by thread.
+   * This map contains also the number of the device by MPI communicator.
+   */
+  typedef std::vector< std::map< char *, std::pair< MPI_Comm*, int> > > comm_map;
   comm_map commMap_;
 
   static void get_port(InputDevice *device, char* port_name);

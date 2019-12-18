@@ -43,6 +43,7 @@ nest::InputBackendMPI::initialize()
 void
 nest::InputBackendMPI::finalize()
 {
+  // clear vector of map
   device_map::iterator it_device;
   for(it_device = devices_.begin();it_device!=devices_.end();it_device++){
     it_device->clear();
@@ -101,6 +102,8 @@ nest::InputBackendMPI::set_value_names( const InputDevice& device,
 void
 nest::InputBackendMPI::prepare()
 {
+  // Create the connection with MPI by thread ( I am not sure is the best)
+  // 1) take all the port of the connections
   thread thread_id = kernel().vp_manager.get_thread_id();
 
   //get port and update the list of device
@@ -124,7 +127,7 @@ nest::InputBackendMPI::prepare()
 	  it_device->second.first=comm;
   }
 
-  // connect the thread with MPI process it need to be connected
+  // 2) connect the thread with MPI process it need to be connected
   // WARNING can be a bug if it's need all the thread to be connected in MPI
   comm_map::value_type::iterator it_comm;
   for ( it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++){
@@ -136,7 +139,7 @@ nest::InputBackendMPI::prepare()
 void
 nest::InputBackendMPI::pre_run_hook()
 {
-  // connect take information of MPI process
+  // connect take information of MPI process (for the moment only spike train)
   const thread thread_id = kernel().vp_manager.get_thread_id();
   device_map::value_type::iterator it_device;
   for (it_device = devices_[thread_id].begin(); it_device != devices_[thread_id].end(); it_device++) {
@@ -153,6 +156,8 @@ nest::InputBackendMPI::post_step_hook()
 void
 nest::InputBackendMPI::post_run_hook()
 {
+  // Send information about the end of the running part
+  // Question : 1 thread or multiple threads send this information ?
   thread thread_id = kernel().vp_manager.get_thread_id();
   // WARNING can be a bug if all the thread to send ending connection of MPI
   comm_map::value_type::iterator it_comm;
@@ -166,6 +171,8 @@ nest::InputBackendMPI::post_run_hook()
 void
 nest::InputBackendMPI::cleanup()
 {
+  //Disconnect all the MPI connection and send information about this disconnection
+  // Clean all the list of map
   thread thread_id = kernel().vp_manager.get_thread_id();
   // WARNING can be a bug if all the thread to send ending connection of MPI
   //disconnect MPI
@@ -227,7 +234,7 @@ nest::InputBackendMPI::get_port(InputDevice *device, char* port_name) {
 
 void
 nest::InputBackendMPI::get_port(const index index_node, const std::string& label, char* port_name){
-  std::ostringstream basename;
+  std::ostringstream basename; // path of the file : path+label+id+.txt (file contains only one line with name of the port
   const std::string& path = kernel().io_manager.get_data_path();
   if ( not path.empty() )
   {
@@ -255,15 +262,19 @@ nest::InputBackendMPI::get_port(const index index_node, const std::string& label
 
 void
 nest::InputBackendMPI::receive_spike_train(const MPI_Comm& comm, InputDevice& device){
+  // Send the first message with id of device and thread id
   int message[2];
   message[0] = device.get_node_id();
   message[0] = kernel().vp_manager.get_thread_id();
   MPI_Status status_mpi;
   MPI_Send(message , 2, MPI_INT, 0, 0, comm);
+  // Receive the size of data
   int shape[1];
   MPI_Recv(&shape, 1, MPI_INT, MPI_ANY_SOURCE,message[1] ,comm ,&status_mpi);
+  // Receive the data ( for the moment only spike time )
   double spikes[shape[0]];
   MPI_Recv(&spikes, shape[0], MPI_DOUBLE,status_mpi.MPI_SOURCE,message[1],comm ,&status_mpi);
   std::vector<double> spikes_list(spikes, spikes + sizeof(spikes) / sizeof(spikes[0]));
+  // Update the device with the data
   device.update_from_backend(spikes_list);
 }
