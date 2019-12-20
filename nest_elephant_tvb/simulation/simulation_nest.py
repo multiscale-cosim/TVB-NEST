@@ -352,13 +352,13 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
     #poisson_generator input
     if param_background['poisson']:
         param_poisson_generator_ex = {
-            "rate": param_background['rate']*param_background['nb_connection_ex'],
+            "rate": param_background['rate_ex'],
             "start": 0.0,
             "stop": time_simulation}
         nest.CopyModel("poisson_generator",'poisson_generator_ex_by_population')
         nest.SetDefaults('poisson_generator_ex_by_population',param_poisson_generator_ex)
         param_poisson_generator_in = {
-            "rate": param_background['rate']*param_background['nb_connection_in'],
+            "rate": param_background['rate_in'],
             "start": 0.0,
             "stop": time_simulation}
         nest.CopyModel("poisson_generator",'poisson_generator_in_by_population')
@@ -373,7 +373,7 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
                         'delay' : nest.GetKernelStatus("min_delay"), # without delay
                         }
         syn_spec_in_poisson_generator ={
-            'weight' :-param_background['weight_poisson']*3, #TODO need to replace the number
+            'weight' :-param_background['weight_poisson']*2.5, #TODO need to replace the number
             'delay' : nest.GetKernelStatus("min_delay"), # without delay
         }
         for name_pops,list_pops in dic_layer.items():

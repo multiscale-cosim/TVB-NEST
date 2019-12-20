@@ -64,12 +64,12 @@ param_topology={
     'param_neuron_excitatory': {
         'C_m':200.0,
         't_ref':5.0,
-        'V_reset':-65.0,
-        'E_L':-54.0,
+        'V_reset':-64.5,
+        'E_L':-64.5,
         'g_L':10.0,
         'I_e':0.0,
         'a':0.0,
-        'b':30.0,
+        'b':50.0,
         'Delta_T':2.0,
         'tau_w':500.0,
         'V_th':-50.0,
@@ -85,7 +85,7 @@ param_topology={
         'C_m':200.0,
         't_ref':5.0,
         'V_reset':-65.0,
-        'E_L':-54.5, #-60 good bi-stable between 50 and 70
+        'E_L':-65.,
         'g_L':10.0,
         'I_e':0.0,
         'a':0.0,
@@ -116,7 +116,7 @@ param_connection={
     # weigth in the population from excitatory neurons
     'weight_local':1.0,
     # ratio between excitatory weight and inhibitory weight
-    'g':3.0,
+    'g':2.5,
     #probability inside the region
     'p_connect':0.05,
     # number of external synapse:
@@ -134,11 +134,9 @@ param_connection={
 param_background={
     #define if the simulation use or not a poisson generator
     'poisson':True,
-    #the firing rate of poisson_generator
-    'rate': 0.052+1.0e-3, #150
-    #the number of connexion from other region of the brain
-    'nb_connection_ex':400.0,
-    'nb_connection_in':200.0,
+    # rate of poisson
+    'rate_ex':400.0*1.0e-3+2.0*140,
+    'rate_in':200.0*1e-3+0.0*140,
     #the weight on the connexion
     'weight_poisson':param_connection['weight_local'],
     #define if the simulation have or not noise
