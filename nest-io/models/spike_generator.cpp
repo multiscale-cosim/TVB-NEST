@@ -340,7 +340,7 @@ nest::spike_generator::update_from_backend(std::vector<double> input_spikes) {
   Parameters_ ptmp = P_; // temporary copy in case of errors
 
   const Time& origin = device_.get_origin();
-  // For the recording backend
+  // For the input backend
   if ( !input_spikes.empty() ){
 
     DictionaryDatum d = DictionaryDatum( new Dictionary );
