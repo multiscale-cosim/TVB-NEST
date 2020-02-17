@@ -60,7 +60,9 @@ void
 nest::InputBackendMPI::enroll( InputDevice& device,
   const DictionaryDatum& params )
 {
-  if ( device.get_type() == InputDevice::SPIKE_GENERATOR ){
+  if ( device.get_type() == InputDevice::SPIKE_GENERATOR or
+        device.get_type() == InputDevice::STEP_CURRENT_GENERATOR ){
+
 	  thread tid = device.get_thread();
 	  index node_id = device.get_node_id();
 

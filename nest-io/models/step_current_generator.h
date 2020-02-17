@@ -35,6 +35,7 @@
 #include "ring_buffer.h"
 #include "stimulating_device.h"
 #include "universal_data_logger.h"
+#include "input_device.h"
 
 namespace nest
 {
@@ -93,7 +94,7 @@ Author: Jochen Martin Eppler, Jens Kremkow
 SeeAlso: ac_generator, dc_generator, step_current_generator, Device,
 StimulatingDevice
 */
-class step_current_generator : public DeviceNode
+class step_current_generator : public InputDevice
 {
 
 public:
@@ -130,6 +131,9 @@ public:
 
   void get_status( DictionaryDatum& ) const;
   void set_status( const DictionaryDatum& );
+
+  void update_from_backend(std::vector<double> input_spikes) override;
+  Type get_type() const;
 
 private:
   void init_state_( const Node& );
@@ -242,6 +246,7 @@ step_current_generator::handles_test_event( DataLoggingRequest& dlr, rport recep
 inline void
 step_current_generator::get_status( DictionaryDatum& d ) const
 {
+  InputDevice::get_status(d);
   P_.get( d );
   device_.get_status( d );
 
@@ -253,6 +258,8 @@ step_current_generator::set_status( const DictionaryDatum& d )
 {
   Parameters_ ptmp = P_;   // temporary copy in case of errors
   ptmp.set( d, B_, this ); // throws if BadProperty
+
+  InputDevice::set_status(d);
 
   // We now know that ptmp is consistent. We do not write it back
   // to P_ before we are also sure that the properties to be set

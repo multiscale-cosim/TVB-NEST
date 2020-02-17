@@ -63,7 +63,7 @@ public:
    */
   enum Type
   {
-    CURRENT_GENERATOR,
+    STEP_CURRENT_GENERATOR,
     SPIKE_GENERATOR
   };
 
