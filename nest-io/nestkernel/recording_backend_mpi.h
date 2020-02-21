@@ -87,12 +87,12 @@ private:
    * A map of MPI communicator by thread.
    * This map contains also the number of the device by MPI communicator.
    */
-  typedef std::vector< std::map< char *, std::pair< MPI_Comm*, int> > > comm_map;
+  typedef std::vector< std::map< std::string, std::pair< MPI_Comm*, int> > > comm_map;
   comm_map commMap_;
 
 
-  static void get_port(const RecordingDevice* device,char* port_name);
-  static void get_port(const index index_node, const std::string& label,char* port_name);
+  static void get_port(const RecordingDevice* device,std::string* port_name);
+  static void get_port(const index index_node, const std::string& label,std::string* port_name);
 
 };
 

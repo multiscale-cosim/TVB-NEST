@@ -112,15 +112,14 @@ nest::InputBackendMPI::prepare()
   device_map::value_type::iterator it_device;
   for(it_device=devices_[thread_id].begin();it_device != devices_[thread_id].end();it_device++){
     // add the link between MPI communicator and the device (device can share the same MPI communicator
-	  char * port_name = new char [MPI_MAX_PORT_NAME];
-	  get_port(it_device->second.second,port_name);
+	  std::string port_name;
+	  get_port(it_device->second.second,&port_name);
 	  comm_map::value_type::iterator comm_it = commMap_[ thread_id ].find(port_name);
 	  MPI_Comm * comm;
 	  if (comm_it != commMap_[ thread_id ].end())
     {
 	    comm = comm_it->second.first;
 	    comm_it->second.second+=1;
-	    delete[](port_name);
     } else {
       comm = new MPI_Comm;
       std::pair< MPI_Comm*, int> comm_count = std::make_pair(comm,1);
@@ -133,8 +132,8 @@ nest::InputBackendMPI::prepare()
   // WARNING can be a bug if it's need all the thread to be connected in MPI
   comm_map::value_type::iterator it_comm;
   for ( it_comm = commMap_[thread_id].begin(); it_comm != commMap_[thread_id].end(); it_comm++){
-    printf("Connect to %s\n", it_comm->first);fflush(stdout);
-    MPI_Comm_connect(it_comm->first, MPI_INFO_NULL, 0, MPI_COMM_WORLD, it_comm->second.first); // should use the status for handle error
+    MPI_Comm_connect(it_comm->first.data(), MPI_INFO_NULL, 0, MPI_COMM_WORLD, it_comm->second.first); // should use the status for handle error
+    printf("Connect to %s\n", it_comm->first.data());fflush(stdout);
   }
 }
 
@@ -185,7 +184,6 @@ nest::InputBackendMPI::cleanup()
     MPI_Send(value, 1, MPI_INT, 0, 2, *it_comm->second.first);
     MPI_Comm_disconnect(it_comm->second.first);
     delete(it_comm->second.first);
-    delete[](it_comm->first);
   }
   // clear map of device
   commMap_[thread_id].clear();
@@ -230,12 +228,12 @@ nest::InputBackendMPI::set_status( const DictionaryDatum& d )
 
 
 void
-nest::InputBackendMPI::get_port(InputDevice *device, char* port_name) {
+nest::InputBackendMPI::get_port(InputDevice *device, std::string* port_name) {
   get_port(device->get_node_id(),device->get_label(),port_name);
 }
 
 void
-nest::InputBackendMPI::get_port(const index index_node, const std::string& label, char* port_name){
+nest::InputBackendMPI::get_port(const index index_node, const std::string& label, std::string* port_name){
   std::ostringstream basename; // path of the file : path+label+id+.txt (file contains only one line with name of the port
   const std::string& path = kernel().io_manager.get_data_path();
   if ( not path.empty() )
@@ -256,8 +254,9 @@ nest::InputBackendMPI::get_port(const index index_node, const std::string& label
   basename << add_path;
   std::cout << basename.rdbuf() << std::endl;
   std::ifstream file(basename.str());
+
   if (file.is_open()) {
-    file.getline(port_name, 256);
+    getline(file,*port_name);
   }
   file.close();
 }
