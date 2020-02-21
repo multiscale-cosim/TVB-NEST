@@ -266,7 +266,7 @@ nest::InputBackendMPI::receive_spike_train(const MPI_Comm& comm, InputDevice& de
   // Send the first message with id of device and thread id
   int message[2];
   message[0] = device.get_node_id();
-  message[0] = kernel().vp_manager.get_thread_id();
+  message[1] = kernel().vp_manager.get_thread_id();
   MPI_Status status_mpi;
   MPI_Send(message , 2, MPI_INT, 0, 0, comm);
   // Receive the size of data
