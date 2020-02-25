@@ -3,9 +3,9 @@ import os
 import numpy.random as rgn
 from mpi4py import MPI
 
-def input(path,nb_spike_detector):
+def input(path):
     #Start communication channels
-    path_to_files = path + nb_spike_detector + ".txt"
+    path_to_files = path
     #For NEST
     # Init connection
     print("Waiting for port details")
@@ -52,13 +52,13 @@ def input(path,nb_spike_detector):
     comm = MPI.COMM_WORLD.Accept(port, info, root)
     MPI.Close_port(port)
     os.remove(path_to_files)
-    print('exit');
+    print('exit')
     MPI.Finalize()
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==3:
-        input(sys.argv[1],sys.argv[2])
+    if len(sys.argv)==2:
+        input(sys.argv[1])
     else:
         print('missing argument')
 
