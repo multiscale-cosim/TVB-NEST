@@ -7,7 +7,7 @@ import scipy.special as sp_spec
 from tvb.basic.neotraits.api import NArray, Range, Final, List
 from numba import jit
 
-class Zerlaut_adaptation_first_order(Model):
+class ZerlautAdaptationFirstOrder(Model):
     r"""
     **References**:
     .. [ZD_2018]  Zerlaut, Y., Chemla, S., Chavane, F. et al. *Modeling mesoscopic cortical dynamics using a mean-field
@@ -342,6 +342,12 @@ class Zerlaut_adaptation_first_order(Model):
                corresponding state-variable indices for this model are :math:`E = 0`,
                :math:`I = 1` and :math:`W = 2`."""
         )
+    state_variable_boundaries = Final(
+        label="Firing rate of population is always positive",
+        default={"E": numpy.array([0.0, 1.0]),
+                 "I": numpy.array([0.0, 1.0])},
+        doc="""The values for each state-variable should be set to encompass
+            the boundaries of the dynamic range of that state-variable. Set None for one-sided boundaries""")
 
     state_variables = 'E I W_e W_i'.split()
     _nvar = 4
@@ -536,7 +542,7 @@ class Zerlaut_adaptation_first_order(Model):
         return sp_spec.erfc((Vthre-muV) / (numpy.sqrt(2)*sigmaV)) / (2*Tv)
 
 
-class Zerlaut_adaptation_second_order(Zerlaut_adaptation_first_order):
+class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
     r"""
     **References**:
     .. [ZD_2018]  Zerlaut, Y., Chemla, S., Chavane, F. et al. *Modeling mesoscopic cortical dynamics using a mean-field

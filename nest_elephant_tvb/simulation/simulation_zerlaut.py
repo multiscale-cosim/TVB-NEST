@@ -1,14 +1,12 @@
 import nest_elephant_tvb.simulation.file_tvb.Zerlaut as Zerlaut
+from nest_elephant_tvb.simulation.file_tvb.Interface_co_simulation_parallel import Interface_co_simulation
 import tvb.simulator.lab as lab
 import numpy.random as rgn
 import numpy as np
 import nest_elephant_tvb.simulation.file_tvb.noise as my_noise
-import json
-import os
-import subprocess
-import sys
+from mpi4py import MPI
 
-def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background):
+def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background,mpi=None):
     '''
     Initialise the simulator with parameter
     :param param_tvb : parameter for the simulator tvb
@@ -17,6 +15,7 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
     :param param_connection : parameter for the connection between neurons and regions
     :param param_topology : parameter for the neurons and the population
     :param param_background : parameter for the noise
+    :param mpi : if use or not mpi
     :return: the simulator initialize
     '''
     ## initialise the random generator
@@ -24,9 +23,9 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
 
     ## Model
     if param_zerlaut['order'] == 1:
-        model = Zerlaut.Zerlaut_adaptation_first_order(variables_of_interest='E I W_e W_i'.split())
+        model = Zerlaut.ZerlautAdaptationFirstOrder(variables_of_interest='E I W_e W_i'.split())
     elif param_zerlaut['order'] == 2:
-        model = Zerlaut.Zerlaut_adaptation_second_order(variables_of_interest='E I C_ee C_ei C_ii W_e W_i'.split())
+        model = Zerlaut.ZerlautAdaptationSecondOrder(variables_of_interest='E I C_ee C_ei C_ii W_e W_i'.split())
     else:
         raise Exception('Bad order for the model')
 
@@ -83,10 +82,28 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
                                        b=np.array(0.0))
 
     ## Integrator
-    noise = my_noise.Ornstein_Ulhenbeck_process(nsig=np.array(param_zerlaut['noise_parameter']['nsig']),
-                                                    ntau=param_zerlaut['noise_parameter']['ntau'])
+    # test of noiose should be remove and use paramerters
+    noise = my_noise.Ornstein_Ulhenbeck_process(
+        tau_OU=20.0,
+        # mu=np.array([300.0,0.0,0.,0.0,0.0,0.0,0.0]).reshape((7,1,1)),
+        # nsig=np.array([10.0,0.,0.,0.,0.,0.,0.]),
+        # weights=np.array([1/400,0.,0.,0.,0.,0.,0.]).reshape((7,1,1))
+        mu=np.array([700e-3,0.0,0.,0.0,0.0,0.0,0.0]).reshape((7,1,1)),
+        nsig=np.array([50e-3,0.,0.,0.,0.,0.,0.]),
+        weights=np.array([1.e-2,0.,0.,0.,0.,0.,0.]).reshape((7,1,1))
+    )
+    # noise = my_noise.Poisson_noise(nsig=np.array([30.0,0.0,0.,0.,0.,0.0,0.]),
+    #                                weights=np.array([3.5e-4,0.,0.,0.,0.,0.,0.]).reshape((7,1,1))) #TODO to remove number
+                                    # weights = np.array([5/400*0.1, 0., 1e-6, 0., 0., 0., 0.]).reshape((7, 1, 1)))  # TODO to remove number
+    # noise = my_noise.Poisson_noise(nsig=np.array([300.0,300.0,300.,0.,300.,0.,0.]),
+    #                                weights=np.array([1./8000.,1./2000.,1./8000./8000.,0.,1./2000./2000.,0.,0.]).reshape((7,1,1))) #TODO to remove number
+    # noise = my_noise.Poisson_noise(nsig=np.array([1.0,param_background['rate_in']-200.0*1e-3,0.,0.,0.,0.,0.]),
+    #                                nb_neurons=1)
+    # noise = lab.noise.Additive(nsig=np.array([3.16*5/400.0*1e-9,0.,0.,0.,0.,0.,0.]))
+    # noise = lab.noise.Additive(nsig=np.array([0.0,0.,0.,0.,0.,0.,0.]))
     noise.random_stream.seed(param_nest['master_seed']-1)
     integrator = lab.integrators.HeunStochastic(noise=noise,dt=param_nest['sim_resolution'])
+    # integrator = lab.integrators.HeunDeterministic()
 
     ## Monitors
     monitors =[]
@@ -102,23 +119,14 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
             variables_of_interest=np.array(param_tvb['parameter_Bold']['variables_of_interest']),
             period=param_tvb['parameter_Bold']['period'])
         monitors.append(monitor_Bold)
+    if mpi is not None:
+        # special monitor for MPI
+        monitor_IO = Interface_co_simulation(
+           id_proxy=mpi['id_proxy'],
+           time_synchronize=mpi['time_synchronize']
+            )
+        monitors.append(monitor_IO)
 
-    #save the parameters in on file
-    if not os.path.exists(param_tvb['path_result']):
-        os.mkdir(param_tvb['path_result'])
-    f = open(param_tvb['path_result']+'/parameter.py',"w")
-    for name,dic in [('param_tvb',param_tvb),
-                     ('param_zerlaut',param_zerlaut),
-                     ('param_nest',param_nest),
-                     ('param_topology',param_topology),
-                     ('param_connection',param_connection),
-                     ('param_background',param_background)
-                     ]:
-        f.write(name+' = ')
-        json.dump(dic, f)
-        f.write("\n")
-    f.close()
-    subprocess.call([os.path.dirname(os.path.abspath(__file__))+'/correct_parameter.sh',param_tvb['path_result']+'/parameter.py']) ##Warning can be don't find the script
 
     #initialize the simulator:
     simulator = lab.simulator.Simulator(model = model, connectivity = connection,
@@ -181,35 +189,176 @@ def simulate_tvb(results_path,begin,end,param_tvb,param_zerlaut,
               param_nest,param_topology,param_connection,param_background)
     run_simulation(simulator,end,param_tvb)
 
-
-def get_result(path,time_begin,time_end):
+def rum_mpi(path):
     '''
     return the result of the simulation between the wanted time
     :param path: the folder of the simulation
-    :param time_begin: the start time for the result
-    :param time_end:  the ending time for the result
-    :return: result of all monitor
     '''
+    # take the parameters of the simulation frfom the saving file
     sys.path.append(path)
-    from parameter import param_tvb
+    from parameter import param_co_simulation,param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background,result_path,begin,end
     sys.path.remove(path)
-    count_begin = int(time_begin/param_tvb['save_time'])
-    count_end = int(time_end/param_tvb['save_time'])+1
-    nb_monitor = param_tvb['Raw'] + param_tvb['TemporalAverage'] + param_tvb['Bold']
-    output =[]
 
-    for count in range(count_begin,count_end):
-        result = np.load(path+'/step_'+str(count)+'.npy',allow_pickle=True)
-        for i in range(result.shape[0]):
-            tmp = np.array(result[i])
-            if len(tmp) != 0:
-                tmp = tmp[np.where((time_begin <= tmp[:,0]) &  (tmp[:,0]<= time_end)),:]
-                tmp_time = tmp[0][:,0]
-                if tmp_time.shape[0] != 0:
-                    one = tmp[0][:,1][0]
-                    tmp_value = np.concatenate(tmp[0][:,1]).reshape(tmp_time.shape[0],one.shape[0],one.shape[1])
-                    if len(output) == nb_monitor:
-                        output[i]=[np.concatenate([output[i][0],tmp_time]),np.concatenate([output[i][1],tmp_value])]
-                    else:
-                        output.append([tmp_time,tmp_value])
-    return output
+    #initialise the TVB
+    param_tvb['path_result']=result_path+'/tvb/'
+    id_proxy = param_co_simulation['id_region_nest']
+    time_synch = param_co_simulation['synchronization']
+    simulator = init(param_tvb,param_zerlaut,
+              param_nest,param_topology,param_connection,param_background,{'id_proxy':np.array(id_proxy),
+                                                                          'time_synchronize':time_synch,
+                                                                           })
+    # configure for saving result of TVB
+    # check how many monitor it's used
+    nb_monitor = param_tvb['Raw'] + param_tvb['TemporalAverage'] + param_tvb['Bold']
+    # initialise the variable for the saving the result
+    save_result =[]
+    for i in range(nb_monitor):
+        save_result.append([])
+    count = 0
+
+    #init MPI :
+    data = None #data for the proxy node (no initialisation in the parameter)
+    comm_receive=[]
+    for i in id_proxy:
+        comm_receive.append(init_mpi(result_path+"/send_to_tvb/"+str(i)+".txt"))
+    comm_send=[]
+    for i in id_proxy :
+        comm_send.append(init_mpi(result_path+"/receive_from_tvb/"+str(i)+".txt"))
+
+    # the loop of the simulation
+    time_simulation =0.0
+    while time_simulation < end:
+        print("####### TVB start simulation"); sys.stdout.flush()
+        nest_data=[]
+        for result in simulator(simulation_length=time_synch,proxy_data=data):
+            for i in range(nb_monitor):
+                if result[i] is not None:
+                    save_result[i].append(result[i])
+            nest_data.append([result[-1][0][1],result[-1][1][1]])
+
+            #save the result in file
+            if result[-1][0][0] >= param_tvb['save_time']*(count+1): #check if the time for saving at some time step
+                np.save(param_tvb['path_result']+'/step_'+str(count)+'.npy',save_result)
+                save_result =[]
+                for i in range(nb_monitor):
+                    save_result.append([])
+                count +=1
+        print("####### TVB end simulation"); sys.stdout.flush()
+
+        # prepare to send data with MPI
+        nest_data = np.array(nest_data)
+        time = [nest_data[0,0]+time_synch,nest_data[-1,0]+time_synch]
+        rate = np.concatenate(nest_data[:,1])
+        for index,comm in enumerate(comm_send):
+            send_mpi(comm,time,rate[index]*1e3)
+
+        print("####### TVB receive data"); sys.stdout.flush()
+        #receive MPI data
+        data_value = []
+        for comm in comm_receive:
+            receive = receive_mpi(comm)
+            time_data = receive[0]
+            data_value.append(receive[1])
+        data=np.empty((2,),dtype=object)
+        time_data = np.arange(time_data[0],time_data[1],param_nest['sim_resolution'])
+        data_value = np.swapaxes(np.array(data_value),0,1)[:,:,np.newaxis,np.newaxis]
+        if data_value.shape[0] != time_data.shape[0]:
+            # WARNING : avoid floating counting problems : approximation of numpy.arrange() https://github.com/numpy/numpy/issues/5808
+            if data_value.shape[0] - time_data.shape[0] == -1:
+                time_data=time_data[:-1]
+            else:
+                raise(Exception('Bad shape of data'))
+        data[:]=[time_data,data_value]
+        #increment of the loop
+        time_simulation+=time_synch
+    # save the last part
+    np.save(param_tvb['path_result']+'/step_'+str(count)+'.npy',save_result)
+    for index,comm in  enumerate(comm_send):
+        end_mpi(comm,result_path+"/send_to_tvb/"+str(id_proxy[index])+".txt")
+    for index,comm in  enumerate(comm_receive):
+        end_mpi(comm,result_path+"/send_to_tvb/"+str(id_proxy[index])+".txt")
+
+## MPI function for receive and send data
+
+def init_mpi(path):
+    """
+    initilise MPI connection
+    :param path:
+    :return:
+    """
+    fport = open(path, "r")
+    port=fport.readline()
+    fport.close()
+    print("wait connection "+port);sys.stdout.flush()
+    comm = MPI.COMM_WORLD.Connect(port)
+    print('connect to '+port);sys.stdout.flush()
+    return comm
+
+def send_mpi(comm,times,data):
+    """
+    send mpi data
+    :param comm: MPI communicator
+    :param times: times of values
+    :param data: rates inputs
+    :return:nothing
+    """
+    status_ = MPI.Status()
+    # wait until the translator accept the connections
+    accept = False
+    while not accept:
+        req = comm.irecv(source=0,tag=0)
+        accept = req.wait(status_)
+    source = status_.Get_source() # the id of the excepted source
+    data = np.ascontiguousarray(data,dtype='d') # format the rate for sending
+    shape = np.array(data.shape[0],dtype='i') # size of data
+    times = np.array(times,dtype='d') # time of stating and ending step
+    comm.Send([times,MPI.DOUBLE],dest=source,tag=0)
+    comm.Send([shape,MPI.INT],dest=source,tag=0)
+    comm.Send([data, MPI.DOUBLE], dest=source, tag=0)
+
+
+def receive_mpi(comm):
+    """
+        receive proxu values the
+    :param comm: MPI communicator
+    :return: rate of all proxy
+    """
+    status_ = MPI.Status()
+    # send to the translator : I want the next part
+    req = comm.isend(True, dest=0, tag=0)
+    req.wait()
+    time_step = np.empty(2, dtype='d')
+    comm.Recv([time_step, 2, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
+    # get the size of the rate
+    size=np.empty(1,dtype='i')
+    comm.Recv([size, MPI.INT], source=0, tag=0)
+    # get the rate
+    rates = np.empty(size, dtype='d')
+    comm.Recv([rates,size, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
+    # print the summary of the data
+    if status_.Get_tag() == 0:
+        return time_step,rates
+    else:
+        return None # TODO take in count
+
+def end_mpi(comm,path):
+    """
+    ending the communication
+    :param comm: MPI communicator
+    :param path: for the close the port
+    :return: nothing
+    """
+    # closing the connection at this end
+    comm.Disconnect()
+    fport = open(path, "r")
+    port=fport.readline()
+    fport.close()
+    print("close connection "+port);sys.stdout.flush()
+    MPI.Close_port(port)
+    print('exit')
+    MPI.Finalize()
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv)==2:
+        rum_mpi(sys.argv[1])
