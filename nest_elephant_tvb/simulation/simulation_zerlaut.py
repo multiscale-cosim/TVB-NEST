@@ -228,7 +228,7 @@ def rum_mpi(path):
     # the loop of the simulation
     count = 0
     while count*time_synch < end:
-        print("####### TVB start simulation"); sys.stdout.flush()
+        print("####### TVB start simulation "+str(count*time_synch)); sys.stdout.flush()
         nest_data=[]
         for result in simulator(simulation_length=time_synch,proxy_data=data):
             for i in range(nb_monitor):
@@ -243,7 +243,7 @@ def rum_mpi(path):
                 for i in range(nb_monitor):
                     save_result.append([])
                 count +=1
-        print("####### TVB end simulation"); sys.stdout.flush()
+        # print("####### TVB end simulation"); sys.stdout.flush()
 
         # prepare to send data with MPI
         nest_data = np.array(nest_data)
@@ -252,7 +252,7 @@ def rum_mpi(path):
         for index,comm in enumerate(comm_send):
             send_mpi(comm,time,rate[index]*1e3)
 
-        print("####### TVB receive data"); sys.stdout.flush()
+        # print("####### TVB receive data"); sys.stdout.flush()
         #receive MPI data
         data_value = []
         for comm in comm_receive:
@@ -261,7 +261,7 @@ def rum_mpi(path):
             data_value.append(receive[1])
         data=np.empty((2,),dtype=object)
         nb_step = np.rint((time_data[1]-time_data[0])/param_nest['sim_resolution'])
-        nb_step_0 =  np.rint(time_data[0]/param_nest['sim_resolution'])
+        nb_step_0 = np.rint(time_data[0]/param_nest['sim_resolution'])
         time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_nest['sim_resolution']
         data_value = np.swapaxes(np.array(data_value),0,1)[:,:,np.newaxis,np.newaxis]
         if data_value.shape[0] != time_data.shape[0]:

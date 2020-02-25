@@ -64,6 +64,9 @@ class Interface_co_simulation(Raw):
         ######## WARNING:Change the instance history for taking in count the proxy #########
         id_proxy = self.id_proxy
         dt = simulator.integrator.dt
+        delay_proxy =  simulator.history.delays[id_proxy,:]
+        delay_proxy =  delay_proxy[:,id_proxy]
+        min_delay = int(-numpy.min(delay_proxy,initial=numpy.infty,where=delay_proxy!=0.0))
         class History_proxy(HistoryProxy,simulator.history.__class__):
             def __init__(self):
                 pass
@@ -79,8 +82,8 @@ class Interface_co_simulation(Raw):
                     step_n = data[0] / dt - step  # the index of the buffer
                     if any(step_n > self.n_time):  # check if there are not too much data
                         raise Exception('ERROR too early')
-                    #TODO need to change value for delays reference to + comput delai before
-                    if any(numpy.rint(step_n).astype(int)  < int(-numpy.min(self.delays,initial=numpy.infty,where=self.delays!=0.0))):  # check if it's not missing value
+                    if any(numpy.rint(step_n).astype(int)  < min_delay):  # check if it's not missing value
+                        # WARNING doesn't in count the modification of delay
                         raise Exception('ERROR too late')
                     indice = numpy.expand_dims(numpy.rint(step_n + step).astype(int) % self.n_time, 1)
                     if indice.size != numpy.unique(indice).size:  # check if the index is correct
