@@ -1,6 +1,5 @@
 import numpy as np
 import os
-import numpy.random as rgn
 from mpi4py import MPI
 
 def analyse(path,nb_spike_detector):
