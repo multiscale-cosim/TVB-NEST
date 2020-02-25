@@ -13,7 +13,9 @@ def network_initialisation(results_path,param_nest):
     :param param_nest: Dictionary with the parameter for Nest
     :return: Random generator for each thread
     """
+    # the seed of the simulation
     master_seed = param_nest['master_seed']
+    # the number of processus or thread of the simulation
     total_num_virtual_procs = param_nest['total_num_virtual_procs']
     # Numpy random generator
     np.random.seed(master_seed)
@@ -44,17 +46,22 @@ def network_initialisation(results_path,param_nest):
         nest.SetKernelStatus({"print_time": True})
     return pyrngs
 
-def network_initialisation_neurons(results_path,pyrngs,param_topology,return_gids=False):
+def network_initialisation_neurons(results_path,pyrngs,param_topology,return_gids=False,cosimulation=None):
     """
     Create all neuron in each unit in Nest. An unit is composed by two populations (excitatory and inhibitory)
     :param results_path: Folder for saving the result of device
     :param pyrngs: Random generator for each thread
     :param param_topology: Dictionary with the parameter for the topology
     :param return_gids: Boolean to choose to return the ids of population or not
+    :param cosimulation : parameters for the  co-simulation
     :return: Dictionary with the id of different layer and the index of the layer out
     """
-    # Number of region
-    nb_region = param_topology['nb_region']
+    # Number of region to simulate
+    if cosimulation is not None:
+        nb_region =  len(cosimulation['id_region_nest'])
+    else:
+        nb_region = param_topology['nb_region']
+
     # Number of neurons by region
     nb_neuron_region = param_topology['nb_neuron_by_region']
     # Percentage of inhibitory neurons
@@ -205,13 +212,14 @@ def create_homogenous_connection(dic_layer,param_connection,save=False,init=None
     if save:
         np.save(param_connection['path_homogeneous']+str(nest.Rank())+'.npy',np.array(nest.GetConnections())[:,:2])
 
-def create_heterogenous_connection(dic_layer,param_topology,param_connection,save=False,init=None):
+def create_heterogenous_connection(dic_layer,param_topology,param_connection,save=False,init=None, cosimulation=None):
     '''
     creation of heterogenous connections or inside population
     :param dic_layer: Dictionary with all the layer
     :param param_topology: Parameter for the topology
     :param param_connection: Parameter for the connections
     :param save: option for saving or not the connection between neurons
+    :param cosimulation : parameters for the  co-simulation
     :return:
     '''
     if init == None:
@@ -222,6 +230,13 @@ def create_heterogenous_connection(dic_layer,param_topology,param_connection,sav
         (conn_params_ex_inside, conn_params_in_inside,
          list_layer_ex,list_layer_in,
          weights,delays)=init
+        
+    if cosimulation is not None:
+        # addapt the weight of the nest node only
+        weights=weights[cosimulation['id_region_nest'],:]
+        weights=weights[:,cosimulation['id_region_nest']]
+        delays=delays[cosimulation['id_region_nest'],:]
+        delays=delays[:,cosimulation['id_region_nest']]
 
     ## connection between region
     for i in range(len(list_layer_ex)):
@@ -255,21 +270,22 @@ def create_heterogenous_connection(dic_layer,param_topology,param_connection,sav
     if save:
         np.save(param_connection['path_heterogeneous']+str(nest.Rank())+'.npy',np.array(nest.GetConnections())[:,:2])
 
-def network_connection(dic_layer,param_topology,param_connection):
+def network_connection(dic_layer,param_topology,param_connection, cosimulation=None):
     """
     Create the connection between all the neurons
     :param dic_layer: Dictionary with all the layer
     :param param_topology: Parameter for the topology
     :param param_connection: Parameter for the connections
+    :param cosimulation : parameters for the  co-simulation
     :return: nothing
     """
     init= init_connection(dic_layer,param_topology,param_connection)
 
     create_homogenous_connection(dic_layer,param_connection,save=False,init=init)
-    create_heterogenous_connection(dic_layer,param_topology,param_connection,save=False,init=init)
+    create_heterogenous_connection(dic_layer,param_topology,param_connection,save=False,init=init,cosimulation=cosimulation)
 
 
-def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False):
+def network_device(dic_layer,min_time,time_simulation,param_background,param_connection,mpi=False,cosimulation=None):
     """
     Create and Connect different record or input device
     :param dic_layer: Dictionary with all the layer
@@ -277,17 +293,17 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
     :param min_time: Beginning time of recording
     :param time_simulation: End of simulation
     :param param_background: parameter for the noise and external input
+    :param cosimulation : parameters for the  co-simulation
     :return: the list of multimeter and spike detector
     #TODO : add multimeter and dc_current
     """
     #Spike Detector
     #parameter of spike detector
-    if mpi:
+    if mpi or cosimulation is not None:
        param_spike_dec= {"start": min_time,
                           "stop": time_simulation,
-                          # "record_to": ["mpi"],
-
-                          'label': 'config_mpi_spike_detector'
+                          "record_to": "mpi",
+                          'label': 'spike_detector'
                           }
        nest.CopyModel('spike_detector', 'spike_detector_record_mpi')
        nest.SetDefaults("spike_detector_record_mpi", param_spike_dec)
@@ -333,6 +349,11 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
                 spike_detector_mpi = nest.Create('spike_detector_record_mpi')
                 spike_detector.append(spike_detector_mpi)
                 nest.Connect(list_pops[i]['region'],spike_detector_mpi)
+            elif cosimulation is not None:
+                if name_pops == 'excitatory':
+                    spike_detector_mpi = nest.Create('spike_detector_record_mpi')
+                    spike_detector.append(spike_detector_mpi)
+                    nest.Connect(list_pops[i]['region'],spike_detector_mpi)
             else:
                 nest.Connect(list_pops[i]['region'],spike_detector)
 
@@ -364,26 +385,22 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
         nest.CopyModel("poisson_generator",'poisson_generator_in_by_population')
         nest.SetDefaults('poisson_generator_in_by_population',param_poisson_generator_in)
 
-        conndict_poisson_generator = {'connection_type': 'divergent',
-                       'weights' :param_background['weight_poisson'],
-                       'delays' : nest.GetKernelStatus("min_delay"), # without delay
-                        }
-        syn_spec_poisson_generator ={
+        syn_spec_ex_poisson_generator ={
                         'weight' :param_background['weight_poisson'],
                         'delay' : nest.GetKernelStatus("min_delay"), # without delay
                         }
         syn_spec_in_poisson_generator ={
-            'weight' :-param_background['weight_poisson']*2.5, #TODO need to replace the number
+            'weight' :-param_background['weight_poisson']*param_connection['g'],
             'delay' : nest.GetKernelStatus("min_delay"), # without delay
         }
         for name_pops,list_pops in dic_layer.items():
             for index,population in enumerate(list_pops['list']):
                 poisson_generator = nest.Create('poisson_generator_ex_by_population')
-                nest.Connect(poisson_generator,population['region'],syn_spec=syn_spec_poisson_generator)
-                poisson_generator = nest.Create('poisson_generator_in_by_population')
-                nest.Connect(poisson_generator,population['region'],syn_spec=syn_spec_in_poisson_generator)
+                nest.Connect(poisson_generator,population['region'],syn_spec=syn_spec_ex_poisson_generator)
+                # poisson_generator = nest.Create('poisson_generator_in_by_population')
+                # nest.Connect(poisson_generator,population['region'],syn_spec=syn_spec_in_poisson_generator)
 
-        #add noise in current
+    #add noise in current
     if param_background['noise']:
         param_noise_generator = {
             "mean":param_background['mean_noise'],
@@ -407,7 +424,36 @@ def network_device(dic_layer,min_time,time_simulation,param_background,mpi=False
                 noise_generator = nest.Create('noise_generator_global')
                 nest.Connect(noise_generator,population['region'],syn_spec=syn_spec_noise)
 
-    return spike_detector
+    #Connection proxy to each neurons
+    spike_generator=[]
+    if cosimulation is not None:
+        param_spike_dec= {"start": 0.0,
+                      "stop": time_simulation,
+                      "input_from": "mpi",
+                      'label': 'spike_generator'
+                      }
+        nest.CopyModel('spike_generator', 'spike_generator_mpi')
+        nest.SetDefaults("spike_generator_mpi", param_spike_dec)
+        nb_neurons = []
+        name_pops = []
+        for name_pop, items in dic_layer.items():
+            nb_neurons.append(items['nb'])
+            name_pops.append(name_pop)
+        for i in range(len(cosimulation['id_region_nest'])):
+            spike_generator_mpi = nest.Create('spike_generator_mpi',np.sum(nb_neurons))
+            spike_generator.append(spike_generator_mpi)
+            nb_device = 0
+            for index,name in enumerate(name_pops):
+                print([nb_device,nb_device+nb_neurons[index]]);sys.stdout.flush()
+                nest.Connect(spike_generator_mpi[nb_device:nb_device+nb_neurons[index]],dic_layer[name]['list'][i]['region'],syn_spec={
+                                               "weight":param_connection['weight_global'],
+                                               "delay":nest.GetKernelStatus("min_delay"),
+                                               },
+                            conn_spec={'rule': 'one_to_one'},
+                             )
+                nb_device+=nb_neurons[index]
+
+    return spike_detector,spike_generator
 
 
 def simulate (results_path,begin,end,
@@ -435,7 +481,7 @@ def simulate (results_path,begin,end,
     if nest.Rank() == 0:
         tic = time.time()
     network_connection(dic_layer,param_topology,param_connection)
-    spike_detector=network_device(dic_layer,begin,end,param_background)
+    spike_detector,spike_generator=network_device(dic_layer,begin,end,param_background,param_connection)
     if nest.Rank() == 0:
         toc = time.time() - tic
         print("Time to create the connections and devices: %.2f s" % toc)
@@ -449,12 +495,24 @@ def simulate (results_path,begin,end,
         print("Time to simulate: %.2f s" % toc)
 
 def config_mpi_record (results_path,begin,end,
-              param_nest,param_topology,param_connection,param_background):
+              param_nest,param_topology,param_connection,param_background,
+                       cosimulation=None):
+    """
+    configuration before running
+    :param results_path: the name of file for recording
+    :param begin : time of beginning to record
+    :param end : time of end simulation
+    :param param_nest: Dictionary with the parameter for Nest
+    :param param_topology: Parameter for the topology
+    :param param_connection: Parameter for the connections
+    :param param_background: parameter for the noise and external input
+    :param cosimulation: parameters for the cosimulation
+    """
    # Initialisation of the network
     if nest.Rank() == 0:
         tic = time.time()
     pyrngs=network_initialisation(results_path,param_nest)
-    dic_layer=network_initialisation_neurons(results_path,pyrngs,param_topology)
+    dic_layer=network_initialisation_neurons(results_path,pyrngs,param_topology,cosimulation=cosimulation)
     if nest.Rank() == 0:
         toc = time.time() - tic
         print("Time to initialize the network: %.2f s" % toc)
@@ -462,18 +520,44 @@ def config_mpi_record (results_path,begin,end,
     # Connection and Device
     if nest.Rank() == 0:
         tic = time.time()
-    network_connection(dic_layer,param_topology,param_connection)
-    spike_detector=network_device(dic_layer,begin,end,param_background,mpi=True)
+    network_connection(dic_layer,param_topology,param_connection,cosimulation=cosimulation)
+    spike_detector,spike_generator=network_device(dic_layer,begin,end,param_background,param_connection,mpi=False,cosimulation=cosimulation)
     if nest.Rank() == 0:
         toc = time.time() - tic
         print("Time to create the connections and devices: %.2f s" % toc)
-    return spike_detector
+    return spike_detector,spike_generator
 
 def simulate_mpi_record(end):
+    """
+     simulation with mpi recording
+    :param end : time of end simulation
+    """
     # Simulation
     if nest.Rank() == 0:
         tic = time.time()
     nest.Simulate(end)
+    if nest.Rank() == 0:
+        toc=time.time()-tic
+        print("Time to simulate: %.2f s" % toc)
+
+def simulate_mpi_co_simulation(time_synch,end):
+    """
+    simulation with co-simulation
+    :param time_synch: time of synchronization between all the simulator
+    :param end : time of end simulation
+    """
+    # Simulation
+    if nest.Rank() == 0:
+        tic = time.time()
+    time_sim = 0.0
+    print("############ Nest Prepare");sys.stdout.flush()
+    nest.Prepare()
+    while  time_sim < end:
+        print("############ Nest run "+str(nest.Rank())+" time "+str(nest.GetKernelStatus('time')));sys.stdout.flush()
+        nest.Run(time_synch)
+        print("############ Nest end");sys.stdout.flush()
+        time_sim+=time_synch
+    nest.Cleanup()
     if nest.Rank() == 0:
         toc=time.time()-tic
         print("Time to simulate: %.2f s" % toc)
