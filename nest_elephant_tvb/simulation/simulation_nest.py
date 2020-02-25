@@ -549,14 +549,14 @@ def simulate_mpi_co_simulation(time_synch,end):
     # Simulation
     if nest.Rank() == 0:
         tic = time.time()
-    time_sim = 0.0
+    count = 0.0
     print("############ Nest Prepare");sys.stdout.flush()
     nest.Prepare()
-    while  time_sim < end:
+    while  count*time_synch < end:
         print("############ Nest run "+str(nest.Rank())+" time "+str(nest.GetKernelStatus('time')));sys.stdout.flush()
         nest.Run(time_synch)
         print("############ Nest end");sys.stdout.flush()
-        time_sim+=time_synch
+        count+=1
     nest.Cleanup()
     if nest.Rank() == 0:
         toc=time.time()-tic
