@@ -260,8 +260,9 @@ def rum_mpi(path):
             time_data = receive[0]
             data_value.append(receive[1])
         data=np.empty((2,),dtype=object)
-        nb_step = (time_data[0]-time_data[1])/param_nest['sim_resolution']
-        time_data = np.arange(0,nb_step,1)*param_nest['sim_resolution']
+        nb_step = np.rint((time_data[1]-time_data[0])/param_nest['sim_resolution'])
+        nb_step_0 =  np.rint(time_data[0]/param_nest['sim_resolution'])
+        time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_nest['sim_resolution']
         data_value = np.swapaxes(np.array(data_value),0,1)[:,:,np.newaxis,np.newaxis]
         if data_value.shape[0] != time_data.shape[0]:
             raise(Exception('Bad shape of data'))
