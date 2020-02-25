@@ -35,8 +35,7 @@ The simulation kernel is put back to its initial state using `ResetKernel`.
 
 import nest
 import numpy
-import pylab
-import time
+import os
 
 nest.ResetKernel()
 
@@ -51,8 +50,7 @@ specified. The following properties are related to writing to file:
 '''
 
 nest.SetKernelStatus({"overwrite_files": True,
-                      "data_path": "/home/kusch/Documents/project/co_simulation/co-simulation_mouse/test_nest/test_file/data/",
-                      # "data_prefix": ""
+                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../../../",
                       })
 
 '''
@@ -97,17 +95,13 @@ n_2 = nest.Create("iaf_psc_alpha",
 
 m = nest.Create("spike_detector",
                 params={
-                    # "interval": 0.1,
-                    #     "record_from": ["V_m"],
                         "record_to": "mpi",
-                        "label": "conf"})
+                        "label": "test_nest"})
 
 m_2 = nest.Create("spike_detector",
                 params={
-                    # "interval": 0.1,
-                    #     "record_from": ["V_m"],
                     "record_to": "mpi",
-                    "label":"conf"})
+                    "label":"test_nest"})
 
 s_ex = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([10.0, 20.0, 50.0])})
@@ -131,7 +125,6 @@ nest.Connect(s_ex, n, syn_spec={"weight": 100.0})
 nest.Connect(s_in, n, syn_spec={"weight": 0.0})
 nest.Connect(dc,n)
 nest.Connect(dc_2,n_2)
-# nest.Connect(m, n)
 nest.Connect(n,m)
 nest.Connect(n_2,m_2)
 
@@ -151,33 +144,5 @@ nest.Run(200.)
 nest.Run(200.)
 # time.sleep(10.)
 nest.Cleanup()
-nest.Simulate(200.)
-# '''
-# After the simulation, the recordings are obtained from the multimeter via the
-# key `events` of the status dictionary accessed by `GetStatus`. `times`
-# indicates the recording times stored for each data point.
-# '''
-#
-# print(nest.GetStatus(m))
-#
-# events = nest.GetStatus(m)[0]["events"]
-# t = events["times"]
-#
-# '''
-# Finally, the time courses of the membrane voltage and the synaptic
-# conductance are displayed.
-# '''
-#
-# pylab.clf()
-#
-# pylab.subplot(211)
-# pylab.plot(t, events["V_m"])
-# pylab.axis([0, 100, -75, -53])
-# pylab.ylabel("membrane potential (mV)")
-#
-# pylab.subplot(212)
-# pylab.plot(t, events["g_ex"], t, events["g_in"])
-# pylab.axis([0, 100, 0, 45])
-# pylab.xlabel("time (ms)")
-# pylab.ylabel("synaptic conductance (nS)")
-# pylab.legend(("g_exc", "g_inh"))
+# nest.Simulate(200.)
+

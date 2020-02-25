@@ -2,9 +2,9 @@ import numpy as np
 import os
 from mpi4py import MPI
 
-def analyse(path,nb_spike_detector):
+def analyse(path):
     #Start communication channels
-    path_to_files = path + nb_spike_detector + ".txt"
+    path_to_files = path
     #For NEST
     # Init connection
     print("Waiting for port details")
@@ -46,8 +46,8 @@ def analyse(path,nb_spike_detector):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==3:
-        analyse(sys.argv[1],sys.argv[2])
+    if len(sys.argv)==2:
+        analyse(sys.argv[1])
     else:
         print('missing argument')
 

@@ -35,8 +35,7 @@ The simulation kernel is put back to its initial state using `ResetKernel`.
 
 import nest
 import numpy
-import pylab
-import time
+import os
 import sys
 
 nest.ResetKernel()
@@ -52,8 +51,7 @@ specified. The following properties are related to writing to file:
 '''
 
 nest.SetKernelStatus({"overwrite_files": True,
-                      "data_path": "/home/kusch/Documents/project/co_simulation/co-simulation_mouse/test_nest/test_file/data/",
-                      # "data_prefix": ""
+                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../../../",
                       })
 
 '''
@@ -99,25 +97,25 @@ n_2 = nest.Create("iaf_psc_alpha",
 m = nest.Create("spike_detector",
                 params={
                         "record_to": "mpi",
-                        "label": "conf"})
+                        "label": "test_nest"})
 m_2 = nest.Create("spike_detector",
                 params={
                     "record_to": "mpi",
-                    "label":"conf"})
+                    "label":"test_nest"})
 m_3 = nest.Create("spike_detector",
                   params={
                       "record_to": "memory",
-                      "label":"conf"})
+                      "label":"test_nest"})
 m_4 = nest.Create("spike_detector",
                   params={
                       "record_to": "memory",
-                      "label":"conf"})
+                      "label":"test_nest"})
 
 sys.stdout.flush()
 s_ex = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([]),
                            'input_from':'mpi',
-                           "label":"conf_gen"})
+                           "label":"test_nest"})
 s_in = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([15.0, 25.0, 55.0])})
 
@@ -159,7 +157,7 @@ nest.Run(200.)
 nest.Run(200.)
 # time.sleep(10.)
 nest.Cleanup()
-nest.Simulate(200.)
+# nest.Simulate(200.)
 print(nest.GetStatus(m_3)[0]['events'])
 print(nest.GetStatus(m_4)[0]['events'])
 
