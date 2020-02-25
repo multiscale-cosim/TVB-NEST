@@ -2,12 +2,22 @@ import numpy as np
 
 path ="/home/kusch/Documents/project/co_simulation/co-simulation_mouse/nest_elephant_tvb/parameter/data_mouse/"
 
+#parameter for the cosimulations and parameters of the simulations
 param_co_simulation={
+    # boolean for check if there are or not co-simulation
     'co-simulation':False,
+    # number of MPI process for nest (need to be equals to  param_nest['total_num_virtual_procs']
+    # select if nest is use or not
     'nb_MPI_nest':1,
+    # select if nest is use or not
     'nb_MPI_TVB':0,
+    # save or not nest( result with MPI (not yet implemented)
     'record_MPI':False,
-    'nb_node':1,
+    # id of region simulate by nest
+    'id_region_nest':[],
+    #
+    'synchronization':0.,#Todo compute with the min of delay
+    'percentage_shared':0.5
 }
 
 #parameter simulators
@@ -54,7 +64,7 @@ param_tvb={
 param_topology={
     'nb_region':10,
     # Number of neurons by region
-    'nb_neuron_by_region':10000,
+    'nb_neuron_by_region':int(1e4),
     # Percentage of inhibitory neurons
     'percentage_inhibitory':0.2,
     # Type of neuron
@@ -69,7 +79,7 @@ param_topology={
         'g_L':10.0,
         'I_e':0.0,
         'a':0.0,
-        'b':50.0,
+        'b':1.0,
         'Delta_T':2.0,
         'tau_w':500.0,
         'V_th':-50.0,
@@ -116,7 +126,7 @@ param_connection={
     # weigth in the population from excitatory neurons
     'weight_local':1.0,
     # ratio between excitatory weight and inhibitory weight
-    'g':2.5,
+    'g':3.5,
     #probability inside the region
     'p_connect':0.05,
     # number of external synapse:
@@ -135,8 +145,8 @@ param_background={
     #define if the simulation use or not a poisson generator
     'poisson':True,
     # rate of poisson
-    'rate_ex':400.0*1.0e-3+2.0*140,
-    'rate_in':200.0*1e-3+0.0*140,
+    'rate_ex':400*1e-3+2.0*150,
+    'rate_in':200.0*1.e-3+0.0*150,
     #the weight on the connexion
     'weight_poisson':param_connection['weight_local'],
     #define if the simulation have or not noise
@@ -168,14 +178,14 @@ param_zerlaut={
     # Time constant of the model
     'T':20.0,
     # Polynome for excitatory neurons | WARNING :should be change when the parameter of neurons change)
-    'P_e':[-0.0498, 0.00506, -0.025, 0.0014, -0.00041, 0.0105, -0.036, 0.0074, 0.0012, -0.0407],
+    'P_e':[-0.05059317,  0.0036078 ,  0.01794401,  0.00467008,  0.00098553,  0.0082953 , -0.00985289, -0.02600252, -0.00274499, -0.01051463],
+    # 'P_e':[-0.04994512,  0.00033889,  0.00434596,  0.00122126,  0.00584339, -0.00048078, -0.0001464,   0.00140099, -0.00025785, -0.00141249],
+    'P_e':[-0.0506587 ,  0.0026406 , -0.00151409, -0.00810736,  0.00081096,   0.01194696, -0.00728937,  0.00156232,  0.00462174, -0.00576466],
     # Polynome for inhibitory neurons | WARNING: should be change when the parameter of neurons change)
-    'P_i':[-0.0514, 0.004, -0.0083, 0.0002, -0.0005, 0.0014, -0.0146, 0.0045, 0.0028, -0.0153],
+    # 'P_i':[-0.05084858,  0.00146866, -0.00657981,  0.0014993 , -0.0003816 ,  0.00020026,  0.00078719, -0.00322428, -0.00842626, -0.0012793 ],
+    # 'P_i':[-0.04959247, -0.00113669,  0.00093422, -0.00560576,  0.00292606, -0.02052566,  0.0105556,  -0.00163008,  0.00447567, -0.00182161],
+    'P_i':[-5.96722865e-02,  7.15675508e-03,  4.28252163e-03,  9.25089702e-03,  1.16632197e-06, -1.00659310e-02,  3.89257235e-03,  4.45787751e-04,  4.20050937e-03,  4.37359879e-03],
+
     # initial condition, should be simmilar than nest #TODO
-    'initial_condition':{"E": [0.0, 0.0], "I": [0., 0.], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
-    # Should be link with noise in Nest #TODO
-    'noise_parameter':{
-        'nsig':[5e-09, 5e-09, 0.0, 0.0, 0.0, 0.0, 0.0],
-        'ntau':0.0,
-    },
+    'initial_condition':{"E": [0.0, 0.0], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
 }
