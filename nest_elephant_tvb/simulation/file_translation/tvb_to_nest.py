@@ -52,6 +52,7 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
     while True:
         list_id=np.ones(nb_spike_generator) * -1 # list to link the spike train to the spike detector
         count_ending=0
+        print("######### TVB to Nest: start to send " );sys.stdout.flush()
         while count_ending != len(source_sending) or list_id[-1] == -1:
             # Waiting for some processus ask for receive the spikes
             ids = np.empty(2, dtype='i')
@@ -123,9 +124,11 @@ def receive(path,TVB_config,nb_spike_generator,percentage_shared,status_data,buf
     while True:
         # Send to all the confirmation of the processus can send data
         requests=[]
+        print("######### TVB to Nest: wait receive ");sys.stdout.flush()
         for source in source_sending:
             requests.append(comm.isend(True,dest=source,tag=0))
         MPI.Request.Waitall(requests)
+        print("######### TVB to Nest: receive all");sys.stdout.flush()
         # get the starting and ending time of the simulation to translate
         time_step = np.empty(2, dtype='d')
         comm.Recv([time_step, 2, MPI.DOUBLE], source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status_)
@@ -138,21 +141,25 @@ def receive(path,TVB_config,nb_spike_generator,percentage_shared,status_data,buf
             comm.Recv([rate, size[0], MPI.DOUBLE], source=status_.Get_source(), tag=0, status=status_)
 
             # Compute the rate to spike trains
-            spike_shared=rates_to_spikes(rate*percentage_shared*Hz,time_step[0]*ms,time_step[1]*ms,variation=True)[0]
+            #Todo avoid rate == 0
+            spike_shared=rates_to_spikes((rate+1e-12)*percentage_shared*Hz,time_step[0]*ms,time_step[1]*ms,variation=True)[0]
             # spike_shared=toy_rates_to_spikes(rate*percentage_shared,time_step[0],time_step[1])
             spike_generate = np.empty(nb_spike_generator,dtype=np.object)
             for i in range(nb_spike_generator):
-                spikes= rates_to_spikes(rate*(1-percentage_shared)*Hz,time_step[0]*ms,time_step[1]*ms,variation=True)[0]
+                # Todo avoid rate == 0
+                spikes= rates_to_spikes((rate+1e-12)*(1-percentage_shared)*Hz,time_step[0]*ms,time_step[1]*ms,variation=True)[0]
                 # spikes= toy_rates_to_spikes(rate*(1-percentage_shared),time_step[0],time_step[1])
                 spike_generate[i]= np.around(np.sort(np.concatenate((spikes,spike_shared))),decimals=1)
+
+            print("######### TVB to Nest:  to generator to all: ");sys.stdout.flush()
 
             # Wait for lock to be set to False
             while (status_data[0]):
                 pass
             # Set lock to true and put the data in the shared buffer
+            buffer_spike[0] = copy.copy(spike_generate)
             with lock_status:
                 status_data[0] = True
-            buffer_spike[0] = copy.copy(spike_generate)
         elif status_.Get_tag() == 1:
                 break
     print('Receive : ending');sys.stdout.flush()
