@@ -35,9 +35,8 @@ The simulation kernel is put back to its initial state using `ResetKernel`.
 
 import nest
 import numpy
-import pylab
-import time
 import sys
+import os
 
 nest.ResetKernel()
 
@@ -52,8 +51,7 @@ specified. The following properties are related to writing to file:
 '''
 
 nest.SetKernelStatus({"overwrite_files": True,
-                      "data_path": "/home/kusch/Documents/project/co_simulation/co-simulation_mouse/test_nest/test_file/data/",
-                      # "data_prefix": ""
+                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../../../",
                       })
 
 '''
@@ -101,12 +99,11 @@ m = nest.Create("spike_detector",
                       "record_to": "memory"
                   })
 
-sys.stdout.flush()
 s_ex = nest.Create("step_current_generator",
                    params={"amplitude_times": numpy.array([]),
                            "amplitude_values": numpy.array([]),
                            'input_from':'mpi',
-                           "label":"conf_step"})
+                           "label":"test_nest"})
 s_in = nest.Create("step_current_generator",
                    params={
                        "amplitude_times": numpy.array([1.0, 100.0, 400.0]),
@@ -127,9 +124,6 @@ nest.Connect(n_2,m)
 nest.Connect(s_ex,n)
 nest.Connect(s_in,n_2)
 
-print(s_ex)
-sys.stdout.flush()
-
 '''
 A network simulation with a duration of 100 ms is started with `Simulate`.
 '''
@@ -146,4 +140,5 @@ nest.Run(200.)
 nest.Cleanup()
 # nest.Simulate(200.)
 print(nest.GetStatus(m)[0]['events'])
+
 
