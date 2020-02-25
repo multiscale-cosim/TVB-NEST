@@ -33,6 +33,7 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
     # print('Send : connect to '+port);sys.stdout.flush()
 
     status_ = MPI.Status()
+    end=False
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the communication
     while True:
         list_id=np.ones(nb_spike_generator) * -1 # list to link the spike train to the spike detector
@@ -54,8 +55,6 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
                     pass
                 # Select the good spike train and send it
                 data = buffer_spike[0][index]
-                if index == 12:
-                    print("######### TVB to Nest:"+str(data))
                 shape = np.array(data.shape[0], dtype='i')
                 # firstly send the size of the spikes train
                 comm.Send([shape,MPI.INT],dest=status_.Get_source(),tag=ids[1])
@@ -65,12 +64,13 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
                 # ending the update of the all the spike train from one processus
                 count_ending += 1
             else:
+                end = True
                 break
-        if -1 in list_id:
-            break
         # Set lock back to False
         with lock_status:
             status_data[0] = False
+        if end:
+            break
     #TODO need to take in count the end of the simulation (add shared variable for close the simulation)
     # print("Send : ending" );sys.stdout.flush()
     comm.Disconnect()
@@ -78,7 +78,6 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
     for i in range(nb_spike_generator):
         path_to_files = path + str(first_id_spike_generator+i) + ".txt"
         os.remove(path_to_files)
-    MPI.Finalize()
     # print('Send : exit');sys.stdout.flush()
 
 def receive(path,TVB_config,analyse,status_data,buffer_spike):
@@ -135,14 +134,14 @@ def receive(path,TVB_config,analyse,status_data,buffer_spike):
             with lock_status:
                 status_data[0] = True
         elif status_.Get_tag() == 1:
-                break
+            with lock_status:
+                status_data[0] = True
+            break
     # print('Receive : ending');sys.stdout.flush()
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    MPI.Finalize()
-    # print('Receive : exit');
-
+    # print('Receive : exit');sys.stdout.flush()
 
 if __name__ == "__main__":
     import sys
@@ -169,6 +168,7 @@ if __name__ == "__main__":
         th_send.start()
         th_receive.join()
         th_send.join()
+        MPI.Finalize()
     else:
         print('missing argument')
 
