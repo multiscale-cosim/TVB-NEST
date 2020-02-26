@@ -9,19 +9,22 @@ def simulate_TVB_reception(path):
     '''
     # Init connection from file connection
     print(path)
-    print("Waiting for port details");sys.stdout.flush()
+    print("TVB INPUT : Waiting for port details");sys.stdout.flush()
     fport = open(path, "r")
     port=fport.readline()
     fport.close()
-    print("wait connection "+port);sys.stdout.flush()
+    print("TVB INPUT :wait connection "+port);sys.stdout.flush()
     comm = MPI.COMM_WORLD.Connect(port)
-    print('connect to '+port);sys.stdout.flush()
+    print('TVB INPUT :connect to '+port);sys.stdout.flush()
 
     status_ = MPI.Status()
     while(True):
         # send to the translator, I want the next part
         req = comm.isend(True, dest=0, tag=0)
         req.wait()
+
+        times=np.empty(2,dtype='d')
+        comm.Recv([times, MPI.FLOAT], source=0, tag=0)
         # get the size of the rate
         size=np.empty(1,dtype='i')
         comm.Recv([size, MPI.INT], source=0, tag=0)
@@ -30,13 +33,18 @@ def simulate_TVB_reception(path):
         comm.Recv([rates,size, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
         # print the summary of the data
         if status_.Get_tag() == 0:
-            print(comm.Get_rank(),np.sum(rates), rates);sys.stdout.flush()
+            print("TVB INPUT :",comm.Get_rank(),times,np.sum(rates));sys.stdout.flush()
         else:
             break
+        if times[1] >9900:
+            break
     # closing the connection at this end
+    req = comm.isend(True, dest=0, tag=1)
+    req.wait()
+    print('TVB INPUT :end');sys.stdout.flush()
     comm.Disconnect()
     MPI.Close_port(port)
-    print('exit');
+    print('TVB INPUT :exit');sys.stdout.flush()
     MPI.Finalize()
 
 if __name__ == "__main__":

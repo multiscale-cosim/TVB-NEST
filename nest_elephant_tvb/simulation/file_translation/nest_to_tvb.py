@@ -70,7 +70,6 @@ def receive(path,file_spike_detector,store,status_data,buffer):
     MPI.Close_port(port)
     os.remove(path_to_files)
     # print('Receive : exit');sys.stdout.flush()
-    MPI.Finalize()
 
 def send(path,TVB_config,analyse,status_data,buffer):
     '''
@@ -132,7 +131,6 @@ def send(path,TVB_config,analyse,status_data,buffer):
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    MPI.Finalize()
     # print('Send : exit')
 
 
@@ -164,6 +162,7 @@ if __name__ == "__main__":
         th_send.start()
         th_receive.join()
         th_send.join()
+        MPI.Finalize()
     else:
         print('missing argument')
 

@@ -55,6 +55,8 @@ def send(path,first_id_spike_generator,nb_spike_generator,status_data,buffer_spi
                     pass
                 # Select the good spike train and send it
                 data = buffer_spike[0][index]
+                if index == 0:
+                    print("######### TVB to Nest:"+str(data)+" " +str(index)); sys.stdout.flush()
                 shape = np.array(data.shape[0], dtype='i')
                 # firstly send the size of the spikes train
                 comm.Send([shape,MPI.INT],dest=status_.Get_source(),tag=ids[1])
