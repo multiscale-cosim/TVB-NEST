@@ -15,8 +15,9 @@ param_co_simulation={
     'record_MPI':False,
     # id of region simulate by nest
     'id_region_nest':[],
-    #
+    # time of synchronization between node
     'synchronization':0.,#Todo compute with the min of delay
+    # percentage of shared rate between neurons of the same region
     'percentage_shared':0.5
 }
 
