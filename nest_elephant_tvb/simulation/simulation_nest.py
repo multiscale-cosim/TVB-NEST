@@ -1,9 +1,7 @@
-from __future__ import print_function
 import nest
 import numpy as np
 import os
 import time
-import subprocess
 import sys
 
 def network_initialisation(results_path,param_nest):
