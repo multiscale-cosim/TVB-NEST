@@ -5,6 +5,7 @@ from nest_elephant_tvb.simulation.simulation_nest import simulate,config_mpi_rec
 from nest_elephant_tvb.simulation.simulation_zerlaut import simulate_tvb
 import subprocess
 import json
+import numpy as np
 
 def generate_parameter(parameter_default,dict_variable=None):
     """
@@ -190,7 +191,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
     else:
         if param_co_simulation['nb_MPI_nest'] != 0:
             # Second case : Only nest simulation
-            if param_co_simulation['record_MPI']:
+            if param_co_simulation['record_MPI']>100.0:
                 #initialise Nest before the communication
                 spike_detector = config_mpi_record(results_path=results_path,begin=begin,end=end,
                 param_nest=param_nest,param_topology=param_topology,
@@ -198,16 +199,29 @@ def run(results_path,parameter_default,dict_variable,begin,end):
 
                 #create file for the foldder for the communication part
                 if nest.Rank() == 0:
-                    if not os.path.exists(results_path+'/config_mpi_spike_detector/'):
-                        os.makedirs(newpath+'/config_mpi_spike_detector')
+                    if not os.path.exists(results_path+'/spike_detector/'):
+                        os.makedirs(results_path+'/spike_detector/')
+                    if not os.path.exists(results_path + '/save/'):
+                        os.makedirs(results_path + '/save/')
                 else:
-                    while not os.path.exists(results_path+'/config_mpi_spike_detector/'):
+                    while not os.path.exists(results_path+'/save/'):
                         pass
 
                 #TODO need to test and to finish this part
-                dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_record_region_activity.sh"
-                for i in spike_detector:
-                    subprocess.call(["bash",dir_path, results_path+'/config_mpi_spike_detector/',str(i[0])])
+                for index,id_spike_detector in enumerate(spike_detector):
+                    dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_nest_to_tvb.sh"
+                    argv=[ dir_path,
+                           results_path,
+                           "/spike_detector/"+str(id_spike_detector.tolist()[0])+".txt",
+                           "/save/"+str(id_spike_detector.tolist()[0]),
+                           str(param_nest['sim_resolution']),
+                           str(param_co_simulation['record_MPI']),
+                           str(np.ceil(end/param_co_simulation['record_MPI']))
+                           ]
+                subprocess.Popen(argv,
+                                 #need to check if it's needed or not (doesn't work for me)
+                                 stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
+                                 )
                 simulate_mpi_record(end)
             else:
                 # just run nest with the configuration
