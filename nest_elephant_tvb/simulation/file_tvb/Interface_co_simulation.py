@@ -1,5 +1,5 @@
-from scipy.fftpack import basic
-from tvb.simulator.monitors import Raw, basic, arrays
+from tvb.basic.neotraits.ex import TraitAttributeError
+from tvb.simulator.monitors import Raw,NArray,Float
 from tvb.simulator.history import BaseHistory, Dim, NDArray
 from types import MethodType
 import numpy
@@ -19,7 +19,11 @@ class Model_with_proxy():
         :param model_without_proxy: model without proxy
         '''
         for key, value in vars(model_without_proxy).items():
-            setattr(self, key, value)
+            try:
+               setattr(self, key, value)
+            except TraitAttributeError:
+                # variable final don't need to copy
+                pass
         self.configure()
 
     def set_id_proxy(self, id_proxy):
@@ -37,22 +41,22 @@ class Model_with_proxy():
         self._update = True
         self._proxy_value = data
 
-    def firing_rate(self):
+    def coupling_variable(self):
         '''
-        function in order to have access to the firing rate
+        function in order to have access to the valye of the  coupling variable
         :return: firing rate of the model
         '''
-        return self._firing_rate
+        return self._coupling_variable
 
 class HistoryProxy(BaseHistory):
     "History implementation for saving proxy data."
 
     nb_proxy = Dim()  # number of proxy
-    dim_1 = Dim()  # dmension one
+    dim_1 = Dim()  # dimension one
     dt = NDArray((dim_1, dim_1), 'f')  # integration time of the simulator
     current_step = NDArray((dim_1, dim_1), 'f', read_only=False)  # the current time step of the simulation
     id_proxy = NDArray((nb_proxy,), 'i')  # the identification of proxy node
-    buffer = NDArray(('n_time', 'n_cvar', 'n_node', 'n_mode'), 'f8', read_only=False)  # the buffer of value of th proxy
+    buffer = NDArray(('n_time', 'n_cvar', 'n_node', 'n_mode'), 'f8', read_only=False)  # the buffer of value of the proxy
 
     def __init__(self, time_synchronize, dt, id_proxy, cvars, n_mode):
         '''
@@ -80,7 +84,7 @@ class HistoryProxy(BaseHistory):
         :param data: the data for the proxy node
         '''
         if self.id_proxy.size != 0:
-            step_n = data[0] / self.dt[0] - step  # the indexe of the buffer
+            step_n = data[0] / self.dt[0] - step  # the index of the buffer
             if any(step_n > self.n_time):  # check if there are not too much data
                 raise Exception('ERROR too early')
             if any(numpy.rint(step_n).astype(int) < 0.0):  # check if it's not missing value
@@ -98,72 +102,108 @@ class HistoryProxy(BaseHistory):
 
     def update_current_step(self, step):
         '''
-        update the curretn step of the simulator
+        update the current step of the simulator
         :param step: current step
         :return:
         '''
         self.current_step = numpy.array([step])
 
-############################################ Modify Zerlaut #############################################
-from Zerlaut import Zerlaut_adaptation_first_order,Zerlaut_adaptation_second_order
+############################################ Modify Reduced Wong Wang #############################################
+# Modification of the Reduced Wong Wang in order to accept proxy value and to retutn the firing rate of the differnet node
 
-class Zerlaut_adaptation_first_order_proxy(Zerlaut_adaptation_first_order,Model_with_proxy):
+from tvb.simulator.models.wong_wang import ReducedWongWang
+from numba import guvectorize, float64
+
+@guvectorize([(float64[:],)*12], '(n),(m)' + ',()'*8 + '->(n),(n)', nopython=True)
+def _numba_dfun(S, c, a, b, d, g, ts, w, j, io, dx,h):
+    "Gufunc for reduced Wong-Wang model equations.(modification for saving the firing rate h)"
+    x = w[0]*j[0]*S[0] + io[0] + j[0]*c[0]
+    h[0] = (a[0]*x - b[0]) / (1 - numpy.exp(-d[0]*(a[0]*x - b[0])))
+    dx[0] = - (S[0] / ts[0]) + (1.0 - S[0]) * h[0] * g[0]
+
+@guvectorize([(float64[:],)*5], '(n),(m)' + ',()'*2 + '->(n)', nopython=True)
+def _numba_dfun_proxy(S, h, g, ts, dx):
+    "Gufunc for reduced Wong-Wang model equations for proxy node."
+    dx[0] = - (S[0] / ts[0]) + (1.0 - S[0]) * h[0] * g[0]
+
+class ReducedWongWang_proxy(ReducedWongWang,Model_with_proxy):
     '''
     modify class in order to take in count proxy firing rate and to monitor the firing rate
     '''
     def __init__(self):
-        super(Zerlaut_adaptation_first_order,self).__init__()
+        super(ReducedWongWang,self).__init__()
 
     def dfun(self, x, c, local_coupling=0.0):
-        if self._update and self._id_proxy.size != 0:
-            x[0,self._id_proxy]=self._proxy_value
-            self._firing_rate=x[0, :]
-            self._update=False
-        deriv = super(Zerlaut_adaptation_first_order,self).dfun(x, c, local_coupling)
-        return deriv
-
-class Zeralut_adaptation_second_order_proxy(Zerlaut_adaptation_second_order,Model_with_proxy):
-    '''
-    modify class in order to take in count proxy firing rate and to monitor the firing rate
-    '''
-    def __init__(self):
-        super(Zerlaut_adaptation_second_order,self).__init__()
-
-    def dfun(self, x, c, local_coupling=0.0):
-        if self._update and self._id_proxy.size != 0:
-            x[0,self._id_proxy]=self._proxy_value
-            self._firing_rate=x[0, :]
-            self._update=False
-        deriv = super(Zerlaut_adaptation_second_order,self).dfun(x, c, local_coupling)
-        return deriv
-
-
+            # same has tvb implementation
+            x_ = x.reshape(x.shape[:-1]).T
+            c_ = c.reshape(c.shape[:-1]).T + local_coupling * x[0]
+            deriv, H = _numba_dfun(x_, c_, self.a, self.b, self.d, self.gamma,
+                                   self.tau_s, self.w, self.J_N, self.I_o)
+            # compute the part for the proxy node if there are data
+            if self._update and self._id_proxy.size != 0:
+                # take the parameter for the proxy nodes
+                tau_s = self.tau_s if self.tau_s.shape[0] == 1 else self.tau_s[self._id_proxy]
+                gamma = self.gamma if self.gamma.shape[0] == 1 else self.gamma[self._id_proxy]
+                # compute the derivation
+                deriv[self._id_proxy] = _numba_dfun_proxy(x_[self._id_proxy], self._proxy_value, gamma, tau_s)
+                # replace the firing rate by the true firing rate
+                H[self._id_proxy] = self._proxy_value
+            if self._update:
+                # replace the firing rate by the true firing rate
+                self._coupling_variable = H
+                self._update = False
+            return deriv.T[..., numpy.newaxis]
 #######################################################################################
 
 class Interface_co_simulation(Raw):
-    id_proxy = arrays.IntegerArray(
-        label = "Identifier of proxys",
-        order = -1)
-    time_synchronize = basic.Float(
+    id_proxy = NArray(
+        dtype=numpy.int,
+        label = "Identifier of proxies",
+        )
+    time_synchronize = Float(
         label="simulated time between receiving the value of the proxy",
-        order=-1)
+        )
 
     _model_with_proxy=None
 
-    def __init__(self,model_with_proxy,**kwargs):
+    def __init__(self,model_with_proxy=None,**kwargs):
         super(Interface_co_simulation, self).__init__(**kwargs)
         self._model_with_proxy=model_with_proxy
 
     def config_for_sim(self,simulator):
         #configuration of all monitor
         super(Interface_co_simulation, self).config_for_sim(simulator)
+        self._id_node =  numpy.where(numpy.logical_not(numpy.isin(numpy.arange(0,simulator.number_of_nodes,1), self.id_proxy)))[0]
+        self._nb_step_time = numpy.int(self.time_synchronize/simulator.integrator.dt)
 
         # create the model with proxy
-        if not hasattr(self._model_with_proxy(), '_id_proxy'):
-            raise Exception("ERROR type of model doesn't accept proxy")  #avoid bad type of class
-        new_model = self._model_with_proxy()
-        new_model.copy_inst(simulator.model)
-        simulator.model = new_model
+        if hasattr(simulator.model, '_id_proxy'):
+            self._model_with_proxy = simulator.model.__class__
+        else:
+            if self._model_with_proxy is None:
+                model_class = simulator.model.__class__
+                class model_proxy(model_class,Model_with_proxy):
+                    '''
+                        modify class in order to take in count proxy and to monitor the coupling variable
+                    '''
+                    def __init__(self):
+                        super(model_class,self).__init__()
+
+                    def dfun(self, x, c, local_coupling=0.0):
+                        if self._update:
+                            self._coupling_variable = x[self.cvar, :]
+                            if self._id_proxy.size != 0:
+                                x[self.cvar,self._id_proxy]=self._proxy_value
+                            self._update=False
+                        deriv = super(model_proxy,self).dfun(x, c, local_coupling)
+                        return deriv
+                self._model_with_proxy = model_proxy
+            else :
+                if not hasattr(self._model_with_proxy(), '_id_proxy'):
+                    raise Exception("ERROR type of model doesn't accept proxy")  #avoid bad type of class
+            new_model = self._model_with_proxy()
+            new_model.copy_inst(simulator.model)
+            simulator.model = new_model
         self.model = simulator.model
         self.model.set_id_proxy(self.id_proxy)
 
@@ -183,6 +223,9 @@ class Interface_co_simulation(Raw):
         # this method is the first method call in the integration loop.
         # This overwriting add the update of the current step for the integrator
         original_method = simulator._loop_compute_node_coupling
+        def coupling(step):
+            return original_method(step)
+        self.coupling=coupling
         def _loop_compute_node_coupling(self,step):
             ''''
             see the simulator for this method
@@ -222,5 +265,8 @@ class Interface_co_simulation(Raw):
         :return:
         '''
         self.step = step
-        time = step * self.dt
-        return [time, numpy.expand_dims(self.model.firing_rate(),0)]
+        time = numpy.empty((2,),dtype=object)
+        time[:] = [step * self.dt, (step+self._nb_step_time)*self.dt]
+        result = numpy.empty((2,),dtype=object)
+        result[:] = [numpy.expand_dims(self.model.coupling_variable(),0),self.coupling(step+self._nb_step_time)[:,self.id_proxy,:]]
+        return [time, result]

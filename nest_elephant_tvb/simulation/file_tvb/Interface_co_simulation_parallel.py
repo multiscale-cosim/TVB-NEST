@@ -34,9 +34,8 @@ class Interface_co_simulation(Raw):
         label="simulated time between receiving the value of the proxy",
         )
 
-    def __init__(self,model_with_proxy=None,**kwargs):
+    def __init__(self,**kwargs):
         super(Interface_co_simulation, self).__init__(**kwargs)
-        self._model_with_proxy=model_with_proxy
 
     def config_for_sim(self,simulator):
         #configuration of all monitor
