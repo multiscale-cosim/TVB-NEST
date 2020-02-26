@@ -43,7 +43,7 @@ class Model_with_proxy():
 
     def coupling_variable(self):
         '''
-        function in order to have access to the valye of the  coupling variable
+        function in order to have access to the variable of the  coupling variable
         :return: firing rate of the model
         '''
         return self._coupling_variable
@@ -92,7 +92,7 @@ class HistoryProxy(BaseHistory):
             indice = numpy.expand_dims(numpy.rint(step_n + step).astype(int) % self.n_time, 1)
             if indice.size != numpy.unique(indice).size:  # check if the index is correct
                 raise Exception('ERRROR two times are the same')
-            self.buffer[indice, 0, :, 0] = data[1]
+            self.buffer[indice, :,numpy.arange(0,self.id_proxy.shape[0]), :] = data[1]
 
     def next_step(self):
         '''
