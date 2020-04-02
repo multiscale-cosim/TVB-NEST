@@ -1,0 +1,4 @@
+[submodule "nest-io-dev"]
+	path = nest-io-dev
+	url = https://github.com/sdiazpier/nest-simulator.git
+	branch = nest-io-dev
