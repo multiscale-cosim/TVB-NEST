@@ -79,13 +79,16 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer):
                 break
 
         if count_ending !=len(source_sending):
+            with lock_status:
+                status_data[0] = True
             break
         # wait until the data can be send to the sender thread
         while(status_data[0]):
             pass
+        # Set lock to true and put the data in the shared buffer
+        buffer[0]=store.return_data()
         with lock_status:
             status_data[0]=True
-        buffer[0]=store.return_data()
         count+=1
 
     logger.info('Receive : ending')
@@ -168,7 +171,8 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer):
                 status_data[0]=False
         else:
             # disconnect when everything is ending
-            #TODO testing
+            with lock_status:
+                status_data[0]=False
             break
         count+=1
 
