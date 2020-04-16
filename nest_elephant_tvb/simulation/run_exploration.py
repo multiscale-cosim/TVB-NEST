@@ -7,6 +7,7 @@ import subprocess
 import json
 import numpy as np
 
+
 def generate_parameter(parameter_default,dict_variable=None):
     """
     generate the  parameter for the actual simulation
@@ -91,6 +92,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
     if nest.Rank() == 0:
         if not os.path.exists(newpath):
             os.makedirs(newpath)
+        if not os.path.exists(newpath+"/log"):
+            os.makedirs(newpath+"/log")
         if not os.path.exists(newpath + '/tvb'):
             os.makedirs(newpath + '/tvb')
         else:
@@ -141,7 +144,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                        "/send_to_tvb/"+str(id_proxy[index])+".txt",
                        str(param_nest['sim_resolution']),
                        str(time_synch),
-                       str(param_zerlaut['T'])
+                       str(param_zerlaut['T']),
+                       str(param_co_simulation['level_log'])
                        ]
                 subprocess.Popen(argv,
                                  #need to check if it's needed or not (doesn't work for me)
@@ -164,7 +168,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                        str(ids_spike_generator.tolist()[0]),
                        str(len(ids_spike_generator.tolist())),
                        "/../receive_from_tvb/"+str(id_proxy[index])+".txt",
-                       str(param_co_simulation['percentage_shared'])
+                       str(param_co_simulation['percentage_shared']),
+                       str(param_co_simulation['level_log'])
                        ]
                 subprocess.Popen(argv,
                                  #need to check if it's needed or not (doesn't work for me)
@@ -186,7 +191,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
         # and start the simulation at the same time
         while not os.path.exists(newpath+'/tvb/step_init.npy'):
              pass
-        simulate_mpi_co_simulation(time_synch,end)
+        simulate_mpi_co_simulation(time_synch,end,newpath,param_co_simulation['level_log'])
 
     else:
         if param_co_simulation['nb_MPI_nest'] != 0:

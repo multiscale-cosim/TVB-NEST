@@ -1,6 +1,6 @@
 import numpy as np
 
-path ="/home/kusch/Documents/project/co_simulation/co-simulation_mouse/nest_elephant_tvb/parameter/data_mouse/"
+path ="/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/nest_elephant_tvb/parameter/data_mouse/"
 
 #parameter for the cosimulations and parameters of the simulations
 param_co_simulation={
@@ -18,7 +18,9 @@ param_co_simulation={
     # time of synchronization between node
     'synchronization':0.,#Todo compute with the min of delay
     # percentage of shared rate between neurons of the same region
-    'percentage_shared':0.5
+    'percentage_shared':0.5,
+    # level of log : debug 0, info 1, warning 2, error 3, critical 4
+    'level_log':1
 }
 
 #parameter simulators

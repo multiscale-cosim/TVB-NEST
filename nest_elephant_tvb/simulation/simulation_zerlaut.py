@@ -1,3 +1,8 @@
+import logging
+
+logger = logging.getLogger('tvb')
+logging.getLogger('numba').setLevel(logging.WARNING)
+
 import nest_elephant_tvb.simulation.file_tvb.Zerlaut as Zerlaut
 from nest_elephant_tvb.simulation.file_tvb.Interface_co_simulation_parallel import Interface_co_simulation
 import tvb.simulator.lab as lab
@@ -5,6 +10,7 @@ import numpy.random as rgn
 import numpy as np
 import nest_elephant_tvb.simulation.file_tvb.noise as my_noise
 from mpi4py import MPI
+
 
 def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background,mpi=None):
     '''
@@ -194,10 +200,31 @@ def rum_mpi(path):
     return the result of the simulation between the wanted time
     :param path: the folder of the simulation
     '''
-    # take the parameters of the simulation frfom the saving file
+    # take the parameters of the simulation from the saving file
     sys.path.append(path)
     from parameter import param_co_simulation,param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background,result_path,begin,end
     sys.path.remove(path)
+
+    # configuration of the logger
+    fh = logging.FileHandler(path + '/log/tvb.log')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    if param_co_simulation['level_log'] == 0:
+        fh.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
+    elif  param_co_simulation['level_log'] == 1:
+        fh.setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
+    elif  param_co_simulation['level_log'] == 2:
+        fh.setLevel(logging.WARNING)
+        logger.setLevel(logging.WARNING)
+    elif  param_co_simulation['level_log'] == 3:
+        fh.setLevel(logging.ERROR)
+        logger.setLevel(logging.ERROR)
+    elif  param_co_simulation['level_log'] == 4:
+        fh.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
 
     #initialise the TVB
     param_tvb['path_result']=result_path+'/tvb/'
@@ -214,7 +241,6 @@ def rum_mpi(path):
     save_result =[]
     for i in range(nb_monitor):
         save_result.append([])
-    count = 0
 
     #init MPI :
     data = None #data for the proxy node (no initialisation in the parameter)
@@ -228,7 +254,7 @@ def rum_mpi(path):
     # the loop of the simulation
     count = 0
     while count*time_synch < end:
-        print("####### TVB start simulation "+str(count*time_synch)); sys.stdout.flush()
+        logger.info(" TVB start simulation "+str(count*time_synch));
         nest_data=[]
         for result in simulator(simulation_length=time_synch,proxy_data=data):
             for i in range(nb_monitor):
@@ -243,7 +269,7 @@ def rum_mpi(path):
                 for i in range(nb_monitor):
                     save_result.append([])
                 count +=1
-        # print("####### TVB end simulation"); sys.stdout.flush()
+        logger.info(" TVB end simulation")
 
         # prepare to send data with MPI
         nest_data = np.array(nest_data)
@@ -252,7 +278,7 @@ def rum_mpi(path):
         for index,comm in enumerate(comm_send):
             send_mpi(comm,time,rate[index]*1e3)
 
-        # print("####### TVB receive data"); sys.stdout.flush()
+        logger.info(" TVB receive data")
         #receive MPI data
         data_value = []
         for comm in comm_receive:
@@ -287,9 +313,9 @@ def init_mpi(path):
     fport = open(path, "r")
     port=fport.readline()
     fport.close()
-    print("wait connection "+port);sys.stdout.flush()
+    logger.info("wait connection "+port);sys.stdout.flush()
     comm = MPI.COMM_WORLD.Connect(port)
-    print('connect to '+port);sys.stdout.flush()
+    logger.info('connect to '+port);sys.stdout.flush()
     return comm
 
 def send_mpi(comm,times,data):
@@ -351,9 +377,9 @@ def end_mpi(comm,path):
     fport = open(path, "r")
     port=fport.readline()
     fport.close()
-    print("close connection "+port);sys.stdout.flush()
+    logger.info("close connection "+port);sys.stdout.flush()
     MPI.Close_port(port)
-    print('exit')
+    logger.info('exit')
     MPI.Finalize()
 
 if __name__ == "__main__":

@@ -3,10 +3,11 @@ import os
 from mpi4py import MPI
 from threading import Thread, Lock
 from nest_elephant_tvb.simulation.file_translation.science_nest_to_tvb import store_data,analyse_data
+import logging
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
-def receive(path,file_spike_detector,store,status_data,buffer):
+def receive(path,level_log,file_spike_detector,store,status_data,buffer):
     '''
     the receive part of the translator
     :param path: folder which will contain the configuration file
@@ -15,8 +16,30 @@ def receive(path,file_spike_detector,store,status_data,buffer):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
+    # Configuration logger
+    logger = logging.getLogger('nest_to_tvb_receive')
+    fh = logging.FileHandler(path+'/log/nest_to_tvb_receive.log')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    if level_log == 0:
+        fh.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
+    elif  level_log == 1:
+        fh.setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
+    elif  level_log == 2:
+        fh.setLevel(logging.WARNING)
+        logger.setLevel(logging.WARNING)
+    elif  level_log == 3:
+        fh.setLevel(logging.ERROR)
+        logger.setLevel(logging.ERROR)
+    elif  level_log == 4:
+        fh.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
+
     # Open the MPI port connection
-    # print("Receive : Waiting for port details");sys.stdout.flush()
+    logger.info("Receive : Waiting for port details")
     info = MPI.INFO_NULL
     root=0
     port = MPI.Open_port(info)
@@ -26,9 +49,9 @@ def receive(path,file_spike_detector,store,status_data,buffer):
     fport.write(port)
     fport.close()
     # Wait until connection
-    # print('Receive : wait connection '+port);sys.stdout.flush()
+    logger.info('Receive : wait connection '+port)
     comm = MPI.COMM_WORLD.Accept(port, info, root)
-    # print('Receive : connect to '+port);sys.stdout.flush()
+    logger.info('Receive : connect to '+port)
 
     status_ = MPI.Status() # status of the different message
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
@@ -36,19 +59,19 @@ def receive(path,file_spike_detector,store,status_data,buffer):
     while True:
         # send the confirmation of the processus can send data
         requests=[]
-        # print("######### Nest to TVB : wait all");sys.stdout.flush()
+        logger.info(" Nest to TVB : wait all")
         for source in source_sending:
             requests.append(comm.Isend([np.array(True,dtype='b'),MPI.BOOL],dest=source,tag=0))
         MPI.Request.Waitall(requests)
 
-        # print("######### Nest to TVB : start to receive");sys.stdout.flush()
+        logger.info(" Nest to TVB : start to receive")
         #  Get the data/ spike
         data = np.empty(2, dtype='d')
         count_ending=0
         while count_ending !=len(source_sending):
             comm.Recv([data,2, MPI.DOUBLE],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
             if status_.Get_tag() == 1:
-                # print("######### Nest to TVB : receive " + str(count_ending)); sys.stdout.flush()
+                logger.info("Nest to TVB : receive " + str(count_ending))
                 count_ending+=1
             elif status_.Get_tag() == 0:
                 store.add_spikes(count,data)
@@ -65,13 +88,13 @@ def receive(path,file_spike_detector,store,status_data,buffer):
         buffer[0]=store.return_data()
         count+=1
 
-    # print('Receive : ending');sys.stdout.flush()
+    logger.info('Receive : ending')
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    # print('Receive : exit');sys.stdout.flush()
+    logger.info('Receive : exit')
 
-def send(path,TVB_config,analyse,status_data,buffer):
+def send(path,level_log,TVB_config,analyse,status_data,buffer):
     '''
     the sending part of the translator
     :param path:  folder which will contain the configuration file
@@ -81,8 +104,30 @@ def send(path,TVB_config,analyse,status_data,buffer):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
+    # Configuration logger
+    logger = logging.getLogger('nest_to_tvb_send')
+    fh = logging.FileHandler(path+'/log/nest_to_tvb_send.log')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    if level_log == 0:
+        fh.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
+    elif  level_log == 1:
+        fh.setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
+    elif  level_log == 2:
+        fh.setLevel(logging.WARNING)
+        logger.setLevel(logging.WARNING)
+    elif  level_log == 3:
+        fh.setLevel(logging.ERROR)
+        logger.setLevel(logging.ERROR)
+    elif  level_log == 4:
+        fh.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
+
     # Open the MPI port connection
-    # print("Send : Waiting for port details");sys.stdout.flush()
+    logger.info("Send : Waiting for port details")
     info = MPI.INFO_NULL
     root=0
     port = MPI.Open_port(info)
@@ -91,27 +136,27 @@ def send(path,TVB_config,analyse,status_data,buffer):
     fport = open(path_to_files, "w+")
     fport.write(port)
     fport.close()
-    # print('Send : wait connection '+port);sys.stdout.flush()
+    logger.info('Send : wait connection '+port)
     comm = MPI.COMM_WORLD.Accept(port, info, root)
-    # print('Send : connect to '+port);sys.stdout.flush()
+    logger.info('Send : connect to '+port)
 
     count=0
     status_ = MPI.Status()
     while True:
         # wait until the translator accept the connections
         accept = False
-        # print("######### Nest to TVB : wait to send " );sys.stdout.flush()
+        logger.info("Nest to TVB : wait to send " )
         while not accept:
             req = comm.irecv(source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG)
             accept = req.wait(status_)
 
-        # print("######### Nest to TVB : send data " );sys.stdout.flush()
+        logger.info(" Nest to TVB : send data " )
         if status_.Get_tag() == 0:
             # send the rate when there ready
             while(not status_data[0]):
                 pass
             times,data=analyse.analyse(count,buffer[0])
-            print("######### Nest to TVB : send data :"+str(np.sum(data)) );sys.stdout.flush()
+            logger.info("Nest to TVB : send data :"+str(np.sum(data)) )
             # time of stating and ending step
             comm.Send([times, MPI.DOUBLE], dest=status_.Get_source(), tag=0)
             # send the size of the rate
@@ -127,23 +172,23 @@ def send(path,TVB_config,analyse,status_data,buffer):
             break
         count+=1
 
-    # print('Send : ending');sys.stdout.flush()
+    logger.info('Send : ending')
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    # print('Send : exit')
+    logger.info('Send : exit')
 
 
 if __name__ == "__main__":
     import sys
-    print(sys.argv);sys.stdout.flush()
-    if len(sys.argv)==7:
+    if len(sys.argv)==8:
         path_folder_config = sys.argv[1]
         file_spike_detector = sys.argv[2]
         TVB_recev_file = sys.argv[3]
         dt = float(sys.argv[4])
         delay_min = float(sys.argv[5])
         width = float(sys.argv[6])
+        level_log = int(sys.argv[7])
 
         # variable for communication between thread
         status_data=[False] # status of the buffer
@@ -154,8 +199,8 @@ if __name__ == "__main__":
         analyse = analyse_data(int(width/dt), delay_min)
 
         # create the thread for receive and send data
-        th_receive = Thread(target=receive, args=(path_folder_config,file_spike_detector,store,status_data,buffer))
-        th_send = Thread(target=send, args=(path_folder_config,TVB_recev_file,analyse,status_data,buffer))
+        th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))
+        th_send = Thread(target=send, args=(path_folder_config,level_log,TVB_recev_file,analyse,status_data,buffer))
 
         # start the threads
         th_receive.start()

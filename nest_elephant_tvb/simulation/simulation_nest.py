@@ -3,6 +3,7 @@ import numpy as np
 import os
 import time
 import sys
+import logging
 
 def network_initialisation(results_path,param_nest):
     """
@@ -538,24 +539,47 @@ def simulate_mpi_record(end):
         toc=time.time()-tic
         print("Time to simulate: %.2f s" % toc)
 
-def simulate_mpi_co_simulation(time_synch,end):
+def simulate_mpi_co_simulation(time_synch,end,path,level_log):
     """
     simulation with co-simulation
     :param time_synch: time of synchronization between all the simulator
     :param end : time of end simulation
     """
+
+    # configuration of the logger
+    logger = logging.getLogger('nest')
+    fh = logging.FileHandler(path + '/log/nest.log')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    if level_log == 0:
+        fh.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
+    elif  level_log == 1:
+        fh.setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
+    elif  level_log == 2:
+        fh.setLevel(logging.WARNING)
+        logger.setLevel(logging.WARNING)
+    elif  level_log == 3:
+        fh.setLevel(logging.ERROR)
+        logger.setLevel(logging.ERROR)
+    elif  level_log == 4:
+        fh.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
+
     # Simulation
     if nest.Rank() == 0:
         tic = time.time()
     count = 0.0
-    print("############ Nest Prepare");sys.stdout.flush()
+    logger.info("Nest Prepare")
     nest.Prepare()
     while  count*time_synch < end:
-        print("############ Nest run "+str(nest.Rank())+" time "+str(nest.GetKernelStatus('time')));sys.stdout.flush()
+        logger.info(" Nest run time "+str(nest.GetKernelStatus('time')))
         nest.Run(time_synch)
-        print("############ Nest end");sys.stdout.flush()
+        logger.info(" Nest end")
         count+=1
     nest.Cleanup()
     if nest.Rank() == 0:
         toc=time.time()-tic
-        print("Time to simulate: %.2f s" % toc)
+        logger.info("Time to simulate: %.2f s" % toc)
