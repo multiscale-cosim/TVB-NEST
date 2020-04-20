@@ -36,20 +36,20 @@ def input(path,nb_mpi):
             print(" source "+str(status_.Get_source()));sys.stdout.flush()
             comm.Recv([id, 1, MPI.INT], source=status_.Get_source(), tag=0)
             print(" id ", id);sys.stdout.flush()
-            count += 1
             if count_send % nb_mpi == 0:
                 shape = np.random.randint(0,50,1,dtype='i')*2
                 data = starting+np.random.rand(shape[0])*200
                 data = np.around(np.sort(np.array(data,dtype='d')),decimals=1)
+            count_send += 1
             comm.Send([shape, MPI.INT], dest=status_.Get_source(), tag=id[0])
             print(" shape data ",shape);sys.stdout.flush()
             comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=id[0])
             print(" send data", data);sys.stdout.flush()
         elif status_.Get_tag() == 1:
             print("end run");sys.stdout.flush()
-            count += 1
             if count % nb_mpi ==  0:
                 starting+=200
+            count += 1
         elif (status_.Get_tag() == 2):
             for i in range(nb_mpi-1):
                 print(" receive ending");sys.stdout.flush()
