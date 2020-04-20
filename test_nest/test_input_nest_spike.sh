@@ -16,7 +16,5 @@ mpirun -n 1 python3 ../nest-io/pynest/examples/spikegenerator_mpi.py
 
 rm  4.txt
 rm  3.txt
-rm  7.txt
-kill $PID_1
 kill $PID_2
 kill $PID_3
