@@ -146,6 +146,7 @@ nest::InputBackendMPI::pre_run_hook()
   for (it_device = devices_[thread_id].begin(); it_device != devices_[thread_id].end(); it_device++) {
     receive_spike_train(*(it_device->second.first), *(it_device->second.second));
   }
+  printf("NEST :  End receive spike \n");fflush(stdout);
 }
 
 void

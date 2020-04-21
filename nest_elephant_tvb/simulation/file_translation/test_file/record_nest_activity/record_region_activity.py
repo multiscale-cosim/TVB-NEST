@@ -1,6 +1,7 @@
 import numpy as np
 import os
 from mpi4py import MPI
+import time
 
 def analyse(path):
     #Start communication channels
@@ -17,28 +18,31 @@ def analyse(path):
     print('wait connection '+port)
     comm = MPI.COMM_WORLD.Accept(port, info, root)
     print('connect to '+port)
+
     #test one rate
     status_ = MPI.Status()
-    accept = np.array([True], dtype='b')
-    comm.Send([accept, MPI.BOOL], dest=0, tag=0)
+    check = np.empty(1,dtype='b')
     while(True):
-        data = np.empty(2, dtype='d')
-        comm.Recv([data,2, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
+        comm.Recv([check, 1, MPI.CXX_BOOL], source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status_)
+        print(" start to send"); sys.stdout.flush()
+        print(" status a tag ",status_.Get_tag() ); sys.stdout.flush()
         if status_.Get_tag() == 0:
-            print(data)
-            sys.stdout.flush()
-        elif status_.Get_tag() == 1:
+            comm.Send([np.array(True, dtype='b'), MPI.BOOL], dest=status_.Get_source(), tag=0)
+            shape = np.empty(1, dtype='i')
+            comm.Recv([shape, 1, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
+            print("shape is", shape); sys.stdout.flush()
+            data = np.empty(shape[0], dtype='d')
+            comm.Recv([data, shape[0], MPI.DOUBLE], source=status_.Get_source(), tag=0, status=status_)
+            print("data is ", data); sys.stdout.flush()
+            comm.Recv([check, 1, MPI.CXX_BOOL], source=status_.Get_source(), tag=MPI.ANY_TAG, status=status_)
             print("end run");sys.stdout.flush()
-            comm.Send([accept, MPI.BOOL], dest=0, tag=0)
         elif status_.Get_tag() ==2:
             print("end simulation");sys.stdout.flush()
-            comm.Disconnect()
-            comm = MPI.COMM_WORLD.Accept(port, info, root)
-            comm.Send([accept, MPI.BOOL], dest=0, tag=0)
+            break
         else:
             print(status_.Get_tag())
             break
-
+    comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
     print('exit');

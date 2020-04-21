@@ -43,9 +43,8 @@ def input(path):
             print("end run");sys.stdout.flush()
             starting+=200
         elif (status_.Get_tag() == 2):
-            print("end simulation");
-            sys.stdout.flush()
-            print("ending time : ",starting)
+            print("end simulation"); sys.stdout.flush()
+            print("ending time : ",starting); sys.stdout.flush()
             break
         else:
             print(status_.Get_tag())

@@ -36,7 +36,6 @@ The simulation kernel is put back to its initial state using `ResetKernel`.
 import nest
 import numpy
 import os
-import sys
 
 nest.ResetKernel()
 
@@ -52,6 +51,7 @@ specified. The following properties are related to writing to file:
 
 nest.SetKernelStatus({"overwrite_files": True,
                       "data_path": os.path.dirname(os.path.realpath(__file__))+"/../../../",
+                      "total_num_virtual_procs":4,
                       })
 
 '''
@@ -98,24 +98,14 @@ m = nest.Create("spike_detector",
                 params={
                         "record_to": "mpi",
                         "label": "test_nest"})
+
 m_2 = nest.Create("spike_detector",
                 params={
                     "record_to": "mpi",
                     "label":"test_nest"})
-m_3 = nest.Create("spike_detector",
-                  params={
-                      "record_to": "memory",
-                      "label":"test_nest"})
-m_4 = nest.Create("spike_detector",
-                  params={
-                      "record_to": "memory",
-                      "label":"test_nest"})
 
-sys.stdout.flush()
 s_ex = nest.Create("spike_generator",
-                   params={"spike_times": numpy.array([]),
-                           'input_from':'mpi',
-                           "label":"test_nest"})
+                   params={"spike_times": numpy.array([10.0, 20.0, 50.0])})
 s_in = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([15.0, 25.0, 55.0])})
 
@@ -123,6 +113,7 @@ dc = nest.Create("dc_generator",
                  params={"amplitude":900.0})
 dc_2 = nest.Create("dc_generator",
                  params={"amplitude":1000.0})
+print("create nodes")
 '''
 Next, the spike generators are connected to the neuron with `Connect`. Synapse
 specifications can be provided in a dictionary. In this example of a
@@ -131,24 +122,20 @@ Note that it is positive for excitatory and negative for inhibitory
 connections.
 '''
 
-nest.Connect(s_ex, n, syn_spec={"weight": 1000.0})
-nest.Connect(s_in, n_2, syn_spec={"weight": 1000.0})
+nest.Connect(s_ex, n, syn_spec={"weight": 100.0})
+nest.Connect(s_in, n, syn_spec={"weight": 0.0})
+nest.Connect(dc,n)
+nest.Connect(dc_2,n_2)
 nest.Connect(n,m)
-nest.Connect(n_2,m)
-nest.Connect(s_ex,m_2)
-nest.Connect(s_in,m_2)
-nest.Connect(n,m_3)
-nest.Connect(n_2,m_3)
-nest.Connect(s_ex,m_4)
-nest.Connect(s_in,m_4)
+nest.Connect(n_2,m_2)
 
+print("create connect")
 
 '''
 A network simulation with a duration of 100 ms is started with `Simulate`.
 '''
-print("Spike generator 1 {} and 2 {}".format(s_in, s_ex))
+print("Spike detector 1 {} and 2 {}".format(n, n_2))
 nest.Prepare()
-print("Start run")
 nest.Run(200.)
 # time.sleep(10.)
 nest.Run(200.)
@@ -159,6 +146,4 @@ nest.Run(200.)
 # time.sleep(10.)
 nest.Cleanup()
 # nest.Simulate(200.)
-print(nest.GetStatus(m_3)[0]['events'])
-print(nest.GetStatus(m_4)[0]['events'])
 
