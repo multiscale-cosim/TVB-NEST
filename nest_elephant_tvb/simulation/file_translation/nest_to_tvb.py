@@ -87,7 +87,7 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer):
         elif status_.Get_tag() == 2:
             with lock_status:
                 status_data[0] = True
-            print("end simulation");sys.stdout.flush()
+            logger.info("end simulation")
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))

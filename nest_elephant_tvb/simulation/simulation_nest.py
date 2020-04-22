@@ -526,19 +526,6 @@ def config_mpi_record (results_path,begin,end,
         print("Time to create the connections and devices: %.2f s" % toc)
     return spike_detector,spike_generator
 
-def simulate_mpi_record(end):
-    """
-     simulation with mpi recording
-    :param end : time of end simulation
-    """
-    # Simulation
-    if nest.Rank() == 0:
-        tic = time.time()
-    nest.Simulate(end)
-    if nest.Rank() == 0:
-        toc=time.time()-tic
-        print("Time to simulate: %.2f s" % toc)
-
 def simulate_mpi_co_simulation(time_synch,end,path,level_log):
     """
     simulation with co-simulation

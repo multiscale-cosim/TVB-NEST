@@ -17,6 +17,8 @@ param_co_simulation={
     'id_region_nest':[],
     # time of synchronization between node
     'synchronization':0.,#Todo compute with the min of delay
+    # save step
+    'save_step':0.,
     # percentage of shared rate between neurons of the same region
     'percentage_shared':0.5,
     # level of log : debug 0, info 1, warning 2, error 3, critical 4
