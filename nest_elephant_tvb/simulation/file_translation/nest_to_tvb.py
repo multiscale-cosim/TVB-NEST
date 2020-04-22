@@ -55,41 +55,42 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer):
 
     status_ = MPI.Status() # status of the different message
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
+    check = np.empty(1,dtype='b')
     count=0
     while True:
         # send the confirmation of the processus can send data
         requests=[]
         logger.info(" Nest to TVB : wait all")
         for source in source_sending:
-            requests.append(comm.Isend([np.array(True,dtype='b'),MPI.BOOL],dest=source,tag=0))
-        MPI.Request.Waitall(requests)
+            comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
 
-        logger.info(" Nest to TVB : start to receive")
-        #  Get the data/ spike
-        data = np.empty(2, dtype='d')
-        count_ending=0
-        while count_ending !=len(source_sending):
-            comm.Recv([data,2, MPI.DOUBLE],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
-            if status_.Get_tag() == 1:
-                logger.info("Nest to TVB : receive " + str(count_ending))
-                count_ending+=1
-            elif status_.Get_tag() == 0:
+        if status_.Get_tag() == 0:
+            logger.info(" Nest to TVB : start to receive")
+            #  Get the data/ spike
+            for source in source_sending:
+                comm.Send([np.array(True,dtype='b'),MPI.BOOL],dest=source,tag=0)
+                shape = np.empty(1, dtype='i')
+                comm.Recv([shape, 1, MPI.INT], source=source, tag=0, status=status_)
+                data = np.empty(shape[0], dtype='d')
+                comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
                 store.add_spikes(count,data)
-            else:
-                break
-
-        if count_ending !=len(source_sending):
+            while (status_data[0]):
+                pass
+            # wait until the data can be send to the sender thread
+            # Set lock to true and put the data in the shared buffer
+            buffer[0] = store.return_data()
             with lock_status:
                 status_data[0] = True
+        elif status_.Get_tag() == 1:
+            logger.info("Nest to TVB : receive end " + str(count))
+            count += 1
+        elif status_.Get_tag() == 2:
+            with lock_status:
+                status_data[0] = True
+            print("end simulation");sys.stdout.flush()
             break
-        # wait until the data can be send to the sender thread
-        while(status_data[0]):
-            pass
-        # Set lock to true and put the data in the shared buffer
-        buffer[0]=store.return_data()
-        with lock_status:
-            status_data[0]=True
-        count+=1
+        else:
+            raise Exception("bad mpi tag"+str(status_.Get_tag()))
 
     logger.info('Receive : ending')
     comm.Disconnect()
@@ -199,8 +200,8 @@ if __name__ == "__main__":
         buffer=[np.zeros((int(delay_min/dt),1))] # buffer of the rate to send it
 
         # object for analysing data
-        store=store_data(buffer[0].shape,delay_min,dt)
-        analyse = analyse_data(int(width/dt), delay_min)
+        store=store_data(buffer[0].shape,delay_min,dt,path_folder_config,level_log)
+        analyse = analyse_data(int(width/dt), delay_min,path_folder_config,level_log)
 
         # create the thread for receive and send data
         th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))

@@ -56,47 +56,50 @@ def send(path,level_log,first_id_spike_generator,nb_spike_generator,status_data,
     logger.info('Send : connect to '+port)
 
     status_ = MPI.Status()
-    end=False
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the communication
+    check = np.empty(1,dtype='b')
     while True:
-        list_id=np.ones(nb_spike_generator) * -1 # list to link the spike train to the spike detector
-        count_ending=0
-        logger.info(" TVB to Nest: start to send " )
-        while count_ending != len(source_sending) or list_id[-1] == -1:
+        for source in source_sending:
+            comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
+
+        if status_.Get_tag() == 0:
+            logger.info(" TVB to Nest: start to send ")
+            # wait until the data are ready to use
+            while (not status_data[0]):
+                pass
             # Waiting for some processus ask for receive the spikes
-            ids = np.empty(2, dtype='i')
-            comm.Recv([ids,2, MPI.INT],source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG,status=status_)
-            if status_.Get_tag() == 0:
-                # create or find the index of the spike generator
-                if ids[0] in list_id:
-                    index = np.where(ids[0]==list_id)[0][0]
-                else:
-                    index = np.where(list_id==-1)[0][0]
-                    list_id[index]=ids[0]
-                # wait until the data are ready to use
-                while (not status_data[0]):
-                    pass
-                # Select the good spike train and send it
-                data = buffer_spike[0][index]
-                if index == 0:
-                    logger.info(" TVB to Nest:"+str(data)+" " +str(index))
-                shape = np.array(data.shape[0], dtype='i')
-                # firstly send the size of the spikes train
-                comm.Send([shape,MPI.INT],dest=status_.Get_source(),tag=ids[1])
-                # secondly send the spikes train
-                comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=ids[1])
-            elif  status_.Get_tag() == 1:
-                # ending the update of the all the spike train from one processus
-                count_ending += 1
-            else:
-                end = True
-                break
-        # Set lock back to False
-        with lock_status:
-            status_data[0] = False
-        if end:
+            list_id = np.ones(nb_spike_generator) * -1  # list to link the spike train to the spike detector
+            for nb_neurons in range(nb_spike_generator):
+                id = np.empty(1, dtype='i')
+                for source in source_sending:
+                    comm.Recv([id, 1, MPI.INT], source=source, tag=0)
+                    # create or find the index of the spike generator
+                    if id[0] in list_id:
+                        index = np.where(id[0]==list_id)[0][0]
+                    else:
+                        index = np.where(list_id==-1)[0][0]
+                        list_id[index]=id[0]
+                    # Select the good spike train and send it
+                    data = buffer_spike[0][index]
+                    if index == 0:
+                        logger.info(" TVB to Nest:"+str(data)+" " +str(index))
+                    shape = np.array(data.shape[0], dtype='i')
+                    # firstly send the size of the spikes train
+                    comm.Send([shape, MPI.INT], dest=status_.Get_source(), tag=id[0])
+                    # secondly send the spikes train
+                    comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=id[0])
+        elif  status_.Get_tag() == 1:
+            # ending the update of the all the spike train from one processus
+            logger.info(" TVB to Nest end sending ")
+            with lock_status:
+                status_data[0] = False
+        elif status_.Get_tag() == 2:
+            logger.info(" TVB to Nest end simulation ")
+            with lock_status:
+                status_data[0] = False
             break
-    #TODO need to take in count the end of the simulation (add shared variable for close the simulation)
+        else:
+            raise Exception("bad mpi tag : "+str(status_.Get_tag()))
     logger.info("Send : ending" )
     comm.Disconnect()
     MPI.Close_port(port)
