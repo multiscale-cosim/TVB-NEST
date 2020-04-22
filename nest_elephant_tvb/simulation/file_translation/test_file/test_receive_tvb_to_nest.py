@@ -19,34 +19,31 @@ def simulate_nest_generator(path):
 
     status_ = MPI.Status()
     ids=np.arange(0,10,1) # random id of spike detector
-    thread=0
     print(ids);sys.stdout.flush()
     while(True):
+        # Send start simulation
+        comm.Send([np.array([True], dtype='b'), MPI.CXX_BOOL], dest=0, tag=0)
         for id in ids:
-            message_ids = np.array([id,thread],dtype='i')
             # send ID of spike generator
-            print("Nest_Input :send id : " + str(message_ids));sys.stdout.flush()
-            comm.Send([np.array(message_ids,dtype='i'), MPI.INT], dest=0, tag=0)
+            comm.Send([np.array(id,dtype='i'), MPI.INT], dest=0, tag=0)
             # receive the number of spikes for updating the spike detector
             size=np.empty(1,dtype='i')
-            comm.Recv([size,1, MPI.INT], source=0, tag=thread,status=status_)
+            comm.Recv([size,1, MPI.INT], source=0, tag=id,status=status_)
             print("Nest_Input :receive size : " + str(size));sys.stdout.flush()
             # receive the spikes for updating the spike detector
             data = np.empty(size, dtype='d')
-            comm.Recv([data,size, MPI.DOUBLE],source=0,tag=thread,status=status_)
+            comm.Recv([data,size, MPI.DOUBLE],source=0,tag=id,status=status_)
             print("Nest_Input :receive data : " + str(np.sum(data)));sys.stdout.flush()
             # printing value and exist
-            if status_.Get_tag() == thread:
+            if id == 0:
                 print(id, data,np.sum(data));sys.stdout.flush()
-            else:
-                break
         if np.any(data > 10000):
             break
         #send ending the the run of the simulation
-        comm.Send([np.array(id,dtype='i'), MPI.INT], dest=0, tag=1)
+        comm.Send([np.array([True], dtype='b'), MPI.CXX_BOOL], dest=0, tag=1)
     # closing the connection at this end
     print('Nest_Input : Disconnect');
-    comm.Send([np.array(id, dtype='i'), MPI.INT], dest=0, tag=2)
+    comm.Send([np.array([True], dtype='b'), MPI.CXX_BOOL], dest=0, tag=2)
     comm.Disconnect()
     MPI.Close_port(port)
     print('Nest_Input :exit');

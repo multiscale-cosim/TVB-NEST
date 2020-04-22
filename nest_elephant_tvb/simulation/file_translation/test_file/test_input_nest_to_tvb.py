@@ -19,24 +19,24 @@ def simulate_spike_detector(path,min_delay):
     print('Nest Output : connect to '+ port) ;sys.stdout.flush()
 
     starting = 0.0 # the begging of each time of synchronization
+    check = np.empty(1,dtype='b')
+    status_ = MPI.Status() # status of the different message
     while True:
         # wait until the translator accept the connections
-        accept = np.array([False],dtype='b')
-        while not accept[0]:
-            req = comm.Irecv([accept,1,MPI.BOOL],source=0,tag=0)
-            req.wait()
+        comm.Send([np.array([True],dtype='b'), 1, MPI.CXX_BOOL], dest=0, tag=0)
+        comm.Recv([check, 1, MPI.CXX_BOOL], source=MPI.ANY_SOURCE, tag=0,status=status_)
         # create random data
         size= np.random.randint(0,1000)
         time = starting+np.random.rand(size)*(min_delay-0.2)
         time = np.around(np.sort(np.array(time)),decimals=1)
-        id = np.random.randint(0,10,size)
-        data = np.ascontiguousarray(np.swapaxes([id,time],0,1),dtype='d')
+        id_neurons = np.random.randint(0,10,size)
+        id_detector = np.random.randint(0,10,size)
+        data = np.ascontiguousarray(np.swapaxes([id_detector,id_neurons,time],0,1),dtype='d')
         # send data one by one like spike generator
-        for i in data:
-            comm.Send([i, MPI.DOUBLE], dest=0, tag=0)
-            # print("Nest Output :  send data ",i)
+        comm.Send([np.array([size*3],dtype='i'),1, MPI.INT], dest=status_.Get_source(), tag=0)
+        comm.Send([data,size*3, MPI.DOUBLE], dest=status_.Get_source(), tag=0)
         # ending the actual run
-        comm.Send([i, MPI.DOUBLE], dest=0, tag=1)
+        comm.Send([np.array([True],dtype='b'), 1, MPI.CXX_BOOL], dest=0, tag=1)
         #print result and go to the next run
         print("Nest Output : ",comm.Get_rank(),size);sys.stdout.flush()
         starting+=min_delay
@@ -45,7 +45,7 @@ def simulate_spike_detector(path,min_delay):
     # closing the connection at this end
     print("Nest Output : ending" );sys.stdout.flush()
     # send the signal for end the translation
-    comm.Send([i, MPI.DOUBLE], dest=0, tag=2)
+    comm.Send([np.array([True], dtype='b'), 1, MPI.CXX_BOOL], dest=0, tag=2)
     comm.Disconnect()
     MPI.Close_port(port)
     MPI.Finalize()
