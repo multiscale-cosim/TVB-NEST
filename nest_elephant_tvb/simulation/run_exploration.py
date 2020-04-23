@@ -46,11 +46,16 @@ def generate_parameter(parameter_default,results_path,dict_variable=None):
             init_rates = np.array([[] for i in range(param_topology['nb_neuron_by_region'])])
             np.save(path_rates,init_rates)
             param_TR_tvb_to_nest['init']= path_rates
+
         if not hasattr(param_TR_nest_to_tvb, 'init'):
             path_spikes = results_path+'/init_spikes.npy'
             init_spikes = np.zeros((int(parameter_default.param_co_simulation['synchronization']/param_nest['sim_resolution']),1))
             np.save(path_spikes,init_spikes)
             param_TR_nest_to_tvb['init']= path_spikes
+        param_TR_nest_to_tvb['resolution']=param_nest['sim_resolution']
+        param_TR_nest_to_tvb['synch']=parameter_default.param_co_simulation['synchronization']
+        param_TR_nest_to_tvb['width']=param_zerlaut['T']
+        param_TR_nest_to_tvb['level_log']= parameter_default.param_co_simulation['level_log']
 
     return param_nest,param_topology,param_connection,param_background,param_tvb,param_zerlaut,\
            param_TR_tvb_to_nest,param_TR_nest_to_tvb
@@ -163,10 +168,6 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                        results_path,
                        "/spike_detector/"+str(id_spike_detector.tolist()[0])+".txt",
                        "/send_to_tvb/"+str(id_proxy[index])+".txt",
-                       str(param_nest['sim_resolution']),
-                       str(time_synch),
-                       str(param_zerlaut['T']),
-                       str(param_co_simulation['level_log'])
                        ]
                 subprocess.Popen(argv,
                                  #need to check if it's needed or not (doesn't work for me)

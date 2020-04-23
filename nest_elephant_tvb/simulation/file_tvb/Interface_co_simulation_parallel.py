@@ -136,9 +136,7 @@ class Interface_co_simulation(Raw):
 
         # WARNING should be change if the function update of the history change  (the actual update is the same all history)
         def update(self, step, new_state):
-            print("before : ",self.buffer[step % self.n_time])
             self.buffer[step % self.n_time][:,id_node] = new_state[:,id_node][self.cvars]
-            print("after : ",self.buffer[step % self.n_time])
 
         new_history = History_proxy()
         new_history.copy_inst(simulator.history)

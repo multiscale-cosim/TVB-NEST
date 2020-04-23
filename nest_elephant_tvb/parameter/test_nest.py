@@ -197,6 +197,10 @@ param_zerlaut={
 
 param_TR_nest_to_tvb={
     # 'init': path of the initialisation of the translation if not the run exploration will create it
+    # 'resolution': param_nest['sim_resolution']
+    # 'synch': param_co_simulation['synchronization']
+    # 'width': param_zerlaut['T']
+    # 'level_log': param_co_simulation['level_log']
 }
 
 param_TR_tvb_to_nest={

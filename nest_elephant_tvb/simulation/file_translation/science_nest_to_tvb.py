@@ -14,17 +14,19 @@ def slidding_window(data,width):
     return res.mean(axis=1)
 
 class store_data:
-    def __init__(self,shape,synch,dt,path,level_log,param):
+    def __init__(self,path,param):
         """
         initialisation
         :param shape: shape of the histogram
         :param synch: time of synchronization between simulator
         :param dt: integrator step of the tvb
         """
-        self.hist = np.zeros(shape)
-        self.shape = shape
-        self.synch=synch
-        self.dt=dt
+        self.synch=param['synch']
+        self.dt=param['resolution']
+        self.shape = (int(self.synch/self.dt),1)
+        self.hist = np.zeros(self.shape)
+
+        level_log = param['level_log']
         self.logger = logging.getLogger('store')
         fh = logging.FileHandler(path+'/log/nest_to_tvb_science.log')
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -66,15 +68,18 @@ class store_data:
         return hist_copy
 
 class analyse_data:
-    def __init__(self,width,synch,path,level_log,param):
+    def __init__(self,path,param):
         """
         initialisation
         :param width: the window of the average in time
         :param synch: synchronize time between simulator
         """
-        self.buffer=np.zeros((width,)) #initialisation/ previous result for a good result
-        self.width = width
-        self.synch = synch
+
+        self.width = int(param['width']/param['resolution'])
+        self.synch = param['synch']
+        self.buffer=np.zeros((self.width,)) #initialisation/ previous result for a good result
+
+        level_log = param['level_log']
         self.logger = logging.getLogger('analyse')
         fh = logging.FileHandler(path+'/log/nest_to_tvb_science.log')
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
