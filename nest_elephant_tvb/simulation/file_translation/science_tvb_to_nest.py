@@ -17,14 +17,16 @@ def toy_rates_to_spikes(rates,t_start,t_stop):
     return times
 
 class generate_data:
-    def __init__(self,path,percentage_shared,nb_spike_generator,level_log,param):
+    def __init__(self,path,nb_spike_generator,param):
         """
         generate spike train for each neurons
         :param percentage_shared: percentage of shared rate between neurons
         :param nb_spike_generator: number of spike generator/neurons in each regions
         """
-        self.percentage_shared = percentage_shared
+        self.percentage_shared = param['percentage_shared']
         self.nb_spike_generator = nb_spike_generator
+
+        level_log = param['level_log']
         self.logger = logging.getLogger('generator')
         fh = logging.FileHandler(path+'/log/tvb_to_nest_science.log')
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')

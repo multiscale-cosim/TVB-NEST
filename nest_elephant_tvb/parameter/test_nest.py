@@ -19,8 +19,6 @@ param_co_simulation={
     'synchronization':0.,#Todo compute with the min of delay
     # save step
     'save_step':0.,
-    # percentage of shared rate between neurons of the same region
-    'percentage_shared':0.5,
     # level of log : debug 0, info 1, warning 2, error 3, critical 4
     'level_log':1
 }
@@ -204,5 +202,8 @@ param_TR_nest_to_tvb={
 }
 
 param_TR_tvb_to_nest={
+    # percentage of shared rate between neurons of the same region
+    'percentage_shared': 0.5
     # 'init': path of the initialisation of the translation if not the run exploration will create it
+    # 'level_log': param_co_simulation['level_log']
 }

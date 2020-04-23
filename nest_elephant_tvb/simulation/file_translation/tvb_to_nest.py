@@ -194,19 +194,18 @@ def receive(path,level_log,TVB_config,generator,status_data,buffer_spike):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==7:
+    if len(sys.argv)==5:
         path_config = sys.argv[1]
         id_first_spike_detector = int(sys.argv[2])
         nb_spike_generator = int(sys.argv[3])
         TVB_config = sys.argv[4]
-        percentage_shared = float(sys.argv[5])
-        level_log = int(sys.argv[6])
 
         # object for analysing data
         sys.path.append(path_config+'/../')
         from parameter import param_TR_tvb_to_nest as param
         sys.path.remove(path_config+'/../')
-        generator = generate_data(path_config+'/../',percentage_shared,nb_spike_generator,level_log,param)
+        generator = generate_data(path_config+'/../',nb_spike_generator,param)
+        level_log = param['level_log']
 
         # variable for communication between thread
         status_data=[True]
