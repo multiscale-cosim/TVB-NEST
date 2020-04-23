@@ -194,3 +194,11 @@ param_zerlaut={
     # initial condition, should be simmilar than nest #TODO
     'initial_condition':{"E": [0.0, 0.0], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
 }
+
+param_TR_nest_to_tvb={
+    # 'init': path of the initialisation of the translation if not the run exploration will create it
+}
+
+param_TR_tvb_to_nest={
+    # 'init': path of the initialisation of the translation if not the run exploration will create it
+}

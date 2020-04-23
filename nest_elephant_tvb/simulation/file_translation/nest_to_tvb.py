@@ -195,13 +195,17 @@ if __name__ == "__main__":
         width = float(sys.argv[6])
         level_log = int(sys.argv[7])
 
-        # variable for communication between thread
-        status_data=[False] # status of the buffer
-        buffer=[np.zeros((int(delay_min/dt),1))] # buffer of the rate to send it
-
         # object for analysing data
-        store=store_data(buffer[0].shape,delay_min,dt,path_folder_config,level_log)
-        analyse = analyse_data(int(width/dt), delay_min,path_folder_config,level_log)
+        sys.path.append(path_folder_config)
+        from parameter import param_TR_nest_to_tvb as param
+        sys.path.remove(path_folder_config)
+        store=store_data((int(delay_min/dt),1),delay_min,dt,path_folder_config,level_log,param)
+        analyse = analyse_data(int(width/dt), delay_min,path_folder_config,level_log,param)
+
+        # variable for communication between thread
+        status_data=[True] # status of the buffer
+        initialisation =np.load(param['init']) # initialisation value
+        buffer=[initialisation] # buffer of the rate to send it
 
         # create the thread for receive and send data
         th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))

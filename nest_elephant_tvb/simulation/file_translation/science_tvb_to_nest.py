@@ -1,6 +1,7 @@
 import numpy as np
 from nest_elephant_tvb.simulation.file_translation.rate_spike import rates_to_spikes
 from quantities import ms,Hz
+import logging
 
 # Can be changed to the function we had with elephant, this is just a toy function
 def toy_rates_to_spikes(rates,t_start,t_stop):
@@ -16,7 +17,7 @@ def toy_rates_to_spikes(rates,t_start,t_stop):
     return times
 
 class generate_data:
-    def __init__(self,percentage_shared,nb_spike_generator):
+    def __init__(self,path,percentage_shared,nb_spike_generator,level_log,param):
         """
         generate spike train for each neurons
         :param percentage_shared: percentage of shared rate between neurons
@@ -24,6 +25,26 @@ class generate_data:
         """
         self.percentage_shared = percentage_shared
         self.nb_spike_generator = nb_spike_generator
+        self.logger = logging.getLogger('generator')
+        fh = logging.FileHandler(path+'/log/tvb_to_nest_science.log')
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+        self.logger.addHandler(fh)
+        if level_log == 0:
+            fh.setLevel(logging.DEBUG)
+            self.logger.setLevel(logging.DEBUG)
+        elif  level_log == 1:
+            fh.setLevel(logging.INFO)
+            self.logger.setLevel(logging.INFO)
+        elif  level_log == 2:
+            fh.setLevel(logging.WARNING)
+            self.logger.setLevel(logging.WARNING)
+        elif  level_log == 3:
+            fh.setLevel(logging.ERROR)
+            self.logger.setLevel(logging.ERROR)
+        elif  level_log == 4:
+            fh.setLevel(logging.CRITICAL)
+            self.logger.setLevel(logging.CRITICAL)
 
     def generate_spike(self,count,time_step,rate):
         """

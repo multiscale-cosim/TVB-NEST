@@ -1,7 +1,6 @@
 import logging
-
-logger = logging.getLogger('tvb')
 logging.getLogger('numba').setLevel(logging.WARNING)
+logger = logging.getLogger('tvb')
 
 import nest_elephant_tvb.simulation.file_tvb.Zerlaut as Zerlaut
 from nest_elephant_tvb.simulation.file_tvb.Interface_co_simulation_parallel import Interface_co_simulation
@@ -254,6 +253,22 @@ def rum_mpi(path):
     # the loop of the simulation
     count = 0
     while count*time_synch < end:
+        logger.info(" TVB receive data")
+        #receive MPI data
+        data_value = []
+        for comm in comm_receive:
+            receive = receive_mpi(comm)
+            time_data = receive[0]
+            data_value.append(receive[1])
+        data=np.empty((2,),dtype=object)
+        nb_step = np.rint((time_data[1]-time_data[0])/param_nest['sim_resolution'])
+        nb_step_0 = np.rint(time_data[0]/param_nest['sim_resolution'])
+        time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_nest['sim_resolution']
+        data_value = np.swapaxes(np.array(data_value),0,1)[:,:,np.newaxis,np.newaxis]
+        if data_value.shape[0] != time_data.shape[0]:
+            raise(Exception('Bad shape of data'))
+        data[:]=[time_data,data_value]
+
         logger.info(" TVB start simulation "+str(count*time_synch));
         nest_data=[]
         for result in simulator(simulation_length=time_synch,proxy_data=data):
@@ -278,21 +293,6 @@ def rum_mpi(path):
         for index,comm in enumerate(comm_send):
             send_mpi(comm,time,rate[index]*1e3)
 
-        logger.info(" TVB receive data")
-        #receive MPI data
-        data_value = []
-        for comm in comm_receive:
-            receive = receive_mpi(comm)
-            time_data = receive[0]
-            data_value.append(receive[1])
-        data=np.empty((2,),dtype=object)
-        nb_step = np.rint((time_data[1]-time_data[0])/param_nest['sim_resolution'])
-        nb_step_0 = np.rint(time_data[0]/param_nest['sim_resolution'])
-        time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_nest['sim_resolution']
-        data_value = np.swapaxes(np.array(data_value),0,1)[:,:,np.newaxis,np.newaxis]
-        if data_value.shape[0] != time_data.shape[0]:
-            raise(Exception('Bad shape of data'))
-        data[:]=[time_data,data_value]
         #increment of the loop
         count+=1
     # save the last part
@@ -335,7 +335,7 @@ def send_mpi(comm,times,data):
     source = status_.Get_source() # the id of the excepted source
     data = np.ascontiguousarray(data,dtype='d') # format the rate for sending
     shape = np.array(data.shape[0],dtype='i') # size of data
-    times = np.array(times,dtype='d') # time of stating and ending step
+    times = np.array(times,dtype='d') # time of starting and ending step
     comm.Send([times,MPI.DOUBLE],dest=source,tag=0)
     comm.Send([shape,MPI.INT],dest=source,tag=0)
     comm.Send([data, MPI.DOUBLE], dest=source, tag=0)
@@ -343,7 +343,7 @@ def send_mpi(comm,times,data):
 
 def receive_mpi(comm):
     """
-        receive proxu values the
+        receive proxy values the
     :param comm: MPI communicator
     :return: rate of all proxy
     """

@@ -35,6 +35,7 @@ Defines a set Interface input and output of TVB.
 
 """
 from tvb.simulator.monitors import Raw, NArray, Float
+from types import MethodType
 import numpy
 
 
@@ -101,6 +102,7 @@ class Interface_co_simulation(Raw):
 
         # ####### WARNING:Change the instance history for taking in count the proxy #########
         id_proxy = self.id_proxy
+        id_node = self._id_node
         dt = simulator.integrator.dt
         delay_proxy = simulator.history.delays[id_proxy, :]
         delay_proxy = delay_proxy[:, id_proxy]
@@ -114,7 +116,7 @@ class Interface_co_simulation(Raw):
             def __init__(self):
                 pass
 
-            # WARNING should be change if the histiry are different (the actal update is the same all history
+            # WARNING should be change if the history are different (the actual update is the same all history)
             def update_proxy(self, step, data):
                 """
                 update the history with the new value
@@ -132,11 +134,17 @@ class Interface_co_simulation(Raw):
                         raise Exception('ERRROR two times are the same')
                     self.buffer[indice, :, id_proxy, :] = data[1]
 
+        # WARNING should be change if the function update of the history change  (the actual update is the same all history)
+        def update(self, step, new_state):
+            print("before : ",self.buffer[step % self.n_time])
+            self.buffer[step % self.n_time][:,id_node] = new_state[:,id_node][self.cvars]
+            print("after : ",self.buffer[step % self.n_time])
+
         new_history = History_proxy()
         new_history.copy_inst(simulator.history)
         del simulator.history  # remove old history
-        # add a method for update the history
         simulator.history = new_history
+        simulator.history.update = MethodType(update, simulator.history) # replace the function update with the new one
 
     def sample(self, step, state):
         """

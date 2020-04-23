@@ -81,8 +81,7 @@ def send(path,level_log,first_id_spike_generator,nb_spike_generator,status_data,
                         list_id[index]=id[0]
                     # Select the good spike train and send it
                     data = buffer_spike[0][index]
-                    if index == 0:
-                        logger.info(" TVB to Nest:"+str(data)+" " +str(index))
+                    logger.info(" TVB to Nest:"+str(data)+" " +str(index))
                     shape = np.array(data.shape[0], dtype='i')
                     # firstly send the size of the spikes train
                     comm.Send([shape, MPI.INT], dest=status_.Get_source(), tag=id[0])
@@ -108,7 +107,7 @@ def send(path,level_log,first_id_spike_generator,nb_spike_generator,status_data,
         os.remove(path_to_files)
     logger.info('Send : exit')
 
-def receive(path,level_log,TVB_config,analyse,status_data,buffer_spike):
+def receive(path,level_log,TVB_config,generator,status_data,buffer_spike):
     '''
     the receiving part of the translator
     :param path: folder which will contain the configuration file
@@ -175,7 +174,7 @@ def receive(path,level_log,TVB_config,analyse,status_data,buffer_spike):
             #  Get the rate
             rate = np.empty(size[0], dtype='d')
             comm.Recv([rate, size[0], MPI.DOUBLE], source=status_.Get_source(), tag=0, status=status_)
-            spike_generate = analyse.generate_spike(0,time_step,rate)
+            spike_generate = generator.generate_spike(0,time_step,rate)
             # Wait for lock to be set to False
             while (status_data[0]):
                 pass
@@ -203,16 +202,20 @@ if __name__ == "__main__":
         percentage_shared = float(sys.argv[5])
         level_log = int(sys.argv[6])
 
-        # variable for communication between thread
-        status_data=[False]
-        buffer_spike=[[]]
-
         # object for analysing data
-        analyse = generate_data(percentage_shared,nb_spike_generator)
+        sys.path.append(path_config+'/../')
+        from parameter import param_TR_tvb_to_nest as param
+        sys.path.remove(path_config+'/../')
+        generator = generate_data(path_config+'/../',percentage_shared,nb_spike_generator,level_log,param)
+
+        # variable for communication between thread
+        status_data=[True]
+        initialisation =np.load(param['init'])
+        buffer_spike=[initialisation]
 
         # create the thread for receive and send data
         th_send = Thread(target=send, args=(path_config,level_log,id_first_spike_detector,nb_spike_generator,status_data,buffer_spike))
-        th_receive = Thread(target=receive, args=(path_config,level_log,TVB_config,analyse,status_data,buffer_spike ))
+        th_receive = Thread(target=receive, args=(path_config,level_log,TVB_config,generator,status_data,buffer_spike ))
 
         # start the threads
         th_receive.start()

@@ -8,7 +8,7 @@ import json
 import numpy as np
 
 
-def generate_parameter(parameter_default,dict_variable=None):
+def generate_parameter(parameter_default,results_path,dict_variable=None):
     """
     generate the  parameter for the actual simulation
     use for changing parameter for the exploration
@@ -24,6 +24,8 @@ def generate_parameter(parameter_default,dict_variable=None):
     param_background = parameter_default.param_background
     param_tvb = parameter_default.param_tvb
     param_zerlaut = parameter_default.param_zerlaut
+    param_TR_tvb_to_nest = parameter_default.param_TR_tvb_to_nest
+    param_TR_nest_to_tvb = parameter_default.param_TR_nest_to_tvb
     if dict_variable != None:
         for variable in dict_variable.keys():
             if variable in param_nest.keys():
@@ -38,10 +40,24 @@ def generate_parameter(parameter_default,dict_variable=None):
                 param_connection[variable]=dict_variable[variable]
             elif variable in param_background.keys():
                 param_background[variable]=dict_variable[variable]
-    return param_nest,param_topology,param_connection,param_background,param_tvb,param_zerlaut
+    if parameter_default.param_co_simulation['co-simulation']:
+        if not hasattr(param_TR_tvb_to_nest, 'init'):
+            path_rates = results_path+'/init_rates.npy'
+            init_rates = np.array([[] for i in range(param_topology['nb_neuron_by_region'])])
+            np.save(path_rates,init_rates)
+            param_TR_tvb_to_nest['init']= path_rates
+        if not hasattr(param_TR_nest_to_tvb, 'init'):
+            path_spikes = results_path+'/init_spikes.npy'
+            init_spikes = np.zeros((int(parameter_default.param_co_simulation['synchronization']/param_nest['sim_resolution']),1))
+            np.save(path_spikes,init_spikes)
+            param_TR_nest_to_tvb['init']= path_spikes
+
+    return param_nest,param_topology,param_connection,param_background,param_tvb,param_zerlaut,\
+           param_TR_tvb_to_nest,param_TR_nest_to_tvb
 
 
-def save_parameter(param_co_simulation,param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background,results_path,begin,end):
+def save_parameter(param_co_simulation,param_tvb,param_zerlaut,param_nest,param_topology,param_connection,
+                   param_background,param_TR_tvb_to_nest,param_TR_nest_to_tvb,results_path,begin,end):
     """
     save the parameters of the simulations in on file which can be imported by python
     :param param_co_simulation:parameter for the cosimulations and parameters of the simulations
@@ -63,7 +79,9 @@ def save_parameter(param_co_simulation,param_tvb,param_zerlaut,param_nest,param_
                      ('param_nest',param_nest),
                      ('param_topology',param_topology),
                      ('param_connection',param_connection),
-                     ('param_background',param_background)
+                     ('param_background',param_background),
+                     ('param_TR_nest_to_tvb',param_TR_nest_to_tvb),
+                     ('param_TR_tvb_to_nest', param_TR_tvb_to_nest),
                      ]:
         f.write(name+' = ')
         json.dump(dic, f)
@@ -107,13 +125,16 @@ def run(results_path,parameter_default,dict_variable,begin,end):
 
     # generate parameter for the  simulation
     param_nest,param_topology,param_connection,\
-    param_background,param_tvb,param_zerlaut = generate_parameter(parameter_default,dict_variable)
+    param_background,param_tvb,param_zerlaut,\
+    param_TR_tvb_to_nest,param_TR_nest_to_tvb\
+        = generate_parameter(parameter_default,results_path,dict_variable)
 
     # parameter for the cosimulation and more
     param_co_simulation = parameter_default.param_co_simulation
 
     save_parameter(param_co_simulation,param_tvb,param_zerlaut,param_nest,param_topology,param_connection,
-                   param_background,results_path,begin,end)
+                   param_background,param_TR_tvb_to_nest,param_TR_nest_to_tvb,
+                   results_path,begin,end)
 
     if param_co_simulation['co-simulation']:
         # First case : co-simulation
@@ -152,7 +173,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                                  stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
                                  )
 
-            # create translator between TVB  to Nest:
+            # create translator between TVB to Nest:
             # one by proxy/id_region
 
             # create all the repertory for the translation file (communication files of MPI)
