@@ -10,7 +10,7 @@ def run_exploration(path,begin,end):
     parameter_test.param_co_simulation['nb_MPI_tvb']=0
     parameter_test.param_co_simulation['id_region_nest']=[0,1,2]
     parameter_test.param_co_simulation['synchronization']=20.0
-    parameter_test.param_co_simulation['save_step']=10
+    parameter_test.param_record_MPI['save_step']=10
     parameter_test.param_co_simulation['level_log']=1
     parameter_test.param_co_simulation['record_MPI']=True
     run_exploration_2D(path, parameter_test, {'g':np.arange(0.0, 1.0, 0.5), 'mean_I_ext': np.arange(0.0, 100.0, 50.0)}, begin, end)

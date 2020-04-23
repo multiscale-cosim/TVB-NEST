@@ -61,22 +61,28 @@ def save(path,nb_step,step_save,status_data,buffer):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==9:
+    if len(sys.argv)==5:
         path_folder_config = sys.argv[1]
         file_spike_detector = sys.argv[2]
         path_folder_save = sys.argv[3]
-        dt = float(sys.argv[4])
-        delay_min = float(sys.argv[5])
-        nb_step = float(sys.argv[6])
-        step_save = float(sys.argv[7])
-        level_log = int(sys.argv[8])
+        end = float(sys.argv[4])
+
+        # object for analysing data
+        sys.path.append(path_folder_config)
+        from parameter import param_record_MPI as param
+        sys.path.remove(path_folder_config)
+        time_synch = param['synch']
+        nb_step = np.ceil(end/time_synch)
+        step_save = param['save_step']
+        level_log = param['level_log']
+
 
         # variable for communication between thread
         status_data=[False] # status of the buffer
-        buffer=[np.zeros((int(delay_min/dt),1))] # buffer of the rate to send it
+        buffer=[np.array([])]
 
         # object for analysing data
-        store=store_data(buffer[0].shape,delay_min,dt,path_folder_config,level_log)
+        store=store_data(path_folder_config,param)
 
         # create the thread for receive and send data
         th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))

@@ -38,17 +38,12 @@ def run(results_path,parameter_default,dict_variable,begin,end):
             pass
 
     # generate parameter for the  simulation
-    param_nest,param_topology,param_connection,\
-    param_background,param_tvb,param_zerlaut,\
-    param_TR_tvb_to_nest,param_TR_nest_to_tvb\
-        = generate_parameter(parameter_default,results_path,dict_variable)
+    parameters = generate_parameter(parameter_default,results_path,dict_variable)
 
     # parameter for the cosimulation and more
-    param_co_simulation = parameter_default.param_co_simulation
+    param_co_simulation = parameters['param_co_simulation']
 
-    save_parameter(param_co_simulation,param_tvb,param_zerlaut,param_nest,param_topology,param_connection,
-                   param_background,param_TR_tvb_to_nest,param_TR_nest_to_tvb,
-                   results_path,begin,end)
+    save_parameter(parameters,results_path,begin,end)
 
     if param_co_simulation['co-simulation']:
         # First case : co-simulation
@@ -57,8 +52,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
 
         #initialise Nest and take information for the connection between all the mpi process
         spike_detector,spike_generator = config_mpi_record(results_path=results_path,begin=begin,end=end,
-                param_nest=param_nest,param_topology=param_topology,
-                param_connection=param_connection,param_background=param_background,
+                                                           param_nest=parameters['param_nest'],param_topology=parameters['param_topology'],
+                                                           param_connection=parameters['param_connection'],param_background=parameters['param_background'],
                                                            cosimulation=param_co_simulation)
         if nest.Rank() == 0:
             # create translator between Nest to TVB :
@@ -128,10 +123,12 @@ def run(results_path,parameter_default,dict_variable,begin,end):
             if param_co_simulation['record_MPI']:
                 time_synch =  param_co_simulation['synchronization']
                 #initialise Nest before the communication
-                spike_detector,spike_generator = config_mpi_record(results_path=results_path,begin=begin,end=end,
-                param_nest=param_nest,param_topology=param_topology,
-                param_connection=param_connection,param_background=param_background,
-                cosimulation = param_co_simulation)
+                spike_detector, spike_generator = config_mpi_record(results_path=results_path, begin=begin, end=end,
+                                                                    param_nest=parameters['param_nest'],
+                                                                    param_topology=parameters['param_topology'],
+                                                                    param_connection=parameters['param_connection'],
+                                                                    param_background=parameters['param_background'],
+                                                                    cosimulation=param_co_simulation)
 
                 #create file for the foldder for the communication part
                 if nest.Rank() == 0:
@@ -150,11 +147,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                            results_path,
                            "/spike_detector/"+str(id_spike_detector.tolist()[0])+".txt",
                            results_path+"/save/"+str(id_spike_detector.tolist()[0]),
-                           str(param_nest['sim_resolution']),
-                           str(time_synch),
-                           str(np.ceil(end/time_synch)),
-                           str(param_co_simulation['save_step']),
-                           str(param_co_simulation['level_log']),
+                           str(end)
                            ]
                     subprocess.Popen(argv,
                                  #need to check if it's needed or not (doesn't work for me)
@@ -164,14 +157,14 @@ def run(results_path,parameter_default,dict_variable,begin,end):
             else:
                 # just run nest with the configuration
                 simulate(results_path=results_path, begin=begin, end=end,
-                     param_nest=param_nest, param_topology=param_topology,
-                     param_connection=param_connection, param_background=param_background)
+                         param_nest=parameters['param_nest'], param_topology=parameters['param_topology'],
+                         param_connection=parameters['param_connection'], param_background=parameters['param_background'])
         else:
             # Third case : Only tvb simulation
-            simulate_tvb(results_path=results_path,begin=begin,end=end,
-                param_tvb=param_tvb,param_zerlaut=param_zerlaut,
-                param_nest=param_nest,param_topology=param_topology,
-                param_connection=param_connection,param_background=param_background)
+            simulate_tvb(results_path=results_path, begin=begin, end=end,
+                 param_tvb=parameters['param_tvb'], param_zerlaut=parameters['param_zerlaut'],
+                 param_nest=parameters['param_nest'], param_topology=parameters['param_topology'],
+                 param_connection=parameters['param_connection'], param_background=parameters['param_background'])
     print('time: '+str(datetime.datetime.now())+' END SIMULATION \n')
 
 def run_exploration_2D(path,parameter_default,dict_variables,begin,end):

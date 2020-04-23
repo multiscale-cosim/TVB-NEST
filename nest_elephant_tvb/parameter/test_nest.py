@@ -17,8 +17,6 @@ param_co_simulation={
     'id_region_nest':[],
     # time of synchronization between node
     'synchronization':0.,#Todo compute with the min of delay
-    # save step
-    'save_step':0.,
     # level of log : debug 0, info 1, warning 2, error 3, critical 4
     'level_log':1
 }
@@ -207,3 +205,13 @@ param_TR_tvb_to_nest={
     # 'init': path of the initialisation of the translation if not the run exploration will create it
     # 'level_log': param_co_simulation['level_log']
 }
+
+param_record_MPI={
+    # save step
+    'save_step': 0,
+    # 'init': path of the initialisation of the translation if not the run exploration will create it
+    # 'resolution': param_nest['sim_resolution']
+    # 'synch': param_co_simulation['synchronization']
+    # 'level_log': param_co_simulation['level_log']
+}
+
