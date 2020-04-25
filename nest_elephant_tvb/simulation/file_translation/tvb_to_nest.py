@@ -7,7 +7,7 @@ import logging
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
-def send(path,level_log,first_id_spike_generator,nb_spike_generator,status_data,buffer_spike):
+def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,buffer_spike):
     '''
     the sending part of the translator
     :param path: folder which will contain the configuration fil
@@ -19,7 +19,7 @@ def send(path,level_log,first_id_spike_generator,nb_spike_generator,status_data,
     '''
     # Configuration logger
     logger = logging.getLogger('tvb_to_nest_send')
-    fh = logging.FileHandler(path+'/../log/tvb_to_nest_send.log')
+    fh = logging.FileHandler(path+'/../log/tvb_to_nest_send'+str(first_id_spike_generator)+'.log')
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)
     logger.addHandler(fh)
@@ -84,9 +84,10 @@ def send(path,level_log,first_id_spike_generator,nb_spike_generator,status_data,
                     logger.info(" TVB to Nest:"+str(data)+" " +str(index))
                     shape = np.array(data.shape[0], dtype='i')
                     # firstly send the size of the spikes train
-                    comm.Send([shape, MPI.INT], dest=status_.Get_source(), tag=id[0])
+                    comm.Send([shape, MPI.INT], dest=source, tag=id[0])
                     # secondly send the spikes train
-                    comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=id[0])
+                    comm.Send([data, MPI.DOUBLE], dest=source, tag=id[0])
+            logger.info(" end sending:")
         elif  status_.Get_tag() == 1:
             # ending the update of the all the spike train from one processus
             logger.info(" TVB to Nest end sending ")
@@ -107,7 +108,7 @@ def send(path,level_log,first_id_spike_generator,nb_spike_generator,status_data,
         os.remove(path_to_files)
     logger.info('Send : exit')
 
-def receive(path,level_log,TVB_config,generator,status_data,buffer_spike):
+def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_data,buffer_spike):
     '''
     the receiving part of the translator
     :param path: folder which will contain the configuration file
@@ -120,7 +121,7 @@ def receive(path,level_log,TVB_config,generator,status_data,buffer_spike):
     '''
     # Configuration logger
     logger = logging.getLogger('tvb_to_nest_receive')
-    fh = logging.FileHandler(path+'/../log/tvb_to_nest_receive.log')
+    fh = logging.FileHandler(path+'/../log/tvb_to_nest_receive'+str(first_id_spike_generator)+'.log')
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)
     logger.addHandler(fh)
@@ -213,8 +214,8 @@ if __name__ == "__main__":
         buffer_spike=[initialisation]
 
         # create the thread for receive and send data
-        th_send = Thread(target=send, args=(path_config,level_log,id_first_spike_detector,nb_spike_generator,status_data,buffer_spike))
-        th_receive = Thread(target=receive, args=(path_config,level_log,TVB_config,generator,status_data,buffer_spike ))
+        th_send = Thread(target=send, args=(path_config,id_first_spike_detector,level_log,nb_spike_generator,status_data,buffer_spike))
+        th_receive = Thread(target=receive, args=(path_config,id_first_spike_detector,level_log,TVB_config,generator,status_data,buffer_spike ))
 
         # start the threads
         th_receive.start()
