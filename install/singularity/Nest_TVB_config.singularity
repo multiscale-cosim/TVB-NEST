@@ -2,11 +2,10 @@ Bootstrap: docker
 from:alpine:3.11
 
 %help
-Nest i/o
+TVB and Nest i/o
 
 %files
 ../../nest-io-dev /home/nest-io-dev
-../../nest_elephant_tvb /home/nest_elephant_tvb
 
 %post
     apk update
@@ -20,7 +19,7 @@ Nest i/o
     make -j$(nproc)
     make install
 
-    #python
+    # Nest 
     apk add cmake readline-dev ncurses-dev gsl-dev curl python3
     apk add python3-dev py3-numpy-dev py3-scipy cython
     cd /root
@@ -40,6 +39,8 @@ Nest i/o
     pip install matplotlib
     pip install elephant
     pip install mpi4py
+
+    # install TVB
     apk add llvm8-dev llvm8
     export LLVM_CONFIG=/usr/bin/llvm8-config
     pip install tvb-data tvb-gdist tvb-library 
@@ -52,10 +53,9 @@ Nest i/o
     make install
     #make test
     cd /home/
-    echo 'export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:/home/:$PYTHONPATH' >>$SINGULARITY_ENVIRONMENT
+    echo 'export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:$PYTHONPATH' >>$SINGULARITY_ENVIRONMENT
 
 %runscript
-   export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:/home/:$PYTHONPATH
    exec /usr/bin/python3.8 "$@"
 
 %runscript

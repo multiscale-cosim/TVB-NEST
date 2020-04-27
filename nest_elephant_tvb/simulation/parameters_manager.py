@@ -1,7 +1,5 @@
 import json
 import numpy as np
-import subprocess
-import os
 
 def generate_parameter(parameter_default,results_path,dict_variable=None):
     """
@@ -94,7 +92,7 @@ def save_parameter(parameters,results_path,begin,end):
     :param end:  when end the recording simulation and the simulation
     :return: nothing
     """
-    f = open(results_path+'/parameter.py',"w")
+    f = open(results_path+'/parameter.py',"wt")
     for param_name,param_dic in parameters.items():
         f.write(param_name+' = ')
         json.dump(param_dic, f)
@@ -103,5 +101,10 @@ def save_parameter(parameters,results_path,begin,end):
     f.write("begin=" + str(begin) + "\n")
     f.write("end=" + str(end) + "\n")
     f.close()
-    subprocess.call([os.path.dirname(os.path.abspath(__file__))+'/correct_parameter.sh',results_path+'/parameter.py']) ##Warning can be don't find the script
+    fin = open(results_path+'/parameter.py',"rt")
+    data = fin.read().replace('true','True').replace('false','False')
+    fin.close()
+    fout = open(results_path+'/parameter.py',"wt")
+    fout.write(data)
+    fout.close()
 

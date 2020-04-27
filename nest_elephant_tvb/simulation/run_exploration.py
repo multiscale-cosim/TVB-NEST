@@ -5,7 +5,6 @@ from nest_elephant_tvb.simulation.parameters_manager import generate_parameter,s
 from nest_elephant_tvb.simulation.simulation_nest import simulate,config_mpi_record,simulate_mpi_co_simulation
 from nest_elephant_tvb.simulation.simulation_zerlaut import simulate_tvb
 import subprocess
-import numpy as np
 
 def run(results_path,parameter_default,dict_variable,begin,end):
     """
@@ -43,7 +42,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
     # parameter for the cosimulation and more
     param_co_simulation = parameters['param_co_simulation']
 
-    save_parameter(parameters,results_path,begin,end)
+    if nest.Rank() == 0:
+        save_parameter(parameters,results_path,begin,end)
 
     if param_co_simulation['co-simulation']:
         # First case : co-simulation
@@ -68,7 +68,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
 
             for index,id_spike_detector in enumerate(spike_detector):
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_nest_to_tvb.sh"
-                argv=[ dir_path,
+                argv=[ '/bin/sh',
+                       dir_path,
                        results_path,
                        "/spike_detector/"+str(id_spike_detector.tolist()[0])+".txt",
                        "/send_to_tvb/"+str(id_proxy[index])+".txt",
@@ -89,7 +90,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
 
             for index,ids_spike_generator in enumerate(spike_generator):
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_tvb_to_nest.sh"
-                argv=[ dir_path,
+                argv=[ '/bin/sh',
+                       dir_path,
                        results_path+"/spike_generator/",
                        str(ids_spike_generator.tolist()[0]),
                        str(len(ids_spike_generator.tolist())),
@@ -104,6 +106,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
             # Run TVB in co-simulation
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_tvb/run_mpi_tvb.sh"
             argv=[
+                '/bin/sh',
                 dir_path,
                 results_path
             ]
@@ -143,7 +146,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                 #TODO need to test and to finish this part
                 for index,id_spike_detector in enumerate(spike_detector):
                     dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_nest_save.sh"
-                    argv=[ dir_path,
+                    argv=[ '/bin/sh',
+                           dir_path,
                            results_path,
                            "/spike_detector/"+str(id_spike_detector.tolist()[0])+".txt",
                            results_path+"/save/"+str(id_spike_detector.tolist()[0]),
