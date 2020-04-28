@@ -201,7 +201,8 @@ param_TR_nest_to_tvb={
 
 param_TR_tvb_to_nest={
     # percentage of shared rate between neurons of the same region
-    'percentage_shared': 0.5
+    'percentage_shared': 0.5,
+    'seed':param_nest['master_seed']-2 # -2 because -1 is use by the simulation of TVB
     # 'init': path of the initialisation of the translation if not the run exploration will create it
     # 'level_log': param_co_simulation['level_log']
 }

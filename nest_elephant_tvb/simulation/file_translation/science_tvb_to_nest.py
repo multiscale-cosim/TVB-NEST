@@ -25,6 +25,7 @@ class generate_data:
         """
         self.percentage_shared = param['percentage_shared']
         self.nb_spike_generator = nb_spike_generator
+        np.random.seed(param['seed'])
 
         level_log = param['level_log']
         self.logger = logging.getLogger('generator')
