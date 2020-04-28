@@ -170,11 +170,13 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer):
             comm.Send([data,MPI.DOUBLE], dest=status_.Get_source(), tag=0)
             with lock_status:
                 status_data[0]=False
-        else:
+        elif status_.Get_tag() == 1:
             # disconnect when everything is ending
             with lock_status:
                 status_data[0]=False
             break
+        else:
+            raise Exception("bad mpi tag"+str(status_.Get_tag()))
         count+=1
 
     logger.info('Send : ending')

@@ -296,11 +296,13 @@ def rum_mpi(path):
         #increment of the loop
         count+=1
     # save the last part
+    logger.info(" TVB exit")
     np.save(param_tvb['path_result']+'/step_'+str(count)+'.npy',save_result)
     for index,comm in  enumerate(comm_send):
-        end_mpi(comm,result_path+"/send_to_tvb/"+str(id_proxy[index])+".txt")
+        end_mpi(comm,result_path+"/receive_from_tvb/"+str(id_proxy[index])+".txt",True)
     for index,comm in  enumerate(comm_receive):
-        end_mpi(comm,result_path+"/send_to_tvb/"+str(id_proxy[index])+".txt")
+        end_mpi(comm,result_path+"/send_to_tvb/"+str(id_proxy[index])+".txt",False)
+    MPI.Finalize() # ending with MPI
 
 ## MPI function for receive and send data
 
@@ -365,22 +367,36 @@ def receive_mpi(comm):
     else:
         return None # TODO take in count
 
-def end_mpi(comm,path):
+def end_mpi(comm,path,sending):
     """
     ending the communication
     :param comm: MPI communicator
     :param path: for the close the port
     :return: nothing
     """
-    # closing the connection at this end
-    comm.Disconnect()
+    # read the port before the deleted file
     fport = open(path, "r")
     port=fport.readline()
     fport.close()
-    logger.info("close connection "+port);sys.stdout.flush()
+    # different ending of the translator
+    if sending :
+        status_ = MPI.Status()
+        # wait until the translator accept the connections
+        accept = False
+        while not accept:
+            req = comm.irecv(source=0, tag=0)
+            accept = req.wait(status_)
+        source = status_.Get_source()  # the id of the excepted source
+        times = np.array([0.,0.],dtype='d') # time of starting and ending step
+        comm.Send([times,MPI.DOUBLE],dest=source,tag=1)
+    else:
+         # send to the translator : I want the next part
+        req = comm.isend(True, dest=0, tag=1)
+        req.wait()
+    # closing the connection at this end
+    comm.Disconnect()
     MPI.Close_port(port)
-    logger.info('exit')
-    MPI.Finalize()
+    logger.info("TVB close connection "+port);sys.stdout.flush()
 
 if __name__ == "__main__":
     import sys

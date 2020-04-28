@@ -187,6 +187,8 @@ def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_
             with lock_status:
                 status_data[0] = True
             break
+        else:
+            raise Exception("bad mpi tag"+str(status_.Get_tag()))
     logger.info('Receive : ending')
     comm.Disconnect()
     MPI.Close_port(port)
