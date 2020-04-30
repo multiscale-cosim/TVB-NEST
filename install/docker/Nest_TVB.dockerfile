@@ -13,7 +13,7 @@ RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     make -j$(nproc);\
     make install
 
-# Nest
+# Install the dependance for Nest
 RUN apk add cmake readline-dev ncurses-dev gsl-dev curl python3;\
     apk add python3-dev py3-numpy-dev py3-scipy cython;\
     cd /root;\
@@ -31,6 +31,7 @@ RUN apk add llvm8-dev llvm8;\
     export LLVM_CONFIG=/usr/bin/llvm8-config;\
     pip install tvb-data tvb-gdist tvb-library
 
+# Compile and Install package for Nest
 RUN cd /home/;\
     NAME_SOURCE_NEST=/home/nest-io-dev;\
     PATH_INSTALATION=/usr/lib/nest/;\
@@ -44,6 +45,6 @@ RUN cd /home/;\
     cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-python=3;\
     make -j$(nproc);\
     make install
-    #make test ;\
+    #make installcheck
 
 ENV PYTHONPATH /usr/lib/nest/lib64/python3.8/site-packages/:/home/:$PYTHONPATH
