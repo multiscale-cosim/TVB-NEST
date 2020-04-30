@@ -5,9 +5,10 @@ def generate_parameter(parameter_default,results_path,dict_variable=None):
     """
     generate the  parameter for the actual simulation
     use for changing parameter for the exploration
-    WARNING: not all parameters can be use for exploration, changing this function for add new paramters
+    WARNING: not all parameters can be use for exploration, changing this function for add new parameters
              only  parameters of excitatory neurons can be changing
     :param parameter_default: parameters by default of the exploration
+    :param results_path : the folder of the result
     :param dict_variable: the variable to change and there values
     :return:
     """
@@ -29,6 +30,13 @@ def generate_parameter(parameter_default,results_path,dict_variable=None):
 
 
 def create_linked_parameters(results_path,parameters):
+    """
+    Change the parameters following the link between them
+
+    :param results_path: the folder to save the result
+    :param parameters: dictionary of parameters
+    :return: dictionary of parameters for the simulation
+    """
     param_co_simulation = parameters['param_co_simulation']
     param_nest = parameters['param_nest']
     param_nest_connection = parameters['param_nest_connection']
@@ -47,6 +55,7 @@ def create_linked_parameters(results_path,parameters):
     param_tvb_connection['path_distance'] =  param_nest_connection['path_distance']
     param_tvb_connection['path_weight'] =  param_nest_connection['path_weight']
     param_tvb_connection['nb_region'] =  param_nest_topology['nb_region']
+    param_tvb_connection['velocity'] =  param_nest_connection['velocity']
     parameters['param_tvb_connection'] = param_tvb_connection
 
     ## coupling
@@ -106,7 +115,6 @@ def create_linked_parameters(results_path,parameters):
         param_TR_tvb_to_nest['seed'] = param_nest['master_seed']-3
         parameters['param_TR_tvb_to_nest'] = param_TR_tvb_to_nest
 
-
         # parameters for the translation nest to TVB
         if 'param_TR_nest_to_tvb' in parameters.keys():
             param_TR_nest_to_tvb = parameters['param_TR_nest_to_tvb']
@@ -139,18 +147,13 @@ def create_linked_parameters(results_path,parameters):
 def save_parameter(parameters,results_path,begin,end):
     """
     save the parameters of the simulations in on file which can be imported by python
-    :param param_co_simulation:parameter for the cosimulations and parameters of the simulations
-    :param param_tvb: parameters for tvb (some parameters are parameters nest)
-    :param param_zerlaut: parameters for model of tvb (some parameters are parameters topology)
-    :param param_nest: parameters for nest engine
-    :param param_topology: parameters for neurons in regions
-    :param param_connection: parameters for connections inside and between regions
-    :param param_background: parameters for noise and stimulations
+    :param parameters: dictionary of parameters
     :param results_path: where to save the result
     :param begin: when start the recording simulation ( not take in count for tvb (start always to zeros )
     :param end:  when end the recording simulation and the simulation
     :return: nothing
     """
+    # save the value of all parameters
     f = open(results_path+'/parameter.py',"wt")
     for param_name,param_dic in parameters.items():
         f.write(param_name+' = ')
@@ -160,6 +163,8 @@ def save_parameter(parameters,results_path,begin,end):
     f.write("begin=" + str(begin) + "\n")
     f.write("end=" + str(end) + "\n")
     f.close()
+
+    # correct the writing of the boolean variable
     fin = open(results_path+'/parameter.py',"rt")
     data = fin.read().replace('true','True').replace('false','False')
     fin.close()

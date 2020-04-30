@@ -4,7 +4,7 @@ import numpy as np
 from neo import AnalogSignal
 from quantities import Hz
 
-def rates_to_spikes( rates,t_start,t_stop, variation=False):
+def rates_to_spikes( rates, t_start, t_stop, variation=False):
     """
     Generate spike train with homogenous or inhomogenous Poisson generator
     :param rates: an array or a float of quantities

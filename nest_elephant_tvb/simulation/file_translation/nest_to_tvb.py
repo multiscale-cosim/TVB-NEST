@@ -11,7 +11,9 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer):
     '''
     the receive part of the translator
     :param path: folder which will contain the configuration file
+    :param level_log : the level for the logger
     :param file_spike_detector: the relative path which contains the txt file
+    :param store : object for store the data before analysis
     :param status_data: the status of the buffer (SHARED between thread)
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
@@ -53,6 +55,7 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer):
     comm = MPI.COMM_WORLD.Accept(port, info, root)
     logger.info('Receive : connect to '+port)
 
+    # initialise variables for the loop
     status_ = MPI.Status() # status of the different message
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
     check = np.empty(1,dtype='b')
@@ -102,6 +105,7 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer):
     '''
     the sending part of the translator
     :param path:  folder which will contain the configuration file
+    :param level_log: the level for the logger
     :param TVB_config:  the relative path which contains the txt file
     :param analyse ; analyse object to transform spikes to state variable
     :param status_data: the status of the buffer (SHARED between thread)
@@ -193,18 +197,18 @@ if __name__ == "__main__":
         file_spike_detector = sys.argv[2]
         TVB_recev_file = sys.argv[3]
 
-        # object for analysing data
+        # take the parameters and instantiate objects for analysing data
         sys.path.append(path_folder_config)
         from parameter import param_TR_nest_to_tvb as param
         sys.path.remove(path_folder_config)
-        store=store_data(path_folder_config,param)
-        analyse = analyse_data(path_folder_config,param)
+        store=store_data(path_folder_config+'/log/',param)
+        analyse = analyse_data(path_folder_config+'/log/',param)
+        level_log = param['level_log']
 
         # variable for communication between thread
         status_data=[True] # status of the buffer
         initialisation =np.load(param['init']) # initialisation value
         buffer=[initialisation] # buffer of the rate to send it
-        level_log = param['level_log']
 
         # create the thread for receive and send data
         th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))

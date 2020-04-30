@@ -13,7 +13,7 @@ RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     make -j$(nproc);\
     make install
 
-# Install package for Nest
+# Install the dependance for Nest
 RUN apt-get install -y build-essential cmake python3-distutils python3-dev python3.7 libltdl-dev libreadline-dev libncurses-dev libgsl-dev curl;\
     cd /root ;\
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;\
@@ -33,6 +33,7 @@ RUN apt-get install -y llvm-dev llvm;\
     export LLVM_CONFIG=/usr/bin/llvm-config;\
     pip install tvb-data tvb-gdist tvb-library
 
+# Compile and Install package for Nest
 RUN cd /home/;\
     NAME_SOURCE_NEST=/home/nest-io-dev;\
     PATH_INSTALATION=/usr/lib/nest/;\

@@ -19,7 +19,7 @@ TVB and Nest i/o
     make -j$(nproc)
     make install
 
-    # Nest 
+    # Install the dependence of Nest
     apk add cmake readline-dev ncurses-dev gsl-dev curl python3
     apk add python3-dev py3-numpy-dev py3-scipy cython
     cd /root
@@ -45,6 +45,7 @@ TVB and Nest i/o
     export LLVM_CONFIG=/usr/bin/llvm8-config
     pip install tvb-data tvb-gdist tvb-library 
 
+    # Compile and install nest
     cd /home/
     mkdir $PATH_BUILD
     cd $PATH_BUILD
@@ -53,6 +54,7 @@ TVB and Nest i/o
     make install
     #make test
     cd /home/
+    # export pythonpath for include pynest in python
     echo 'export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:$PYTHONPATH' >>$SINGULARITY_ENVIRONMENT
 
 %runscript

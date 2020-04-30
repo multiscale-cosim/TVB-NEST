@@ -5,7 +5,7 @@ def simulate_TVB_output(path,min_delay):
     '''
     simulate the input of the translator tvb_to_nest
     :param path: the path to the file for the connections
-    :param nb_spike_detector:
+    :param min_delay: the time of one simulation
     :return:
     '''
     # Init connection from file connection
@@ -54,7 +54,7 @@ def simulate_TVB_output(path,min_delay):
     comm.Send([times, MPI.DOUBLE], dest=0, tag=1)
     comm.Disconnect()
     MPI.Close_port(port)
-    print('TVB_OUTPUT :exit');
+    print('TVB_OUTPUT :exit')
     MPI.Finalize()
 
 if __name__ == "__main__":

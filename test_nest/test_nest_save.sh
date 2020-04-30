@@ -1,10 +1,14 @@
 #!/bin/bash
-DELAY=100.0
 
-PACKAGE=/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/
-PYTHONLIB=/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/venv/lib/python3.6/site-packages
-REPERTORY_LIB_NEST=/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/nest-run/lib/python3.6/site-packages/
+# Test the saving histogram with MPI
+
+# configuration variable
+PACKAGE=${PWD}/../   # folder of co-simulation-tvb-nest
+PYTHONLIB=${PWD}/../venv/lib/python3.6/site-packages # folder with my virtual python library
+REPERTORY_LIB_NEST=${PWD}/../lib/nest_run/lib/python3.6/site-packages/
 export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
+
+DELAY=100.0
 
 mkdir ./test_nest_to_save
 mkdir ./test_nest_to_save/input/

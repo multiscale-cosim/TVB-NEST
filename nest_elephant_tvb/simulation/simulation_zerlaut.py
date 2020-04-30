@@ -14,26 +14,24 @@ from mpi4py import MPI
 def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,mpi=None):
     '''
     Initialise the simulator with parameter
-    :param param_tvb : parameter for the simulator tvb
-    :param param_zerlaut : parameter for the model
-    :param param_nest : parameter for the simulator of tvb from nest parameter
-    :param param_connection : parameter for the connection between neurons and regions
-    :param param_topology : parameter for the neurons and the population
-    :param param_background : parameter for the noise
+    :param param_tvb_connection : parameters for the connection
+    :param param_tvb_coupling : parameters for the coupling between nodes
+    :param param_tvb_integrator : parameters of the integrator and the noise
+    :param param_tvb_model : parameters for the models of TVB
+    :param param_tvb_monitor : parameters for TVB monitors
     :param mpi : if use or not mpi
     :return: the simulator initialize
     '''
     ## initialise the random generator
     rgn.seed(param_tvb_integrator['seed_init']-1)
 
-    ## Model
+    ## Model configuration
     if param_tvb_model['order'] == 1:
         model = Zerlaut.ZerlautAdaptationFirstOrder(variables_of_interest='E I W_e W_i'.split())
     elif param_tvb_model['order'] == 2:
         model = Zerlaut.ZerlautAdaptationSecondOrder(variables_of_interest='E I C_ee C_ei C_ii W_e W_i'.split())
     else:
         raise Exception('Bad order for the model')
-
     model.g_L=np.array(param_tvb_model['g_L'])
     model.E_L_e=np.array(param_tvb_model['E_L_e'])
     model.E_L_i=np.array(param_tvb_model['E_L_i'])
@@ -81,13 +79,13 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
                                                region_labels=np.array([],dtype=np.dtype('<U128')),
                                                centres=np.array([])
                                                )
+    connection.speed = np.array(param_tvb_connection['velocity'])
 
     ## Coupling
     coupling = lab.coupling.Linear(a=np.array(param_tvb_coupling['a']),
                                        b=np.array(0.0))
 
     ## Integrator
-    # test of noise should be remove and use parameters
     noise = my_noise.Ornstein_Ulhenbeck_process(
         tau_OU=param_tvb_integrator['tau_OU'],
         mu=np.array(param_tvb_integrator['mu']).reshape((7,1,1)),
@@ -167,15 +165,13 @@ def simulate_tvb(results_path,begin,end,param_tvb_connection,param_tvb_coupling,
     :param results_path: the folder to save the result
     :param begin: the starting point of record  WARNING : not used
     :param end: the ending point of record
-    :param param_tvb: the parameter of tvb
-    :param param_zerlaut: parameter for the model
-    :param param_nest: parameter for nest
-    :param param_topology: parameter for the region
-    :param param_connection: parameter for the connections between neurons and regions
-    :param param_background: parameters for the noise
+    :param param_tvb_connection : parameters for the connection
+    :param param_tvb_coupling : parameters for the coupling between nodes
+    :param param_tvb_integrator : parameters of the integrator and the noise
+    :param param_tvb_model : parameters for the models of TVB
+    :param param_tvb_monitor : parameters for TVB monitors
     :return: simulation
     '''
-    #TODO add the option for the co-simulation (add raw_monitor and manage proxy node) or create another functions
     param_tvb_monitor['path_result']=results_path+'/tvb/'
     simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor)
     run_simulation(simulator,end,param_tvb_monitor)
@@ -293,7 +289,7 @@ def rum_mpi(path):
 
 def init_mpi(path):
     """
-    initilise MPI connection
+    initialise MPI connection
     :param path:
     :return:
     """
@@ -357,6 +353,7 @@ def end_mpi(comm,path,sending):
     ending the communication
     :param comm: MPI communicator
     :param path: for the close the port
+    :param sending: if the translator is for sending or receiving data
     :return: nothing
     """
     # read the port before the deleted file

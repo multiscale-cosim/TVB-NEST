@@ -13,4 +13,6 @@ pip install elephant
 
 pip install tvb-data tvb-gdist tvb-library
 
+# need to add the library for nest
+
 deactivate

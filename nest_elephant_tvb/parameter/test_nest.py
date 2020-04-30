@@ -2,16 +2,17 @@ import os
 
 path =os.path.dirname(os.path.realpath(__file__))+"/data_mouse/"
 
+# ALL commented parameters are linked parameter manage by parameters_manager.py
+# For the exploration of parameters never use the same name two times in the dictionary param
+
 #parameter for the cosimulations and parameters of the simulations
 param_co_simulation={
     # boolean for check if there are or not co-simulation
     'co-simulation':False,
-    # number of MPI process for nest (need to be equals to  param_nest['total_num_virtual_procs']
+    # number of MPI process for nest
     # select if nest is use or not
     'nb_MPI_nest':1,
-    # select if nest is use or not
-    'nb_MPI_TVB':0,
-    # save or not nest( result with MPI (not yet implemented)
+    # save or not nest( result with MPI )
     'record_MPI':False,
     # id of region simulate by nest
     'id_region_nest':[],
@@ -41,6 +42,7 @@ param_nest={
 
 #parameter for nest simulation
 param_nest_topology={
+    # number of region of simulated in the brain
     'nb_region':10,
     # Number of neurons by region
     'nb_neuron_by_region':int(1e4),
@@ -114,7 +116,7 @@ param_nest_connection={
     'path_weight':path+'/weight.npy',
     # path for the distance matrix
     'path_distance':path+'/distance.npy',
-    #velocity of transmission
+    #velocity of transmission in m/s
     'velocity':3.0,
     #Weight between region
     'weight_global': 1.0,
@@ -126,7 +128,7 @@ param_nest_background={
     # rate of poisson
     'rate_ex':400*1e-3+2.0*150,
     'rate_in':200.0*1.e-3+0.0*150,
-    #the weight on the connexion
+    #the weight on the connection
     # 'weight_poisson':param_nest_connection['weight_local'],
     #define if the simulation have or not noise
     'noise':False,
@@ -134,7 +136,7 @@ param_nest_background={
     'mean_noise':0.0,
     # Standard deviation of the noise
     'sigma_noise':400.0,
-    #the weight on the connexion
+    #the weight on the connection
     'weight_noise':1.0,
     #stimulus
     'stimulus':False,
@@ -158,6 +160,8 @@ param_tvb_connection={
     # 'path_distance':param_nest_connection['path_distance'],
     # number of region
     # 'nb_region': param_nest_topology['nb_region']
+    # velocity of transmission in m/s
+    #'velocity': param_nest_connection['velocity']
 }
 
 # parameter TVB for the LINEAR coupling
@@ -214,6 +218,8 @@ param_tvb_model={
     # initial condition, should be simmilar than nest
     'initial_condition':{"E": [0.0, 0.0], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
 }
+
+# parameter TVB for the monitors
 param_tvb_monitor={
     # the time of simulation in each file
     'save_time': 2000.0,
@@ -235,6 +241,7 @@ param_tvb_monitor={
     }
 }
 
+# Parameters for the translator Nest to TVB
 param_TR_nest_to_tvb={
     # 'init': path of the initialisation of the translation if not the run exploration will create it
     # 'resolution': param_nest['sim_resolution']
@@ -243,6 +250,7 @@ param_TR_nest_to_tvb={
     # 'level_log': param_co_simulation['level_log']
 }
 
+# Parameters for the translator TVB to Nest
 param_TR_tvb_to_nest={
     # percentage of shared rate between neurons of the same region
     'percentage_shared': 0.5,
@@ -251,6 +259,7 @@ param_TR_tvb_to_nest={
     # 'level_log': param_co_simulation['level_log']
 }
 
+# Parameters for the module of saving by MPI
 param_record_MPI={
     # save step
     'save_step': 0,

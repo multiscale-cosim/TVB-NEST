@@ -4,6 +4,11 @@ import numpy.random as rgn
 from mpi4py import MPI
 
 def input(path):
+    """
+    Simulate some random spike train input
+    :param path: the file for the configurations of the connection
+    :return:
+    """
     #Start communication channels
     path_to_files = path
     #For NEST
@@ -19,8 +24,8 @@ def input(path):
     sys.stdout.flush()
     comm = MPI.COMM_WORLD.Accept(port, info, root)
     print('connect to '+port)
-    #test one rate
 
+    #test one rate
     status_ = MPI.Status()
     check = np.empty(1,dtype='b')
     starting = 1
@@ -52,7 +57,7 @@ def input(path):
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    print('exit');
+    print('exit')
     MPI.Finalize()
 
 if __name__ == "__main__":

@@ -1,9 +1,14 @@
 import numpy as np
 import os
 from mpi4py import MPI
-import time
 
 def analyse(path,nb_mpi):
+    """
+    simulate the recorder module
+    :param path: the file for the configurations of the connection
+    :param nb_mpi: number of mpi rank for testing multi-threading and MPI simulation
+    :return:
+    """
     #Start communication channels
     path_to_files = path
     #For NEST
@@ -53,7 +58,7 @@ def analyse(path,nb_mpi):
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    print('exit');
+    print('exit')
     MPI.Finalize()
 
 if __name__ == "__main__":

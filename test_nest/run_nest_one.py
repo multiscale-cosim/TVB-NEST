@@ -1,10 +1,11 @@
 from nest_elephant_tvb.simulation.run_exploration import run_exploration_2D
-import numpy as np
 from nest_elephant_tvb.parameter import test_nest as parameter_test
 
+# File for simulate with nest only 1 region
+
 def run_exploration(path,begin,end):
-    parameter_test.param_topology['nb_region']=1
-    run_exploration_2D(path, parameter_test, {'g':[3.0], 'mean_I_ext': [0.0]}, begin, end)
+    parameter_test.param_nest_topology['nb_region']=1
+    run_exploration_2D(path, parameter_test, {'b':[10.0,7.0,1.0], 'mean_I_ext': [0.0]}, begin, end)
 
 if __name__ == "__main__":
     import sys
