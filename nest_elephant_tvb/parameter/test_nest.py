@@ -1,6 +1,6 @@
-import numpy as np
+import os
 
-path ="/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/nest_elephant_tvb/parameter/data_mouse/"
+path =os.path.dirname(os.path.realpath(__file__))+"/data_mouse/"
 
 #parameter for the cosimulations and parameters of the simulations
 param_co_simulation={
@@ -39,30 +39,8 @@ param_nest={
     'verbosity':20
 }
 
-# WARNING TVB use also some parameters of nest
-param_tvb={
-    # the time of simulation in each file
-    'save_time': 2000.0,
-    # use or not the Raw monitor
-    'Raw':False,
-    # Use or not the Temporal Average Monitor
-    'TemporalAverage':False,
-    # Parameter for Temporal Average Monitor
-    'parameter_TemporalAverage':{
-        'variables_of_interest':[0,1,2,3],
-        'period':param_nest['sim_resolution']*10.0
-    },
-    # Use or not the Bold Monitor
-    'Bold':True,
-    # Paramter for the Bold Monitor
-    'parameter_Bold':{
-        'variables_of_interest':[0],
-        'period':param_nest['sim_resolution']*20000.0
-    }
-}
-
 #parameter for nest simulation
-param_topology={
+param_nest_topology={
     'nb_region':10,
     # Number of neurons by region
     'nb_neuron_by_region':int(1e4),
@@ -119,7 +97,7 @@ param_topology={
     'mean_w_0':0.0,
 }
 
-param_connection={
+param_nest_connection={
     #file for connection homogeneous
     'path_homogeneous':path+'/connection_homogeneous_',
     #file for connection heterogenous
@@ -142,14 +120,14 @@ param_connection={
     'weight_global': 1.0,
 }
 
-param_background={
+param_nest_background={
     #define if the simulation use or not a poisson generator
     'poisson':True,
     # rate of poisson
     'rate_ex':400*1e-3+2.0*150,
     'rate_in':200.0*1.e-3+0.0*150,
     #the weight on the connexion
-    'weight_poisson':param_connection['weight_local'],
+    # 'weight_poisson':param_nest_connection['weight_local'],
     #define if the simulation have or not noise
     'noise':False,
     # Mean of the noise in pA
@@ -172,23 +150,89 @@ param_background={
     'multimeter':False
 }
 
-#parameter for tvb
-param_zerlaut={
+# parameter TVB for the connection between node
+param_tvb_connection={
+    # path for the connectivity matrix (normalise in order to sum of input for region egual 1)
+    # 'path_weight':param_nest_connection['path_distance'],
+    # path for the distance matrix
+    # 'path_distance':param_nest_connection['path_distance'],
+    # number of region
+    # 'nb_region': param_nest_topology['nb_region']
+}
+
+# parameter TVB for the LINEAR coupling
+param_tvb_coupling={
+    # The global scaling of the connection weights
+    # 'a' : param_nest_connection['weight_global']
+}
+
+# parameter TVB for the STOCHASTIC HEUN integrator
+param_tvb_integrator = {
+    # integration step
+    # 'sim_resolution': param_nest['sim_resolution']
+    # seed for the random generator
+    # 'master_seed': param_nest['master_seed']-1
+    # seed for the initialisation of the history
+    # 'master_seed_init': param_nest['master_seed']-2
+    # parameters for a special noise
+    'tau_OU':20.0,
+    'mu':[700e-3,0.0,0.,0.0,0.0,0.0,0.0],
+    'nsig':[50e-3,0.,0.,0.,0.,0.,0.],
+    'weights':[1.e-2,0.,0.,0.,0.,0.,0.],
+}
+
+#parameter for the model of the node : ZERLAUT model / Mean field AdEX
+param_tvb_model={
     #order of the model
     'order':2,
+    # 'g_L':param_nest_topology['param_neuron_excitatory']['g_L']
+    # 'E_L_e':param_nest_topology['param_neuron_excitatory']['E_L']
+    # 'E_L_i':param_nest_topology['param_neuron_inhibitory']['E_L']
+    # 'C_m':param_nest_topology['param_neuron_excitatory']['C_m']
+    # 'b_e':param_nest_topology['param_neuron_excitatory']['b']
+    # 'a_e':param_nest_topology['param_neuron_excitatory']['a']
+    # 'b_i':param_nest_topology['param_neuron_inhibitory']['b']
+    # 'a_i':param_nest_topology['param_neuron_inhibitory']['a']
+    # 'tau_w_e':param_nest_topology['param_neuron_excitatory']['tau_w']
+    # 'tau_w_i':param_nest_topology['param_neuron_inhibitory']['tau_w']
+    # 'E_e':param_nest_topology['param_neuron_excitatory']['E_ex']
+    # 'E_i':param_nest_topology['param_neuron_excitatory']['E_in']
+    # 'Q_e':param_nest_connection['weight_local']
+    # 'Q_i':param_nest_connection['weight_local']*param_nest_connection['g']
+    # 'tau_e':param_nest_topology['param_neuron_excitatory']['tau_syn_ex']
+    # 'tau_i':param_nest_topology['param_neuron_excitatory']['tau_syn_in']
+    # 'N_tot':param_nest_topology['nb_neuron_by_region']
+    # 'p_connect':param_nest_connection['p_connect']
+    # 'g':param_nest_topology['percentage_inhibitory']
+    # 'K_ext_e':param_nest_connection['nb_external_synapse']
     # Time constant of the model
     'T':20.0,
     # Polynome for excitatory neurons | WARNING :should be change when the parameter of neurons change)
     'P_e':[-0.05059317,  0.0036078 ,  0.01794401,  0.00467008,  0.00098553,  0.0082953 , -0.00985289, -0.02600252, -0.00274499, -0.01051463],
-    # 'P_e':[-0.04994512,  0.00033889,  0.00434596,  0.00122126,  0.00584339, -0.00048078, -0.0001464,   0.00140099, -0.00025785, -0.00141249],
-    'P_e':[-0.0506587 ,  0.0026406 , -0.00151409, -0.00810736,  0.00081096,   0.01194696, -0.00728937,  0.00156232,  0.00462174, -0.00576466],
     # Polynome for inhibitory neurons | WARNING: should be change when the parameter of neurons change)
-    # 'P_i':[-0.05084858,  0.00146866, -0.00657981,  0.0014993 , -0.0003816 ,  0.00020026,  0.00078719, -0.00322428, -0.00842626, -0.0012793 ],
-    # 'P_i':[-0.04959247, -0.00113669,  0.00093422, -0.00560576,  0.00292606, -0.02052566,  0.0105556,  -0.00163008,  0.00447567, -0.00182161],
     'P_i':[-5.96722865e-02,  7.15675508e-03,  4.28252163e-03,  9.25089702e-03,  1.16632197e-06, -1.00659310e-02,  3.89257235e-03,  4.45787751e-04,  4.20050937e-03,  4.37359879e-03],
-
-    # initial condition, should be simmilar than nest #TODO
+    # initial condition, should be simmilar than nest
     'initial_condition':{"E": [0.0, 0.0], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
+}
+param_tvb_monitor={
+    # the time of simulation in each file
+    'save_time': 2000.0,
+    # use or not the Raw monitor
+    'Raw':False,
+    # Use or not the Temporal Average Monitor
+    'TemporalAverage':False,
+    # Parameter for Temporal Average Monitor
+    'parameter_TemporalAverage':{
+        'variables_of_interest':[0,1,2,3],
+        # 'period': param_nest['sim_resolution']*10.0 # 1s assuming the step size is 0.1 ms
+    },
+    # Use or not the Bold Monitor
+    'Bold':True,
+    # Paramter for the Bold Monitor
+    'parameter_Bold':{
+        'variables_of_interest':[0],
+        # 'period':param_nest['sim_resolution']*20000.0 # 20 min assuming the step size is 0.1 ms
+    }
 }
 
 param_TR_nest_to_tvb={
@@ -202,7 +246,7 @@ param_TR_nest_to_tvb={
 param_TR_tvb_to_nest={
     # percentage of shared rate between neurons of the same region
     'percentage_shared': 0.5,
-    'seed':param_nest['master_seed']-2 # -2 because -1 is use by the simulation of TVB
+    # 'seed':param_nest['master_seed']-3 # -3 because -1 and -2 is use by the simulation of TVB
     # 'init': path of the initialisation of the translation if not the run exploration will create it
     # 'level_log': param_co_simulation['level_log']
 }

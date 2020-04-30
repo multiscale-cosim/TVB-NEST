@@ -52,8 +52,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
 
         #initialise Nest and take information for the connection between all the mpi process
         spike_detector,spike_generator = config_mpi_record(results_path=results_path,begin=begin,end=end,
-                                                           param_nest=parameters['param_nest'],param_topology=parameters['param_topology'],
-                                                           param_connection=parameters['param_connection'],param_background=parameters['param_background'],
+                                                           param_nest=parameters['param_nest'],param_topology=parameters['param_nest_topology'],
+                                                           param_connection=parameters['param_nest_connection'],param_background=parameters['param_nest_background'],
                                                            cosimulation=param_co_simulation)
         if nest.Rank() == 0:
             # create translator between Nest to TVB :
@@ -128,9 +128,9 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                 #initialise Nest before the communication
                 spike_detector, spike_generator = config_mpi_record(results_path=results_path, begin=begin, end=end,
                                                                     param_nest=parameters['param_nest'],
-                                                                    param_topology=parameters['param_topology'],
-                                                                    param_connection=parameters['param_connection'],
-                                                                    param_background=parameters['param_background'],
+                                                                    param_topology=parameters['param_nest_topology'],
+                                                                    param_connection=parameters['param_nest_connection'],
+                                                                    param_background=parameters['param_nest_background'],
                                                                     cosimulation=param_co_simulation)
 
                 #create file for the foldder for the communication part
@@ -161,14 +161,18 @@ def run(results_path,parameter_default,dict_variable,begin,end):
             else:
                 # just run nest with the configuration
                 simulate(results_path=results_path, begin=begin, end=end,
-                         param_nest=parameters['param_nest'], param_topology=parameters['param_topology'],
-                         param_connection=parameters['param_connection'], param_background=parameters['param_background'])
+                         param_nest=parameters['param_nest'],
+                         param_topology=parameters['param_nest_topology'],
+                         param_connection=parameters['param_nest_connection'],
+                         param_background=parameters['param_nest_background'])
         else:
             # Third case : Only tvb simulation
             simulate_tvb(results_path=results_path, begin=begin, end=end,
-                 param_tvb=parameters['param_tvb'], param_zerlaut=parameters['param_zerlaut'],
-                 param_nest=parameters['param_nest'], param_topology=parameters['param_topology'],
-                 param_connection=parameters['param_connection'], param_background=parameters['param_background'])
+                         param_tvb_connection=parameters['param_tvb_connection'],
+                         param_tvb_coupling=parameters['param_tvb_coupling'],
+                         param_tvb_integrator=parameters['param_tvb_integrator'],
+                         param_tvb_model=parameters['param_tvb_model'],
+                         param_tvb_monitor=parameters['param_tvb_monitor'])
     print('time: '+str(datetime.datetime.now())+' END SIMULATION \n')
 
 def run_exploration_2D(path,parameter_default,dict_variables,begin,end):

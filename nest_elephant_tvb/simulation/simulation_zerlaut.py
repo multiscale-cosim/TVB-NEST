@@ -11,7 +11,7 @@ import nest_elephant_tvb.simulation.file_tvb.noise as my_noise
 from mpi4py import MPI
 
 
-def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background,mpi=None):
+def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,mpi=None):
     '''
     Initialise the simulator with parameter
     :param param_tvb : parameter for the simulator tvb
@@ -24,57 +24,57 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
     :return: the simulator initialize
     '''
     ## initialise the random generator
-    rgn.seed(param_nest['master_seed']-1)
+    rgn.seed(param_tvb_integrator['seed_init']-1)
 
     ## Model
-    if param_zerlaut['order'] == 1:
+    if param_tvb_model['order'] == 1:
         model = Zerlaut.ZerlautAdaptationFirstOrder(variables_of_interest='E I W_e W_i'.split())
-    elif param_zerlaut['order'] == 2:
+    elif param_tvb_model['order'] == 2:
         model = Zerlaut.ZerlautAdaptationSecondOrder(variables_of_interest='E I C_ee C_ei C_ii W_e W_i'.split())
     else:
         raise Exception('Bad order for the model')
 
-    model.g_L=np.array(param_topology['param_neuron_excitatory']['g_L'])
-    model.E_L_e=np.array(param_topology['param_neuron_excitatory']['E_L'])
-    model.E_L_i=np.array(param_topology['param_neuron_inhibitory']['E_L'])
-    model.C_m=np.array(param_topology['param_neuron_excitatory']['C_m'])
-    model.b_e=np.array(param_topology['param_neuron_excitatory']['b'])
-    model.a_e=np.array(param_topology['param_neuron_excitatory']['a'])
-    model.b_i=np.array(param_topology['param_neuron_inhibitory']['b'])
-    model.a_i=np.array(param_topology['param_neuron_inhibitory']['a'])
-    model.tau_w_e=np.array(param_topology['param_neuron_excitatory']['tau_w'])
-    model.tau_w_i=np.array(param_topology['param_neuron_inhibitory']['tau_w'])
-    model.E_e=np.array(param_topology['param_neuron_excitatory']['E_ex'])
-    model.E_i=np.array(param_topology['param_neuron_excitatory']['E_in'])
-    model.Q_e=np.array(param_connection['weight_local'])
-    model.Q_i=np.array(param_connection['weight_local']*param_connection['g'])
-    model.tau_e=np.array(param_topology['param_neuron_excitatory']['tau_syn_ex'])
-    model.tau_i=np.array(param_topology['param_neuron_excitatory']['tau_syn_in'])
-    model.N_tot=np.array(param_topology['nb_neuron_by_region'])
-    model.p_connect=np.array(param_connection['p_connect'])
-    model.g=np.array(param_topology['percentage_inhibitory'])
-    model.T=np.array(param_zerlaut['T'])
-    model.P_e=np.array(param_zerlaut['P_e'])
-    model.P_i=np.array(param_zerlaut['P_i'])
-    model.K_ext_e=np.array(param_connection['nb_external_synapse'])
+    model.g_L=np.array(param_tvb_model['g_L'])
+    model.E_L_e=np.array(param_tvb_model['E_L_e'])
+    model.E_L_i=np.array(param_tvb_model['E_L_i'])
+    model.C_m=np.array(param_tvb_model['C_m'])
+    model.b_e=np.array(param_tvb_model['b_e'])
+    model.a_e=np.array(param_tvb_model['a_e'])
+    model.b_i=np.array(param_tvb_model['b_i'])
+    model.a_i=np.array(param_tvb_model['a_i'])
+    model.tau_w_e=np.array(param_tvb_model['tau_w_e'])
+    model.tau_w_i=np.array(param_tvb_model['tau_w_i'])
+    model.E_e=np.array(param_tvb_model['E_e'])
+    model.E_i=np.array(param_tvb_model['E_i'])
+    model.Q_e=np.array(param_tvb_model['Q_e'])
+    model.Q_i=np.array(param_tvb_model['Q_i'])
+    model.tau_e=np.array(param_tvb_model['tau_e'])
+    model.tau_i=np.array(param_tvb_model['tau_i'])
+    model.N_tot=np.array(param_tvb_model['N_tot'])
+    model.p_connect=np.array(param_tvb_model['p_connect'])
+    model.g=np.array(param_tvb_model['g'])
+    model.T=np.array(param_tvb_model['T'])
+    model.P_e=np.array(param_tvb_model['P_e'])
+    model.P_i=np.array(param_tvb_model['P_i'])
+    model.K_ext_e=np.array(param_tvb_model['K_ext_e'])
     model.K_ext_i=np.array(0)
     model.external_input_ex_ex=np.array(0.)
     model.external_input_ex_in=np.array(0.)
     model.external_input_in_ex=np.array(0.0)
     model.external_input_in_in=np.array(0.0)
-    model.state_variable_range['E'] =np.array( param_zerlaut['initial_condition']['E'])
-    model.state_variable_range['I'] =np.array( param_zerlaut['initial_condition']['I'])
-    if param_zerlaut['order'] == 2:
-        model.state_variable_range['C_ee'] = np.array(param_zerlaut['initial_condition']['C_ee'])
-        model.state_variable_range['C_ei'] = np.array(param_zerlaut['initial_condition']['C_ei'])
-        model.state_variable_range['C_ii'] = np.array(param_zerlaut['initial_condition']['C_ii'])
-    model.state_variable_range['W_e'] = np.array(param_zerlaut['initial_condition']['W_e'])
-    model.state_variable_range['W_i'] = np.array(param_zerlaut['initial_condition']['W_i'])
+    model.state_variable_range['E'] =np.array( param_tvb_model['initial_condition']['E'])
+    model.state_variable_range['I'] =np.array( param_tvb_model['initial_condition']['I'])
+    if param_tvb_model['order'] == 2:
+        model.state_variable_range['C_ee'] = np.array(param_tvb_model['initial_condition']['C_ee'])
+        model.state_variable_range['C_ei'] = np.array(param_tvb_model['initial_condition']['C_ei'])
+        model.state_variable_range['C_ii'] = np.array(param_tvb_model['initial_condition']['C_ii'])
+    model.state_variable_range['W_e'] = np.array(param_tvb_model['initial_condition']['W_e'])
+    model.state_variable_range['W_i'] = np.array(param_tvb_model['initial_condition']['W_i'])
 
     ## Connection
-    tract_lengths = np.load(param_connection['path_distance'])
-    weights = np.load(param_connection['path_weight'])
-    nb_region = int(param_topology['nb_region'])
+    tract_lengths = np.load(param_tvb_connection['path_distance'])
+    weights = np.load(param_tvb_connection['path_weight'])
+    nb_region = int(param_tvb_connection['nb_region'])
     connection = lab.connectivity.Connectivity(number_of_regions=nb_region,
                                                    tract_lengths=tract_lengths[:nb_region,:nb_region],
                                                    weights=weights[:nb_region,:nb_region],
@@ -83,46 +83,34 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
                                                )
 
     ## Coupling
-    coupling = lab.coupling.Linear(a=np.array(param_connection['weight_global']),
+    coupling = lab.coupling.Linear(a=np.array(param_tvb_coupling['a']),
                                        b=np.array(0.0))
 
     ## Integrator
-    # test of noiose should be remove and use paramerters
+    # test of noise should be remove and use parameters
     noise = my_noise.Ornstein_Ulhenbeck_process(
-        tau_OU=20.0,
-        # mu=np.array([300.0,0.0,0.,0.0,0.0,0.0,0.0]).reshape((7,1,1)),
-        # nsig=np.array([10.0,0.,0.,0.,0.,0.,0.]),
-        # weights=np.array([1/400,0.,0.,0.,0.,0.,0.]).reshape((7,1,1))
-        mu=np.array([700e-3,0.0,0.,0.0,0.0,0.0,0.0]).reshape((7,1,1)),
-        nsig=np.array([50e-3,0.,0.,0.,0.,0.,0.]),
-        weights=np.array([1.e-2,0.,0.,0.,0.,0.,0.]).reshape((7,1,1))
+        tau_OU=param_tvb_integrator['tau_OU'],
+        mu=np.array(param_tvb_integrator['mu']).reshape((7,1,1)),
+        nsig=np.array(param_tvb_integrator['nsig']),
+        weights=np.array(param_tvb_integrator['weights']).reshape((7,1,1))
     )
-    # noise = my_noise.Poisson_noise(nsig=np.array([30.0,0.0,0.,0.,0.,0.0,0.]),
-    #                                weights=np.array([3.5e-4,0.,0.,0.,0.,0.,0.]).reshape((7,1,1))) #TODO to remove number
-                                    # weights = np.array([5/400*0.1, 0., 1e-6, 0., 0., 0., 0.]).reshape((7, 1, 1)))  # TODO to remove number
-    # noise = my_noise.Poisson_noise(nsig=np.array([300.0,300.0,300.,0.,300.,0.,0.]),
-    #                                weights=np.array([1./8000.,1./2000.,1./8000./8000.,0.,1./2000./2000.,0.,0.]).reshape((7,1,1))) #TODO to remove number
-    # noise = my_noise.Poisson_noise(nsig=np.array([1.0,param_background['rate_in']-200.0*1e-3,0.,0.,0.,0.,0.]),
-    #                                nb_neurons=1)
-    # noise = lab.noise.Additive(nsig=np.array([3.16*5/400.0*1e-9,0.,0.,0.,0.,0.,0.]))
-    # noise = lab.noise.Additive(nsig=np.array([0.0,0.,0.,0.,0.,0.,0.]))
-    noise.random_stream.seed(param_nest['master_seed']-1)
-    integrator = lab.integrators.HeunStochastic(noise=noise,dt=param_nest['sim_resolution'])
+    noise.random_stream.seed(param_tvb_integrator['seed'])
+    integrator = lab.integrators.HeunStochastic(noise=noise,dt=param_tvb_integrator['sim_resolution'])
     # integrator = lab.integrators.HeunDeterministic()
 
     ## Monitors
     monitors =[]
-    if param_tvb['Raw']:
+    if param_tvb_monitor['Raw']:
         monitors.append(lab.monitors.Raw())
-    if param_tvb['TemporalAverage']:
+    if param_tvb_monitor['TemporalAverage']:
         monitor_TAVG = lab.monitors.TemporalAverage(
-            variables_of_interest=param_tvb['parameter_TemporalAverage']['variables_of_interest'],
-            period=param_tvb['parameter_TemporalAverage']['period'])
+            variables_of_interest=param_tvb_monitor['parameter_TemporalAverage']['variables_of_interest'],
+            period=param_tvb_monitor['parameter_TemporalAverage']['period'])
         monitors.append(monitor_TAVG)
-    if param_tvb['Bold']:
+    if param_tvb_monitor['Bold']:
         monitor_Bold = lab.monitors.Bold(
-            variables_of_interest=np.array(param_tvb['parameter_Bold']['variables_of_interest']),
-            period=param_tvb['parameter_Bold']['period'])
+            variables_of_interest=np.array(param_tvb_monitor['parameter_Bold']['variables_of_interest']),
+            period=param_tvb_monitor['parameter_Bold']['period'])
         monitors.append(monitor_Bold)
     if mpi is not None:
         # special monitor for MPI
@@ -132,14 +120,13 @@ def init(param_tvb,param_zerlaut,param_nest,param_topology,param_connection,para
             )
         monitors.append(monitor_IO)
 
-
     #initialize the simulator:
     simulator = lab.simulator.Simulator(model = model, connectivity = connection,
                                             coupling = coupling, integrator = integrator, monitors = monitors
                                         )
     simulator.configure()
     # save the initial condition
-    np.save(param_tvb['path_result']+'/step_init.npy',simulator.history.buffer)
+    np.save(param_tvb_monitor['path_result']+'/step_init.npy',simulator.history.buffer)
     # end edit
     return simulator
 
@@ -173,8 +160,8 @@ def run_simulation(simulator, time, parameter_tvb):
     # save the last part
     np.save(parameter_tvb['path_result']+'/step_'+str(count)+'.npy',save_result)
 
-def simulate_tvb(results_path,begin,end,param_tvb,param_zerlaut,
-              param_nest,param_topology,param_connection,param_background):
+def simulate_tvb(results_path,begin,end,param_tvb_connection,param_tvb_coupling,
+                 param_tvb_integrator,param_tvb_model,param_tvb_monitor):
     '''
     simulate TVB with zerlaut simulation
     :param results_path: the folder to save the result
@@ -189,10 +176,9 @@ def simulate_tvb(results_path,begin,end,param_tvb,param_zerlaut,
     :return: simulation
     '''
     #TODO add the option for the co-simulation (add raw_monitor and manage proxy node) or create another functions
-    param_tvb['path_result']=results_path+'/tvb/'
-    simulator = init(param_tvb,param_zerlaut,
-              param_nest,param_topology,param_connection,param_background)
-    run_simulation(simulator,end,param_tvb)
+    param_tvb_monitor['path_result']=results_path+'/tvb/'
+    simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor)
+    run_simulation(simulator,end,param_tvb_monitor)
 
 def rum_mpi(path):
     '''
@@ -201,7 +187,7 @@ def rum_mpi(path):
     '''
     # take the parameters of the simulation from the saving file
     sys.path.append(path)
-    from parameter import param_co_simulation,param_tvb,param_zerlaut,param_nest,param_topology,param_connection,param_background,result_path,begin,end
+    from parameter import param_co_simulation, param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_tvb_model, param_tvb_monitor, result_path, begin,end
     sys.path.remove(path)
 
     # configuration of the logger
@@ -226,16 +212,15 @@ def rum_mpi(path):
         logger.setLevel(logging.CRITICAL)
 
     #initialise the TVB
-    param_tvb['path_result']=result_path+'/tvb/'
+    param_tvb_monitor['path_result']=result_path+'/tvb/'
     id_proxy = param_co_simulation['id_region_nest']
     time_synch = param_co_simulation['synchronization']
-    simulator = init(param_tvb,param_zerlaut,
-              param_nest,param_topology,param_connection,param_background,{'id_proxy':np.array(id_proxy),
+    simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,{'id_proxy':np.array(id_proxy),
                                                                           'time_synchronize':time_synch,
                                                                            })
     # configure for saving result of TVB
     # check how many monitor it's used
-    nb_monitor = param_tvb['Raw'] + param_tvb['TemporalAverage'] + param_tvb['Bold']
+    nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold']
     # initialise the variable for the saving the result
     save_result =[]
     for i in range(nb_monitor):
@@ -261,15 +246,15 @@ def rum_mpi(path):
             time_data = receive[0]
             data_value.append(receive[1])
         data=np.empty((2,),dtype=object)
-        nb_step = np.rint((time_data[1]-time_data[0])/param_nest['sim_resolution'])
-        nb_step_0 = np.rint(time_data[0]/param_nest['sim_resolution'])
-        time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_nest['sim_resolution']
+        nb_step = np.rint((time_data[1]-time_data[0])/param_tvb_integrator['sim_resolution'])
+        nb_step_0 = np.rint(time_data[0]/param_tvb_integrator['sim_resolution'])
+        time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_tvb_integrator['sim_resolution']
         data_value = np.swapaxes(np.array(data_value),0,1)[:,:,np.newaxis,np.newaxis]
         if data_value.shape[0] != time_data.shape[0]:
             raise(Exception('Bad shape of data'))
         data[:]=[time_data,data_value]
 
-        logger.info(" TVB start simulation "+str(count*time_synch));
+        logger.info(" TVB start simulation "+str(count*time_synch))
         nest_data=[]
         for result in simulator(simulation_length=time_synch,proxy_data=data):
             for i in range(nb_monitor):
@@ -278,8 +263,8 @@ def rum_mpi(path):
             nest_data.append([result[-1][0][1],result[-1][1][1]])
 
             #save the result in file
-            if result[-1][0][0] >= param_tvb['save_time']*(count+1): #check if the time for saving at some time step
-                np.save(param_tvb['path_result']+'/step_'+str(count)+'.npy',save_result)
+            if result[-1][0][0] >= param_tvb_monitor['save_time']*(count+1): #check if the time for saving at some time step
+                np.save(param_tvb_monitor['path_result']+'/step_'+str(count)+'.npy',save_result)
                 save_result =[]
                 for i in range(nb_monitor):
                     save_result.append([])
@@ -297,7 +282,7 @@ def rum_mpi(path):
         count+=1
     # save the last part
     logger.info(" TVB exit")
-    np.save(param_tvb['path_result']+'/step_'+str(count)+'.npy',save_result)
+    np.save(param_tvb_monitor['path_result']+'/step_'+str(count)+'.npy',save_result)
     for index,comm in  enumerate(comm_send):
         end_mpi(comm,result_path+"/receive_from_tvb/"+str(id_proxy[index])+".txt",True)
     for index,comm in  enumerate(comm_receive):
