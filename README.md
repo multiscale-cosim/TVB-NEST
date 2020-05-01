@@ -1,58 +1,60 @@
 #Co-simulation Between TVb and NEST
-#READ IT before to use this :
 ## Concept 
 This is a prof of concept for the co-simulation between TVB and NEST.
-It should be flexible and scalable to adapt to any applications and run on supercomputers.
+It should be flexible and scalable to adapt to any networks simulation and run in supercomputers.
 
 WARNING : this code has some bugs and missing elements.
+WARNING : All the script needs to be launch in the repertory where there are.
 
-##Future implementation :
-1. **FOR DEBUGGING** : Create a debugger of all the components 
-2. Reproducibility : 
-    1. Add seed in the science module for TVB to Nest
-    2. Solve the issue of Nest (https://github.com/nest/nest-simulator/issues/1409)
-3.  Add test for the input an output of interface TVB
-4.  Miss a mechanism to synchronise all the components at the begging system at the begging.
-5.  It is missing the initialisation for the Communication
-6.  Manage the MPI/Threading of Nest (Actual give a segmentation error. For avoiding it, put the same number of MPI process than virtual process)
-7.  Finish to change the noise in TVB
-8.  Modify the function generates parameters in run_explorations parameters for all parameters.
-9.  Add some functions of the simulation Nest to include multimeter recorder and other stimuli. 
 
-##Test
-### The Missing Tests
-1.  The ending of the simulation is not ready to use. They’re not test for check if the application finish correctly.
-2.  The saving of histogram is not testing.
-3.  Miss control over the time of all the simulator during the simulation
-### How to test the application
-Before every test include in your python path the folder and the installation of Nest
+## Table of Contents
+1. [Installation and update](#installalation)
+    1. [Advice for using the repertory](#advice)
+    2. [Different Installation](#diff_install)
+2. [Dependencies](#dependencies)
+3. [Adaption to your own usage](#usage)
+    1. [The management of parameters or change parameters](#usage_1)
+    2. [If you want to modify the Nest configuration](#usage_2)
+    3. [If you want to modify TVB configuration](#usage_3)
+4.[Tests](#tests)
+    1. [How to test the installation](#test_1)
+5. [Future implementation](#future)
+6. [Extension](#extension)
+7. [Files](#files)
 
-Example/test of the different components
-1. test_nest/test_input_nest_current.sh
-2. test_nest/test_input_nest_spike.sh 
-3. test_nest/test_record_nest_spike.sh
-4. test_nest/test_translator_nest_to_tvb.sh
-5. test_nest/test_translator_tvb_to_nest.sh
+## Installation and update :<a name="installalation"></a>
+### Advice for using the repertory :<a name="advice"></a>
+For cloning the project, you need also to clone the submodule.
+I advice you to clone the repertory with the following command :  git clone --recurse-submodules 
 
-Test only nest : run_nest_one.py,run_nest_two.py,run_nest_three.py (test with 1, 2 ou 3 regions)
-Test only tvb : run_tvb_one.py,run_tvb_two.py,run_tvb_three.py (test with 1, 2 ou 3 regions)
-Test co-simulation : 
-    mpirun -n X python test_nest/run_co-sim.py 
+For updating the folder, you need also to update the submodule by the following command: git submodule update
 
-## Future ideas
-1. Need to create an orchestrator for managing communication of MPI and the synchronisation between all the elements
-2. The implementation of any translator can be done by replacing the function in the file science
-3. Increase the Configuration file for a generalisation of the configuration of Nest and TVB.
-    For the moment the configuration is based on region connected. Each region has 2 populations of excitatory and inhibitory neurons.
-    The type of the neurons is the same everywhere.
-    TVB is based on a model based on the model of adaptive exponential integrate and fire neurons. The most of the configuration is coming from the configuration of Nest.
-4. Improvement of the MPI protocol between all the components
-5. Improve the different I/O interface for all the components
+### Different Installation :<a name="diff_install"></a>
+In the folder installation, you have three possibilities : 
+- docker :
+    There are one script for creating a docker image and one script for running a example of usage of this image.
+    There are the possibility of two different OS : alpine (1) and debian (2)
+- singularity : 
+    The same function for docker are available for singularity
+- virtual environment :
+    There are one script for create a virtual environment with all the python library for running the script.
+    WARNING : the library for PyNest are not available in this environment. You should compile Nest and add the path of the library in the PYTHONPATH before to use it.
 
-## Dependencies
-Nest : the version  of Nest is base of Nest 3 is already included in the repertory
+If you want to install in your computer, you should look the configuration file of singularity.
+This are only possibility and not a formal way to install and to use this git repository.
+To test your installation, you should look the section Test or the folder test_nest
 
-MPI :
+## Dependencies<a name="dependencies"></a>
+Nest : the version of Nest is base of Nest 3 is already included in the repertory
+        For the dependency of nest, you should look this page : https://nest-simulator.readthedocs.io/en/stable/installation/linux_install.html
+        For having the good configuration parameters of Nest, you should look this page : https://nest-simulator.readthedocs.io/en/stable/installation/install_options.html
+        I use the next commands for compiling nest :
+        mkdir ./lib/nest_run
+        mkdir ./lib/nest_build
+        cd  ./lib/nest_build
+        cmake ../../nest-io-dev/ -DCMAKE_INSTALL_PREFIX:PATH='../lib/nest_run/' -Dwith-python=3 -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-debug=ON
+        make 
+MPI : MPI need to be MPI-3 ( I use the following implementation : http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz)
 
 Python library :
 1. TVB version >=2.0
@@ -61,14 +63,87 @@ Python library :
 5. threading
 6. scipy
 7. json
-8. subprocess
 9. numba
 10. quantities
 11. elephant
 12. neo
 
-## Files
-* nest-io : new version of Nest (need to be compiled with MPI option)
+## Adaption to your own usage<a name="usages"></a>
+### The management of parameters or change parameters:<a name="usages_1"></a>
+ The file nest_elephant_nest/simulation/parameters_managers.py which manage the modification of parameters of the exploration and the link between parameters.
+ If you want to change a parameters, you should be careful of the dependency between parameters ( see the file test_parameters ).
+ If you want to explore a particular parameters, you should be careful of the name of parameters and the real modification of it.
+ 
+### If you want to modify the Nest configuration:<a name="usages_2"></a>
+You should change the file nest_elephant_nest/simulation/simulation_nest.py
+The most important of this file is the the function at the end call for the run exploration.
+There are 5 step : 
+- Configure Nest
+- Create the population of neurons
+- Create the connection between population 
+- Create the device (WARNING: this function need to send the ID's of device using MPI. This ids are used for the configutation of the translators)
+- Simulate
+
+The 4 first step are the initialisation of Nest.
+If you include or remove the parameters of Nest, you need to change nest_elephant_nest/simulation/parameters_managers.py for remove the link between parameters.
+Moreover, the name of the parameters need to begin by 'param'.  
+
+### If you want to modify TVB configuration:<a name="usages_3"></a>
+You should change the beginning of the file nest_elephant_nest/simulation/simulation_zerlaut.py
+The function init create the simulator for running TVB. All the parameters are use in this file.
+The dependency with the parameter of Nest are define in nest_elephant_nest/simulation/parameters_managers.py. 
+
+##Tests<a name="tests"></a>
+### How to test the installation (don't the correctness of the simulation)<a name="tests_1"></a>
+Before every test include in your python path the folder and the installation of Nest
+
+Example/test of the different modules
+1. Nest :
+    1. test_nest/test_input_nest_current.sh
+    2. test_nest/test_input_nest_current_multiple.sh (test also the multi-threading)
+    3. test_nest/test_input_nest_spike.sh 
+    4. test_nest/test_record_nest_spike.sh
+    5. test_nest/test_record_nest_spike_multiple.sh (test also the multi-threading) 
+2. test_nest/test_translator_nest_to_tvb.sh
+3. test_nest/test_translator_tvb_to_nest.sh
+4. test_nest/test_nest_save.sh
+
+Test only nest : run_nest_one.py (for 1 region in Nest but it can be easily extend to 112 regions)
+Test only tvb : run_tvb_one.py (for 1 region in TVB but it can be easily extend to 112 regions)
+
+For testing the co-simulation, you can check : 
+    - test_nest/test_co-sim.sh
+    - install/docker/run_image.sh
+    - install/singularity/run_image.sh
+
+## Future implementation :<a name="future"></a>
+1. Improve the communication pattern for the input of Nest
+2. Install on cluster
+3. Add a second function to transform rate to spike based on Multiple Interaction Process Model
+4. Improve synchronisation between modules (actually file synchronization).
+5. Add test for the input an output of interface TVB.
+6. Add test for valid the value a simulation
+7. Add some functions of the simulation Nest to include multimeter recorder and other stimuli. 
+
+## Extension :<a name="extension"></a>
+1. Replace the output of simulator by a streaming output function.
+2. Replace the device in Nest by include the input direct in the neurons 
+3. Create an orchestrator for managing communication of MPI and the synchronisation between all the elements
+
+## Files<a name="files"></a>
+* [install](#installalation)
+    * docker
+        create_docker.sh, create_docker_1.sh : create the docker image for the project
+        Nest_TVB.dockerfile, Nest_TVB_1.dockerfile : file of configuration for docker
+        run_images : example of running co-simulation with the image 
+    * py_venv
+        create_virtual_python.sh : create the virtual environment
+    * singularity
+        create_container.sh, create_container_1.sh : create the singularity image for the project
+        Nest_TVB_config.singularity, Nest_TVB_config_1.singularity : file of configuration for singularity
+        run_images : example of running co-simulation with the image 
+* nest-io : new version of Nest (old repertory will disappear)
+* nest-io-dev : the branch of Nest with IO using MPI
 * nest_elephant_nest: file which contains all the kernel of the simulation
     * parameter : parameter for the simulation and the data
         * data_mouse : data from Allen Institute of mouse connectome is composed of the file of the distance between each region and the weight of the connections
@@ -86,8 +161,8 @@ Python library :
             * Interface_co_simulation.py : interface can be used only in sequential but allow using intermediate result for the firing rate. (Need to compute Nest before TVB)
             * Interface_co_simulation_parallel.py : can be used to compute TVB and Nest in same time
             * test_interface... : test for the interface with the model of Wong Wang
-        * correct_parameters.sh : script for modifying the parameters after to save in json (allow to use like python package)
-        * run_exploration.py : main script of the simulation for the exploration of 2 parameters with one or 2 simulators
+        * parameters_manager.py : script which manage the parameters ( saving, modify parameters of exploration and link between parameters.
+        * run_exploration.py : main script of the simulation for the exploration of 1 parameters with one or 2 simulators
         * simulation_nest.py : the script the configuration and the running of the simulation of Nest
         * simulation_zerlaut.py : the script for the configure and the running of the simulator of TVB
-* test_nest: contains all the test (see the section test)   
+* test_nest: contains all the [test](#tests)   
