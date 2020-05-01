@@ -12,11 +12,11 @@ WARNING : All the script needs to be launch in the repertory where there are.
     1. [Advice for using the repertory](#advice)
     2. [Different Installation](#diff_install)
 2. [Dependencies](#dependencies)
-3. [Adaption to your own usage](#usage)
-    1. [The management of parameters or change parameters](#usage_1)
-    2. [If you want to modify the Nest configuration](#usage_2)
-    3. [If you want to modify TVB configuration](#usage_3)
-4.[Tests](#tests)
+3. [Adaption to your own usage](#usages)
+    1. [The management of parameters or change parameters](#usages_1)
+    2. [If you want to modify the Nest configuration](#usages_2)
+    3. [If you want to modify TVB configuration](#usages_3)
+4. [Tests](#tests)
     1. [How to test the installation](#test_1)
 5. [Future implementation](#future)
 6. [Extension](#extension)
@@ -93,7 +93,7 @@ You should change the beginning of the file nest_elephant_nest/simulation/simula
 The function init create the simulator for running TVB. All the parameters are use in this file.
 The dependency with the parameter of Nest are define in nest_elephant_nest/simulation/parameters_managers.py. 
 
-##Tests<a name="tests"></a>
+## Tests<a name="tests"></a>
 ### How to test the installation (don't the correctness of the simulation)<a name="tests_1"></a>
 Before every test include in your python path the folder and the installation of Nest
 
