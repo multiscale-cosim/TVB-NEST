@@ -14,8 +14,9 @@ WARNING : All the script needs to be launch in the repertory where there are.
 2. [Dependencies](#dependencies)
 3. [Adaption to your own usage](#usages)
     1. [The management of parameters or change parameters](#usages_1)
-    2. [If you want to modify the Nest configuration](#usages_2)
-    3. [If you want to modify TVB configuration](#usages_3)
+    2. [The modification of the translation](#usages_2) 
+    2. [If you want to modify the Nest configuration](#usages_3)
+    3. [If you want to modify TVB configuration](#usages_4)
 4. [Tests](#tests)
     1. [How to test the installation](#test_1)
 5. [Future implementation](#future)
@@ -74,21 +75,38 @@ Python library :
  If you want to change a parameters, you should be careful of the dependency between parameters ( see the file test_parameters ).
  If you want to explore a particular parameters, you should be careful of the name of parameters and the real modification of it.
  
-### If you want to modify the Nest configuration:<a name="usages_2"></a>
+### The modification of the translation :<a name="usages_2"></a>
+ The translation function is simple to change the function.
+ In the files nest_elephant_nest/simulation/files_translation/science_tvb_to_nest.py or science_nest_to_tvb.py contains all the functions for exploring different solution of translations.
+ The translation tvb to nest is composed of one function :
+ - generate_spike :
+ This function take in input the rates of TVB and generate an array with all the input spike for each neurons.
+ Actually, the function is a generation of spike with a generator of inhomogeneous poisson (implemented in elephant).
+ The parameter is the percentage of rate shared between all neurons. (it's a very simple translation) 
+ 
+ The translation nest to tvb is composed of two functions :
+ - add_spikes : 
+    This function takes an array of spike and store it in a buffer.
+    The actual function store the spike in an histogram
+ - analyse:
+    This function take the buffer and transform in rates.
+    Actually, the model is based on a sliding window of the histogram. The analyse generate rate with a sliding window.
+ 
+### If you want to modify the Nest configuration:<a name="usages_3"></a>
 You should change the file nest_elephant_nest/simulation/simulation_nest.py
 The most important of this file is the the function at the end call for the run exploration.
 There are 5 step : 
 - Configure Nest
 - Create the population of neurons
 - Create the connection between population 
-- Create the device (WARNING: this function need to send the ID's of device using MPI. This ids are used for the configutation of the translators)
+- Create the device (WARNING: this function need to send the ID's of device using MPI. This ids are used for the configuration of the translators)
 - Simulate
 
 The 4 first step are the initialisation of Nest.
 If you include or remove the parameters of Nest, you need to change nest_elephant_nest/simulation/parameters_managers.py for remove the link between parameters.
 Moreover, the name of the parameters need to begin by 'param'.  
 
-### If you want to modify TVB configuration:<a name="usages_3"></a>
+### If you want to modify TVB configuration:<a name="usages_4"></a>
 You should change the beginning of the file nest_elephant_nest/simulation/simulation_zerlaut.py
 The function init create the simulator for running TVB. All the parameters are use in this file.
 The dependency with the parameter of Nest are define in nest_elephant_nest/simulation/parameters_managers.py. 
