@@ -131,6 +131,8 @@ For testing the co-simulation, you can check :
 3. Create an orchestrator for managing communication of MPI and the synchronisation between all the elements
 
 ## Files<a name="files"></a>
+* doc : Documention of the project
+    * UML : UML of communication and state of modules
 * [install](#installalation)
     * docker
         create_docker.sh, create_docker_1.sh : create the docker image for the project
