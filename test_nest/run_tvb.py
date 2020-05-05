@@ -2,9 +2,10 @@ from nest_elephant_tvb.simulation.run_exploration import run_exploration_2D
 import numpy as np
 from nest_elephant_tvb.parameter import test_nest as parameter_test
 
+# File for exploring a simulation with only tvb simulation
+
 def run_exploration(path,begin,end):
     parameter_test.param_co_simulation['nb_MPI_nest']=0
-    parameter_test.param_co_simulation['nb_MPI_tvb']=1
     run_exploration_2D(path, parameter_test, {'g':np.arange(0.0, 1.0, 0.5), 'mean_I_ext': np.arange(0.0, 100.0, 50.0)}, begin, end)
 
 if __name__ == "__main__":

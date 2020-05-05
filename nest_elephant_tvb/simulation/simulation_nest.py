@@ -10,7 +10,7 @@ def network_initialisation(results_path,param_nest):
     Initialise the kernel of Nest
     :param results_path: Folder for saving the result of device
     :param param_nest: Dictionary with the parameter for Nest
-    :return: Random generator for each thread
+    :return:
     """
     # the seed of the simulation
     master_seed = param_nest['master_seed']
@@ -18,7 +18,6 @@ def network_initialisation(results_path,param_nest):
     total_num_virtual_procs = param_nest['total_num_virtual_procs']
     # Numpy random generator
     np.random.seed(master_seed)
-    pyrngs = [np.random.RandomState(s) for s in range(master_seed, master_seed + total_num_virtual_procs)]
     # Nest Kernel
     nest.set_verbosity(param_nest['verbosity'])
     nest.ResetKernel()
@@ -43,13 +42,12 @@ def network_initialisation(results_path,param_nest):
     })
     if nest.Rank()==0:
         nest.SetKernelStatus({"print_time": True})
-    return pyrngs
+    return
 
-def network_initialisation_neurons(results_path,pyrngs,param_topology,return_gids=False,cosimulation=None):
+def network_initialisation_neurons(results_path,param_topology,return_gids=False,cosimulation=None):
     """
     Create all neuron in each unit in Nest. An unit is composed by two populations (excitatory and inhibitory)
     :param results_path: Folder for saving the result of device
-    :param pyrngs: Random generator for each thread
     :param param_topology: Dictionary with the parameter for the topology
     :param return_gids: Boolean to choose to return the ids of population or not
     :param cosimulation : parameters for the  co-simulation
@@ -231,7 +229,7 @@ def create_heterogenous_connection(dic_layer,param_topology,param_connection,sav
          weights,delays)=init
         
     if cosimulation is not None:
-        # addapt the weight of the nest node only
+        # adapt the weight of the nest node only
         weights=weights[cosimulation['id_region_nest'],:]
         weights=weights[:,cosimulation['id_region_nest']]
         delays=delays[cosimulation['id_region_nest'],:]
@@ -470,8 +468,8 @@ def simulate (results_path,begin,end,
     # Initialisation of the network
     if nest.Rank() == 0:
         tic = time.time()
-    pyrngs=network_initialisation(results_path,param_nest)
-    dic_layer=network_initialisation_neurons(results_path,pyrngs,param_topology)
+    network_initialisation(results_path,param_nest)
+    dic_layer=network_initialisation_neurons(results_path,param_topology)
     if nest.Rank() == 0:
         toc = time.time() - tic
         print("Time to initialize the network: %.2f s" % toc)
@@ -494,7 +492,7 @@ def simulate (results_path,begin,end,
         print("Time to simulate: %.2f s" % toc)
 
 def config_mpi_record (results_path,begin,end,
-              param_nest,param_topology,param_connection,param_background,
+                       param_nest,param_topology,param_connection,param_background,
                        cosimulation=None):
     """
     configuration before running
@@ -506,12 +504,13 @@ def config_mpi_record (results_path,begin,end,
     :param param_connection: Parameter for the connections
     :param param_background: parameter for the noise and external input
     :param cosimulation: parameters for the cosimulation
+    :return the ids of spike_detector and of spike_generators for MPI connection
     """
    # Initialisation of the network
     if nest.Rank() == 0:
         tic = time.time()
-    pyrngs=network_initialisation(results_path,param_nest)
-    dic_layer=network_initialisation_neurons(results_path,pyrngs,param_topology,cosimulation=cosimulation)
+    network_initialisation(results_path,param_nest)
+    dic_layer=network_initialisation_neurons(results_path,param_topology,cosimulation=cosimulation)
     if nest.Rank() == 0:
         toc = time.time() - tic
         print("Time to initialize the network: %.2f s" % toc)
@@ -531,8 +530,9 @@ def simulate_mpi_co_simulation(time_synch,end,path,level_log):
     simulation with co-simulation
     :param time_synch: time of synchronization between all the simulator
     :param end : time of end simulation
+    :param path : path for the logger file
+    :param level_log : the level of the logger
     """
-
     # configuration of the logger
     logger = logging.getLogger('nest')
     fh = logging.FileHandler(path + '/log/nest.log')

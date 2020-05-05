@@ -1,13 +1,13 @@
 from nest_elephant_tvb.simulation.run_exploration import run_exploration_2D
-import mpi4py.MPI as MPI
 import numpy as np
 from nest_elephant_tvb.parameter import test_nest as parameter_test
+
+# File for testing the saving of the histogram of Nest simulation
 
 def run_exploration(path,begin,end):
     parameter_test.param_co_simulation['co-simulation']=False
     parameter_test.param_co_simulation['nb_MPI_nest']=1
     parameter_test.param_nest['total_num_virtual_procs']=10
-    parameter_test.param_co_simulation['nb_MPI_tvb']=0
     parameter_test.param_co_simulation['id_region_nest']=[0,1,2]
     parameter_test.param_co_simulation['synchronization']=20.0
     parameter_test.param_record_MPI['save_step']=10

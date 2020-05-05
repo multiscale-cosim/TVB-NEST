@@ -1,6 +1,11 @@
 #!/bin/bash
 
+# Test the translator Nest to TVB
+
+# configuration variable
 . ./init.sh
+
+DELAY=100.0
 
 mkdir ./test_nest_to_tvb
 mkdir ./test_nest_to_tvb/input/

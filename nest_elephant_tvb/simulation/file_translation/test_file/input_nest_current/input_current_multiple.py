@@ -4,6 +4,12 @@ import numpy.random as rgn
 from mpi4py import MPI
 
 def input(path,nb_mpi):
+    """
+    Simulate some random current input
+    :param path: the file for the configurations of the connection
+    :param nb_mpi: number of mpi rank for testing multi-threading and MPI simulation
+    :return:
+    """
     #Start communication channels
     path_to_files = path
     #For NEST

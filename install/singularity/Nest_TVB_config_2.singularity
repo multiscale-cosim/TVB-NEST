@@ -19,7 +19,7 @@ TVB and Nest IO
     make -j$(nproc)
     make install
 
-    # Install package for Nest
+    # Install the dependence of Nest
     apt-get install -y build-essential cmake python3-distutils python3-dev python3.7 libltdl-dev libreadline-dev libncurses-dev libgsl-dev curl
     cd /root 
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -52,6 +52,7 @@ TVB and Nest IO
     pip install tvb-data tvb-gdist tvb-library
 
 
+    # Compile and Install Nest
     cd /home/
     mkdir $PATH_BUILD
     cd $PATH_BUILD

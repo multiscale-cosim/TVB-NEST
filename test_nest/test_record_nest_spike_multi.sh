@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Test record with MPI with different number of thread and MPI
+
+# configuration variable
 . ./init.sh
 
 # test 1 : full mpi

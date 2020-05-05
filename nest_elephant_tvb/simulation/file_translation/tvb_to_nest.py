@@ -12,9 +12,10 @@ def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,
     the sending part of the translator
     :param path: folder which will contain the configuration fil
     :param first_id_spike_generator: the relative path which contains the txt file
+    :param level_log : the level for the logger
     :param nb_spike_generator: the number of spike generator
     :param status_data: the status of the buffer (SHARED between thread)
-    :param buffer_spike: the bufffer which contains the data (SHARED between thread)
+    :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
     # Configuration logger
@@ -55,6 +56,7 @@ def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,
     comm = MPI.COMM_WORLD.Accept(port, info, root)
     logger.info('Send : connect to '+port)
 
+    # itialisation variable before the loop
     status_ = MPI.Status()
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the communication
     check = np.empty(1,dtype='b')
@@ -112,11 +114,12 @@ def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_
     '''
     the receiving part of the translator
     :param path: folder which will contain the configuration file
-    :param TVB_config:
-    :param nb_spike_generator:
-    :param percentage_shared:
-    :param status_data:
-    :param buffer_spike:
+    :param first_id_spike_generator: the relative path which contains the txt file
+    :param level_log : the level for the logger
+    :param TVB_config : the folder with the file of the connection with TVB
+    :param generator : the function to generate rate to spikes
+    :param status_data: the status of the buffer (SHARED between thread)
+    :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
     # Configuration logger
@@ -207,7 +210,7 @@ if __name__ == "__main__":
         sys.path.append(path_config+'/../')
         from parameter import param_TR_tvb_to_nest as param
         sys.path.remove(path_config+'/../')
-        generator = generate_data(path_config+'/../',nb_spike_generator,param)
+        generator = generate_data(path_config+'/../log/',nb_spike_generator,param)
         level_log = param['level_log']
 
         # variable for communication between thread

@@ -1,9 +1,13 @@
 import numpy as np
 import os
 from mpi4py import MPI
-import time
 
 def analyse(path):
+    """
+    simulate the recorder module
+    :param path: the file for the configurations of the connection
+    :return:
+    """
     #Start communication channels
     path_to_files = path
     #For NEST
@@ -45,7 +49,7 @@ def analyse(path):
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)
-    print('exit');
+    print('exit')
     MPI.Finalize()
 
 if __name__ == "__main__":

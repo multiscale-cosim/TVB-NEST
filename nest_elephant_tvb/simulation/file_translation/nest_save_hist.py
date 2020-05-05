@@ -3,14 +3,18 @@ from mpi4py import MPI
 from threading import Thread
 from nest_elephant_tvb.simulation.file_translation.nest_to_tvb import receive,store_data,lock_status,logging
 
-def save(path,nb_step,step_save,status_data,buffer):
+def save(path,level_log,nb_step,step_save,status_data,buffer):
     '''
     WARNING never ending
     :param path:  folder which will contain the configuration file
+    :param level_log : the level for the logger
+    :param nb_step : number of time for saving data
+    :param step_save : number of integration step to save in same time
     :param status_data: the status of the buffer (SHARED between thread)
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
+    # Configuration logger
     logger = logging.getLogger('nest_save')
     fh = logging.FileHandler(path+'/../../log/nest_save.log')
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -32,8 +36,8 @@ def save(path,nb_step,step_save,status_data,buffer):
         fh.setLevel(logging.CRITICAL)
         logger.setLevel(logging.CRITICAL)
 
+    # initialisation variable
     buffer_save = None
-
     count=0
     while count<nb_step:
         logger.info("Nest save : save "+str(count))
@@ -41,15 +45,15 @@ def save(path,nb_step,step_save,status_data,buffer):
         while(not status_data[0]):
             pass
         if buffer_save is None:
-            logger.info("buffer 1 : "+str(count))
+            logger.info("buffer initialise buffer : "+str(count))
             buffer_save = buffer[0]
         elif count % step_save == 0:
-            logger.info("buffer 2 : "+str(count))
+            logger.info("buffer save buffer : "+str(count))
             buffer_save = np.concatenate((buffer_save,buffer[0]))
             np.save(path+"_"+str(count)+".npy",buffer_save)
             buffer_save = None
         else:
-            logger.info("buffer 3 : "+str(count))
+            logger.info("fill the buffer : "+str(count))
             buffer_save = np.concatenate((buffer_save,buffer[0]))
         with lock_status:
             status_data[0]=False
@@ -67,7 +71,7 @@ if __name__ == "__main__":
         path_folder_save = sys.argv[3]
         end = float(sys.argv[4])
 
-        # object for analysing data
+        # parameters for the module
         sys.path.append(path_folder_config)
         from parameter import param_record_MPI as param
         sys.path.remove(path_folder_config)
@@ -75,7 +79,6 @@ if __name__ == "__main__":
         nb_step = np.ceil(end/time_synch)
         step_save = param['save_step']
         level_log = param['level_log']
-
 
         # variable for communication between thread
         status_data=[False] # status of the buffer
@@ -86,7 +89,7 @@ if __name__ == "__main__":
 
         # create the thread for receive and send data
         th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))
-        th_save = Thread(target=save, args=(path_folder_save,nb_step,step_save,status_data,buffer))
+        th_save = Thread(target=save, args=(path_folder_save,level_log,nb_step,step_save,status_data,buffer))
 
         # start the threads
         th_receive.start()
@@ -96,4 +99,3 @@ if __name__ == "__main__":
         MPI.Finalize()
     else:
         print('missing argument')
-

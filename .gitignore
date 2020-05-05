@@ -3,4 +3,4 @@
 */*.pyc
 *.pyc
 */test_file/*
-
+lib/

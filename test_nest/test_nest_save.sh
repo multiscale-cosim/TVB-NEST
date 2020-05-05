@@ -1,6 +1,11 @@
 #!/bin/bash
 
+# Test the saving histogram with MPI
+
+# configuration variable
 . ./init.sh
+
+DELAY=100.0
 
 mkdir ./test_nest_to_save
 mkdir ./test_nest_to_save/input/

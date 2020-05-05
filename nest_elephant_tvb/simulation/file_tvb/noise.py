@@ -1,6 +1,8 @@
 from tvb.simulator.noise import Additive, Noise, NArray,Int, Attr, simple_gen_astr, Float
 import numpy
 
+# file of testing specific noise
+
 class  Ornstein_Ulhenbeck_process (Additive):
     tau_OU = Float(
         label="time scale of decay",

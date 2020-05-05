@@ -10,7 +10,7 @@ def toy_rates_to_spikes(rates,t_start,t_stop):
     :param rates: rates from tvb
     :param t_start: time of starting simulation
     :param t_stop: time of ending simulation
-    :return:
+    :return: times of spikes
     '''
     times = t_start + np.random.rand(rates.shape[-1]) * (t_stop-t_start)
     times = np.around(np.sort(np.array(times)), decimals=1)
@@ -20,16 +20,18 @@ class generate_data:
     def __init__(self,path,nb_spike_generator,param):
         """
         generate spike train for each neurons
-        :param percentage_shared: percentage of shared rate between neurons
+        :param path : path for the logger files
         :param nb_spike_generator: number of spike generator/neurons in each regions
         """
-        self.percentage_shared = param['percentage_shared']
-        self.nb_spike_generator = nb_spike_generator
+        self.percentage_shared = param['percentage_shared'] # percentage of shared rate between neurons
+        self.nb_spike_generator = nb_spike_generator        # number of spike generator
+
         np.random.seed(param['seed'])
 
+        # configure the logger
         level_log = param['level_log']
         self.logger = logging.getLogger('generator')
-        fh = logging.FileHandler(path+'/log/tvb_to_nest_science.log')
+        fh = logging.FileHandler(path+'/tvb_to_nest_science.log')
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
         self.logger.addHandler(fh)
