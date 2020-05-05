@@ -272,7 +272,7 @@ def rum_mpi(path):
         time = [nest_data[0,0]+time_synch,nest_data[-1,0]+time_synch]
         rate = np.concatenate(nest_data[:,1])
         for index,comm in enumerate(comm_send):
-            send_mpi(comm,time,rate[index]*1e3)
+            send_mpi(comm,time,rate[:,index]*1e3)
 
         #increment of the loop
         count+=1
