@@ -13,7 +13,7 @@ mkdir ./test_tvb_to_nest/output/
 mkdir ./test_tvb_to_nest/log/
 
 DELAY=100.0
-parameter='param_TR_tvb_to_nest = {"init": "./test_tvb_to_nest/init_rates.npy", "percentage_shared": 0.5, "seed": 42, "level_log": 0}'
+parameter='param_TR_tvb_to_nest = {"init": "./test_tvb_to_nest/init_rates.npy", "percentage_shared": 0.5, "seed": 42, "nb_synapses":10,"level_log": 0}'
 echo "${parameter}" >./test_tvb_to_nest/parameter.py
 cp ./init_rates.npy  ./test_tvb_to_nest/init_rates.npy
 

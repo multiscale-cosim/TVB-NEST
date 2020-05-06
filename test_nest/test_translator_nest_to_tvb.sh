@@ -13,7 +13,7 @@ mkdir ./test_nest_to_tvb/output/
 mkdir ./test_nest_to_tvb/log/
 
 DELAY=100.0
-parameter='param_TR_nest_to_tvb = {"init": "./test_nest_to_tvb/init_spikes.npy", "resolution": 0.1, "synch": '${DELAY}', "width": 20.0, "level_log": 0}'
+parameter='param_TR_nest_to_tvb = {"init": "./test_nest_to_tvb/init_spikes.npy", "resolution": 0.1, "synch": '${DELAY}', "width": 20.0, "nb_neurons":20, "level_log": 0}'
 echo "${parameter}" >./test_nest_to_tvb/parameter.py
 cp ./init_spikes.npy  ./test_nest_to_tvb/init_spikes.npy
 
