@@ -9,6 +9,7 @@ import numpy.random as rgn
 import numpy as np
 import nest_elephant_tvb.simulation.file_tvb.noise as my_noise
 from mpi4py import MPI
+import os
 
 
 def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,mpi=None):
@@ -117,6 +118,11 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
            time_synchronize=mpi['time_synchronize']
             )
         monitors.append(monitor_IO)
+        for i in mpi['id_proxy']:
+            while not os.path.isfile(mpi['path_send']+str(i)+'.txt'):
+                pass
+            while not os.path.isfile(mpi['path_receive']+str(i)+'.txt'):
+                pass
 
     #initialize the simulator:
     simulator = lab.simulator.Simulator(model = model, connectivity = connection,
@@ -211,9 +217,14 @@ def rum_mpi(path):
     param_tvb_monitor['path_result']=result_path+'/tvb/'
     id_proxy = param_co_simulation['id_region_nest']
     time_synch = param_co_simulation['synchronization']
-    simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,{'id_proxy':np.array(id_proxy),
-                                                                          'time_synchronize':time_synch,
-                                                                           })
+    path_send = result_path+"/send_to_tvb/"
+    path_receive = result_path+"/receive_from_tvb/"
+    simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,
+                     {'id_proxy':np.array(id_proxy),
+                      'time_synchronize':time_synch,
+                      'path_send': path_send,
+                      'path_receive': path_receive,
+                     })
     # configure for saving result of TVB
     # check how many monitor it's used
     nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold']
@@ -226,10 +237,10 @@ def rum_mpi(path):
     data = None #data for the proxy node (no initialisation in the parameter)
     comm_receive=[]
     for i in id_proxy:
-        comm_receive.append(init_mpi(result_path+"/send_to_tvb/"+str(i)+".txt"))
+        comm_receive.append(init_mpi(path_send+str(i)+".txt"))
     comm_send=[]
     for i in id_proxy :
-        comm_send.append(init_mpi(result_path+"/receive_from_tvb/"+str(i)+".txt"))
+        comm_send.append(init_mpi(path_receive+str(i)+".txt"))
 
     # the loop of the simulation
     count = 0
