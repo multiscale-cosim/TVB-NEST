@@ -83,7 +83,7 @@ def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,
                         list_id[index]=id[0]
                     # Select the good spike train and send it
                     data = buffer_spike[0][index]
-                    logger.info(" TVB to Nest:"+str(data)+" " +str(index))
+                    # logger.info(" TVB to Nest:"+str(data)+" " +str(index))
                     shape = np.array(data.shape[0], dtype='i')
                     # firstly send the size of the spikes train
                     comm.Send([shape, MPI.INT], dest=source, tag=id[0])

@@ -1,6 +1,6 @@
 #!/bin/bash
-CLUSTER=true
-DEEPEST=true
+CLUSTER=$(false)
+DEEPEST=$(false)
 
 if [ $CLUSTER ]
 then
@@ -22,9 +22,9 @@ then
 else
     echo " WARNING the python path are not defene"
 
-#    PACKAGE=${PWD}/../   # folder of co-simulation-tvb-nest
+    PACKAGE=${PWD}/../   # folder of co-simulation-tvb-nest
 #    PYTHONLIB=${PWD}/../venv/lib/python3.6/site-packages # folder with python library
-#    REPERTORY_LIB_NEST=${PWD}/../lib/nest_run/lib/python3.6/site-packages/ # folder with py-nest
+    REPERTORY_LIB_NEST=${PWD}/../lib/nest_run/lib/python3.6/site-packages/ # folder with py-nest
     export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
     RUN="mpirun"
 fi

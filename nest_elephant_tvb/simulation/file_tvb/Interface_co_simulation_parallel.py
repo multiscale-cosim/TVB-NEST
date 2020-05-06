@@ -131,7 +131,7 @@ class Interface_co_simulation(Raw):
                         raise Exception('ERROR too late')
                     indice = numpy.expand_dims(numpy.rint(step_n + step).astype(int) % self.n_time, 1)
                     if indice.size != numpy.unique(indice).size:  # check if the index is correct
-                        raise Exception('ERRROR two times are the same')
+                        raise Exception('ERROR two times are the same')
                     self.buffer[indice, :, id_proxy, :] = data[1]
 
         # WARNING should be change if the function update of the history change  (the actual update is the same all history)

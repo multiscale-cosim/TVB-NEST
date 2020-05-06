@@ -57,6 +57,7 @@ class store_data:
         for data in np.reshape(datas,(int(datas.shape[0]/3),3)):
             data[2]-=self.dt
             self.hist[int((data[2]-count*self.synch)/self.dt)]+=1
+        self.logger.info(int(datas.shape[0]/3))
 
     def return_data(self):
         """
@@ -77,7 +78,8 @@ class analyse_data:
 
         self.width = int(param['width']/param['resolution']) # the window of the average in time
         self.synch = param['synch']                          # synchronize time between simulator
-        self.buffer=np.zeros((self.width,))                  #initialisation/ previous result for a good result
+        self.buffer = np.zeros((self.width,))                  #initialisation/ previous result for a good result
+        self.coeff = 1 / ( param['nb_neurons'] * param['resolution'] ) # for the mean firing rate in in KHZ
 
         level_log = param['level_log']
         self.logger = logging.getLogger('analyse')
@@ -112,4 +114,5 @@ class analyse_data:
         data = slidding_window(hist_slide,self.width)
         self.buffer = np.squeeze(hist_slide[-self.width:])
         times = np.array([count*self.synch,(count+1)*self.synch], dtype='d')
-        return times,data
+        self.logger.info(np.mean(data*self.coeff))
+        return times,data*self.coeff

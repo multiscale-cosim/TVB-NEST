@@ -57,6 +57,12 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                                                            param_background=parameters['param_nest_background'],
                                                            cosimulation=param_co_simulation)
         if nest.Rank() == 0:
+            # difference between cluster and PC
+            if param_co_simulation['cluster']:
+                mpirun='srun'
+            else:
+                mpirun='mpirun'
+
             # create translator between Nest to TVB :
             # one by proxy/spikedetector
 
@@ -70,6 +76,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_nest_to_tvb.sh"
                 argv=[ '/bin/sh',
                        dir_path,
+                       mpirun,
                        results_path,
                        "/spike_detector/"+str(id_spike_detector.tolist()[0])+".txt",
                        "/send_to_tvb/"+str(id_proxy[index])+".txt",
@@ -92,6 +99,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_tvb_to_nest.sh"
                 argv=[ '/bin/sh',
                        dir_path,
+                       mpirun,
                        results_path+"/spike_generator/",
                        str(ids_spike_generator.tolist()[0]),
                        str(len(ids_spike_generator.tolist())),
@@ -108,6 +116,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
             argv=[
                 '/bin/sh',
                 dir_path,
+                mpirun,
                 results_path
             ]
             subprocess.Popen(argv,
@@ -138,6 +147,12 @@ def run(results_path,parameter_default,dict_variable,begin,end):
 
                 #create file for the foldder for the communication part
                 if nest.Rank() == 0:
+                    # difference between cluster and PC
+                    if param_co_simulation['cluster']:
+                        mpirun='srun'
+                    else:
+                        mpirun='mpirun'
+
                     if not os.path.exists(results_path+'/spike_detector/'):
                         os.makedirs(results_path+'/spike_detector/')
                     if not os.path.exists(results_path + '/save/'):
@@ -150,6 +165,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                     dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_nest_save.sh"
                     argv=[ '/bin/sh',
                            dir_path,
+                           mpirun,
                            results_path,
                            "/spike_detector/"+str(id_spike_detector.tolist()[0])+".txt",
                            results_path+"/save/"+str(id_spike_detector.tolist()[0]),

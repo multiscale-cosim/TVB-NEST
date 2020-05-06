@@ -19,9 +19,11 @@ WARNING : All the script needs to be launch in the repertory where there are.
     3. [If you want to modify TVB configuration](#usages_4)
 4. [Tests](#tests)
     1. [How to test the installation](#test_1)
-5. [Future implementation](#future)
-6. [Extension](#extension)
-7. [Files](#files)
+5. [Cluster](#cluster)
+    1. [Deepest](#deepest)
+6. [Future implementation](#future)
+7. [Extension](#extension)
+8. [Files](#files)
 
 ## Installation and update :<a name="installalation"></a>
 ### Advice for using the repertory :<a name="advice"></a>
@@ -126,22 +128,31 @@ Example/test of the different modules
 3. test_nest/test_translator_tvb_to_nest.sh
 4. test_nest/test_nest_save.sh
 
-Test only nest : run_nest_one.py (for 1 region in Nest but it can be easily extend to 112 regions)
-Test only tvb : run_tvb_one.py (for 1 region in TVB but it can be easily extend to 112 regions)
+Test only nest : run_nest_one.py (for 1 region in Nest but it can be easily extend to 104 regions)
+Test only tvb : run_tvb_one.py (for 1 region in TVB but it can be easily extend to 104 regions)
 
 For testing the co-simulation, you can check : 
     - test_nest/test_co-sim.sh
     - install/docker/run_image.sh
     - install/singularity/run_image.sh
 
+## Cluster <a name="cluster"></a>
+The option for using the project in a cluster is base on the system manager slurm. If you have another system manager, you need to modify run_exploration.
+For the moment, it's impossible to add option to slurm but it's easily to add this feature.
+WARNING: this project are only test on DEEPEST.
+### DEEPEST : <a name="deepest"></a>
+The installation and the option for the cluster are build for DEEPEST (https://www.deep-projects.eu/).
+The file install/deep/install.sh is for compile and install all the python library in the folder lib for the usage in the cluster.
+For testing the installation, you need to change the file /test_nest/init.sh. This file contain the initialisation for running job. Moreover, the parameter cluster in teh co-simulation need to be equals at true.
+
+
 ## Future implementation :<a name="future"></a>
 1. Improve the communication pattern for the input of Nest
-2. Install on cluster
-3. Add a second function to transform rate to spike based on Multiple Interaction Process Model
-4. Improve synchronisation between modules (actually file synchronization).
-5. Add test for the input an output of interface TVB.
-6. Add test for valid the value a simulation
-7. Add some functions of the simulation Nest to include multimeter recorder and other stimuli. 
+2. Add a second function to transform rate to spike based on Multiple Interaction Process Model
+3. Improve synchronisation between modules (actually file synchronization).
+4. Add test for the input an output of interface TVB.
+5. Add test for valid the value a simulation
+6. Add some functions of the simulation Nest to include multimeter recorder and other stimuli. 
 
 ## Extension :<a name="extension"></a>
 1. Replace the output of simulator by a streaming output function.
@@ -152,6 +163,8 @@ For testing the co-simulation, you can check :
 * doc : Documention of the project
     * UML : UML of communication and state of modules
 * [install](#installalation)
+    * [deep](#deepest)
+        install.sh : installation on deepest cluster
     * docker
         create_docker.sh, create_docker_1.sh : create the docker image for the project
         Nest_TVB.dockerfile, Nest_TVB_1.dockerfile : file of configuration for docker

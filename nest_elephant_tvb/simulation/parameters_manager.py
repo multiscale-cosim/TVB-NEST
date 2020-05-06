@@ -113,6 +113,7 @@ def create_linked_parameters(results_path,parameters):
             param_TR_tvb_to_nest['init']= path_rates
         param_TR_tvb_to_nest['level_log']= param_co_simulation['level_log']
         param_TR_tvb_to_nest['seed'] = param_nest['master_seed']-3
+        param_TR_tvb_to_nest['nb_synapses'] = param_nest_connection['nb_external_synapse']
         parameters['param_TR_tvb_to_nest'] = param_TR_tvb_to_nest
 
         # parameters for the translation nest to TVB
@@ -126,6 +127,7 @@ def create_linked_parameters(results_path,parameters):
             np.save(path_spikes,init_spikes)
             param_TR_nest_to_tvb['init']= path_spikes
         param_TR_nest_to_tvb['resolution']=param_nest['sim_resolution']
+        param_TR_nest_to_tvb['nb_neurons']=param_nest_topology['nb_neuron_by_region'] * (1-param_nest_topology['percentage_inhibitory'])
         param_TR_nest_to_tvb['synch']=param_co_simulation['synchronization']
         param_TR_nest_to_tvb['width']=param_tvb_model['T']
         param_TR_nest_to_tvb['level_log']= param_co_simulation['level_log']

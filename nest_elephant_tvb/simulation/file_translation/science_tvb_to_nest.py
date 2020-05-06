@@ -25,6 +25,7 @@ class generate_data:
         """
         self.percentage_shared = param['percentage_shared'] # percentage of shared rate between neurons
         self.nb_spike_generator = nb_spike_generator        # number of spike generator
+        self.nb_synapse = param['nb_synapses']
 
         np.random.seed(param['seed'])
 
@@ -60,6 +61,7 @@ class generate_data:
         :return:
         """
         # Compute the rate to spike trains
+        rate *= self.nb_synapse # rate of poisson generator ( due property of poisson process)
         rate += 1e-12 # avoid rate equals to zeros
         spike_shared = \
             rates_to_spikes(rate * self.percentage_shared * Hz,
@@ -70,5 +72,6 @@ class generate_data:
                 rates_to_spikes(rate * (1 - self.percentage_shared) * Hz, time_step[0] * ms, time_step[1] * ms,
                                 variation=True)[0]
             spike_generate[i] = np.around(np.sort(np.concatenate((spikes, spike_shared))), decimals=1)
+        self.logger.info('rate :'+str(rate)+' spikes :'+str(np.concatenate(spike_generate).shape))
         return spike_generate
 

@@ -19,7 +19,9 @@ param_co_simulation={
     # time of synchronization between node
     'synchronization':0.,#Todo compute with the min of delay
     # level of log : debug 0, info 1, warning 2, error 3, critical 4
-    'level_log':1
+    'level_log':1,
+    # if running in cluster:
+    'cluster':False
 }
 
 #parameter simulators
@@ -216,7 +218,7 @@ param_tvb_model={
     # Polynome for inhibitory neurons | WARNING: should be change when the parameter of neurons change)
     'P_i':[-5.96722865e-02,  7.15675508e-03,  4.28252163e-03,  9.25089702e-03,  1.16632197e-06, -1.00659310e-02,  3.89257235e-03,  4.45787751e-04,  4.20050937e-03,  4.37359879e-03],
     # initial condition, should be simmilar than nest
-    'initial_condition':{"E": [0.0, 0.0], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
+    'initial_condition':{"E": [0.100, 0.001], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
 }
 
 # parameter TVB for the monitors
@@ -247,6 +249,7 @@ param_TR_nest_to_tvb={
     # 'resolution': param_nest['sim_resolution']
     # 'synch': param_co_simulation['synchronization']
     # 'width': param_zerlaut['T']
+    # 'nb_neurons' : param_nest_topology['nb_neuron_by_region'] * (1-param_nest_topology['percentage_inhibitory']) # number of excitatory neurons
     # 'level_log': param_co_simulation['level_log']
 }
 
@@ -255,6 +258,7 @@ param_TR_tvb_to_nest={
     # percentage of shared rate between neurons of the same region
     'percentage_shared': 0.5,
     # 'seed':param_nest['master_seed']-3 # -3 because -1 and -2 is use by the simulation of TVB
+    # 'nb_synapses' : param_nest_connection['nb_external_synapse'] # number of external synapses
     # 'init': path of the initialisation of the translation if not the run exploration will create it
     # 'level_log': param_co_simulation['level_log']
 }
