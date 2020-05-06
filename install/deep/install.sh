@@ -8,6 +8,7 @@ module load Python/3.6.8 # already some module in side ( example : pip)
 module load SciPy-Stack/2019a-Python-3.6.8 mpi4py/3.0.1-Python-3.6.8
 
 INSTALL_FOLDER=${PWD}/../../lib/
+mkdir $INSTALL_FOLDER
 
 # build nest
 PATH_INSTALATION=${PWD}/../../nest-io-dev
@@ -28,6 +29,7 @@ make install
 PYTHON_LIB=${INSTALL_FOLDER}/site_packages
 mkdir $PYTHON_LIB
 export PYTHONPATH=$PYTHON_LIB:$PYTHONPATH
+pip install --no-deps --target=$PYTHON_LIB numpy
 pip install --no-deps --target=$PYTHON_LIB elephant neo tqdm quantities
 pip install --no-deps --target=$PYTHON_LIB tvb-gdist
 pip install --no-deps --target=$PYTHON_LIB tvb-data
