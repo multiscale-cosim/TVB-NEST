@@ -1,5 +1,18 @@
 #!/bin/bash 
 
+# Expand variables and print line to be executed
+set -o xtrace
+
+# Script needs to be started from the directory it is located in
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+if [[ ${DIR} != ${PWD} ]]
+then
+	echo "Script should only be called from the containing directory"
+	exit 1
+fi
+
+# Load the modules, this is cluster specific
 module load CMake/3.14.0 
 module load intel-para/2019a.1 # for MPI and compiler
 module load Intel/2019.5.281-GCC-8.3.0
@@ -22,14 +35,13 @@ cmake $PATH_INSTALATION \
 	 -Dwith-python=3 -Dwith-mpi=ON \
 	 -Dwith-readline=OFF \
 	 -Dwith-ltdl=OFF
-make -j 16 
+make -j 8  # Be friendly for your neighbours and not use -j16
 make install
 
 # install module of python 
 PYTHON_LIB=${INSTALL_FOLDER}/site_packages
 mkdir $PYTHON_LIB
 export PYTHONPATH=$PYTHON_LIB:$PYTHONPATH
-pip install --no-deps --target=$PYTHON_LIB numpy
 pip install --no-deps --target=$PYTHON_LIB elephant neo tqdm quantities
 pip install --no-deps --target=$PYTHON_LIB tvb-gdist
 pip install --no-deps --target=$PYTHON_LIB tvb-data

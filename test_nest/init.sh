@@ -1,10 +1,10 @@
 #!/bin/bash
-CLUSTER=$(false)
-DEEPEST=$(false)
+CLUSTER=false  #false/true
+DEEPEST=false  #false/true
 
-if [ $CLUSTER ]
+if [ "$CLUSTER" = true ]
 then
-    if [ $DEEPEST ]
+    if [ "$DEEPEST" = true ]
     then 
         module load CMake/3.14.0
         module load intel-para/2019a.1 # for MPI and compiler
