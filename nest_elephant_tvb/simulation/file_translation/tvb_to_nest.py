@@ -4,6 +4,7 @@ from mpi4py import MPI
 from threading import Thread, Lock
 from nest_elephant_tvb.simulation.file_translation.science_tvb_to_nest import generate_data
 import logging
+from pathlib import Path
 
 class MPI_util():
     def __init__(self, path, file1, file2):
@@ -23,7 +24,7 @@ class MPI_util():
         
 lock_status=Lock() # locker for manage the transfer of data from thread
 
-def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,buffer_spike):
+def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,buffer_spike, comm):
     '''
     the sending part of the translator
     :param path: folder which will contain the configuration fil
@@ -56,26 +57,7 @@ def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,
         fh.setLevel(logging.CRITICAL)
         logger.setLevel(logging.CRITICAL)
 
-    # Open the MPI port connection
-    logger.info("Translate Send : Waiting for port details")
-    print('Translate SEND: before open_port');sys.stdout.flush() 
-    info = MPI.INFO_NULL
-    root = 0
-    port = MPI.Open_port(info)
-    print('Translate SEND: after open_port');sys.stdout.flush() 
-    # Write file configuration of the port
-    for i in range(nb_spike_generator):
-        path_to_files = path + str(first_id_spike_generator+i) + ".txt"
-        print('Translate SEND: path_file: ' + path_to_files);sys.stdout.flush() 
-        fport = open(path_to_files, "w+")
-        fport.write(port)
-        fport.close()
-    # Wait until connection
-    logger.info('Translate Send : wait connection '+port)
-    print('Translate SEND: before Accepted: '+ str([port, info, root]));sys.stdout.flush() 
-    comm = MPI.COMM_WORLD.Accept(port, info, root)
-    print('Translate SEND: Accepted');sys.stdout.flush() 
-    logger.info('Translate Send : connect to '+port)
+  
     import time
     time.sleep(1)
     print('Translate SEND: Done with connection loop, EXIT after 5 second');sys.stdout.flush() 
@@ -136,7 +118,7 @@ def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,
         os.remove(path_to_files)
     logger.info('Send : exit')
 
-def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_data,buffer_spike):
+def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_data,buffer_spike, com):
     '''
     the receiving part of the translator
     :param path: folder which will contain the configuration file
@@ -171,24 +153,7 @@ def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_
         logger.setLevel(logging.CRITICAL)
 
     # Open the MPI port connection
-    logger.info("Translate Receive : Waiting for port details")
-    print('Translate RECEIVE: before open_port');sys.stdout.flush() 
-    info = MPI.INFO_NULL
-    root = 0
-    port = MPI.Open_port(info)
-    print('Translate RECEIVE: after open_port');sys.stdout.flush() 
-    # Write file configuration of the port
-    path_to_files = path + TVB_config
-    print('Translate RECEIVE: path_file: ' + path_to_files);sys.stdout.flush() 
-    fport = open(path_to_files, "w+")
-    fport.write(port)
-    fport.close()
-    print('Translate RECEIVE: before accept: '+ str([port, info, root]));sys.stdout.flush() 
-    logger.info('Translate Receive : wait connection ' + port);sys.stdout.flush() 
-    comm = MPI.COMM_WORLD.Accept(port, info, root)
-    logger.info('Translate Receive : connect to ' + port);sys.stdout.flush() 
-    print('Translate RECEIVE: after accept');sys.stdout.flush() 
-    print('Translate RECEIVE: Done with connection loop, EXIT after 5 second');sys.stdout.flush() 
+
     import time
     time.sleep(1)
     return
@@ -253,9 +218,66 @@ if __name__ == "__main__":
         initialisation =np.load(param['init'])
         buffer_spike=[initialisation]
 
+        ### Create Com objects for communications
+        info = MPI.INFO_NULL
+        root = 0
+        
+        ##############################################
+        # send Create the port
+        print('Translate SEND: before open_port');sys.stdout.flush() 
+        port_send = MPI.Open_port(info)  # open a NEW port
+        print('Translate SEND: after open_port');sys.stdout.flush() 
+
+        # write file with port and unlockl
+        path_to_files_send = os.path.join(path_config, "0_send.txt")
+        print('Translate SEND: path_file: ' + path_to_files_send);sys.stdout.flush() 
+        fport_send = open(path_to_files_send, "w+")
+        fport_send.write(port_send)
+        fport_send.close()
+
+        path_to_files_send_unlock = os.path.join(path_config, "0_send.txt.unlock")
+        fport_send_lock = open(path_to_files_send_unlock, "w+")
+        fport_send_lock.write(path_to_files_send_unlock)
+        fport_send_lock.close()
+
+        #path_to_files_send_unlock = os.path.join(path_config, "0_send.txt.unlock")
+        #path_to_files_send_unlock
+        #Path(path_to_files_send_unlock).touch()       
+        ##############################################
+        # receive       
+        print('Translate RECEIVE: before open_port');sys.stdout.flush() 
+        port_receive = MPI.Open_port(info)
+        print('Translate RECEIVE: after open_port');sys.stdout.flush() 
+        
+        # Write file configuration of the port
+        path_to_files_receive = os.path.join(path_config, "0_receive.txt")
+        print('Translate RECEIVE: path_file: ' + path_to_files_receive);sys.stdout.flush() 
+        fport_receive = open(path_to_files_receive, "w+")
+        fport_receive.write(port_receive)
+        fport_receive.close()
+
+        path_to_files_receive_unlock = os.path.join(path_config, "0_receive.txt.unlock")
+        fport_receive_lock = open(path_to_files_receive_unlock, "w+")
+        fport_receive_lock.write(path_to_files_receive_unlock)
+        fport_receive_lock.close()
+        #path_to_files_receive_unlock = os.path.join(path_config, "0_receive.txt.unlock")
+        #path_to_files_receive_unlock
+        #Path(path_to_files_receive_unlock).touch()
+
+        ############################################
+        # accept connections
+        print('Translate SEND: before Accepted: '+ str([port_send, info, root]));sys.stdout.flush() 
+        comm_send = MPI.COMM_WORLD.Accept(port_send, info, root)
+        print('Translate SEND: Accepted');sys.stdout.flush()   
+        
+        print('Translate RECEIVE: before accept: '+ str([port_receive, info, root]));sys.stdout.flush() 
+        comm_receive = MPI.COMM_WORLD.Accept(port_receive, info, root)
+        print('Translate RECEIVE: after accept');sys.stdout.flush() 
+        ##############################################
+
         # create the thread for receive and send data
-        th_send = Thread(target=send, args=(path_config,id_first_spike_detector,level_log,nb_spike_generator,status_data,buffer_spike))
-        th_receive = Thread(target=receive, args=(path_config,id_first_spike_detector,level_log,TVB_config,generator,status_data,buffer_spike ))
+        th_send = Thread(target=send, args=(path_config,id_first_spike_detector,level_log,nb_spike_generator,status_data,buffer_spike, comm_send))
+        th_receive = Thread(target=receive, args=(path_config,id_first_spike_detector,level_log,TVB_config,generator,status_data,buffer_spike, comm_receive ))
 
         # start the threads
         th_receive.start()
