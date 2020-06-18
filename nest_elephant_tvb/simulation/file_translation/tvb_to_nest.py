@@ -5,6 +5,22 @@ from threading import Thread, Lock
 from nest_elephant_tvb.simulation.file_translation.science_tvb_to_nest import generate_data
 import logging
 
+class MPI_util():
+    def __init__(self, path, file1, file2):
+        self._path = path
+        self._file1 = file1
+        self._file2 = file2
+
+    def get_comm(self, id):
+        # return the correct com based on the id
+        pass
+
+    def __del__(self):
+        # body of destructor
+        pass
+
+
+        
 lock_status=Lock() # locker for manage the transfer of data from thread
 
 def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,buffer_spike):
@@ -41,20 +57,30 @@ def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,
         logger.setLevel(logging.CRITICAL)
 
     # Open the MPI port connection
-    logger.info("Send : Waiting for port details")
+    logger.info("Translate Send : Waiting for port details")
+    print('Translate SEND: before open_port');sys.stdout.flush() 
     info = MPI.INFO_NULL
     root = 0
     port = MPI.Open_port(info)
+    print('Translate SEND: after open_port');sys.stdout.flush() 
     # Write file configuration of the port
     for i in range(nb_spike_generator):
         path_to_files = path + str(first_id_spike_generator+i) + ".txt"
+        print('Translate SEND: path_file: ' + path_to_files);sys.stdout.flush() 
         fport = open(path_to_files, "w+")
         fport.write(port)
         fport.close()
     # Wait until connection
-    logger.info('Send : wait connection '+port)
+    logger.info('Translate Send : wait connection '+port)
+    print('Translate SEND: before Accepted: '+ str([port, info, root]));sys.stdout.flush() 
     comm = MPI.COMM_WORLD.Accept(port, info, root)
-    logger.info('Send : connect to '+port)
+    print('Translate SEND: Accepted');sys.stdout.flush() 
+    logger.info('Translate Send : connect to '+port)
+    import time
+    time.sleep(1)
+    print('Translate SEND: Done with connection loop, EXIT after 5 second');sys.stdout.flush() 
+
+    return
 
     # itialisation variable before the loop
     status_ = MPI.Status()
@@ -145,18 +171,27 @@ def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_
         logger.setLevel(logging.CRITICAL)
 
     # Open the MPI port connection
-    logger.info("Receive : Waiting for port details")
+    logger.info("Translate Receive : Waiting for port details")
+    print('Translate RECEIVE: before open_port');sys.stdout.flush() 
     info = MPI.INFO_NULL
     root = 0
     port = MPI.Open_port(info)
+    print('Translate RECEIVE: after open_port');sys.stdout.flush() 
     # Write file configuration of the port
     path_to_files = path + TVB_config
+    print('Translate RECEIVE: path_file: ' + path_to_files);sys.stdout.flush() 
     fport = open(path_to_files, "w+")
     fport.write(port)
     fport.close()
-    logger.info('Receive : wait connection ' + port)
+    print('Translate RECEIVE: before accept: '+ str([port, info, root]));sys.stdout.flush() 
+    logger.info('Translate Receive : wait connection ' + port);sys.stdout.flush() 
     comm = MPI.COMM_WORLD.Accept(port, info, root)
-    logger.info('Receive : connect to ' + port)
+    logger.info('Translate Receive : connect to ' + port);sys.stdout.flush() 
+    print('Translate RECEIVE: after accept');sys.stdout.flush() 
+    print('Translate RECEIVE: Done with connection loop, EXIT after 5 second');sys.stdout.flush() 
+    import time
+    time.sleep(1)
+    return
 
     status_ = MPI.Status()
     source_sending = np.arange(0,comm.Get_remote_size(),1)# list of all the process for the commmunication

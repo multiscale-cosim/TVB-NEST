@@ -13,9 +13,14 @@ def simulate_TVB_output(path,min_delay):
     fport = open(path, "r")
     port = fport.readline()
     fport.close()
-    print('TVB_OUTPUT :wait connection '+port);sys.stdout.flush()
+    print('TVB_OUTPUT :wait connection: '+ port + ": " + path );sys.stdout.flush()
     comm = MPI.COMM_WORLD.Connect(port)
     print('TVB_OUTPUT :connect to '+port);sys.stdout.flush()
+       
+    print('TVB_OUTPUT: Done with connection loop, EXIT after 1 second');sys.stdout.flush() 
+    import time
+    time.sleep(1)
+    return
 
     status_ = MPI.Status()
     starting = 0.0 # the begging of each time of synchronization

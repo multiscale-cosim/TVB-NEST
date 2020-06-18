@@ -1,6 +1,6 @@
 #!/bin/bash
-CLUSTER=false  #false/true
-DEEPEST=false  #false/true
+CLUSTER=true  #false/true
+DEEPEST=true  #false/true
 
 if [ "$CLUSTER" = true ]
 then
@@ -18,7 +18,7 @@ then
     PYTHONLIB=../lib/site_packages # folder with python library
     REPERTORY_LIB_NEST=../lib/nest_run/lib64/python3.6/site-packages/ # folder with py-nest
     export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
-    RUN="srun"
+    RUN="srun --partition=dp-cn"
 else
     echo " WARNING the python path are not defene"
 
