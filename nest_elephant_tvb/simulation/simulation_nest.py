@@ -34,7 +34,7 @@ def network_initialisation(results_path,param_nest):
         "total_num_virtual_procs": total_num_virtual_procs,
         # "local_num_threads": total_num_virtual_procs,
         # Path to save the output data
-        'data_path': results_path,
+        'data_path': results_path+'/nest/',
         # Masterseed for NEST and NumPy
         'grng_seed': master_seed + total_num_virtual_procs,
         # Seeds for the individual processes
@@ -132,7 +132,7 @@ def network_initialisation_neurons(results_path,param_topology,return_gids=False
 
     # save id of each population
     if nest.Rank() == 0:
-        pop_file = open(os.path.join(results_path, 'population_GIDs.dat'), 'w+')
+        pop_file = open(os.path.join(results_path+'/nest/', 'population_GIDs.dat'), 'w+')
         for gid in gids_ex:
             pop_file.write('%d  %d %s\n' % (gid[0], gid[1],'excitatory'))
         for gid in gids_in:
@@ -282,7 +282,7 @@ def network_connection(dic_layer,param_topology,param_connection, cosimulation=N
     create_heterogenous_connection(dic_layer,param_topology,param_connection,save=False,init=init,cosimulation=cosimulation)
 
 
-def network_device(dic_layer,min_time,time_simulation,param_background,param_connection,mpi=False,cosimulation=None):
+def network_device(results_path,dic_layer,min_time,time_simulation,param_background,param_connection,mpi=False,cosimulation=None):
     """
     Create and Connect different record or input device
     :param dic_layer: Dictionary with all the layer
@@ -300,7 +300,7 @@ def network_device(dic_layer,min_time,time_simulation,param_background,param_con
        param_spike_dec= {"start": min_time,
                           "stop": time_simulation,
                           "record_to": "mpi",
-                          'label': 'spike_detector'
+                          'label': '/../spike_detector'
                           }
        nest.CopyModel('spike_detector', 'spike_detector_record_mpi')
        nest.SetDefaults("spike_detector_record_mpi", param_spike_dec)
@@ -335,13 +335,6 @@ def network_device(dic_layer,min_time,time_simulation,param_background,param_con
     for name_pops,items in dic_layer.items():
         list_pops = items['list']
         for i in range(len(list_pops)):
-            # if param_background['multimeter']:
-            #     multimeter = nest.Create("multimeter")
-            #     param_mul['label'] = name_pops+"_"+str(i)+"/multimeter"
-            #     nest.SetStatus(multimeter, param_mul)
-            #     nest.Connect(multimeter, list_pops[i]['region'])
-            #     dict_multimeter[name_pops].append(
-            #         {'detector': multimeter, 'numero': i})
             if mpi:
                 spike_detector_mpi = nest.Create('spike_detector_record_mpi')
                 spike_detector.append(spike_detector_mpi)
@@ -353,6 +346,36 @@ def network_device(dic_layer,min_time,time_simulation,param_background,param_con
                     nest.Connect(list_pops[i]['region'],spike_detector_mpi)
             else:
                 nest.Connect(list_pops[i]['region'],spike_detector)
+    label_pop_record=[]
+    if param_background['multimeter']:
+        for label, (variable,id_first,id_end) in param_background['multimeter_list'].items():
+            multimeter = nest.Create("multimeter",1,params={
+                "start": min_time,
+                "stop": time_simulation,
+                "record_to":"ascii",
+                "record_from":variable,
+                'label':label,
+            })
+            nest.Connect(multimeter,nest.GetNodes()[id_first:id_end])
+            label_pop_record.append((label,variable))
+
+    if param_background['record_spike']:
+        for label, (id_first,id_end) in param_background['record_spike_list'].items():
+            spike_detector_simple = nest.Create('spike_detector', 1, params={
+                "start": min_time,
+                "stop": time_simulation,
+                "record_to": "ascii",
+                'label': label,
+            })
+            nest.Connect(nest.GetNodes()[id_first:id_end], spike_detector_simple)
+            label_pop_record.append((label,'spikes'))
+    # save label of population
+    if nest.Rank() == 0:
+        label_file = open(os.path.join(results_path+'/nest/', 'labels.csv'), 'w+')
+        label_file.write('%s,%s\n' % ('label', 'type of data'))
+        for label,record_type in label_pop_record:
+            label_file.write('%s,%s\n' % (label, record_type))
+        label_file.close()
 
     # create and connect device
     ##External current input
@@ -427,7 +450,7 @@ def network_device(dic_layer,min_time,time_simulation,param_background,param_con
         param_spike_dec= {"start": 0.0,
                       "stop": time_simulation,
                       "input_from": "mpi",
-                      'label': 'spike_generator'
+                      'label': '../spike_generator'
                       }
         nest.CopyModel('spike_generator', 'spike_generator_mpi')
         nest.SetDefaults("spike_generator_mpi", param_spike_dec)
@@ -478,7 +501,7 @@ def simulate (results_path,begin,end,
     if nest.Rank() == 0:
         tic = time.time()
     network_connection(dic_layer,param_topology,param_connection)
-    spike_detector,spike_generator=network_device(dic_layer,begin,end,param_background,param_connection)
+    spike_detector,spike_generator=network_device(results_path,dic_layer,begin,end,param_background,param_connection)
     if nest.Rank() == 0:
         toc = time.time() - tic
         print("Time to create the connections and devices: %.2f s" % toc)
@@ -519,7 +542,7 @@ def config_mpi_record (results_path,begin,end,
     if nest.Rank() == 0:
         tic = time.time()
     network_connection(dic_layer,param_topology,param_connection,cosimulation=cosimulation)
-    spike_detector,spike_generator=network_device(dic_layer,begin,end,param_background,param_connection,mpi=False,cosimulation=cosimulation)
+    spike_detector,spike_generator=network_device(results_path,dic_layer,begin,end,param_background,param_connection,mpi=False,cosimulation=cosimulation)
     if nest.Rank() == 0:
         toc = time.time() - tic
         print("Time to create the connections and devices: %.2f s" % toc)

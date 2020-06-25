@@ -88,6 +88,8 @@ class Interface_co_simulation(Raw):
             # Modify the call method of the simulator in order to update the proxy value
             def __call__(self, simulation_length=None, random_state=None, proxy_data=None):
                 if hasattr(self.history, 'update_proxy') and proxy_data is not None:
+                    if int(simulation_length/dt) != proxy_data[0].shape[0]:
+                        raise Exception('mission value in the proxy data')
                     self.history.update_proxy(self.current_step, proxy_data)
                 return super(type(simulator), self).__call__(simulation_length=simulation_length,
                                                              random_state=random_state)
@@ -105,7 +107,7 @@ class Interface_co_simulation(Raw):
         id_node = self._id_node
         dt = simulator.integrator.dt
         delay_proxy = simulator.history.delays[id_proxy, :]
-        delay_proxy = delay_proxy[:, id_proxy]
+        delay_proxy = delay_proxy[:, id_node]
         min_delay =  -numpy.min(delay_proxy, initial=numpy.Inf, where=delay_proxy != 0.0)
         if min_delay == -numpy.Inf:
             min_delay = numpy.iinfo(numpy.int32).min
@@ -124,6 +126,10 @@ class Interface_co_simulation(Raw):
                 """
                 if id_proxy.size != 0:
                     step_n = data[0] / dt - step  # the index of the buffer
+                    # TODO need to check if not missing values ( for moment is not robust)
+                    # the following works because the simulation length have the same dimension then the data
+                    if numpy.max(step_n)>-min_delay:
+                        raise Exception('ERROR missing value for the run')
                     if any(step_n > self.n_time):  # check if there are not too much data
                         raise Exception('ERROR too early')
                     if any(numpy.rint(step_n).astype(int) < min_delay):  # check if it's not missing value
@@ -132,7 +138,7 @@ class Interface_co_simulation(Raw):
                     indice = numpy.expand_dims(numpy.rint(step_n + step).astype(int) % self.n_time, 1)
                     if indice.size != numpy.unique(indice).size:  # check if the index is correct
                         raise Exception('ERROR two times are the same')
-                    self.buffer[indice, :, id_proxy, :] = data[1]
+                    self.buffer[indice, :, id_proxy, :] = numpy.reshape(data[1],(indice.shape[0],id_proxy.shape[0],self.buffer.shape[1],self.buffer.shape[3]))
 
         # WARNING should be change if the function update of the history change  (the actual update is the same all history)
         def update(self, step, new_state):

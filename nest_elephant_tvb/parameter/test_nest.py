@@ -118,6 +118,10 @@ param_nest_connection={
     'path_weight':path+'/weight.npy',
     # path for the distance matrix
     'path_distance':path+'/distance.npy',
+    # path for the center of the node
+    'path_centers':path+'/centers.txt',
+    # path for the distance matrix
+    'path_region_labels':path+'/region_labels.txt',
     #velocity of transmission in m/s
     'velocity':3.0,
     #Weight between region
@@ -151,7 +155,10 @@ param_nest_background={
     #stimulus populatin target
     'stimulus_target':0,
     #multimeter => ask a lot of memory
-    'multimeter':False
+    'multimeter':True,
+    'multimeter_list':{'pop_1_ex_VM':(['V_m'],0,10),'pop1_ex_W':(['w'],0,10),'pop_1_in_VM':(['V_m'],800,810),'pop1_in_W':(['w'],800,810)},
+    'record_spike': True,
+    'record_spike_list':{'pop_1_ex':(0,799),'pop_2_ex':(1000,1799),'pop_1_in':(800,999),'pop_2_in':(1800,1999)},
 }
 
 # parameter TVB for the connection between node
@@ -235,7 +242,7 @@ param_tvb_monitor={
         # 'period': param_nest['sim_resolution']*10.0 # 1s assuming the step size is 0.1 ms
     },
     # Use or not the Bold Monitor
-    'Bold':True,
+    'Bold':False,
     # Paramter for the Bold Monitor
     'parameter_Bold':{
         'variables_of_interest':[0],
