@@ -6,7 +6,13 @@ import numpy as np
 import os
 import re
 
+# import data generate by Nest
 def import_data_file(path):
+    """
+    import data from one recorder of nest
+    :param path: file with data saved by Nest
+    :return: data from one file
+    """
     data =np.asarray(np.genfromtxt(path,
                      skip_header=2,
                      skip_footer=0,
@@ -16,6 +22,12 @@ def import_data_file(path):
     return data
 
 def get_label_and_type(path,nb):
+    """
+    get the description of type of recording and the name of the file
+    :param path: file with all information record
+    :param nb: index of the population
+    :return: the label and the type of the recordinng data
+    """
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -29,12 +41,23 @@ def get_label_and_type(path,nb):
         raise Exception('not enough number of line')
 
 def count_number_of_label(path):
+    """
+    the number of label
+    :param path: the path to the files with labels
+    :return:
+    """
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         nb_label = sum(1 for row in csv_reader )
     return nb_label-1 # remove header
 
 def get_data(label,path):
+    """
+    collect all the data from one record, concatenate them and return them
+    :param label: the label of the recorder
+    :param path: the folder of recorded file
+    :return: data of the recorder
+    """
     regex = re.compile(label+'\-\w*\-\w*\.dat')
     data_list = []
     for root, dirs, files in os.walk(path):
@@ -51,6 +74,13 @@ def get_data(label,path):
     return field,np.array(data_concatenate)
 
 def reorder_data_multimeter(data):
+    """
+    Order the data of multimeter
+    The order in input are by time, by neurons, by value in contiguous value
+    The order in output are by neurons, by times, by value in different dimensions
+    :param data: the reorder data
+    :return:
+    """
     ids = np.unique(data[0]) # give id of neurons
     time = np.unique(data[1]) # give time
     index_ids = np.argsort(data[0])
@@ -61,6 +91,13 @@ def reorder_data_multimeter(data):
     return [ids,time,np.concatenate(value)]
 
 def reorder_data_spike_detector(data):
+    """
+    Order data of spike recorder
+    The order in input are by time and neurons in contiguous value
+    The order in output are by neurons and by time in different dimension
+    :param data: the reorder data
+    :return:
+    """
     ids = np.unique(data[0])
     spikes =[]
     for i in ids:
@@ -68,23 +105,27 @@ def reorder_data_spike_detector(data):
     return [ids,np.array(spikes)]
 
 def get_data_all(path):
+    """
+    Get all data of Nest and reorder them.
+    :param path: the path of the Nest folder
+    :return:
+    """
     nb = count_number_of_label(path+ 'labels.csv')
-    data_pop = []
+    data_pop = {}
     for i in range(nb):
         label, type = get_label_and_type(path + 'labels.csv', i)
         field, data = get_data(label, path)
         if type == 'spikes':
-            data_pop.append(reorder_data_spike_detector(data))
+            data_pop[label]=reorder_data_spike_detector(data)
         else:
-            data_pop.append(reorder_data_multimeter(data))
+            data_pop[label]=reorder_data_multimeter(data)
     return data_pop
 
+# import data generate by TVB
 def get_rate(path):
     '''
-    return the result of the simulation between the wanted time
-    :param path: the folder of the simulation
-    :param time_begin: the start time for the result
-    :param time_end:  the ending time for the result
+    return the result of the simulation from TVB
+    :param path: the folder of TVB
     :return: result of all monitor
     '''
     count = 0
@@ -107,8 +148,10 @@ def get_rate(path):
     return output
 
 # path = '/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/test_nest/test_co-sim/_g_5.0_mean_I_ext_0.0/'
-# # data_pop = get_data_all(path+'/nest/')
-# # print(len(data_pop))
+# path = '/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim/'
+# data_pop = get_data_all(path+'/nest/')
+# print(len(data_pop))
+# print(data_pop.keys())
 # rate = get_rate(path+'/tvb/')
 # import matplotlib.pyplot as plt
 # plt.figure()
