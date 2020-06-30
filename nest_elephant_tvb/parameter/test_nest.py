@@ -118,7 +118,7 @@ param_nest_connection={
     # number of external synapse:
     'nb_external_synapse':400,
     # path for the connectivity matrix (normalise in order to sum of input for region egual 1)
-    'path_weight':path+'/weight.npy',
+    'path_weight':path+'/weights.npy',
     # path for the distance matrix
     'path_distance':path+'/distance.npy',
     # path for the center of the node
@@ -236,7 +236,7 @@ param_tvb_monitor={
     # the time of simulation in each file
     'save_time': 2000.0,
     # use or not the Raw monitor
-    'Raw':False,
+    'Raw':True,
     # Use or not the Temporal Average Monitor
     'TemporalAverage':False,
     # Parameter for Temporal Average Monitor
