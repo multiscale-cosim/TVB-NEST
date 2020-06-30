@@ -243,7 +243,7 @@ def rum_mpi(path):
     nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold']
     # initialise the variable for the saving the result
     save_result =[]
-    for i in range(nb_monitor+1): # the input output monitor
+    for i in range(nb_monitor): # the input output monitor
         save_result.append([])
 
     #init MPI :
@@ -268,7 +268,7 @@ def rum_mpi(path):
             data_value.append(receive[1])
         data=np.empty((2,),dtype=object)
         nb_step = np.rint((time_data[1]-time_data[0])/param_tvb_integrator['sim_resolution'])
-        nb_step_0 = np.rint(time_data[0]/param_tvb_integrator['sim_resolution'])
+        nb_step_0 = np.rint(time_data[0]/param_tvb_integrator['sim_resolution']) + 1 # start at the first time step not at 0.0
         time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_tvb_integrator['sim_resolution']
         data_value = np.swapaxes(np.array(data_value),0,1)[:,:]
         if data_value.shape[0] != time_data.shape[0]:
@@ -277,33 +277,24 @@ def rum_mpi(path):
 
         logger.info(" TVB start simulation "+str(count*time_synch))
         nest_data=[]
-        count_step = 0
         for result in simulator(simulation_length=time_synch,proxy_data=data):
             for i in range(nb_monitor):
                 if result[i] is not None:
                     save_result[i].append(result[i])
-
-            # output with all good value
-            proxy_data = np.zeros((7,len(id_proxy),1))
-            proxy_data[0,:,0] = data[1][count_step]
-            index = [ j-i for i,j in enumerate(np.sort(id_proxy))]
-            res=np.insert(result[-1][1][0],index,proxy_data,axis=1)
-            save_result[-1].append([result[-1][0][0],res])
-            count_step += 1
-            nest_data.append([result[-1][0][1],result[-1][1][1]])
+            nest_data.append([result[-1][0],result[-1][1]])
 
             #save the result in file
-            if result[-1][0][0] >= param_tvb_monitor['save_time']*(count_save+1): #check if the time for saving at some time step
+            if result[-1][0] >= param_tvb_monitor['save_time']*(count_save+1): #check if the time for saving at some time step
                 np.save(param_tvb_monitor['path_result']+'/step_'+str(count_save)+'.npy',save_result)
                 save_result =[]
-                for i in range(nb_monitor+1):
+                for i in range(nb_monitor):
                     save_result.append([])
                 count_save +=1
         logger.info(" TVB end simulation")
 
         # prepare to send data with MPI
         nest_data = np.array(nest_data)
-        time = [nest_data[0,0]+time_synch,nest_data[-1,0]+time_synch]
+        time = [nest_data[0,0],nest_data[-1,0]]
         rate = np.concatenate(nest_data[:,1])
         for index,comm in enumerate(comm_send):
             send_mpi(comm,time,rate[:,index]*1e3)

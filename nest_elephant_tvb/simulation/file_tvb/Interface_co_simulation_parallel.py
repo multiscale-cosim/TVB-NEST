@@ -86,11 +86,19 @@ class Interface_co_simulation(Raw):
 
         # ####### WARNING:Change the instance simulator for taking in count the proxy ########
         # overwrite of the simulator for update the proxy value
-        mask = numpy.ones(len(simulator.model.state_variables), numpy.bool)
-        mask[simulator.model.cvar] = False
+        index_cvar_make = numpy.array(
+            [[i, j, k] for i in simulator.model.cvar for j in id_proxy for k in range(simulator.model.number_of_modes)])
+
+        mask_no_cvar = numpy.ones(len(simulator.model.state_variables), numpy.bool)
+        mask_no_cvar[simulator.model.cvar] = False
+        index_no_cvar_make = numpy.array(
+            [[i, j, k] for i in numpy.where(mask_no_cvar)[0] for j in id_proxy for k in range(simulator.model.number_of_modes)])
+
         class Simulator_proxy(type(simulator)):
-            no_cvar_index =  NArray(label="Index of not coupling variable",
-                                         default=mask)
+            index_cvar =  NArray(label="Index of coupling variable",
+                                         default=index_cvar_make)
+            index_no_cvar =  NArray(label="Index of notcoupling variable",
+                                 default=index_no_cvar_make)
             # Modify the call method of the simulator in order to update the proxy value
             # for the integration in TVB, it's just to modify the state variable after the after the integration scheme
             def __call__(self, simulation_length=None, random_state=None, proxy_data=None):
@@ -101,12 +109,17 @@ class Interface_co_simulation(Raw):
                 yield from super(type(simulator), self).__call__(simulation_length=simulation_length,
                                                          random_state=random_state)
                 # update the current state
-                self.current_state[self.model.cvar,id_proxy,:] = self.history.query_proxy(self.current_step+1)
-                self.current_state[self.no_cvar_index][:,id_proxy,:] = numpy.NAN
+                if self.index_cvar.shape[0] != 0:
+                        self.current_state[(self.index_cvar[:,0],self.index_cvar[:,1],self.index_cvar[:,2])] = numpy.squeeze(self.history.query_proxy(self.current_step+1))
+                if self.index_no_cvar.shape[0] != 0:
+                    self.current_state[(self.index_no_cvar[:,0],self.index_no_cvar[:,1],self.index_no_cvar[:,2])] = numpy.NAN
 
             def _loop_monitor_output(self, step, state):
                 # modify the state variable before the record of the monitor
-                state[self.model.cvar, id_proxy, :] = self.history.query_proxy(step+1)
+                if self.index_cvar.shape[0] != 0:
+                    state[(self.index_cvar[:,0],self.index_cvar[:,1],self.index_cvar[:,2])] = numpy.squeeze(self.history.query_proxy(step+1))
+                if self.index_no_cvar.shape[0] != 0:
+                        state[(self.index_no_cvar[:,0],self.index_no_cvar[:,1],self.index_no_cvar[:,2])] = numpy.NAN
                 return super(type(simulator), self)._loop_monitor_output(step, state)
 
         # change the class of the simulator
