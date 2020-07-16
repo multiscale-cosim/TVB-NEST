@@ -78,7 +78,7 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
     tract_lengths = np.load(param_tvb_connection['path_distance'])
     weights = np.load(param_tvb_connection['path_weight'])
     if 'path_region_labels' in param_tvb_connection.keys():
-        region_labels = np.loadtxt(param_tvb_connection['path_region_labels'])
+        region_labels = np.loadtxt(param_tvb_connection['path_region_labels'], dtype=str)
     else:
         region_labels = np.array([], dtype=np.dtype('<U128'))
     if 'path_centers' in param_tvb_connection.keys():

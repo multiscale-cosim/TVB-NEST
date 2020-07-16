@@ -19,6 +19,8 @@ def import_data_file(path):
                      names=True,
                      dtype=None,
                      delimiter='\t'))
+    if len(data.shape) == 0:
+        data.reshape((1,))
     return data
 
 def get_label_and_type(path,nb):
@@ -70,7 +72,10 @@ def get_data(label,path):
     data_concatenate = [[] for i in field ]
     for data in data_list:
        for i,name in enumerate(field):
-           data_concatenate[i]=np.concatenate((data_concatenate[i],data[name]))
+           if len(data[name].shape) == 0:
+                data_concatenate[i]=np.concatenate((data_concatenate[i],[data[name]]))
+           else:
+               data_concatenate[i] = np.concatenate((data_concatenate[i], data[name]))
     return field,np.array(data_concatenate)
 
 def reorder_data_multimeter(data):
@@ -147,27 +152,27 @@ def get_rate(path):
         count+=1
     return output
 
-# path = '/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/test_nest/test_co-sim/_g_5.0_mean_I_ext_0.0/'
-# path = '/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim/'
-# data_pop = get_data_all(path+'/nest/')
-# print(len(data_pop))
-# print(data_pop.keys())
-# rate = get_rate(path+'/tvb/')
-# import matplotlib.pyplot as plt
-# plt.figure()
-# # for i in range(75,79,1):
-# #     plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,i,:]*1e3,label=str(i))
-# plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,77,:]*1e3)
-# plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,25,:]*1e3)
-# plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,2,:]*1e3)
-# plt.legend()
-# plt.figure()
-# plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,:,0]*1e3)
-# plt.figure()
-# plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,1,:,0]*1e3)
-# plt.figure()
-# plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,5,:,0])
-# plt.show()
+if __name__ == '__main__':
+    path = '/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim_2/'
+    data_pop = get_data_all(path+'/nest/')
+    print(len(data_pop))
+    print(data_pop.keys())
+    rate = get_rate(path+'/tvb/')
+    import matplotlib.pyplot as plt
+    plt.figure()
+    # for i in range(75,79,1):
+    #     plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,i,:]*1e3,label=str(i))
+    plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,77,:]*1e3)
+    plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,25,:]*1e3)
+    plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,2,:]*1e3)
+    plt.legend()
+    plt.figure()
+    plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,:,0]*1e3)
+    plt.figure()
+    plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,1,:,0]*1e3)
+    plt.figure()
+    plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,5,:,0])
+    plt.show()
 
 
 
