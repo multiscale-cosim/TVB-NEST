@@ -18,9 +18,19 @@
 #specific language governing permissions and limitations
 #under the License.
 
+# Script needs to be started from the directory it is located in
+CURRENT_REPERTORY=$(pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$DIR" || exit
+
+# Choice of the image
 IMAGE=local:NEST_TVB_IO
 #IMAGE=local:NEST_TVB_IO_2
 
+# Run the docker image
 cd ../../
 sudo docker run -it --mount type=bind,source="$(pwd)",target=/home $IMAGE mpirun -n 2 python3 /home/test_nest/run_co-sim_test_docker.py
-cd install/docker/
+cd install/docker/ || exit
+
+# return to the calling repertory
+cd "${CURRENT_REPERTORY}" || exit

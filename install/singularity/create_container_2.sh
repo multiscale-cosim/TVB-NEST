@@ -18,5 +18,14 @@
 #specific language governing permissions and limitations
 #under the License.
 
+# Script needs to be started from the directory it is located in
+CURRENT_REPERTORY=$(pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$DIR" || exit
+
+# delete the previous image if exit and after rebuilt it
 rm -f Nest_TVB_2.simg
-sudo /usr/bin/singularity build Nest_TVB_2.simg Nest_TVB_config_2.singularity
+sudo singularity build Nest_TVB_2.simg Nest_TVB_config_2.singularity
+
+# return to the calling repertory
+cd "${CURRENT_REPERTORY}" || exit

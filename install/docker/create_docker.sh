@@ -18,6 +18,15 @@
 #specific language governing permissions and limitations
 #under the License.
 
+# Script needs to be started from the directory it is located in
+CURRENT_REPERTORY=$(pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$DIR" || exit
+
+# copy the folder for compiling in the docker
 cp -r  ../../nest-io-dev .
 sudo docker build -t local:NEST_TVB_IO -f Nest_TVB.dockerfile .
 rm -rd nest-io-dev
+
+# return to the calling repertory
+cd "${CURRENT_REPERTORY}" || exit

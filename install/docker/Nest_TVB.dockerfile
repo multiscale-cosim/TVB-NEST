@@ -39,14 +39,14 @@ RUN apk add cmake readline-dev ncurses-dev gsl-dev curl python3;\
     python3 get-pip.py;\
     rm get-pip.py;\
     pip install --upgrade pip;\
-    apk add freetype-dev;\
+    apk add freetype-dev jpeg-dev zlib-dev;\
     pip install matplotlib;\
     pip install elephant;\
     pip install mpi4py
 
 # install TVB
-RUN apk add llvm8-dev llvm8;\
-    export LLVM_CONFIG=/usr/bin/llvm8-config;\
+RUN apk add llvm9-dev llvm9;\
+    export LLVM_CONFIG=$(which llvm-config);\
     pip install tvb-data tvb-gdist tvb-library
 
 # Compile and Install package for Nest

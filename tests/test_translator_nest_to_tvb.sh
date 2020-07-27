@@ -4,6 +4,11 @@
 
 # Test the translator Nest to TVB
 
+# Script needs to be started from the directory it is located in
+CURRENT_REPERTORY=$(pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$DIR" || exit
+
 # configuration variable
 . ./init.sh
 
@@ -27,3 +32,6 @@ $RUN -n 1 python3 ../nest_elephant_tvb/simulation/file_translation/test_file/tes
 wait
 
 rm  -rd test_nest_to_tvb
+
+# return to the calling repertory
+cd "${CURRENT_REPERTORY}" || exit

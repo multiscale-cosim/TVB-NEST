@@ -18,10 +18,19 @@
 #specific language governing permissions and limitations
 #under the License.
 
+# Script needs to be started from the directory it is located in
+CURRENT_REPERTORY=$(pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$DIR" || exit
+
+# choice of the image
 IMAGE=./install/singularity/Nest_TVB_full.simg
 #IMAGE=./install/singularity/Nest_TVB.simg
 #IMAGE=./install/singularity/Nest_TVB_2.simg
 
 cd ../../
 singularity run --app mpi $IMAGE -n 8 python3 test_nest/run_co-sim_test.py $(pwd)/test_nest/test_sing/ 8
-cd install/singularity
+cd install/singularity || exit
+
+# return to the calling repertory
+cd "${CURRENT_REPERTORY}" || exit
