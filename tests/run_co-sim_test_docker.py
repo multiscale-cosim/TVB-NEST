@@ -9,7 +9,7 @@ from nest_elephant_tvb.parameter import test_nest as parameter_test
 # File for testing the co-simulation with a docker image
 
 def run_exploration(path,begin,end):
-    parameter_test.path = "/home/nest_elephant_tvb/parameter/data_mouse/"
+    parameter_test.path = "/home/example/parameter/data_mouse/"
     parameter_test.param_co_simulation['co-simulation']=True
     parameter_test.param_co_simulation['nb_MPI_nest']=MPI.COMM_WORLD.Get_size()
     parameter_test.param_nest['total_num_virtual_procs']=10
