@@ -110,7 +110,7 @@ def run(parameters_file):
                 os.makedirs(newpath+"/send_to_tvb/")
 
             for index,id_spike_detector in enumerate(spike_detector):
-                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../file_translation/run_mpi_nest_to_tvb.sh"
+                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_nest_to_tvb.sh"
                 argv=[ '/bin/sh',
                        dir_path,
                        mpirun,
@@ -133,7 +133,7 @@ def run(parameters_file):
                 os.makedirs(newpath+"/receive_from_tvb/")
 
             for index,ids_spike_generator in enumerate(spike_generator):
-                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../file_translation/run_mpi_tvb_to_nest.sh"
+                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_tvb_to_nest.sh"
                 argv=[ '/bin/sh',
                        dir_path,
                        mpirun,
@@ -199,7 +199,7 @@ def run(parameters_file):
                         pass
 
                 for index,id_spike_detector in enumerate(spike_detector):
-                    dir_path = os.path.dirname(os.path.realpath(__file__))+"/../file_translation/run_mpi_nest_save.sh"
+                    dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_nest_save.sh"
                     argv=[ '/bin/sh',
                            dir_path,
                            mpirun,
