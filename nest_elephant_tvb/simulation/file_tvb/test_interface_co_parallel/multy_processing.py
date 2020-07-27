@@ -2,7 +2,7 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 from mpi4py import MPI
-from nest_elephant_tvb.simulation.file_tvb import tvb_sim
+from nest_elephant_tvb.simulation.file_tvb.test_interface_co_parallel.function_tvb import tvb_sim
 import numpy as np
 import numpy.random as rgn
 

@@ -51,7 +51,7 @@ specified. The following properties are related to writing to file:
 '''
 
 nest.SetKernelStatus({"overwrite_files": True,
-                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../../../",
+                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../",
                       })
 
 '''
@@ -103,7 +103,7 @@ s_ex = nest.Create("step_current_generator",
                    params={"amplitude_times": numpy.array([]),
                            "amplitude_values": numpy.array([]),
                            'input_from':'mpi',
-                           "label":"test_nest"})
+                           "label":"test_nest_current"})
 s_in = nest.Create("step_current_generator",
                    params={
                        "amplitude_times": numpy.array([1.0, 100.0, 400.0]),

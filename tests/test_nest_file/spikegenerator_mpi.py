@@ -51,7 +51,7 @@ specified. The following properties are related to writing to file:
 '''
 
 nest.SetKernelStatus({"overwrite_files": True,
-                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../../../",
+                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../",
                       })
 
 '''
@@ -97,25 +97,25 @@ n_2 = nest.Create("iaf_psc_alpha",
 m = nest.Create("spike_detector",
                 params={
                         "record_to": "mpi",
-                        "label": "test_nest"})
+                        "label": "test_nest_spike"})
 m_2 = nest.Create("spike_detector",
                 params={
                     "record_to": "mpi",
-                    "label":"test_nest"})
+                    "label":"test_nest_spike"})
 m_3 = nest.Create("spike_detector",
                   params={
                       "record_to": "memory",
-                      "label":"test_nest"})
+                      "label":"test_nest_spike"})
 m_4 = nest.Create("spike_detector",
                   params={
                       "record_to": "memory",
-                      "label":"test_nest"})
+                      "label":"test_nest_spike"})
 
 sys.stdout.flush()
 s_ex = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([]),
                            'input_from':'mpi',
-                           "label":"test_nest"})
+                           "label":"test_nest_spike"})
 s_in = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([15.0, 25.0, 55.0])})
 

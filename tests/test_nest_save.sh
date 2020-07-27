@@ -25,9 +25,9 @@ DELAY=100.0
 parameter='param_record_MPI = {"save_step": 10, "resolution": 0.1, "synch": '"${DELAY}"', "level_log": 0}'
 echo "${parameter}" >./test_nest_to_save/parameter.py
 
-$RUN -n 1 python3 ../nest_elephant_tvb/translation/nest_save_hist.py ../test_nest/test_nest_to_save/ input/0.txt ../test_nest/test_nest_to_save/save/test 10000 &
+$RUN -n 1 python3 ../nest_elephant_tvb/translation/nest_save_hist.py ./test_nest_to_save/ input/0.txt ./test_nest_to_save/save/test 10000 &
 sleep 10 # wait for creation of file
-$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_input_nest_to_tvb.py  ../test_nest/test_nest_to_save/input/0.txt $DELAY &
+$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_input_nest_to_tvb.py  ./test_nest_to_save/input/0.txt $DELAY &
 
 wait
 

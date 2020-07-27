@@ -12,10 +12,15 @@ cd "$DIR" || exit
 # configuration variable
 . ./init.sh
 
-$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/record_nest_activity/record_region_activity.py  ../test_nest/3.txt &
-$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/record_nest_activity/record_region_activity.py  ../test_nest/4.txt &
+mkdir test_nest_record
+sleep 1
 
-$RUN -n 1 python3 ./test_nest_filenest-io/spikedetector_mpi.py
+$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/record_nest_activity/record_region_activity.py  ./test_nest_record/3.txt &
+$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/record_nest_activity/record_region_activity.py  ./test_nest_record/4.txt &
+
+$RUN -n 1 python3 ./test_nest_file/spikedetector_mpi.py
+
+rm -rd test_nest_record
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit
