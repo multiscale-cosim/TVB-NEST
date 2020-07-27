@@ -135,7 +135,7 @@ def neuron_widget (nb_thread=4):
         plt.ylabel("w [pAmp]")
         plt.title("Phase plane representation")
         plt.subplot(2, 2, 3)
-        Vms = MH_sim["events"]["V_m"]
+        Vms = MH_sim["events"]["w"]
         ts = MH_sim["events"]["times"] 
         plt.plot(ts, Vms)
         plt.xlabel("t [ms]")
@@ -146,6 +146,7 @@ def neuron_widget (nb_thread=4):
         plt.subplot(2, 2, 4)
         plt.plot(ts, evs,".")
         plt.title('Spike neurons')
+        plt.xlabel("t [ms]")
         plt.subplots_adjust(hspace=0.8)
         plt.show()
 

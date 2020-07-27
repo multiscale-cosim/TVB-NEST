@@ -118,10 +118,11 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
         ax3.set_ylabel('Neuron index')
 
         ax4 = fig.add_subplot(224)
-        ax4.plot(TimBinned_ex, popRate_ex, 'b')
-        ax4.plot(TimBinned_in, popRate_in, 'r')
+        ax4.plot(TimBinned_ex, popRate_ex, 'b',label='excitatory population')
+        ax4.plot(TimBinned_in, popRate_in, 'r',label='inhibitory population')
         ax4.set_xlabel('Time (ms)')
         ax4.set_ylabel('FR')
+        ax4.legend()
 
         if histogram:
             plt.figure(figsize=(9.5, 4))
@@ -149,10 +150,11 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
         ax3.set_ylabel('Neuron index')
 
         ax4 = fig.add_subplot(122)
-        ax4.plot(TimBinned_ex, popRate_ex, 'b')
-        ax4.plot(TimBinned_in, popRate_in, 'r')
+        ax4.plot(TimBinned_ex, popRate_ex, 'b',label='excitatory population')
+        ax4.plot(TimBinned_in, popRate_in, 'r',label='inhibitory population')
         ax4.set_xlabel('Time (ms)')
         ax4.set_ylabel('FR')
+        ax4.legend()
 
         if histogram:
             plt.figure(figsize=(9.5, 4))
@@ -181,7 +183,7 @@ if __name__ == '__main__':
     param['param_nest_topology']={}
     param['param_nest_topology']["percentage_inhibitory"] =0.2
     param['param_nest_topology']["nb_neuron_by_region"] =1000
-    print_nest_pop(param, 0.0, 100.0,data['pop_1_ex'],data['pop_1_in'],
+    print_nest_pop(param, 0.0, 2000.0,data['pop_1_ex'],data['pop_1_in'],
                V_ex=data['pop_1_ex_VM'],V_in=data['pop_1_in_VM'],
                W_ex=data['pop_1_ex_W'],W_in=data['pop_1_in_W'],
                 histogram=True)
