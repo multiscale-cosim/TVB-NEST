@@ -4,7 +4,7 @@
 import numpy as np
 from mpi4py import MPI
 from threading import Thread
-from nest_elephant_tvb.simulation.file_translation.nest_to_tvb import receive,store_data,lock_status,logging
+from nest_elephant_tvb.file_translation.nest_to_tvb import receive,store_data,lock_status,logging
 
 def save(path,level_log,nb_step,step_save,status_data,buffer):
     '''

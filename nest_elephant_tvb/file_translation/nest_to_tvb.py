@@ -5,7 +5,7 @@ import numpy as np
 import os
 from mpi4py import MPI
 from threading import Thread, Lock
-from nest_elephant_tvb.simulation.file_translation.science_nest_to_tvb import store_data,analyse_data
+from nest_elephant_tvb.file_translation.science_nest_to_tvb import store_data,analyse_data
 import logging
 
 lock_status=Lock() # locker for manage the transfer of data from thread
