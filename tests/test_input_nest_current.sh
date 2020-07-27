@@ -12,7 +12,7 @@ cd "$DIR" || exit
 # configuration variable
 . ./init.sh
 
-$RUN -n 1 python3 ../nest_elephant_tvb/simulation/file_translation/test_file/input_nest_current/input_current.py ../test_nest/4.txt &
+$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/input_nest_current/input_current.py ../test_nest/4.txt &
 PID_1=$(echo $!)
 
 $RUN -n 1 python3 ./test_nest_file/step_current_generator_mpi.py

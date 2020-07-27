@@ -180,14 +180,14 @@ For testing the installation, you need to change the file /test_nest/init.sh. Th
 * nest_elephant_nest: file which contains all the kernel of the simulation
     * parameter : parameter for the simulation and the data
         * data_mouse : data from Allen Institute of mouse connectome is composed of the file of the distance between each region and the weight of the connections
+    * translation: folder contains the translator between TVB and Nest
+        * run_... : for running the different component
+        * nest_to_tvb : for the communication between Nest to TVB
+        * tvb_to_nest : for the communication between TVB to Nest
+        * science_... : files contain the function to transform spike to rate and opposite
+        * rate_spike : special function use in science based on elephant applications
+        * test_file : all the tests of translators and Nest I/O
     * simulation : folder contains every file for the simulation
-        * file_translation: folder contains the translator between TVB and Nest
-            * run_... : for running the different component
-            * nest_to_tvb : for the communication between Nest to TVB
-            * tvb_to_nest : for the communication between TVB to Nest
-            * science_... : files contain the function to transform spike to rate and opposite
-            * rate_spike : special function use in science based on elephant applications
-            * test_file : all the tests of translators and Nest I/O
         *  file TVB : folder contains file for the interface of TVB 
             * Zerlaut.py : model of the Mean Field
             * noise.py : specific noise for this model
