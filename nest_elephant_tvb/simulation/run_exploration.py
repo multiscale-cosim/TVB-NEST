@@ -1,14 +1,18 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+
 import datetime
 import os
+import sys
 import nest
 from nest_elephant_tvb.simulation.parameters_manager import generate_parameter,save_parameter
 from nest_elephant_tvb.simulation.simulation_nest import simulate,config_mpi_record,simulate_mpi_co_simulation
 from nest_elephant_tvb.simulation.simulation_zerlaut import simulate_tvb
 import subprocess
 
-def run(results_path,parameter_default,dict_variable,begin,end):
+def run_exploration(results_path,parameter_default,dict_variable,begin,end):
     """
-    Run one simulation
+    Run one simulation of the exploration
     :param results_path: the folder where to save spikes
     :param parameter_default: parameters by default of the exploration
     :param dict_variable : dictionary with the variable change
@@ -16,6 +20,42 @@ def run(results_path,parameter_default,dict_variable,begin,end):
     :param end: when end the recording simulation and the simulation
     :return: nothing
     """
+    #create the folder for result is not exist
+    newpath = os.path.join(os.getcwd(),results_path)
+    # start to create the repertory for the simulation
+    if nest.Rank() == 0:
+        if not os.path.exists(newpath):
+            os.makedirs(newpath)
+        else:
+            try:
+                os.remove(newpath + '/parameter.py') # use it for synchronise all mpi the beginning
+            except OSError:
+                pass
+        # generate and save parameter for the  simulation
+        parameters = generate_parameter(parameter_default,results_path,dict_variable)
+        save_parameter(parameters,results_path,begin,end)
+    else:
+       while os.path.exists(newpath+'/parameter.py'): # use it for synchronise all nest thread
+            pass
+    while not os.path.exists(newpath+'/parameter.py'): # use it for synchronise all nest thread
+        pass
+    run(results_path+'/parameter.py')
+
+
+def run(parameters_file):
+    '''
+    run the simulation
+    :param parameters_file: parameters of the simulation
+    :return:
+    '''
+    sys.path.append(os.path.dirname(parameters_file))
+    import parameter
+    sys.path.remove(os.path.dirname(parameters_file))
+    parameters= parameter.__dict__
+    begin = parameters['begin']
+    end = parameters['end']
+    results_path = parameters['result_path']
+
     print('time: '+str(datetime.datetime.now())+' BEGIN SIMULATION \n')
     #create the folder for result is not exist
     newpath = os.path.join(os.getcwd(),results_path)
@@ -25,6 +65,8 @@ def run(results_path,parameter_default,dict_variable,begin,end):
             os.makedirs(newpath)
         if not os.path.exists(newpath+"/log"):
             os.makedirs(newpath+"/log")
+        if not os.path.exists(newpath + '/nest'):
+            os.makedirs(newpath + '/nest')
         if not os.path.exists(newpath + '/tvb'):
             os.makedirs(newpath + '/tvb')
         else:
@@ -35,11 +77,6 @@ def run(results_path,parameter_default,dict_variable,begin,end):
     else:
         while not os.path.exists(newpath+'/tvb'): # use it for synchronise all nest thread
             pass
-
-    # generate and save parameter for the  simulation
-    parameters = generate_parameter(parameter_default,results_path,dict_variable)
-    if nest.Rank() == 0:
-        save_parameter(parameters,results_path,begin,end)
 
     # parameter for the co-simulation
     param_co_simulation = parameters['param_co_simulation']
@@ -73,7 +110,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                 os.makedirs(newpath+"/send_to_tvb/")
 
             for index,id_spike_detector in enumerate(spike_detector):
-                dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_nest_to_tvb.sh"
+                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_nest_to_tvb.sh"
                 argv=[ '/bin/sh',
                        dir_path,
                        mpirun,
@@ -96,7 +133,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                 os.makedirs(newpath+"/receive_from_tvb/")
 
             for index,ids_spike_generator in enumerate(spike_generator):
-                dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_tvb_to_nest.sh"
+                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_tvb_to_nest.sh"
                 argv=[ '/bin/sh',
                        dir_path,
                        mpirun,
@@ -162,7 +199,7 @@ def run(results_path,parameter_default,dict_variable,begin,end):
                         pass
 
                 for index,id_spike_detector in enumerate(spike_detector):
-                    dir_path = os.path.dirname(os.path.realpath(__file__))+"/file_translation/run_mpi_nest_save.sh"
+                    dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_nest_save.sh"
                     argv=[ '/bin/sh',
                            dir_path,
                            mpirun,
@@ -211,6 +248,12 @@ def run_exploration_2D(path,parameter_default,dict_variables,begin,end):
             # try:
             print('SIMULATION : '+name_variable_1+': '+str(variable_1)+' '+name_variable_2+': '+str(variable_2))
             results_path=path+'_'+name_variable_1+'_'+str(variable_1)+'_'+name_variable_2+'_'+str(variable_2)
-            run(results_path,parameter_default,{name_variable_1:variable_1,name_variable_2:variable_2},begin,end)
+            run_exploration(results_path,parameter_default,{name_variable_1:variable_1,name_variable_2:variable_2},begin,end)
             # except:
             #     sys.stderr.write('time: '+str(datetime.datetime.now())+' error: ERROR in simulation \n')
+
+if __name__ == "__main__":
+    if len(sys.argv)==2:
+        run(parameters_file=sys.argv[1])
+    else:
+        print('missing argument')

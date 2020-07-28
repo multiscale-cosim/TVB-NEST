@@ -1,3 +1,6 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+
 import logging
 logging.getLogger('numba').setLevel(logging.WARNING)
 logger = logging.getLogger('tvb')
@@ -71,15 +74,25 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
     model.state_variable_range['W_i'] = np.array(param_tvb_model['initial_condition']['W_i'])
 
     ## Connection
+    nb_region = int(param_tvb_connection['nb_region'])
     tract_lengths = np.load(param_tvb_connection['path_distance'])
     weights = np.load(param_tvb_connection['path_weight'])
-    nb_region = int(param_tvb_connection['nb_region'])
+    if 'path_region_labels' in param_tvb_connection.keys():
+        region_labels = np.loadtxt(param_tvb_connection['path_region_labels'], dtype=str)
+    else:
+        region_labels = np.array([], dtype=np.dtype('<U128'))
+    if 'path_centers' in param_tvb_connection.keys():
+        centers = np.loadtxt(param_tvb_connection['path_centers'])
+    else:
+        centers = np.array([])
     connection = lab.connectivity.Connectivity(number_of_regions=nb_region,
                                                    tract_lengths=tract_lengths[:nb_region,:nb_region],
                                                    weights=weights[:nb_region,:nb_region],
-                                               region_labels=np.array([],dtype=np.dtype('<U128')),
-                                               centres=np.array([])
+                                               region_labels=region_labels,
+                                               centres=centers
                                                )
+    # if 'normalised' in param_tvb_connection.keys() or param_tvb_connection['normalised']:
+    #     connection.weights = connection.weights / np.sum(connection.weights, axis=0)
     connection.speed = np.array(param_tvb_connection['velocity'])
 
     ## Coupling
@@ -230,7 +243,7 @@ def rum_mpi(path):
     nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold']
     # initialise the variable for the saving the result
     save_result =[]
-    for i in range(nb_monitor):
+    for i in range(nb_monitor): # the input output monitor
         save_result.append([])
 
     #init MPI :
@@ -244,6 +257,7 @@ def rum_mpi(path):
 
     # the loop of the simulation
     count = 0
+    count_save = 0
     while count*time_synch < end:
         logger.info(" TVB receive data")
         #receive MPI data
@@ -254,9 +268,9 @@ def rum_mpi(path):
             data_value.append(receive[1])
         data=np.empty((2,),dtype=object)
         nb_step = np.rint((time_data[1]-time_data[0])/param_tvb_integrator['sim_resolution'])
-        nb_step_0 = np.rint(time_data[0]/param_tvb_integrator['sim_resolution'])
+        nb_step_0 = np.rint(time_data[0]/param_tvb_integrator['sim_resolution']) + 1 # start at the first time step not at 0.0
         time_data = np.arange(nb_step_0,nb_step_0+nb_step,1)*param_tvb_integrator['sim_resolution']
-        data_value = np.swapaxes(np.array(data_value),0,1)[:,:,np.newaxis,np.newaxis]
+        data_value = np.swapaxes(np.array(data_value),0,1)[:,:]
         if data_value.shape[0] != time_data.shape[0]:
             raise(Exception('Bad shape of data'))
         data[:]=[time_data,data_value]
@@ -267,20 +281,20 @@ def rum_mpi(path):
             for i in range(nb_monitor):
                 if result[i] is not None:
                     save_result[i].append(result[i])
-            nest_data.append([result[-1][0][1],result[-1][1][1]])
+            nest_data.append([result[-1][0],result[-1][1]])
 
             #save the result in file
-            if result[-1][0][0] >= param_tvb_monitor['save_time']*(count+1): #check if the time for saving at some time step
-                np.save(param_tvb_monitor['path_result']+'/step_'+str(count)+'.npy',save_result)
+            if result[-1][0] >= param_tvb_monitor['save_time']*(count_save+1): #check if the time for saving at some time step
+                np.save(param_tvb_monitor['path_result']+'/step_'+str(count_save)+'.npy',save_result)
                 save_result =[]
                 for i in range(nb_monitor):
                     save_result.append([])
-                count +=1
+                count_save +=1
         logger.info(" TVB end simulation")
 
         # prepare to send data with MPI
         nest_data = np.array(nest_data)
-        time = [nest_data[0,0]+time_synch,nest_data[-1,0]+time_synch]
+        time = [nest_data[0,0],nest_data[-1,0]]
         rate = np.concatenate(nest_data[:,1])
         for index,comm in enumerate(comm_send):
             send_mpi(comm,time,rate[:,index]*1e3)
