@@ -3,6 +3,9 @@
 
 import numpy as np
 from mpi4py import MPI
+import os
+import time
+import sys
 
 def simulate_TVB_output(path,min_delay):
     '''
@@ -11,14 +14,35 @@ def simulate_TVB_output(path,min_delay):
     :param min_delay: the time of one simulation
     :return:
     '''
+    max_mpi_connection_attempts = 50
+    file_unlock=False
+    for attempt in range(max_mpi_connection_attempts):
+        if os.path.exists(path+".unlock"):
+            print ("MPI connection file available after t={0} seconds".format(attempt));sys.stdout.flush()
+            file_unlock=True
+            break
+
+        time.sleep(1)
+
+
+    if file_unlock is False:
+        print("Could file not unlocked after 20 attempts, exit");sys.stdout.flush()
+        sys.exit (1)
+
+
     # Init connection from file connection
     print("TVB_OUTPUT : Waiting for port details");sys.stdout.flush()
     fport = open(path, "r")
     port = fport.readline()
     fport.close()
-    print('TVB_OUTPUT :wait connection '+port);sys.stdout.flush()
+    print('TVB_OUTPUT :wait connection: '+ port + ": " + path );sys.stdout.flush()
     comm = MPI.COMM_WORLD.Connect(port)
     print('TVB_OUTPUT :connect to '+port);sys.stdout.flush()
+       
+    print('TVB_OUTPUT: Done with connection loop, EXIT after 1 second');sys.stdout.flush() 
+
+    time.sleep(1)
+    return
 
     status_ = MPI.Status()
     starting = 0.0 # the begging of each time of synchronization

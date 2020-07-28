@@ -9,7 +9,7 @@ WARNING : All the script needs to be launch in the repertory where there are.
 
 ## Table of Contents
 1. [Installation and update](#installalation)
-    1. [Advice for using the repertory](#advice)
+    1. [Advice for using the repository](#advice)
     2. [Different Installation](#diff_install)
 2. [Dependencies](#dependencies)
 3. [Adaption to your own usage](#usages)
@@ -165,6 +165,7 @@ For testing the installation, you need to change the file /test_nest/init.sh. Th
 * [install](#installalation)
     * [deep](#deepest)
         install.sh : installation on deepest cluster
+		Should be installed in /p/project/type1_1/[personaldir]
     * docker
         create_docker.sh, create_docker_1.sh : create the docker image for the project
         Nest_TVB.dockerfile, Nest_TVB_1.dockerfile : file of configuration for docker

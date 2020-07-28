@@ -14,6 +14,9 @@ cd "$DIR" || exit
 
 DELAY=100.0
 
+rm  -rd test_nest_to_tvb
+
+
 mkdir ./test_nest_to_tvb
 mkdir ./test_nest_to_tvb/input/
 mkdir ./test_nest_to_tvb/output/
@@ -25,12 +28,10 @@ echo "${parameter}" >./test_nest_to_tvb/parameter.py
 cp ./init_spikes.npy  ./test_nest_to_tvb/init_spikes.npy
 
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/nest_to_tvb.py ./test_nest_to_tvb/ input/0.txt output/0.txt&
-sleep 10 # wait for creation of file
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_input_nest_to_tvb.py  ./test_nest_to_tvb/input/0.txt $DELAY &
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_receive_nest_to_tvb.py  ./test_nest_to_tvb/output/0.txt &
 
 wait
-
 rm  -rd test_nest_to_tvb
 
 # return to the calling repertory

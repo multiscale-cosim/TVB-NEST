@@ -4,6 +4,9 @@
 import numpy as np
 from mpi4py import MPI
 
+import os
+import time
+
 def simulate_spike_detector(path,min_delay):
     '''
     simulate spike detector output for testing the nest to tvb translator input
@@ -14,6 +17,12 @@ def simulate_spike_detector(path,min_delay):
     # Init connection from file connection
     print(path)
     print("Nest Output : Waiting for port details");sys.stdout.flush()
+
+    while not os.path.exists(path):
+        print ("Port file not found yet, retry in 1 second")
+        time.sleep(1)
+
+
     fport = open(path, "r")
     port = fport.readline()
     fport.close()
@@ -30,11 +39,11 @@ def simulate_spike_detector(path,min_delay):
         comm.Recv([check, 1, MPI.CXX_BOOL], source=MPI.ANY_SOURCE, tag=0,status=status_)
         # create random data
         size= np.random.randint(0,1000)
-        time = starting+np.random.rand(size)*(min_delay-0.2)
-        time = np.around(np.sort(np.array(time)),decimals=1)
+        times = starting+np.random.rand(size)*(min_delay-0.2)
+        times = np.around(np.sort(np.array(times)),decimals=1)
         id_neurons = np.random.randint(0,10,size)
         id_detector = np.random.randint(0,10,size)
-        data = np.ascontiguousarray(np.swapaxes([id_detector,id_neurons,time],0,1),dtype='d')
+        data = np.ascontiguousarray(np.swapaxes([id_detector,id_neurons,times],0,1),dtype='d')
         # send data one by one like spike generator
         comm.Send([np.array([size*3],dtype='i'),1, MPI.INT], dest=status_.Get_source(), tag=0)
         comm.Send([data,size*3, MPI.DOUBLE], dest=status_.Get_source(), tag=0)

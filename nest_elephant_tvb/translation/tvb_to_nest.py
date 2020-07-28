@@ -7,57 +7,45 @@ from mpi4py import MPI
 from threading import Thread, Lock
 from nest_elephant_tvb.translation.science_tvb_to_nest import generate_data
 import logging
+from pathlib import Path
 
+class MPI_util():
+    def __init__(self, path, file1, file2):
+        self._path = path
+        self._file1 = file1
+        self._file2 = file2
+
+    def get_comm(self, id):
+        # return the correct com based on the id
+        pass
+
+    def __del__(self):
+        # body of destructor
+        pass
+
+
+        
 lock_status=Lock() # locker for manage the transfer of data from thread
 
-def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,buffer_spike):
+def send(path,first_id_spike_generator,logger,nb_spike_generator,status_data,buffer_spike, comm):
     '''
     the sending part of the translator
     :param path: folder which will contain the configuration fil
     :param first_id_spike_generator: the relative path which contains the txt file
-    :param level_log : the level for the logger
+    :param logger : logger
     :param nb_spike_generator: the number of spike generator
     :param status_data: the status of the buffer (SHARED between thread)
     :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    # Configuration logger
-    logger = logging.getLogger('tvb_to_nest_send')
-    fh = logging.FileHandler(path+'/../log/tvb_to_nest_send'+str(first_id_spike_generator)+'.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if level_log == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  level_log == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  level_log == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  level_log == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  level_log == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
 
-    # Open the MPI port connection
-    logger.info("Send : Waiting for port details")
-    info = MPI.INFO_NULL
-    root = 0
-    port = MPI.Open_port(info)
-    # Write file configuration of the port
-    for i in range(nb_spike_generator):
-        path_to_files = path + str(first_id_spike_generator+i) + ".txt"
-        fport = open(path_to_files, "w+")
-        fport.write(port)
-        fport.close()
-    # Wait until connection
-    logger.info('Send : wait connection '+port)
-    comm = MPI.COMM_WORLD.Accept(port, info, root)
-    logger.info('Send : connect to '+port)
+
+  
+    import time
+    time.sleep(1)
+    print('Translate SEND: Done with connection loop, EXIT after 5 second');sys.stdout.flush() 
+
+    return
 
     # itialisation variable before the loop
     status_ = MPI.Status()
@@ -108,58 +96,25 @@ def send(path,first_id_spike_generator,level_log,nb_spike_generator,status_data,
     logger.info("Send : ending" )
     comm.Disconnect()
     MPI.Close_port(port)
-    for i in range(nb_spike_generator):
-        path_to_files = path + str(first_id_spike_generator+i) + ".txt"
-        os.remove(path_to_files)
     logger.info('Send : exit')
 
-def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_data,buffer_spike):
+def receive(path,first_id_spike_generator,logger,TVB_config,generator,status_data,buffer_spike, com):
     '''
     the receiving part of the translator
     :param path: folder which will contain the configuration file
     :param first_id_spike_generator: the relative path which contains the txt file
-    :param level_log : the level for the logger
+    :param logger : logger
     :param TVB_config : the folder with the file of the connection with TVB
     :param generator : the function to generate rate to spikes
     :param status_data: the status of the buffer (SHARED between thread)
     :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    # Configuration logger
-    logger = logging.getLogger('tvb_to_nest_receive')
-    fh = logging.FileHandler(path+'/../log/tvb_to_nest_receive'+str(first_id_spike_generator)+'.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if level_log == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  level_log == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  level_log == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  level_log == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  level_log == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
-
     # Open the MPI port connection
-    logger.info("Receive : Waiting for port details")
-    info = MPI.INFO_NULL
-    root = 0
-    port = MPI.Open_port(info)
-    # Write file configuration of the port
-    path_to_files = path + TVB_config
-    fport = open(path_to_files, "w+")
-    fport.write(port)
-    fport.close()
-    logger.info('Receive : wait connection ' + port)
-    comm = MPI.COMM_WORLD.Accept(port, info, root)
-    logger.info('Receive : connect to ' + port)
+
+    import time
+    time.sleep(1)
+    return
 
     status_ = MPI.Status()
     source_sending = np.arange(0,comm.Get_remote_size(),1)# list of all the process for the commmunication
@@ -198,39 +153,122 @@ def receive(path,first_id_spike_generator,level_log,TVB_config,generator,status_
     logger.info('Receive : ending')
     comm.Disconnect()
     MPI.Close_port(port)
-    os.remove(path_to_files)
+
     logger.info('Receive : exit')
+
+def create_logger(path, log_level):
+    # Configure logger
+    logger = logging.getLogger('tvb_to_nest_send')
+    fh = logging.FileHandler(path+'/../log/tvb_to_nest_send.log')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    if log_level == 0:
+        fh.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
+    elif  log_level == 1:
+        fh.setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
+    elif  log_level == 2:
+        fh.setLevel(logging.WARNING)
+        logger.setLevel(logging.WARNING)
+    elif  log_level == 3:
+        fh.setLevel(logging.ERROR)
+        logger.setLevel(logging.ERROR)
+    elif  log_level == 4:
+        fh.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
+
+    return logger
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==5:
-        path_config = sys.argv[1]
-        id_first_spike_detector = int(sys.argv[2])
-        nb_spike_generator = int(sys.argv[3])
-        TVB_config = sys.argv[4]
 
-        # object for analysing data
-        sys.path.append(path_config+'/../')
-        from parameter import param_TR_tvb_to_nest as param
-        sys.path.remove(path_config+'/../')
-        generator = generate_data(path_config+'/../log/',nb_spike_generator,param)
-        level_log = param['level_log']
-
-        # variable for communication between thread
-        status_data=[True]
-        initialisation =np.load(param['init'])
-        buffer_spike=[initialisation]
-
-        # create the thread for receive and send data
-        th_send = Thread(target=send, args=(path_config,id_first_spike_detector,level_log,nb_spike_generator,status_data,buffer_spike))
-        th_receive = Thread(target=receive, args=(path_config,id_first_spike_detector,level_log,TVB_config,generator,status_data,buffer_spike ))
-
-        # start the threads
-        th_receive.start()
-        th_send.start()
-        th_receive.join()
-        th_send.join()
-        MPI.Finalize()
-    else:
+    if len(sys.argv)!=5:
         print('missing argument')
+        exit (1)
 
+    # Parse arguments
+    path_config = sys.argv[1]
+    id_first_spike_detector = int(sys.argv[2])
+    nb_spike_generator = int(sys.argv[3])
+    TVB_config = sys.argv[4]
+
+
+    # object for analysing data
+    sys.path.append(path_config+'/../')
+    from parameter import param_TR_tvb_to_nest as param
+    sys.path.remove(path_config+'/../')
+    generator = generate_data(path_config+'/../log/',nb_spike_generator,param)
+    log_level = param['level_log']
+
+    # variable for communication between thread
+    status_data=[True]
+    initialisation =np.load(param['init'])
+    buffer_spike=[initialisation]
+
+    ### Create Com objects for communications
+    info = MPI.INFO_NULL
+    root = 0
+        
+    ##############################################
+    # Create the port, file and set unlock for sender
+    print('Translate SEND: before open_port');sys.stdout.flush() 
+    port_send = MPI.Open_port(info)  # open a NEW port
+    print('Translate SEND: after open_port');sys.stdout.flush() 
+
+    # write file with port and unlockl
+    path_to_files_send = os.path.join(path_config, "0_send.txt")
+    print('Translate SEND: path_file: ' + path_to_files_send);sys.stdout.flush() 
+    fport_send = open(path_to_files_send, "w+")
+    fport_send.write(port_send)
+    fport_send.close()
+        
+    path_to_files_send_unlock = os.path.join(path_config, "0_send.txt.unlock")
+    Path(path_to_files_send_unlock).touch()       
+
+    ##############################################
+    #  Create the port, file and set unlock for receiver       
+    print('Translate RECEIVE: before open_port');sys.stdout.flush() 
+    port_receive = MPI.Open_port(info)
+    print('Translate RECEIVE: after open_port');sys.stdout.flush() 
+        
+    # Write file configuration of the port
+    path_to_files_receive = os.path.join(path_config, "0_receive.txt")
+    print('Translate RECEIVE: path_file: ' + path_to_files_receive);sys.stdout.flush() 
+    fport_receive = open(path_to_files_receive, "w+")
+    fport_receive.write(port_receive)
+    fport_receive.close()
+
+    path_to_files_receive_unlock = os.path.join(path_config, "0_receive.txt.unlock")
+    Path(path_to_files_receive_unlock).touch()
+
+    ############################################
+    # accept connections
+    print('Translate SEND: before Accepted: '+ str([port_send, info, root]));sys.stdout.flush() 
+    comm_send = MPI.COMM_WORLD.Accept(port_send, info, root)
+    print('Translate SEND: Accepted');sys.stdout.flush()   
+        
+    print('Translate RECEIVE: before accept: '+ str([port_receive, info, root]));sys.stdout.flush() 
+    comm_receive = MPI.COMM_WORLD.Accept(port_receive, info, root)
+    print('Translate RECEIVE: after accept');sys.stdout.flush() 
+    ##############################################
+
+    logger = create_logger(path_config, log_level)
+
+    # create the thread for receive and send data
+    th_send = Thread(target=send, args=(path_config,id_first_spike_detector,logger,nb_spike_generator,status_data,buffer_spike, comm_send))
+    th_receive = Thread(target=receive, args=(path_config,id_first_spike_detector,logger,TVB_config,generator,status_data,buffer_spike, comm_receive ))
+
+    # start the threads
+    th_receive.start()
+    th_send.start()
+    th_receive.join()
+    th_send.join()
+    MPI.Finalize()
+
+    # Clean up port files and locks
+    os.remove(path_to_files_send)
+    os.remove(path_to_files_send_unlock)
+    os.remove(path_to_files_receive)
+    os.remove(path_to_files_receive_unlock)
