@@ -5,6 +5,7 @@ import datetime
 import os
 import sys
 import nest
+import time
 from nest_elephant_tvb.simulation.parameters_manager import generate_parameter,save_parameter
 from nest_elephant_tvb.simulation.simulation_nest import simulate,config_mpi_record,simulate_mpi_co_simulation
 from nest_elephant_tvb.simulation.simulation_zerlaut import simulate_tvb
@@ -162,6 +163,7 @@ def run(parameters_file):
                              )
 
         #TODO correct synchronization? : waiting until create most all file of config
+        time.sleep(10)
 
         # Use the init file of TVB for waiting the configuration file for MPI communication are ready to use
         # and start the simulation at the same time

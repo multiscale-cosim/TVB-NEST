@@ -53,11 +53,11 @@ make install
 PYTHON_LIB=${INSTALL_FOLDER}/site_packages
 mkdir "$PYTHON_LIB"
 export PYTHONPATH=$PYTHON_LIB:$PYTHONPATH
-pip install --no-deps --target="$PYTHON_LIB" numpy
-pip install --no-deps --target="$PYTHON_LIB" elephant neo tqdm quantities
-pip install --no-deps --target="$PYTHON_LIB" tvb-gdist
-pip install --no-deps --target="$PYTHON_LIB" tvb-data
-pip install --no-deps --target="$PYTHON_LIB" tvb-library llvmlite numba numexpr
+pip install --no-deps --upgrade --target="$PYTHON_LIB" numpy
+pip install --no-deps --upgrade --target="$PYTHON_LIB" elephant neo tqdm quantities
+pip install --no-deps --upgrade --target="$PYTHON_LIB" tvb-gdist
+pip install --no-deps --upgrade --target="$PYTHON_LIB" tvb-data
+pip install --no-deps --upgrade --target="$PYTHON_LIB" tvb-library llvmlite numba numexpr
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

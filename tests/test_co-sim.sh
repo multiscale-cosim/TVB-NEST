@@ -16,5 +16,5 @@ $RUN -n 2 python3 run_co-sim_test.py ./test_co-sim/ 2
 rm  -rd test_co-sim
 
 mkdir ./test_co-sim
-$RUN -n 1 python3 run_co-sim_test.py ./test_co-sim/ 8
+$RUN -n 2 python3 run_co-sim_test.py ./test_co-sim/ 4
 rm  -rd test_co-sim
