@@ -250,6 +250,8 @@ if __name__ == "__main__":
     th_send.start()
     th_receive.join()
     th_send.join()
+    comm_send.Disconnect()
+    comm_receive.Disconnect()
     MPI.Close_port(port_send)
     MPI.Close_port(port_receive)
     MPI.Finalize()

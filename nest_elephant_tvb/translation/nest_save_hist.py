@@ -2,6 +2,7 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 import numpy as np
+import os
 from mpi4py import MPI
 from threading import Thread
 from nest_elephant_tvb.translation.nest_to_tvb import receive,store_data,lock_status,logging
@@ -64,6 +65,7 @@ def save(path,level_log,nb_step,step_save,status_data,buffer):
     logger.info('Save : ending');sys.stdout.flush()
     if buffer_save is not None:
         np.save(path + str(count) + ".npy", buffer_save)
+    return
 
 
 if __name__ == "__main__":
@@ -90,8 +92,27 @@ if __name__ == "__main__":
         # object for analysing data
         store=store_data(path_folder_config,param)
 
+        ############
+        # Open the MPI port connection for receiver
+        info = MPI.INFO_NULL
+        root=0
+
+        port_receive = MPI.Open_port(info)
+        # Write file configuration of the port
+        path_to_files = path_folder_config + file_spike_detector
+        path_to_files_temp = path_to_files + ".temp"
+        fport = open(path_to_files_temp, "w+")
+        fport.write(port_receive)
+        fport.close()
+        # rename forces that when the file is there it also contains the port
+        os.rename(path_to_files_temp, path_to_files)  # Todo: fragile when temp dir is not cleared out.
+        # Wait until connection
+        comm_receiver = MPI.COMM_WORLD.Accept(port_receive, info, root)
+        #########################
+
         # create the thread for receive and send data
-        th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))
+        th_receive = Thread(target=receive,
+                            args=(path_folder_config, level_log, file_spike_detector, store, status_data, buffer, comm_receiver))
         th_save = Thread(target=save, args=(path_folder_save,level_log,nb_step,step_save,status_data,buffer))
 
         # start the threads
@@ -99,6 +120,8 @@ if __name__ == "__main__":
         th_save.start()
         th_receive.join()
         th_save.join()
+        comm_receiver.Disconnect()
+        MPI.Close_port(port_receive)
         MPI.Finalize()
     else:
         print('missing argument')
