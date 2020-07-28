@@ -3,6 +3,9 @@
 
 import numpy as np
 from mpi4py import MPI
+import os
+import time
+
 
 def simulate_TVB_reception(path):
     '''
@@ -13,6 +16,11 @@ def simulate_TVB_reception(path):
     # Init connection from file connection
     print(path)
     print("TVB INPUT : Waiting for port details");sys.stdout.flush()
+
+    while not os.path.exists(path):
+        print ("Port file not found yet, retry in 1 second")
+        time.sleep(1)
+
     fport = open(path, "r")
     port=fport.readline()
     fport.close()

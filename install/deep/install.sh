@@ -35,7 +35,7 @@ INSTALL_FOLDER=${PWD}/../../lib/
 mkdir "$INSTALL_FOLDER"
 
 # build nest
-PATH_INSTALLATION=${PWD}/../../nest-io-dev
+PATH_INSTALLATION=${PWD}/../../nest-io
 PATH_BUILD=${INSTALL_FOLDER}/nest_build
 PATH_RUN=${INSTALL_FOLDER}/nest_run
 mkdir "$PATH_BUILD"

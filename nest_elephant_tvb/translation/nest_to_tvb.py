@@ -10,7 +10,7 @@ import logging
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
-def receive(path,level_log,file_spike_detector,store,status_data,buffer):
+def receive(path,level_log,file_spike_detector,store,status_data,buffer, comm):
     '''
     the receive part of the translator
     :param path: folder which will contain the configuration file
@@ -42,21 +42,6 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer):
     elif  level_log == 4:
         fh.setLevel(logging.CRITICAL)
         logger.setLevel(logging.CRITICAL)
-
-    # Open the MPI port connection
-    logger.info("Receive : Waiting for port details")
-    info = MPI.INFO_NULL
-    root=0
-    port = MPI.Open_port(info)
-    # Write file configuration of the port
-    path_to_files = path + file_spike_detector
-    fport = open(path_to_files, "w+")
-    fport.write(port)
-    fport.close()
-    # Wait until connection
-    logger.info('Receive : wait connection '+port)
-    comm = MPI.COMM_WORLD.Accept(port, info, root)
-    logger.info('Receive : connect to '+port)
 
     # initialise variables for the loop
     status_ = MPI.Status() # status of the different message
@@ -99,12 +84,9 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer):
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
 
     logger.info('Receive : ending')
-    comm.Disconnect()
-    MPI.Close_port(port)
-    os.remove(path_to_files)
-    logger.info('Receive : exit')
 
-def send(path,level_log,TVB_config,analyse,status_data,buffer):
+
+def send(path,level_log,TVB_config,analyse,status_data,buffer, comm):
     '''
     the sending part of the translator
     :param path:  folder which will contain the configuration file
@@ -137,19 +119,6 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer):
         fh.setLevel(logging.CRITICAL)
         logger.setLevel(logging.CRITICAL)
 
-    # Open the MPI port connection
-    logger.info("Send : Waiting for port details")
-    info = MPI.INFO_NULL
-    root=0
-    port = MPI.Open_port(info)
-    # Write file configuration of the port
-    path_to_files = path + TVB_config
-    fport = open(path_to_files, "w+")
-    fport.write(port)
-    fport.close()
-    logger.info('Send : wait connection '+port)
-    comm = MPI.COMM_WORLD.Accept(port, info, root)
-    logger.info('Send : connect to '+port)
 
     count=0
     status_ = MPI.Status()
@@ -187,42 +156,85 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer):
         count+=1
 
     logger.info('Send : ending')
-    comm.Disconnect()
-    MPI.Close_port(port)
-    os.remove(path_to_files)
-    logger.info('Send : exit')
+
 
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==4:
-        path_folder_config = sys.argv[1]
-        file_spike_detector = sys.argv[2]
-        TVB_recev_file = sys.argv[3]
 
-        # take the parameters and instantiate objects for analysing data
-        sys.path.append(path_folder_config)
-        from parameter import param_TR_nest_to_tvb as param
-        sys.path.remove(path_folder_config)
-        store=store_data(path_folder_config+'/log/',param)
-        analyse = analyse_data(path_folder_config+'/log/',param)
-        level_log = param['level_log']
+    if len(sys.argv)!=4:
+        print('incorrect number of arguments')
+        exit(1)
 
-        # variable for communication between thread
-        status_data=[True] # status of the buffer
-        initialisation =np.load(param['init']) # initialisation value
-        buffer=[initialisation] # buffer of the rate to send it
+    path = sys.argv[1]
+    file_spike_detector = sys.argv[2]
+    TVB_recev_file = sys.argv[3]
 
-        # create the thread for receive and send data
-        th_receive = Thread(target=receive, args=(path_folder_config,level_log,file_spike_detector,store,status_data,buffer))
-        th_send = Thread(target=send, args=(path_folder_config,level_log,TVB_recev_file,analyse,status_data,buffer))
+    # take the parameters and instantiate objects for analysing data
+    sys.path.append(path)
+    from parameter import param_TR_nest_to_tvb as param
+    sys.path.remove(path)
+    store=store_data(path+'/log/',param)
+    analyse = analyse_data(path+'/log/',param)
+    level_log = param['level_log']
 
-        # start the threads
-        th_receive.start()
-        th_send.start()
-        th_receive.join()
-        th_send.join()
-        MPI.Finalize()
-    else:
-        print('missing argument')
+    # variable for communication between thread
+    status_data=[True] # status of the buffer
+    initialisation =np.load(param['init']) # initialisation value
+    buffer=[initialisation] # buffer of the rate to send it
+
+    ############
+    # Open the MPI port connection for receiver
+    info = MPI.INFO_NULL
+    root=0
+
+    port_receive = MPI.Open_port(info)
+    # Write file configuration of the port
+    path_to_files = path + file_spike_detector 
+    path_to_files_temp = path_to_files + ".temp"
+    fport = open(path_to_files_temp, "w+")
+    fport.write(port_receive)
+    fport.close()
+    # rename forces that when the file is there it also contains the port
+    os.rename(path_to_files_temp, path_to_files)  # Todo: fragile when temp dir is not cleared out.
+    # Wait until connection
+    comm_receiver = MPI.COMM_WORLD.Accept(port_receive, info, root)
+    #########################
+
+    ######################
+    # open for for the sender
+    port_send = MPI.Open_port(info)
+    # Write file configuration of the port
+    path_to_files = path + TVB_recev_file
+    path_to_files_temp = path_to_files + ".temp"
+    fport = open(path_to_files_temp, "w+")
+    fport.write(port_send)
+    fport.close()
+    # rename forces that when the file is there it also contains the port
+    os.rename(path_to_files_temp, path_to_files)  # Todo: fragile when temp dir is not cleared out.
+    comm_sender = MPI.COMM_WORLD.Accept(port_send, info, root)
+    ##############
+
+    # create the thread for receive and send data
+    th_receive = Thread(target=receive, args=(path,level_log,file_spike_detector,store,status_data,buffer, comm_receiver))
+    th_send = Thread(target=send, args=(path,level_log,TVB_recev_file,analyse,status_data,buffer, comm_sender))
+
+    # start the threads
+    th_receive.start()
+    th_send.start()
+    th_receive.join()
+    th_send.join()
+
+    comm_receiver.Disconnect()
+    MPI.Close_port(port_receive)
+
+    comm_sender.Disconnect()
+    MPI.Close_port(port_send)
+    os.remove(path_to_files) # TODO
+  
+
+
+    MPI.Finalize()
+
+
 
