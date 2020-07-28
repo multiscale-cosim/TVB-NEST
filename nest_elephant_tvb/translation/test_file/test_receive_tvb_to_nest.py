@@ -18,13 +18,11 @@ def simulate_nest_generator(path):
     max_mpi_connection_attempts = 50
     file_unlock=False
     for attempt in range(max_mpi_connection_attempts):
+        print("file to read",path);sys.stdout.flush()
         if os.path.exists(path+".unlock"):
             print ("MPI connection file available after t={0} seconds".format(attempt));sys.stdout.flush()
             file_unlock=True
             break
-
-        time.sleep(1)
-
 
     if file_unlock is False:
         print("Could file not unlocked after 20 attempts, exit");sys.stdout.flush()
@@ -38,10 +36,6 @@ def simulate_nest_generator(path):
     print("Nest_Input :wait connection "+port);sys.stdout.flush()
     comm = MPI.COMM_WORLD.Connect(port)
     print('Nest_Input :connect to '+port);sys.stdout.flush()
-
-    print('Nest_input: Done with connection loop, EXIT after 5 second');sys.stdout.flush() 
-    time.sleep(1)
-    return
 
     status_ = MPI.Status()
     ids=np.arange(0,10,1) # random id of spike detector
@@ -67,8 +61,7 @@ def simulate_nest_generator(path):
             print ("Nest_Input: debug end of loop");sys.stdout.flush()
             
         print ("Nest_Input: before break");sys.stdout.flush()
-      
-        print ("Nest_Input: before break" + str(data > 10000));sys.stdout.flush()
+        # print ("Nest_Input: before break" + str(data > 10000));sys.stdout.flush()
         if np.any(data > 10000):
             break
         

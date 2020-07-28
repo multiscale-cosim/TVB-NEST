@@ -38,16 +38,7 @@ def send(path,first_id_spike_generator,logger,nb_spike_generator,status_data,buf
     :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-
-
-  
-    import time
-    time.sleep(1)
-    print('Translate SEND: Done with connection loop, EXIT after 5 second');sys.stdout.flush() 
-
-    return
-
-    # itialisation variable before the loop
+    # initialisation variable before the loop
     status_ = MPI.Status()
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the communication
     check = np.empty(1,dtype='b')
@@ -93,12 +84,10 @@ def send(path,first_id_spike_generator,logger,nb_spike_generator,status_data,buf
             break
         else:
             raise Exception("bad mpi tag : "+str(status_.Get_tag()))
-    logger.info("Send : ending" )
-    comm.Disconnect()
-    MPI.Close_port(port)
-    logger.info('Send : exit')
+    return
 
-def receive(path,first_id_spike_generator,logger,TVB_config,generator,status_data,buffer_spike, com):
+
+def receive(path,first_id_spike_generator,logger,TVB_config,generator,status_data,buffer_spike, comm):
     '''
     the receiving part of the translator
     :param path: folder which will contain the configuration file
@@ -111,11 +100,6 @@ def receive(path,first_id_spike_generator,logger,TVB_config,generator,status_dat
     :return:
     '''
     # Open the MPI port connection
-
-    import time
-    time.sleep(1)
-    return
-
     status_ = MPI.Status()
     source_sending = np.arange(0,comm.Get_remote_size(),1)# list of all the process for the commmunication
     while True:
@@ -150,11 +134,8 @@ def receive(path,first_id_spike_generator,logger,TVB_config,generator,status_dat
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
-    logger.info('Receive : ending')
-    comm.Disconnect()
-    MPI.Close_port(port)
+    return
 
-    logger.info('Receive : exit')
 
 def create_logger(path, log_level):
     # Configure logger
@@ -215,17 +196,21 @@ if __name__ == "__main__":
     # Create the port, file and set unlock for sender
     print('Translate SEND: before open_port');sys.stdout.flush() 
     port_send = MPI.Open_port(info)  # open a NEW port
-    print('Translate SEND: after open_port');sys.stdout.flush() 
+    print('Translate SEND: after open_port');sys.stdout.flush()
+    path_to_files_sends = []
+    path_to_files_sends_unlock = []
+    for i in range(nb_spike_generator):
+        # write file with port and unlock
+        path_to_files_send = os.path.join(path_config, str(id_first_spike_detector+i) + ".txt")
+        print('Translate SEND: path_file: ' + path_to_files_send);sys.stdout.flush()
+        fport_send = open(path_to_files_send, "w+")
+        fport_send.write(port_send)
+        fport_send.close()
 
-    # write file with port and unlockl
-    path_to_files_send = os.path.join(path_config, "0_send.txt")
-    print('Translate SEND: path_file: ' + path_to_files_send);sys.stdout.flush() 
-    fport_send = open(path_to_files_send, "w+")
-    fport_send.write(port_send)
-    fport_send.close()
-        
-    path_to_files_send_unlock = os.path.join(path_config, "0_send.txt.unlock")
-    Path(path_to_files_send_unlock).touch()       
+        path_to_files_send_unlock = os.path.join(path_config, str(id_first_spike_detector+i) + ".txt.unlock")
+        Path(path_to_files_send_unlock).touch()
+        path_to_files_sends.append(path_to_files_send)
+        path_to_files_sends_unlock.append(path_to_files_send_unlock)
 
     ##############################################
     #  Create the port, file and set unlock for receiver       
@@ -234,13 +219,13 @@ if __name__ == "__main__":
     print('Translate RECEIVE: after open_port');sys.stdout.flush() 
         
     # Write file configuration of the port
-    path_to_files_receive = os.path.join(path_config, "0_receive.txt")
+    path_to_files_receive = os.path.join(path_config, TVB_config)
     print('Translate RECEIVE: path_file: ' + path_to_files_receive);sys.stdout.flush() 
     fport_receive = open(path_to_files_receive, "w+")
     fport_receive.write(port_receive)
     fport_receive.close()
 
-    path_to_files_receive_unlock = os.path.join(path_config, "0_receive.txt.unlock")
+    path_to_files_receive_unlock = os.path.join(path_config, TVB_config+".unlock")
     Path(path_to_files_receive_unlock).touch()
 
     ############################################
@@ -265,10 +250,14 @@ if __name__ == "__main__":
     th_send.start()
     th_receive.join()
     th_send.join()
+    MPI.Close_port(port_send)
+    MPI.Close_port(port_receive)
     MPI.Finalize()
 
     # Clean up port files and locks
-    os.remove(path_to_files_send)
-    os.remove(path_to_files_send_unlock)
+    for path_send in path_to_files_sends :
+        os.remove(path_send)
+    for path_send_unlock in path_to_files_sends_unlock:
+        os.remove(path_send_unlock)
     os.remove(path_to_files_receive)
     os.remove(path_to_files_receive_unlock)

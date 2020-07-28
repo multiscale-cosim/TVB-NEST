@@ -84,6 +84,7 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer, comm):
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
 
     logger.info('Receive : ending')
+    return
 
 
 def send(path,level_log,TVB_config,analyse,status_data,buffer, comm):
@@ -156,6 +157,7 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer, comm):
         count+=1
 
     logger.info('Send : ending')
+    return
 
 
 
@@ -231,8 +233,6 @@ if __name__ == "__main__":
     comm_sender.Disconnect()
     MPI.Close_port(port_send)
     os.remove(path_to_files) # TODO
-  
-
 
     MPI.Finalize()
 
