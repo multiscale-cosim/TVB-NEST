@@ -8,7 +8,7 @@ from nest_elephant_tvb.parameter import test_nest as parameter_test
 
 def run_exploration(path,begin,end):
     parameter_test.param_co_simulation['nb_MPI_nest']=0
-    parameter_test.param_nest_topology['nb_region']=1
+    parameter_test.param_nest_topology['nb_region']=104
     parameter_test.param_tvb_monitor['Raw']=True
     run_exploration_2D(path, parameter_test, {'b':[10.0,7.0,1.0], 'mean_I_ext': [0.0]}, begin, end)
 

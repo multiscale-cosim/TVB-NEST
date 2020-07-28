@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from nest_elephant_tvb.simulation.file_translation.science_nest_to_tvb import slidding_window
+from nest_elephant_tvb.file_translation import slidding_window
 
 def compute_rate(data,time,N,Dt):
     """

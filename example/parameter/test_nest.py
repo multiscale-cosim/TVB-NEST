@@ -234,7 +234,7 @@ param_tvb_model={
 # parameter TVB for the monitors
 param_tvb_monitor={
     # the time of simulation in each file
-    'save_time': 2000.0,
+    'save_time': 20.0,
     # use or not the Raw monitor
     'Raw':True,
     # Use or not the Temporal Average Monitor
