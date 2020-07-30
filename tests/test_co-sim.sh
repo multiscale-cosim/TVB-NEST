@@ -8,13 +8,17 @@
 . ./init.sh
 
 mkdir ./test_co-sim
-$RUN -n 1 python3 run_co-sim_test.py ./test_co-sim/ 1
+python3 run_co-sim_test.py ./test_co-sim/ 1 1 $CLUSTER
 rm  -rd test_co-sim
 
 mkdir ./test_co-sim
-$RUN -n 2 python3 run_co-sim_test.py ./test_co-sim/ 2
+python3 run_co-sim_test.py ./test_co-sim/ 4 1 $CLUSTER
 rm  -rd test_co-sim
 
 mkdir ./test_co-sim
-$RUN -n 2 python3 run_co-sim_test.py ./test_co-sim/ 4
+python3 run_co-sim_test.py ./test_co-sim/ 4 2 $CLUSTER
+rm  -rd test_co-sim
+
+mkdir ./test_co-sim
+python3 run_co-sim_test.py ./test_co-sim/ 4 4 $CLUSTER
 rm  -rd test_co-sim

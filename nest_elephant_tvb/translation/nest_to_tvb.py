@@ -3,53 +3,31 @@
 
 import numpy as np
 import os
+import json
+import pathlib
 from mpi4py import MPI
 from threading import Thread, Lock
-from nest_elephant_tvb.translation.science_nest_to_tvb import store_data,analyse_data
 import logging
+from nest_elephant_tvb.translation.science_nest_to_tvb import store_data,analyse_data
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
-def receive(path,level_log,file_spike_detector,store,status_data,buffer, comm):
+def receive(logger,store,status_data,buffer, comm):
     '''
     the receive part of the translator
-    :param path: folder which will contain the configuration file
-    :param level_log : the level for the logger
-    :param file_spike_detector: the relative path which contains the txt file
+    :param logger : logger fro the thread
     :param store : object for store the data before analysis
     :param status_data: the status of the buffer (SHARED between thread)
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    # Configuration logger
-    logger = logging.getLogger('nest_to_tvb_receive')
-    fh = logging.FileHandler(path+'/log/nest_to_tvb_receive.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if level_log == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  level_log == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  level_log == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  level_log == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  level_log == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
-
     # initialise variables for the loop
     status_ = MPI.Status() # status of the different message
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
     check = np.empty(1,dtype='b')
     count=0
-    while True:
-        # send the confirmation of the processus can send data
+    while True: # FAT END POINT
+        # send the confirmation of the process can send data
         requests=[]
         logger.info(" Nest to TVB : wait all")
         for source in source_sending:
@@ -83,47 +61,24 @@ def receive(path,level_log,file_spike_detector,store,status_data,buffer, comm):
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
 
-    logger.info('Receive : ending')
+    logger.info('communication disconnect')
+    comm.Disconnect()
+    logger.info('end thread')
     return
 
 
-def send(path,level_log,TVB_config,analyse,status_data,buffer, comm):
+def send(logger,analyse,status_data,buffer, comm):
     '''
     the sending part of the translator
-    :param path:  folder which will contain the configuration file
-    :param level_log: the level for the logger
-    :param TVB_config:  the relative path which contains the txt file
+    :param logger: logger fro the thread
     :param analyse ; analyse object to transform spikes to state variable
     :param status_data: the status of the buffer (SHARED between thread)
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    # Configuration logger
-    logger = logging.getLogger('nest_to_tvb_send')
-    fh = logging.FileHandler(path+'/log/nest_to_tvb_send.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if level_log == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  level_log == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  level_log == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  level_log == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  level_log == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
-
-
     count=0
     status_ = MPI.Status()
-    while True:
+    while True: # FAT END POINT
         # wait until the translator accept the connections
         accept = False
         logger.info("Nest to TVB : wait to send " )
@@ -131,7 +86,7 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer, comm):
             req = comm.irecv(source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG)
             accept = req.wait(status_)
 
-        logger.info(" Nest to TVB : send data " )
+        logger.info(" Nest to TVB : send data status : " +str(status_.Get_tag()))
         if status_.Get_tag() == 0:
             # send the rate when there ready
             while(not status_data[0]):
@@ -155,10 +110,35 @@ def send(path,level_log,TVB_config,analyse,status_data,buffer, comm):
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
         count+=1
-
-    logger.info('Send : ending')
+    logger.info('communication disconnect')
+    comm.Disconnect()
+    logger.info('end thread')
     return
 
+def create_logger(path,name, log_level):
+    # Configure logger
+    logger = logging.getLogger(name)
+    fh = logging.FileHandler(path+'/log/'+name+'.log')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    if log_level == 0:
+        fh.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
+    elif  log_level == 1:
+        fh.setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
+    elif  log_level == 2:
+        fh.setLevel(logging.WARNING)
+        logger.setLevel(logging.WARNING)
+    elif  log_level == 3:
+        fh.setLevel(logging.ERROR)
+        logger.setLevel(logging.ERROR)
+    elif  log_level == 4:
+        fh.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
+
+    return logger
 
 
 if __name__ == "__main__":
@@ -173,12 +153,14 @@ if __name__ == "__main__":
     TVB_recev_file = sys.argv[3]
 
     # take the parameters and instantiate objects for analysing data
-    sys.path.append(path)
-    from parameter import param_TR_nest_to_tvb as param
-    sys.path.remove(path)
-    store=store_data(path+'/log/',param)
+    with open(path+'/parameter.json') as f:
+        parameters = json.load(f)
+    param = parameters['param_TR_nest_to_tvb']
+    store = store_data(path+'/log/',param)
     analyse = analyse_data(path+'/log/',param)
     level_log = param['level_log']
+    id_spike_detector = os.path.splitext(os.path.basename(path+file_spike_detector))[0]
+    logger_master = create_logger(path, 'nest_to_tvb_master'+str(id_spike_detector), level_log)
 
     # variable for communication between thread
     status_data=[True] # status of the buffer
@@ -190,51 +172,63 @@ if __name__ == "__main__":
     info = MPI.INFO_NULL
     root=0
 
+    logger_master.info('Translate Receive: before open_port')
     port_receive = MPI.Open_port(info)
+    logger_master.info('Translate Receive: after open_port: '+port_receive)
     # Write file configuration of the port
-    path_to_files = path + file_spike_detector 
-    path_to_files_temp = path_to_files + ".temp"
-    fport = open(path_to_files_temp, "w+")
+    path_to_files_receive = path + file_spike_detector
+    fport = open(path_to_files_receive, "w+")
     fport.write(port_receive)
     fport.close()
-    # rename forces that when the file is there it also contains the port
-    os.rename(path_to_files_temp, path_to_files)  # Todo: fragile when temp dir is not cleared out.
-    # Wait until connection
-    comm_receiver = MPI.COMM_WORLD.Accept(port_receive, info, root)
+    pathlib.Path(path_to_files_receive+'.unlock').touch()
+    logger_master.info('Translate Receive: path_file: ' + path_to_files_receive)
     #########################
 
     ######################
     # open for for the sender
+    logger_master.info('Translate SEND: before open_port')
     port_send = MPI.Open_port(info)
+    logger_master.info('Translate SEND: after open_port : '+port_send)
     # Write file configuration of the port
-    path_to_files = path + TVB_recev_file
-    path_to_files_temp = path_to_files + ".temp"
-    fport = open(path_to_files_temp, "w+")
+    path_to_files_send = path + TVB_recev_file
+    fport = open(path_to_files_send, "w+")
     fport.write(port_send)
     fport.close()
-    # rename forces that when the file is there it also contains the port
-    os.rename(path_to_files_temp, path_to_files)  # Todo: fragile when temp dir is not cleared out.
-    comm_sender = MPI.COMM_WORLD.Accept(port_send, info, root)
+    pathlib.Path(path_to_files_send+'.unlock').touch()
+    logger_master.info('Translate SEND: path_file: ' + path_to_files_send);sys.stdout.flush()
     ##############
+    #############
+    # Wait until connection
+    logger_master.info('Waiting communication')
+    comm_receiver = MPI.COMM_WORLD.Accept(port_receive, info, root)
+    comm_sender = MPI.COMM_WORLD.Accept(port_send, info, root)
+    logger_master.info('get communication and start thread')
+    #############
 
+    logger_receive = create_logger(path, 'nest_to_tvb_receive'+str(id_spike_detector), level_log)
+    logger_send = create_logger(path, 'nest_to_tvb_send'+str(id_spike_detector), level_log)
     # create the thread for receive and send data
-    th_receive = Thread(target=receive, args=(path,level_log,file_spike_detector,store,status_data,buffer, comm_receiver))
-    th_send = Thread(target=send, args=(path,level_log,TVB_recev_file,analyse,status_data,buffer, comm_sender))
+    th_receive = Thread(target=receive, args=(logger_receive,store,status_data,buffer, comm_receiver))
+    th_send = Thread(target=send, args=(logger_send,analyse,status_data,buffer, comm_sender))
 
     # start the threads
+    # FAT END POINT
+    logger_master.info('Start thread')
     th_receive.start()
     th_send.start()
     th_receive.join()
     th_send.join()
+    logger_master.info('thread join')
 
-    comm_receiver.Disconnect()
-    MPI.Close_port(port_receive)
-
-    comm_sender.Disconnect()
+    # close port
     MPI.Close_port(port_send)
-    os.remove(path_to_files) # TODO
+    MPI.Close_port(port_receive)
+    logger_master.info('close communicator')
 
+    # finalise MPI
     MPI.Finalize()
 
-
-
+    logger_master.info('clean file')
+    os.remove(path_to_files_receive)
+    os.remove(path_to_files_send)
+    logger_master.info('end')

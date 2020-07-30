@@ -22,8 +22,8 @@ mkdir ./test_nest_to_save/log/
 DELAY=100.0
 
 # shellcheck disable=SC2089
-parameter='param_record_MPI = {"save_step": 10, "resolution": 0.1, "synch": '"${DELAY}"', "level_log": 0}'
-echo "${parameter}" >./test_nest_to_save/parameter.py
+parameter='{"param_record_MPI" :{"save_step": 10, "resolution": 0.1, "synch": '"${DELAY}"', "level_log": 0}}'
+echo "${parameter}" >./test_nest_to_save/parameter.json
 
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/nest_save_hist.py ./test_nest_to_save/ input/0.txt ./test_nest_to_save/save/test 10000 &
 sleep 10 # wait for creation of file

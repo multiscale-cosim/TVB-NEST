@@ -2,48 +2,27 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 import numpy as np
-import os
+import json
 from mpi4py import MPI
 from threading import Thread
-from nest_elephant_tvb.translation.nest_to_tvb import receive,store_data,lock_status,logging
+import pathlib
+from nest_elephant_tvb.translation.nest_to_tvb import receive,store_data,lock_status,create_logger
 
-def save(path,level_log,nb_step,step_save,status_data,buffer):
+def save(path,logger,nb_step,step_save,status_data,buffer):
     '''
     WARNING never ending
     :param path:  folder which will contain the configuration file
-    :param level_log : the level for the logger
+    :param logger : the logger fro the thread
     :param nb_step : number of time for saving data
     :param step_save : number of integration step to save in same time
     :param status_data: the status of the buffer (SHARED between thread)
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    # Configuration logger
-    logger = logging.getLogger('nest_save')
-    fh = logging.FileHandler(path+'/../../log/nest_save.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if level_log == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  level_log == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  level_log == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  level_log == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  level_log == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
-
     # initialisation variable
     buffer_save = None
     count=0
-    while count<nb_step:
+    while count<nb_step: # FAT END POINT
         logger.info("Nest save : save "+str(count))
         # send the rate when there ready
         while(not status_data[0]):
@@ -77,13 +56,15 @@ if __name__ == "__main__":
         end = float(sys.argv[4])
 
         # parameters for the module
-        sys.path.append(path_folder_config)
-        from parameter import param_record_MPI as param
-        sys.path.remove(path_folder_config)
+        # take the parameters and instantiate objects for analysing data
+        with open(path_folder_config+'/parameter.json') as f:
+            parameters = json.load(f)
+        param = parameters['param_record_MPI']
         time_synch = param['synch']
         nb_step = np.ceil(end/time_synch)
         step_save = param['save_step']
         level_log = param['level_log']
+        logger_master = create_logger(path_folder_config, 'nest_to_tvb_master', level_log)
 
         # variable for communication between thread
         status_data=[False] # status of the buffer
@@ -97,30 +78,40 @@ if __name__ == "__main__":
         info = MPI.INFO_NULL
         root=0
 
+        logger_master.info('Translate Receive: before open_port')
         port_receive = MPI.Open_port(info)
+        logger_master.info('Translate Receive: after open_port')
         # Write file configuration of the port
         path_to_files = path_folder_config + file_spike_detector
-        path_to_files_temp = path_to_files + ".temp"
-        fport = open(path_to_files_temp, "w+")
+        fport = open(path_to_files, "w+")
         fport.write(port_receive)
         fport.close()
         # rename forces that when the file is there it also contains the port
-        os.rename(path_to_files_temp, path_to_files)  # Todo: fragile when temp dir is not cleared out.
+        pathlib.Path(path_to_files+'.unlock').touch()
+        logger_master.info('Translate Receive: path_file: ' + path_to_files)
         # Wait until connection
+        logger_master.info('Waiting communication')
         comm_receiver = MPI.COMM_WORLD.Accept(port_receive, info, root)
+        logger_master.info('get communication and start thread')
         #########################
 
-        # create the thread for receive and send data
+        # create the thread for receive and save data
+        logger_receive = create_logger(path_folder_config, 'nest_to_tvb_receive', level_log)
+        logger_save = create_logger(path_folder_config, 'nest_to_tvb_send', level_log)
         th_receive = Thread(target=receive,
-                            args=(path_folder_config, level_log, file_spike_detector, store, status_data, buffer, comm_receiver))
-        th_save = Thread(target=save, args=(path_folder_save,level_log,nb_step,step_save,status_data,buffer))
+                            args=(logger_receive, store, status_data, buffer, comm_receiver))
+        th_save = Thread(target=save, args=(path_folder_save,logger_save,nb_step,step_save,status_data,buffer))
 
         # start the threads
+        # FAT END POINT
+        logger_master.info('start thread')
         th_receive.start()
         th_save.start()
         th_receive.join()
         th_save.join()
+        logger_master.info('join thread')
         comm_receiver.Disconnect()
+        logger_master.info('disconnect communicator')
         MPI.Close_port(port_receive)
         MPI.Finalize()
     else:

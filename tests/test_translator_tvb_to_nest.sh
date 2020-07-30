@@ -20,8 +20,8 @@ mkdir ./test_tvb_to_nest/output/
 mkdir ./test_tvb_to_nest/log/
 
 DELAY=100.0
-parameter='param_TR_tvb_to_nest = {"init": "./test_tvb_to_nest/init_rates.npy", "percentage_shared": 0.5, "seed": 42, "nb_synapses":10,"level_log": 0}'
-echo "${parameter}" >./test_tvb_to_nest/parameter.py
+parameter='{"param_TR_tvb_to_nest" : {"init": "./test_tvb_to_nest/init_rates.npy", "percentage_shared": 0.5, "seed": 42, "nb_synapses":10,"level_log": 0}}'
+echo "${parameter}" >./test_tvb_to_nest/parameter.json
 cp ./init_rates.npy  ./test_tvb_to_nest/init_rates.npy
 
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/tvb_to_nest.py ./test_tvb_to_nest/output/ 0 10 ../input/0.txt&
