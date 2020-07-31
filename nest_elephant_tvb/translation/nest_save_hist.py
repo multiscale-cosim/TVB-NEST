@@ -6,6 +6,7 @@ import json
 from mpi4py import MPI
 from threading import Thread
 import pathlib
+import time
 from nest_elephant_tvb.translation.nest_to_tvb import receive,store_data,lock_status,create_logger
 
 def save(path,logger,nb_step,step_save,status_data,buffer):
@@ -25,7 +26,8 @@ def save(path,logger,nb_step,step_save,status_data,buffer):
     while count<nb_step: # FAT END POINT
         logger.info("Nest save : save "+str(count))
         # send the rate when there ready
-        while(not status_data[0]):
+        while status_data[0] != 0 and status_data[0] != 2: # FAT END POINT
+            time.sleep(0.1)
             pass
         if buffer_save is None:
             logger.info("buffer initialise buffer : "+str(count))
@@ -39,7 +41,7 @@ def save(path,logger,nb_step,step_save,status_data,buffer):
             logger.info("fill the buffer : "+str(count))
             buffer_save = np.concatenate((buffer_save,buffer[0]))
         with lock_status:
-            status_data[0]=False
+            status_data[0]=1
         count+=1
     logger.info('Save : ending');sys.stdout.flush()
     if buffer_save is not None:
@@ -67,7 +69,7 @@ if __name__ == "__main__":
         logger_master = create_logger(path_folder_config, 'nest_to_tvb_master', level_log)
 
         # variable for communication between thread
-        status_data=[False] # status of the buffer
+        status_data=[1] # status of the buffer
         buffer=[np.array([])]
 
         # object for analysing data
