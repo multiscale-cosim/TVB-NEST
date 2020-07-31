@@ -110,8 +110,6 @@ if __name__ == "__main__":
         th_receive.join()
         th_save.join()
         logger_master.info('join thread')
-        comm_receiver.Disconnect()
-        logger_master.info('disconnect communicator')
         MPI.Close_port(port_receive)
         MPI.Finalize()
     else:

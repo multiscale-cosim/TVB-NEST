@@ -8,6 +8,7 @@ from threading import Thread, Lock
 from nest_elephant_tvb.translation.science_tvb_to_nest import generate_data
 import logging
 import json
+import time
 import pathlib
 
 lock_status=Lock() # locker for manage the transfer of data from thread
@@ -33,7 +34,8 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
         if status_.Get_tag() == 0:
             logger.info(" TVB to Nest: start to send ")
             # wait until the data are ready to use
-            while (not status_data[0]):
+            while status_data[0] != 0 and status_data[0] != 2: # FAT END POINT
+                time.sleep(0.1)
                 pass
             # Waiting for some processus ask for receive the spikes
             list_id = np.ones(nb_spike_generator) * -1  # list to link the spike train to the spike detector
@@ -60,11 +62,12 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
             # ending the update of the all the spike train from one processus
             logger.info(" TVB to Nest end sending ")
             with lock_status:
-                status_data[0] = False
+                if status_data[0] != 2:
+                    status_data[0] = 1
         elif status_.Get_tag() == 2:
             logger.info(" TVB to Nest end simulation ")
             with lock_status:
-                status_data[0] = False
+                status_data[0] = 2
             break
         else:
             raise Exception("bad mpi tag : "+str(status_.Get_tag()))
@@ -107,15 +110,16 @@ def receive(logger,generator,status_data,buffer_spike, comm):
             comm.Recv([rate, size[0], MPI.DOUBLE], source=status_.Get_source(), tag=0, status=status_)
             spike_generate = generator.generate_spike(0,time_step,rate)
             # Wait for lock to be set to False
-            while (status_data[0]):
+            while status_data[0] == 1 and status_data[0] == 2:
+                time.sleep(0.1)
                 pass
             # Set lock to true and put the data in the shared buffer
             buffer_spike[0] = spike_generate
             with lock_status:
-                status_data[0] = True
+                status_data[0] = 0
         elif status_.Get_tag() == 1:
             with lock_status:
-                status_data[0] = True
+                status_data[0] = 2
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
@@ -173,7 +177,7 @@ if __name__ == "__main__":
     logger_master = create_logger(path_config, 'tvb_to_nest_master'+str(id_first_spike_detector), log_level)
 
     # variable for communication between thread
-    status_data=[True]
+    status_data=[0]
     initialisation =np.load(param['init'])
     buffer_spike=[initialisation]
 

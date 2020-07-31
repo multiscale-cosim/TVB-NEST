@@ -58,6 +58,7 @@ def simulate_spike_detector(path,min_delay):
     print("Nest Output : ending" );sys.stdout.flush()
     # send the signal for end the translation
     comm.Send([np.array([True], dtype='b'), 1, MPI.CXX_BOOL], dest=0, tag=2)
+    print("Nest Output : ending" );sys.stdout.flush()
     comm.Disconnect()
     MPI.Close_port(port)
     MPI.Finalize()

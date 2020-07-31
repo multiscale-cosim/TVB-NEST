@@ -4,6 +4,7 @@
 import numpy as np
 import os
 import json
+import time
 import pathlib
 from mpi4py import MPI
 from threading import Thread, Lock
@@ -43,19 +44,21 @@ def receive(logger,store,status_data,buffer, comm):
                 data = np.empty(shape[0], dtype='d')
                 comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
                 store.add_spikes(count,data)
-            while (status_data[0]):
+            while status_data[0] != 1 and status_data[0] != 2: # FAT END POINT
+                time.sleep(0.1)
                 pass
             # wait until the data can be send to the sender thread
             # Set lock to true and put the data in the shared buffer
             buffer[0] = store.return_data()
-            with lock_status:
-                status_data[0] = True
+            with lock_status: # FAT END POINT
+                if status_data[0] != 2:
+                    status_data[0] = 0
         elif status_.Get_tag() == 1:
             logger.info("Nest to TVB : receive end " + str(count))
             count += 1
         elif status_.Get_tag() == 2:
             with lock_status:
-                status_data[0] = True
+                status_data[0] = 2
             logger.info("end simulation")
             break
         else:
@@ -89,7 +92,8 @@ def send(logger,analyse,status_data,buffer, comm):
         logger.info(" Nest to TVB : send data status : " +str(status_.Get_tag()))
         if status_.Get_tag() == 0:
             # send the rate when there ready
-            while(not status_data[0]):
+            while status_data[0] != 0: # FAT END POINT
+                time.sleep(0.1)
                 pass
             times,data=analyse.analyse(count,buffer[0])
             logger.info("Nest to TVB : send data :"+str(np.sum(data)) )
@@ -101,11 +105,12 @@ def send(logger,analyse,status_data,buffer, comm):
             # send the rates
             comm.Send([data,MPI.DOUBLE], dest=status_.Get_source(), tag=0)
             with lock_status:
-                status_data[0]=False
+                if status_data[0] != 2:
+                    status_data[0] = 1
         elif status_.Get_tag() == 1:
             # disconnect when everything is ending
             with lock_status:
-                status_data[0]=False
+                status_data[0] = 2
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
@@ -163,7 +168,7 @@ if __name__ == "__main__":
     logger_master = create_logger(path, 'nest_to_tvb_master'+str(id_spike_detector), level_log)
 
     # variable for communication between thread
-    status_data=[True] # status of the buffer
+    status_data=[0] # status of the buffer
     initialisation =np.load(param['init']) # initialisation value
     buffer=[initialisation] # buffer of the rate to send it
 
