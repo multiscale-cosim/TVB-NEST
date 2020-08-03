@@ -69,5 +69,5 @@ RUN cd /home/;\
     make install
     #make installcheck
 
-ENV PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:/home/:$PYTHONPATH
+ENV PYTHONPATH=/usr/lib/nest/lib/python3.7/site-packages/:/home/:$PYTHONPATH
 

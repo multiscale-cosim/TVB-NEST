@@ -24,12 +24,33 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR" || exit
 
 # choice of the image
-IMAGE=./install/singularity/Nest_TVB_full.simg
-#IMAGE=./install/singularity/Nest_TVB.simg
-#IMAGE=./install/singularity/Nest_TVB_2.simg
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+    exit
+fi
+if [ $1 -eq 0 ]
+then
+  IMAGE=./install/singularity/Nest_TVB_full.simg
+  echo ' test image full Nest and TVB'
+elif [ $1 -eq 1 ]
+then
+  IMAGE=./install/singularity/Nest_TVB.simg
+  echo ' test image from alpine OS Nest and TVB'
+elif [ $1 -eq 2 ]
+then
+  IMAGE=./install/singularity/Nest_TVB_2.simg
+  echo ' test image from debian OS Nest and TVB '
+else
+  echo ' No image to test '
+  exit
+fi
 
+# launch the test
 cd ../../
-singularity run --app mpi $IMAGE -n 8 python3 test_nest/run_co-sim_test.py $(pwd)/test_nest/test_sing/ 8
+mkdir $(pwd)/tests/test_singularity/
+singularity run --app python $IMAGE ./tests/run_co-sim_test.py $(pwd)/tests/test_singularity/ 4 4 false
+rm -rd $(pwd)/tests/test_singularity/
 cd install/singularity || exit
 
 # return to the calling repertory

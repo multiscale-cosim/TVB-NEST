@@ -91,12 +91,6 @@ TVB and Nest IO
 %apprun mpi
    exec /usr/bin/mpirun "$@"
 
-%apprun py-mpi-2
-   exec /usr/bin/mpirun -n 2 /usr/bin/python3.7 "$@"
-
-%apprun py-mpi-4
-   exec /usr/bin/mpirun -n 4 /usr/bin/python3.7 "$@"
-
 %apprun jupyter-notebook
    exec jupyter-notebook
 

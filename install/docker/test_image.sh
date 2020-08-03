@@ -24,12 +24,30 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR" || exit
 
 # Choice of the image
-IMAGE=local:NEST_TVB_IO
-#IMAGE=local:NEST_TVB_IO_2
+# choice of the image
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+    exit
+fi
+if [ $1 -eq 0 ]
+then
+  IMAGE=local:NEST_TVB_IO
+  echo ' test image from alpine OS Nest and TVB'
+elif [ $1 -eq 1 ]
+then
+  IMAGE=local:NEST_TVB_IO_2
+  echo ' test image from debian OS Nest and TVB '
+else
+  echo ' No image to test '
+  exit
+fi
 
 # Run the docker image
 cd ../../
-sudo docker run -it --mount type=bind,source="$(pwd)",target=/home $IMAGE python3 /home/tests/run_co-sim_test_docker.py
+mkdir $(pwd)/tests/test_docker/
+sudo docker run -it --mount type=bind,source="$(pwd)",target=/home $IMAGE python3 /home/tests/run_co-sim_test.py ./tests/test_docker/ 4 4 false
+rm -rd $(pwd)/tests/test_docker/
 cd install/docker/ || exit
 
 # return to the calling repertory

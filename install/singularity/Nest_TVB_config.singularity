@@ -22,6 +22,13 @@ under the License.
 
 TVB and Nest i/o
 
+application :
+- python
+- mpi
+
+example for launch :
+singularity run --app python
+
 %files
 ../../nest-io-dev /home/nest-io-dev
 
@@ -76,17 +83,8 @@ TVB and Nest i/o
     # export pythonpath for include pynest in python
     echo 'export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:$PYTHONPATH' >>$SINGULARITY_ENVIRONMENT
 
-%runscript
-   exec /usr/bin/python3.8 "$@"
-
-%runscript
+%apprun python
    exec /usr/bin/python3.8 "$@"
 
 %apprun mpi
    exec /usr/bin/mpirun "$@"
-
-%apprun py-mpi-2
-   exec /usr/bin/mpirun -n 2 /usr/bin/python3.8 "$@"
-
-%apprun py-mpi-4
-   exec /usr/bin/mpirun -n 4 /usr/bin/python3.8 "$@"

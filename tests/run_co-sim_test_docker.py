@@ -13,7 +13,7 @@ def run_exploration(path,begin,end):
     parameter_test.param_co_simulation['nb_MPI_nest']=MPI.COMM_WORLD.Get_size()
     parameter_test.param_nest['total_num_virtual_procs']=10
     parameter_test.param_co_simulation['id_region_nest']=[1,2]
-    parameter_test.param_co_simulation['synchronization']=11.0
+    parameter_test.param_co_simulation['synchronization']=3.5
     run_exploration_2D(path, parameter_test, {'g':[1.0], 'mean_I_ext': [0.0]}, begin, end)
 
 if __name__ == "__main__":

@@ -82,18 +82,8 @@ TVB and Nest IO
     rm -dr $PATH_BUILD
     echo "export  PYTHONPATH=$PYTHONPATH\n export PATH=$PATH" >>$SINGULARITY_ENVIRONMENT
 
-%runscript
-   exec /usr/bin/python3.7 "$@"
-
-%runscript
+%apprun python
    exec /usr/bin/python3.7 "$@"
 
 %apprun mpi
    exec /usr/bin/mpirun "$@"
-
-%apprun py-mpi-2
-   exec /usr/bin/mpirun -n 2 /usr/bin/python3.7 "$@"
-
-%apprun py-mpi-4
-   exec /usr/bin/mpirun -n 4 /usr/bin/python3.7 "$@"
-
