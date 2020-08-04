@@ -28,7 +28,7 @@ It should be flexible and scalable to adapt to any networks simulation and run i
 
 ## Installation and update :<a name="installalation"></a>
 ### Advice for using the repertory :<a name="advice"></a>
-For cloning the project, you also need to clone the submodule.
+For cloning the project, you also need to clone the submodule. [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 I advise you to clone the repertory with the following command :  git clone --recurse-submodules 
 
 For updating the folder, you also need to update the submodule by the following command: git submodule update.
