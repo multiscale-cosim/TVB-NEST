@@ -134,7 +134,7 @@ There exist two types of monitors depending on your use of the model TVB. Interf
 ### How to test the installation (they don't check the correctness of the simulation)<a name="tests_1"></a>
 
 1. Test the Nest I/O :
-    1.' tests/test_input_nest_current.sh'\
+    1. 'tests/test_input_nest_current.sh'\
      The test is for the step current generator with mpi communication. The array at this end of the output is the event record by a spike detector.
      If there is an event from the neurons 1, this meaning the device impact the dynamic of the neuron.
     2. 'tests/test_input_nest_current_multiple.sh'\
@@ -162,11 +162,7 @@ There exist two types of monitors depending on your use of the model TVB. Interf
     3. 'tests/test_nest_save.sh'\
        This test is for the module translation between Nest save. The implementation of this translator reuse the interface with Nest from Nest to TVB.
        You can check if it succeeds to exist without error (exit of Nest Output and the end of the processes).
-3. Test the co-simulation:
-    1. 'tests/test_co-sim.sh'\
-        This test is for the application. It tests the co-simulation in different parameterization of Nest. The parameter testing is for testing the case of use only threading, use only MPI process or a mix of the two.
-        The success of these tests is to arrive at the end without any errors. 
-4. Orchestrator:
+3. Orchestrator:
     1. 'tests/run_tvb_one.py' : run exploration 2D of TVB only with one region
     2. 'tests/run_tvb.py' : run exploration 2D of TVB only with the test parameter
     3. 'tests/run_nest_one.py' : run exploration 2D of Nest only with one region 
@@ -174,11 +170,18 @@ There exist two types of monitors depending on your use of the model TVB. Interf
     5. 'tests/run_nest.py' : run exploration 2D of Nest with translator for saving the mean firing rate
     6. 'tests/run_nest_co-sim.py' : run exploration 2D co-simulation with test parameter
     7. 'tests/run_nest_co-sim_test.py' : file using by test_co-sim.sh
-    8. 'tests/run_nest_co-sim_test_docker.py' : file for testing the co-simulation in a docker container
+4. Test the co-simulation:
+    1. 'tests/test_co-sim.sh'\
+        This test is for the application. It tests the co-simulation in different parameterization of Nest. The parameter testing is for testing the case of use only threading, use only MPI process or a mix of the two.
+        The success of these tests is to arrive at the end without any errors. 
     
-For testing the co-simulation in a container, you can check : (see [installation](#installation))
-    - 'install/docker/run_image.sh'
-    - 'install/singularity/run_image.sh'
+5. For testing the co-simulation in a container : (see [installation](#installation) for the creation of image)
+   * 'install/docker/test_image.sh'
+   * 'install/singularity/test_image.sh'
+
+    These tests are based on the script 'tests/run_nest_co-sim_test.py'. They need a parameter to choose the image to test.\
+    For docker, 0 is for alpine distribution (local:NEST_TVB_IO) and 1 is for the debian distribution  (local:NEST_TVB_IO_2).\
+    For singularity, 0 is for the full image (Nest_TVB_full.simg), 1 is for alpine distribution (Nest_TVB_1.simg) and 2 is for debian distribution (Nest_TVB_2.simg).
 
 ## Cluster <a name="cluster"></a>
 The option for using the project in a cluster is based on the system manager slum. If you have another system manager, you need to modify all 'nest_elephant/orchestrator/run_exploration.py'.
