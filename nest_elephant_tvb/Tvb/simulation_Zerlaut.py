@@ -308,7 +308,7 @@ def run_mpi(path):
         count+=1
     # save the last part
     logger.info(" TVB finish")
-    np.save(param_tvb_monitor['path_result']+'/step_'+str(count)+'.npy',save_result)
+    np.save(param_tvb_monitor['path_result']+'/step_'+str(count_save)+'.npy',save_result)
     for index,comm in  enumerate(comm_send):
         end_mpi(comm,result_path+"/translation/receive_from_tvb/"+str(id_proxy[index])+".txt",True,logger)
     for index,comm in  enumerate(comm_receive):

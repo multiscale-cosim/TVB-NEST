@@ -25,6 +25,8 @@ TVB and Nest IO
 %files
 ../../nest-io-dev /home/nest-io-dev
 ../../nest_elephant_tvb /home/nest_elephant_tvb
+../../example/analyse /home/nest_elephant_tvb/analyse
+../../example/parameter /home/nest_elephant_tvb/parameter
 
 %post
     apt-get update

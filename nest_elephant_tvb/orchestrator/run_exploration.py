@@ -109,6 +109,12 @@ def run(parameters_file):
         os.remove(results_path+'/nest/spike_detector.txt.unlock')
         spike_detector = np.loadtxt(results_path+'/nest/spike_detector.txt',dtype=int)
 
+        # print ids of nest population
+        print("Ids of different populations of Nest :\n")
+        f = open(results_path+'/nest/population_GIDs.dat', 'r')
+        print(f.read())
+        f.close()
+
         # Run TVB in co-simulation
         dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../Tvb/run_mpi_tvb.sh"
         argv = [
@@ -126,7 +132,6 @@ def run(parameters_file):
         # create translator between Nest to TVB :
         # one by proxy/spikedetector
         for index,id_spike_detector in enumerate(spike_detector):
-            print(id_spike_detector)
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_nest_to_tvb.sh"
             argv=[ '/bin/sh',
                    dir_path,

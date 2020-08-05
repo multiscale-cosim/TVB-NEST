@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from nest_elephant_tvb.file_translation import slidding_window
+from nest_elephant_tvb.translation.science_nest_to_tvb import slidding_window
 
 def compute_rate(data,time,N,Dt):
     """
@@ -32,7 +32,8 @@ def bin_array(array, BIN, time_array,N,Dt):
     hist = compute_rate(array,time_array,N,Dt)
     return ( slidding_window(time_array,BIN),slidding_window(hist,BIN),hist)
 
-def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None, W_ex=None, W_in=None, histogram=True):
+def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None, W_ex=None, W_in=None, histogram=True,
+                   size_neurons=0.1):
     """
     print the result of the recording from Nest
     :param param: parameter of the simulation
@@ -110,10 +111,10 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
         ax3 = fig.add_subplot(223)
         for i in range(spikes_ex[0].shape[0]):
             ax3.plot(spikes_ex[1][i] - begin, np.repeat(spikes_ex[0][i], spikes_ex[1][i].shape[0]), '.b',
-                     markersize=0.1)
+                     markersize=size_neurons)
         for i in range(spikes_in[0].shape[0]):
             ax3.plot(spikes_in[1][i] - begin, np.repeat(spikes_in[0][i], spikes_in[1][i].shape[0]), '.r',
-                     markersize=0.1)
+                     markersize=size_neurons)
         ax3.set_xlabel('Time (ms)')
         ax3.set_ylabel('Neuron index')
 
@@ -142,10 +143,10 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
         ax3 = fig.add_subplot(121)
         for i in range(spikes_ex[0].shape[0]):
             ax3.plot(spikes_ex[1][i] - begin, np.repeat(spikes_ex[0][i], spikes_ex[1][i].shape[0]), '.b',
-                     markersize=0.1)
+                     markersize=size_neurons)
         for i in range(spikes_in[0].shape[0]):
             ax3.plot(spikes_in[1][i] - begin, np.repeat(spikes_in[0][i], spikes_in[1][i].shape[0]), '.r',
-                     markersize=0.1)
+                     markersize=size_neurons)
         ax3.set_xlabel('Time (ms)')
         ax3.set_ylabel('Neuron index')
 
@@ -173,7 +174,7 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
 
 # Test the function, helping for debugging
 if __name__ == '__main__':
-    from nest_elephant_tvb.analyse.get_data import get_data_all
+    from example.analyse.get_data import get_data_all
     data = get_data_all('/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim_2/nest/')
     param={}
     param['param_nest']={}
