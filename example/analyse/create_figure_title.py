@@ -102,13 +102,13 @@ def create_figure_title(param, data_1, image=None, alpha_image=0.4, threshold=1.
 # Test the function, helping for debugging
 if __name__ == '__main__':
     from example.analyse.get_data import get_data_all,get_rate
-    param = { 'param_nest_connection':{"path_weight":'/home/kusch/Documents/project/co_simulation/TVB-NEST/example/parameter/data_mouse/weights.npy',
-                                       "path_distance": '/home/kusch/Documents/project/co_simulation/TVB-NEST/example/parameter/data_mouse/distance.npy',
+    param = { 'param_nest_connection':{"path_weight":'../../example/parameter/data_mouse/weights.npy',
+                                       "path_distance": '../../example/parameter/data_mouse/distance.npy',
                                         "velocity":3.0},
               'param_co_simulation':{"id_region_nest":[29,81]},
               'param_nest_topology':{"nb_region":104},
-              'param_tvb_connection':{'path_region_labels':'/home/kusch/Documents/project/co_simulation/TVB-NEST/example/parameter/data_mouse/region_labels.txt',
-                                      'path_centers':'/home/kusch/Documents/project/co_simulation/TVB-NEST/example/parameter/data_mouse/centres.txt'
+              'param_tvb_connection':{'path_region_labels':'../../example/parameter/data_mouse/region_labels.txt',
+                                      'path_centers':'../../example/parameter/data_mouse/centres.txt'
                                       }
               }
     # color_Nest = 'royalblue'
@@ -120,10 +120,10 @@ if __name__ == '__main__':
     # color_TVB  = 'mediumturquoise'
     color_TVB  = 'darkgreen'
 
-    data = get_data_all('/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim_2/nest/')
-    result_raw = get_rate('/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim_2/tvb/')[0]  # result of the Raw monitor
+    data = get_data_all('../../example/long_simulation/nest/')
+    result_raw = get_rate('../../example/long_simulation/tvb/')[0]  # result of the Raw monitor
 
-    create_figure_title(param, data, image='/home/kusch/Documents/project/co_simulation/TVB-NEST/example/parameter/data_mouse/StruturalMRI_allen_40.npy',
+    create_figure_title(param, data, image='../../example/parameter/data_mouse/StruturalMRI_allen_40.npy',
                        color_Nest=color_Nest, color_TVB=color_TVB,
                        size_edges=0.5,
                        threshold=0.05, size_neurons=0.1)

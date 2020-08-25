@@ -153,7 +153,7 @@ def get_rate(path):
     return output
 
 if __name__ == '__main__':
-    path = '/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim_2/'
+    path = '../../example/long_simulation/'
     data_pop = get_data_all(path+'/nest/')
     print(len(data_pop))
     print(data_pop.keys())

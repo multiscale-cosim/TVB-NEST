@@ -59,6 +59,12 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
     TimBinned_ex, popRate_ex, hist_ex = bin_array(np.concatenate(spikes_ex[1]) - begin, bin, time_array, nb_ex, dt)
     TimBinned_in, popRate_in, hist_in = bin_array(np.concatenate(spikes_in[1]) - begin, bin, time_array, nb_in, dt)
 
+    import matplotlib.ticker as tkr
+    def numfmt(x, pos): # your custom formatter function: divide by 100.0
+        s = '{}'.format(x * dt)
+        return s
+    format_hixt_x = tkr.FuncFormatter(numfmt)
+
     if V_ex is not None:
         time_V_ex = V_ex[1]
         mean_V_ex = np.mean(V_ex[2], axis=0)
@@ -131,12 +137,14 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
             plt.plot(hist_ex, 'b')
             plt.title('Instantaneous firing rate of excitatory population')
             plt.xlabel('time in ms')
-            plt.ylabel('Instantaneous firing rate in Hz')
+            plt.ylabel('Instantaneous firing rate\n in Hz')
+            plt.gca().xaxis.set_major_formatter(format_hixt_x)
             plt.subplot(212)
             plt.plot(hist_in, 'r')
             plt.title('Instantaneous firing rate of inhibitory population')
             plt.xlabel('time in ms')
-            plt.ylabel('Instantaneous firing rate in Hz')
+            plt.ylabel('Instantaneous firing rate \nin Hz')
+            plt.gca().xaxis.set_major_formatter(format_hixt_x)
             plt.subplots_adjust(hspace=0.5)
     else:
         fig = plt.figure(figsize=(9.5, 4))
@@ -163,19 +171,21 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
             plt.plot(hist_ex, 'b')
             plt.title('Instantaneous firing rate of excitatory population')
             plt.xlabel('time in ms')
-            plt.ylabel('Instantaneous firing rate in Hz')
+            plt.ylabel('Instantaneous firing rate \nin Hz')
+            plt.gca().xaxis.set_major_formatter(format_hixt_x)
             plt.subplot(212)
             plt.plot(hist_in, 'r')
             plt.title('Instantaneous firing rate of inhibitory population')
             plt.xlabel('time in ms')
-            plt.ylabel('Instantaneous firing rate in Hz')
+            plt.ylabel('Instantaneous firing rate \nin Hz')
+            plt.gca().xaxis.set_major_formatter(format_hixt_x)
             plt.subplots_adjust(hspace=0.5)
     plt.show()
 
 # Test the function, helping for debugging
 if __name__ == '__main__':
     from example.analyse.get_data import get_data_all
-    data = get_data_all('/home/kusch/Documents/project/co_simulation/co-simulation-tvb-nest/example/test_sim_2/nest/')
+    data = get_data_all('../../example/long_simulation/nest/')
     param={}
     param['param_nest']={}
     param['param_nest']["sim_resolution"]=0.1
