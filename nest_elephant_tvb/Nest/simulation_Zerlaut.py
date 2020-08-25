@@ -468,7 +468,6 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
             spike_generator.append(spike_generator_mpi)
             nb_device = 0
             for index,name in enumerate(name_pops):
-                print([nb_device,nb_device+nb_neurons[index]]);sys.stdout.flush()
                 nest.Connect(spike_generator_mpi[nb_device:nb_device+nb_neurons[index]],dic_layer[name]['list'][i]['region'],syn_spec={
                                                "weight":param_connection['weight_global'],
                                                "delay":nest.GetKernelStatus("min_delay"),

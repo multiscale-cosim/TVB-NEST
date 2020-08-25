@@ -1,0 +1,9 @@
+label,type of data
+pop_1_ex_VM,['V_m']
+pop_1_ex_W,['w']
+pop_1_in_VM,['V_m']
+pop_1_in_W,['w']
+pop_1_ex,spikes
+pop_2_ex,spikes
+pop_1_in,spikes
+pop_2_in,spikes

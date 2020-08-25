@@ -1,0 +1,13 @@
+2020-08-25 16:41:37,101 - nest_to_tvb_master2002 - INFO - Translate Receive: before open_port
+2020-08-25 16:41:37,102 - nest_to_tvb_master2002 - INFO - Translate Receive: after open_port: tag#0$description#INS-Precision-7540$port#46737$ifname#127.0.1.1$
+2020-08-25 16:41:37,102 - nest_to_tvb_master2002 - INFO - Translate Receive: path_file: /home/kusch/Documents/project/co_simulation/TVB-NEST/example/long_simulation//translation/spike_detector/2002.txt
+2020-08-25 16:41:37,102 - nest_to_tvb_master2002 - INFO - Translate SEND: before open_port
+2020-08-25 16:41:37,102 - nest_to_tvb_master2002 - INFO - Translate SEND: after open_port : tag#1$description#INS-Precision-7540$port#46737$ifname#127.0.1.1$
+2020-08-25 16:41:37,102 - nest_to_tvb_master2002 - INFO - Translate SEND: path_file: /home/kusch/Documents/project/co_simulation/TVB-NEST/example/long_simulation//translation/send_to_tvb/81.txt
+2020-08-25 16:41:37,102 - nest_to_tvb_master2002 - INFO - Waiting communication
+2020-08-25 16:41:38,732 - nest_to_tvb_master2002 - INFO - get communication and start thread
+2020-08-25 16:41:38,733 - nest_to_tvb_master2002 - INFO - Start thread
+2020-08-25 17:39:06,734 - nest_to_tvb_master2002 - INFO - thread join
+2020-08-25 17:39:06,735 - nest_to_tvb_master2002 - INFO - close communicator
+2020-08-25 17:39:06,735 - nest_to_tvb_master2002 - INFO - clean file
+2020-08-25 17:39:06,735 - nest_to_tvb_master2002 - INFO - end

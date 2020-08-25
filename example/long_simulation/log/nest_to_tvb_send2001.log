@@ -1,0 +1,1720 @@
+2020-08-25 16:41:38,743 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:41:38,746 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:41:38,748 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:41:38,758 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:41:39,013 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:41:42,022 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.027812500000000004
+2020-08-25 16:41:42,022 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:41:43,310 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:41:46,818 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.03862500000000001
+2020-08-25 16:41:46,818 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:41:47,650 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:41:51,155 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.04206250000000001
+2020-08-25 16:41:51,155 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:41:51,981 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:41:56,488 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.04375000000000001
+2020-08-25 16:41:56,488 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:41:56,758 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:02,266 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.04375000000000001
+2020-08-25 16:42:02,267 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:02,512 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:08,425 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.03987500000000001
+2020-08-25 16:42:08,426 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:08,677 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:14,285 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0091875
+2020-08-25 16:42:14,285 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:14,538 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:20,546 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0044375000000000005
+2020-08-25 16:42:20,547 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:20,904 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:26,416 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0005
+2020-08-25 16:42:26,416 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:26,689 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:33,398 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:42:33,398 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:33,655 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:40,271 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:42:40,271 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:40,519 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:46,127 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:42:46,127 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:46,379 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:51,288 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:42:51,288 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:51,538 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:42:57,246 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:42:57,246 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:42:57,498 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:03,209 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:03,209 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:03,464 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:09,171 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:09,172 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:09,433 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:15,240 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:15,241 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:15,492 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:22,254 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:22,254 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:22,624 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:29,340 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:29,341 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:29,651 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:36,060 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:36,060 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:36,353 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:43,062 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:43,062 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:43,355 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:50,765 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:50,765 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:51,021 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:43:57,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:43:57,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:43:57,285 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:02,993 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:02,993 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:03,245 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:08,953 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:08,953 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:09,210 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:14,918 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:14,918 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:15,168 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:20,876 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:20,876 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:21,133 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:26,740 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:26,740 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:26,911 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:32,318 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:32,318 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:32,578 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:40,389 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:40,389 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:40,687 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:48,116 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:48,116 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:48,428 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:44:55,950 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:44:55,950 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:44:56,334 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:05,158 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:05,158 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:05,482 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:16,303 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:16,303 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:16,601 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:22,509 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:22,509 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:22,767 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:28,375 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:28,375 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:28,621 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:34,128 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:34,129 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:34,379 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:40,692 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:40,692 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:40,943 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:46,852 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:46,852 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:47,222 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:53,130 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:53,130 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:53,387 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:45:59,195 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:45:59,195 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:45:59,447 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:06,457 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:06,457 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:06,717 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:12,630 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:12,630 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:12,876 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:18,584 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:18,584 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:18,836 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:24,744 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:24,744 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:25,002 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:30,910 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:30,911 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:31,157 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:36,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:36,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:36,618 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:42,026 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:42,026 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:42,270 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:47,277 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:46:47,277 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:47,527 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:52,536 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:46:52,536 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:52,792 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:46:57,699 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:46:57,700 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:46:57,957 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:04,175 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:47:04,175 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:04,433 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:10,142 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:47:10,142 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:10,501 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:18,514 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:47:18,514 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:18,830 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:26,841 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0015625
+2020-08-25 16:47:26,841 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:27,128 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:33,937 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0013750000000000001
+2020-08-25 16:47:33,937 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:34,226 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:41,440 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:47:41,440 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:41,747 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:49,159 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:47:49,159 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:49,522 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:47:59,648 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:47:59,648 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:47:59,958 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:48:10,294 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:48:10,294 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:48:10,654 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:48:20,282 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:48:20,282 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:48:20,625 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:48:33,303 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0001875
+2020-08-25 16:48:33,303 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:48:33,793 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:48:43,613 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:48:43,613 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:48:43,874 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:48:53,192 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:48:53,192 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:48:53,481 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:02,298 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:49:02,298 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:02,671 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:11,886 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:49:11,886 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:12,163 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:20,674 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:49:20,674 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:20,933 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:27,649 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:49:27,649 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:27,937 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:33,951 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:49:33,951 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:34,205 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:40,914 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0016250000000000001
+2020-08-25 16:49:40,914 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:41,175 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:47,484 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:49:47,484 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:47,731 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:49:53,643 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:49:53,644 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:49:53,898 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:00,106 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:50:00,106 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:00,376 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:06,186 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:50:06,187 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:06,441 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:11,552 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0033125000000000003
+2020-08-25 16:50:11,552 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:11,808 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:17,518 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004750000000000001
+2020-08-25 16:50:17,519 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:17,770 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:22,677 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0086875
+2020-08-25 16:50:22,677 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:22,927 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:27,936 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.010937500000000003
+2020-08-25 16:50:27,936 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:28,194 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:34,402 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.015375000000000003
+2020-08-25 16:50:34,402 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:34,656 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:40,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.024625
+2020-08-25 16:50:40,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:40,614 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:46,225 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.027312500000000003
+2020-08-25 16:50:46,225 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:46,580 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:52,894 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.030187500000000006
+2020-08-25 16:50:52,894 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:53,145 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:50:58,856 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.028437500000000004
+2020-08-25 16:50:58,856 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:50:59,109 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:04,917 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.024687500000000005
+2020-08-25 16:51:04,917 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:05,193 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:10,802 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.021375
+2020-08-25 16:51:10,802 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:11,052 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:16,760 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0158125
+2020-08-25 16:51:16,761 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:17,014 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:22,722 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.009875000000000002
+2020-08-25 16:51:22,722 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:22,994 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:28,001 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006937500000000001
+2020-08-25 16:51:28,001 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:28,248 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:33,856 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006562500000000001
+2020-08-25 16:51:33,856 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:34,107 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:39,214 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.005937500000000001
+2020-08-25 16:51:39,214 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:39,475 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:45,183 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0060625
+2020-08-25 16:51:45,183 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:45,431 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:50,438 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 16:51:50,438 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:50,689 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:51:55,996 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0035000000000000005
+2020-08-25 16:51:55,996 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:51:56,255 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:01,363 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:52:01,363 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:01,609 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:07,618 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:52:07,618 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:07,870 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:13,480 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0015
+2020-08-25 16:52:13,480 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:13,746 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:20,254 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0018125000000000003
+2020-08-25 16:52:20,255 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:20,505 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:27,414 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:52:27,414 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:27,666 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:34,179 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:52:34,179 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:34,414 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:40,731 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:52:40,731 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:40,984 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:46,794 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:52:46,794 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:47,044 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:52:53,556 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0019375
+2020-08-25 16:52:53,557 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:52:53,808 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:00,317 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:00,318 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:00,583 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:08,094 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:08,095 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:08,347 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:13,855 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:13,855 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:14,107 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:19,616 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:19,617 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:19,866 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:25,980 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:25,980 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:26,354 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:32,063 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:32,063 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:32,312 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:37,720 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:37,720 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:37,970 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:43,379 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:53:43,379 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:43,630 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:49,447 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0020625000000000005
+2020-08-25 16:53:49,447 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:49,693 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:53:56,201 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0063125
+2020-08-25 16:53:56,202 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:53:56,455 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:02,163 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.012500000000000002
+2020-08-25 16:54:02,163 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:02,425 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:08,035 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.020000000000000004
+2020-08-25 16:54:08,035 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:08,282 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:13,789 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.024250000000000004
+2020-08-25 16:54:13,789 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:14,042 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:19,553 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.029625000000000005
+2020-08-25 16:54:19,554 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:19,901 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:25,509 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.029937500000000006
+2020-08-25 16:54:25,509 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:25,759 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:31,369 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.033125
+2020-08-25 16:54:31,369 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:31,629 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:37,339 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.03475
+2020-08-25 16:54:37,339 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:37,587 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:43,095 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.030000000000000006
+2020-08-25 16:54:43,095 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:43,345 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:49,465 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.030562500000000006
+2020-08-25 16:54:49,466 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:49,727 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:54:55,751 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.029500000000000005
+2020-08-25 16:54:55,751 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:54:56,001 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:03,415 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.026937500000000003
+2020-08-25 16:55:03,415 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:03,675 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:10,386 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.023562500000000007
+2020-08-25 16:55:10,386 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:10,739 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:16,848 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.021875000000000006
+2020-08-25 16:55:16,848 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:17,099 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:22,808 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.019625000000000004
+2020-08-25 16:55:22,808 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:23,067 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:28,775 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.014937500000000003
+2020-08-25 16:55:28,775 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:29,023 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:34,731 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.011250000000000003
+2020-08-25 16:55:34,731 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:34,984 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:40,692 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.010937500000000003
+2020-08-25 16:55:40,692 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:40,951 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:46,358 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0073125
+2020-08-25 16:55:46,359 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:46,610 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:52,119 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.007000000000000001
+2020-08-25 16:55:52,119 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:52,280 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:55:57,890 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.010812500000000003
+2020-08-25 16:55:57,890 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:55:58,144 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:03,552 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.014437500000000002
+2020-08-25 16:56:03,552 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:03,800 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:09,508 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.014687500000000003
+2020-08-25 16:56:09,508 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:09,757 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:15,766 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.014750000000000003
+2020-08-25 16:56:15,766 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:16,011 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:21,619 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.013687500000000002
+2020-08-25 16:56:21,619 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:21,970 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:27,678 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.012125
+2020-08-25 16:56:27,678 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:27,932 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:33,843 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0124375
+2020-08-25 16:56:33,843 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:34,090 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:39,703 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.011187500000000003
+2020-08-25 16:56:39,703 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:39,954 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:45,562 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.014937500000000003
+2020-08-25 16:56:45,562 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:45,807 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:51,515 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.019000000000000003
+2020-08-25 16:56:51,516 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:51,768 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:56:57,376 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.020312500000000004
+2020-08-25 16:56:57,376 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:56:57,629 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:03,136 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.021875000000000006
+2020-08-25 16:57:03,137 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:03,383 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:08,890 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.020187500000000004
+2020-08-25 16:57:08,890 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:09,139 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:14,847 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.021375000000000005
+2020-08-25 16:57:14,848 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:15,105 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:20,817 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.020437500000000004
+2020-08-25 16:57:20,817 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:21,063 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:26,770 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.023187500000000007
+2020-08-25 16:57:26,770 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:27,021 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:32,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.025375
+2020-08-25 16:57:32,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:32,287 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:39,096 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.023125000000000007
+2020-08-25 16:57:39,096 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:39,342 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:44,950 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.025375
+2020-08-25 16:57:44,950 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:45,198 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:51,907 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.022375000000000003
+2020-08-25 16:57:51,907 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:52,165 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:57:58,873 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0245
+2020-08-25 16:57:58,874 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:57:59,119 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:05,828 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.020937500000000005
+2020-08-25 16:58:05,828 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:06,082 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:11,689 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.019875000000000004
+2020-08-25 16:58:11,690 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:11,937 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:17,545 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.018062500000000002
+2020-08-25 16:58:17,545 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:17,793 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:23,310 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.01675
+2020-08-25 16:58:23,310 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:23,568 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:29,275 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0168125
+2020-08-25 16:58:29,275 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:29,521 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:35,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.007875
+2020-08-25 16:58:35,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:35,280 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:41,788 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.005750000000000001
+2020-08-25 16:58:41,788 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:42,046 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:48,955 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004125
+2020-08-25 16:58:48,955 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:49,202 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:58:54,709 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 16:58:54,709 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:58:54,958 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:00,866 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.000375
+2020-08-25 16:59:00,866 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:01,124 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:06,031 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:06,031 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:06,278 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:11,285 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:11,285 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:11,536 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:18,345 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:18,345 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:18,609 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:25,518 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:25,518 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:25,773 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:30,680 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:30,681 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:30,931 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:36,039 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:36,039 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:36,284 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:41,192 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:41,192 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:41,440 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:47,048 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:47,048 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:47,301 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:53,216 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:53,216 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:53,461 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 16:59:58,368 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 16:59:58,368 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 16:59:58,617 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:04,125 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:04,125 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:04,377 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:09,885 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:09,885 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:10,131 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:15,538 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:15,538 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:15,787 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:21,498 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:21,498 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:21,753 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:26,963 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:26,963 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:27,221 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:32,628 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:32,628 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:32,876 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:38,784 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:38,785 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:38,961 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:44,668 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:44,668 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:44,824 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:50,332 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:50,332 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:50,585 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:00:56,293 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:00:56,293 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:00:56,451 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:02,058 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0016875000000000002
+2020-08-25 17:01:02,058 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:02,379 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:07,887 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:01:07,887 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:08,043 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:13,650 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:01:13,650 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:13,816 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:19,423 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:01:19,423 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:19,671 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:25,379 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:01:25,379 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:25,536 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:31,043 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0020625
+2020-08-25 17:01:31,043 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:31,290 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:36,998 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:01:36,998 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:37,152 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:42,760 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:01:42,760 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:43,009 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:48,717 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0018125000000000003
+2020-08-25 17:01:48,717 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:48,969 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:01:55,078 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:01:55,078 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:01:55,329 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:00,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:02:00,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:00,989 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:06,496 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:02:06,496 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:06,752 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:12,464 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:02:12,464 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:12,715 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:18,423 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0019375
+2020-08-25 17:02:18,423 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:18,677 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:24,294 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:02:24,294 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:24,461 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:30,269 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:02:30,269 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:30,522 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:36,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:02:36,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:36,281 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:42,189 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:02:42,189 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:42,359 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:47,966 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:02:47,966 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:48,215 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:53,622 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:02:53,622 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:53,874 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:02:59,382 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:02:59,382 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:02:59,645 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:05,154 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:05,154 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:05,404 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:10,815 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:10,816 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:11,069 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:16,677 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:16,677 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:16,936 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:22,444 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:22,444 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:22,692 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:29,003 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:29,003 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:29,256 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:35,064 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:35,064 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:35,323 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:40,230 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:40,230 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:40,480 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:45,287 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:45,287 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:45,538 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:51,346 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:51,346 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:51,604 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:03:56,611 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:03:56,612 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:03:56,859 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:01,666 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:04:01,666 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:01,916 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:07,024 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:04:07,024 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:07,277 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:13,185 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:04:13,185 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:13,456 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:18,964 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:04:18,964 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:19,214 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:24,821 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:04:24,821 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:25,075 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:30,784 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:04:30,784 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:31,031 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:36,642 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:04:36,642 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:36,892 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:42,500 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0018750000000000004
+2020-08-25 17:04:42,500 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:42,756 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:47,964 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.005625000000000001
+2020-08-25 17:04:47,964 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:48,239 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:53,646 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.00875
+2020-08-25 17:04:53,646 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:53,895 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:04:59,404 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.010125000000000002
+2020-08-25 17:04:59,404 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:04:59,657 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:06,366 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.010937500000000003
+2020-08-25 17:05:06,366 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:06,621 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:12,229 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.010937500000000003
+2020-08-25 17:05:12,229 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:12,479 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:18,087 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.009125000000000001
+2020-08-25 17:05:18,087 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:18,344 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:24,052 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.00625
+2020-08-25 17:05:24,052 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:24,298 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:29,805 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:05:29,805 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:30,056 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:34,964 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0038750000000000004
+2020-08-25 17:05:34,964 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:35,120 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:40,727 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:05:40,728 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:40,990 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:46,397 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:05:46,397 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:46,552 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:51,960 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0024375000000000004
+2020-08-25 17:05:51,960 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:52,203 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:05:57,811 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:05:57,811 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:05:58,057 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:03,564 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:06:03,564 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:03,724 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:09,131 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :6.25e-05
+2020-08-25 17:06:09,131 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:09,321 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:15,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:15,029 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:15,276 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:20,783 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:20,784 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:21,037 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:25,944 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:25,944 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:26,198 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:31,005 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:31,005 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:31,253 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:36,761 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:36,761 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:37,012 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:42,519 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:42,519 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:42,676 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:48,184 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:48,184 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:48,435 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:54,042 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:54,042 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:06:54,200 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:06:59,807 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:06:59,807 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:00,055 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:06,463 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:06,463 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:06,619 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:13,127 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:13,127 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:13,386 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:18,794 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:18,794 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:19,041 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:25,249 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:25,249 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:25,502 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:31,010 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:31,010 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:31,260 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:36,767 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:36,768 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:37,018 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:43,527 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:43,527 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:43,785 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:49,593 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:49,593 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:49,840 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:07:55,247 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:07:55,247 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:07:55,403 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:00,910 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:00,911 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:01,065 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:06,472 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:06,472 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:06,725 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:12,232 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:12,232 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:12,486 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:18,294 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:18,294 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:18,568 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:24,076 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:24,076 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:24,326 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:29,934 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:29,934 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:30,187 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:35,697 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:35,697 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:35,945 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:41,553 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:41,553 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:41,807 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:47,416 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:47,416 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:47,663 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:53,170 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:53,171 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:53,421 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:08:59,134 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:08:59,134 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:08:59,388 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:04,295 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:04,295 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:04,539 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:10,047 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:10,047 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:10,299 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:15,807 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:15,807 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:16,060 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:21,067 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:21,067 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:21,340 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:26,948 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:26,948 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:27,198 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:32,706 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:32,706 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:32,959 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:38,066 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:38,066 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:38,312 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:43,920 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:43,920 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:44,173 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:49,780 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:49,780 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:50,032 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:09:55,641 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:09:55,641 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:09:55,888 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:01,496 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:01,496 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:01,745 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:07,052 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:07,053 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:07,311 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:13,119 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:13,119 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:13,368 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:18,978 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:18,979 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:19,228 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:24,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:24,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:25,096 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:30,804 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:30,804 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:31,052 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:36,459 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:36,459 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:36,709 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:42,318 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:42,318 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:42,577 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:47,985 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:47,985 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:48,235 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:53,943 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:53,943 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:10:54,197 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:10:59,905 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:10:59,906 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:00,153 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:05,760 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:05,761 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:06,010 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:11,718 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:11,718 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:11,973 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:17,781 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:17,781 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:18,027 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:23,535 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:23,535 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:23,787 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:29,403 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:29,403 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:29,655 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:35,463 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:35,463 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:35,708 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:41,416 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:41,416 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:41,664 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:47,472 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:11:47,472 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:47,725 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:53,533 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.000125
+2020-08-25 17:11:53,533 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:53,780 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:11:59,387 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:11:59,387 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:11:59,640 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:05,450 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:12:05,450 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:05,710 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:11,431 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:12:11,431 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:11,678 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:18,287 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:12:18,287 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:18,536 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:25,344 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0041875
+2020-08-25 17:12:25,344 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:25,590 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:31,098 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0038750000000000004
+2020-08-25 17:12:31,098 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:31,350 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:36,958 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.005437500000000001
+2020-08-25 17:12:36,958 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:37,210 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:42,817 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006562500000000001
+2020-08-25 17:12:42,817 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:43,064 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:48,672 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006562500000000001
+2020-08-25 17:12:48,672 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:48,925 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:12:54,635 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006125
+2020-08-25 17:12:54,635 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:12:54,894 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:00,502 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:13:00,503 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:00,757 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:06,264 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0036875000000000007
+2020-08-25 17:13:06,265 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:06,520 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:12,228 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0026875000000000002
+2020-08-25 17:13:12,228 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:12,486 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:17,994 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:13:17,994 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:18,241 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:23,749 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:13:23,749 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:24,002 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:29,709 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:13:29,710 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:29,969 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:35,476 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:13:35,476 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:35,724 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:41,131 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.001375
+2020-08-25 17:13:41,131 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:41,385 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:46,895 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:13:46,895 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:47,144 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:52,551 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0007500000000000002
+2020-08-25 17:13:52,551 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:52,801 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:13:58,214 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:13:58,214 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:13:58,467 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:04,074 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:14:04,075 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:04,321 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:09,832 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:14:09,832 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:10,084 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:15,591 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:14:15,591 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:15,843 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:21,651 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:14:21,652 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:21,898 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:27,505 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0008125000000000001
+2020-08-25 17:14:27,505 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:27,758 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:32,765 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:14:32,765 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:33,017 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:38,725 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:14:38,725 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:38,996 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:44,604 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:14:44,604 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:44,856 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:50,263 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:14:50,263 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:50,516 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:14:56,229 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0019375000000000002
+2020-08-25 17:14:56,229 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:14:56,479 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:01,886 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:15:01,886 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:02,137 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:07,544 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:15:07,544 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:07,797 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:13,405 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0022500000000000003
+2020-08-25 17:15:13,405 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:13,652 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:19,260 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:15:19,260 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:19,516 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:25,224 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004
+2020-08-25 17:15:25,224 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:25,486 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:30,993 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:15:30,993 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:31,243 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:36,650 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:15:36,650 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:36,903 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:42,510 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:15:42,510 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:42,758 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:48,364 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0015
+2020-08-25 17:15:48,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:48,614 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:54,223 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:15:54,223 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:15:54,486 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:15:59,994 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:15:59,994 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:00,242 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:05,849 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:05,850 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:06,102 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:11,820 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:11,820 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:12,067 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:17,575 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:17,575 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:17,825 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:23,333 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:23,333 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:23,592 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:29,201 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:29,201 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:29,448 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:34,969 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:34,969 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:35,218 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:40,826 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:40,826 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:41,079 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:46,591 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:46,591 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:46,840 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:52,347 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:52,347 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:52,598 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:16:58,213 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:16:58,213 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:16:58,463 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:03,871 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:03,871 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:04,121 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:09,731 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:09,731 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:09,992 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:15,603 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:15,603 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:15,858 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:21,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:21,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:21,617 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:27,327 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:27,327 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:27,574 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:33,282 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:33,282 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:33,535 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:39,242 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:39,242 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:39,501 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:45,209 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:45,209 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:45,463 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:51,177 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:51,177 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:51,429 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:17:57,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:17:57,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:17:58,094 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:04,502 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:04,502 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:04,854 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:11,365 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:11,366 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:11,623 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:17,631 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:17,631 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:17,879 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:24,387 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:24,387 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:24,636 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:31,344 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:31,344 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:31,590 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:36,797 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:36,797 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:37,047 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:42,654 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:42,654 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:42,908 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:48,917 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:48,917 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:49,190 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:18:54,097 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:18:54,097 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:18:54,345 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:00,153 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:00,153 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:00,405 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:07,114 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:07,114 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:07,371 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:13,880 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:13,880 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:14,130 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:19,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:19,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:20,093 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:25,901 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:25,901 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:26,151 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:31,559 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:31,559 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:31,809 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:37,417 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:37,417 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:37,676 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:43,183 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:43,183 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:43,431 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:48,939 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:48,939 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:49,189 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:19:54,797 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:19:54,798 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:19:55,059 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:00,667 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:00,667 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:00,914 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:06,322 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:06,322 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:06,573 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:12,182 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:12,183 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:12,442 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:17,948 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:17,948 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:18,197 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:23,604 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:23,604 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:23,856 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:29,464 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:29,464 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:29,711 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:35,219 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:35,219 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:35,469 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:40,977 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:40,977 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:41,229 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:46,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:20:46,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:47,088 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:52,495 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0008125000000000001
+2020-08-25 17:20:52,495 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:52,745 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:20:58,152 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:20:58,152 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:20:58,406 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:04,114 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:21:04,114 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:04,361 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:10,069 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:21:10,069 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:10,319 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:15,426 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:21:15,426 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:15,684 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:20,591 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:21:20,592 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:20,839 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:26,647 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.00075
+2020-08-25 17:21:26,647 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:26,897 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:32,604 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:21:32,605 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:32,866 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:38,573 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:21:38,573 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:38,819 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:44,527 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:21:44,527 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:44,778 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:50,586 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:21:50,586 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:50,834 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:21:56,541 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:21:56,541 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:21:56,790 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:02,598 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:02,598 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:02,858 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:09,567 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:09,567 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:09,814 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:16,023 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:16,023 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:16,273 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:22,882 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:22,882 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:23,140 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:28,648 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:28,648 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:28,898 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:33,805 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:33,805 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:34,057 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:39,665 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:39,665 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:39,916 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:44,722 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:44,722 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:45,072 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:49,979 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:49,979 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:50,231 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:22:56,039 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:22:56,039 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:22:56,285 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:02,398 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:02,398 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:02,648 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:08,156 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:08,156 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:08,407 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:14,118 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:14,118 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:14,364 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:19,171 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:19,171 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:19,420 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:25,934 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:25,934 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:26,186 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:32,796 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:32,796 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:33,042 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:39,458 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:39,458 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:39,708 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:44,615 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:44,615 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:44,872 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:50,480 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:50,480 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:50,729 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:23:55,536 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:23:55,536 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:23:55,786 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:00,593 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:00,593 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:00,845 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:05,852 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:05,852 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:06,102 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:11,609 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:11,609 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:11,857 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:17,577 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:17,577 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:17,838 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:25,248 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:25,248 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:25,497 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:31,312 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:31,312 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:31,686 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:37,494 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:37,495 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:37,748 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:43,357 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:43,357 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:43,609 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:48,817 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:48,817 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:49,176 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:24:55,489 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:24:55,489 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:24:55,744 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:02,753 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:02,753 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:03,012 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:08,720 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:08,720 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:08,891 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:15,902 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:15,902 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:16,153 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:21,861 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:21,861 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:22,114 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:27,723 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:27,723 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:27,981 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:33,589 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:33,589 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:33,841 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:39,349 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:39,349 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:39,603 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:45,210 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:45,211 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:45,460 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:52,570 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:52,570 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:52,853 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:25:58,763 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:25:58,763 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:25:59,017 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:04,524 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:04,525 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:04,679 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:10,186 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:10,186 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:10,442 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:16,150 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:16,150 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:16,407 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:21,816 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:21,816 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:22,068 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:27,476 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:27,476 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:27,731 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:33,438 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:33,439 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:33,710 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:39,217 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:39,218 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:39,473 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:44,980 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:44,980 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:45,234 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:50,742 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:50,742 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:50,992 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:26:56,399 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:26:56,399 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:26:56,652 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:02,360 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:27:02,360 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:02,629 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:08,437 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:27:08,437 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:08,689 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:14,201 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:27:14,201 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:14,456 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:20,265 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:27:20,265 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:20,446 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:26,154 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0010625
+2020-08-25 17:27:26,154 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:26,307 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:32,014 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:27:32,014 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:32,269 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:37,877 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:27:37,877 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:38,127 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:43,034 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:27:43,034 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:43,284 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:49,092 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:27:49,092 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:49,356 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:27:54,463 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:27:54,464 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:27:54,712 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:00,319 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0005
+2020-08-25 17:28:00,320 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:00,571 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:06,378 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:06,378 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:06,638 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:12,347 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:12,347 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:12,599 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:18,108 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:18,108 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:18,362 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:23,971 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:23,971 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:24,232 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:29,940 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:29,941 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:30,191 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:35,898 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:35,898 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:36,153 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:41,460 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:41,460 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:41,724 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:47,432 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:47,432 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:47,683 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:52,690 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:52,690 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:52,947 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:28:58,755 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:28:58,755 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:28:59,017 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:04,729 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:29:04,729 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:04,985 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:10,993 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:29:10,993 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:11,253 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:16,765 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:29:16,765 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:17,023 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:22,430 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:29:22,431 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:22,688 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:28,196 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.00025
+2020-08-25 17:29:28,196 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:28,459 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:34,066 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:29:34,066 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:34,316 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:39,824 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0034375000000000005
+2020-08-25 17:29:39,824 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:40,076 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:45,584 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:29:45,584 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:45,839 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:51,247 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:29:51,247 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:51,597 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:29:57,505 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:29:57,505 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:29:57,762 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:03,369 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0035000000000000005
+2020-08-25 17:30:03,370 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:03,632 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:08,439 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:30:08,439 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:08,690 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:13,402 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0003125
+2020-08-25 17:30:13,402 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:13,659 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:18,465 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:30:18,465 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:18,720 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:25,129 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:30:25,129 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:25,379 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:30,987 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0018125000000000003
+2020-08-25 17:30:30,987 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:31,252 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:36,959 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0025625000000000005
+2020-08-25 17:30:36,960 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:37,222 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:43,030 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:30:43,030 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:43,289 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:49,697 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:30:49,697 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:49,953 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:30:56,662 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:30:56,662 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:30:56,918 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:02,626 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004125
+2020-08-25 17:31:02,626 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:02,879 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:08,586 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:31:08,587 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:08,846 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:14,557 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0011875
+2020-08-25 17:31:14,557 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:14,908 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:20,622 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:31:20,622 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:20,879 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:26,989 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:31:26,989 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:27,240 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:32,948 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:31:32,948 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:33,203 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:39,012 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:31:39,012 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:39,268 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:44,175 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0008125000000000001
+2020-08-25 17:31:44,175 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:44,455 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:49,262 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:31:49,262 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:49,511 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:31:55,220 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0036875000000000007
+2020-08-25 17:31:55,220 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:31:55,475 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:00,983 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:32:00,983 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:01,253 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:06,760 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:32:06,761 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:07,022 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:12,630 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:32:12,630 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:12,889 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:18,596 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0029375
+2020-08-25 17:32:18,596 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:18,847 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:24,455 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0029375
+2020-08-25 17:32:24,455 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:24,708 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:30,121 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0022500000000000003
+2020-08-25 17:32:30,121 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:30,378 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:36,186 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:32:36,186 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:36,436 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:41,843 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:32:41,843 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:42,097 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:47,609 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:32:47,610 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:47,869 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:53,877 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:32:53,877 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:32:54,146 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:32:59,856 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0008125000000000001
+2020-08-25 17:32:59,857 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:00,103 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:05,811 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:05,812 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:06,067 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:11,674 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:11,675 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:11,925 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:17,532 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:17,533 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:17,787 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:23,395 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:23,395 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:23,649 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:29,256 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:29,256 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:29,509 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:35,117 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:35,117 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:35,379 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:41,189 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:41,189 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:41,540 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:47,251 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:47,251 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:47,504 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:33:53,212 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:33:53,212 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:33:53,476 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:00,084 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:34:00,085 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:00,334 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:06,642 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:34:06,642 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:06,895 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:12,002 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:34:12,003 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:12,264 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:17,271 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:34:17,271 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:17,521 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:22,329 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0014375000000000002
+2020-08-25 17:34:22,329 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:22,581 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:28,188 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:34:28,189 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:28,446 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:33,253 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:34:33,253 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:33,501 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:38,308 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:34:38,309 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:38,558 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:44,466 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004
+2020-08-25 17:34:44,466 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:44,725 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:49,632 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006562500000000001
+2020-08-25 17:34:49,632 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:49,879 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:34:55,587 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0045000000000000005
+2020-08-25 17:34:55,587 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:34:55,836 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:01,645 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006562500000000001
+2020-08-25 17:35:01,645 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:01,907 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:07,618 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.006562500000000001
+2020-08-25 17:35:07,618 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:07,866 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:13,374 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.008625
+2020-08-25 17:35:13,375 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:13,629 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:19,437 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.005812500000000001
+2020-08-25 17:35:19,437 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:19,696 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:25,604 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004687500000000001
+2020-08-25 17:35:25,604 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:25,851 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:32,560 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0059375
+2020-08-25 17:35:32,560 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:32,812 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:38,519 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:35:38,520 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:38,771 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:45,480 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.00375
+2020-08-25 17:35:45,480 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:45,754 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:51,261 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:35:51,261 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:51,521 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:35:57,329 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0033125000000000003
+2020-08-25 17:35:57,329 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:35:57,476 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:03,084 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0034375000000000005
+2020-08-25 17:36:03,084 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:03,334 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:08,240 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:36:08,240 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:08,499 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:15,108 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:36:15,108 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:15,357 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:21,866 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0033750000000000004
+2020-08-25 17:36:21,866 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:22,118 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:28,426 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:36:28,427 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:28,673 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:34,080 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004562500000000001
+2020-08-25 17:36:34,081 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:34,330 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:39,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:36:39,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:40,088 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:45,196 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:36:45,196 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:45,450 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:50,256 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:36:50,257 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:50,506 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:36:56,214 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0025625000000000005
+2020-08-25 17:36:56,214 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:36:56,468 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:02,181 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0018125
+2020-08-25 17:37:02,181 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:02,429 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:07,836 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:37:07,837 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:08,086 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:13,794 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:37:13,794 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:14,053 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:19,060 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:37:19,060 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:19,311 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:24,919 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:37:24,919 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:25,184 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:30,191 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:37:30,191 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:30,438 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:35,445 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:37:35,445 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:35,694 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:42,003 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:37:42,003 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:42,255 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:48,163 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0015000000000000002
+2020-08-25 17:37:48,163 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:48,412 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:54,020 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:37:54,020 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:37:54,270 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:37:59,878 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:37:59,878 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:00,132 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:06,640 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:38:06,640 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:06,891 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:11,798 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:38:11,798 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:12,052 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:17,059 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.004375
+2020-08-25 17:38:17,059 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:17,314 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:22,922 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0022500000000000003
+2020-08-25 17:38:22,922 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:23,174 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:28,586 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:38:28,586 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:28,841 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:34,349 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0021875
+2020-08-25 17:38:34,349 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:34,599 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:39,508 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0015625
+2020-08-25 17:38:39,508 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:39,762 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:45,269 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:38:45,269 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:45,526 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:50,633 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:38:50,633 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:50,882 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:38:56,289 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:38:56,289 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:38:56,546 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 0
+2020-08-25 17:39:01,453 - nest_to_tvb_send2001 - INFO - Nest to TVB : send data :0.0
+2020-08-25 17:39:01,453 - nest_to_tvb_send2001 - INFO - Nest to TVB : wait to send 
+2020-08-25 17:39:05,989 - nest_to_tvb_send2001 - INFO -  Nest to TVB : send data status : 1
+2020-08-25 17:39:05,989 - nest_to_tvb_send2001 - INFO - communication disconnect
+2020-08-25 17:39:05,989 - nest_to_tvb_send2001 - INFO - end thread

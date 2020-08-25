@@ -1,0 +1,1746 @@
+2020-08-25 16:41:38,731 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#45463$ifname#127.0.1.1$
+2020-08-25 16:41:38,732 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#45463$ifname#127.0.1.1$
+2020-08-25 16:41:38,732 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#46737$ifname#127.0.1.1$
+2020-08-25 16:41:38,732 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#46737$ifname#127.0.1.1$
+2020-08-25 16:41:38,732 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$
+2020-08-25 16:41:38,733 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$
+2020-08-25 16:41:38,733 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#56791$ifname#127.0.1.1$
+2020-08-25 16:41:38,733 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#56791$ifname#127.0.1.1$
+2020-08-25 16:41:38,734 - tvb - INFO -  TVB receive data
+2020-08-25 16:41:38,760 - tvb - INFO -  TVB start simulation 0.0
+2020-08-25 16:41:39,012 - tvb - INFO -  TVB end simulation
+2020-08-25 16:41:39,013 - tvb - INFO -  TVB receive data
+2020-08-25 16:41:42,036 - tvb - INFO -  TVB start simulation 3.5
+2020-08-25 16:41:42,265 - tvb - INFO -  TVB end simulation
+2020-08-25 16:41:43,310 - tvb - INFO -  TVB receive data
+2020-08-25 16:41:46,819 - tvb - INFO -  TVB start simulation 7.0
+2020-08-25 16:41:47,053 - tvb - INFO -  TVB end simulation
+2020-08-25 16:41:47,649 - tvb - INFO -  TVB receive data
+2020-08-25 16:41:51,158 - tvb - INFO -  TVB start simulation 10.5
+2020-08-25 16:41:51,396 - tvb - INFO -  TVB end simulation
+2020-08-25 16:41:51,981 - tvb - INFO -  TVB receive data
+2020-08-25 16:41:56,514 - tvb - INFO -  TVB start simulation 14.0
+2020-08-25 16:41:56,757 - tvb - INFO -  TVB end simulation
+2020-08-25 16:41:56,758 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:02,268 - tvb - INFO -  TVB start simulation 17.5
+2020-08-25 16:42:02,511 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:02,512 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:08,427 - tvb - INFO -  TVB start simulation 21.0
+2020-08-25 16:42:08,677 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:08,677 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:14,287 - tvb - INFO -  TVB start simulation 24.5
+2020-08-25 16:42:14,538 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:14,538 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:20,649 - tvb - INFO -  TVB start simulation 28.0
+2020-08-25 16:42:20,902 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:20,903 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:26,439 - tvb - INFO -  TVB start simulation 31.5
+2020-08-25 16:42:26,689 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:26,689 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:33,402 - tvb - INFO -  TVB start simulation 35.0
+2020-08-25 16:42:33,655 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:33,655 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:40,272 - tvb - INFO -  TVB start simulation 38.5
+2020-08-25 16:42:40,519 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:40,519 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:46,129 - tvb - INFO -  TVB start simulation 42.0
+2020-08-25 16:42:46,378 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:46,379 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:51,290 - tvb - INFO -  TVB start simulation 45.5
+2020-08-25 16:42:51,537 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:51,538 - tvb - INFO -  TVB receive data
+2020-08-25 16:42:57,248 - tvb - INFO -  TVB start simulation 49.0
+2020-08-25 16:42:57,498 - tvb - INFO -  TVB end simulation
+2020-08-25 16:42:57,498 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:03,211 - tvb - INFO -  TVB start simulation 52.5
+2020-08-25 16:43:03,463 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:03,464 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:09,178 - tvb - INFO -  TVB start simulation 56.0
+2020-08-25 16:43:09,432 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:09,432 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:15,243 - tvb - INFO -  TVB start simulation 59.5
+2020-08-25 16:43:15,491 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:15,492 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:22,356 - tvb - INFO -  TVB start simulation 63.0
+2020-08-25 16:43:22,608 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:22,608 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:29,373 - tvb - INFO -  TVB start simulation 66.5
+2020-08-25 16:43:29,651 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:29,651 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:36,098 - tvb - INFO -  TVB start simulation 70.0
+2020-08-25 16:43:36,353 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:36,353 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:43,090 - tvb - INFO -  TVB start simulation 73.5
+2020-08-25 16:43:43,355 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:43,355 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:50,767 - tvb - INFO -  TVB start simulation 77.0
+2020-08-25 16:43:51,020 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:51,020 - tvb - INFO -  TVB receive data
+2020-08-25 16:43:57,030 - tvb - INFO -  TVB start simulation 80.5
+2020-08-25 16:43:57,285 - tvb - INFO -  TVB end simulation
+2020-08-25 16:43:57,285 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:02,995 - tvb - INFO -  TVB start simulation 84.0
+2020-08-25 16:44:03,245 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:03,245 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:08,955 - tvb - INFO -  TVB start simulation 87.5
+2020-08-25 16:44:09,210 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:09,210 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:14,920 - tvb - INFO -  TVB start simulation 91.0
+2020-08-25 16:44:15,167 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:15,168 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:20,878 - tvb - INFO -  TVB start simulation 94.5
+2020-08-25 16:44:21,132 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:21,132 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:26,742 - tvb - INFO -  TVB start simulation 98.0
+2020-08-25 16:44:26,910 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:26,911 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:32,320 - tvb - INFO -  TVB start simulation 101.5
+2020-08-25 16:44:32,578 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:32,578 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:40,418 - tvb - INFO -  TVB start simulation 105.0
+2020-08-25 16:44:40,687 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:40,687 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:48,154 - tvb - INFO -  TVB start simulation 108.5
+2020-08-25 16:44:48,428 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:48,428 - tvb - INFO -  TVB receive data
+2020-08-25 16:44:56,052 - tvb - INFO -  TVB start simulation 112.0
+2020-08-25 16:44:56,308 - tvb - INFO -  TVB end simulation
+2020-08-25 16:44:56,308 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:05,179 - tvb - INFO -  TVB start simulation 115.5
+2020-08-25 16:45:05,481 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:05,482 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:16,331 - tvb - INFO -  TVB start simulation 119.0
+2020-08-25 16:45:16,601 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:16,601 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:22,511 - tvb - INFO -  TVB start simulation 122.5
+2020-08-25 16:45:22,766 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:22,767 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:28,377 - tvb - INFO -  TVB start simulation 126.0
+2020-08-25 16:45:28,620 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:28,621 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:34,130 - tvb - INFO -  TVB start simulation 129.5
+2020-08-25 16:45:34,379 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:34,379 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:40,694 - tvb - INFO -  TVB start simulation 133.0
+2020-08-25 16:45:40,942 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:40,942 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:46,858 - tvb - INFO -  TVB start simulation 136.5
+2020-08-25 16:45:47,222 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:47,222 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:53,134 - tvb - INFO -  TVB start simulation 140.0
+2020-08-25 16:45:53,386 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:53,387 - tvb - INFO -  TVB receive data
+2020-08-25 16:45:59,197 - tvb - INFO -  TVB start simulation 143.5
+2020-08-25 16:45:59,447 - tvb - INFO -  TVB end simulation
+2020-08-25 16:45:59,447 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:06,459 - tvb - INFO -  TVB start simulation 147.0
+2020-08-25 16:46:06,716 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:06,717 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:12,632 - tvb - INFO -  TVB start simulation 150.5
+2020-08-25 16:46:12,876 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:12,876 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:18,586 - tvb - INFO -  TVB start simulation 154.0
+2020-08-25 16:46:18,836 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:18,836 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:24,746 - tvb - INFO -  TVB start simulation 157.5
+2020-08-25 16:46:25,002 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:25,002 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:30,912 - tvb - INFO -  TVB start simulation 161.0
+2020-08-25 16:46:31,157 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:31,157 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:36,367 - tvb - INFO -  TVB start simulation 164.5
+2020-08-25 16:46:36,617 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:36,618 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:42,028 - tvb - INFO -  TVB start simulation 168.0
+2020-08-25 16:46:42,270 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:42,270 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:47,279 - tvb - INFO -  TVB start simulation 171.5
+2020-08-25 16:46:47,526 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:47,527 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:52,538 - tvb - INFO -  TVB start simulation 175.0
+2020-08-25 16:46:52,791 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:52,792 - tvb - INFO -  TVB receive data
+2020-08-25 16:46:57,701 - tvb - INFO -  TVB start simulation 178.5
+2020-08-25 16:46:57,957 - tvb - INFO -  TVB end simulation
+2020-08-25 16:46:57,957 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:04,180 - tvb - INFO -  TVB start simulation 182.0
+2020-08-25 16:47:04,432 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:04,433 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:10,244 - tvb - INFO -  TVB start simulation 185.5
+2020-08-25 16:47:10,501 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:10,501 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:18,538 - tvb - INFO -  TVB start simulation 189.0
+2020-08-25 16:47:18,829 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:18,830 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:26,863 - tvb - INFO -  TVB start simulation 192.5
+2020-08-25 16:47:27,127 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:27,128 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:33,958 - tvb - INFO -  TVB start simulation 196.0
+2020-08-25 16:47:34,226 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:34,226 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:41,478 - tvb - INFO -  TVB start simulation 199.5
+2020-08-25 16:47:41,746 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:41,747 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:49,262 - tvb - INFO -  TVB start simulation 203.0
+2020-08-25 16:47:49,521 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:49,522 - tvb - INFO -  TVB receive data
+2020-08-25 16:47:59,671 - tvb - INFO -  TVB start simulation 206.5
+2020-08-25 16:47:59,943 - tvb - INFO -  TVB end simulation
+2020-08-25 16:47:59,943 - tvb - INFO -  TVB receive data
+2020-08-25 16:48:10,296 - tvb - INFO -  TVB start simulation 210.0
+2020-08-25 16:48:10,641 - tvb - INFO -  TVB end simulation
+2020-08-25 16:48:10,642 - tvb - INFO -  TVB receive data
+2020-08-25 16:48:20,325 - tvb - INFO -  TVB start simulation 213.5
+2020-08-25 16:48:20,623 - tvb - INFO -  TVB end simulation
+2020-08-25 16:48:20,623 - tvb - INFO -  TVB receive data
+2020-08-25 16:48:33,321 - tvb - INFO -  TVB start simulation 217.0
+2020-08-25 16:48:33,792 - tvb - INFO -  TVB end simulation
+2020-08-25 16:48:33,793 - tvb - INFO -  TVB receive data
+2020-08-25 16:48:43,615 - tvb - INFO -  TVB start simulation 220.5
+2020-08-25 16:48:43,868 - tvb - INFO -  TVB end simulation
+2020-08-25 16:48:43,868 - tvb - INFO -  TVB receive data
+2020-08-25 16:48:53,219 - tvb - INFO -  TVB start simulation 224.0
+2020-08-25 16:48:53,481 - tvb - INFO -  TVB end simulation
+2020-08-25 16:48:53,481 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:02,411 - tvb - INFO -  TVB start simulation 227.5
+2020-08-25 16:49:02,670 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:02,671 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:11,909 - tvb - INFO -  TVB start simulation 231.0
+2020-08-25 16:49:12,162 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:12,163 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:20,676 - tvb - INFO -  TVB start simulation 234.5
+2020-08-25 16:49:20,933 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:20,933 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:27,673 - tvb - INFO -  TVB start simulation 238.0
+2020-08-25 16:49:27,936 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:27,937 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:33,953 - tvb - INFO -  TVB start simulation 241.5
+2020-08-25 16:49:34,204 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:34,205 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:40,916 - tvb - INFO -  TVB start simulation 245.0
+2020-08-25 16:49:41,175 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:41,175 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:47,486 - tvb - INFO -  TVB start simulation 248.5
+2020-08-25 16:49:47,731 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:47,731 - tvb - INFO -  TVB receive data
+2020-08-25 16:49:53,645 - tvb - INFO -  TVB start simulation 252.0
+2020-08-25 16:49:53,897 - tvb - INFO -  TVB end simulation
+2020-08-25 16:49:53,897 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:00,108 - tvb - INFO -  TVB start simulation 255.5
+2020-08-25 16:50:00,376 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:00,376 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:06,188 - tvb - INFO -  TVB start simulation 259.0
+2020-08-25 16:50:06,440 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:06,441 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:11,554 - tvb - INFO -  TVB start simulation 262.5
+2020-08-25 16:50:11,808 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:11,808 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:17,520 - tvb - INFO -  TVB start simulation 266.0
+2020-08-25 16:50:17,769 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:17,770 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:22,679 - tvb - INFO -  TVB start simulation 269.5
+2020-08-25 16:50:22,927 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:22,927 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:27,938 - tvb - INFO -  TVB start simulation 273.0
+2020-08-25 16:50:28,193 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:28,194 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:34,406 - tvb - INFO -  TVB start simulation 276.5
+2020-08-25 16:50:34,656 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:34,656 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:40,367 - tvb - INFO -  TVB start simulation 280.0
+2020-08-25 16:50:40,614 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:40,614 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:46,327 - tvb - INFO -  TVB start simulation 283.5
+2020-08-25 16:50:46,579 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:46,579 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:52,896 - tvb - INFO -  TVB start simulation 287.0
+2020-08-25 16:50:53,144 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:53,145 - tvb - INFO -  TVB receive data
+2020-08-25 16:50:58,858 - tvb - INFO -  TVB start simulation 290.5
+2020-08-25 16:50:59,109 - tvb - INFO -  TVB end simulation
+2020-08-25 16:50:59,109 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:04,919 - tvb - INFO -  TVB start simulation 294.0
+2020-08-25 16:51:05,193 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:05,193 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:10,804 - tvb - INFO -  TVB start simulation 297.5
+2020-08-25 16:51:11,051 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:11,052 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:16,762 - tvb - INFO -  TVB start simulation 301.0
+2020-08-25 16:51:17,013 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:17,014 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:22,724 - tvb - INFO -  TVB start simulation 304.5
+2020-08-25 16:51:22,993 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:22,994 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:28,003 - tvb - INFO -  TVB start simulation 308.0
+2020-08-25 16:51:28,248 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:28,248 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:33,858 - tvb - INFO -  TVB start simulation 311.5
+2020-08-25 16:51:34,107 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:34,107 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:39,216 - tvb - INFO -  TVB start simulation 315.0
+2020-08-25 16:51:39,474 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:39,475 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:45,185 - tvb - INFO -  TVB start simulation 318.5
+2020-08-25 16:51:45,430 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:45,430 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:50,440 - tvb - INFO -  TVB start simulation 322.0
+2020-08-25 16:51:50,688 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:50,689 - tvb - INFO -  TVB receive data
+2020-08-25 16:51:55,998 - tvb - INFO -  TVB start simulation 325.5
+2020-08-25 16:51:56,255 - tvb - INFO -  TVB end simulation
+2020-08-25 16:51:56,255 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:01,365 - tvb - INFO -  TVB start simulation 329.0
+2020-08-25 16:52:01,609 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:01,609 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:07,620 - tvb - INFO -  TVB start simulation 332.5
+2020-08-25 16:52:07,869 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:07,869 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:13,486 - tvb - INFO -  TVB start simulation 336.0
+2020-08-25 16:52:13,745 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:13,746 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:20,256 - tvb - INFO -  TVB start simulation 339.5
+2020-08-25 16:52:20,504 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:20,505 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:27,416 - tvb - INFO -  TVB start simulation 343.0
+2020-08-25 16:52:27,665 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:27,666 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:34,181 - tvb - INFO -  TVB start simulation 346.5
+2020-08-25 16:52:34,414 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:34,414 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:40,733 - tvb - INFO -  TVB start simulation 350.0
+2020-08-25 16:52:40,984 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:40,984 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:46,796 - tvb - INFO -  TVB start simulation 353.5
+2020-08-25 16:52:47,044 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:47,044 - tvb - INFO -  TVB receive data
+2020-08-25 16:52:53,558 - tvb - INFO -  TVB start simulation 357.0
+2020-08-25 16:52:53,807 - tvb - INFO -  TVB end simulation
+2020-08-25 16:52:53,808 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:00,320 - tvb - INFO -  TVB start simulation 360.5
+2020-08-25 16:53:00,582 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:00,583 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:08,097 - tvb - INFO -  TVB start simulation 364.0
+2020-08-25 16:53:08,347 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:08,347 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:13,857 - tvb - INFO -  TVB start simulation 367.5
+2020-08-25 16:53:14,107 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:14,107 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:19,618 - tvb - INFO -  TVB start simulation 371.0
+2020-08-25 16:53:19,865 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:19,866 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:26,082 - tvb - INFO -  TVB start simulation 374.5
+2020-08-25 16:53:26,339 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:26,339 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:32,064 - tvb - INFO -  TVB start simulation 378.0
+2020-08-25 16:53:32,311 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:32,312 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:37,722 - tvb - INFO -  TVB start simulation 381.5
+2020-08-25 16:53:37,970 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:37,970 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:43,381 - tvb - INFO -  TVB start simulation 385.0
+2020-08-25 16:53:43,630 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:43,630 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:49,449 - tvb - INFO -  TVB start simulation 388.5
+2020-08-25 16:53:49,692 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:49,692 - tvb - INFO -  TVB receive data
+2020-08-25 16:53:56,203 - tvb - INFO -  TVB start simulation 392.0
+2020-08-25 16:53:56,454 - tvb - INFO -  TVB end simulation
+2020-08-25 16:53:56,455 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:02,165 - tvb - INFO -  TVB start simulation 395.5
+2020-08-25 16:54:02,424 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:02,425 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:08,037 - tvb - INFO -  TVB start simulation 399.0
+2020-08-25 16:54:08,281 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:08,282 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:13,791 - tvb - INFO -  TVB start simulation 402.5
+2020-08-25 16:54:14,041 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:14,041 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:19,656 - tvb - INFO -  TVB start simulation 406.0
+2020-08-25 16:54:19,900 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:19,901 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:25,511 - tvb - INFO -  TVB start simulation 409.5
+2020-08-25 16:54:25,758 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:25,759 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:31,371 - tvb - INFO -  TVB start simulation 413.0
+2020-08-25 16:54:31,629 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:31,629 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:37,341 - tvb - INFO -  TVB start simulation 416.5
+2020-08-25 16:54:37,587 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:37,587 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:43,097 - tvb - INFO -  TVB start simulation 420.0
+2020-08-25 16:54:43,344 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:43,345 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:49,468 - tvb - INFO -  TVB start simulation 423.5
+2020-08-25 16:54:49,726 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:49,727 - tvb - INFO -  TVB receive data
+2020-08-25 16:54:55,753 - tvb - INFO -  TVB start simulation 427.0
+2020-08-25 16:54:56,001 - tvb - INFO -  TVB end simulation
+2020-08-25 16:54:56,001 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:03,418 - tvb - INFO -  TVB start simulation 430.5
+2020-08-25 16:55:03,675 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:03,675 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:10,488 - tvb - INFO -  TVB start simulation 434.0
+2020-08-25 16:55:10,738 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:10,739 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:16,850 - tvb - INFO -  TVB start simulation 437.5
+2020-08-25 16:55:17,099 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:17,099 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:22,810 - tvb - INFO -  TVB start simulation 441.0
+2020-08-25 16:55:23,066 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:23,067 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:28,777 - tvb - INFO -  TVB start simulation 444.5
+2020-08-25 16:55:29,023 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:29,023 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:34,733 - tvb - INFO -  TVB start simulation 448.0
+2020-08-25 16:55:34,983 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:34,984 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:40,694 - tvb - INFO -  TVB start simulation 451.5
+2020-08-25 16:55:40,950 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:40,951 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:46,360 - tvb - INFO -  TVB start simulation 455.0
+2020-08-25 16:55:46,609 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:46,610 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:52,121 - tvb - INFO -  TVB start simulation 458.5
+2020-08-25 16:55:52,280 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:52,280 - tvb - INFO -  TVB receive data
+2020-08-25 16:55:57,899 - tvb - INFO -  TVB start simulation 462.0
+2020-08-25 16:55:58,144 - tvb - INFO -  TVB end simulation
+2020-08-25 16:55:58,144 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:03,553 - tvb - INFO -  TVB start simulation 465.5
+2020-08-25 16:56:03,799 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:03,800 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:09,510 - tvb - INFO -  TVB start simulation 469.0
+2020-08-25 16:56:09,757 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:09,757 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:15,767 - tvb - INFO -  TVB start simulation 472.5
+2020-08-25 16:56:16,011 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:16,011 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:21,721 - tvb - INFO -  TVB start simulation 476.0
+2020-08-25 16:56:21,970 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:21,970 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:27,680 - tvb - INFO -  TVB start simulation 479.5
+2020-08-25 16:56:27,931 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:27,932 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:33,845 - tvb - INFO -  TVB start simulation 483.0
+2020-08-25 16:56:34,089 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:34,089 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:39,705 - tvb - INFO -  TVB start simulation 486.5
+2020-08-25 16:56:39,954 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:39,954 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:45,564 - tvb - INFO -  TVB start simulation 490.0
+2020-08-25 16:56:45,807 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:45,807 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:51,519 - tvb - INFO -  TVB start simulation 493.5
+2020-08-25 16:56:51,768 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:51,768 - tvb - INFO -  TVB receive data
+2020-08-25 16:56:57,378 - tvb - INFO -  TVB start simulation 497.0
+2020-08-25 16:56:57,628 - tvb - INFO -  TVB end simulation
+2020-08-25 16:56:57,628 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:03,138 - tvb - INFO -  TVB start simulation 500.5
+2020-08-25 16:57:03,382 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:03,383 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:08,892 - tvb - INFO -  TVB start simulation 504.0
+2020-08-25 16:57:09,138 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:09,139 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:14,849 - tvb - INFO -  TVB start simulation 507.5
+2020-08-25 16:57:15,105 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:15,105 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:20,819 - tvb - INFO -  TVB start simulation 511.0
+2020-08-25 16:57:21,063 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:21,063 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:26,772 - tvb - INFO -  TVB start simulation 514.5
+2020-08-25 16:57:27,021 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:27,021 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:32,031 - tvb - INFO -  TVB start simulation 518.0
+2020-08-25 16:57:32,287 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:32,287 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:39,097 - tvb - INFO -  TVB start simulation 521.5
+2020-08-25 16:57:39,342 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:39,342 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:44,952 - tvb - INFO -  TVB start simulation 525.0
+2020-08-25 16:57:45,198 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:45,198 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:51,909 - tvb - INFO -  TVB start simulation 528.5
+2020-08-25 16:57:52,164 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:52,165 - tvb - INFO -  TVB receive data
+2020-08-25 16:57:58,875 - tvb - INFO -  TVB start simulation 532.0
+2020-08-25 16:57:59,119 - tvb - INFO -  TVB end simulation
+2020-08-25 16:57:59,119 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:05,830 - tvb - INFO -  TVB start simulation 535.5
+2020-08-25 16:58:06,081 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:06,082 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:11,692 - tvb - INFO -  TVB start simulation 539.0
+2020-08-25 16:58:11,936 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:11,937 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:17,547 - tvb - INFO -  TVB start simulation 542.5
+2020-08-25 16:58:17,792 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:17,793 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:23,312 - tvb - INFO -  TVB start simulation 546.0
+2020-08-25 16:58:23,567 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:23,567 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:29,277 - tvb - INFO -  TVB start simulation 549.5
+2020-08-25 16:58:29,521 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:29,521 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:35,031 - tvb - INFO -  TVB start simulation 553.0
+2020-08-25 16:58:35,279 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:35,279 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:41,790 - tvb - INFO -  TVB start simulation 556.5
+2020-08-25 16:58:42,046 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:42,046 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:48,957 - tvb - INFO -  TVB start simulation 560.0
+2020-08-25 16:58:49,201 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:49,202 - tvb - INFO -  TVB receive data
+2020-08-25 16:58:54,711 - tvb - INFO -  TVB start simulation 563.5
+2020-08-25 16:58:54,958 - tvb - INFO -  TVB end simulation
+2020-08-25 16:58:54,958 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:00,868 - tvb - INFO -  TVB start simulation 567.0
+2020-08-25 16:59:01,124 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:01,124 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:06,033 - tvb - INFO -  TVB start simulation 570.5
+2020-08-25 16:59:06,278 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:06,278 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:11,287 - tvb - INFO -  TVB start simulation 574.0
+2020-08-25 16:59:11,536 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:11,536 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:18,353 - tvb - INFO -  TVB start simulation 577.5
+2020-08-25 16:59:18,609 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:18,609 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:25,529 - tvb - INFO -  TVB start simulation 581.0
+2020-08-25 16:59:25,773 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:25,773 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:30,682 - tvb - INFO -  TVB start simulation 584.5
+2020-08-25 16:59:30,931 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:30,931 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:36,040 - tvb - INFO -  TVB start simulation 588.0
+2020-08-25 16:59:36,284 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:36,284 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:41,194 - tvb - INFO -  TVB start simulation 591.5
+2020-08-25 16:59:41,440 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:41,440 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:47,050 - tvb - INFO -  TVB start simulation 595.0
+2020-08-25 16:59:47,301 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:47,301 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:53,218 - tvb - INFO -  TVB start simulation 598.5
+2020-08-25 16:59:53,461 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:53,461 - tvb - INFO -  TVB receive data
+2020-08-25 16:59:58,370 - tvb - INFO -  TVB start simulation 602.0
+2020-08-25 16:59:58,617 - tvb - INFO -  TVB end simulation
+2020-08-25 16:59:58,617 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:04,127 - tvb - INFO -  TVB start simulation 605.5
+2020-08-25 17:00:04,377 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:04,377 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:09,887 - tvb - INFO -  TVB start simulation 609.0
+2020-08-25 17:00:10,130 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:10,130 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:15,540 - tvb - INFO -  TVB start simulation 612.5
+2020-08-25 17:00:15,787 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:15,787 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:21,500 - tvb - INFO -  TVB start simulation 616.0
+2020-08-25 17:00:21,752 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:21,752 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:26,965 - tvb - INFO -  TVB start simulation 619.5
+2020-08-25 17:00:27,221 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:27,221 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:32,630 - tvb - INFO -  TVB start simulation 623.0
+2020-08-25 17:00:32,876 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:32,876 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:38,807 - tvb - INFO -  TVB start simulation 626.5
+2020-08-25 17:00:38,960 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:38,960 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:44,670 - tvb - INFO -  TVB start simulation 630.0
+2020-08-25 17:00:44,824 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:44,824 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:50,334 - tvb - INFO -  TVB start simulation 633.5
+2020-08-25 17:00:50,585 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:50,585 - tvb - INFO -  TVB receive data
+2020-08-25 17:00:56,295 - tvb - INFO -  TVB start simulation 637.0
+2020-08-25 17:00:56,450 - tvb - INFO -  TVB end simulation
+2020-08-25 17:00:56,451 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:02,160 - tvb - INFO -  TVB start simulation 640.5
+2020-08-25 17:01:02,378 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:02,379 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:07,889 - tvb - INFO -  TVB start simulation 644.0
+2020-08-25 17:01:08,042 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:08,042 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:13,658 - tvb - INFO -  TVB start simulation 647.5
+2020-08-25 17:01:13,815 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:13,815 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:19,425 - tvb - INFO -  TVB start simulation 651.0
+2020-08-25 17:01:19,671 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:19,671 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:25,381 - tvb - INFO -  TVB start simulation 654.5
+2020-08-25 17:01:25,535 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:25,535 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:31,045 - tvb - INFO -  TVB start simulation 658.0
+2020-08-25 17:01:31,290 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:31,290 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:37,000 - tvb - INFO -  TVB start simulation 661.5
+2020-08-25 17:01:37,152 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:37,152 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:42,762 - tvb - INFO -  TVB start simulation 665.0
+2020-08-25 17:01:43,009 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:43,009 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:48,719 - tvb - INFO -  TVB start simulation 668.5
+2020-08-25 17:01:48,969 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:48,969 - tvb - INFO -  TVB receive data
+2020-08-25 17:01:55,080 - tvb - INFO -  TVB start simulation 672.0
+2020-08-25 17:01:55,329 - tvb - INFO -  TVB end simulation
+2020-08-25 17:01:55,329 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:00,839 - tvb - INFO -  TVB start simulation 675.5
+2020-08-25 17:02:00,988 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:00,989 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:06,498 - tvb - INFO -  TVB start simulation 679.0
+2020-08-25 17:02:06,752 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:06,752 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:12,466 - tvb - INFO -  TVB start simulation 682.5
+2020-08-25 17:02:12,715 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:12,715 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:18,427 - tvb - INFO -  TVB start simulation 686.0
+2020-08-25 17:02:18,677 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:18,677 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:24,296 - tvb - INFO -  TVB start simulation 689.5
+2020-08-25 17:02:24,461 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:24,461 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:30,271 - tvb - INFO -  TVB start simulation 693.0
+2020-08-25 17:02:30,521 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:30,522 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:36,031 - tvb - INFO -  TVB start simulation 696.5
+2020-08-25 17:02:36,280 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:36,281 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:42,191 - tvb - INFO -  TVB start simulation 700.0
+2020-08-25 17:02:42,358 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:42,358 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:47,968 - tvb - INFO -  TVB start simulation 703.5
+2020-08-25 17:02:48,214 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:48,215 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:53,624 - tvb - INFO -  TVB start simulation 707.0
+2020-08-25 17:02:53,874 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:53,874 - tvb - INFO -  TVB receive data
+2020-08-25 17:02:59,388 - tvb - INFO -  TVB start simulation 710.5
+2020-08-25 17:02:59,645 - tvb - INFO -  TVB end simulation
+2020-08-25 17:02:59,645 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:05,156 - tvb - INFO -  TVB start simulation 714.0
+2020-08-25 17:03:05,404 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:05,404 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:10,817 - tvb - INFO -  TVB start simulation 717.5
+2020-08-25 17:03:11,069 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:11,069 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:16,679 - tvb - INFO -  TVB start simulation 721.0
+2020-08-25 17:03:16,936 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:16,936 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:22,446 - tvb - INFO -  TVB start simulation 724.5
+2020-08-25 17:03:22,691 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:22,692 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:29,005 - tvb - INFO -  TVB start simulation 728.0
+2020-08-25 17:03:29,255 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:29,256 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:35,066 - tvb - INFO -  TVB start simulation 731.5
+2020-08-25 17:03:35,322 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:35,322 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:40,232 - tvb - INFO -  TVB start simulation 735.0
+2020-08-25 17:03:40,480 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:40,480 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:45,289 - tvb - INFO -  TVB start simulation 738.5
+2020-08-25 17:03:45,536 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:45,538 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:51,348 - tvb - INFO -  TVB start simulation 742.0
+2020-08-25 17:03:51,604 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:51,604 - tvb - INFO -  TVB receive data
+2020-08-25 17:03:56,613 - tvb - INFO -  TVB start simulation 745.5
+2020-08-25 17:03:56,858 - tvb - INFO -  TVB end simulation
+2020-08-25 17:03:56,859 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:01,668 - tvb - INFO -  TVB start simulation 749.0
+2020-08-25 17:04:01,916 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:01,916 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:07,026 - tvb - INFO -  TVB start simulation 752.5
+2020-08-25 17:04:07,277 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:07,277 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:13,187 - tvb - INFO -  TVB start simulation 756.0
+2020-08-25 17:04:13,456 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:13,456 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:18,966 - tvb - INFO -  TVB start simulation 759.5
+2020-08-25 17:04:19,213 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:19,214 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:24,823 - tvb - INFO -  TVB start simulation 763.0
+2020-08-25 17:04:25,075 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:25,075 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:30,786 - tvb - INFO -  TVB start simulation 766.5
+2020-08-25 17:04:31,030 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:31,031 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:36,644 - tvb - INFO -  TVB start simulation 770.0
+2020-08-25 17:04:36,891 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:36,891 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:42,502 - tvb - INFO -  TVB start simulation 773.5
+2020-08-25 17:04:42,755 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:42,756 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:47,966 - tvb - INFO -  TVB start simulation 777.0
+2020-08-25 17:04:48,238 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:48,239 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:53,648 - tvb - INFO -  TVB start simulation 780.5
+2020-08-25 17:04:53,895 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:53,895 - tvb - INFO -  TVB receive data
+2020-08-25 17:04:59,406 - tvb - INFO -  TVB start simulation 784.0
+2020-08-25 17:04:59,657 - tvb - INFO -  TVB end simulation
+2020-08-25 17:04:59,657 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:06,368 - tvb - INFO -  TVB start simulation 787.5
+2020-08-25 17:05:06,620 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:06,621 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:12,231 - tvb - INFO -  TVB start simulation 791.0
+2020-08-25 17:05:12,479 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:12,479 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:18,089 - tvb - INFO -  TVB start simulation 794.5
+2020-08-25 17:05:18,343 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:18,344 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:24,053 - tvb - INFO -  TVB start simulation 798.0
+2020-08-25 17:05:24,297 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:24,298 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:29,808 - tvb - INFO -  TVB start simulation 801.5
+2020-08-25 17:05:30,056 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:30,056 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:34,966 - tvb - INFO -  TVB start simulation 805.0
+2020-08-25 17:05:35,119 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:35,120 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:40,730 - tvb - INFO -  TVB start simulation 808.5
+2020-08-25 17:05:40,989 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:40,990 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:46,399 - tvb - INFO -  TVB start simulation 812.0
+2020-08-25 17:05:46,552 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:46,552 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:51,962 - tvb - INFO -  TVB start simulation 815.5
+2020-08-25 17:05:52,202 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:52,202 - tvb - INFO -  TVB receive data
+2020-08-25 17:05:57,813 - tvb - INFO -  TVB start simulation 819.0
+2020-08-25 17:05:58,056 - tvb - INFO -  TVB end simulation
+2020-08-25 17:05:58,057 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:03,566 - tvb - INFO -  TVB start simulation 822.5
+2020-08-25 17:06:03,723 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:03,724 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:09,133 - tvb - INFO -  TVB start simulation 826.0
+2020-08-25 17:06:09,321 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:09,321 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:15,031 - tvb - INFO -  TVB start simulation 829.5
+2020-08-25 17:06:15,275 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:15,276 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:20,785 - tvb - INFO -  TVB start simulation 833.0
+2020-08-25 17:06:21,036 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:21,037 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:25,947 - tvb - INFO -  TVB start simulation 836.5
+2020-08-25 17:06:26,198 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:26,198 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:31,007 - tvb - INFO -  TVB start simulation 840.0
+2020-08-25 17:06:31,253 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:31,253 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:36,763 - tvb - INFO -  TVB start simulation 843.5
+2020-08-25 17:06:37,011 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:37,012 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:42,521 - tvb - INFO -  TVB start simulation 847.0
+2020-08-25 17:06:42,676 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:42,676 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:48,186 - tvb - INFO -  TVB start simulation 850.5
+2020-08-25 17:06:48,434 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:48,435 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:54,044 - tvb - INFO -  TVB start simulation 854.0
+2020-08-25 17:06:54,199 - tvb - INFO -  TVB end simulation
+2020-08-25 17:06:54,200 - tvb - INFO -  TVB receive data
+2020-08-25 17:06:59,809 - tvb - INFO -  TVB start simulation 857.5
+2020-08-25 17:07:00,054 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:00,055 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:06,465 - tvb - INFO -  TVB start simulation 861.0
+2020-08-25 17:07:06,618 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:06,618 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:13,129 - tvb - INFO -  TVB start simulation 864.5
+2020-08-25 17:07:13,386 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:13,386 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:18,796 - tvb - INFO -  TVB start simulation 868.0
+2020-08-25 17:07:19,040 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:19,041 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:25,251 - tvb - INFO -  TVB start simulation 871.5
+2020-08-25 17:07:25,501 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:25,502 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:31,012 - tvb - INFO -  TVB start simulation 875.0
+2020-08-25 17:07:31,259 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:31,260 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:36,769 - tvb - INFO -  TVB start simulation 878.5
+2020-08-25 17:07:37,018 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:37,018 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:43,529 - tvb - INFO -  TVB start simulation 882.0
+2020-08-25 17:07:43,784 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:43,785 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:49,595 - tvb - INFO -  TVB start simulation 885.5
+2020-08-25 17:07:49,840 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:49,840 - tvb - INFO -  TVB receive data
+2020-08-25 17:07:55,249 - tvb - INFO -  TVB start simulation 889.0
+2020-08-25 17:07:55,403 - tvb - INFO -  TVB end simulation
+2020-08-25 17:07:55,403 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:00,912 - tvb - INFO -  TVB start simulation 892.5
+2020-08-25 17:08:01,064 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:01,065 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:06,474 - tvb - INFO -  TVB start simulation 896.0
+2020-08-25 17:08:06,724 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:06,724 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:12,234 - tvb - INFO -  TVB start simulation 899.5
+2020-08-25 17:08:12,485 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:12,485 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:18,296 - tvb - INFO -  TVB start simulation 903.0
+2020-08-25 17:08:18,568 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:18,568 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:24,078 - tvb - INFO -  TVB start simulation 906.5
+2020-08-25 17:08:24,326 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:24,326 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:29,936 - tvb - INFO -  TVB start simulation 910.0
+2020-08-25 17:08:30,186 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:30,187 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:35,699 - tvb - INFO -  TVB start simulation 913.5
+2020-08-25 17:08:35,944 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:35,945 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:41,554 - tvb - INFO -  TVB start simulation 917.0
+2020-08-25 17:08:41,807 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:41,807 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:47,418 - tvb - INFO -  TVB start simulation 920.5
+2020-08-25 17:08:47,662 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:47,663 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:53,172 - tvb - INFO -  TVB start simulation 924.0
+2020-08-25 17:08:53,421 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:53,421 - tvb - INFO -  TVB receive data
+2020-08-25 17:08:59,136 - tvb - INFO -  TVB start simulation 927.5
+2020-08-25 17:08:59,387 - tvb - INFO -  TVB end simulation
+2020-08-25 17:08:59,387 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:04,297 - tvb - INFO -  TVB start simulation 931.0
+2020-08-25 17:09:04,539 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:04,539 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:10,048 - tvb - INFO -  TVB start simulation 934.5
+2020-08-25 17:09:10,299 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:10,299 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:15,809 - tvb - INFO -  TVB start simulation 938.0
+2020-08-25 17:09:16,059 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:16,059 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:21,069 - tvb - INFO -  TVB start simulation 941.5
+2020-08-25 17:09:21,340 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:21,340 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:26,950 - tvb - INFO -  TVB start simulation 945.0
+2020-08-25 17:09:27,198 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:27,198 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:32,708 - tvb - INFO -  TVB start simulation 948.5
+2020-08-25 17:09:32,958 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:32,958 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:38,068 - tvb - INFO -  TVB start simulation 952.0
+2020-08-25 17:09:38,312 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:38,312 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:43,922 - tvb - INFO -  TVB start simulation 955.5
+2020-08-25 17:09:44,172 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:44,173 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:49,782 - tvb - INFO -  TVB start simulation 959.0
+2020-08-25 17:09:50,032 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:50,032 - tvb - INFO -  TVB receive data
+2020-08-25 17:09:55,643 - tvb - INFO -  TVB start simulation 962.5
+2020-08-25 17:09:55,888 - tvb - INFO -  TVB end simulation
+2020-08-25 17:09:55,888 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:01,498 - tvb - INFO -  TVB start simulation 966.0
+2020-08-25 17:10:01,745 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:01,745 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:07,054 - tvb - INFO -  TVB start simulation 969.5
+2020-08-25 17:10:07,311 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:07,311 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:13,121 - tvb - INFO -  TVB start simulation 973.0
+2020-08-25 17:10:13,367 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:13,368 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:18,980 - tvb - INFO -  TVB start simulation 976.5
+2020-08-25 17:10:19,228 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:19,228 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:24,839 - tvb - INFO -  TVB start simulation 980.0
+2020-08-25 17:10:25,096 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:25,096 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:30,806 - tvb - INFO -  TVB start simulation 983.5
+2020-08-25 17:10:31,051 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:31,051 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:36,461 - tvb - INFO -  TVB start simulation 987.0
+2020-08-25 17:10:36,708 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:36,709 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:42,320 - tvb - INFO -  TVB start simulation 990.5
+2020-08-25 17:10:42,577 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:42,577 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:47,987 - tvb - INFO -  TVB start simulation 994.0
+2020-08-25 17:10:48,235 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:48,235 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:53,946 - tvb - INFO -  TVB start simulation 997.5
+2020-08-25 17:10:54,196 - tvb - INFO -  TVB end simulation
+2020-08-25 17:10:54,197 - tvb - INFO -  TVB receive data
+2020-08-25 17:10:59,907 - tvb - INFO -  TVB start simulation 1001.0
+2020-08-25 17:11:00,152 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:00,153 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:05,762 - tvb - INFO -  TVB start simulation 1004.5
+2020-08-25 17:11:06,009 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:06,010 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:11,719 - tvb - INFO -  TVB start simulation 1008.0
+2020-08-25 17:11:11,973 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:11,973 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:17,783 - tvb - INFO -  TVB start simulation 1011.5
+2020-08-25 17:11:18,027 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:18,027 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:23,537 - tvb - INFO -  TVB start simulation 1015.0
+2020-08-25 17:11:23,786 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:23,787 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:29,405 - tvb - INFO -  TVB start simulation 1018.5
+2020-08-25 17:11:29,655 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:29,655 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:35,464 - tvb - INFO -  TVB start simulation 1022.0
+2020-08-25 17:11:35,707 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:35,708 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:41,418 - tvb - INFO -  TVB start simulation 1025.5
+2020-08-25 17:11:41,664 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:41,664 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:47,474 - tvb - INFO -  TVB start simulation 1029.0
+2020-08-25 17:11:47,724 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:47,725 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:53,535 - tvb - INFO -  TVB start simulation 1032.5
+2020-08-25 17:11:53,779 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:53,779 - tvb - INFO -  TVB receive data
+2020-08-25 17:11:59,389 - tvb - INFO -  TVB start simulation 1036.0
+2020-08-25 17:11:59,640 - tvb - INFO -  TVB end simulation
+2020-08-25 17:11:59,640 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:05,452 - tvb - INFO -  TVB start simulation 1039.5
+2020-08-25 17:12:05,709 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:05,710 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:11,433 - tvb - INFO -  TVB start simulation 1043.0
+2020-08-25 17:12:11,677 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:11,678 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:18,288 - tvb - INFO -  TVB start simulation 1046.5
+2020-08-25 17:12:18,535 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:18,536 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:25,346 - tvb - INFO -  TVB start simulation 1050.0
+2020-08-25 17:12:25,590 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:25,590 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:31,100 - tvb - INFO -  TVB start simulation 1053.5
+2020-08-25 17:12:31,349 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:31,350 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:36,959 - tvb - INFO -  TVB start simulation 1057.0
+2020-08-25 17:12:37,209 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:37,210 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:42,819 - tvb - INFO -  TVB start simulation 1060.5
+2020-08-25 17:12:43,064 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:43,064 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:48,674 - tvb - INFO -  TVB start simulation 1064.0
+2020-08-25 17:12:48,925 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:48,925 - tvb - INFO -  TVB receive data
+2020-08-25 17:12:54,637 - tvb - INFO -  TVB start simulation 1067.5
+2020-08-25 17:12:54,894 - tvb - INFO -  TVB end simulation
+2020-08-25 17:12:54,894 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:00,509 - tvb - INFO -  TVB start simulation 1071.0
+2020-08-25 17:13:00,755 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:00,755 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:06,266 - tvb - INFO -  TVB start simulation 1074.5
+2020-08-25 17:13:06,519 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:06,520 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:12,230 - tvb - INFO -  TVB start simulation 1078.0
+2020-08-25 17:13:12,485 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:12,486 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:17,995 - tvb - INFO -  TVB start simulation 1081.5
+2020-08-25 17:13:18,241 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:18,241 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:23,751 - tvb - INFO -  TVB start simulation 1085.0
+2020-08-25 17:13:24,001 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:24,002 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:29,711 - tvb - INFO -  TVB start simulation 1088.5
+2020-08-25 17:13:29,968 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:29,969 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:35,478 - tvb - INFO -  TVB start simulation 1092.0
+2020-08-25 17:13:35,723 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:35,724 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:41,133 - tvb - INFO -  TVB start simulation 1095.5
+2020-08-25 17:13:41,385 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:41,385 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:46,898 - tvb - INFO -  TVB start simulation 1099.0
+2020-08-25 17:13:47,143 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:47,144 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:52,553 - tvb - INFO -  TVB start simulation 1102.5
+2020-08-25 17:13:52,800 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:52,800 - tvb - INFO -  TVB receive data
+2020-08-25 17:13:58,216 - tvb - INFO -  TVB start simulation 1106.0
+2020-08-25 17:13:58,466 - tvb - INFO -  TVB end simulation
+2020-08-25 17:13:58,467 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:04,076 - tvb - INFO -  TVB start simulation 1109.5
+2020-08-25 17:14:04,321 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:04,321 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:09,834 - tvb - INFO -  TVB start simulation 1113.0
+2020-08-25 17:14:10,083 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:10,083 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:15,593 - tvb - INFO -  TVB start simulation 1116.5
+2020-08-25 17:14:15,843 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:15,843 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:21,653 - tvb - INFO -  TVB start simulation 1120.0
+2020-08-25 17:14:21,897 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:21,898 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:27,511 - tvb - INFO -  TVB start simulation 1123.5
+2020-08-25 17:14:27,757 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:27,758 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:32,767 - tvb - INFO -  TVB start simulation 1127.0
+2020-08-25 17:14:33,016 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:33,017 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:38,727 - tvb - INFO -  TVB start simulation 1130.5
+2020-08-25 17:14:38,995 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:38,996 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:44,605 - tvb - INFO -  TVB start simulation 1134.0
+2020-08-25 17:14:44,855 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:44,856 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:50,265 - tvb - INFO -  TVB start simulation 1137.5
+2020-08-25 17:14:50,516 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:50,516 - tvb - INFO -  TVB receive data
+2020-08-25 17:14:56,232 - tvb - INFO -  TVB start simulation 1141.0
+2020-08-25 17:14:56,478 - tvb - INFO -  TVB end simulation
+2020-08-25 17:14:56,478 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:01,888 - tvb - INFO -  TVB start simulation 1144.5
+2020-08-25 17:15:02,136 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:02,136 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:07,546 - tvb - INFO -  TVB start simulation 1148.0
+2020-08-25 17:15:07,797 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:07,797 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:13,406 - tvb - INFO -  TVB start simulation 1151.5
+2020-08-25 17:15:13,652 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:13,652 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:19,262 - tvb - INFO -  TVB start simulation 1155.0
+2020-08-25 17:15:19,516 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:19,516 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:25,228 - tvb - INFO -  TVB start simulation 1158.5
+2020-08-25 17:15:25,485 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:25,485 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:30,996 - tvb - INFO -  TVB start simulation 1162.0
+2020-08-25 17:15:31,242 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:31,243 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:36,652 - tvb - INFO -  TVB start simulation 1165.5
+2020-08-25 17:15:36,902 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:36,902 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:42,512 - tvb - INFO -  TVB start simulation 1169.0
+2020-08-25 17:15:42,757 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:42,758 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:48,366 - tvb - INFO -  TVB start simulation 1172.5
+2020-08-25 17:15:48,613 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:48,614 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:54,225 - tvb - INFO -  TVB start simulation 1176.0
+2020-08-25 17:15:54,485 - tvb - INFO -  TVB end simulation
+2020-08-25 17:15:54,485 - tvb - INFO -  TVB receive data
+2020-08-25 17:15:59,996 - tvb - INFO -  TVB start simulation 1179.5
+2020-08-25 17:16:00,241 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:00,242 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:05,851 - tvb - INFO -  TVB start simulation 1183.0
+2020-08-25 17:16:06,101 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:06,102 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:11,821 - tvb - INFO -  TVB start simulation 1186.5
+2020-08-25 17:16:12,066 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:12,067 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:17,577 - tvb - INFO -  TVB start simulation 1190.0
+2020-08-25 17:16:17,824 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:17,825 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:23,338 - tvb - INFO -  TVB start simulation 1193.5
+2020-08-25 17:16:23,591 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:23,592 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:29,203 - tvb - INFO -  TVB start simulation 1197.0
+2020-08-25 17:16:29,448 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:29,448 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:34,970 - tvb - INFO -  TVB start simulation 1200.5
+2020-08-25 17:16:35,218 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:35,218 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:40,828 - tvb - INFO -  TVB start simulation 1204.0
+2020-08-25 17:16:41,079 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:41,079 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:46,593 - tvb - INFO -  TVB start simulation 1207.5
+2020-08-25 17:16:46,839 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:46,839 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:52,349 - tvb - INFO -  TVB start simulation 1211.0
+2020-08-25 17:16:52,598 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:52,598 - tvb - INFO -  TVB receive data
+2020-08-25 17:16:58,215 - tvb - INFO -  TVB start simulation 1214.5
+2020-08-25 17:16:58,462 - tvb - INFO -  TVB end simulation
+2020-08-25 17:16:58,463 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:03,873 - tvb - INFO -  TVB start simulation 1218.0
+2020-08-25 17:17:04,120 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:04,121 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:09,734 - tvb - INFO -  TVB start simulation 1221.5
+2020-08-25 17:17:09,991 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:09,992 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:15,612 - tvb - INFO -  TVB start simulation 1225.0
+2020-08-25 17:17:15,857 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:15,857 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:21,367 - tvb - INFO -  TVB start simulation 1228.5
+2020-08-25 17:17:21,617 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:21,617 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:27,329 - tvb - INFO -  TVB start simulation 1232.0
+2020-08-25 17:17:27,574 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:27,574 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:33,284 - tvb - INFO -  TVB start simulation 1235.5
+2020-08-25 17:17:33,534 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:33,534 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:39,244 - tvb - INFO -  TVB start simulation 1239.0
+2020-08-25 17:17:39,501 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:39,501 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:45,216 - tvb - INFO -  TVB start simulation 1242.5
+2020-08-25 17:17:45,462 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:45,463 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:51,179 - tvb - INFO -  TVB start simulation 1246.0
+2020-08-25 17:17:51,428 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:51,428 - tvb - INFO -  TVB receive data
+2020-08-25 17:17:57,839 - tvb - INFO -  TVB start simulation 1249.5
+2020-08-25 17:17:58,093 - tvb - INFO -  TVB end simulation
+2020-08-25 17:17:58,094 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:04,604 - tvb - INFO -  TVB start simulation 1253.0
+2020-08-25 17:18:04,853 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:04,853 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:11,367 - tvb - INFO -  TVB start simulation 1256.5
+2020-08-25 17:18:11,622 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:11,623 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:17,633 - tvb - INFO -  TVB start simulation 1260.0
+2020-08-25 17:18:17,878 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:17,879 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:24,389 - tvb - INFO -  TVB start simulation 1263.5
+2020-08-25 17:18:24,636 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:24,636 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:31,346 - tvb - INFO -  TVB start simulation 1267.0
+2020-08-25 17:18:31,589 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:31,590 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:36,799 - tvb - INFO -  TVB start simulation 1270.5
+2020-08-25 17:18:37,046 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:37,047 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:42,656 - tvb - INFO -  TVB start simulation 1274.0
+2020-08-25 17:18:42,908 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:42,908 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:48,919 - tvb - INFO -  TVB start simulation 1277.5
+2020-08-25 17:18:49,189 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:49,190 - tvb - INFO -  TVB receive data
+2020-08-25 17:18:54,099 - tvb - INFO -  TVB start simulation 1281.0
+2020-08-25 17:18:54,345 - tvb - INFO -  TVB end simulation
+2020-08-25 17:18:54,345 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:00,155 - tvb - INFO -  TVB start simulation 1284.5
+2020-08-25 17:19:00,404 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:00,404 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:07,116 - tvb - INFO -  TVB start simulation 1288.0
+2020-08-25 17:19:07,371 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:07,371 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:13,882 - tvb - INFO -  TVB start simulation 1291.5
+2020-08-25 17:19:14,129 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:14,129 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:19,839 - tvb - INFO -  TVB start simulation 1295.0
+2020-08-25 17:19:20,092 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:20,093 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:25,904 - tvb - INFO -  TVB start simulation 1298.5
+2020-08-25 17:19:26,151 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:26,151 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:31,561 - tvb - INFO -  TVB start simulation 1302.0
+2020-08-25 17:19:31,809 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:31,809 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:37,419 - tvb - INFO -  TVB start simulation 1305.5
+2020-08-25 17:19:37,675 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:37,676 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:43,185 - tvb - INFO -  TVB start simulation 1309.0
+2020-08-25 17:19:43,431 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:43,431 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:48,942 - tvb - INFO -  TVB start simulation 1312.5
+2020-08-25 17:19:49,189 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:49,189 - tvb - INFO -  TVB receive data
+2020-08-25 17:19:54,799 - tvb - INFO -  TVB start simulation 1316.0
+2020-08-25 17:19:55,059 - tvb - INFO -  TVB end simulation
+2020-08-25 17:19:55,059 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:00,669 - tvb - INFO -  TVB start simulation 1319.5
+2020-08-25 17:20:00,914 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:00,914 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:06,324 - tvb - INFO -  TVB start simulation 1323.0
+2020-08-25 17:20:06,573 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:06,573 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:12,184 - tvb - INFO -  TVB start simulation 1326.5
+2020-08-25 17:20:12,441 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:12,441 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:17,950 - tvb - INFO -  TVB start simulation 1330.0
+2020-08-25 17:20:18,196 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:18,197 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:23,606 - tvb - INFO -  TVB start simulation 1333.5
+2020-08-25 17:20:23,856 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:23,856 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:29,466 - tvb - INFO -  TVB start simulation 1337.0
+2020-08-25 17:20:29,711 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:29,711 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:35,221 - tvb - INFO -  TVB start simulation 1340.5
+2020-08-25 17:20:35,469 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:35,469 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:40,978 - tvb - INFO -  TVB start simulation 1344.0
+2020-08-25 17:20:41,229 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:41,229 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:46,842 - tvb - INFO -  TVB start simulation 1347.5
+2020-08-25 17:20:47,087 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:47,087 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:52,497 - tvb - INFO -  TVB start simulation 1351.0
+2020-08-25 17:20:52,744 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:52,745 - tvb - INFO -  TVB receive data
+2020-08-25 17:20:58,154 - tvb - INFO -  TVB start simulation 1354.5
+2020-08-25 17:20:58,406 - tvb - INFO -  TVB end simulation
+2020-08-25 17:20:58,406 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:04,116 - tvb - INFO -  TVB start simulation 1358.0
+2020-08-25 17:21:04,361 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:04,361 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:10,071 - tvb - INFO -  TVB start simulation 1361.5
+2020-08-25 17:21:10,318 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:10,319 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:15,428 - tvb - INFO -  TVB start simulation 1365.0
+2020-08-25 17:21:15,684 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:15,684 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:20,593 - tvb - INFO -  TVB start simulation 1368.5
+2020-08-25 17:21:20,839 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:20,839 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:26,649 - tvb - INFO -  TVB start simulation 1372.0
+2020-08-25 17:21:26,896 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:26,897 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:32,606 - tvb - INFO -  TVB start simulation 1375.5
+2020-08-25 17:21:32,865 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:32,865 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:38,575 - tvb - INFO -  TVB start simulation 1379.0
+2020-08-25 17:21:38,819 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:38,819 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:44,529 - tvb - INFO -  TVB start simulation 1382.5
+2020-08-25 17:21:44,778 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:44,778 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:50,588 - tvb - INFO -  TVB start simulation 1386.0
+2020-08-25 17:21:50,833 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:50,833 - tvb - INFO -  TVB receive data
+2020-08-25 17:21:56,543 - tvb - INFO -  TVB start simulation 1389.5
+2020-08-25 17:21:56,790 - tvb - INFO -  TVB end simulation
+2020-08-25 17:21:56,790 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:02,600 - tvb - INFO -  TVB start simulation 1393.0
+2020-08-25 17:22:02,858 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:02,858 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:09,569 - tvb - INFO -  TVB start simulation 1396.5
+2020-08-25 17:22:09,814 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:09,814 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:16,025 - tvb - INFO -  TVB start simulation 1400.0
+2020-08-25 17:22:16,273 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:16,273 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:22,884 - tvb - INFO -  TVB start simulation 1403.5
+2020-08-25 17:22:23,140 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:23,140 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:28,650 - tvb - INFO -  TVB start simulation 1407.0
+2020-08-25 17:22:28,897 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:28,898 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:33,807 - tvb - INFO -  TVB start simulation 1410.5
+2020-08-25 17:22:34,057 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:34,057 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:39,667 - tvb - INFO -  TVB start simulation 1414.0
+2020-08-25 17:22:39,915 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:39,916 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:44,824 - tvb - INFO -  TVB start simulation 1417.5
+2020-08-25 17:22:45,072 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:45,072 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:49,981 - tvb - INFO -  TVB start simulation 1421.0
+2020-08-25 17:22:50,231 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:50,231 - tvb - INFO -  TVB receive data
+2020-08-25 17:22:56,041 - tvb - INFO -  TVB start simulation 1424.5
+2020-08-25 17:22:56,285 - tvb - INFO -  TVB end simulation
+2020-08-25 17:22:56,285 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:02,400 - tvb - INFO -  TVB start simulation 1428.0
+2020-08-25 17:23:02,648 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:02,648 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:08,158 - tvb - INFO -  TVB start simulation 1431.5
+2020-08-25 17:23:08,406 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:08,407 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:14,120 - tvb - INFO -  TVB start simulation 1435.0
+2020-08-25 17:23:14,364 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:14,364 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:19,172 - tvb - INFO -  TVB start simulation 1438.5
+2020-08-25 17:23:19,419 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:19,420 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:25,936 - tvb - INFO -  TVB start simulation 1442.0
+2020-08-25 17:23:26,185 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:26,186 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:32,798 - tvb - INFO -  TVB start simulation 1445.5
+2020-08-25 17:23:33,042 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:33,042 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:39,460 - tvb - INFO -  TVB start simulation 1449.0
+2020-08-25 17:23:39,707 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:39,708 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:44,617 - tvb - INFO -  TVB start simulation 1452.5
+2020-08-25 17:23:44,872 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:44,872 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:50,482 - tvb - INFO -  TVB start simulation 1456.0
+2020-08-25 17:23:50,729 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:50,729 - tvb - INFO -  TVB receive data
+2020-08-25 17:23:55,538 - tvb - INFO -  TVB start simulation 1459.5
+2020-08-25 17:23:55,785 - tvb - INFO -  TVB end simulation
+2020-08-25 17:23:55,786 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:00,595 - tvb - INFO -  TVB start simulation 1463.0
+2020-08-25 17:24:00,844 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:00,845 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:05,857 - tvb - INFO -  TVB start simulation 1466.5
+2020-08-25 17:24:06,101 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:06,101 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:11,611 - tvb - INFO -  TVB start simulation 1470.0
+2020-08-25 17:24:11,857 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:11,857 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:17,579 - tvb - INFO -  TVB start simulation 1473.5
+2020-08-25 17:24:17,838 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:17,838 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:25,250 - tvb - INFO -  TVB start simulation 1477.0
+2020-08-25 17:24:25,496 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:25,496 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:31,414 - tvb - INFO -  TVB start simulation 1480.5
+2020-08-25 17:24:31,673 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:31,674 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:37,496 - tvb - INFO -  TVB start simulation 1484.0
+2020-08-25 17:24:37,748 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:37,748 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:43,359 - tvb - INFO -  TVB start simulation 1487.5
+2020-08-25 17:24:43,609 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:43,609 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:48,919 - tvb - INFO -  TVB start simulation 1491.0
+2020-08-25 17:24:49,175 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:49,175 - tvb - INFO -  TVB receive data
+2020-08-25 17:24:55,493 - tvb - INFO -  TVB start simulation 1494.5
+2020-08-25 17:24:55,743 - tvb - INFO -  TVB end simulation
+2020-08-25 17:24:55,744 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:02,755 - tvb - INFO -  TVB start simulation 1498.0
+2020-08-25 17:25:03,011 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:03,012 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:08,722 - tvb - INFO -  TVB start simulation 1501.5
+2020-08-25 17:25:08,891 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:08,891 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:15,905 - tvb - INFO -  TVB start simulation 1505.0
+2020-08-25 17:25:16,153 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:16,153 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:21,863 - tvb - INFO -  TVB start simulation 1508.5
+2020-08-25 17:25:22,114 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:22,114 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:27,725 - tvb - INFO -  TVB start simulation 1512.0
+2020-08-25 17:25:27,981 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:27,981 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:33,591 - tvb - INFO -  TVB start simulation 1515.5
+2020-08-25 17:25:33,841 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:33,841 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:39,351 - tvb - INFO -  TVB start simulation 1519.0
+2020-08-25 17:25:39,602 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:39,603 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:45,212 - tvb - INFO -  TVB start simulation 1522.5
+2020-08-25 17:25:45,460 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:45,460 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:52,598 - tvb - INFO -  TVB start simulation 1526.0
+2020-08-25 17:25:52,853 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:52,853 - tvb - INFO -  TVB receive data
+2020-08-25 17:25:58,768 - tvb - INFO -  TVB start simulation 1529.5
+2020-08-25 17:25:59,016 - tvb - INFO -  TVB end simulation
+2020-08-25 17:25:59,017 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:04,526 - tvb - INFO -  TVB start simulation 1533.0
+2020-08-25 17:26:04,678 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:04,678 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:10,188 - tvb - INFO -  TVB start simulation 1536.5
+2020-08-25 17:26:10,442 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:10,442 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:16,160 - tvb - INFO -  TVB start simulation 1540.0
+2020-08-25 17:26:16,407 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:16,407 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:21,818 - tvb - INFO -  TVB start simulation 1543.5
+2020-08-25 17:26:22,068 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:22,068 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:27,478 - tvb - INFO -  TVB start simulation 1547.0
+2020-08-25 17:26:27,730 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:27,730 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:33,440 - tvb - INFO -  TVB start simulation 1550.5
+2020-08-25 17:26:33,709 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:33,710 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:39,219 - tvb - INFO -  TVB start simulation 1554.0
+2020-08-25 17:26:39,472 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:39,473 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:44,982 - tvb - INFO -  TVB start simulation 1557.5
+2020-08-25 17:26:45,234 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:45,234 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:50,744 - tvb - INFO -  TVB start simulation 1561.0
+2020-08-25 17:26:50,991 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:50,992 - tvb - INFO -  TVB receive data
+2020-08-25 17:26:56,401 - tvb - INFO -  TVB start simulation 1564.5
+2020-08-25 17:26:56,651 - tvb - INFO -  TVB end simulation
+2020-08-25 17:26:56,652 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:02,367 - tvb - INFO -  TVB start simulation 1568.0
+2020-08-25 17:27:02,628 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:02,629 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:08,439 - tvb - INFO -  TVB start simulation 1571.5
+2020-08-25 17:27:08,689 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:08,689 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:14,203 - tvb - INFO -  TVB start simulation 1575.0
+2020-08-25 17:27:14,455 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:14,455 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:20,267 - tvb - INFO -  TVB start simulation 1578.5
+2020-08-25 17:27:20,446 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:20,446 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:26,156 - tvb - INFO -  TVB start simulation 1582.0
+2020-08-25 17:27:26,306 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:26,306 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:32,016 - tvb - INFO -  TVB start simulation 1585.5
+2020-08-25 17:27:32,269 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:32,269 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:37,879 - tvb - INFO -  TVB start simulation 1589.0
+2020-08-25 17:27:38,126 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:38,127 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:43,035 - tvb - INFO -  TVB start simulation 1592.5
+2020-08-25 17:27:43,284 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:43,284 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:49,094 - tvb - INFO -  TVB start simulation 1596.0
+2020-08-25 17:27:49,356 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:49,356 - tvb - INFO -  TVB receive data
+2020-08-25 17:27:54,465 - tvb - INFO -  TVB start simulation 1599.5
+2020-08-25 17:27:54,711 - tvb - INFO -  TVB end simulation
+2020-08-25 17:27:54,712 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:00,321 - tvb - INFO -  TVB start simulation 1603.0
+2020-08-25 17:28:00,570 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:00,571 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:06,380 - tvb - INFO -  TVB start simulation 1606.5
+2020-08-25 17:28:06,638 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:06,638 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:12,352 - tvb - INFO -  TVB start simulation 1610.0
+2020-08-25 17:28:12,598 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:12,599 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:18,110 - tvb - INFO -  TVB start simulation 1613.5
+2020-08-25 17:28:18,361 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:18,362 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:23,973 - tvb - INFO -  TVB start simulation 1617.0
+2020-08-25 17:28:24,232 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:24,232 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:29,942 - tvb - INFO -  TVB start simulation 1620.5
+2020-08-25 17:28:30,190 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:30,190 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:35,900 - tvb - INFO -  TVB start simulation 1624.0
+2020-08-25 17:28:36,153 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:36,153 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:41,462 - tvb - INFO -  TVB start simulation 1627.5
+2020-08-25 17:28:41,723 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:41,724 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:47,433 - tvb - INFO -  TVB start simulation 1631.0
+2020-08-25 17:28:47,682 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:47,683 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:52,692 - tvb - INFO -  TVB start simulation 1634.5
+2020-08-25 17:28:52,947 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:52,947 - tvb - INFO -  TVB receive data
+2020-08-25 17:28:58,757 - tvb - INFO -  TVB start simulation 1638.0
+2020-08-25 17:28:59,017 - tvb - INFO -  TVB end simulation
+2020-08-25 17:28:59,017 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:04,731 - tvb - INFO -  TVB start simulation 1641.5
+2020-08-25 17:29:04,984 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:04,984 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:10,995 - tvb - INFO -  TVB start simulation 1645.0
+2020-08-25 17:29:11,253 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:11,253 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:16,769 - tvb - INFO -  TVB start simulation 1648.5
+2020-08-25 17:29:17,022 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:17,023 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:22,432 - tvb - INFO -  TVB start simulation 1652.0
+2020-08-25 17:29:22,688 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:22,688 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:28,198 - tvb - INFO -  TVB start simulation 1655.5
+2020-08-25 17:29:28,458 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:28,459 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:34,068 - tvb - INFO -  TVB start simulation 1659.0
+2020-08-25 17:29:34,315 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:34,316 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:39,826 - tvb - INFO -  TVB start simulation 1662.5
+2020-08-25 17:29:40,075 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:40,076 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:45,585 - tvb - INFO -  TVB start simulation 1666.0
+2020-08-25 17:29:45,839 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:45,839 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:51,349 - tvb - INFO -  TVB start simulation 1669.5
+2020-08-25 17:29:51,596 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:51,597 - tvb - INFO -  TVB receive data
+2020-08-25 17:29:57,507 - tvb - INFO -  TVB start simulation 1673.0
+2020-08-25 17:29:57,761 - tvb - INFO -  TVB end simulation
+2020-08-25 17:29:57,762 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:03,371 - tvb - INFO -  TVB start simulation 1676.5
+2020-08-25 17:30:03,632 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:03,632 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:08,441 - tvb - INFO -  TVB start simulation 1680.0
+2020-08-25 17:30:08,690 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:08,690 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:13,408 - tvb - INFO -  TVB start simulation 1683.5
+2020-08-25 17:30:13,658 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:13,659 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:18,467 - tvb - INFO -  TVB start simulation 1687.0
+2020-08-25 17:30:18,720 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:18,720 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:25,132 - tvb - INFO -  TVB start simulation 1690.5
+2020-08-25 17:30:25,379 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:25,379 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:30,999 - tvb - INFO -  TVB start simulation 1694.0
+2020-08-25 17:30:31,251 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:31,251 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:36,961 - tvb - INFO -  TVB start simulation 1697.5
+2020-08-25 17:30:37,221 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:37,222 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:43,040 - tvb - INFO -  TVB start simulation 1701.0
+2020-08-25 17:30:43,288 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:43,289 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:49,699 - tvb - INFO -  TVB start simulation 1704.5
+2020-08-25 17:30:49,952 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:49,953 - tvb - INFO -  TVB receive data
+2020-08-25 17:30:56,671 - tvb - INFO -  TVB start simulation 1708.0
+2020-08-25 17:30:56,918 - tvb - INFO -  TVB end simulation
+2020-08-25 17:30:56,918 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:02,628 - tvb - INFO -  TVB start simulation 1711.5
+2020-08-25 17:31:02,878 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:02,878 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:08,588 - tvb - INFO -  TVB start simulation 1715.0
+2020-08-25 17:31:08,845 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:08,846 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:14,659 - tvb - INFO -  TVB start simulation 1718.5
+2020-08-25 17:31:14,908 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:14,908 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:20,624 - tvb - INFO -  TVB start simulation 1722.0
+2020-08-25 17:31:20,878 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:20,879 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:26,991 - tvb - INFO -  TVB start simulation 1725.5
+2020-08-25 17:31:27,239 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:27,240 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:32,952 - tvb - INFO -  TVB start simulation 1729.0
+2020-08-25 17:31:33,203 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:33,203 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:39,013 - tvb - INFO -  TVB start simulation 1732.5
+2020-08-25 17:31:39,268 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:39,268 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:44,177 - tvb - INFO -  TVB start simulation 1736.0
+2020-08-25 17:31:44,455 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:44,455 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:49,264 - tvb - INFO -  TVB start simulation 1739.5
+2020-08-25 17:31:49,511 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:49,511 - tvb - INFO -  TVB receive data
+2020-08-25 17:31:55,222 - tvb - INFO -  TVB start simulation 1743.0
+2020-08-25 17:31:55,475 - tvb - INFO -  TVB end simulation
+2020-08-25 17:31:55,475 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:01,006 - tvb - INFO -  TVB start simulation 1746.5
+2020-08-25 17:32:01,253 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:01,253 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:06,762 - tvb - INFO -  TVB start simulation 1750.0
+2020-08-25 17:32:07,014 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:07,022 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:12,632 - tvb - INFO -  TVB start simulation 1753.5
+2020-08-25 17:32:12,888 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:12,888 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:18,598 - tvb - INFO -  TVB start simulation 1757.0
+2020-08-25 17:32:18,846 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:18,847 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:24,457 - tvb - INFO -  TVB start simulation 1760.5
+2020-08-25 17:32:24,708 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:24,708 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:30,123 - tvb - INFO -  TVB start simulation 1764.0
+2020-08-25 17:32:30,378 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:30,378 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:36,188 - tvb - INFO -  TVB start simulation 1767.5
+2020-08-25 17:32:36,435 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:36,435 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:41,845 - tvb - INFO -  TVB start simulation 1771.0
+2020-08-25 17:32:42,096 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:42,096 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:47,611 - tvb - INFO -  TVB start simulation 1774.5
+2020-08-25 17:32:47,868 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:47,869 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:53,884 - tvb - INFO -  TVB start simulation 1778.0
+2020-08-25 17:32:54,146 - tvb - INFO -  TVB end simulation
+2020-08-25 17:32:54,146 - tvb - INFO -  TVB receive data
+2020-08-25 17:32:59,858 - tvb - INFO -  TVB start simulation 1781.5
+2020-08-25 17:33:00,103 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:00,103 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:05,813 - tvb - INFO -  TVB start simulation 1785.0
+2020-08-25 17:33:06,067 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:06,067 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:11,676 - tvb - INFO -  TVB start simulation 1788.5
+2020-08-25 17:33:11,924 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:11,925 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:17,534 - tvb - INFO -  TVB start simulation 1792.0
+2020-08-25 17:33:17,787 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:17,787 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:23,397 - tvb - INFO -  TVB start simulation 1795.5
+2020-08-25 17:33:23,648 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:23,649 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:29,258 - tvb - INFO -  TVB start simulation 1799.0
+2020-08-25 17:33:29,509 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:29,509 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:35,119 - tvb - INFO -  TVB start simulation 1802.5
+2020-08-25 17:33:35,378 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:35,379 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:41,291 - tvb - INFO -  TVB start simulation 1806.0
+2020-08-25 17:33:41,539 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:41,540 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:47,253 - tvb - INFO -  TVB start simulation 1809.5
+2020-08-25 17:33:47,503 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:47,504 - tvb - INFO -  TVB receive data
+2020-08-25 17:33:53,214 - tvb - INFO -  TVB start simulation 1813.0
+2020-08-25 17:33:53,475 - tvb - INFO -  TVB end simulation
+2020-08-25 17:33:53,476 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:00,086 - tvb - INFO -  TVB start simulation 1816.5
+2020-08-25 17:34:00,334 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:00,334 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:06,644 - tvb - INFO -  TVB start simulation 1820.0
+2020-08-25 17:34:06,895 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:06,895 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:12,005 - tvb - INFO -  TVB start simulation 1823.5
+2020-08-25 17:34:12,263 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:12,264 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:17,273 - tvb - INFO -  TVB start simulation 1827.0
+2020-08-25 17:34:17,520 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:17,521 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:22,331 - tvb - INFO -  TVB start simulation 1830.5
+2020-08-25 17:34:22,581 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:22,581 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:28,191 - tvb - INFO -  TVB start simulation 1834.0
+2020-08-25 17:34:28,446 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:28,446 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:33,255 - tvb - INFO -  TVB start simulation 1837.5
+2020-08-25 17:34:33,501 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:33,501 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:38,310 - tvb - INFO -  TVB start simulation 1841.0
+2020-08-25 17:34:38,557 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:38,558 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:44,468 - tvb - INFO -  TVB start simulation 1844.5
+2020-08-25 17:34:44,724 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:44,724 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:49,634 - tvb - INFO -  TVB start simulation 1848.0
+2020-08-25 17:34:49,879 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:49,879 - tvb - INFO -  TVB receive data
+2020-08-25 17:34:55,589 - tvb - INFO -  TVB start simulation 1851.5
+2020-08-25 17:34:55,835 - tvb - INFO -  TVB end simulation
+2020-08-25 17:34:55,836 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:01,647 - tvb - INFO -  TVB start simulation 1855.0
+2020-08-25 17:35:01,906 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:01,907 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:07,619 - tvb - INFO -  TVB start simulation 1858.5
+2020-08-25 17:35:07,866 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:07,866 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:13,376 - tvb - INFO -  TVB start simulation 1862.0
+2020-08-25 17:35:13,628 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:13,628 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:19,439 - tvb - INFO -  TVB start simulation 1865.5
+2020-08-25 17:35:19,695 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:19,696 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:25,606 - tvb - INFO -  TVB start simulation 1869.0
+2020-08-25 17:35:25,850 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:25,850 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:32,562 - tvb - INFO -  TVB start simulation 1872.5
+2020-08-25 17:35:32,811 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:32,812 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:38,521 - tvb - INFO -  TVB start simulation 1876.0
+2020-08-25 17:35:38,770 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:38,771 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:45,502 - tvb - INFO -  TVB start simulation 1879.5
+2020-08-25 17:35:45,753 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:45,754 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:51,263 - tvb - INFO -  TVB start simulation 1883.0
+2020-08-25 17:35:51,520 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:51,521 - tvb - INFO -  TVB receive data
+2020-08-25 17:35:57,331 - tvb - INFO -  TVB start simulation 1886.5
+2020-08-25 17:35:57,476 - tvb - INFO -  TVB end simulation
+2020-08-25 17:35:57,476 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:03,086 - tvb - INFO -  TVB start simulation 1890.0
+2020-08-25 17:36:03,333 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:03,333 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:08,242 - tvb - INFO -  TVB start simulation 1893.5
+2020-08-25 17:36:08,499 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:08,499 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:15,110 - tvb - INFO -  TVB start simulation 1897.0
+2020-08-25 17:36:15,357 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:15,357 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:21,868 - tvb - INFO -  TVB start simulation 1900.5
+2020-08-25 17:36:22,118 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:22,118 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:28,428 - tvb - INFO -  TVB start simulation 1904.0
+2020-08-25 17:36:28,673 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:28,673 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:34,082 - tvb - INFO -  TVB start simulation 1907.5
+2020-08-25 17:36:34,329 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:34,330 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:39,839 - tvb - INFO -  TVB start simulation 1911.0
+2020-08-25 17:36:40,088 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:40,088 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:45,198 - tvb - INFO -  TVB start simulation 1914.5
+2020-08-25 17:36:45,449 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:45,449 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:50,258 - tvb - INFO -  TVB start simulation 1918.0
+2020-08-25 17:36:50,506 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:50,506 - tvb - INFO -  TVB receive data
+2020-08-25 17:36:56,215 - tvb - INFO -  TVB start simulation 1921.5
+2020-08-25 17:36:56,467 - tvb - INFO -  TVB end simulation
+2020-08-25 17:36:56,467 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:02,184 - tvb - INFO -  TVB start simulation 1925.0
+2020-08-25 17:37:02,428 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:02,429 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:07,838 - tvb - INFO -  TVB start simulation 1928.5
+2020-08-25 17:37:08,085 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:08,085 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:13,796 - tvb - INFO -  TVB start simulation 1932.0
+2020-08-25 17:37:14,052 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:14,053 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:19,062 - tvb - INFO -  TVB start simulation 1935.5
+2020-08-25 17:37:19,310 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:19,311 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:24,920 - tvb - INFO -  TVB start simulation 1939.0
+2020-08-25 17:37:25,183 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:25,184 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:30,193 - tvb - INFO -  TVB start simulation 1942.5
+2020-08-25 17:37:30,438 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:30,438 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:35,447 - tvb - INFO -  TVB start simulation 1946.0
+2020-08-25 17:37:35,694 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:35,694 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:42,005 - tvb - INFO -  TVB start simulation 1949.5
+2020-08-25 17:37:42,255 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:42,255 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:48,165 - tvb - INFO -  TVB start simulation 1953.0
+2020-08-25 17:37:48,412 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:48,412 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:54,022 - tvb - INFO -  TVB start simulation 1956.5
+2020-08-25 17:37:54,269 - tvb - INFO -  TVB end simulation
+2020-08-25 17:37:54,270 - tvb - INFO -  TVB receive data
+2020-08-25 17:37:59,880 - tvb - INFO -  TVB start simulation 1960.0
+2020-08-25 17:38:00,131 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:00,132 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:06,642 - tvb - INFO -  TVB start simulation 1963.5
+2020-08-25 17:38:06,891 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:06,891 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:11,800 - tvb - INFO -  TVB start simulation 1967.0
+2020-08-25 17:38:12,051 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:12,052 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:17,061 - tvb - INFO -  TVB start simulation 1970.5
+2020-08-25 17:38:17,314 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:17,314 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:22,924 - tvb - INFO -  TVB start simulation 1974.0
+2020-08-25 17:38:23,174 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:23,174 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:28,588 - tvb - INFO -  TVB start simulation 1977.5
+2020-08-25 17:38:28,840 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:28,841 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:34,351 - tvb - INFO -  TVB start simulation 1981.0
+2020-08-25 17:38:34,598 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:34,599 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:39,510 - tvb - INFO -  TVB start simulation 1984.5
+2020-08-25 17:38:39,762 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:39,762 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:45,271 - tvb - INFO -  TVB start simulation 1988.0
+2020-08-25 17:38:45,525 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:45,526 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:50,635 - tvb - INFO -  TVB start simulation 1991.5
+2020-08-25 17:38:50,881 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:50,881 - tvb - INFO -  TVB receive data
+2020-08-25 17:38:56,291 - tvb - INFO -  TVB start simulation 1995.0
+2020-08-25 17:38:56,545 - tvb - INFO -  TVB end simulation
+2020-08-25 17:38:56,546 - tvb - INFO -  TVB receive data
+2020-08-25 17:39:01,455 - tvb - INFO -  TVB start simulation 1998.5
+2020-08-25 17:39:01,708 - tvb - INFO -  TVB end simulation
+2020-08-25 17:39:01,709 - tvb - INFO -  TVB finish
+2020-08-25 17:39:01,710 - tvb - INFO - TVB close connection send tag#1$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$
+2020-08-25 17:39:01,710 - tvb - INFO - TVB send check
+2020-08-25 17:39:05,827 - tvb - INFO - TVB send end simulation
+2020-08-25 17:39:05,827 - tvb - INFO - TVB disconnect communication
+2020-08-25 17:39:05,828 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$
+2020-08-25 17:39:05,828 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$
+2020-08-25 17:39:05,828 - tvb - INFO - TVB close connection send tag#1$description#INS-Precision-7540$port#56791$ifname#127.0.1.1$
+2020-08-25 17:39:05,828 - tvb - INFO - TVB send check
+2020-08-25 17:39:05,988 - tvb - INFO - TVB send end simulation
+2020-08-25 17:39:05,988 - tvb - INFO - TVB disconnect communication
+2020-08-25 17:39:05,989 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#56791$ifname#127.0.1.1$
+2020-08-25 17:39:05,989 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#56791$ifname#127.0.1.1$
+2020-08-25 17:39:05,989 - tvb - INFO - TVB close connection receive tag#1$description#INS-Precision-7540$port#45463$ifname#127.0.1.1$
+2020-08-25 17:39:05,989 - tvb - INFO - TVB disconnect communication
+2020-08-25 17:39:05,989 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#45463$ifname#127.0.1.1$
+2020-08-25 17:39:05,989 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#45463$ifname#127.0.1.1$
+2020-08-25 17:39:05,989 - tvb - INFO - TVB close connection receive tag#1$description#INS-Precision-7540$port#46737$ifname#127.0.1.1$
+2020-08-25 17:39:05,989 - tvb - INFO - TVB disconnect communication
+2020-08-25 17:39:05,990 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#46737$ifname#127.0.1.1$
+2020-08-25 17:39:05,990 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#46737$ifname#127.0.1.1$
+2020-08-25 17:39:05,990 - tvb - INFO -  TVB exit

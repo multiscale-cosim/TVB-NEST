@@ -1,0 +1,15 @@
+2020-08-25 16:41:37,779 - tvb_to_nest_master2015 - INFO - Translate SEND: before open_port
+2020-08-25 16:41:37,779 - tvb_to_nest_master2015 - INFO - Translate SEND: after open_port : tag#0$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$
+2020-08-25 16:41:37,872 - tvb_to_nest_master2015 - INFO - Translate SEND: path_file: /home/kusch/Documents/project/co_simulation/TVB-NEST/example/long_simulation//translation/spike_generator/3014.txt
+2020-08-25 16:41:37,872 - tvb_to_nest_master2015 - INFO - Translate RECEIVE: before open_port
+2020-08-25 16:41:37,872 - tvb_to_nest_master2015 - INFO - Translate RECEIVE: after open_port tag#1$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$
+2020-08-25 16:41:37,872 - tvb_to_nest_master2015 - INFO - Translate RECEIVE: path_file: /home/kusch/Documents/project/co_simulation/TVB-NEST/example/long_simulation//translation/spike_generator//../receive_from_tvb/29.txt
+2020-08-25 16:41:37,872 - tvb_to_nest_master2015 - INFO - Translate SEND: before Accepted: ['tag#0$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$', <mpi4py.MPI.Info object at 0x7fc9eb3a09c0>, 0]
+2020-08-25 16:41:38,163 - tvb_to_nest_master2015 - INFO - Translate SEND: Accepted
+2020-08-25 16:41:38,163 - tvb_to_nest_master2015 - INFO - Translate RECEIVE: before accept: ['tag#1$description#INS-Precision-7540$port#50153$ifname#127.0.1.1$', <mpi4py.MPI.Info object at 0x7fc9eb3a09c0>, 0]
+2020-08-25 16:41:38,733 - tvb_to_nest_master2015 - INFO - Translate RECEIVE: after accept
+2020-08-25 16:41:38,733 - tvb_to_nest_master2015 - INFO - Start thread
+2020-08-25 17:39:06,735 - tvb_to_nest_master2015 - INFO - thread join
+2020-08-25 17:39:06,735 - tvb_to_nest_master2015 - INFO - close communicator
+2020-08-25 17:39:06,735 - tvb_to_nest_master2015 - INFO - clean file
+2020-08-25 17:39:06,754 - tvb_to_nest_master2015 - INFO - end
