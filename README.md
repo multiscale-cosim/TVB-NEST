@@ -9,22 +9,24 @@ It should be flexible and scalable to adapt to any networks simulation and run i
 1. [Installation and update](#installation)
     1. [Advice for using the repository](#advice)
     2. [Different Installation](#diff_install)
-2. [Dependencies](#dependencies)
+2. [Example](#example)
+    1. [Mouse Brain](#mouse_brain)
+3. [Dependencies](#dependencies)
     1. [Nest](#dependencies_nest)
     2. [MPI](#dependencies_mpi)
     3. [Python library](#dependencies_py)
-3. [Adaptation to your own usage](#usages)
+4. [Adaptation to your own usage](#usages)
     1. [The management of parameters or change parameters](#usages_1)
     2. [The modification of translation](#usages_2) 
     3. [The modification of Nest configuration](#usages_3)
     4. [The modification of TVB configuration](#usages_4)
-4. [Tests](#tests)
+5. [Tests](#tests)
     1. [How to test the installation](#test_1)
-5. [Cluster](#cluster)
+6. [Cluster](#cluster)
     1. [Deepest](#deepest)
-6. [Future implementation](#future)
-7. [Extension](#extension)
-8. [Files](#files)
+7. [Future implementation](#future)
+8. [Extension](#extension)
+9. [Files](#files)
 
 ## Installation and update :<a name="installalation"></a>
 ### Advice for using the repertory :<a name="advice"></a>
@@ -53,9 +55,29 @@ If you install in your computer, you should look at the configuration file of th
 The installation is not for the moment standardize.\
 For testing your installation, you should look at the section [Test](#tests) or the folder tests.
 
+## Example<a name="example"></a>
+In the folder example, you can find jupyter notebook for having a demonstration of this project and some result of the simulation.
+The [result of the simulation](#short_sim) can help you to understand the structure of folders for saving the output of simulation and to prepare your visualization.
+The structure of the result is defined in the orchestrator file, it can be modified but this organization helps to separate the different modules of the simulation and the logs. 
+
+The example is based on the application of the framework. For the moment, there is only one application.
+#### Mouse Brain<a name="mouse_brain"></a>
+This example is a demonstration of the full-mouse brain with 2 regions simulate with Nest.\
+For running this example, you need to create the full image of singularity which contains all the modules for the jupyter notebook.
+Once you have this image, you should launch the next command of the folder example:
+> singularity run --app jupyter-notebook ../install/singularity/Nest_TVB_full.simg
+
+The jupyter home page will start in your browser and you can launch the jupyter notebook.
+
+This example is composed of 4 parts:
+   1. The explanation of all the parameters of the application
+   2. The running part of the application
+   3. The display of the result of the simulation (short simulation)
+   4. The display of the result of a long simulation
+   
 ## Dependencies<a name="dependencies"></a>
 #### Nest<a name="dependencies_nest"></a>
-the version of Nest is base of Nest 3 is already included in the repertory\
+The version of Nest is base of Nest 3 is already included in the repertory\
 For the dependency of Nest, you should look at this page : https://nest-simulator.readthedocs.io/en/stable/installation/linux_install.html \
 For having the correct configuration parameters of Nest, you should look at this page : https://nest-simulator.readthedocs.io/en/stable/installation/install_options.html \
 I use the next commands for compiling nest : \
@@ -205,53 +227,71 @@ For testing the installation, you need to change the file /tests/init.sh. The pa
 2. Improve the orchestrator for managing communication of MPI and the synchronization between all processes
 
 ## Files<a name="files"></a>
-* doc : Documentation of the project
-    * UML : UML of communication and state of modules
-* example : an example of the usage of  the proof of concept
-    * analyse : the function for analysis of the output of examples
-    * parameter : parameter for the simulation and the data
-        * data_mouse : data from Allen Institute of mouse connectome is composed of the file of the distance between each region and the weight of the connections
-        * test_nest.py : parameter for testing the installation 
-    * test_1 : folder for running example
-        * parameter : parameters of example_1
-    * example_1.ipynb : jupyter notebook for running an example of co-simulation
+* doc: Documentation of the project
+    * UML: UML of communication and state of modules
+* [example](#example): an example of the usage of  the proof of concept
+    * analyse: the function for analysis of the output of examples
+    * parameter: parameter for the simulation and the data
+        * data_mouse: data from Allen Institute of mouse connectome is composed of the file of the distance between each region and the weight of the connections
+        * test_nest.py: parameter for testing the installation 
+    * <a name="short_sim">short_simulation</a>: folder of the result of the short simulation
+        * log: folder contains all the log of the simulation
+        * nest: generated files by the Nest module
+            * labels.csv: the label of the recorder and the type of recording
+            * population_GIDs.dat: the id of the neurons and the type of neurons
+            * spike_detector.txt: the id of spike detector
+            * spike_generator.txt: the id of spike generator
+            * other files : the output of the spike detectors and multimeters
+        * translation: 
+            * receive_from_tvb: contains the MPI port for the connection of TVB to the translator during the simulation
+            * send_to_tvb: contains the MPI port for the connection of TVB to the translator during the simulation
+            * spike_detector: contains the MPI port for the connection of Nest to the translator during the simulation
+            * spike_generator: contains the MPI port for the connection of Nest to the translator during the simulation
+        * tvb: generated files by TVB modules
+            * step_*.npy : the output of the monitor of TVB
+            * step_init.npy: the initialisation value of the node in TVB
+        * init_rates.npy: initialisation of the rate from Nest to TVB
+        * init_spikes.npy: initialisation of spikes from TVB to Nest
+        * parameters: parameters for the simulation
+    * long_simulation: same result but for a longer simulation
+    * [demonstration_mouse_brain.ipynb](#mouse_brain): jupyter notebook for running an example of the application
 * [install](#installation)
     * [deep](#deepest)
-        install.sh : installation on deepest cluster
+        install.sh: installation on deepest cluster
 		Should be installed in /p/project/type1_1/[personaldir]
     * docker
-        create_docker.sh, create_docker_2.sh : create the docker image for the project
-        Nest_TVB.dockerfile, Nest_TVB_2.dockerfile : file of configurations for docker
-        run_images : example of running co-simulation with the image 
+        create_docker.sh, create_docker_2.sh: create the docker image for the project
+        Nest_TVB.dockerfile, Nest_TVB_2.dockerfile: file of configurations for docker
+        run_images: example of running co-simulation with the image 
     * py_venv
-        create_virtual_python.sh : create the virtual environment
+        create_virtual_python.sh: create the virtual environment
     * singularity
-        create_container.sh, create_container_2.sh : create the singularity image for the project
-        Nest_TVB_config.singularity, Nest_TVB_config_2.singularity : file of configurations for singularity
-        create_container_full.sh, Nest_TVB_config_full.singularity : file for the creation of the image for running a jupyter server with the co-simulation
-        run_images : example of running co-simulation with the image 
-* nest-io-dev : the branch of Nest with IO using MPI
+        create_container.sh, create_container_2.sh: create the singularity image for the project
+        Nest_TVB_config.singularity, Nest_TVB_config_2.singularity: file of configurations for singularity
+        create_container_full.sh, Nest_TVB_config_full.singularity: file for the creation of the image for running a jupyter server with the co-simulation
+        run_images: example of running co-simulation with the image 
+* nest-io-dev: the branch of Nest with IO using MPI
 * nest_elephant_nest: file which contains all the kernel of the simulation
-    * Nest : folder contains all the file to configure and launch Nest
-        * run_mpi_nest.sh : run the simulation Zerlaut with MPI ( use by the orchestrator for launch Nest)
-        * simulation_Zerlaut.py : run the Nest part of the application
+    * Nest: folder contains all the file to configure and launch Nest
+        * run_mpi_nest.sh: run the simulation Zerlaut with MPI ( use by the orchestrator for launch Nest)
+        * simulation_Zerlaut.py: run the Nest part of the application
     * orchestrator:
-        * parameters_manager.py : script which manages the parameters ( saving, modify parameters of exploration and link between parameters. )
-        * run_exploration.py : main script of the simulation for the exploration of 1 or 2 parameters with 1 or 2 simulators
+        * parameters_manager.py: script which manages the parameters ( saving, modify parameters of exploration and link between parameters. )
+        * run_exploration.py: main script of the simulation for the exploration of 1 or 2 parameters with 1 or 2 simulators
     * translation: folder contains the translator between TVB and Nest
-        * run_... : for running the different component
-        * nest_to_tvb : for communication between Nest to TVB
-        * tvb_to_nest : for communication between TVB to Nest
-        * science_... : files contain the function to transform spike to rate and opposite
-        * rate_spike : special function use in science based on elephant applications
-        * test_file : all the tests of translators and Nest I/O
+        * run_...: for running the different component
+        * nest_to_tvb: for communication between Nest to TVB
+        * tvb_to_nest: for communication between TVB to Nest
+        * science_...: files contain the function to transform spike to rate and opposite
+        * rate_spike: special function use in science based on elephant applications
+        * test_file: all the tests of translators and Nest I/O
     * TVB
-        *  modify TVB : folder contains file for the interface and the extensions of TVB
-            * Zerlaut.py : model of the Mean Field
-            * noise.py : specific noise for this model
-            * Interface_co_simulation.py : interface can be used only in sequential but allow using intermediate result for the firing rate. (Need to compute Nest before TVB.)
-            * Interface_co_simulation_parallel.py : can be used to compute TVB and Nest in same time
-            * test_interface... : test for the interface with the model of Wong Wang
-        * simulation_Zerlaut.py : the script for the configure and the running of the simulator of TVB
-        * run_mpi_tvb.sh : run the simulation Zerlaut with MPI ( use by the orchestrator for launch TVB )
+        *  modify TVB: folder contains file for the interface and the extensions of TVB
+            * Zerlaut.py: model of the Mean Field
+            * noise.py: specific noise for this model
+            * Interface_co_simulation.py: interface can be used only in sequential but allow using intermediate result for the firing rate. (Need to compute Nest before TVB.)
+            * Interface_co_simulation_parallel.py: can be used to compute TVB and Nest in same time
+            * test_interface...: test for the interface with the model of Wong Wang
+        * simulation_Zerlaut.py: the script for the configure and the running of the simulator of TVB
+        * run_mpi_tvb.sh: run the simulation Zerlaut with MPI ( use by the orchestrator for launch TVB )
 * test_nest: contains all the [test](#tests)   
