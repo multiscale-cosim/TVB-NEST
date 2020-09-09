@@ -40,19 +40,23 @@ def input(path,nb_mpi):
         print(" start to send"); sys.stdout.flush()
         print(" status a tag ",status_.Get_tag() ); sys.stdout.flush()
         if status_.Get_tag() == 0 :
-            id = np.empty(1, dtype='i')
-            print(" receive id ");sys.stdout.flush()
+            # receive list ids
+            size_list = np.empty(1, dtype='i')
+            comm.Recv([size_list, 1, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
+            print("size list id",size_list);sys.stdout.flush()
+            list_id = np.empty(size_list, dtype='i')
+            comm.Recv([list_id, size_list, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
+            print(" id ", list_id);sys.stdout.flush()
             print(" source "+str(status_.Get_source()));sys.stdout.flush()
-            comm.Recv([id, 1, MPI.INT], source=status_.Get_source(), tag=0)
-            print(" id ", id);sys.stdout.flush()
             if count_send % nb_mpi == 0:
                 shape = np.random.randint(0,50,1,dtype='i')*2
                 data = starting+np.random.rand(shape[0])*200
                 data = np.around(np.sort(np.array(data,dtype='d')),decimals=1)
             count_send += 1
-            comm.Send([shape, MPI.INT], dest=status_.Get_source(), tag=id[0])
+            send_shape = np.array(np.concatenate([shape,shape]),dtype ='i')
+            comm.Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
             print(" shape data ",shape);sys.stdout.flush()
-            comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=id[0])
+            comm.Send([data, MPI.DOUBLE], dest=status_.Get_source(), tag=list_id[0])
             print(" send data", data);sys.stdout.flush()
         elif status_.Get_tag() == 1:
             print("end run");sys.stdout.flush()

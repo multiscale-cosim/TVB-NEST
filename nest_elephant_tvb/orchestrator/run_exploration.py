@@ -108,6 +108,12 @@ def run(parameters_file):
             time.sleep(1)
         os.remove(results_path+'/nest/spike_detector.txt.unlock')
         spike_detector = np.loadtxt(results_path+'/nest/spike_detector.txt',dtype=int)
+        # case of one spike detector
+        try :
+            spike_detector = np.array([int(spike_detector)])
+            spike_generator = np.expand_dims(spike_generator,0)
+        except:
+            pass
 
         # print ids of nest population
         print("Ids of different populations of Nest :\n")

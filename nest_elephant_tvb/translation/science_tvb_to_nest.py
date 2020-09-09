@@ -86,7 +86,7 @@ class generate_data:
         elif self.function_translation == 2:
             rate *= self.nb_synapse / self.percentage_shared # rate of poisson generator ( due property of poisson process)
             rate += 1e-12  # avoid rate equals to zeros
-            spike_shared = rates_to_spikes(rate * Hz, time_step[0] * ms, time_step[1] * ms, variation=True)[0]
+            spike_shared = np.round(rates_to_spikes(rate * Hz, time_step[0] * ms, time_step[1] * ms, variation=True)[0],1)
             select = np.random.binomial(n=1,p=self.percentage_shared,size=(self.nb_spike_generator,spike_shared.shape[0]))
             result = []
             for i in np.repeat([spike_shared],self.nb_spike_generator,axis=0)*select :

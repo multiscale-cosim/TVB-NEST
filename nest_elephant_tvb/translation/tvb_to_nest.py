@@ -38,25 +38,24 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
                 time.sleep(0.1)
                 pass
             # Waiting for some processus ask for receive the spikes
-            list_id = np.ones(nb_spike_generator) * -1  # list to link the spike train to the spike detector
-            for nb_neurons in range(nb_spike_generator):
-                id = np.empty(1, dtype='i')
-                for source in source_sending:
-                    comm.Recv([id, 1, MPI.INT], source=source, tag=0)
-                    # create or find the index of the spike generator
-                    if id[0] in list_id:
-                        index = np.where(id[0]==list_id)[0][0]
-                    else:
-                        index = np.where(list_id==-1)[0][0]
-                        list_id[index]=id[0]
-                    # Select the good spike train and send it
-                    data = buffer_spike[0][index]
-                    # logger.info(" TVB to Nest:"+str(data)+" " +str(index))
-                    shape = np.array(data.shape[0], dtype='i')
-                    # firstly send the size of the spikes train
-                    comm.Send([shape, MPI.INT], dest=source, tag=id[0])
-                    # secondly send the spikes train
-                    comm.Send([data, MPI.DOUBLE], dest=source, tag=id[0])
+            shape = np.zeros(nb_spike_generator) * -1  # list to link the spike train to the spike detector
+            for source in source_sending:
+                # receive list ids
+                size_list = np.empty(1, dtype='i')
+                comm.Recv([size_list, 1, MPI.INT], source=source, tag=0, status=status_)
+                list_id = np.empty(size_list, dtype='i')
+                comm.Recv([list_id, size_list, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
+                # Select the good spike train and send it
+                data = buffer_spike[0]
+                # logger.info(" TVB to Nest:"+str(data))
+                for i in range(len(shape)):
+                    shape[i] = data[i].shape[0]
+                send_shape = np.array(np.concatenate(([np.sum(shape)],shape)), dtype='i')
+                # firstly send the size of the spikes train
+                comm.Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
+                # secondly send the spikes train
+                data = np.concatenate(data).astype('d')
+                comm.Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
             logger.info(" end sending:")
         elif  status_.Get_tag() == 1:
             # ending the update of the all the spike train from one processus

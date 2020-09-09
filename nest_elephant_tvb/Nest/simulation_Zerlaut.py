@@ -451,13 +451,13 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
     #Connection proxy to each neurons
     spike_generator=[]
     if cosimulation is not None and cosimulation['co-simulation']:
-        param_spike_dec= {"start": 0.0,
+        param_spike_gen= {"start": 0.0,
                       "stop": time_simulation,
                       "input_from": "mpi",
                       'label': '../translation/spike_generator'
                       }
         nest.CopyModel('spike_generator', 'spike_generator_mpi')
-        nest.SetDefaults("spike_generator_mpi", param_spike_dec)
+        nest.SetDefaults("spike_generator_mpi", param_spike_gen)
         nb_neurons = []
         name_pops = []
         for name_pop, items in dic_layer.items():
