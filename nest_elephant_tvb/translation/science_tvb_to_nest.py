@@ -20,7 +20,7 @@ def toy_rates_to_spikes(rates,t_start,t_stop):
     return times
 
 class generate_data:
-    def __init__(self,path,nb_spike_generator,param):
+    def __init__(self,path,nb_spike_generator,param,function_select=2):
         """
         generate spike train for each neurons
         :param path : path for the logger files
@@ -29,6 +29,7 @@ class generate_data:
         self.percentage_shared = param['percentage_shared'] # percentage of shared rate between neurons
         self.nb_spike_generator = nb_spike_generator        # number of spike generator
         self.nb_synapse = param['nb_synapses']
+        self.function_translation = function_select
 
         np.random.seed(param['seed'])
 
@@ -58,23 +59,42 @@ class generate_data:
     def generate_spike(self,count,time_step,rate):
         """
         generate spike
+        This function are based on the paper : Kuhn, Alexandre, Ad Aertsen, and Stefan Rotter. “Higher-Order Statistics of Input Ensembles and the Response of Simple Model Neurons.” Neural Computation 15, no. 1 (January 2003): 67–101. https://doi.org/10.1162/089976603321043702.
+        DOI: 10.1162/089976603321043702
+        function 1 : Single Interaction Process Model
+        function 2 : Multiple Interaction Process Model
         :param count: the number of step of synchronization between simulators
         :param time_step: the time of synchronization
         :param rate: the input rate of the mean field
         :return:
         """
-        # Compute the rate to spike trains
-        rate *= self.nb_synapse # rate of poisson generator ( due property of poisson process)
-        rate += 1e-12 # avoid rate equals to zeros
-        spike_shared = \
-            rates_to_spikes(rate * self.percentage_shared * Hz,
-                            time_step[0] * ms, time_step[1] * ms, variation=True)[0]
-        spike_generate = np.empty(self.nb_spike_generator, dtype=np.object)
-        for i in range(self.nb_spike_generator):
-            spikes = \
-                rates_to_spikes(rate * (1 - self.percentage_shared) * Hz, time_step[0] * ms, time_step[1] * ms,
-                                variation=True)[0]
-            spike_generate[i] = np.around(np.sort(np.concatenate((spikes, spike_shared))), decimals=1)
-        self.logger.info('rate :'+str(rate)+' spikes :'+str(np.concatenate(spike_generate).shape))
-        return spike_generate
+        if self.function_translation == 1:
+            # Compute the rate to spike trains
+            rate *= self.nb_synapse # rate of poisson generator ( due property of poisson process)
+            rate += 1e-12 # avoid rate equals to zeros
+            spike_shared = \
+                rates_to_spikes(rate * self.percentage_shared * Hz,
+                                time_step[0] * ms, time_step[1] * ms, variation=True)[0]
+            spike_generate = np.empty(self.nb_spike_generator, dtype=np.object)
+            for i in range(self.nb_spike_generator):
+                spikes = \
+                    rates_to_spikes(rate * (1 - self.percentage_shared) * Hz, time_step[0] * ms, time_step[1] * ms,
+                                    variation=True)[0]
+                spike_generate[i] = np.around(np.sort(np.concatenate((spikes, spike_shared))), decimals=1)
+            self.logger.info('rate :'+str(rate)+' spikes :'+str(np.concatenate(spike_generate).shape))
+            return spike_generate
+        elif self.function_translation == 2:
+            rate *= self.nb_synapse / self.percentage_shared # rate of poisson generator ( due property of poisson process)
+            rate += 1e-12  # avoid rate equals to zeros
+            spike_shared = rates_to_spikes(rate * Hz, time_step[0] * ms, time_step[1] * ms, variation=True)[0]
+            select = np.random.binomial(n=1,p=self.percentage_shared,size=(self.nb_spike_generator,spike_shared.shape[0]))
+            result = []
+            for i in np.repeat([spike_shared],self.nb_spike_generator,axis=0)*select :
+                result.append(i[np.where(i!=0)])
+            return result
+
+
+
+
+
 
