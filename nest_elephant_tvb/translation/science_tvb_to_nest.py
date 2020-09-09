@@ -29,7 +29,7 @@ class generate_data:
         self.percentage_shared = param['percentage_shared'] # percentage of shared rate between neurons
         self.nb_spike_generator = nb_spike_generator        # number of spike generator
         self.nb_synapse = param['nb_synapses']
-        self.function_translation = function_select
+        self.function_translation = function_select #TODO add a parameter for this
 
         np.random.seed(param['seed'])
 
