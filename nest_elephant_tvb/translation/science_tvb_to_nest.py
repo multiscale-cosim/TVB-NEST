@@ -92,9 +92,3 @@ class generate_data:
             for i in np.repeat([spike_shared],self.nb_spike_generator,axis=0)*select :
                 result.append(i[np.where(i!=0)])
             return result
-
-
-
-
-
-

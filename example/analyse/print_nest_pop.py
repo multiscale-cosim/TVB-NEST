@@ -182,19 +182,65 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
             plt.subplots_adjust(hspace=0.5)
     plt.show()
 
+def print_spiketrain( begin, end, spikes, size_neurons=0.5):
+        plt.figure(figsize=(20, 20))
+        for i in range(spikes[0].shape[0]):
+            plt.plot(spikes[1][i] - begin, np.repeat(spikes[0][i], spikes[1][i].shape[0]), '.b',
+                     markersize=size_neurons)
+        # plt.xlabel('Time (ms)')
+        # plt.ylabel('Neuron index')
+        plt.xticks([-1,-1.00001],['',''])
+        plt.yticks([-1,-1.000001],['',''])
+        plt.ylim(ymin=np.min(spikes[0])-size_neurons,ymax=np.max(spikes[0])+size_neurons)
+        plt.xlim(xmin=begin,xmax=end)
+        plt.show()
+
+def print_rate(folder_simulation,begin, end,nb_regions ):
+    from example.analyse.get_data import get_rate
+    plt.figure(figsize=(20, 20))
+    result_raw = get_rate(folder_simulation + '/tvb/')[0]  # result of the Raw monitor
+
+    # separate the different variable
+    times = result_raw[0]
+    state_variable = np.concatenate(result_raw[1]).reshape((result_raw[1].shape[0], 7,
+                                                           nb_regions))  # shape : time, state variable, region
+    plt.plot(times, state_variable[:, 1, :] * 1e3)
+    # plt.ylabel('firing rate in Hz')
+    # plt.xlabel('time in ms')
+    # plt.title('firing rate of inhibitory population')
+    plt.xticks([-1, -1.00001], ['', ''])
+    plt.yticks([-1, -1.000001], ['', ''])
+    plt.ylim(ymin=0.0)
+    plt.xlim(xmin=begin, xmax=end)
+
+    plt.figure(figsize=(20, 20))
+    plt.plot(times, state_variable[:, 0, :10] * 1e3)
+    # plt.ylabel('firing rate in Hz')
+    # plt.xlabel('time in ms')
+    # plt.title('firing rate of excitatory population')
+    plt.xticks([-1, -1.00001], ['', ''])
+    plt.yticks([-1, -1.000001], ['', ''])
+    plt.ylim(ymin=0.0)
+    plt.xlim(xmin=begin, xmax=end)
+    plt.show()
+
+
 # Test the function, helping for debugging
 if __name__ == '__main__':
     from example.analyse.get_data import get_data_all
     data = get_data_all('../../example/long_simulation/nest/')
-    param={}
-    param['param_nest']={}
-    param['param_nest']["sim_resolution"]=0.1
-    param['param_tvb_model']={}
-    param['param_tvb_model']['T']=20.0
-    param['param_nest_topology']={}
-    param['param_nest_topology']["percentage_inhibitory"] =0.2
-    param['param_nest_topology']["nb_neuron_by_region"] =1000
-    print_nest_pop(param, 0.0, 2000.0,data['pop_1_ex'],data['pop_1_in'],
-               V_ex=data['pop_1_ex_VM'],V_in=data['pop_1_in_VM'],
-               W_ex=data['pop_1_ex_W'],W_in=data['pop_1_in_W'],
-                histogram=True)
+    print_rate('../../example/long_simulation/',0.0,2000.0,104)
+    # print_spiketrain(50.0,2000.0,data['pop_1_ex'],10.0)
+    # print_spiketrain(30.0,1950.0,data['pop_2_ex'],10.0)
+    # param={}
+    # param['param_nest']={}
+    # param['param_nest']["sim_resolution"]=0.1
+    # param['param_tvb_model']={}
+    # param['param_tvb_model']['T']=20.0
+    # param['param_nest_topology']={}
+    # param['param_nest_topology']["percentage_inhibitory"] =0.2
+    # param['param_nest_topology']["nb_neuron_by_region"] =1000
+    # print_nest_pop(param, 0.0, 2000.0,data['pop_1_ex'],data['pop_1_in'],
+    #            V_ex=data['pop_1_ex_VM'],V_in=data['pop_1_in_VM'],
+    #            W_ex=data['pop_1_ex_W'],W_in=data['pop_1_in_W'],
+    #             histogram=True)

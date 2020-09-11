@@ -10,6 +10,7 @@ import logging
 import json
 import time
 import pathlib
+from timer.Timer import Timer
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
@@ -22,21 +23,27 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
     :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
+    timer_send = Timer(5,1000)
+    timer_send.start(0)
     # initialisation variable before the loop
     status_ = MPI.Status()
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the communication
     check = np.empty(1,dtype='b')
+    timer_send.stop(0)
     while True: # FAT END POINT
+        timer_send.start(1)
         for source in source_sending:
             comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
         logger.info(" Get check : status : " +str(status_.Get_tag()))
-
+        timer_send.stop(1)
         if status_.Get_tag() == 0:
             logger.info(" TVB to Nest: start to send ")
             # wait until the data are ready to use
+            timer_send.start(2)
             while status_data[0] != 0 and status_data[0] != 2: # FAT END POINT
                 time.sleep(0.1)
                 pass
+            timer_send.change(2,3)
             # Waiting for some processus ask for receive the spikes
             shape = np.zeros(nb_spike_generator) * -1  # list to link the spike train to the spike detector
             for source in source_sending:
@@ -57,6 +64,7 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
                 data = np.concatenate(data).astype('d')
                 comm.Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
             logger.info(" end sending:")
+            timer_send.stop(3)
         elif  status_.Get_tag() == 1:
             # ending the update of the all the spike train from one processus
             logger.info(" TVB to Nest end sending ")
@@ -70,9 +78,12 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
             break
         else:
             raise Exception("bad mpi tag : "+str(status_.Get_tag()))
+    timer_send.start(0)
     logger.info('communication disconnect')
     comm.Disconnect()
     logger.info('end thread')
+    timer_send.stop(0)
+    timer_send.save(path_config+'/../../'+logger.name+'.npy')
     return
 
 
@@ -85,33 +96,43 @@ def receive(logger,generator,status_data,buffer_spike, comm):
     :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
+    timer_receive = Timer(6,1000)
+    timer_receive.start(0)
     # Open the MPI port connection
     status_ = MPI.Status()
     source_sending = np.arange(0,comm.Get_remote_size(),1)# list of all the process for the commmunication
+    timer_receive.stop(0)
     while True: # FAT END POINT
         # Send to all the confirmation of the processus can send data
         requests=[]
         logger.info(" TVB to Nest: wait receive ")
+        timer_receive.start(1)
         for source in source_sending:
             requests.append(comm.isend(True,dest=source,tag=0))
         MPI.Request.Waitall(requests)
+        timer_receive.change(1,2)
         logger.info(" TVB to Nest: receive all")
         # get the starting and ending time of the simulation to translate
         time_step = np.empty(2, dtype='d')
         comm.Recv([time_step, 2, MPI.DOUBLE], source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status_)
         logger.info(" TVB to Nest: get time_step "+str(time_step)+" status : " + str(status_.Get_tag()))
+        timer_receive.stop(2)
         if status_.Get_tag() == 0:
+            timer_receive.start(3)
             #  Get the size of the data
             size = np.empty(1, dtype='i')
             comm.Recv([size, 1, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
             #  Get the rate
             rate = np.empty(size[0], dtype='d')
             comm.Recv([rate, size[0], MPI.DOUBLE], source=status_.Get_source(), tag=0, status=status_)
+            timer_receive.change(3,4)
             spike_generate = generator.generate_spike(0,time_step,rate)
+            timer_receive.change(4,5)
             # Wait for lock to be set to False
             while status_data[0] == 1 and status_data[0] == 2:
                 time.sleep(0.1)
                 pass
+            timer_receive.stop(5)
             # Set lock to true and put the data in the shared buffer
             buffer_spike[0] = spike_generate
             with lock_status:
@@ -122,9 +143,12 @@ def receive(logger,generator,status_data,buffer_spike, comm):
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
+    timer_receive.start(0)
     logger.info('communication disconnect')
     comm.Disconnect()
     logger.info('end thread')
+    timer_receive.stop(0)
+    timer_receive.save(path_config+'/../../'+logger.name+'.npy')
     return
 
 
@@ -160,6 +184,8 @@ if __name__ == "__main__":
         print('missing argument')
         exit (1)
 
+    timer_master = Timer(1,10)
+    timer_master.start(0)
     # Parse arguments
     path_config = sys.argv[1]
     id_first_spike_detector = int(sys.argv[2])
@@ -219,6 +245,7 @@ if __name__ == "__main__":
     pathlib.Path(path_to_files_receive + ".unlock").touch()
 
     ############################################
+    timer_master.change(0,0)
     # accept connections
     logger_master.info('Translate SEND: before Accepted: '+ str([port_send, info, root]))
     comm_send = MPI.COMM_WORLD.Accept(port_send, info, root)
@@ -228,7 +255,7 @@ if __name__ == "__main__":
     comm_receive = MPI.COMM_WORLD.Accept(port_receive, info, root)
     logger_master.info('Translate RECEIVE: after accept')
     ##############################################
-
+    timer_master.change(0,0)
 
     logger_send = create_logger(path_config, 'tvb_to_nest_send'+str(id_first_spike_detector), log_level)
     logger_receive = create_logger(path_config, 'tvb_to_nest_receive'+str(id_first_spike_detector), log_level)
@@ -239,11 +266,13 @@ if __name__ == "__main__":
     # start the threads
     # FAT END POINT
     logger_master.info('Start thread')
+    timer_master.change(0,0)
     th_receive.start()
     th_send.start()
     th_receive.join()
     th_send.join()
     logger_master.info('thread join')
+    timer_master.change(0,0)
     MPI.Close_port(port_send)
     MPI.Close_port(port_receive)
     logger_master.info('close communicator')
@@ -255,3 +284,5 @@ if __name__ == "__main__":
         os.remove(path_send)
     os.remove(path_to_files_receive)
     logger_master.info('end')
+    timer_master.stop(0)
+    timer_master.save(path_config+'/../../'+logger_master.name+'.npy')

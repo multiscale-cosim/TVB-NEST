@@ -10,6 +10,7 @@ from mpi4py import MPI
 from threading import Thread, Lock
 import logging
 from nest_elephant_tvb.translation.science_nest_to_tvb import store_data,analyse_data
+from timer.Timer import Timer
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
@@ -22,19 +23,25 @@ def receive(logger,store,status_data,buffer, comm):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
+    timer_receive = Timer(4,1000)
+    timer_receive.start(0)
     # initialise variables for the loop
     status_ = MPI.Status() # status of the different message
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
     check = np.empty(1,dtype='b')
     count=0
+    timer_receive.stop(0)
     while True: # FAT END POINT
         # send the confirmation of the process can send data
         requests=[]
         logger.info(" Nest to TVB : wait all")
+        timer_receive.start(1)
         for source in source_sending:
             comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
+        timer_receive.stop(1)
 
         if status_.Get_tag() == 0:
+            timer_receive.start(2)
             logger.info(" Nest to TVB : start to receive")
             #  Get the data/ spike
             for source in source_sending:
@@ -44,6 +51,7 @@ def receive(logger,store,status_data,buffer, comm):
                 data = np.empty(shape[0], dtype='d')
                 comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
                 store.add_spikes(count,data)
+            timer_receive.change(2,3)
             while status_data[0] != 1 and status_data[0] != 2: # FAT END POINT
                 time.sleep(0.1)
                 pass
@@ -53,6 +61,7 @@ def receive(logger,store,status_data,buffer, comm):
             with lock_status: # FAT END POINT
                 if status_data[0] != 2:
                     status_data[0] = 0
+            timer_receive.stop(3)
         elif status_.Get_tag() == 1:
             logger.info("Nest to TVB : receive end " + str(count))
             count += 1
@@ -63,10 +72,12 @@ def receive(logger,store,status_data,buffer, comm):
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
-
+    timer_receive.start(0)
     logger.info('communication disconnect')
     comm.Disconnect()
     logger.info('end thread')
+    timer_receive.stop(0)
+    timer_receive.save(path+logger.name+'.npy')
     return
 
 
@@ -79,23 +90,30 @@ def send(logger,analyse,status_data,buffer, comm):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
+    timer_send = Timer(5,1000)
+    timer_send.start(0)
     count=0
     status_ = MPI.Status()
+    timer_send.stop(0)
     while True: # FAT END POINT
         # wait until the translator accept the connections
         accept = False
         logger.info("Nest to TVB : wait to send " )
+        timer_send.start(1)
         while not accept:
             req = comm.irecv(source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG)
             accept = req.wait(status_)
-
+        timer_send.stop(1)
         logger.info(" Nest to TVB : send data status : " +str(status_.Get_tag()))
         if status_.Get_tag() == 0:
             # send the rate when there ready
+            timer_send.start(2)
             while status_data[0] != 0: # FAT END POINT
                 time.sleep(0.1)
                 pass
+            timer_send.change(2,3)
             times,data=analyse.analyse(count,buffer[0])
+            timer_send.change(3,4)
             logger.info("Nest to TVB : send data :"+str(np.sum(data)) )
             # time of stating and ending step
             comm.Send([times, MPI.DOUBLE], dest=status_.Get_source(), tag=0)
@@ -107,6 +125,7 @@ def send(logger,analyse,status_data,buffer, comm):
             with lock_status:
                 if status_data[0] != 2:
                     status_data[0] = 1
+            timer_send.stop(4)
         elif status_.Get_tag() == 1:
             # disconnect when everything is ending
             with lock_status:
@@ -115,9 +134,12 @@ def send(logger,analyse,status_data,buffer, comm):
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
         count+=1
+    timer_send.start(0)
     logger.info('communication disconnect')
     comm.Disconnect()
     logger.info('end thread')
+    timer_send.stop(0)
+    timer_send.save(path+logger.name+'.npy')
     return
 
 def create_logger(path,name, log_level):
@@ -148,6 +170,9 @@ def create_logger(path,name, log_level):
 
 if __name__ == "__main__":
     import sys
+    from timer.Timer import Timer
+    timer_main = Timer(1,10)
+    timer_main.start(0)
 
     if len(sys.argv)!=4:
         print('incorrect number of arguments')
@@ -202,6 +227,7 @@ if __name__ == "__main__":
     pathlib.Path(path_to_files_send+'.unlock').touch()
     logger_master.info('Translate SEND: path_file: ' + path_to_files_send);sys.stdout.flush()
     ##############
+    timer_main.change(0,0)
     #############
     # Wait until connection
     logger_master.info('Waiting communication')
@@ -209,6 +235,7 @@ if __name__ == "__main__":
     comm_sender = MPI.COMM_WORLD.Accept(port_send, info, root)
     logger_master.info('get communication and start thread')
     #############
+    timer_main.change(0,0)
 
     logger_receive = create_logger(path, 'nest_to_tvb_receive'+str(id_spike_detector), level_log)
     logger_send = create_logger(path, 'nest_to_tvb_send'+str(id_spike_detector), level_log)
@@ -219,10 +246,12 @@ if __name__ == "__main__":
     # start the threads
     # FAT END POINT
     logger_master.info('Start thread')
+    timer_main.change(0,0)
     th_receive.start()
     th_send.start()
     th_receive.join()
     th_send.join()
+    timer_main.change(0,0)
     logger_master.info('thread join')
 
     # close port
@@ -237,3 +266,5 @@ if __name__ == "__main__":
     os.remove(path_to_files_receive)
     os.remove(path_to_files_send)
     logger_master.info('end')
+    timer_main.stop(0)
+    timer_main.save(path+logger_master.name+'.npy')
