@@ -13,7 +13,7 @@ def slidding_window(data,width):
     :return: state variable of the mean field
     """
     res = np.zeros((data.shape[0]-width,width))
-    res [:,:] = data[[[ i+j for i in range(width) ] for j in range(data.shape[0]-width)]]
+    res [:,:] = np.squeeze(data[np.array([[ i+j for i in range(width) ] for j in range(data.shape[0]-width)])])
     return res.mean(axis=1)
 
 class store_data:
