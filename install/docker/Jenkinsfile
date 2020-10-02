@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        FULL_DOCKER_IMAGE_NAME = 'docker-repository.codemart.ro/tvb-nest'
+        VERSION_TAG = 'mrs'
+    }
+
+    stages {
+        stage('Build docker image'){
+            steps {
+                script {
+                    sh 'curl https://raw.githubusercontent.com/the-virtual-brain/tvb-multiscale/nest3/docker/common/Dockerfile -o Dockerfile'
+
+                    def dockerfile = './Dockerfile'
+                    def dockerImage = docker.build("${FULL_DOCKER_IMAGE_NAME}", "-f ${dockerfile} --build-arg NEST_REPO_URL=https://github.com/sdiazpier/nest-simulator.git --build-arg BRANCH=nest-io-dev --build-arg TVB_ROOT_BRANCH=master .")
+                    dockerImage.push('${VERSION_TAG}')
+                }
+            }
+        }
+        stage ('Run tests in Python 3') {
+            agent {
+                docker {
+                    image '${FULL_DOCKER_IMAGE_NAME}:${VERSION_TAG}'
+                }
+            }
+            steps {
+                sh '''#!/bin/bash
+                    source /home/docker/env/neurosci/bin/activate
+                    python tests/run_co-sim_test.py ./tests/test_docker/ 4 4 false
+                    exit 0
+                '''
+                zip archive: true, dir: './tests/test_docker/', glob: '', zipFile: 'test_docker_results.zip'
+            }
+        }
+    }
+
+    post {
+        changed {
+            mail to: 'paula.popa@codemart.ro',
+            subject: "Jenkins Pipeline ${currentBuild.fullDisplayName} changed status",
+            body: """
+                Result: ${currentBuild.result}
+                Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'
+                Check console output at ${env.BUILD_URL}"""
+        }
+
+        success {
+            echo 'Build finished successfully'
+        }
+    }
+}
