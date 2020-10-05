@@ -279,6 +279,7 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
 if __name__ == '__main__':
     # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/10000_7/_g_1.0_mean_I_ext_0.0/')
     dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/5/_g_1.0_mean_I_ext_0.0/')
     # print_data_time(dict_time,index[0],index[1])
     print_tree_data(dict_time,index[0],index[1])
     print('end')

@@ -23,7 +23,7 @@ def receive(logger,store,status_data,buffer, comm):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    timer_receive = Timer(4,1000)
+    timer_receive = Timer(5,1000)
     timer_receive.start(0)
     # initialise variables for the loop
     status_ = MPI.Status() # status of the different message
@@ -42,16 +42,19 @@ def receive(logger,store,status_data,buffer, comm):
 
         if status_.Get_tag() == 0:
             timer_receive.start(2)
+            wait = 0
             logger.info(" Nest to TVB : start to receive")
             #  Get the data/ spike
             for source in source_sending:
                 comm.Send([np.array(True,dtype='b'),MPI.BOOL],dest=source,tag=0)
                 shape = np.empty(1, dtype='i')
                 comm.Recv([shape, 1, MPI.INT], source=source, tag=0, status=status_)
+                if wait == 0:
+                    timer_receive.change(2,3)
                 data = np.empty(shape[0], dtype='d')
                 comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
                 store.add_spikes(count,data)
-            timer_receive.change(2,3)
+            timer_receive.change(3,4)
             while status_data[0] != 1 and status_data[0] != 2: # FAT END POINT
                 time.sleep(0.1)
                 pass
@@ -61,7 +64,7 @@ def receive(logger,store,status_data,buffer, comm):
             with lock_status: # FAT END POINT
                 if status_data[0] != 2:
                     status_data[0] = 0
-            timer_receive.stop(3)
+            timer_receive.stop(4)
         elif status_.Get_tag() == 1:
             logger.info("Nest to TVB : receive end " + str(count))
             count += 1
