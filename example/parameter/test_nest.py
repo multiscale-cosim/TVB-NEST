@@ -122,7 +122,7 @@ param_nest_connection={
     # path for the distance matrix
     'path_distance':path+'/distance.npy',
     # path for the center of the node
-    'path_centers':path+'/centers.txt',
+    'path_centers':path+'/centres.txt',
     # path for the distance matrix
     'path_region_labels':path+'/region_labels.txt',
     #velocity of transmission in m/s

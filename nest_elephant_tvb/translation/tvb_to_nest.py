@@ -14,7 +14,7 @@ from timer.Timer import Timer
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
-def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
+def send(logger,id_first_spike_detector,status_data,buffer_spike, comm):
     '''
     the sending part of the translator
     :param logger : logger
@@ -45,7 +45,6 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
                 pass
             timer_send.change(2,3)
             # Waiting for some processus ask for receive the spikes
-            shape = np.zeros(nb_spike_generator) * -1  # list to link the spike train to the spike detector
             for source in source_sending:
                 # receive list ids
                 size_list = np.empty(1, dtype='i')
@@ -53,10 +52,13 @@ def send(logger,nb_spike_generator,status_data,buffer_spike, comm):
                 list_id = np.empty(size_list, dtype='i')
                 comm.Recv([list_id, size_list, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
                 # Select the good spike train and send it
-                data = buffer_spike[0]
                 # logger.info(" TVB to Nest:"+str(data))
-                for i in range(len(shape)):
-                    shape[i] = data[i].shape[0]
+                logger.info("rank "+str(source)+" lits_id "+str(list_id))
+                data = []
+                shape = []
+                for i in list_id:
+                    shape += [buffer_spike[0][i-id_first_spike_detector].shape[0]]
+                    data += [buffer_spike[0][i-id_first_spike_detector]]
                 send_shape = np.array(np.concatenate(([np.sum(shape)],shape)), dtype='i')
                 # firstly send the size of the spikes train
                 comm.Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
@@ -260,7 +262,7 @@ if __name__ == "__main__":
     logger_send = create_logger(path_config, 'tvb_to_nest_send'+str(id_first_spike_detector), log_level)
     logger_receive = create_logger(path_config, 'tvb_to_nest_receive'+str(id_first_spike_detector), log_level)
     # create the thread for receive and send data
-    th_send = Thread(target=send, args=(logger_send,nb_spike_generator,status_data,buffer_spike, comm_send))
+    th_send = Thread(target=send, args=(logger_send,id_first_spike_detector,status_data,buffer_spike, comm_send))
     th_receive = Thread(target=receive, args=(logger_receive,generator,status_data,buffer_spike, comm_receive ))
 
     # start the threads
