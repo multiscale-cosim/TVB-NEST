@@ -6,6 +6,7 @@ logging.getLogger('numba').setLevel(logging.WARNING)
 logging.getLogger('tvb').setLevel(logging.ERROR)
 
 import tvb.simulator.lab as lab
+from tvb.datatypes.sensors import SensorsInternal
 import numpy.random as rgn
 import numpy as np
 from mpi4py import MPI
@@ -15,6 +16,7 @@ import time
 import nest_elephant_tvb.Tvb.modify_tvb.noise as my_noise
 import nest_elephant_tvb.Tvb.modify_tvb.Zerlaut as Zerlaut
 from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import Interface_co_simulation
+from nest_elephant_tvb.Tvb.helper_function_zerlaut import findVec
 
 
 def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,cosim=None):
@@ -87,12 +89,24 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
         centers = np.loadtxt(param_tvb_connection['path_centers'])
     else:
         centers = np.array([])
+    if 'orientation' in param_tvb_connection.keys() and param_tvb_connection['orientation']:
+        orientation = []
+        for i in np.transpose(centers):
+             orientation.append(findVec(i,np.mean(centers,axis=1)))
+        orientation = np.array(orientation)
+    else:
+       orientation = None
+    if 'path_cortical' in param_tvb_connection.keys():
+        cortical = np.load(param_tvb_connection['path_cortical'])
+    else:
+        cortical=None
     connection = lab.connectivity.Connectivity(number_of_regions=nb_region,
-                                                   tract_lengths=tract_lengths[:nb_region,:nb_region],
-                                                   weights=weights[:nb_region,:nb_region],
+                                               tract_lengths=tract_lengths[:nb_region,:nb_region],
+                                               weights=weights[:nb_region,:nb_region],
                                                region_labels=region_labels,
-                                               centres=centers
-                                               )
+                                               centres=centers.T,
+                                               cortical=cortical,
+                                               orientations=orientation)
     # if 'normalised' in param_tvb_connection.keys() or param_tvb_connection['normalised']:
     #     connection.weights = connection.weights / np.sum(connection.weights, axis=0)
     connection.speed = np.array(param_tvb_connection['velocity'])
@@ -126,6 +140,14 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
             variables_of_interest=np.array(param_tvb_monitor['parameter_Bold']['variables_of_interest']),
             period=param_tvb_monitor['parameter_Bold']['period'])
         monitors.append(monitor_Bold)
+    if param_tvb_monitor['SEEG']:
+        sensor = SensorsInternal().from_file(param_tvb_monitor['parameter_SEEG']['path'])
+        projection_matrix = param_tvb_monitor['parameter_SEEG']['scaling_projection']/np.array(
+            [np.linalg.norm(np.expand_dims(i, 1) - centers[:, cortical], axis=0) for i in sensor.locations])
+        np.save(param_tvb_monitor['path_result']+'/projection.npy',projection_matrix)
+        monitors.append(lab.monitors.iEEG.from_file(
+            param_tvb_monitor['parameter_SEEG']['path'],
+            param_tvb_monitor['path_result']+'/projection.npy'))
     if cosim is not None:
         # special monitor for MPI
         monitor_IO = Interface_co_simulation(
@@ -133,6 +155,7 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
            time_synchronize=cosim['time_synchronize']
             )
         monitors.append(monitor_IO)
+
 
     #initialize the simulator:
     simulator = lab.simulator.Simulator(model = model, connectivity = connection,
@@ -152,7 +175,7 @@ def run_simulation(simulator, time, parameter_tvb):
     :param parameter_tvb: the parameter for the simulator
     '''
     # check how many monitor it's used
-    nb_monitor = parameter_tvb['Raw'] + parameter_tvb['TemporalAverage'] + parameter_tvb['Bold']
+    nb_monitor = parameter_tvb['Raw'] + parameter_tvb['TemporalAverage'] + parameter_tvb['Bold'] + parameter_tvb['SEEG']
     # initialise the variable for the saving the result
     save_result =[]
     for i in range(nb_monitor):
@@ -245,7 +268,7 @@ def run_mpi(path):
                      })
     # configure for saving result of TVB
     # check how many monitor it's used
-    nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold']
+    nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold'] + param_tvb_monitor['SEEG']
     # initialise the variable for the saving the result
     save_result =[]
     for i in range(nb_monitor): # the input output monitor
