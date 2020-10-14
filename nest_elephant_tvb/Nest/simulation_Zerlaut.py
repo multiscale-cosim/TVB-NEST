@@ -564,7 +564,7 @@ def simulate_mpi_co_simulation(time_synch,end,logger):
     """
     # Simulation
     if nest.Rank() == 0:
-        timer_sim = Timer(1,1000)
+        timer_sim = Timer(1,100000)
         timer_sim.start(0)
     count = 0.0
     logger.info("Nest Prepare")

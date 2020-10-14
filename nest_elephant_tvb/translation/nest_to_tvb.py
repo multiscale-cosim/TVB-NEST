@@ -23,7 +23,7 @@ def receive(logger,store,status_data,buffer, comm):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    timer_receive = Timer(5,1000)
+    timer_receive = Timer(5,100000)
     timer_receive.start(0)
     # initialise variables for the loop
     status_ = MPI.Status() # status of the different message
@@ -93,7 +93,7 @@ def send(logger,analyse,status_data,buffer, comm):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    timer_send = Timer(5,1000)
+    timer_send = Timer(5,100000)
     timer_send.start(0)
     count=0
     status_ = MPI.Status()

@@ -243,7 +243,7 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
         trace.marker.pad.update({'t':70.0})
         fig.add_trace(trace, col = i+1, row = 1)
 
-    fig.update_layout(height=1000, width=1800, title_text="Simulation 20 neurons",uniformtext_minsize=50,font={'size':40})
+    fig.update_layout(height=1100, width=1800, title_text="Simulation 10000 neurons MPI=8 time_syn=3.5",uniformtext_minsize=50,font={'size':40})
     fig.update_layout(uniformtext = dict(minsize = 20,mode= 'hide'))
     fig.show()
 
@@ -278,8 +278,9 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
 
 if __name__ == '__main__':
     # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/10000_7/_g_1.0_mean_I_ext_0.0/')
-    dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10/_g_1.0_mean_I_ext_0.0/')
-    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/5/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/8/_g_1.0_mean_I_ext_0.0/')
+    dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.5/_g_1.0_mean_I_ext_0.0/')
     # print_data_time(dict_time,index[0],index[1])
     print_tree_data(dict_time,index[0],index[1])
     print('end')

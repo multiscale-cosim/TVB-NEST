@@ -23,7 +23,7 @@ def send(logger,id_first_spike_detector,status_data,buffer_spike, comm):
     :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    timer_send = Timer(5,1000)
+    timer_send = Timer(5,100000)
     timer_send.start(0)
     # initialisation variable before the loop
     status_ = MPI.Status()
@@ -98,7 +98,7 @@ def receive(logger,generator,status_data,buffer_spike, comm):
     :param buffer_spike: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    timer_receive = Timer(6,1000)
+    timer_receive = Timer(6,100000)
     timer_receive.start(0)
     # Open the MPI port connection
     status_ = MPI.Status()

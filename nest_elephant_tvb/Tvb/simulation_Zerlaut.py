@@ -19,7 +19,7 @@ from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import In
 from nest_elephant_tvb.Tvb.helper_function_zerlaut import findVec
 
 from timer.Timer import Timer
-timer_tvb = Timer(7,1000)
+timer_tvb = Timer(7,100000)
 
 def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,cosim=None):
     '''
