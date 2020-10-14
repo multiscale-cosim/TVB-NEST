@@ -30,7 +30,7 @@ pipeline {
                     python tests/run_co-sim_test.py ./tests/test_docker/ 4 4 false
                     exit 0
                 '''
-                zip archive: true, dir: './tests/test_docker/', glob: '', zipFile: 'test_docker_results.zip'
+                zip archive: true, dir: 'tests/test_docker/', glob: '', zipFile: 'test_docker_results.zip'
             }
         }
     }
