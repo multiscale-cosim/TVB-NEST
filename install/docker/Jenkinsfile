@@ -10,10 +10,10 @@ pipeline {
         stage('Build docker image'){
             steps {
                 script {
-                    sh 'curl https://raw.githubusercontent.com/the-virtual-brain/tvb-multiscale/nest3/docker/common/Dockerfile -o Dockerfile'
+                    sh 'curl https://raw.githubusercontent.com/the-virtual-brain/tvb-multiscale/common-docker/docker/common/Dockerfile -o Dockerfile'
 
                     def dockerfile = './Dockerfile'
-                    def dockerImage = docker.build("${FULL_DOCKER_IMAGE_NAME}", "-f ${dockerfile} --build-arg NEST_REPO_URL=https://github.com/sdiazpier/nest-simulator.git --build-arg BRANCH=nest-io-dev --build-arg TVB_ROOT_BRANCH=master .")
+                    def dockerImage = docker.build("${FULL_DOCKER_IMAGE_NAME}", "-f ${dockerfile} --build-arg NEST_REPO_URL=https://github.com/sdiazpier/nest-simulator.git --build-arg NEST_BRANCH=nest-io-dev --build-arg TVB_ROOT_BRANCH=master .")
                     dockerImage.push('${VERSION_TAG}')
                 }
             }
@@ -27,10 +27,15 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     source /home/docker/env/neurosci/bin/activate
-                    python tests/run_co-sim_test.py ./tests/test_docker/ 4 4 false
+                    export workspace=$PWD
+                    cp -r * /home/docker/packages/tvb-nest
+                    cd /home/docker/packages/tvb-nest
+                    pytest --cov-config .coveragerc --cov=nest_elephant_tvb tests/suite --cov-branch --cov-report xml:tvb_nest_coverage.xml --junitxml=tvb_nest_test_results.xml
+                    cp *.xml "$workspace"
                     exit 0
                 '''
-                zip archive: true, dir: 'tests/test_docker/', glob: '', zipFile: 'test_docker_results.zip'
+                junit 'tvb_nest_test_results.xml'
+                step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'tvb_nest_coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
             }
         }
     }
