@@ -200,6 +200,7 @@ def analyse_translation_nest_to_tvb(index,master,send,receive):
     receive_node.addNode('wait for<br>receiving<br>message', values=remove_NAN(time_value_receive[2,:]))
     receive_node.addNode('receive data', values = remove_NAN(time_value_receive[3,:]))
     receive_node.addNode('wait the thread send', values = remove_NAN(time_value_receive[4,:]))
+    receive_node.addNode('store data', values = remove_NAN(time_value_receive[5,:]))
     receive_node.addNode('end receive thread', time_value_receive[0,1])
     simulation.adds(send_node,receive_node)
     translate.adds(initialisation,simulation,end)
