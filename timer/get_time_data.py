@@ -56,7 +56,7 @@ def get_time(array):
 
 def get_nest_time(array):
     diff = np.diff(array)
-    return [diff[:,0],diff[:,1],diff[:,2],diff[:,3]]
+    return [diff[:,i] for i in range(diff.shape[1])]
 
 def remove_NAN(array):
     return array[np.where(np.logical_not(np.isnan(array)))]
@@ -71,9 +71,18 @@ def get_data(path):
     for file_name_full in os.listdir(path+'/nest/'):
         filename, file_extension = os.path.splitext(file_name_full)
         if file_extension == '.txt':
-            if filename != 'spike_detector' and filename != 'spike_generator':
-                data_file = np.loadtxt(path+'/nest/'+file_name_full,dtype=np.str,delimiter=';')
-                data['nest_'+filename] = np.char.replace(data_file, ',', '.').astype(np.float)
+            if filename != 'spike_detector' and filename != 'spike_generator' :
+                if filename == 'timer_0':
+                    data_file = np.loadtxt(path+'/nest/'+file_name_full,dtype=np.str,delimiter=';')
+                    data['nest_'+filename] = np.char.replace(data_file, ',', '.').astype(np.float)
+                elif filename == 'timer_input_0':
+                    data_file = np.loadtxt(path+'/nest/'+file_name_full,skiprows=1,dtype=np.str,delimiter=';')
+                    data['nest_'+filename] = np.char.replace(data_file, ',', '.').astype(np.float)
+                    data_file = np.loadtxt(path+'/nest/'+file_name_full,max_rows=1,dtype=np.str,delimiter=';')
+                    data['nest_'+filename+'_init'] = np.char.replace(data_file, ',', '.').astype(np.float)
+                elif  filename == 'timer_io_0':
+                    data_file = np.loadtxt(path+'/nest/'+file_name_full,dtype=np.str,delimiter=';')
+                    data['nest_'+filename] = np.char.replace(data_file, ',', '.').astype(np.float)
     return data
 
 def analyse_tvb(tvb):
@@ -93,11 +102,14 @@ def analyse_tvb(tvb):
     tvb_node.adds(init_tvb,simulation_tvb,end_tvb)
     return tvb_node
 
-def analyse_nest(nest,nest_init,nest_sim,nest_timer):
+def analyse_nest(nest,nest_init,nest_sim,nest_timer,nest_timer_input_init,nest_timer_input,nest_timer_io):
     timer_value_nest = get_time(nest)
     timer_value_nest_init = get_time(nest_init)
     timer_value_nest_sim = remove_NAN(get_time(nest_sim))
     timer_value_nest_time = get_nest_time(nest_timer)
+    timer_value_nest_time_input = get_nest_time(nest_timer_input)
+    timer_value_nest_time_io = get_nest_time(nest_timer_io)
+
     nest_node = Node('Nest',nest[0,9]-nest[0,0])
     init_nest = Node('initialisation',nest[0,7]-nest[0,0])
     init_nest.addNode('start',timer_value_nest[0,0])
@@ -110,15 +122,23 @@ def analyse_nest(nest,nest_init,nest_sim,nest_timer):
     init_config.addNode('init population_neurons', timer_value_nest_init[0,1])
     init_config.addNode('init connection',timer_value_nest_init[0,2])
     init_config.addNode('init device', timer_value_nest_init[0,3])
-    simulation.addNode('prepare', timer_value_nest_sim[0])
+    prepare =  Node('prepare',timer_value_nest_sim[0] )
+    simulation.add( prepare )
+    prepare.addNode('prepare input',nest_timer_input_init[1] - nest_timer_input_init[0])
     run_nest = Node('run', values=timer_value_nest_sim[2:-1])
     simulation.add(run_nest)
-    # run_nest.addNode('pre-run:<br>-waiting data<br>-update',values=timer_value_nest_time[0])
-    run_nest.addNode('pre-run:<br>-waiting data<br>-update<br>stimulus<br>devices', values=timer_value_nest_time[0])
+    pre_run = Node('pre-run', values=timer_value_nest_time[0] )
+    run_nest.adds(pre_run)
+    pre_run.addNode('pre_run_record',values = timer_value_nest_time_io[0])
+    pre_run.addNode('pre_run_input',values = timer_value_nest_time_io[1])
+    wait_time = nest_timer_input[:,3]-nest_timer_input[:,0]
+    pre_run.get('pre_run_input').addNode('pre_run_input_receive_data',values=timer_value_nest_time_input[0]-wait_time )
+    pre_run.get('pre_run_input').addNode('pre_run_input_wait',values=wait_time)
+    pre_run.get('pre_run_input').addNode('pre_run_input_update',values=timer_value_nest_time_input[1])
     run_nest.addNode('pre-run 2',values=timer_value_nest_time[1])
     run_nest.addNode('run simulation',values=timer_value_nest_time[2])
     run_nest.addNode('post-run',values=timer_value_nest_time[3])
-
+    run_nest.get('post-run').addNode('post-run input',values=timer_value_nest_time_input[4])
     simulation.addNode('clean', timer_value_nest_sim[-1])
     nest_node.adds(init_nest,simulation)
     return nest_node
@@ -179,10 +199,7 @@ def analyse_translation_nest_to_tvb(index,master,send,receive):
     receive_node.addNode('start simulation message', values=remove_NAN(time_value_receive[1,:]))
     receive_node.addNode('wait for<br>receiving<br>message', values=remove_NAN(time_value_receive[2,:]))
     receive_node.addNode('receive data', values = remove_NAN(time_value_receive[3,:]))
-    # receive_node.addNode('wait the thread send', values = remove_NAN(time_value_receive[4,:]))
-    # receive_node.addNode('wait for receiving message', values=remove_NAN(time_value_receive[1,:]))
-    # receive_node.addNode('receive data', values = remove_NAN(time_value_receive[2,:]))
-    # receive_node.addNode('wait the thread send', values = remove_NAN(time_value_receive[3,:]))
+    receive_node.addNode('wait the thread send', values = remove_NAN(time_value_receive[4,:]))
     receive_node.addNode('end receive thread', time_value_receive[0,1])
     simulation.adds(send_node,receive_node)
     translate.adds(initialisation,simulation,end)
@@ -206,7 +223,7 @@ def get_dictionnary(path):
 
     data_time = Node('root',0.0)
     data_time.add(analyse_tvb(data['timer_tvb']))
-    data_time.add(analyse_nest(data['nest'],data['nest_init'],data['nest_sim'],data['nest_timer_0']))
+    data_time.add(analyse_nest(data['nest'],data['nest_init'],data['nest_sim'],data['nest_timer_0'],data['nest_timer_input_0_init'],data['nest_timer_input_0'],data['nest_timer_io_0']))
     for index,i in enumerate(index_translator_nest_to_tvb):
         data_time.add(analyse_translation_nest_to_tvb(index,data['nest_to_tvb_master' + str(i)],
                                                          data['nest_to_tvb_send' + str(i)],

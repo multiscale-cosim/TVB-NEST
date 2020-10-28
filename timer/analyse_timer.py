@@ -221,7 +221,7 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
     for labels_sim in labels:
         if np.unique(labels_sim).shape[0] != len(labels_sim):
             count = np.unique(labels_sim,return_counts=True)[1]
-            print(np.array(labels_sim)[np.where(count!=1)])
+            print(np.array(np.unique(labels_sim))[np.where(count!=1)])
             raise Exception('error label not unique in : '+str(labels_sim))
 
     nb_element = len(labels)
@@ -280,7 +280,16 @@ if __name__ == '__main__':
     # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/10000_7/_g_1.0_mean_I_ext_0.0/')
     # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10/_g_1.0_mean_I_ext_0.0/')
     # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/8/_g_1.0_mean_I_ext_0.0/')
-    dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.5/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.5/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_1/5/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_1/delay_vp/10/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_2/delay_vp/1000/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_3/delay_vp/1000/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_4/delay_vp/1000/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_5/delay_vp/1000/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_6/delay_vp/10000/_g_1.0_mean_I_ext_0.0/')
+    # dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_7/delay_vp/10000/_g_1.0_mean_I_ext_0.0/')
+    dict_time, index = get_dictionnary('/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/test_8/delay_vp/10000/_g_1.0_mean_I_ext_0.0/')
     # print_data_time(dict_time,index[0],index[1])
     print_tree_data(dict_time,index[0],index[1])
     print('end')

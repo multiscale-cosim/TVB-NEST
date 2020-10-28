@@ -23,25 +23,24 @@ def receive(logger,store,status_data,buffer, comm):
     :param buffer: the buffer which contains the data (SHARED between thread)
     :return:
     '''
-    timer_receive = Timer(5,100000)
-    timer_receive.start(0)
+    timer_receive = Timer(6,100000)
+    timer_receive.start(0) # initialisation thread receive
     # initialise variables for the loop
     status_ = MPI.Status() # status of the different message
     source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
     check = np.empty(1,dtype='b')
     count=0
-    timer_receive.stop(0)
+    timer_receive.stop(0) # initialisation thread receive
     while True: # FAT END POINT
         # send the confirmation of the process can send data
-        requests=[]
         logger.info(" Nest to TVB : wait all")
-        timer_receive.start(1)
+        timer_receive.start(1) # start simulation
         for source in source_sending:
             comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
-        timer_receive.stop(1)
+        timer_receive.stop(1)  # start simulation
 
         if status_.Get_tag() == 0:
-            timer_receive.start(2)
+            timer_receive.start(2)  # wait for receive data
             wait = 0
             logger.info(" Nest to TVB : start to receive")
             #  Get the data/ spike
@@ -50,21 +49,22 @@ def receive(logger,store,status_data,buffer, comm):
                 shape = np.empty(1, dtype='i')
                 comm.Recv([shape, 1, MPI.INT], source=source, tag=0, status=status_)
                 if wait == 0:
-                    timer_receive.change(2,3)
+                    timer_receive.change(2,3) # wait for receive data + receive data
                 data = np.empty(shape[0], dtype='d')
                 comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
                 store.add_spikes(count,data)
-            timer_receive.change(3,4)
+            timer_receive.change(3,4) # receive data + wait for send thread
             while status_data[0] != 1 and status_data[0] != 2: # FAT END POINT
-                time.sleep(0.1)
+                time.sleep(0.001)
                 pass
+            timer_receive.change(4,5) # wait for send thread + store data
             # wait until the data can be send to the sender thread
             # Set lock to true and put the data in the shared buffer
             buffer[0] = store.return_data()
             with lock_status: # FAT END POINT
                 if status_data[0] != 2:
                     status_data[0] = 0
-            timer_receive.stop(4)
+            timer_receive.stop(5) # store data
         elif status_.Get_tag() == 1:
             logger.info("Nest to TVB : receive end " + str(count))
             count += 1
@@ -75,11 +75,11 @@ def receive(logger,store,status_data,buffer, comm):
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
-    timer_receive.start(0)
+    timer_receive.start(0) # end receive thread
     logger.info('communication disconnect')
     comm.Disconnect()
     logger.info('end thread')
-    timer_receive.stop(0)
+    timer_receive.stop(0) # end receive thread
     timer_receive.save(path+logger.name+'.npy')
     return
 
@@ -94,29 +94,32 @@ def send(logger,analyse,status_data,buffer, comm):
     :return:
     '''
     timer_send = Timer(5,100000)
-    timer_send.start(0)
+    timer_send.start(0) # initialisation thread
     count=0
     status_ = MPI.Status()
-    timer_send.stop(0)
+    timer_send.stop(0)  # initialisation thread
     while True: # FAT END POINT
         # wait until the translator accept the connections
         accept = False
         logger.info("Nest to TVB : wait to send " )
-        timer_send.start(1)
+        timer_send.start(1) # wait for sending message
         while not accept:
             req = comm.irecv(source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG)
             accept = req.wait(status_)
-        timer_send.stop(1)
+        timer_send.stop(1) # wait for sending message
         logger.info(" Nest to TVB : send data status : " +str(status_.Get_tag()))
         if status_.Get_tag() == 0:
             # send the rate when there ready
-            timer_send.start(2)
+            timer_send.start(2) # wait for receive thread
             while status_data[0] != 0: # FAT END POINT
-                time.sleep(0.1)
+                time.sleep(0.001)
                 pass
-            timer_send.change(2,3)
+            timer_send.change(2,3) # wait for receive thread + generate data
             times,data=analyse.analyse(count,buffer[0])
-            timer_send.change(3,4)
+            timer_send.change(3,4) # generate data + send data
+            with lock_status:
+                if status_data[0] != 2:
+                    status_data[0] = 1
             logger.info("Nest to TVB : send data :"+str(np.sum(data)) )
             # time of stating and ending step
             comm.Send([times, MPI.DOUBLE], dest=status_.Get_source(), tag=0)
@@ -125,10 +128,7 @@ def send(logger,analyse,status_data,buffer, comm):
             comm.Send([size,MPI.INT], dest=status_.Get_source(), tag=0)
             # send the rates
             comm.Send([data,MPI.DOUBLE], dest=status_.Get_source(), tag=0)
-            with lock_status:
-                if status_data[0] != 2:
-                    status_data[0] = 1
-            timer_send.stop(4)
+            timer_send.stop(4) # send data
         elif status_.Get_tag() == 1:
             # disconnect when everything is ending
             with lock_status:
@@ -137,11 +137,11 @@ def send(logger,analyse,status_data,buffer, comm):
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
         count+=1
-    timer_send.start(0)
+    timer_send.start(0) # end send thread
     logger.info('communication disconnect')
     comm.Disconnect()
     logger.info('end thread')
-    timer_send.stop(0)
+    timer_send.stop(0) # end send thread
     timer_send.save(path+logger.name+'.npy')
     return
 

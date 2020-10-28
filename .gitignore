@@ -7,3 +7,5 @@
 */test_file/*
 lib/
 */*/*.simg
+./timer/test_file/
+./tests/test_nest_MPI_threading/files/*
