@@ -62,7 +62,7 @@ def run(parameters_file):
 
     # chose between running on cluster or local pc
     if param_co_simulation['cluster']:
-        mpirun = 'srun'
+        mpirun = 'srun' + param_co_simulation['cluster_param']
     else:
         mpirun = 'mpirun'
 
