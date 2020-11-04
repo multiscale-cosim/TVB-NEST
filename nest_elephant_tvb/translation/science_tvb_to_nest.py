@@ -20,7 +20,7 @@ def toy_rates_to_spikes(rates,t_start,t_stop):
     return times
 
 class generate_data:
-    def __init__(self,path,nb_spike_generator,param,function_select=2):
+    def __init__(self,path,nb_spike_generator,param):
         """
         generate spike train for each neurons
         :param path : path for the logger files
@@ -29,7 +29,7 @@ class generate_data:
         self.percentage_shared = param['percentage_shared'] # percentage of shared rate between neurons
         self.nb_spike_generator = nb_spike_generator        # number of spike generator
         self.nb_synapse = param['nb_synapses']
-        self.function_translation = function_select #TODO add a parameter for this
+        self.function_translation = param['function_select'] #TODO add a parameter for this
 
         np.random.seed(param['seed'])
 
@@ -69,21 +69,21 @@ class generate_data:
         :return:
         """
         if self.function_translation == 1:
+            # Single Interaction Process Model
             # Compute the rate to spike trains
             rate *= self.nb_synapse # rate of poisson generator ( due property of poisson process)
             rate += 1e-12 # avoid rate equals to zeros
             spike_shared = \
                 rates_to_spikes(rate * self.percentage_shared * Hz,
                                 time_step[0] * ms, time_step[1] * ms, variation=True)[0]
-            spike_generate = np.empty(self.nb_spike_generator, dtype=np.object)
+            spike_generate = rates_to_spikes(np.repeat([rate],self.nb_spike_generator,axis=0) * (1 - self.percentage_shared) * Hz, time_step[0] * ms, time_step[1] * ms,
+                                    variation=True)
             for i in range(self.nb_spike_generator):
-                spikes = \
-                    rates_to_spikes(rate * (1 - self.percentage_shared) * Hz, time_step[0] * ms, time_step[1] * ms,
-                                    variation=True)[0]
-                spike_generate[i] = np.around(np.sort(np.concatenate((spikes, spike_shared))), decimals=1)
+                spike_generate[i] = np.around(np.sort(np.concatenate((spike_generate, spike_shared))), decimals=1)
             self.logger.info('rate :'+str(rate)+' spikes :'+str(np.concatenate(spike_generate).shape))
             return spike_generate
         elif self.function_translation == 2:
+            # Multiple Interaction Process Model
             rate *= self.nb_synapse / self.percentage_shared # rate of poisson generator ( due property of poisson process)
             rate += 1e-12  # avoid rate equals to zeros
             spike_shared = np.round(rates_to_spikes(rate * Hz, time_step[0] * ms, time_step[1] * ms, variation=True)[0],1)
