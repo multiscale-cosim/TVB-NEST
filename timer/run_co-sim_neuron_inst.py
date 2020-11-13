@@ -10,14 +10,14 @@ from example.parameter import parameter_1 as parameter_test
 
 def run_exploration(path,begin,end,nb_neurons):
     parameter_test.param_co_simulation['co-simulation']=True
-    parameter_test.param_co_simulation['synchronization']=3.5
+    parameter_test.param_co_simulation['synchronization']=0.1
     parameter_test.param_nest_topology['nb_neuron_by_region'] = nb_neurons
     parameter_test.param_co_simulation['nb_MPI_nest']=1
-    parameter_test.param_nest['total_num_virtual_procs']=8
+    parameter_test.param_nest['total_num_virtual_procs']=1
     parameter_test.param_nest_background['multimeter'] =False
     parameter_test.param_nest_background['record_spike'] =False
     parameter_test.param_nest_connection['weight_local'] = 1.0
-    run_exploration_2D(path+'/delay_vp/'+str(nb_neurons)+'/', parameter_test, {'g':np.arange(1.0, 1.2, 0.5), 'mean_I_ext': [0.0]}, begin, end)
+    run_exploration_2D(path+'/inst/'+str(nb_neurons)+'/', parameter_test, {'g':np.arange(1.0, 1.2, 0.5), 'mean_I_ext': [0.0]}, begin, end)
 
 if __name__ == "__main__":
     import sys

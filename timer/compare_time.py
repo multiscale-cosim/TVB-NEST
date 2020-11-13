@@ -280,35 +280,39 @@ if __name__ == '__main__':
     # plt.show()
 
 
-
+    range_value = [10,12,13,15,18,20,23,27,31,36,41,47,54,63,72,83,95,110,126,146,168,193,222,256,295,339,391,450,518,596,687,791,910,1048,1207,1389,1600,1842,2121,2442,2812,3237,3728,4292,4942,5690,6551,7543,8685,10000 ]
     folders =[
-        ['/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/10/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/40/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/100/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/400/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/1000/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/4000/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/10000/_g_1.0_mean_I_ext_0.0/',],
-        [
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/10/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/40/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/100/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/400/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/1000/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/4000/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/10000/_g_1.0_mean_I_ext_0.0/',],
-        ['/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/10/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/40/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/100/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/400/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/1000/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/4000/_g_1.0_mean_I_ext_0.0/',
-         '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/10000/_g_1.0_mean_I_ext_0.0/',],
+        # ['/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/10/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/40/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/100/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/400/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/1000/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/4000/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/10000/_g_1.0_mean_I_ext_0.0/',
+        #      ],
+        # [
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/10/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/40/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/100/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/400/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/1000/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/4000/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/10000/_g_1.0_mean_I_ext_0.0/',],
+        # ['/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/10/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/40/_g_1.0_mean_I_ext_0.0/',
+        # '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/100/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/400/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/1000/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/4000/_g_1.0_mean_I_ext_0.0/',
+        #  '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay_vp/10000/_g_1.0_mean_I_ext_0.0/',],
         # [
         #     '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/10/_g_1.0_mean_I_ext_0.0/',
         #     '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/100/_g_1.0_mean_I_ext_0.0/',
         #     '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/1000/_g_1.0_mean_I_ext_0.0/',
         #     '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/10000/_g_1.0_mean_I_ext_0.0/',]
+    ['/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_final/inst/'+str(i)+'/_g_1.0_mean_I_ext_0.0/' for i in range_value ],
+    ['/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_final/delay/'+str(i)+'/_g_1.0_mean_I_ext_0.0/' for i in range_value ],
+    ['/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_final/delay_vp/'+str(i)+'/_g_1.0_mean_I_ext_0.0/' for i in range_value ],
     ]
 
     labels = ['single-step synchronization between simulators','delayed synchronization between simulators','delayed synchronization between simulators \nand 8-threads-parallel NEST simulation']
@@ -325,31 +329,48 @@ if __name__ == '__main__':
             print(i)
             dict, index = get_dictionnary(i)
             time_sim.append(dict.get('Nest').time)
-            time_nest_sim.append(dict.get('Nest').get('simulation').get('run').get('run simulation').time)
-            diff = dict.get('TVB').get('simulation').get('run simulation').time - dict.get('Nest').get('simulation').get('run').get('run simulation').time
-            if diff <0:
-                diff =0
-            time_nest_IO.append(dict.get('Nest').get('simulation').get('run').get('pre-run:<br>-waiting data<br>-update<br>stimulus<br>devices').time
-                                +dict.get('Nest').get('simulation').get('run').get('post-run').time
-                                -diff)
-            time_nest_tot.append(dict.get('Nest').get('simulation').get('run').get('run simulation').time+dict.get('Nest').get('simulation').get('run').get('pre-run:<br>-waiting data<br>-update<br>stimulus<br>devices').time
-                                 +dict.get('Nest').get('simulation').get('run').get('post-run').time-diff)
-            time_TVB_sim.append(dict.get('TVB').get('simulation').get('run simulation').time)
-            time_TVB_IO.append(dict.get('TVB').get('simulation').get('receive data').time - dict.get('TVB').get('simulation').get('receive data').get('wait receive').time
-                               +dict.get('TVB').get('simulation').get('send data').time-dict.get('TVB').get('simulation').get('send data').get('wait send').time)
-            time_TVB_tot.append(dict.get('TVB').get('simulation').get('run simulation').time
-                                +dict.get('TVB').get('simulation').get('receive data').time - dict.get('TVB').get('simulation').get('receive data').get('wait receive').time
-                                +dict.get('TVB').get('simulation').get('send data').time-dict.get('TVB').get('simulation').get('send data').get('wait send').time)
+            # time_nest_sim.append(dict.get('Nest').get('simulation').get('run').get('run simulation').time)
+            # diff = dict.get('TVB').get('simulation').get('run simulation').time - dict.get('Nest').get('simulation').get('run').get('run simulation').time
+            # if diff <0:
+            #     diff =0
+            # time_nest_IO.append(dict.get('Nest').get('simulation').get('run').get('pre-run:<br>-waiting data<br>-update<br>stimulus<br>devices').time
+            #                     +dict.get('Nest').get('simulation').get('run').get('post-run').time
+            #                     -diff)
+            # time_nest_tot.append(dict.get('Nest').get('simulation').get('run').get('run simulation').time+dict.get('Nest').get('simulation').get('run').get('pre-run:<br>-waiting data<br>-update<br>stimulus<br>devices').time
+            #                      +dict.get('Nest').get('simulation').get('run').get('post-run').time-diff)
+            # time_TVB_sim.append(dict.get('TVB').get('simulation').get('run simulation').time)
+            # time_TVB_IO.append(dict.get('TVB').get('simulation').get('receive data').time - dict.get('TVB').get('simulation').get('receive data').get('wait receive').time
+            #                    +dict.get('TVB').get('simulation').get('send data').time-dict.get('TVB').get('simulation').get('send data').get('wait send').time)
+            # time_TVB_tot.append(dict.get('TVB').get('simulation').get('run simulation').time
+            #                     +dict.get('TVB').get('simulation').get('receive data').time - dict.get('TVB').get('simulation').get('receive data').get('wait receive').time
+            #                     +dict.get('TVB').get('simulation').get('send data').time-dict.get('TVB').get('simulation').get('send data').get('wait send').time)
 
 
         print("plot")
-        x = [20,80,200,800,2000,8000,20000]
+        x = np.array(range_value ) * 2
 
-        plt.plot(x,time_nest_IO,'-',label =label )
+        plt.plot(x,time_sim,'-',label =label )
         plt.xscale('log')
         plt.legend(fontsize=20)
     plt.ylabel('Wall time of the simulation in s',fontsize=30)
     plt.xlabel('Number of neurons in the spiking neural network ',fontsize=30)
     plt.tick_params(axis='both',labelsize=20)
+
+    time_sim_ref = []
+    for i in folders[0]:
+        print(i)
+        dict, index = get_dictionnary(i)
+        time_sim_ref.append(dict.get('Nest').time)
+    plt.figure()
+    for label,folder in zip(labels,folders):
+        time_sim = []
+        for i in folder:
+            print(i)
+            dict, index = get_dictionnary(i)
+            time_sim.append(dict.get('Nest').time)
+        x = np.array(range_value ) * 2
+        plt.plot(x,np.array(time_sim_ref)/np.array(time_sim),'-',label =label )
+        plt.xscale('log')
+        plt.legend(fontsize=20)
 
     plt.show()
