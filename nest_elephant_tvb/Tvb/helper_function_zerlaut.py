@@ -7,6 +7,7 @@ def multiDimenDist(point1,point2):
    for coOrd in deltaVals:
        runningSquared += coOrd**2
    return runningSquared**(1/2)
+
 def findVec(point1,point2,unitSphere = False):
   #setting unitSphere to True will make the vector scaled down to a sphere with a radius one, instead of it's orginal length
   finalVector = [0 for coOrd in point1]
