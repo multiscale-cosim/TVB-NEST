@@ -2,3 +2,14 @@
 	path = nest-io-dev
 	url = https://github.com/sdiazpier/nest-simulator.git
 	branch = nest-io-dev
+[submodule "nest_elephant_tvb/Tvb/-b"]
+	path = nest_elephant_tvb/Tvb/-b
+	url = https://github.com/the-virtual-brain/tvb-root.git
+[submodule "nest_elephant_tvb/Tvb/tvb-root"]
+	path = nest_elephant_tvb/Tvb/tvb-root
+	url = https://github.com/the-virtual-brain/tvb-root.git
+	branch = tvb_cosim_consensus
+[submodule "nest_elephant_tvb/Tvb/tvb_git"]
+	path = nest_elephant_tvb/Tvb/tvb_git
+	url = https://github.com/the-virtual-brain/tvb-root.git
+	branch = tvb_cosim_consensus
