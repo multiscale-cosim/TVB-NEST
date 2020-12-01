@@ -27,7 +27,9 @@
 #   Frontiers in Neuroinformatics (7:10. doi: 10.3389/fninf.2013.00010)
 import tvb.simulator.lab as lab
 from tvb.tests.library.base_testcase import BaseTestCase
-from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation import ReducedWongWang_proxy, Interface_co_simulation
+from tvb.contrib.cosimulation import co_sim_monitor
+from tvb.contrib.cosimulation.cosimulator_1 import CoSimulator
+from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_paralelle.Reduced_Wongwang import ReducedWongWangProxy
 import numpy as np
 
 
@@ -35,6 +37,8 @@ class TestModifyWongWang(BaseTestCase):
     @staticmethod
     def _reference_simulation():
         # reference simulation
+        np.random.seed(42)
+        init = np.random.random_sample((385, 1, 76, 1))
         np.random.seed(42)
         model = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
         connectivity = lab.connectivity.Connectivity().from_file()
@@ -50,10 +54,11 @@ class TestModifyWongWang(BaseTestCase):
                                       coupling=coupling,
                                       integrator=integrator,
                                       monitors=(monitors,),
+                                      initial_conditions=init,
                                       )
         sim.configure()
         result_all = sim.run(simulation_length=10.0)
-        result = result_all[0][1][0][0]
+        result = result_all[0][1][:,0,0,0]
         return connectivity, coupling, integrator, monitors, sim, result, result_all
 
 
@@ -62,21 +67,26 @@ class TestModifyWongWangSimple(TestModifyWongWang):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
         # The modify model without proxy
         np.random.seed(42)
-        model = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
+        init = np.concatenate((np.random.random_sample((385, 1, 76, 1)), np.random.random_sample((385, 1, 76, 1))), axis=1)
+        np.random.seed(42)
+        model = ReducedWongWangProxy(tau_s=np.random.rand(76))
         # integrator = HeunDeterministic(dt=0.1)
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-        sim_2 = lab.simulator.Simulator(model=model,
-                                        connectivity=connectivity,
-                                        coupling=coupling,
-                                        integrator=integrator,
-                                        monitors=(monitors,),
-                                        )
+        sim_2 = CoSimulator(
+                            voi=np.array([0]),
+                            synchronization_time=10.0,
+                            co_monitor=co_sim_monitor.Raw_incomplete(),
+                            proxy_inds=np.asarray([], dtype=np.int),
+                            model=model,
+                            connectivity=connectivity,
+                            coupling=coupling,
+                            integrator=integrator,
+                            monitors=(monitors,),
+                            initial_conditions=init,
+                            )
         sim_2.configure()
-        model_2 = ReducedWongWang_proxy()
-        model_2.copy_inst(sim.model)
-        sim_2.model = model_2
-        result_2_all = sim_2.run(simulation_length=10.0)[0][1][0]
-        result_2 = result_2_all[0]
+        result_2_all = sim_2.run()[0][1][:,0,0,0]
+        result_2 = sim_2.run()[0][1][:,0,0,0]
         diff = result - result_2
         assert np.sum(diff) == 0.0
 
@@ -84,100 +94,139 @@ class TestModifyWongWangSimple(TestModifyWongWang):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
         # The modify model without proxy
         np.random.seed(42)
+        init = np.concatenate((np.random.random_sample((385, 1, 76, 1)), np.random.random_sample((385, 1, 76, 1))), axis=1)
+        np.random.seed(42)
         id_proxy = range(11)
-        model = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
+        model = ReducedWongWangProxy(tau_s=np.random.rand(76))
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-        sim_3 = lab.simulator.Simulator(model=model,
-                                        connectivity=connectivity,
-                                        coupling=coupling,
-                                        integrator=integrator,
-                                        monitors=(monitors,),
-                                        )
+        sim_3 = CoSimulator(
+                            voi = np.array([0]),
+                            synchronization_time=1.,
+                            co_monitor = co_sim_monitor.Raw_incomplete(),
+                            proxy_inds=np.asarray(id_proxy, dtype=np.int),
+                            model=model,
+                            connectivity=connectivity,
+                            coupling=coupling,
+                            integrator=integrator,
+                            monitors=(monitors,),
+                            initial_conditions=init,
+                            )
         sim_3.configure()
-        model_3 = ReducedWongWang_proxy()
-        model_3.copy_inst(sim.model)
-        model_3.set_id_proxy(id_proxy)
-        sim_3.model = model_3
-        result_3_all = sim_3.run(simulation_length=10.0)[0][1][0]
-        result_3 = result_3_all[0]
-        diff = result - result_3
-        assert np.sum(diff) == 0.0
+        sim_3.run()
+        result_3_all = [np.empty((0,)), np.empty((10, 2, 76, 1))]
+        for j in range(0,10):
+            result_3_all_step = sim_3.run()
+            result_3_all[0] = np.concatenate((result_3_all[0], result_3_all_step[0][0]))
+            result_3_all[1] = np.concatenate((result_3_all[1], result_3_all_step[0][1]))
+        for i in range(np.min(sim_3.connectivity.idelays[np.nonzero(sim_3.connectivity.idelays)]) + 1):
+            diff = result_all[0][1][i][0][len(id_proxy):] - result_3_all[1][i+10, 0, len(id_proxy):]
+            diff_2 = result_all[0][1][i][0][:len(id_proxy)] - result_3_all[1][i+10, 0, :len(id_proxy)]
+            assert np.sum(diff) == 0.0 and np.sum(np.isnan(diff_2)) == len(id_proxy)
+        for i in range(np.min(sim_3.connectivity.idelays[np.nonzero(sim_3.connectivity.idelays)]) + 1,100):
+            diff = result_all[0][1][i][0][len(id_proxy):] - result_3_all[1][i + 10, 0, len(id_proxy):]
+            diff_2 = result_all[0][1][i][0][:len(id_proxy)] - result_3_all[1][i + 10, 0, :len(id_proxy)]
+            assert np.sum(diff) != 0.0 and np.sum(np.isnan(diff_2)) == len(id_proxy)
 
     def test_with_proxy_bad_input(self):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
         # The modify model without proxy
         np.random.seed(42)
+        init = np.concatenate((np.random.random_sample((385, 1, 76, 1)), np.random.random_sample((385, 1, 76, 1))), axis=1)
+        np.random.seed(42)
         id_proxy = range(11)
-        model = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
+        model = ReducedWongWangProxy(tau_s=np.random.rand(76))
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-        sim_4 = lab.simulator.Simulator(model=model,
-                                        connectivity=connectivity,
-                                        coupling=coupling,
-                                        integrator=integrator,
-                                        monitors=(monitors,),
-                                        )
+        sim_4 = CoSimulator(
+                            voi = np.array([0]),
+                            synchronization_time=1.,
+                            co_monitor = co_sim_monitor.Raw_incomplete(),
+                            proxy_inds=np.asarray(id_proxy, dtype=np.int),
+                            model=model,
+                            connectivity=connectivity,
+                            coupling=coupling,
+                            integrator=integrator,
+                            monitors=(monitors,),
+                            initial_conditions=init,
+                            )
         sim_4.configure()
-        model_4 = ReducedWongWang_proxy()
-        model_4.copy_inst(sim.model)
-        model_4.set_id_proxy(np.array(id_proxy))
-        model_4.update_proxy(np.ones((11, 1)) * 0.7)
-        sim_4.model = model_4
-        result_4_all = sim_4.run(simulation_length=10.0)[0][1][0]
-        result_4 = result_4_all[0]
-        diff = result - result_4
-        assert np.sum(diff) != 0.0
+        sim_4.run()
+        result_4_all = [np.empty((0,)), np.empty((10, 2, 76, 1))]
+        for j in range(0,10):
+            result_4_all_step = sim_4.run(
+                cosim_updates=[np.array([result_all[0][0][(10 * j) + i] for i in range(10)]),
+                               np.ones((10,len(id_proxy), 1,1)) * 0.7])
+            result_4_all[0] = np.concatenate((result_4_all[0], result_4_all_step[0][0]))
+            result_4_all[1] = np.concatenate((result_4_all[1], result_4_all_step[0][1]))
+        for i in range(np.min(sim_4.connectivity.idelays[np.nonzero(sim_4.connectivity.idelays)])+1):
+            diff = result_all[0][1][i][0][len(id_proxy):] - result_4_all[1][i+10, 0, len(id_proxy):]
+            diff_2 = result_all[0][1][i][0][:len(id_proxy)] - result_4_all[1][i+10, 0, :len(id_proxy)]
+            assert np.sum(diff, where=np.logical_not(np.isnan(diff))) == 0.0 and np.sum(diff_2, where=np.logical_not(
+                np.isnan(diff_2))) != 0.0
+        for i in range(np.min(sim_4.connectivity.idelays[np.nonzero(sim_4.connectivity.idelays)])+1,100):
+            diff = result_all[0][1][i][0][len(id_proxy):] - result_4_all[1][i+10, 0, len(id_proxy):]
+            diff_2 = result_all[0][1][i][0][:len(id_proxy)] - result_4_all[1][i+10, 0, :len(id_proxy)]
+            assert np.sum(diff, where=np.logical_not(np.isnan(diff))) != 0.0 and np.sum(diff_2, where=np.logical_not(
+                np.isnan(diff_2))) != 0.0
 
     def test_with_proxy_right_input(self):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
         # The modify model without proxy
         np.random.seed(42)
-        id_proxy = range(11)
-        model = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
-        # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-        sim_5 = lab.simulator.Simulator(model=model,
-                                        connectivity=connectivity,
-                                        coupling=coupling,
-                                        integrator=integrator,
-                                        monitors=(monitors,),
-                                        )
-        sim_5.configure()
-        model_5 = ReducedWongWang_proxy()
-        model_5.copy_inst(sim.model)
-        model_5.set_id_proxy(np.array(id_proxy))
-        model_5.update_proxy([[0.02610815369723578],
-                              [0.007918682131383152],
-                              [0.008257260378213565],
-                              [0.023084939706151147],
-                              [0.03725706591997936],
-                              [0.017066023963743862],
-                              [0.028114124110158213],
-                              [0.010048491097557441],
-                              [0.013214675199868617],
-                              [0.0046064972150810365],
-                              [0.05189135144713729]])
-        sim_5.model = model_5
-        result_5_all = sim_5.run(simulation_length=10.0)[0][1][0]
-        result_5 = result_5_all[0]
-        diff = result - result_5
-        assert np.sum(diff) == 0.0
-
-    def test_with_proxy_badd_monitor(self):
-        connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
-        # New simulator without proxy
+        init = np.concatenate((np.random.random_sample((385, 1, 76, 1)), np.random.random_sample((385, 1, 76, 1))), axis=1)
         np.random.seed(42)
-        model_6 = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
-        monitors_2 = (
-            Interface_co_simulation(period=0.1, id_proxy=np.array([0, 2], dtype=np.int), time_synchronize=10.0),)
+        id_proxy = range(11)
+        model = ReducedWongWangProxy(tau_s=np.random.rand(76))
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-        sim_6 = lab.simulator.Simulator(model=model_6,
-                                        connectivity=connectivity,
-                                        coupling=coupling,
-                                        integrator=integrator,
-                                        monitors=monitors_2,
-                                        # initial_conditions=np.repeat(0.0,1*1*nb_region).reshape(1,1,nb_region,1)
-                                        )
-        sim_6.configure()
-        result_6_all = sim_6.run(simulation_length=10.0)[0][1][0]
-        result_6 = result_6_all[0]
-        diff = result - result_6
+        sim_5 = CoSimulator(
+                            voi = np.array([0]),
+                            synchronization_time=1.,
+                            co_monitor = co_sim_monitor.Raw_incomplete(),
+                            proxy_inds=np.asarray(id_proxy, dtype=np.int),
+                            model=model,
+                            connectivity=connectivity,
+                            coupling=coupling,
+                            integrator=integrator,
+                            monitors=(monitors,),
+                            initial_conditions=init,
+                            )
+        sim_5.configure()
+        sim_5.run()
+        result_5_all = [np.empty((0,)), np.empty((10, 2, 76, 1))]
+        for j in range(0,10):
+            result_5_all_step = sim_5.run(
+                cosim_updates=[np.array([result_all[0][0][(10 * j) + i] for i in range(10)]),
+                               np.array([result_all[0][1][(10 * j) + i][0][id_proxy] for i in range(10)]).reshape((10,len(id_proxy) , 1, 1))])
+            result_5_all[0] = np.concatenate((result_5_all[0], result_5_all_step[0][0]))
+            result_5_all[1] = np.concatenate((result_5_all[1], result_5_all_step[0][1]))
+        for i in range(100):
+            diff = result_all[0][1][i][0][len(id_proxy):] - result_5_all[1][i+10, 0, len(id_proxy):]
+            diff_2 = result_all[0][1][i][0][:len(id_proxy)] - result_5_all[1][i+10, 0, :len(id_proxy)]
+            assert np.sum(diff, where=np.logical_not(np.isnan(diff))) == 0.0 and np.sum(diff_2, where=np.logical_not(
+                np.isnan(diff_2))) == 0.0
+
+    def test_without_proxy(self):
+        connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
+        # The modify model without proxy
+        np.random.seed(42)
+        model = ReducedWongWangProxy(tau_s=np.random.rand(76))
+        # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
+        sim_2 = CoSimulator(
+                            voi=np.array([0]),
+                            synchronization_time=10.0,
+                            co_monitor=co_sim_monitor.Coupling_co_sim(coupling=coupling),
+                            proxy_inds=np.asarray([0], dtype=np.int),
+                            model=model,
+                            connectivity=connectivity,
+                            coupling=coupling,
+                            integrator=integrator,
+                            monitors=(monitors,),
+                            )
+        sim_2.configure()
+        result_2_all = sim_2.run()[0][1][:,0,0,0]
+        coupling_future = sim_2.output_co_sim_monitor(100,100)
+        result_2 = sim_2.run()[0][1][:,0,0,0]
+        diff = result - result_2
+        assert np.sum(diff) != 0.0
+        result_2 = sim_2.run()[0][1][:,0,0,0]
+        diff = result - result_2
         assert np.sum(diff) != 0.0

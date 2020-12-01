@@ -37,32 +37,36 @@ class TestPrecisionDelayUpdate(BaseTestCase):
     def test_precision_delay_update(self):
         weight = np.array([[2, 8, 0], [0, 0, 0], [3, 0, 1]])
         delay = np.array([[0.6, 0.5, 1.0], [0.7, 0.8, 3.0], [1.0, 0.5, 0.7]])
-        init_value = np.array([[0.1, 0.1, 0.2]] * 2)
-        initial_condition = init_value.reshape((2, 1, weight.shape[0], 1))
+        max = np.int(np.max(delay)*10+1)
+        init_value = np.array([[[0.1,0.0], [0.1,0.0], [0.2,0.0]]] * max)
+        initial_condition = init_value.reshape((max, 2, weight.shape[0], 1))
         resolution_simulation = 0.1
         time_synchronize = np.min(delay)
         proxy_id = [0]
+        no_proxy = [1,2]
+
+        # simulation with one proxy
+        rgn.seed(42)
+        sim = TvbSim(weight, delay, proxy_id, resolution_simulation, time_synchronize,
+                     initial_condition=initial_condition)
+        time, result = sim(time_synchronize)
 
         # full simulation
         rgn.seed(42)
         sim_ref = TvbSim(weight, delay, [], resolution_simulation, time_synchronize,
                          initial_condition=initial_condition)
         time, result_ref = sim_ref(time_synchronize)
-        delay_input = [time, result_ref[:, proxy_id][:, :, 0]]
 
-        # simulation with one proxy
-        rgn.seed(42)
-        sim = TvbSim(weight, delay, proxy_id, resolution_simulation, time_synchronize,
-                     initial_condition=initial_condition)
-        time, result = sim(time_synchronize, delay_input)
-
-        diff = np.where(np.squeeze(result_ref, axis=2)[0] != np.squeeze(result, axis=2)[0])
+        diff = np.where(np.squeeze(result_ref[:,no_proxy,:], axis=2)[0] != np.squeeze(result[0][:,no_proxy,:], axis=2)[0])
         assert diff[0].size == 0
 
         for i in range(0, 10000):
-            time, result_ref = sim_ref(time_synchronize)
             delay_input = [time, result_ref[:, proxy_id][:, :, 0]]
             time, result = sim(time_synchronize, delay_input)
 
-            diff = np.where(result_ref != result)
+
+
+            time, result_ref = sim_ref(time_synchronize)
+
+            diff = np.where(result_ref[:,no_proxy,:] != result[0][:,no_proxy,:])
             assert diff[0].size == 0

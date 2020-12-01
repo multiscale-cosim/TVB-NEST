@@ -30,7 +30,9 @@
 import nest_elephant_tvb.Tvb.tvb_git.scientific_library.tvb.simulator.lab as lab
 import numpy as np
 import numpy.random as rgn
-from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import Interface_co_simulation
+from tvb.contrib.cosimulation import co_sim_monitor
+from tvb.contrib.cosimulation.cosimulator_1 import CoSimulator
+from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_paralelle.Reduced_Wongwang import ReducedWongWangProxy, _numba_dfun_proxy
 
 rgn.seed(42)
 
@@ -55,7 +57,7 @@ def tvb_model(dt, weight, delay, id_proxy):
     """
     region_label = np.repeat(['real'], len(weight))  # name of region fixed can be modify for parameter of function
     region_label[id_proxy] = 'proxy'
-    populations = lab.models.ReducedWongWang()
+    populations = ReducedWongWangProxy()
     white_matter = lab.connectivity.Connectivity(region_labels=region_label,
                                                  weights=weight,
                                                  speed=np.array(1.0),
@@ -65,7 +67,7 @@ def tvb_model(dt, weight, delay, id_proxy):
                                                  centres=np.ones((weight.shape[0], 3))
                                                  )
     white_matter_coupling = lab.coupling.Linear(a=np.array(0.0154))
-    heunint = lab.integrators.HeunDeterministic(dt=dt, bounded_state_variable_indices=np.array([0]),
+    heunint = lab.integrators.EulerDeterministic(dt=dt, bounded_state_variable_indices=np.array([0]),
                                                 state_variable_boundaries=np.array([[0.0, 1.0]]))
     return populations, white_matter, white_matter_coupling, heunint, id_proxy
 
@@ -83,17 +85,32 @@ def tvb_init(parameters, time_synchronize, initial_condition):
     """
     model, connectivity, coupling, integrator, id_proxy = parameters
     # Initialise some Monitors with period in physical time
-    monitors = (lab.monitors.Raw(variables_of_interest=np.array(0)),
-                Interface_co_simulation(id_proxy=np.asarray(id_proxy, dtype=np.int), time_synchronize=time_synchronize))
+    monitors = (lab.monitors.Raw(variables_of_interest=np.array(0)),)
 
     # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-    sim = lab.simulator.Simulator(model=model,
-                                  connectivity=connectivity,
-                                  coupling=coupling,
-                                  integrator=integrator,
-                                  monitors=monitors,
-                                  initial_conditions=initial_condition
-                                  )
+    if len(id_proxy) == 0:
+        sim = lab.simulator.Simulator(
+            model=model,
+            connectivity=connectivity,
+            coupling=coupling,
+            integrator=integrator,
+            monitors=monitors,
+            initial_conditions=initial_condition
+        )
+    else:
+        # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
+        sim = CoSimulator(
+                          voi = np.array([0]),
+                          synchronization_time=time_synchronize,
+                          co_monitor = co_sim_monitor.Raw_incomplete(),
+                          proxy_inds=np.asarray(id_proxy, dtype=np.int),
+                          model=model,
+                          connectivity=connectivity,
+                          coupling=coupling,
+                          integrator=integrator,
+                          monitors=monitors,
+                          initial_conditions=initial_condition
+                          )
     sim.configure()
     return sim
 
@@ -109,10 +126,20 @@ def tvb_simulation(time, sim, data_proxy):
     """
     if data_proxy is not None:
         data_proxy[1] = np.reshape(data_proxy[1], (data_proxy[1].shape[0], data_proxy[1].shape[1], 1, 1))
-    result = sim.run(proxy_data=data_proxy, simulation_length=time)
-    time = result[0][0]
-    s = result[0][1][:, 0]
-    return time, s
+    if sim.__class__ == lab.simulator.Simulator:
+        result = sim.run(simulation_length=time)
+        time = result[0][0]
+        s = result[0][1][:, 0]
+        rate = result[0][1][:, 1]
+    else :
+        start = sim.current_step - sim.synchronization_n_step + 1
+        n_step = sim.synchronization_n_step
+        result_delayed = sim.run(cosim_updates=data_proxy)
+        result = [sim.output_co_sim_monitor(start, n_step)]
+        time = result[0][0]
+        s = [result[0][1][:,0], result_delayed[0][1][:,0]]
+        rate = [result[0][1][:,1], result_delayed[0][1][:,1]]
+    return time, s, rate
 
 
 class TvbSim:
@@ -129,8 +156,11 @@ class TvbSim:
         self.nb_node = weight.shape[0] - len(id_proxy)
         model = tvb_model(resolution_simulation, weight, delay, id_proxy)
         self.sim = tvb_init(model, time_synchronize, initial_condition)
+        self.dt = self.sim.integrator.dt
+        if initial_condition is not None:
+            self.current_state = np.expand_dims(initial_condition[-1,0,id_proxy,0],[0,2]) # only one mod, only S
 
-    def __call__(self, time, proxy_data=None):
+    def __call__(self, time, proxy_data=None, rate_data=None, rate=False):
         """
         run simulation for t biological
         :param time: the time of the simulation
@@ -138,5 +168,26 @@ class TvbSim:
         :return:
             the result of time, the firing rate and the state of the network
         """
-        time, s_out = tvb_simulation(time, self.sim, proxy_data)
-        return time, s_out
+        if rate_data is None:
+            time, s_out, rates = tvb_simulation(time, self.sim, proxy_data)
+        else:
+            proxy_data = [rate_data[0], self.transform_rate_to_s(rate_data[1])]
+            time, s_out, rates = tvb_simulation(time, self.sim, proxy_data)
+
+        if rate:
+            return time, s_out, rates
+        else:
+            return time, s_out
+
+    def transform_rate_to_s(self,rate_data):
+        S = []
+        X = self.current_state
+        for h in rate_data:
+            def dfun_proxy(x,c, local_coupling=0.0, stimulus=0.0):
+                g = self.sim.model.gamma
+                t = self.sim.model.tau_s
+                return _numba_dfun_proxy(x,np.expand_dims(h,[0,2]),g,t)
+            X = self.sim.integrator.scheme(X,dfun_proxy,0.0,0.0,0.0)
+            S.append(X)
+        self.current_state = X
+        return np.concatenate(S)

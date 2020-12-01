@@ -183,9 +183,8 @@ if __name__ == "__main__":
     logger_master = create_logger(path_config, 'tvb_to_nest_master'+str(id_first_spike_detector), log_level)
 
     # variable for communication between thread
-    status_data=[0]
-    initialisation =np.load(param['init'])
-    buffer_spike=[initialisation]
+    status_data=[1]
+    buffer_spike=[None]
 
     ### Create Com objects for communications
     info = MPI.INFO_NULL

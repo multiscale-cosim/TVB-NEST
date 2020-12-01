@@ -28,15 +28,19 @@
 #
 #
 import tvb.simulator.lab as lab
-from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import Interface_co_simulation
 from tvb.tests.library.base_testcase import BaseTestCase
 import numpy as np
+from tvb.contrib.cosimulation import co_sim_monitor
+from tvb.contrib.cosimulation.cosimulator_1 import CoSimulator
+from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_paralelle.Reduced_Wongwang import ReducedWongWangProxy
 
 
 class TestModifyWongWang(BaseTestCase):
     @staticmethod
     def _reference_simulation():
         # reference simulation
+        np.random.seed(42)
+        init = np.random.random_sample((385, 1, 76, 1))
         np.random.seed(42)
         model = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
         connectivity = lab.connectivity.Connectivity().from_file()
@@ -51,6 +55,7 @@ class TestModifyWongWang(BaseTestCase):
                                       coupling=coupling,
                                       integrator=integrator,
                                       monitors=(monitors,),
+                                      initial_conditions=init,
                                       )
         sim.configure()
         result_all = sim.run(simulation_length=10.0)
@@ -61,17 +66,25 @@ class TestModifyWongWang(BaseTestCase):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
         # New simulator without proxy
         np.random.seed(42)
-        model_1 = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
-        monitors_1 = Interface_co_simulation(period=0.1, id_proxy=np.array([], dtype=np.int), time_synchronize=10.0)
+        init = np.concatenate((np.random.random_sample((385, 1, 76, 1)), np.random.random_sample((385, 1, 76, 1))), axis=1)
+        np.random.seed(42)
+        model_1 = ReducedWongWangProxy(tau_s=np.random.rand(76))
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-        sim_1 = lab.simulator.Simulator(model=model_1,
-                                        connectivity=connectivity,
-                                        coupling=coupling,
-                                        integrator=integrator,
-                                        monitors=(monitors, monitors_1,),
-                                        )
+        sim_1 = CoSimulator(
+                            voi = np.array([0]),
+                            synchronization_time=10.0,
+                            co_monitor = co_sim_monitor.Raw_incomplete(),
+                            proxy_inds=np.asarray([], dtype=np.int),
+                            model=model_1,
+                            connectivity=connectivity,
+                            coupling=coupling,
+                            integrator=integrator,
+                            monitors=(monitors,),
+                            initial_conditions=init,
+        )
         sim_1.configure()
-        result_1_all = sim_1.run(simulation_length=10.0)
+        result_1_all = sim_1.run(cosim_updates=None)
+        result_1_all = sim_1.run(cosim_updates=None)
         for i in range(100):
             diff = result_all[0][1][i][0][2:] - result_1_all[0][1][i][0][2:]
             diff_2 = result_all[0][1][i][0][:2] - result_1_all[0][1][i][0][:2]
@@ -82,27 +95,34 @@ class TestModifyWongWang(BaseTestCase):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
         # New simulator with proxy
         np.random.seed(42)
-        model_1 = lab.models.ReducedWongWang(tau_s=np.random.rand(76))
-        monitors_1 = Interface_co_simulation(period=0.1, id_proxy=np.array([0], dtype=np.int), time_synchronize=10.0)
+        init = np.concatenate((np.random.random_sample((385, 1, 76, 1)), np.random.random_sample((385, 1, 76, 1))), axis=1)
+        np.random.seed(42)
+        model_1 = ReducedWongWangProxy(tau_s=np.random.rand(76))
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
-        sim_1 = lab.simulator.Simulator(model=model_1,
-                                        connectivity=connectivity,
-                                        coupling=coupling,
-                                        integrator=integrator,
-                                        monitors=(monitors, monitors_1,),
-                                        )
+        sim_1 = CoSimulator(
+                            voi = np.array([0]),
+                            synchronization_time=1.,
+                            co_monitor = co_sim_monitor.Raw_incomplete(),
+                            proxy_inds=np.asarray([0], dtype=np.int),
+                            model=model_1,
+                            connectivity=connectivity,
+                            coupling=coupling,
+                            integrator=integrator,
+                            monitors=(monitors,),
+                            initial_conditions=init,
+        )
         sim_1.configure()
-        result_1_all = [np.empty((0,)), np.empty((0, 1, 76, 1))]
-        for j in range(5):
+        result_1_all = [np.empty((0,)), np.empty((10, 2, 76, 1))]
+        sim_1.run()
+        for j in range(0,10):
             result_1_all_step = sim_1.run(
-                simulation_length=2.0,
-                proxy_data=[(2.0 * j) + np.arange(0.1, 2.1, 0.1),
-                            np.array([result_all[0][1][(20 * j) + i][0][0] for i in range(20)]).reshape((20, 1, 1, 1))])
+                cosim_updates=[np.array([result_all[0][0][(10 * j) + i] for i in range(10)]),
+                            np.array([result_all[0][1][(10 * j) + i][0][0] for i in range(10)]).reshape((10, 1, 1, 1))])
             result_1_all[0] = np.concatenate((result_1_all[0], result_1_all_step[0][0]))
             result_1_all[1] = np.concatenate((result_1_all[1], result_1_all_step[0][1]))
 
         for i in range(100):
-            diff = result_all[0][1][i][0][1:] - result_1_all[1][i, 0, 1:]
-            diff_2 = result_all[0][1][i][0][:1] - result_1_all[1][i, 0, :1]
+            diff = result_all[0][1][i][0][1:] - result_1_all[1][i+10, 0, 1:]
+            diff_2 = result_all[0][1][i][0][:1] - result_1_all[1][i+10, 0, :1]
             assert np.sum(diff, where=np.logical_not(np.isnan(diff))) == 0.0 and np.sum(diff_2, where=np.logical_not(
                 np.isnan(diff_2))) == 0.0

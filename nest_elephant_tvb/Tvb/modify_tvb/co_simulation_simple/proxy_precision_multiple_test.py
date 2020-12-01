@@ -25,7 +25,7 @@
 #   Jochen Mersmann, Anthony R. McIntosh, Viktor Jirsa (2013)
 #       The Virtual Brain: a simulator of primate brain network dynamics.
 #   Frontiers in Neuroinformatics (7:10. doi: 10.3389/fninf.2013.00010)
-from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_simple.function_tvb import TvbSim
+from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_paralelle.function_tvb import TvbSim
 from tvb.tests.library.base_testcase import BaseTestCase
 import numpy as np
 import numpy.random as rgn
@@ -38,35 +38,43 @@ class TestProxyPrecisionDelaiMultiple(BaseTestCase):
                            [6, 1, 7, 9],
                            [10, 0, 5, 6]])
         delay = np.array([[0.1, 0.1, 0.1, 0.1], [0.1, 0.1, 0.1, 0.1], [0.1, 0.1, 0.1, 0.1], [0.1, 0.1, 0.1, 0.1]]) * 10
-        init_value = np.array([[0.1, 0.1, 0.2, 0.2]] * 2)
-        initial_condition = init_value.reshape((2, 1, weight.shape[0], 1))
+        max = np.int(np.max(delay)*10+1)
+        init_value = np.array([[[0.1,0.0], [0.1,0.0], [0.2,0.0], [0.2,0.0]]* max] )
+        initial_condition = init_value.reshape((max, 2, weight.shape[0], 1))
         resolution_simulation = 0.1
-        resolution_monitor = 0.1 * 5
-        time_synchronize = 0.1 * 5
-        proxy_id = [0, 1, 2]
-
-        # full simulation
-        rgn.seed(42)
-        sim_ref = TvbSim(weight, delay, [], resolution_simulation, resolution_monitor, time_synchronize,
-                         initial_condition=initial_condition)
-        time, result_ref, s_ref = sim_ref(resolution_monitor, s=True)
+        time_synchronize = np.min(delay)
+        proxy_id = [0,2,3]
+        no_proxy = [1]
 
         # simulation with one or more proxy
         rgn.seed(42)
-        sim = TvbSim(weight, delay, proxy_id, resolution_simulation, resolution_monitor, time_synchronize,
-                     initial_condition=initial_condition)
-        time, result, s = sim(resolution_monitor, [time, result_ref[:, proxy_id][:, :, 0]], s=True)
+        sim = TvbSim(weight, delay, proxy_id, resolution_simulation, time_synchronize, initial_condition=initial_condition)
+        time, s , result= sim(time_synchronize, rate=True)
 
-        diff = np.where(np.squeeze(result_ref, axis=2)[0] != np.squeeze(result, axis=2)[0])
-        diff_s = np.where(np.squeeze(s_ref, axis=2)[0] != np.squeeze(s, axis=2)[0])
+        # full simulation
+        rgn.seed(42)
+        sim_ref = TvbSim(weight, delay, [], resolution_simulation, time_synchronize, initial_condition=initial_condition)
+        time, s_ref, result_ref = sim_ref(time_synchronize, rate=True)
+
+        diff = np.where(np.squeeze(result_ref[:,no_proxy,:], axis=2) != np.squeeze(result[0][:,no_proxy,:], axis=2))
+        diff_s = np.where(np.squeeze(s_ref[:,no_proxy,:], axis=2) != np.squeeze(s[0][:,no_proxy,:], axis=2))
         assert diff[0].size == 0
         assert diff_s[0].size == 0
 
         for i in range(0, 10000):
-            time, result_ref, s_ref = sim_ref(time_synchronize, s=True)
-            time, result, s = sim(time_synchronize, [time, result_ref[:, proxy_id][:, :, 0]], s=True)
+            time, s, result = sim(time_synchronize, rate_data=[time, result_ref[:, proxy_id][:, :, 0]], rate=True)
 
-            diff = np.where(result_ref != result)
-            diff_s = np.where(s_ref != s)
+            # compare with raw monitor delayed of time_synchronize
+            diff = np.where(result_ref[:,no_proxy,:] != result[1][:,no_proxy,:])
+            diff_1 = np.where(result_ref[:,proxy_id,:] != result[1][:,proxy_id,:])
+            diff_s = np.where(s_ref != s[1])
+            assert diff[0].size ==0
+            assert diff_1[0].size !=0
+            assert diff_s[0].size ==0
+
+            time, s_ref, result_ref = sim_ref(time_synchronize, rate=True)
+            # compare with the co-sim monitor raw
+            diff = np.where(result_ref[:,no_proxy,:] != result[0][:,no_proxy,:])
+            diff_s = np.where(s_ref[:,no_proxy,:] != s[0][:,no_proxy,:])
             assert diff[0].size == 0
-            assert diff_s[0].size == 0
+            assert diff_s[0].size ==0

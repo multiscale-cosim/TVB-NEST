@@ -1,14 +1,14 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
-
 import tvb.simulator.lab as lab
+from tvb.contrib.cosimulation.cosimulator_1 import CoSimulator
+from tvb.contrib.cosimulation.co_sim_monitor import Coupling_co_sim
 from tvb.datatypes.sensors import SensorsInternal
 import numpy.random as rgn
 import numpy as np
 import nest_elephant_tvb.Tvb.modify_tvb.noise as my_noise
 import nest_elephant_tvb.Tvb.modify_tvb.Zerlaut as Zerlaut
-from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import Interface_co_simulation
 from nest_elephant_tvb.Tvb.helper_function_zerlaut import findVec
 from nest_elephant_tvb.Tvb.TVB_tools import run_normal,run_mpi
 
@@ -143,15 +143,17 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
             param_tvb_monitor['path_result']+'/projection.npy'))
     if cosim is not None:
         # special monitor for MPI
-        monitor_IO = Interface_co_simulation(
-           id_proxy=cosim['id_proxy'],
-           time_synchronize=cosim['time_synchronize']
-            )
-        monitors.append(monitor_IO)
-
-
-    #initialize the simulator:
-    simulator = lab.simulator.Simulator(model = model, connectivity = connection,
+        simulator = CoSimulator(
+                                voi = np.array([0]), # coupling with Excitatory firing rate
+                                synchronization_time=cosim['time_synchronize'],
+                                co_monitor = Coupling_co_sim( coupling = coupling ),
+                                proxy_inds=np.asarray(cosim['id_proxy'], dtype=np.int),
+                                model = model, connectivity = connection,
+                                coupling = coupling, integrator = integrator, monitors = monitors
+                                )
+    else:
+        #initialize the simulator:
+        simulator = lab.simulator.Simulator(model = model, connectivity = connection,
                                             coupling = coupling, integrator = integrator, monitors = monitors
                                         )
     simulator.configure()

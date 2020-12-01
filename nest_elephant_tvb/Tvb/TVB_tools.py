@@ -26,6 +26,7 @@ def run_normal(init,path_parameter):
                  param_tvb_model=parameters['param_tvb_model'],
                  param_tvb_monitor=parameters['param_tvb_monitor'])
 
+
 def simulate_tvb(init,results_path,begin,end,param_tvb_connection,param_tvb_coupling,
                  param_tvb_integrator,param_tvb_model,param_tvb_monitor):
     '''
@@ -44,6 +45,7 @@ def simulate_tvb(init,results_path,begin,end,param_tvb_connection,param_tvb_coup
     param_tvb_monitor['path_result']=results_path+'/tvb/'
     simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor)
     run_simulation(simulator,end,param_tvb_monitor)
+
 
 def run_simulation(simulator, time, parameter_tvb):
     '''
@@ -76,9 +78,7 @@ def run_simulation(simulator, time, parameter_tvb):
     np.save(parameter_tvb['path_result']+'/step_'+str(count)+'.npy',save_result)
 
 
-
 ## MPI function for receive and send data
-
 def init_mpi(path,logger):
     """
     initialise MPI connection
@@ -97,6 +97,7 @@ def init_mpi(path,logger):
     comm = MPI.COMM_WORLD.Connect(port)
     logger.info('connect to '+port);sys.stdout.flush()
     return comm
+
 
 def send_mpi(comm,times,data):
     """
@@ -144,6 +145,7 @@ def receive_mpi(comm):
         return time_step,rates
     else:
         return None # TODO take in count
+
 
 def end_mpi(comm,path,sending,logger):
     """
@@ -230,6 +232,7 @@ def run_mpi(init,path):
     param_tvb_monitor['path_result']=result_path+'/tvb/'
     id_proxy = param_co_simulation['id_region_nest']
     time_synch = param_co_simulation['synchronization']
+    time_synch_n = int(np.around(param_co_simulation['synchronization']/param_tvb_integrator['sim_resolution']))
     path_send = result_path+"/translation/send_to_tvb/"
     path_receive = result_path+"/translation/receive_from_tvb/"
     simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,
@@ -255,10 +258,20 @@ def run_mpi(init,path):
     for i in id_proxy :
         comm_send.append(init_mpi(path_receive+str(i)+".txt",logger))
 
+    logger.info(" Send initialisation value TVB")
+    # prepare to send data with MPI
+    nest_data = simulator.output_co_sim_monitor(0, time_synch_n)
+    time = [nest_data[0][0], nest_data[0][-1]]
+    rate = np.concatenate(nest_data[1][:,0,[id_proxy],0])
+    for index, comm in enumerate(comm_send):
+        send_mpi(comm, time, rate[:, index] * 1e3)
+
     # the loop of the simulation
     count = 0
     count_save = 0
     while count*time_synch < end: # FAT END POINT
+
+
         logger.info(" TVB receive data")
         #receive MPI data
         data_value = []
@@ -276,12 +289,10 @@ def run_mpi(init,path):
         data[:]=[time_data,data_value]
 
         logger.info(" TVB start simulation "+str(count*time_synch))
-        nest_data=[]
-        for result in simulator(simulation_length=time_synch,proxy_data=data):
+        for result in simulator(cosim_updates=data):
             for i in range(nb_monitor):
                 if result[i] is not None:
                     save_result[i].append(result[i])
-            nest_data.append([result[-1][0],result[-1][1]])
 
             #save the result in file
             if result[-1][0] >= param_tvb_monitor['save_time']*(count_save+1): #check if the time for saving at some time step
@@ -292,15 +303,16 @@ def run_mpi(init,path):
                 count_save +=1
         logger.info(" TVB end simulation")
 
-        # prepare to send data with MPI
-        nest_data = np.array(nest_data)
-        time = [nest_data[0,0],nest_data[-1,0]]
-        rate = np.concatenate(nest_data[:,1])
-        for index,comm in enumerate(comm_send):
-            send_mpi(comm,time,rate[:,index]*1e3)
-
         #increment of the loop
         count+=1
+
+        # prepare to send data with MPI
+        nest_data = simulator.output_co_sim_monitor(count*time_synch_n, time_synch_n)
+        time = [nest_data[0][0], nest_data[0][-1]]
+        rate = np.concatenate(nest_data[1][:, 0, [id_proxy], 0])
+        for index, comm in enumerate(comm_send):
+            send_mpi(comm, time, rate[:, index] * 1e3)
+
     # save the last part
     logger.info(" TVB finish")
     np.save(param_tvb_monitor['path_result']+'/step_'+str(count_save)+'.npy',save_result)

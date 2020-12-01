@@ -10,6 +10,6 @@
 	url = https://github.com/the-virtual-brain/tvb-root.git
 	branch = tvb_cosim_consensus
 [submodule "nest_elephant_tvb/Tvb/tvb_git"]
-	path = nest_elephant_tvb/Tvb/tvb_git
+	path = tvb_git
 	url = https://github.com/the-virtual-brain/tvb-root.git
 	branch = tvb_cosim_consensus

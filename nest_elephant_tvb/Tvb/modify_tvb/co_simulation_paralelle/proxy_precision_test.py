@@ -38,12 +38,19 @@ class TestPrecision(BaseTestCase):
         weight = np.array([[2, 8], [3, 5]])
         delay = 100.0
         delays = np.array([[delay, delay], [delay, delay]])
-        init_value = [[0.9], [0.9]]
+        init_value = [[0.9,0.0], [0.9,0.0]]
         resolution_simulation = 0.1
         time_synchronize = 0.1 * 10.0
         nb_init = (int(delay / resolution_simulation)) + 1
-        initial_condition = np.array(init_value * nb_init).reshape((nb_init, 1, weight.shape[0], 1))
+        initial_condition = np.array(init_value * nb_init).reshape((nb_init, 2, weight.shape[0], 1))
         proxy_id = [0]
+        no_proxy = [1]
+
+        # simulation with one proxy
+        rgn.seed(42)
+        sim = TvbSim(weight, delays, proxy_id, resolution_simulation, time_synchronize,
+                     initial_condition=initial_condition)
+        time, result = sim(time_synchronize)
 
         # full simulation
         rgn.seed(42)
@@ -51,18 +58,17 @@ class TestPrecision(BaseTestCase):
                          initial_condition=initial_condition)
         time, result_ref = sim_ref(time_synchronize)
 
-        # simulation with one proxy
-        rgn.seed(42)
-        sim = TvbSim(weight, delays, proxy_id, resolution_simulation, time_synchronize,
-                     initial_condition=initial_condition)
-        time, result = sim(time_synchronize, [time, result_ref[:, proxy_id][:, :, 0]])
-
-        diff = np.where(result_ref != result)
+        diff = np.where(result_ref[:,no_proxy,:] != result[0][:,no_proxy,:])
         assert diff[0].size == 0
 
         for i in range(0, 10000):
-            time, result_ref = sim_ref(time_synchronize)
             time, result = sim(time_synchronize, [time, result_ref[:, proxy_id][:, :, 0]])
 
-            diff = np.where(result_ref != result)
+            # compare with raw monitor delayed of time_synchronize
+            diff_1 = np.where(result_ref != result[1])
+            assert diff_1[0].size ==0
+
+            time, result_ref = sim_ref(time_synchronize)
+            # compare with the co-sim monitor raw
+            diff = np.where(result_ref[:,no_proxy,:] != result[0][:,no_proxy,:])
             assert diff[0].size == 0

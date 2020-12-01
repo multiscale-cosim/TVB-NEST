@@ -25,7 +25,7 @@
 #   Jochen Mersmann, Anthony R. McIntosh, Viktor Jirsa (2013)
 #       The Virtual Brain: a simulator of primate brain network dynamics.
 #   Frontiers in Neuroinformatics (7:10. doi: 10.3389/fninf.2013.00010)
-from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_simple.function_tvb import TvbSim
+from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_paralelle.function_tvb import TvbSim
 from tvb.tests.library.base_testcase import BaseTestCase
 import numpy as np
 
@@ -46,7 +46,7 @@ class TestUpdateModel(BaseTestCase):
         proxy_id = [0, 1]
         firing_rate = np.array([[20.0, 10.0]]) * 10 ** -3  # units time in tvb is ms so the rate is in KHz
 
-        sim = TvbSim(weight, delay, proxy_id, resolution_simulation, resolution_monitor, time_synchronize)
+        sim = TvbSim(weight, delay, proxy_id, resolution_simulation, time_synchronize)
         time, result = sim(resolution_monitor, [np.array([resolution_simulation]), firing_rate])
         for i in range(0, 100):
             time, result = sim(time_synchronize, [time + resolution_monitor, np.repeat(firing_rate.reshape(1, 2), int(
