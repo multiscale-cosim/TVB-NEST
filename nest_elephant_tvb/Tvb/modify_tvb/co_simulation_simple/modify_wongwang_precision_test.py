@@ -73,8 +73,8 @@ class TestModifyWongWangRate(TestModifyWongWang):
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
         sim_2 = CoSimulator(
             voi=np.array([0]),
-            synchronization_time=10.0,
-            co_monitor=co_sim_monitor.Raw_incomplete(),
+            synchronization_time=1.0,
+            co_monitor=(co_sim_monitor.Raw_incomplete(),),
             proxy_inds=np.asarray([], dtype=np.int),
             model=model,
             connectivity=connectivity,
@@ -84,10 +84,11 @@ class TestModifyWongWangRate(TestModifyWongWang):
             initial_conditions=init,
         )
         sim_2.configure()
-        result_2_all = sim_2.run()[0][1][:,:,0,0]
-        result_2 = sim_2.run()[0][1][:,:,0,0]
-        diff = result - result_2
-        assert np.sum(diff) == 0.0
+        result_2_init = sim_2.run()[0][1][:,:,0,0]
+        for i in range(10):
+            result_2 = sim_2.run()[0][1][:,:,0,0]
+            diff = result[i*10:(i+1)*10] - result_2
+            assert np.sum(diff) == 0.0
 
     def test_with_proxy(self):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
@@ -101,7 +102,7 @@ class TestModifyWongWangRate(TestModifyWongWang):
         sim_3 = CoSimulator(
             voi = np.array([0]),
             synchronization_time=1.,
-            co_monitor = co_sim_monitor.Raw_incomplete(),
+            co_monitor = (co_sim_monitor.Raw_incomplete(),),
             proxy_inds=np.asarray(id_proxy, dtype=np.int),
             model=model,
             connectivity=connectivity,
@@ -146,7 +147,7 @@ class TestModifyWongWangRate(TestModifyWongWang):
         sim_4 = CoSimulator(
             voi = np.array([0]),
             synchronization_time=1.,
-            co_monitor = co_sim_monitor.Raw_incomplete(),
+            co_monitor = (co_sim_monitor.Raw_incomplete(),),
             proxy_inds=np.asarray(id_proxy, dtype=np.int),
             model=model,
             connectivity=connectivity,
@@ -195,7 +196,7 @@ class TestModifyWongWangRate(TestModifyWongWang):
         sim_5 = CoSimulator(
             voi = np.array([0]),
             synchronization_time=1.,
-            co_monitor = co_sim_monitor.Raw_incomplete(),
+            co_monitor = (co_sim_monitor.Raw_incomplete(),),
             proxy_inds=np.asarray(id_proxy, dtype=np.int),
             model=model,
             connectivity=connectivity,

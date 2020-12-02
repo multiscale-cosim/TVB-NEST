@@ -27,11 +27,11 @@
 #   Frontiers in Neuroinformatics (7:10. doi: 10.3389/fninf.2013.00010)
 #
 #
-import nest_elephant_tvb.Tvb.tvb_git.scientific_library.tvb.simulator.lab as lab
+import tvb.simulator.lab as lab
 import numpy as np
 import numpy.random as rgn
 from tvb.contrib.cosimulation import co_sim_monitor
-from tvb.contrib.cosimulation.cosimulator_1 import CoSimulator
+from tvb.contrib.cosimulation.cosimulator import CoSimulator
 from nest_elephant_tvb.Tvb.modify_tvb.co_simulation_paralelle.Reduced_Wongwang import ReducedWongWangProxy, _numba_dfun_proxy
 
 rgn.seed(42)
@@ -102,7 +102,7 @@ def tvb_init(parameters, time_synchronize, initial_condition):
         sim = CoSimulator(
                           voi = np.array([0]),
                           synchronization_time=time_synchronize,
-                          co_monitor = co_sim_monitor.Raw_incomplete(),
+                          co_monitor = (co_sim_monitor.Raw_incomplete(),),
                           proxy_inds=np.asarray(id_proxy, dtype=np.int),
                           model=model,
                           connectivity=connectivity,
@@ -135,7 +135,7 @@ def tvb_simulation(time, sim, data_proxy):
         start = sim.current_step - sim.synchronization_n_step + 1
         n_step = sim.synchronization_n_step
         result_delayed = sim.run(cosim_updates=data_proxy)
-        result = [sim.output_co_sim_monitor(start, n_step)]
+        result = sim.output_co_sim_monitor(start, n_step)
         time = result[0][0]
         s = [result[0][1][:,0], result_delayed[0][1][:,0]]
         rate = [result[0][1][:,1], result_delayed[0][1][:,1]]

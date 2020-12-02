@@ -72,8 +72,8 @@ class TestModifyWongWang(BaseTestCase):
         # Initialise a Simulator -- Model, Connectivity, Integrator, and Monitors.
         sim_1 = CoSimulator(
                             voi = np.array([0]),
-                            synchronization_time=10.0,
-                            co_monitor = co_sim_monitor.Raw_incomplete(),
+                            synchronization_time=1.0,
+                            co_monitor = (co_sim_monitor.Raw_incomplete(),),
                             proxy_inds=np.asarray([], dtype=np.int),
                             model=model_1,
                             connectivity=connectivity,
@@ -84,12 +84,13 @@ class TestModifyWongWang(BaseTestCase):
         )
         sim_1.configure()
         result_1_all = sim_1.run(cosim_updates=None)
-        result_1_all = sim_1.run(cosim_updates=None)
-        for i in range(100):
-            diff = result_all[0][1][i][0][2:] - result_1_all[0][1][i][0][2:]
-            diff_2 = result_all[0][1][i][0][:2] - result_1_all[0][1][i][0][:2]
-            assert np.sum(diff, where=np.logical_not(np.isnan(diff))) == 0.0 and np.sum(diff_2, where=np.logical_not(
-                np.isnan(diff_2))) == 0.0
+        for j in range(10):
+            result_1_all = sim_1.run(cosim_updates=None)
+            for i in range(10):
+                diff = result_all[0][1][j*10+i][0][2:] - result_1_all[0][1][i][0][2:]
+                diff_2 = result_all[0][1][j*10+i][0][:2] - result_1_all[0][1][i][0][:2]
+                assert np.sum(diff, where=np.logical_not(np.isnan(diff))) == 0.0 and np.sum(diff_2, where=np.logical_not(
+                    np.isnan(diff_2))) == 0.0
 
     def test_precision_with_proxy(self):
         connectivity, coupling, integrator, monitors, sim, result, result_all = self._reference_simulation()
@@ -102,7 +103,7 @@ class TestModifyWongWang(BaseTestCase):
         sim_1 = CoSimulator(
                             voi = np.array([0]),
                             synchronization_time=1.,
-                            co_monitor = co_sim_monitor.Raw_incomplete(),
+                            co_monitor = (co_sim_monitor.Raw_incomplete(),),
                             proxy_inds=np.asarray([0], dtype=np.int),
                             model=model_1,
                             connectivity=connectivity,
