@@ -92,9 +92,9 @@ dictionary of parameters to overwrite the default values of the model.
 n = nest.Create("iaf_psc_alpha",
                 params={"tau_syn_ex": 1.0, "V_reset": -70.0})
 n_2 = nest.Create("iaf_psc_alpha",
-                params={"tau_syn_ex": 2.0, "V_reset": -70.0})
+                params={"tau_syn_ex": 1.0, "V_reset": -70.0})
 
-m = nest.Create("spike_detector",
+m = nest.Create("spike_recorder",
                   params={
                       "record_to": "memory"
                   })
@@ -102,7 +102,7 @@ m = nest.Create("spike_detector",
 s_ex = nest.Create("step_current_generator",
                    params={"amplitude_times": numpy.array([]),
                            "amplitude_values": numpy.array([]),
-                           'input_from':'mpi',
+                           'stimulus_source':'mpi',
                            "label":"test_nest_current"})
 s_in = nest.Create("step_current_generator",
                    params={
@@ -117,12 +117,11 @@ Note that it is positive for excitatory and negative for inhibitory
 connections.
 '''
 
-nest.Connect(s_ex, n, syn_spec={"weight": 1000.0})
-nest.Connect(s_in, n_2, syn_spec={"weight": 1000.0})
 nest.Connect(n,m)
 nest.Connect(n_2,m)
 nest.Connect(s_ex,n)
 nest.Connect(s_in,n_2)
+# nest.Connect(s_ex,n_2)
 
 '''
 A network simulation with a duration of 100 ms is started with `Simulate`.

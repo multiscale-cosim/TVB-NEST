@@ -94,19 +94,19 @@ n = nest.Create("iaf_psc_alpha",
 n_2 = nest.Create("iaf_psc_alpha",
                 params={"tau_syn_ex": 2.0, "V_reset": -70.0})
 
-m = nest.Create("spike_detector",
+m = nest.Create("spike_recorder",
                 params={
                         "record_to": "mpi",
                         "label": "test_nest_spike"})
-m_2 = nest.Create("spike_detector",
+m_2 = nest.Create("spike_recorder",
                 params={
                     "record_to": "mpi",
                     "label":"test_nest_spike"})
-m_3 = nest.Create("spike_detector",
+m_3 = nest.Create("spike_recorder",
                   params={
                       "record_to": "memory",
                       "label":"test_nest_spike"})
-m_4 = nest.Create("spike_detector",
+m_4 = nest.Create("spike_recorder",
                   params={
                       "record_to": "memory",
                       "label":"test_nest_spike"})
@@ -114,7 +114,7 @@ m_4 = nest.Create("spike_detector",
 sys.stdout.flush()
 s_ex = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([]),
-                           'input_from':'mpi',
+                           'stimulus_source':'mpi',
                            "label":"test_nest_spike"})
 s_in = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([15.0, 25.0, 55.0])})

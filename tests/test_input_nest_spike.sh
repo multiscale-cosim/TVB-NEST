@@ -20,7 +20,7 @@ $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/record_nest_activit
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/record_nest_activity/record_region_activity.py  ./test_nest_spike/4.txt &
 
 $RUN -n 1 python3 ./test_nest_file/spikegenerator_mpi.py
-
+wait
 rm -rd test_nest_spike
 
 # return to the calling repertory

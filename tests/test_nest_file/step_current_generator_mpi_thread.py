@@ -95,7 +95,7 @@ n = nest.Create("iaf_psc_alpha",
 n_2 = nest.Create("iaf_psc_alpha",
                 params={"tau_syn_ex": 2.0, "V_reset": -70.0})
 
-m = nest.Create("spike_detector",
+m = nest.Create("spike_recorder",
                   params={
                       "record_to": "memory"
                   })
@@ -103,7 +103,7 @@ m = nest.Create("spike_detector",
 s_ex = nest.Create("step_current_generator",
                    params={"amplitude_times": numpy.array([]),
                            "amplitude_values": numpy.array([]),
-                           'input_from':'mpi',
+                           'stimulus_source':'mpi',
                            "label":"test_nest_current_multi"})
 s_in = nest.Create("step_current_generator",
                    params={
@@ -141,5 +141,6 @@ nest.Run(200.)
 nest.Cleanup()
 # nest.Simulate(200.)
 print(nest.GetStatus(m)[0]['events'])
+# print(nest.GetStatus(m_1)[0]['events'])
 
 

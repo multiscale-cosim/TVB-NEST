@@ -35,7 +35,7 @@ echo "###################################### thread ############################
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/input_nest_current/input_current_multiple.py ./test_nest_current_multi/4.txt 1 &
 $RUN -n 1 python3 ./test_nest_file/step_current_generator_mpi_thread.py
 
-rm -rd test_nest_current_multi
+#rm -rd test_nest_current_multi
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

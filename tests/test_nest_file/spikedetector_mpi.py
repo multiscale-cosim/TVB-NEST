@@ -93,12 +93,12 @@ n = nest.Create("iaf_psc_alpha",
 n_2 = nest.Create("iaf_psc_alpha",
                 params={"tau_syn_ex": 2.0, "V_reset": -70.0})
 
-m = nest.Create("spike_detector",
+m = nest.Create("spike_recorder",
                 params={
                         "record_to": "mpi",
                         "label": "test_nest_record"})
 
-m_2 = nest.Create("spike_detector",
+m_2 = nest.Create("spike_recorder",
                 params={
                     "record_to": "mpi",
                     "label":"test_nest_record"})

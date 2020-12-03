@@ -250,7 +250,8 @@ param_tvb_monitor={
     'parameter_Bold':{
         'variables_of_interest':[0],
         # 'period':param_nest['sim_resolution']*20000.0 # 20 min assuming the step size is 0.1 ms
-    }
+    },
+    'SEEG':False
 }
 
 # Parameters for the translator Nest to TVB
@@ -271,6 +272,7 @@ param_TR_tvb_to_nest={
     # 'nb_synapses' : param_nest_connection['nb_external_synapse'] # number of external synapses
     # 'init': path of the initialisation of the translation if not the run exploration will create it
     # 'level_log': param_co_simulation['level_log']
+    'function_select':2
 }
 
 # Parameters for the module of saving by MPI
