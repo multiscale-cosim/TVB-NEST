@@ -306,7 +306,7 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
                           "record_to": "mpi",
                           'label': '/../translation/spike_detector'
                           }
-       nest.CopyModel('spike_detector', 'spike_detector_record_mpi')
+       nest.CopyModel('spike_recorder', 'spike_detector_record_mpi')
        nest.SetDefaults("spike_detector_record_mpi", param_spike_dec)
        spike_detector=[]
     else:
@@ -319,7 +319,7 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
                           "record_to":"ascii",
                           'label': "spike_detector"
                           }
-        nest.CopyModel('spike_detector','spike_detector_record')
+        nest.CopyModel('spike_recorder','spike_detector_record')
         nest.SetDefaults("spike_detector_record",param_spike_dec)
         #list_record
         spike_detector = nest.Create('spike_detector_record')
@@ -453,7 +453,7 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
     if cosimulation is not None and cosimulation['co-simulation']:
         param_spike_gen= {"start": 0.0,
                       "stop": time_simulation,
-                      "input_from": "mpi",
+                      'stimulus_source': 'mpi',
                       'label': '../translation/spike_generator'
                       }
         nest.CopyModel('spike_generator', 'spike_generator_mpi')
