@@ -260,7 +260,7 @@ def run_mpi(init,path):
 
     logger.info(" Send initialisation value TVB")
     # prepare to send data with MPI
-    nest_data = simulator.output_co_sim_monitor(0, time_synch_n)
+    nest_data = simulator.output_co_sim_monitor(0, time_synch_n)[0]
     time = [nest_data[0][0], nest_data[0][-1]]
     rate = np.concatenate(nest_data[1][:,0,[id_proxy],0])
     for index, comm in enumerate(comm_send):
@@ -307,7 +307,7 @@ def run_mpi(init,path):
         count+=1
 
         # prepare to send data with MPI
-        nest_data = simulator.output_co_sim_monitor(count*time_synch_n, time_synch_n)
+        nest_data = simulator.output_co_sim_monitor(count*time_synch_n, time_synch_n)[0]
         time = [nest_data[0][0], nest_data[0][-1]]
         rate = np.concatenate(nest_data[1][:, 0, [id_proxy], 0])
         for index, comm in enumerate(comm_send):

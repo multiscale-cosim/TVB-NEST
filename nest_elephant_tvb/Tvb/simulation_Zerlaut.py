@@ -2,7 +2,7 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 import tvb.simulator.lab as lab
-from tvb.contrib.cosimulation.cosimulator_1 import CoSimulator
+from tvb.contrib.cosimulation.cosimulator import CoSimulator
 from tvb.contrib.cosimulation.co_sim_monitor import Coupling_co_sim
 from tvb.datatypes.sensors import SensorsInternal
 import numpy.random as rgn
@@ -146,7 +146,7 @@ def init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_
         simulator = CoSimulator(
                                 voi = np.array([0]), # coupling with Excitatory firing rate
                                 synchronization_time=cosim['time_synchronize'],
-                                co_monitor = Coupling_co_sim( coupling = coupling ),
+                                co_monitor = (Coupling_co_sim( coupling = coupling ),),
                                 proxy_inds=np.asarray(cosim['id_proxy'], dtype=np.int),
                                 model = model, connectivity = connection,
                                 coupling = coupling, integrator = integrator, monitors = monitors
