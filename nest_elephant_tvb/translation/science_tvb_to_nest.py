@@ -26,10 +26,10 @@ class generate_data:
         :param path : path for the logger files
         :param nb_spike_generator: number of spike generator/neurons in each regions
         """
-        self.percentage_shared = param['percentage_shared'] # percentage of shared rate between neurons
-        self.nb_spike_generator = nb_spike_generator        # number of spike generator
-        self.nb_synapse = param['nb_synapses']
-        self.function_translation = param['function_select'] #TODO add a parameter for this
+        self.percentage_shared = param['percentage_shared']  # percentage of shared rate between neurons
+        self.nb_spike_generator = nb_spike_generator         # number of spike generator
+        self.nb_synapse = param['nb_synapses']               # number of synapses by neurons
+        self.function_translation = param['function_select'] # choose the function for the translation
 
         np.random.seed(param['seed'])
 

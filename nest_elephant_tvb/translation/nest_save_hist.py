@@ -45,7 +45,7 @@ def save(path,logger,nb_step,step_save,status_data,buffer):
         count+=1
     logger.info('Save : ending');sys.stdout.flush()
     if buffer_save is not None:
-        np.save(path + str(count) + ".npy", buffer_save)
+        np.save(path + "_" + str(count) + ".npy", buffer_save)
     return
 
 

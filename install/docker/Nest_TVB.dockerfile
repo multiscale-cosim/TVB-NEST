@@ -60,7 +60,7 @@ RUN cd /home/;\
     export NEST_DATA_PATH=$PATH_BUILD/pynest;\
     mkdir $PATH_BUILD;\
     cd $PATH_BUILD;\
-    cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-python=3;\
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-python=ON;\
     make -j$(nproc);\
     make install
     #make installcheck

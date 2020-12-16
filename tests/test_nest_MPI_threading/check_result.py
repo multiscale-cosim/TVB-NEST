@@ -1,3 +1,6 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+
 import numpy as np
 import sys
 import os
@@ -271,14 +274,15 @@ def check_GC_spike_neuron(path,nb_mpi,neurons,separate):
     else:
         print('skip test')
 
-def check(nb_VP,nb_mpi,nb_run, time_sim,
+def check(path,nb_VP,nb_mpi,nb_run, time_sim,
                    spike_generator=0,parrot=0,iaf=0,
-                  separate=False, nb_mpi_recorder=0,
+                   nb_mpi_recorder=0,separate=False,
                    nb_mpi_generator_spike=0,nb_mpi_generator_current=0,shared_mpi_input=False,
                    mix_mpi=0,
                    ):
     """
     return all the test for one simulation case
+    :param path: path of the folder
     :param nb_VP: number of virtual process
     :param nb_mpi: number of mpi rank
     :param nb_run: number of run
@@ -305,7 +309,8 @@ def check(nb_VP,nb_mpi,nb_run, time_sim,
            +'_R_'+str(nb_mpi_recorder)+'_Separate_'+str(int(separate))\
            +'_GS_'+str(nb_mpi_generator_spike) +'_GC_'+str(nb_mpi_generator_current)\
            +'_SH_'+str(int(shared_mpi_input))+'_SM_'+str(mix_mpi)+'/'
-    path =  os.path.dirname(os.path.realpath(__file__))+"/files/"+name
+    #TODO check the name is corresponding
+    path = path+'/'
 
     # compute index and nb element for distinguish the different tests
     nb_element = int(parrot>0) + int(spike_generator>0) + int(iaf>0)
@@ -403,12 +408,12 @@ if __name__ == "__main__":
     # check(16,16,3,200.0,2,2,2,False,6,6,6,False,0)
     # print('test 1')
     # check(16,8 ,3,200.0,2,2,2,True ,6,6,6,False,0)
-    if len(sys.argv) == 3:
-        check(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),float(sys.argv[4]),
-               int(sys.argv[5]),int(sys.argv[6]),int(sys.argv[7]),
-               bool(int(sys.argv[8])),int(sys.argv[9]),
-               int(sys.argv[10]),int(sys.argv[11]),bool(int(sys.argv[12])),
-               int(sys.argv[13])
+    if len(sys.argv) == 15:
+        check(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),float(sys.argv[5]),
+               int(sys.argv[6]),int(sys.argv[7]),int(sys.argv[8]),
+               int(sys.argv[9]),bool(int(sys.argv[10])),
+               int(sys.argv[11]),int(sys.argv[12]),bool(int(sys.argv[13])),
+               int(sys.argv[14])
                )
     else:
         print('bad number of argument')

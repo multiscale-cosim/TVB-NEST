@@ -46,6 +46,7 @@ def rates_to_spikes( rates, t_start, t_stop, variation=False):
 
 def spikes_to_rate( spikes,t_start,t_stop, windows=0.0):
     """
+    #WARNING function unused but keep it for idea
     Compute the rate of one spike train or multiple of spike trains
 
     #TODO : need to have add the overlapping of windows
@@ -53,7 +54,7 @@ def spikes_to_rate( spikes,t_start,t_stop, windows=0.0):
     :param t_start: time to start to compute rate
     :param t_stop: time to stop to compute rate
     :param windows: the window for compute rate
-    # :param overlaps: FUTURE overlasp of window
+    # :param overlaps: FUTURE overlap of window
     :return: rates or variation of rates
     """
 

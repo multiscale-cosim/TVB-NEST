@@ -1,12 +1,15 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+
 import logging
 import numpy as np
 
 def create_logger(path,name):
     """
-    creatae the logger for the different part of the test
+    create the logger for the different part of the test
     :param path: path of files
     :param name: name of the testing part
-    :return:
+    :return: logger
     """
     # Configure logger
     logger = logging.getLogger(name)
@@ -25,7 +28,7 @@ def generate_spike(seed,nb_run,time_sim,size_shape=100):
     :param nb_run: number of run
     :param time_sim: the time of 1 run
     :param size_shape:  maximum size of the shape
-    :return:
+    :return: tuple shape and data
     """
     np.random.seed(seed)
     shapes = []
@@ -38,6 +41,14 @@ def generate_spike(seed,nb_run,time_sim,size_shape=100):
     return (shapes,datas)
 
 def generate_current(seed,nb_run,time_sim,size_shape=100):
+    '''
+    generate current for input
+    :param seed: seed of the generator
+    :param nb_run: number of run
+    :param time_sim: simulation time
+    :param size_shape:   maximum size of the shape
+    :return: shapes and data
+    '''
     np.random.seed(seed)
     shapes = []
     datas = []

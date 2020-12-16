@@ -1075,7 +1075,7 @@ end</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 end</panel_attributes>
-    <additional_attributes>810.0;40.0;810.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>820.0;40.0;820.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
@@ -1092,13 +1092,13 @@ bg=red</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
+      <x>825</x>
       <y>705</y>
-      <w>20</w>
+      <w>15</w>
       <h>245</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>20.0;10.0;10.0;470.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;470.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1160,11 +1160,11 @@ bg=red</panel_attributes>
     <coordinates>
       <x>775</x>
       <y>950</y>
-      <w>60</w>
+      <w>65</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>100.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>110.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLFrame</id>
@@ -1596,7 +1596,7 @@ layer=1</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>795</x>
+      <x>800</x>
       <y>940</y>
       <w>60</w>
       <h>15</h>

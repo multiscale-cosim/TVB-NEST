@@ -1,9 +1,11 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+
 import nest
 import numpy as np
-import os
 from tests.test_nest_MPI_threading.helper import generate_spike, generate_current, create_logger
 
-def create_network(nb_VP,nb_mpi,nb_run, time_sim,
+def create_network(path,nb_VP,nb_mpi,nb_run, time_sim,
                    spike_generator=0,parrot=0,iaf=0,
                    nb_mpi_recorder=0,separate=False,
                    nb_mpi_generator_spike=0,nb_mpi_generator_current=0,shared_mpi_input=False,
@@ -11,6 +13,7 @@ def create_network(nb_VP,nb_mpi,nb_run, time_sim,
                    ):
     """
     configure Nest for the testing part
+    :param path: path for saving sim
     :param nb_VP: number of virtual processing
     :param nb_mpi: number of MPI rank
     :param nb_run: number of run
@@ -37,11 +40,12 @@ def create_network(nb_VP,nb_mpi,nb_run, time_sim,
            +'_R_'+str(nb_mpi_recorder)+'_Separate_'+str(int(separate))\
            +'_GS_'+str(nb_mpi_generator_spike) +'_GC_'+str(nb_mpi_generator_current)\
            +'_SH_'+str(int(shared_mpi_input))+'_SM_'+str(mix_mpi)
-    logger = create_logger(os.path.dirname(os.path.realpath(__file__))+"/files/"+name+'/',name='nest_'+str(nest.Rank())) # TODO need to use it for the degging part
+    logger = create_logger(path+'/log/',name='nest_'+str(nest.Rank())) # TODO need to use it for the degging part
+
 
     nest.ResetKernel()
     nest.SetKernelStatus({"overwrite_files": True,
-                          "data_path": os.path.dirname(os.path.realpath(__file__))+"/files/"+name,
+                          "data_path": path,
                           "total_num_virtual_procs":nb_VP,
                           })
     # compute index and nb element for distinguish the different tests
@@ -93,14 +97,14 @@ def create_network(nb_VP,nb_mpi,nb_run, time_sim,
     generator_spike = []
     generator_current = []
     for i in range(nb_mpi_recorder):
-        recorders.append(nest.Create("spike_detector",params={"record_to": "mpi","label": "file_record"}))
+        recorders.append(nest.Create("spike_recorder",params={"record_to": "mpi","label": "file_record"}))
     for i in range(nb_mpi_generator_spike):
-        generator_spike.append(nest.Create("spike_generator", params={"spike_times": np.array([]), 'input_from': 'mpi',
+        generator_spike.append(nest.Create("spike_generator", params={"spike_times": np.array([]), 'stimulus_source': 'mpi',
                                                                       "label": "file_gen_spike"}))
     for i in range(nb_mpi_generator_current):
         generator_current.append(nest.Create("step_current_generator", params={'amplitude_times':np.array([]),
                                              'amplitude_values':np.array([]),
-                                             'input_from': 'mpi', "label": "file_gen_current"}))
+                                             'stimulus_source': 'mpi', "label": "file_gen_current"}))
 
    # particular device
     poisson_generator=None
@@ -113,7 +117,7 @@ def create_network(nb_VP,nb_mpi,nb_run, time_sim,
     recorder_device = []
     recorder_neuron = []
     for i in range(nb_mpi_recorder):
-        recorders_twins.append(nest.Create("spike_detector",params={"record_to": "memory"}))
+        recorders_twins.append(nest.Create("spike_recorder",params={"record_to": "memory"}))
         if parrot > 0:
             if (index_parrot != -1 and i % nb_element == index_parrot)  or index_parrot == -2:
                 recorder_parrot.append( nest.Create('parrot_neuron',parrot))
@@ -163,12 +167,12 @@ def create_network(nb_VP,nb_mpi,nb_run, time_sim,
         if parrot > 0:
             if (index_parrot != -1 and i % nb_element == index_parrot) or index_parrot == -2:
                 new_parrot = nest.Create('parrot_neuron', parrot)
-                generator_spike_parrot.append(nest.Create("spike_detector",params={"record_to": "memory"}))
+                generator_spike_parrot.append(nest.Create("spike_recorder",params={"record_to": "memory"}))
                 nest.Connect(generator_spike[i],new_parrot)
                 nest.Connect(new_parrot,generator_spike_parrot[-1])
                 if separate:
                     new_parrot_2 = nest.Create('parrot_neuron',parrot)
-                    generator_spike_parrot_bis.append(nest.Create("spike_detector", params={"record_to": "memory"}))
+                    generator_spike_parrot_bis.append(nest.Create("spike_recorder", params={"record_to": "memory"}))
                     nest.Connect(generator_spike_twin[i],new_parrot_2)
                     nest.Connect(new_parrot_2,generator_spike_parrot_bis[-1])
                 else:
@@ -176,21 +180,21 @@ def create_network(nb_VP,nb_mpi,nb_run, time_sim,
         if spike_generator > 0:
             if (index_device != -1 and i % nb_element == index_device)  or index_device == -2:
                 np.random.seed(generator_spike[-1].tolist()[0])
-                generator_spike_device.append(nest.Create("spike_detector",spike_generator))
+                generator_spike_device.append(nest.Create("spike_recorder",spike_generator))
                 nest.Connect(generator_spike[i],generator_spike_device[-1])
                 if separate:
-                    generator_spike_device_bis.append(nest.Create("spike_detector",spike_generator))
+                    generator_spike_device_bis.append(nest.Create("spike_recorder",spike_generator))
                     nest.Connect(generator_spike_twin[i], generator_spike_device_bis[-1])
                 else:
                     nest.Connect(generator_spike_twin[i], generator_spike_device[-1])
         if iaf > 0:
             if (index_aif != -1 and i % nb_element == index_aif)  or index_aif == -2:
                 neuron_test = nest.Create('iaf_psc_alpha',iaf)
-                generator_spike_neuron.append(nest.Create("spike_detector",1))
+                generator_spike_neuron.append(nest.Create("spike_recorder",1))
                 nest.Connect(generator_spike[i],neuron_test)
                 nest.Connect(neuron_test,generator_spike_neuron[-1])
                 if separate:
-                    generator_spike_neuron_bis.append(nest.Create("spike_detector",1))
+                    generator_spike_neuron_bis.append(nest.Create("spike_recorder",1))
                     nest.Connect(generator_spike_twin[i], generator_spike_neuron_bis[-1])
                 else:
                     nest.Connect(generator_spike_twin[i], generator_spike_neuron[-1])
@@ -282,18 +286,18 @@ def create_network(nb_VP,nb_mpi,nb_run, time_sim,
             for device in devices:
                 for data in nest.GetStatus(device):
                     data_collect.append(data['events'])
-            name_save = os.path.dirname(os.path.realpath(__file__))+"/files/"+name+'/'+label + '_rank_' + str(nest.Rank()) + '.npy'
+            name_save = path+'/'+label + '_rank_' + str(nest.Rank()) + '.npy'
             np.save(name_save,data_collect,allow_pickle=True)
 
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)== 14 :
-        create_network(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),float(sys.argv[4]),
-                       int(sys.argv[5]),int(sys.argv[6]),int(sys.argv[7]),
-                       int(sys.argv[8]),bool(int(sys.argv[9])),
-                       int(sys.argv[10]),int(sys.argv[11]),bool(int(sys.argv[12])),
-                       int(sys.argv[13])
+    if len(sys.argv)== 15 :
+        create_network(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),float(sys.argv[5]),
+                       int(sys.argv[6]),int(sys.argv[7]),int(sys.argv[8]),
+                       int(sys.argv[9]),bool(int(sys.argv[10])),
+                       int(sys.argv[11]),int(sys.argv[12]),bool(int(sys.argv[13])),
+                       int(sys.argv[14])
                        )
     else:
         print('missing argument')

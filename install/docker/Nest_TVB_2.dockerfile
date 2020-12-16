@@ -64,7 +64,7 @@ RUN cd /home/;\
     export PATH=$PATH:$PATH_INSTALATION/bin;\
     mkdir $PATH_BUILD;\
     cd $PATH_BUILD;\
-    cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-readline=On -Dwith-ltdl=ON -Dwith-python=3 -Dcythonize-pynest=ON ;\
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-readline=On -Dwith-ltdl=ON -Dwith-python=ON -Dcythonize-pynest=ON ;\
     make;\
     make install
     #make installcheck

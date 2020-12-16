@@ -15,6 +15,6 @@ if __name__ == "__main__":
     if len(sys.argv)==4:
         run_exploration(sys.argv[1],float(sys.argv[2]),float(sys.argv[3]))
     elif len(sys.argv)==1:
-        run_exploration( './test_file/', 0.0, 2000.0)
+        run_exploration( './test_file/nest_only/', 0.0, 200.0)
     else:
         print('missing argument')

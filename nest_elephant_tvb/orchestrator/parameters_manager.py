@@ -28,7 +28,7 @@ def generate_parameter(parameter_default,results_path,dict_variable=None):
                     parameters[parameters_name] = parameters_values
             if variable in parameters['param_nest_topology']['param_neuron_excitatory'].keys():
                 parameters['param_nest_topology']['param_neuron_excitatory'][variable]=dict_variable[variable]
-            #elif variable in parameters['param_topology']['param_neuron_inhibitory'].keys():
+            #elif variable in parameters['param_topology']['param_neuron_inhibitory'].keys(): # TODO problem to difference between inihibitory and excitatory parameters
             #   parameters['param_topology']['param_neuron_inhibitory'][variable] = dict_variable[variable]
     return create_linked_parameters(results_path,parameters)
 
@@ -153,7 +153,6 @@ def create_linked_parameters(results_path,parameters):
 def save_parameter(parameters,results_path,begin,end):
     """
     save the parameters of the simulations in json file
-    #TODO simplify the function
     :param parameters: dictionary of parameters
     :param results_path: where to save the result
     :param begin: when start the recording simulation ( not take in count for tvb (start always to zeros )

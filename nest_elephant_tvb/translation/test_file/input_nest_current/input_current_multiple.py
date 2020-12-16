@@ -34,7 +34,6 @@ def input(path,nb_mpi):
     check = np.empty(1,dtype='b')
     starting = 1
     count=0
-    count_send=0
     while True:
         comm.Recv([check, 1, MPI.CXX_BOOL], source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status_)
         print(" start to send"); sys.stdout.flush()

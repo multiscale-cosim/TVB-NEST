@@ -1,3 +1,6 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+
 def neuron_widget (nb_thread=4):
     import ipywidgets as ipw
     import nest
@@ -68,13 +71,13 @@ def neuron_widget (nb_thread=4):
         nest.CopyModel("static_synapse","inhibitory",{"weight":w_in})
         nest.Connect(G_in,neuron,{'rule': 'pairwise_bernoulli', 'p': p_in},syn_spec="inhibitory")
         # Run it
-        nest.CopyModel("spike_detector","sd_ex",{"record_to": 'memory'})
+        nest.CopyModel("spike_recorder","sd_ex",{"record_to": 'memory'})
         MG_ex = nest.Create("sd_ex")
         nest.Connect(G_ex, MG_ex,syn_spec='static_synapse')
-        nest.CopyModel("spike_detector","sd_in",{"record_to": 'memory'})
+        nest.CopyModel("spike_recorder","sd_in",{"record_to": 'memory'})
         MG_in = nest.Create("sd_in")
         nest.Connect(G_in, MG_in,syn_spec='static_synapse')
-        nest.CopyModel("spike_detector","sd_n",{"record_to": 'memory'})
+        nest.CopyModel("spike_recorder","sd_n",{"record_to": 'memory'})
         MSH = nest.Create("sd_n")
         nest.Connect(neuron, MSH,syn_spec='static_synapse')
         MH = nest.Create("multimeter",params={"record_to": 'memory', "record_from":["V_m",'w']})
@@ -236,4 +239,4 @@ def neuron_widget (nb_thread=4):
                  duration=ipw.FloatSlider(value=200.0, min=10.0, max=20000.0, step=10.0, continuous_update=False,
                            description=r"time simulation (ms)", style=style,
                                    layout=layout)
-                );
+                )

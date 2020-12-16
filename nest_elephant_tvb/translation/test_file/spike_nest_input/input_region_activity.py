@@ -10,7 +10,6 @@ def input(path):
     """
     Simulate some random spike train input
     :param path: the file for the configurations of the connection
-    :param nb_mpi: number of mpi rank for testing multi-threading and MPI simulation
     :return:
     """
     #Start communication channels

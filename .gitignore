@@ -4,6 +4,7 @@
 *.pyc
 */*/__pycache__
 */*/*/__pycache__
+example/.ipynb_checkpoints/
 */test_file/*
 lib/
 */*/*.simg

@@ -2,7 +2,6 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 from nest_elephant_tvb.orchestrator.run_exploration import run_exploration_2D
-import mpi4py.MPI as MPI
 from example.parameter import test_nest as parameter_test
 
 # file for testing the co-simulation

@@ -312,10 +312,6 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
     else:
         param_spike_dec= {"start": min_time,
                           "stop": time_simulation,
-                          #"withtime": True,
-                          #"withgid": True,
-                          #'to_file': True,
-                          #'to_memory': False,
                           "record_to":"ascii",
                           'label': "spike_detector"
                           }
@@ -323,17 +319,6 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
         nest.SetDefaults("spike_detector_record",param_spike_dec)
         #list_record
         spike_detector = nest.Create('spike_detector_record')
-
-    # #  Multimeter
-    # dict_multimeter = {}
-    # # parameter of the multimeter
-    # param_mul = {"start": min_time,
-    #              "stop": time_simulation,
-    #              "interval": 0.1,
-    #              "record_from": ["V_m",'w'],
-    #              "withtime": True,
-    #              'to_accumulator': True,
-    #              }
 
     #Connection to population
     for name_pops,items in dic_layer.items():
@@ -365,7 +350,7 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
 
     if param_background['record_spike']:
         for label, (id_first,id_end) in param_background['record_spike_list'].items():
-            spike_detector_simple = nest.Create('spike_detector', 1, params={
+            spike_detector_simple = nest.Create('spike_recorder', 1, params={
                 "start": min_time,
                 "stop": time_simulation,
                 "record_to": "ascii",
@@ -392,7 +377,6 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
     #     nest.SetDefaults("dc_stim",param_dc)
     #     dc_stim = nest.Create('dc_stim',1)
     #     nest.Connect(dc_stim,dic_layer['excitatory']['list'][param_background['stimulus_target']]['region'],{'connection_type': 'divergent'})
-
 
     #poisson_generator input
     if param_background['poisson']:
@@ -434,10 +418,6 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
             "stop": time_simulation}
         nest.CopyModel("noise_generator",'noise_generator_global')
         nest.SetDefaults('noise_generator_global',param_noise_generator)
-        conndict_noise = {'connection_type': 'divergent',
-                       'weights' :param_background['weight_noise'],
-                       'delays' : nest.GetKernelStatus("min_delay"), # without delay
-                        }
         syn_spec_noise ={
             'weight' :param_background['weight_noise'],
             'delay' : nest.GetKernelStatus("min_delay"), # without delay
@@ -475,7 +455,6 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
                             conn_spec={'rule': 'one_to_one'},
                              )
                 nb_device+=nb_neurons[index]
-
     return spike_detector,spike_generator
 
 

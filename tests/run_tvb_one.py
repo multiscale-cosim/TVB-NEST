@@ -17,6 +17,6 @@ if __name__ == "__main__":
     if len(sys.argv)==4:
         run_exploration(sys.argv[1],float(sys.argv[2]),float(sys.argv[3]))
     elif len(sys.argv)==1:
-        run_exploration( './test_file/test_3/', 0.0, 10000.0)
+        run_exploration( './test_file/tvb_1/', 0.0, 1000.0)
     else:
         print('missing argument')

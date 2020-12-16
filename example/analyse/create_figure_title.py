@@ -1,15 +1,18 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
 import numpy as np
 import networkx as nx
 
-def create_figure_title(param, data_1, image=None, alpha_image=0.4, threshold=1.0, size_edges=1.0, color_Nest='royalblue', color_TVB='tomato',
+def create_figure_title(param, data_1, result_raw, image=None, alpha_image=0.4, threshold=1.0, size_edges=1.0, color_Nest='royalblue', color_TVB='tomato',
                        size_node_TVB=50.0, size_node_Nest=100.0, alpha_node=1.0, size_neurons=0.1):
     """
     print three figure and some text about the connectome for the simulation
     :param param: parameter for the simulation
     # parameter for display the graph (only available if the centers of regions is available)
     # parameter for the background image
+    :param data_1 : Nest data
+    :param result_raw : TVB data
     :param image: the image to ad in background of the graph
     :param alpha_image: the transparency of the image
     # parameter for edge of the graph
@@ -74,8 +77,8 @@ def create_figure_title(param, data_1, image=None, alpha_image=0.4, threshold=1.
     plt.axis('off')
 
 
-    spikes_ex = data['pop_1_ex']
-    spikes_in = data['pop_1_in']
+    spikes_ex = data_1['pop_1_ex']
+    spikes_in = data_1['pop_1_in']
     plt.subplot(244)
     for i in range(spikes_ex[0].shape[0]):
         plt.plot(spikes_ex[1][i], np.repeat(spikes_ex[0][i], spikes_ex[1][i].shape[0]), '.b',
@@ -85,8 +88,8 @@ def create_figure_title(param, data_1, image=None, alpha_image=0.4, threshold=1.
                  markersize=size_neurons)
     plt.axis('off')
 
-    spikes_ex = data['pop_2_ex']
-    spikes_in = data['pop_2_in']
+    spikes_ex = data_1['pop_2_ex']
+    spikes_in = data_1['pop_2_in']
     plt.subplot(248)
     for i in range(spikes_ex[0].shape[0]):
         plt.plot(spikes_ex[1][i], np.repeat(spikes_ex[0][i], spikes_ex[1][i].shape[0]), '.b',
@@ -111,6 +114,7 @@ if __name__ == '__main__':
                                       'path_centers':'../../example/parameter/data_mouse/centres.txt'
                                       }
               }
+    ## Test of colors
     # color_Nest = 'royalblue'
     # color_TVB  = 'tomato'
     # color_Nest = 'darkviolet'
@@ -120,10 +124,10 @@ if __name__ == '__main__':
     # color_TVB  = 'mediumturquoise'
     color_TVB  = 'darkgreen'
 
-    data = get_data_all('../../example/long_simulation/nest/')
+    datas = get_data_all('../../example/long_simulation/nest/')
     result_raw = get_rate('../../example/long_simulation/tvb/')[0]  # result of the Raw monitor
 
-    create_figure_title(param, data, image='../../example/parameter/data_mouse/StruturalMRI_allen_40.npy',
+    create_figure_title(param, datas, result_raw, image='../../example/parameter/data_mouse/StruturalMRI_allen_40.npy',
                        color_Nest=color_Nest, color_TVB=color_TVB,
                        size_edges=0.5,
                        threshold=0.05, size_neurons=0.1)

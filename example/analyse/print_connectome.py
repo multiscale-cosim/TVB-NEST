@@ -1,3 +1,6 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
@@ -44,7 +47,7 @@ def display_connectome(param, image=None, alpha_image=0.4, threshold=1.0, size_e
         rect = Rectangle((i, 0), 1, nb_regions, linewidth=1, edgecolor=color_Nest, facecolor='none')
         axis_1.add_patch(rect)
 
-        # plot delay
+    # plot delay
     axis_2 = axs[1]
     cs = axis_2.imshow(delays)
     fig.colorbar(cs, fraction=0.046, pad=0.04, ax=axis_2)
@@ -106,3 +109,24 @@ def display_connectome(param, image=None, alpha_image=0.4, threshold=1.0, size_e
         else:
             plt.xlim(xmax=np.max(Nposition[:, 0]) + 0.1, xmin=np.min(Nposition[:, 0]) - 0.1)
             plt.ylim(ymax=np.max(Nposition[:, 1]) + 0.1, ymin=np.min(Nposition[:, 1]) - 0.1)
+    plt.show()
+
+# Test the function, helping for debugging
+if __name__ == '__main__':
+    from example.analyse.get_data import get_data_all,get_rate
+    param = { 'param_nest_connection':{"path_weight":'../../example/parameter/data_mouse/weights.npy',
+                                       "path_distance": '../../example/parameter/data_mouse/distance.npy',
+                                        "velocity":3.0},
+              'param_co_simulation':{"id_region_nest":[29,81]},
+              'param_nest_topology':{"nb_region":104},
+              'param_tvb_connection':{'path_region_labels':'../../example/parameter/data_mouse/region_labels.txt',
+                                      'path_centers':'../../example/parameter/data_mouse/centres.txt'
+                                      }
+              }
+    color_Nest = 'gold'
+    color_TVB = 'darkgreen'
+
+    display_connectome(param, image='../../example/parameter/data_mouse/StruturalMRI_allen_40.npy',
+                       color_Nest=color_Nest, color_TVB=color_TVB,
+                       size_edges=0.5,
+                       threshold=0.05)

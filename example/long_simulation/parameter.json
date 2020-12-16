@@ -7,11 +7,11 @@
 "param_tvb_connection" : {"path_region_labels": "/home/nest_elephant_tvb/parameter/data_mouse//region_labels.txt", "path_centers": "/home/nest_elephant_tvb/parameter/data_mouse//centres.txt", "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy", "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy", "nb_region": 104, "velocity": 3.0},
 "param_tvb_coupling" : {"a": 1.0},
 "param_tvb_integrator" : {"tau_OU": 20.0, "mu": [0.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "nsig": [0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "weights": [0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "sim_resolution": 0.1, "seed": 45, "seed_init": 44},
-"param_tvb_monitor" : {"save_time": 20.0, "Raw": true, "TemporalAverage": false, "parameter_TemporalAverage": {"variables_of_interest": [0, 1, 2, 3], "period": 1.0}, "Bold": false, "parameter_Bold": {"variables_of_interest": [0], "period": 2000.0}},
-"param_TR_nest_to_tvb" : {"init": "./long_simulation//init_spikes.npy", "resolution": 0.1, "nb_neurons": 800.0, "synch": 3.5, "width": 20.0, "level_log": 1},
-"param_TR_tvb_to_nest" : {"percentage_shared": 0.0, "init": "./long_simulation//init_rates.npy", "level_log": 1, "seed": 43, "nb_synapses": 115},
+"param_tvb_monitor" : {"save_time": 20.0, "Raw": true, "TemporalAverage": false, "parameter_TemporalAverage": {"variables_of_interest": [0, 1, 2, 3], "period": 1.0}, "Bold": false, "parameter_Bold": {"variables_of_interest": [0], "period": 2000.0}, "SEEG": false, "parameter_SEEG": {"path": "/home/nest_elephant_tvb/parameter/data_mouse/sensor_hypocampus.txt", "scaling_projection": 100.0}},
+"param_TR_nest_to_tvb" : {"init": "./short_simulation//init_spikes.npy", "resolution": 0.1, "nb_neurons": 800.0, "synch": 3.5, "width": 20.0, "level_log": 1},
+"param_TR_tvb_to_nest" : {"percentage_shared": 0.001, "function_select": 2, "init": "./short_simulation//init_rates.npy", "level_log": 1, "seed": 43, "nb_synapses": 115},
 "param_co_simulation" : {"co-simulation": true, "nb_MPI_nest": 10, "record_MPI": false, "id_region_nest": [29, 81], "synchronization": 3.5, "level_log": 1, "cluster": false},
-"result_path":"/home/kusch/Documents/project/co_simulation/TVB-NEST/example/long_simulation/",
+"result_path":"/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/long_simulation/",
 "begin":0.0,
 "end":2000.0
 }

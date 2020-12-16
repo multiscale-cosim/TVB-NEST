@@ -43,12 +43,14 @@ def receive(logger,store,status_data,buffer, comm):
                 data = np.empty(shape[0], dtype='d')
                 comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
                 store.add_spikes(count,data)
+            logger.info(" Nest to TVB : wait status")
             while status_data[0] != 1 and status_data[0] != 2: # FAT END POINT
                 time.sleep(0.001)
                 pass
             # wait until the data can be send to the sender thread
             # Set lock to true and put the data in the shared buffer
             buffer[0] = store.return_data()
+            logger.info(" Nest to TVB : update buffer")
             with lock_status: # FAT END POINT
                 if status_data[0] != 2:
                     status_data[0] = 0
@@ -89,7 +91,7 @@ def send(logger,analyse,status_data,buffer, comm):
         logger.info(" Nest to TVB : send data status : " +str(status_.Get_tag()))
         if status_.Get_tag() == 0:
             # send the rate when there ready
-            while status_data[0] != 0: # FAT END POINT
+            while status_data[0] != 0 and status_data[0] != 2: # FAT END POINT
                 time.sleep(0.001)
                 pass
             times,data=analyse.analyse(count,buffer[0])
@@ -145,7 +147,6 @@ def create_logger(path,name, log_level):
 
 if __name__ == "__main__":
     import sys
-    from timer.Timer import Timer
 
     if len(sys.argv)!=4:
         print('incorrect number of arguments')

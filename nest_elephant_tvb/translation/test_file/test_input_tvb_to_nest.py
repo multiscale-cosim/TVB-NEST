@@ -69,7 +69,7 @@ def simulate_TVB_output(path,min_delay):
     while not accept:
          req = comm.irecv(source=0,tag=0)
          accept = req.wait(status_)
-    print("TVB_OUTPUT :ending" );sys.stdout.flush()
+    print("TVB_OUTPUT :ending 2" );sys.stdout.flush()
     comm.Send([times, MPI.DOUBLE], dest=0, tag=1)
     comm.Disconnect()
     MPI.Close_port(port)

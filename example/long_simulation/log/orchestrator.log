@@ -1,6 +1,5 @@
-2020-08-25 16:41:34,785 - orchestrator - INFO - time: 2020-08-25 16:41:34.785346 BEGIN SIMULATION 
+2020-12-16 12:50:54,588 - orchestrator - INFO - time: 2020-12-16 12:50:54.588336 BEGIN SIMULATION 
 
-2020-08-25 16:41:34,789 - orchestrator - INFO - spike generator ids not found yet, retry in 1 second
-2020-08-25 16:41:35,790 - orchestrator - INFO - spike generator ids not found yet, retry in 1 second
-2020-08-25 17:39:06,974 - orchestrator - INFO - time: 2020-08-25 17:39:06.974939 END SIMULATION 
+2020-12-16 12:50:54,624 - orchestrator - INFO - spike generator ids not found yet, retry in 1 second
+2020-12-16 12:54:46,227 - orchestrator - INFO - time: 2020-12-16 12:54:46.227446 END SIMULATION 
 

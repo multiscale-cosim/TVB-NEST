@@ -25,7 +25,7 @@ cd "$DIR" || exit
 
 # delete the previous image if exit and after rebuilt it
 rm -f Nest_TVB_full.simg
-sudo /usr/bin/singularity build Nest_TVB_full.simg Nest_TVB_full.singularity
+sudo /usr/local/bin/singularity build Nest_TVB_full.simg Nest_TVB_full.singularity
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

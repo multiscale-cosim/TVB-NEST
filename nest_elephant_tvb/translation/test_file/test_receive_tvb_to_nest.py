@@ -3,8 +3,6 @@
 
 import numpy as np
 from mpi4py import MPI
-import time
-import sys
 import os
 
 def simulate_nest_generator(path):
@@ -43,38 +41,39 @@ def simulate_nest_generator(path):
     while(True):
         # Send start simulation
         comm.Send([np.array([True], dtype='b'), MPI.CXX_BOOL], dest=0, tag=0)
-        for id in ids:
-            # send ID of spike generator
-            comm.Send([np.array(id,dtype='i'), MPI.INT], dest=0, tag=0)
-            # receive the number of spikes for updating the spike detector
-            size=np.empty(1,dtype='i')
-            comm.Recv([size,1, MPI.INT], source=0, tag=id,status=status_)
-            print ("Nest_Input (" + str(id) + ") :receive size : " + str(size));sys.stdout.flush()
-            # receive the spikes for updating the spike detector
-            data = np.empty(size, dtype='d')
-            comm.Recv([data,size, MPI.DOUBLE],source=0,tag=id,status=status_)
-            print ("Nest_Input (" + str(id) + ") : " + str(np.sum(data)));sys.stdout.flush()
-            # printing value and exist
-            print ("Nest_Input: Before print ");sys.stdout.flush()
-            if id == 0:
-                print ("Nest_Input:" + str([id, data,np.sum(data)]) );sys.stdout.flush()
-            print ("Nest_Input: debug end of loop");sys.stdout.flush()
-            
+        comm.Send([np.array(10,dtype='i'), MPI.INT], dest=0, tag=0)
+        # send ID of spike generator
+        comm.Send([np.array(ids,dtype='i'), MPI.INT], dest=0, tag=0)
+        # receive the number of spikes for updating the spike detector
+        size=np.empty(11,dtype='i')
+        comm.Recv([size,11, MPI.INT], source=0, tag=ids[0],status=status_)
+        print ("Nest_Input (" + str(ids[0]) + ") :receive size : " + str(size));sys.stdout.flush()
+        # receive the spikes for updating the spike detector
+        data = np.empty(size[0], dtype='d')
+        comm.Recv([data,size[0], MPI.DOUBLE],source=0,tag=ids[0],status=status_)
+        print ("Nest_Input (" + str(id) + ") : " + str(np.sum(data)));sys.stdout.flush()
+        # printing value and exist
+        print ("Nest_Input: Before print ");sys.stdout.flush()
+        if ids[0] == 0:
+            print ("Nest_Input:" + str([ids[0], data,np.sum(data)]) );sys.stdout.flush()
+        print ("Nest_Input: debug end of loop");sys.stdout.flush()
+        #send ending the the run of the simulation
+        print("Nest_Input: Debug before send");sys.stdout.flush()
+        comm.Send([np.array([True], dtype='b'), MPI.CXX_BOOL], dest=0, tag=1)
+        print("Nest_Input: Debug after  send");sys.stdout.flush()
+
         print ("Nest_Input: before break");sys.stdout.flush()
         # print ("Nest_Input: before break" + str(data > 10000));sys.stdout.flush()
         if np.any(data > 10000):
             break
         
-        #send ending the the run of the simulation
-        print("Nest_Input: Debug before send 44");sys.stdout.flush()
-        comm.Send([np.array([True], dtype='b'), MPI.CXX_BOOL], dest=0, tag=1)
-        print("Nest_Input: Debug after  send 44");sys.stdout.flush()
+
     # closing the connection at this end
-    print('Nest_Input : Disconnect');
+    print('Nest_Input : Disconnect')
     comm.Send([np.array([True], dtype='b'), MPI.CXX_BOOL], dest=0, tag=2)
     comm.Disconnect()
     MPI.Close_port(port)
-    print('Nest_Input :exit');
+    print('Nest_Input :exit')
     MPI.Finalize()
 
 if __name__ == "__main__":

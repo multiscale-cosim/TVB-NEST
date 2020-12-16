@@ -55,7 +55,7 @@ class store_data:
         """
         adding spike in the histogram
         :param count: the number of synchronization times
-        :param data: the spike :(id,time)
+        :param datas: the spike :(id,time)
         """
         for data in np.reshape(datas,(int(datas.shape[0]/3),3)):
             data[2]-=self.dt

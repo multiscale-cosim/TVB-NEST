@@ -38,6 +38,7 @@ def send(logger,id_first_spike_detector,status_data,buffer_spike, comm):
                 time.sleep(0.001)
                 pass
             spikes_times = copy.deepcopy(buffer_spike[0])
+            logger.info(" TVB to Nest: spike time")
             with lock_status:
                 if status_data[0] != 2:
                     status_data[0] = 1
@@ -46,22 +47,23 @@ def send(logger,id_first_spike_detector,status_data,buffer_spike, comm):
                 # receive list ids
                 size_list = np.empty(1, dtype='i')
                 comm.Recv([size_list, 1, MPI.INT], source=source, tag=0, status=status_)
-                list_id = np.empty(size_list, dtype='i')
-                comm.Recv([list_id, size_list, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
-                # Select the good spike train and send it
-                # logger.info(" TVB to Nest:"+str(data))
-                logger.info("rank "+str(source)+" lits_id "+str(list_id))
-                data = []
-                shape = []
-                for i in list_id:
-                    shape += [spikes_times[i-id_first_spike_detector].shape[0]]
-                    data += [spikes_times[i-id_first_spike_detector]]
-                send_shape = np.array(np.concatenate(([np.sum(shape)],shape)), dtype='i')
-                # firstly send the size of the spikes train
-                comm.Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
-                # secondly send the spikes train
-                data = np.concatenate(data).astype('d')
-                comm.Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
+                if size_list[0] != 0:
+                    list_id = np.empty(size_list, dtype='i')
+                    comm.Recv([list_id, size_list, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
+                    # Select the good spike train and send it
+                    # logger.info(" TVB to Nest:"+str(data))
+                    logger.info("rank "+str(source)+" list_id "+str(list_id))
+                    data = []
+                    shape = []
+                    for i in list_id:
+                        shape += [spikes_times[i-id_first_spike_detector].shape[0]]
+                        data += [spikes_times[i-id_first_spike_detector]]
+                    send_shape = np.array(np.concatenate(([np.sum(shape)],shape)), dtype='i')
+                    # firstly send the size of the spikes train
+                    comm.Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
+                    # secondly send the spikes train
+                    data = np.concatenate(data).astype('d')
+                    comm.Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
             logger.info(" end sending:")
         elif  status_.Get_tag() == 1:
             # ending the update of the all the spike train from one processus
@@ -111,12 +113,14 @@ def receive(logger,generator,status_data,buffer_spike, comm):
             rate = np.empty(size[0], dtype='d')
             comm.Recv([rate, size[0], MPI.DOUBLE], source=status_.Get_source(), tag=0, status=status_)
             spike_generate = generator.generate_spike(0,time_step,rate)
+            logger.info(" TVB to Nest: wait status")
             # Wait for lock to be set to False
-            while status_data[0] == 1 and status_data[0] == 2:
+            while status_data[0] != 1 and status_data[0] != 2:
                 time.sleep(0.001)
                 pass
             # Set lock to true and put the data in the shared buffer
             buffer_spike[0] = spike_generate
+            logger.info(" TVB to Nest: update buffer")
             with lock_status:
                 status_data[0] = 0
         elif status_.Get_tag() == 1:

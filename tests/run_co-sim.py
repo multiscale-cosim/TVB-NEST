@@ -2,7 +2,6 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 from nest_elephant_tvb.orchestrator.run_exploration import run_exploration_2D
-import mpi4py.MPI as MPI
 import numpy as np
 from example.parameter import test_nest as parameter_test
 
@@ -21,6 +20,6 @@ if __name__ == "__main__":
     if len(sys.argv)==4:
         run_exploration(sys.argv[1],float(sys.argv[2]),float(sys.argv[3]))
     elif len(sys.argv)==1:
-        run_exploration( './test_file/', 0.0, 10000.0)
+        run_exploration( './test_file/co-sim/', 0.0, 1000.0)
     else:
         print('missing argument')

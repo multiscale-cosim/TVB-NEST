@@ -160,12 +160,13 @@ if __name__ == '__main__':
     rate = get_rate(path+'/tvb/')
     import matplotlib.pyplot as plt
     plt.figure()
-    # for i in range(75,79,1):
-    #     plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,i,:]*1e3,label=str(i))
+    for i in range(75,79,1):
+        plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,i,:]*1e3,label=str(i))
+    plt.legend()
+    plt.figure()
     plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,77,:]*1e3)
     plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,25,:]*1e3)
     plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,2,:]*1e3)
-    plt.legend()
     plt.figure()
     plt.plot(rate[0][0],np.concatenate(rate[0][1]).reshape(rate[0][1].shape[0],7,104,1)[:,0,:,0]*1e3)
     plt.figure()

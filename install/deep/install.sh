@@ -43,7 +43,7 @@ mkdir "$PATH_RUN"
 cd "${PATH_BUILD}" || exit
 cmake "$PATH_INSTALLATION" \
 	-DCMAKE_INSTALL_PREFIX:PATH="${PATH_RUN}"\
-	 -Dwith-python=3 -Dwith-mpi=ON \
+	 -Dwith-python=ON -Dwith-mpi=ON \
 	 -Dwith-readline=OFF \
 	 -Dwith-ltdl=OFF
 make -j 8
