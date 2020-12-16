@@ -51,7 +51,7 @@ In the folder installation, you have three possibilities :
 - local installation : the script is only an example of local installation in an environment where you don't have super user right. 
 WARNING : It should not be used in your computer.
 
-If you install in your computer, you should look at the configuration file of the deepest installation, the local installation or the singularity configuration.\
+If you install in your computer, you should look at the configuration file of the singularity configuration or the local installation.\
 The installation is not for the moment standardize.\
 For testing your installation, you should look at the section [Test](#tests) or the folder tests.
 
@@ -166,11 +166,19 @@ There exist two types of monitors depending on your use of the model TVB. Interf
      The test is for the device spike generator with mpi communication. The two arrays at this end of the output is the event record by a spike detector.
      The first array is a recording of the neurons 1. If there are events, this means the spike generator doesn't have an impact on the neurons.
      The second array is a recording of the two spike generator itself. If there is no event from the id 7, this mean there will be a problem. We can compare the value of the array with the data send previously.  
-    4. 'tests/test_record_nest_spike.sh'\
+    4. 'tests/test_input_nest_spike_dict.sh'\
+     It's the same test as previously, except the definition of the parameters is done before the creation of the device.  
+    5. 'tests/test_input_nest_spike_multi.sh'\
+     It's the same test as previously, except that Nest use multithreading.  
+    6. 'tests/test_input_nest_spike_dict.sh'\
+     It's the same test as previously, except that Nest use multithreading.  
+    7. 'tests/test_record_nest_spike.sh'\
      The test is for testing the spike detector and the spike generator with mpi communication. It's just to test it's possible to run it.
-    5. 'tests/test_record_nest_spike_multiple.sh' (also test the multithreading) 
+    8. 'tests/test_record_nest_spike_multiple.sh' (also test the multithreading) 
      The test is for testing the spike detector and the spike generator with mpi communication in different parameterization of Nest. The parameter testing is for testing the case of use only threading, use only MPI process or a mix of the two.
-      It's just to test it's possible to run it.
+     It's just to test it's possible to run it.
+    9. 'tests/test_nest_MPI_threading/run_test.sh'\
+     This script is based on a generic test for testing the multithreading of nest. However it's too complex but it seems to test correctly Nest.
 2. Translation:
     1. 'tests/test_translator_tvb_to_nest.sh'\
         This test is for the module translation between Tvb to Nest.
@@ -207,7 +215,7 @@ There exist two types of monitors depending on your use of the model TVB. Interf
 
 ## Cluster <a name="cluster"></a>
 The option for using the project in a cluster is based on the system manager slum. If you have another system manager, you need to modify all 'nest_elephant/orchestrator/run_exploration.py'.
-For the moment, it's impossible to add options to slim but it's easy to add this feature.
+For the moment, it's impossible to add options to slurm but it's easy to add this feature.
 WARNING: this project is only tested on DEEPEST.
 ### DEEPEST : <a name="deepest"></a>
 The installation and the option for the cluster are built for DEEPEST (https://www.deep-projects.eu/).
@@ -215,16 +223,13 @@ The file 'install/deep/install.sh' is to compile and install all the python libr
 For testing the installation, you need to change the file /tests/init.sh. The paraemter CLUSTER and DEEPEST need be change from 'false' to 'true'.
 
 ## Future implementation :<a name="future"></a>
-1. Improve the communication pattern for the input of Nest
-2. Add a second function to transform rate to spike based on Multiple Interaction Process Model
-3. Add test for the input and output of interface TVB.
-4. Add test for validating values of a simulation
-5. Add some functions of the simulation Nest to include multimeter recorder and other stimuli.
-6. Refractor the code to avoid the same piece of code in different file ( example :  the creation of a logger, ...)
+1. Add test for the input and output of interface TVB.
+2. Add test for validating values of a simulation
+3. Add some functions of the simulation Nest to include multimeter recorder and other stimuli.
+4. Refractor the code to avoid the same piece of code in different file ( example :  the creation of a logger, ...)
 
 ## Extension :<a name="extension"></a>
-1. Replace the device in Nest by included the input directly in the neurons 
-2. Improve the orchestrator for managing communication of MPI and the synchronization between all processes
+1. Improve the orchestrator for managing communication of MPI and the synchronization between all processes
 
 ## Files<a name="files"></a>
 * doc: Documentation of the project
