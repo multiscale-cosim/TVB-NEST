@@ -29,8 +29,9 @@ else
 
     PACKAGE=${PWD}/../   # folder of co-simulation-tvb-nest
     PYTHONLIB=${PWD}/../venv/lib/python3.6/site-packages # folder with python library
+    PYTHONLIBTVB=${PWD}/../tvb_git/tvb_contrib:${PWD}/../tvb_git/tvb_bin:${PWD}/../tvb_git/scientific_library # folder with python library
     REPERTORY_LIB_NEST=${PWD}/../lib/nest_run/lib/python3.6/site-packages/ # folder with py-nest
-    export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
+    export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST:$PYTHONLIBTVB
     RUN="mpirun"
 fi
     
