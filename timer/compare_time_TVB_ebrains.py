@@ -7,7 +7,7 @@ import numpy as np
 # figure for the optimisation for the paper TVB-ebrains
 if __name__ == '__main__':
     folders =[[],[],[]] # same data for the three case
-    list_nb_neurons = np.around(np.logspace(1,4,30)) # list of the number of neurons
+    list_nb_neurons = np.array(np.around(np.logspace(1,4,30)),dtype=np.int) # list of the number of neurons
     nb_trial = 10 # the number of trial
     for nb_neurons in list_nb_neurons:
         # the three test
@@ -62,18 +62,19 @@ if __name__ == '__main__':
 
         # plot the result
         print("plot")
-        plt.plot(list_nb_neurons*2,np.mean(time_sim,axis=1),'g-',label ='time sim' )
-        plt.plot(list_nb_neurons*2,np.mean(time_TVB_tot,axis=1),'m-',label ='TVB total' )
-        plt.plot(list_nb_neurons*2,np.mean(time_nest_sim,axis=1),'b-',label =' sim nest' )
-        plt.plot(list_nb_neurons*2,np.mean(time_nest_IO,axis=1),'b--',label =' IO nest' )
-        plt.plot(list_nb_neurons*2,np.mean(time_nest_wait,axis=1),'g--',label =' wait nest' )
-        plt.plot(list_nb_neurons*2,np.mean(time_TR_1_wait,axis=1),color='tab:orange',label =' wait TR 1' )
-        plt.plot(list_nb_neurons*2,np.mean(time_TR_2_wait,axis=1),'y',label =' wait TR 2' )
-        plt.plot(list_nb_neurons*2,np.mean(time_TR_2_wait,axis=1)+np.mean(time_TR_1_wait,axis=1),'y',label =' sum' )
-        plt.plot(list_nb_neurons*2,np.mean(time_nest_wait,axis=1)+np.mean(time_nest_IO,axis=1)+np.mean(time_nest_sim,axis=1),'m.-',label =' sum nest' )
-        plt.plot(list_nb_neurons*2,np.mean(time_nest_IO,axis=1)+np.mean(time_nest_sim,axis=1),'b.-',label =' sum nest' )
-        plt.plot(list_nb_neurons*2,np.mean(time_TVB_sim,axis=1),'r-',label = ' sim TVB ')
-        plt.plot(list_nb_neurons*2,np.mean(time_TVB_IO,axis=1),'r--',label = ' IO TVB ' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_sim,axis=1),'g-',label ='time sim' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_TVB_tot,axis=1),'m-',label ='TVB total' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_nest_sim,axis=1),'b-',label =' sim nest' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_nest_IO,axis=1),'b--',label =' IO nest' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_nest_wait,axis=1),'g--',label =' wait nest' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_TR_1_wait,axis=1),color='tab:orange',label =' wait TR 1' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_TR_2_wait,axis=1),'y',label =' wait TR 2' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_TR_2_wait,axis=1)+np.mean(time_TR_1_wait,axis=1),'y',label =' sum' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_nest_wait,axis=1)+np.mean(time_nest_IO,axis=1)+np.mean(time_nest_sim,axis=1),'m.-',label =' sum nest' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_nest_IO,axis=1)+np.mean(time_nest_sim,axis=1),'b.-',label =' sum nest' )
+        # plt.plot(list_nb_neurons*2,np.mean(time_TVB_sim,axis=1),'r-',label = ' sim TVB ')
+        # plt.plot(list_nb_neurons*2,np.mean(time_TVB_IO,axis=1),'r--',label = ' IO TVB ' )
+        plt.plot(list_nb_neurons*2,np.mean(time_sim,axis=1),'-',label =label )
         plt.xscale('log')
         plt.legend(fontsize=20)
         print(label)

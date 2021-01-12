@@ -10,5 +10,8 @@ export PATH=$PATH:${PWD}/../lib/lib-py/bin/
 
 for i in {1..10}
 do
-  python3 ./run_co-sim_mpi.py './test_file/mpi/' 0.0 1000.0 $i
+  for trail in {0..10}
+  do
+    python3 ./run_co-sim_mpi.py './test_file/paper_mpi/' $trail 0.0 1000.0 $i
+  done
 done

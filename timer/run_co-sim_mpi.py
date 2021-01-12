@@ -7,7 +7,7 @@ from timer import parameter
 
 # exploration performance for different number of MPI process
 
-def run_exploration(path,begin,end,nb_mpi):
+def run_exploration(path,trail,begin,end,nb_mpi):
     parameter.param_co_simulation['co-simulation']=True
     parameter.param_nest_topology['nb_neuron_by_region'] = 10000
     parameter.param_co_simulation['nb_MPI_nest']=nb_mpi
@@ -15,12 +15,12 @@ def run_exploration(path,begin,end,nb_mpi):
     parameter.param_nest_background['multimeter'] =False
     parameter.param_nest_background['record_spike'] =False
     parameter.param_nest_connection['weight_local'] = 1.0
-    run_exploration_2D(path+'/'+str(nb_mpi)+'/', parameter, {'g':np.arange(1.0, 1.2, 0.5), 'mean_I_ext': [0.0]}, begin, end)
+    run_exploration_2D(path+'/'+str(nb_mpi)+'/'+str(trail)+'/', parameter, {'g':np.arange(1.0, 1.2, 0.5), 'mean_I_ext': [0.0]}, begin, end)
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==5:
-        run_exploration(sys.argv[1],float(sys.argv[2]),float(sys.argv[3]),int(sys.argv[4]))
+    if len(sys.argv)==6:
+        run_exploration(sys.argv[1],int(sys.argv[2]),float(sys.argv[3]),float(sys.argv[4]),int(sys.argv[5]))
     elif len(sys.argv)==1:
         run_exploration( './test_file/mpi/', 0.0, 1000.0,1)
     else:
