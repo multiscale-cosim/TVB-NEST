@@ -7,7 +7,7 @@ from timer import parameter
 
 # exploration performance for different number of neurons
 
-def run_exploration(path,begin,end,nb_neurons):
+def run_exploration(path,trial,begin,end,nb_neurons):
     parameter.param_co_simulation['co-simulation']=True
     parameter.param_co_simulation['synchronization']=3.5
     parameter.param_nest_topology['nb_neuron_by_region'] = nb_neurons
@@ -16,15 +16,15 @@ def run_exploration(path,begin,end,nb_neurons):
     parameter.param_nest_background['multimeter'] =False
     parameter.param_nest_background['record_spike'] =False
     parameter.param_nest_connection['weight_local'] = 1.0
-    run_exploration_2D(path+'/'+str(nb_neurons)+'/', parameter, {'g':np.arange(1.0, 1.2, 0.5), 'mean_I_ext': [0.0]}, begin, end)
+    run_exploration_2D(path+'/'+str(nb_neurons)+'/'+str(trial)+'/', parameter, {'g':np.arange(1.0, 1.2, 0.5), 'mean_I_ext': [0.0]}, begin, end)
 
 if __name__ == "__main__":
     import sys
     import nest
     print(nest.__file__)
     if len(sys.argv)==5:
-        run_exploration(sys.argv[1],float(sys.argv[2]),float(sys.argv[3]),int(sys.argv[4]))
+        run_exploration(sys.argv[1],int(sys.argv[2]),float(sys.argv[3]),float(sys.argv[4]),int(sys.argv[5]))
     elif len(sys.argv)==1:
-        run_exploration( './test_file/neuron/', 0.0, 1000.0,1)
+        run_exploration( './test_file/neuron/',0, 0.0, 1000.0,1)
     else:
         print('missing argument')

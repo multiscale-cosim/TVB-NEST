@@ -98,18 +98,18 @@ if __name__ == '__main__':
         # print percentage cumulative
         plt.subplot(222)
         print("plot")
-        plt.plot(list_nb_neurons*2,(np.mean(time_nest_sim,axis=1))/np.mean(time_sim,axis=1)*100,'-',
+        plt.plot(list_nb_neurons*2,(np.mean(time_nest_sim,axis=1)+np.mean(time_nest_IO,axis=1))/np.mean(time_sim,axis=1)*100,'-',
                  color=[255 / 255, 104 / 255, 65 / 255],label='sim nest')
-        plt.plot(list_nb_neurons*2,(np.mean(time_nest_IO,axis=1)+np.mean(time_nest_sim,axis=1))/np.mean(time_sim,axis=1)*100,'--',
+        plt.plot(list_nb_neurons*2,(np.mean(time_nest_IO,axis=1))/np.mean(time_sim,axis=1)*100,'--',
                  color=[255 / 255, 104 / 255, 65 / 255],label='IO nest')
         plt.plot(list_nb_neurons*2,(np.mean(time_nest_wait,axis=1)+np.mean(time_nest_IO,axis=1)+np.mean(time_nest_sim,axis=1))/np.mean(time_sim,axis=1)*100,'-.',
                  color=[255 / 255, 104 / 255, 65 / 255],label='wait nest')
-        plt.plot(list_nb_neurons*2,(np.mean(time_TVB_sim,axis=1))/np.mean(time_sim,axis=1)*100,'-',
+        plt.plot(list_nb_neurons*2,(np.mean(time_TVB_IO,axis=1)+np.mean(time_TVB_sim,axis=1))/np.mean(time_sim,axis=1)*100,'-',
                  color=[71 / 255, 164 / 255, 226 / 255],label='sim TVB')
-        plt.plot(list_nb_neurons*2,(np.mean(time_TVB_IO,axis=1)+np.mean(time_TVB_sim,axis=1))/np.mean(time_sim,axis=1)*100,'--',
+        plt.plot(list_nb_neurons*2,(np.mean(time_TVB_IO,axis=1))/np.mean(time_sim,axis=1)*100,'--',
                  color=[71 / 255, 164 / 255, 226 / 255],label='IO TVB')
         plt.plot(list_nb_neurons*2,np.mean(time_sim,axis=1)/np.mean(time_sim,axis=1)*100,
-                 'y-',label ='simulation' )
+                 'y-',label ='simulation')
         plt.ylim(ymin=0.0)
         plt.xscale('log')
         plt.tick_params(axis='both', labelsize=20)

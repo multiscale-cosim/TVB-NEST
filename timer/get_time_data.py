@@ -178,7 +178,7 @@ def analyse_tvb(tvb):
     return tvb_node
 
 
-def analyse_nest(nest,nest_init,nest_sim,nest_timer,nest_timer_input_init,nest_timer_input,nest_timer_io):
+def analyse_nest(nest,nest_init,nest_sim,nest_timer,nest_timer_input_init,nest_timer_input,wait_time,nest_timer_io):
     """
     create the tree of simulation time for Nest
     :param nest: time from python of Nest
@@ -187,6 +187,7 @@ def analyse_nest(nest,nest_init,nest_sim,nest_timer,nest_timer_input_init,nest_t
     :param nest_timer: time from kernel of nest
     :param nest_timer_input_init: time form the initialisation of the input of nest
     :param nest_timer_input: time from the input of nest
+    :param wait_time : time waiting by translator
     :param nest_timer_io: time from the io_manager of nest
     :return: tree of times
     """
@@ -209,7 +210,7 @@ def analyse_nest(nest,nest_init,nest_sim,nest_timer,nest_timer_input_init,nest_t
     init_config.addNode('init population_neurons', timer_value_nest_init[0,1])
     init_config.addNode('init connection',timer_value_nest_init[0,2])
     init_config.addNode('init device', timer_value_nest_init[0,3])
-    prepare =  Node('prepare',timer_value_nest_sim[0] )
+    prepare = Node('prepare',timer_value_nest_sim[0] )
     simulation.add( prepare )
     prepare.addNode('prepare input',nest_timer_input_init[1] - nest_timer_input_init[0])
     run_nest = Node('run', values=timer_value_nest_sim[2:-1])
@@ -218,9 +219,9 @@ def analyse_nest(nest,nest_init,nest_sim,nest_timer,nest_timer_input_init,nest_t
     run_nest.adds(pre_run)
     pre_run.addNode('pre_run_record',values = timer_value_nest_time_io[0])
     pre_run.addNode('pre_run_input',values = timer_value_nest_time_io[1])
-    wait_time = nest_timer_input[:,3]-nest_timer_input[:,0]
-    pre_run.get('pre_run_input').addNode('pre_run_input_receive_data',values=timer_value_nest_time_input[0]-wait_time )
-    pre_run.get('pre_run_input').addNode('pre_run_input_wait',values=wait_time)
+    # wait_time = nest_timer_input[:,3]-nest_timer_input[:,0]
+    pre_run.get('pre_run_input').addNode('pre_run_input_receive_data',values=timer_value_nest_time_input[0]-wait_time[np.logical_not(np.isnan(wait_time))] )
+    pre_run.get('pre_run_input').addNode('pre_run_input_wait',values=wait_time[np.logical_not(np.isnan(wait_time))] )
     pre_run.get('pre_run_input').addNode('pre_run_input_update',values=timer_value_nest_time_input[1])
     run_nest.addNode('pre-run 2',values=timer_value_nest_time[1])
     run_nest.addNode('run simulation',values=timer_value_nest_time[2])
@@ -254,7 +255,8 @@ def analyse_translation_tvb_to_nest(index,master,send,receive):
     send_node.addNode('initialisation send thread', time_value_send[0,0])
     send_node.addNode('wait for sending message', values=remove_NAN(time_value_send[1,:]),print_name='wait for<br>sending<br>message')
     send_node.addNode('wait for receiving thread', values=remove_NAN(time_value_send[2,:]),print_name='wait for<br>receiving thread')
-    send_node.addNode('send data', values = remove_NAN(time_value_send[3,:]))
+    send_node.addNode('copy buffer of spikes', values=remove_NAN(time_value_send[3,:]),print_name='copy buffer<br>of spikes')
+    send_node.addNode('send data', values = remove_NAN(time_value_send[4,:]))
     send_node.addNode('end send thread', time_value_send[0,1])
     receive_node = Node('receive thread', receive[0,3]-receive[0,0])
     receive_node.addNode('initialisation thread receive', time_value_receive[0,0])
@@ -334,10 +336,21 @@ def get_dictionnary(path):
             index_translator_nest_to_tvb.append(pattern_nest_to_tvb.split(i)[1])
         if pattern_tvb_to_nest.match(i) is not None:
             index_translator_tvb_to_nest.append(pattern_tvb_to_nest.split(i)[1])
+
+    # get the time of waiting data in the translator for nest
+    wait_time_1 = get_time(data['tvb_to_nest_send'+str(index_translator_tvb_to_nest[0])])[2]
+    wait_time_1 = wait_time_1[np.logical_not(np.isnan(wait_time_1))]
+    wait_time_2 = get_time(data['tvb_to_nest_send'+str(index_translator_tvb_to_nest[1])])[2]
+    wait_time_2 = wait_time_2[np.logical_not(np.isnan(wait_time_2))]
+    if np.sum(wait_time_1) > np.sum(wait_time_2):
+        wait_time = wait_time_1
+    else:
+        wait_time = wait_time_2
+
     #creation of the tree of times
     data_time = Node('root',0.0)
     data_time.add(analyse_tvb(data['timer_tvb']))
-    data_time.add(analyse_nest(data['nest'],data['nest_init'],data['nest_sim'],data['nest_timer_0'],data['nest_timer_input_0_init'],data['nest_timer_input_0'],data['nest_timer_io_0']))
+    data_time.add(analyse_nest(data['nest'],data['nest_init'],data['nest_sim'],data['nest_timer_0'],data['nest_timer_input_0_init'],data['nest_timer_input_0'],wait_time,data['nest_timer_io_0']))
     for index,i in enumerate(index_translator_nest_to_tvb):
         data_time.add(analyse_translation_nest_to_tvb(index,data['nest_to_tvb_master' + str(i)],
                                                          data['nest_to_tvb_send' + str(i)],

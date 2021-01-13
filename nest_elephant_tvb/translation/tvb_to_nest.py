@@ -44,12 +44,13 @@ def send(logger,id_first_spike_detector,status_data,buffer_spike, comm):
             while status_data[0] != 0 and status_data[0] != 2: # FAT END POINT
                 time.sleep(0.001)
                 pass
+            timer_send.change(2,3) # wait receiving thread + copy buffer
             spikes_times = copy.deepcopy(buffer_spike[0])
             logger.info(" TVB to Nest: spike time")
             with lock_status:
                 if status_data[0] != 2:
                     status_data[0] = 1
-            timer_send.change(2,3) # wait receiving thread + send data
+            timer_send.change(3,4) # copy buffer + send data
             # Waiting for some processus ask for receive the spikes
             for source in source_sending:
                 # receive list ids
@@ -73,7 +74,7 @@ def send(logger,id_first_spike_detector,status_data,buffer_spike, comm):
                     data = np.concatenate(data).astype('d')
                     comm.Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
             logger.info(" end sending:")
-            timer_send.stop(3) # send data
+            timer_send.stop(4) # send data
         elif  status_.Get_tag() == 1:
             # ending the update of the all the spike train from one processus
             logger.info(" TVB to Nest end sending ")

@@ -6,6 +6,7 @@
 */*/*/__pycache__
 example/.ipynb_checkpoints/
 */test_file/*
+*/test_file_old/*
 lib/
 */*/*.simg
 ./timer/test_file/
