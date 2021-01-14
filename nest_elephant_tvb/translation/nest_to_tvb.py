@@ -63,7 +63,7 @@ if __name__ == "__main__":
     import nest_elephant_tvb.translation.FatEndPoint as FEP
     path_to_files_receive = path + file_spike_detector
     path_to_files_send = path + TVB_recev_file
-    comm_receiver, port_receive, comm_sender, port_send = FEP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
+    comm, comm_receiver, port_receive, comm_sender, port_send = FEP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
     ############# NEW Code end
     
     
@@ -71,7 +71,8 @@ if __name__ == "__main__":
     ### TODO: encapsulate loggers
     ### kept all logging stuff here for now to have them in one place
     import nest_elephant_tvb.translation.mpi_translator as mt
-    mt.init(path, param, comm_receiver, comm_sender, logger_master, logger_receive, logger_send)
+    loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
+    mt.init(path, param, comm, comm_receiver, comm_sender, loggers)
     ############ NEW Code end
     
     

@@ -19,7 +19,7 @@ def make_connections(path_to_files_receive, path_to_files_send, logger_master):
     comm_sender, port_send = tvb_connection(comm, root, info, logger_master, path_to_files_send)
     logger_master.info('Connections made, starting translation...')
     
-    return comm_receiver, port_receive, comm_sender, port_send
+    return comm, comm_receiver, port_receive, comm_sender, port_send
 
 
 def nest_connection(comm, root, info, logger_master, path_to_files_receive):
