@@ -5,11 +5,11 @@ import numpy as np
 import os
 import json
 import time
-import pathlib
 from mpi4py import MPI
 from threading import Thread, Lock
 import logging
 from nest_elephant_tvb.translation.science_nest_to_tvb import store_data,analyse_data
+
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
@@ -43,14 +43,12 @@ def receive(logger,store,status_data,buffer, comm):
                 data = np.empty(shape[0], dtype='d')
                 comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
                 store.add_spikes(count,data)
-            logger.info(" Nest to TVB : wait status")
             while status_data[0] != 1 and status_data[0] != 2: # FAT END POINT
                 time.sleep(0.001)
                 pass
             # wait until the data can be send to the sender thread
             # Set lock to true and put the data in the shared buffer
             buffer[0] = store.return_data()
-            logger.info(" Nest to TVB : update buffer")
             with lock_status: # FAT END POINT
                 if status_data[0] != 2:
                     status_data[0] = 0
@@ -91,7 +89,7 @@ def send(logger,analyse,status_data,buffer, comm):
         logger.info(" Nest to TVB : send data status : " +str(status_.Get_tag()))
         if status_.Get_tag() == 0:
             # send the rate when there ready
-            while status_data[0] != 0 and status_data[0] != 2: # FAT END POINT
+            while status_data[0] != 0: # FAT END POINT
                 time.sleep(0.001)
                 pass
             times,data=analyse.analyse(count,buffer[0])
@@ -118,6 +116,7 @@ def send(logger,analyse,status_data,buffer, comm):
     comm.Disconnect()
     logger.info('end thread')
     return
+
 
 def create_logger(path,name, log_level):
     # Configure logger
@@ -162,54 +161,32 @@ if __name__ == "__main__":
     param = parameters['param_TR_nest_to_tvb']
     store = store_data(path+'/log/',param)
     analyse = analyse_data(path+'/log/',param)
-    level_log = param['level_log']
-    id_spike_detector = os.path.splitext(os.path.basename(path+file_spike_detector))[0]
-    logger_master = create_logger(path, 'nest_to_tvb_master'+str(id_spike_detector), level_log)
-
     # variable for communication between thread
     status_data=[0] # status of the buffer
     initialisation =np.load(param['init']) # initialisation value
     buffer=[initialisation] # buffer of the rate to send it
-
-    ############
-    # Open the MPI port connection for receiver
-    info = MPI.INFO_NULL
-    root=0
-
-    logger_master.info('Translate Receive: before open_port')
-    port_receive = MPI.Open_port(info)
-    logger_master.info('Translate Receive: after open_port: '+port_receive)
-    # Write file configuration of the port
-    path_to_files_receive = path + file_spike_detector
-    fport = open(path_to_files_receive, "w+")
-    fport.write(port_receive)
-    fport.close()
-    pathlib.Path(path_to_files_receive+'.unlock').touch()
-    logger_master.info('Translate Receive: path_file: ' + path_to_files_receive)
-    #########################
-
-    ######################
-    # open for for the sender
-    logger_master.info('Translate SEND: before open_port')
-    port_send = MPI.Open_port(info)
-    logger_master.info('Translate SEND: after open_port : '+port_send)
-    # Write file configuration of the port
-    path_to_files_send = path + TVB_recev_file
-    fport = open(path_to_files_send, "w+")
-    fport.write(port_send)
-    fport.close()
-    pathlib.Path(path_to_files_send+'.unlock').touch()
-    logger_master.info('Translate SEND: path_file: ' + path_to_files_send);sys.stdout.flush()
-    ##############
-    # Wait until connection
-    logger_master.info('Waiting communication')
-    comm_receiver = MPI.COMM_WORLD.Accept(port_receive, info, root)
-    comm_sender = MPI.COMM_WORLD.Accept(port_send, info, root)
-    logger_master.info('get communication and start thread')
-    #############
-
+    
+    ############ NEW Code: old logging code copied here for better overview
+    level_log = param['level_log']
+    id_spike_detector = os.path.splitext(os.path.basename(path+file_spike_detector))[0]
+    logger_master = create_logger(path, 'nest_to_tvb_master'+str(id_spike_detector), level_log)
     logger_receive = create_logger(path, 'nest_to_tvb_receive'+str(id_spike_detector), level_log)
     logger_send = create_logger(path, 'nest_to_tvb_send'+str(id_spike_detector), level_log)
+    ############# NEW Code end
+    
+    ############ NEW Code: FAT END POINT for MPI and new connections
+    ### contains all MPI connection stuff for proper encapsulation
+    ### TODO: make this a proper interface
+    import nest_elephant_tvb.translation.FatEndPoint as FEP
+    
+    path_to_files_receive = path + file_spike_detector
+    path_to_files_send = path + TVB_recev_file
+    comm_receiver, port_receive, comm_sender, port_send = FEP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
+    ############# NEW Code end
+    
+    
+    
+    ############ NEW Code: removed threads, used MPI ranks...
     # create the thread for receive and send data
     th_receive = Thread(target=receive, args=(logger_receive,store,status_data,buffer, comm_receiver))
     th_send = Thread(target=send, args=(logger_send,analyse,status_data,buffer, comm_sender))
@@ -222,15 +199,15 @@ if __name__ == "__main__":
     th_receive.join()
     th_send.join()
     logger_master.info('thread join')
+    ############ NEW Code end
+    
+    ############ NEW Code: FAT END POINT for MPI and new connections
+    ### contains all MPI connection stuff for proper encapsulation
+    ### TODO: make this a proper interface
+    FEP.close_and_finalize(port_send, port_receive,logger_master)
+    ############# NEW Code end
 
-    # close port
-    MPI.Close_port(port_send)
-    MPI.Close_port(port_receive)
-    logger_master.info('close communicator')
-
-    # finalise MPI
-    MPI.Finalize()
-
+    
     logger_master.info('clean file')
     os.remove(path_to_files_receive)
     os.remove(path_to_files_send)
