@@ -9,7 +9,7 @@ export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
 export PATH=$PATH:${PWD}/../../../co_simulation/co-simulation-tvb-nest/venv/
 
 
-for i in {10,40,100,400,1000,4000,10000}
+for i in {10,13,16,20,26,33,42,53,67,85,108,137,174,221,281,356,452,574,728,924,1172,1487,1887,2395,3039,3857,4894,6210,7880,10000}
 do
   python3 ./run_co-sim_neuron.py './test_file/neuron/' 0.0 1000.0 $i
 done

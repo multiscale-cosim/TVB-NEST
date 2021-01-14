@@ -22,7 +22,7 @@ if __name__ == "__main__":
     import sys
     import nest
     print(nest.__file__)
-    if len(sys.argv)==5:
+    if len(sys.argv)==6:
         run_exploration(sys.argv[1],int(sys.argv[2]),float(sys.argv[3]),float(sys.argv[4]),int(sys.argv[5]))
     elif len(sys.argv)==1:
         run_exploration( './test_file/neuron/',0, 0.0, 1000.0,1)
