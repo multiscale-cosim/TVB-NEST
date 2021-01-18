@@ -1,3 +1,5 @@
+# Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 import time
 import numpy as np
 from mpi4py import MPI
@@ -8,13 +10,14 @@ lock_status=Lock() # locker for manage the transfer of data from thread
 
 def init(path, param, comm, comm_receiver, comm_sender, loggers):
     '''
-    Initialize the translation with MPI
+    Initialize the translation with MPI. NOTE: more information will be added with more changes. Currently the multithreaded version is still in use.
     
     '''
     
     # destructure logger list to indivual variables
     logger_master, logger_receive, logger_send = loggers
     # science part, see import
+    # TODO: use os.path (or similar) for proper file handling.
     store = store_data(path+'/log/',param)
     analyse = analyse_data(path+'/log/',param)
     # variable for communication between thread

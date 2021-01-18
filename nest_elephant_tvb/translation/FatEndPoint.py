@@ -1,9 +1,15 @@
+# Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 from mpi4py import MPI
 import pathlib
 
 def make_connections(path_to_files_receive, path_to_files_send, logger_master):
     '''
-    Fat end point, here: connections to nest and tvb.
+    Rich End Point. Still a first draft, will be changed to a proper interface.
+    This function establishes two MPI intercommunicators. One to NEST and one to TVB.
+    :param path_to_files_receive: path to file, store information about receiving MPI connection
+    :param path_to_files_send: path to file, store information about sending MPI connection
+    :param logger_master: main logger for the connections
     '''
     use_mpi = True
     # init MPI
@@ -43,8 +49,8 @@ def nest_connection(comm, root, info, logger_master, path_to_files_receive):
     
     # broadcast port info, accept connection on all ranks!
     # necessary to avoid problems with information about the mpi rank in open port file.
-    port_receive = comm.bcast(port_receive,root)
-    logger_master.info('Translate Receive: Rank ' + str(comm.Get_rank()) + 'accepting connection on: ' + port_receive)
+    port_receive = comm.bcast(port_receive,root) # TODO: ask Lena if this is needed/correct.
+    logger_master.info('Translate Receive: Rank ' + str(comm.Get_rank()) + ' accepting connection on: ' + port_receive)
     comm_receiver = comm.Accept(port_receive, info, root) 
     logger_master.info('Translate Receive: Simulation client connected to' + str(comm_receiver.Get_rank()))
     
@@ -66,7 +72,7 @@ def tvb_connection(comm, root, info, logger_master, path_to_files_send):
         fport.write(port_send)
         fport.close()
         pathlib.Path(path_to_files_send+'.unlock').touch()
-        logger_master.info('Translate SEND: path_file: ' + path_to_files_send) # ??? ;sys.stdout.flush()
+        logger_master.info('Translate SEND: path_file: ' + path_to_files_send)
     else:
         port_send = None
     

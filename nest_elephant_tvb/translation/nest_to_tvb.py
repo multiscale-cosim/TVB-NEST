@@ -61,7 +61,7 @@ if __name__ == "__main__":
     ### contains all MPI connection stuff for proper encapsulation
     ### TODO: make this a proper interface
     import nest_elephant_tvb.translation.FatEndPoint as FEP
-    path_to_files_receive = path + file_spike_detector
+    path_to_files_receive = path + file_spike_detector # TODO: use proper path operations
     path_to_files_send = path + TVB_recev_file
     comm, comm_receiver, port_receive, comm_sender, port_send = FEP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
     ############# NEW Code end
