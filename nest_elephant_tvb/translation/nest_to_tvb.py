@@ -63,7 +63,7 @@ if __name__ == "__main__":
     ############ NEW Code: FAT END POINT for MPI and new connections
     ### contains all MPI connection stuff for proper encapsulation
     ### TODO: make this a proper interface
-    path_to_files_receive = path + file_spike_detector
+    path_to_files_receive = path + file_spike_detector # TODO: use proper path operations
     path_to_files_send = path + TVB_recev_file
     comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
     ############# NEW Code end
