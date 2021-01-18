@@ -5,6 +5,9 @@ import os
 import json
 import logging
 
+import nest_elephant_tvb.translation.RichEndPoint as REP
+import nest_elephant_tvb.translation.mpi_translator as mt
+
 def create_logger(path,name, log_level):
     # Configure logger
     logger = logging.getLogger(name)
@@ -60,17 +63,15 @@ if __name__ == "__main__":
     ############ NEW Code: FAT END POINT for MPI and new connections
     ### contains all MPI connection stuff for proper encapsulation
     ### TODO: make this a proper interface
-    import nest_elephant_tvb.translation.FatEndPoint as FEP
     path_to_files_receive = path + file_spike_detector
     path_to_files_send = path + TVB_recev_file
-    comm, comm_receiver, port_receive, comm_sender, port_send = FEP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
+    comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
     ############# NEW Code end
     
     
     ############ NEW Code: removed threads, used MPI ranks...
     ### TODO: encapsulate loggers
     ### kept all logging stuff here for now to have them in one place
-    import nest_elephant_tvb.translation.mpi_translator as mt
     loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
     mt.init(path, param, comm, comm_receiver, comm_sender, loggers)
     ############ NEW Code end
@@ -79,7 +80,7 @@ if __name__ == "__main__":
     ############ NEW Code: FAT END POINT for MPI and new connections
     ### contains all MPI connection stuff for proper encapsulation
     ### TODO: make this a proper interface
-    FEP.close_and_finalize(port_send, port_receive,logger_master)
+    REP.close_and_finalize(port_send, port_receive,logger_master)
     ############# NEW Code end
     
     logger_master.info('clean file')
