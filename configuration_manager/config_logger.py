@@ -18,10 +18,10 @@ class ConfigLogger(object):
 
     @classmethod
     def _set_in_dictionary(cls, xml_dictionary, mapList, value):
-        cls._set_from_dictionary(xml_dictionary, mapList[:-1])[mapList[-1]] = value
+        cls._get_from_dictionary(xml_dictionary, mapList[:-1])[mapList[-1]] = value
 
     @classmethod
-    def _set_from_dictionary(cls, xml_dictionary, mapList):
+    def _get_from_dictionary(cls, xml_dictionary, mapList):
         return reduce(operator.getitem, mapList, xml_dictionary)
 
     @classmethod
