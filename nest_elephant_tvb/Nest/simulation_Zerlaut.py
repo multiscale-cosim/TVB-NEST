@@ -310,15 +310,18 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
        nest.SetDefaults("spike_detector_record_mpi", param_spike_dec)
        spike_detector=[]
     else:
-        param_spike_dec= {"start": min_time,
-                          "stop": time_simulation,
-                          "record_to":"ascii",
-                          'label': "spike_detector"
-                          }
-        nest.CopyModel('spike_recorder','spike_detector_record')
-        nest.SetDefaults("spike_detector_record",param_spike_dec)
-        #list_record
-        spike_detector = nest.Create('spike_detector_record')
+        if param_background['record_spike']:
+            param_spike_dec= {"start": min_time,
+                    "stop": time_simulation,
+                    "record_to":"ascii",
+                    'label': "spike_detector"
+                    }
+            nest.CopyModel('spike_recorder','spike_detector_record')
+            nest.SetDefaults("spike_detector_record",param_spike_dec)
+            #list_record
+            spike_detector = nest.Create('spike_detector_record')
+        else:
+            spike_detector = []
 
     #Connection to population
     for name_pops,items in dic_layer.items():
@@ -334,7 +337,8 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
                     spike_detector.append(spike_detector_mpi)
                     nest.Connect(list_pops[i]['region'],spike_detector_mpi)
             else:
-                nest.Connect(list_pops[i]['region'],spike_detector)
+                if param_background['record_spike']:
+                    nest.Connect(list_pops[i]['region'],spike_detector)
     label_pop_record=[]
     if param_background['multimeter']:
         for label, (variable,id_first,id_end) in param_background['multimeter_list'].items():
