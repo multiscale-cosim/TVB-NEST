@@ -32,7 +32,7 @@ def safe_makedir(target_directory):
         else:
             # Either there exists some file with the same name as the
             # target directory, or there is some different error.
-            # Just re-raise the error!
-            raise e
+            # Just re-raise the error for now.
+            raise e  # TODO: add a better exception handling
     finally:
         return target_directory

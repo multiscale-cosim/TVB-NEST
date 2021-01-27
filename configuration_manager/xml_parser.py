@@ -3,15 +3,10 @@
 #  contributor license agreements; and to You under the Apache License,
 #  Version 2.0."
 
-import xml.etree.ElementTree as ET
+from xml.etree import ElementTree
 
 
-class Parser(object):
-    """
-    This class provides functions for parsing an xml file
-    and converting it into Python dictionary type for manipulation.
-    """
-
+class Parser:
     @classmethod
     def load_xml(cls, file):
         """Parses an XML section into an element tree.
@@ -19,51 +14,55 @@ class Parser(object):
         Parameters
         ----------
         file : object
-            XML file containg XML data
+            XML file containing the XML data
 
         Returns
         -------
-        xmltree: ElementTree instance
-            The parsed XML
+        ElementTree instance
         """
         try:
-            cls.__xmltree = ET.parse(file)
+            # self.__xmltree = ElementTree.parse(file)
+            cls.__xmltree = ElementTree.parse(file)
         except FileNotFoundError as e:
             raise e  # TODO: a better exception handling
         else:
             return cls.__xmltree
 
-    @classmethod
-    def __build_child_nodes(cls, child_list):
-        """Helper function to build nested items.
+    # @classmethod
+    def __build_nested_nodes(self, parent_element):
+        """
+        Helper function to build the list of nested elements.
 
         Parameters
         ----------
-        child_list :
+        parent_element : xml.etree.ElementTree.Element
             The parent element of the nested elements.
 
         Returns
         -------
-        child_nodes: List
-            Nested items of an element
+        nested_nodes: list
+            List of nested elements
         """
-        child_nodes = list()
-        for element in child_list:
+        nested_nodes = list()
+        for element in parent_element:
             if element:
-                # treat like dict
+                # Case: nested elements
                 if len(element) == 1 or element[0].tag != element[1].tag:
-                    child_nodes.append(cls.xml2dict(element))
-                # treat like list
+                    # Case: If the depth is one or the first two tags
+                    # in the hierarchy are different, then the series
+                    # is different.
+                    nested_nodes.append(self.convert_xml2dict(element))
                 elif element[0].tag == element[1].tag:
-                    child_nodes.append(cls.build_child_nodes(element))
+                    # Case: nested elements share the same tag name.
+                    nested_nodes.append(self.__build_nested_nodes(element))
             elif element.text:
-                text = element.text.strip()
+                # Case: At the deepest level of the hierarchy
+                text = element.text.strip()  # remove all leading and trailing whitespaces
                 if text:
-                    child_nodes.append(text)
-        return child_nodes
+                    nested_nodes.append(text)
+        return nested_nodes
 
-    @classmethod
-    def convert_xml2dict(cls, parent_element):
+    def convert_xml2dict(self, parent_element):
         """Converts an xml.etree.ElementTree into a Python Dictionary data type.
 
         Parameters
@@ -73,35 +72,38 @@ class Parser(object):
 
         Returns
         -------
-        nodes: dictionary
-            Dictionary created from xml.etree.ElementTree
+        xml_dictionary : dictionary
+            Dictionary built out of the elements of xml.etree.ElementTree
         """
-        nodes = dict()
+        xml_dictionary = dict()
         if parent_element.items():
-            # Case: if root element has attributes
-            nodes.update(dict(parent_element.items()))
-        for element in parent_element:
-            if element:
-                # Case: child elements
-                if len(element) == 1 or element[0].tag != element[1].tag:
-                    # If the first two tags in a series are different,
-                    # then the series is different. Keep on building
-                    # dictionary.
-                    running_dictionary = cls.convert_xml2dict(element)
+            # Case: if the parent element has attributes,
+            # then add them into the dictionary
+            xml_dictionary.update(dict(parent_element.items()))
+        else:
+            for child_element in parent_element:
+                if child_element:
+                    # Case: nested elements
+                    if (len(child_element) == 1 or
+                            child_element[0].tag != child_element[1].tag):
+                        # Case: If the depth is one or the first two tags
+                        # in the hierarchy are different, then the series
+                        # is different. Keep on building dictionary.
+                        xml_dictionary.update({child_element.tag:
+                                               self.convert_xml2dict(child_element)})
+                    else:
+                        # Case: nested elements share the same tag name.
+                        # add them as a list with the shared tag as the
+                        # dictionary key. A list is required for configuring
+                        # the logger handlers by logging.config API.
+                        xml_dictionary.update({child_element.tag:
+                                              self.__build_nested_nodes(child_element)})
+                elif child_element.items():
+                    # Case: if the element has attributes
+                    # then add them into dictionary
+                    xml_dictionary.update({child_element.tag:
+                                          dict(child_element.items())})
+                # Case: No child tags and no attributes
                 else:
-                    # Build a list of nested elements sharing the same tag name
-                    running_dictionary = cls.__build_child_nodes(element)
-                # if the tag has attributes, add those to the dict
-                if element.items():
-                    running_dictionary = {element[0].tag:
-                                            cls.__build_child_nodes(element)}
-                    running_dictionary.update(dict(element.items()))
-                nodes.update({element.tag: running_dictionary})
-            elif element.items():
-                # Case: if the element has attributes then add them
-                # into dictionary
-                nodes.update({element.tag: dict(element.items())})
-            # Finally: No child tags and no attributes
-            else:
-                nodes.update({element.tag: element.text})
-        return nodes
+                    xml_dictionary.update({child_element.tag: child_element.text})
+        return xml_dictionary

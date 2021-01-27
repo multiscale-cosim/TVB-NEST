@@ -10,17 +10,41 @@ from definitions import OUTPUT_DIR
 
 
 class MetaDirectoriesManager(type):
-    """This class implements singleton for DirectoriesManager class."""
+    """This metaclass ensures there exists only one instance of
+    DirectoriesManager class. This prevents the side-effects such as
+    the creation of multiple copies of output directories, concurrent
+    access of DirectoriesManager class, and etc.
+    """
     _instances = {}
+    __directories = {}
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super(MetaDirectoriesManager, 
-                                                cls).__call__(*args, **kwargs)
-            cls.__output_directory = cls.__setup_output_directory(OUTPUT_DIR)
-            cls.get_results_directory()
-            cls.get_logs_directory()
+            # Case: First time instantiation.
+            cls._instances[cls] = super(MetaDirectoriesManager,
+                                        cls).__call__(*args, **kwargs)
         return cls._instances[cls]
+
+
+class DirectoriesManager(metaclass=MetaDirectoriesManager):
+
+    def __init__(self):
+        # create default directories
+        self.__directories = ({'output': self.__setup_output_directory(OUTPUT_DIR)})
+        self.__directories.update({'logs': self.make_directory('logs')})
+        self.__directories.update({'results': self.make_directory('results')})
+
+    def get_directory(self, directory):
+        """Returns the path for the specified directory.
+        
+        Raises `KeyError` if directory does not exist.
+        """
+        value = self.__directories.get(directory)
+        if value:
+            return self.__directories.get(directory)
+        else:
+            # TODO: a better exception handling
+            raise KeyError("directory not found!", directory)
 
     @staticmethod
     def __setup_output_directory(name):
@@ -36,25 +60,18 @@ class MetaDirectoriesManager(type):
         target_directory: str
             Output directory path
         """
-        target_directory = os.path.join(OUTPUT_DIR, name)
-        target_directory += datetime.strftime(datetime.now(), 
+
+        target_directory = name + datetime.strftime(datetime.now(),
                                                     '_%Y-%m-%d_%H-%M')
         safe_makedir(target_directory)
         return target_directory
 
-    def get_output_directory(cls):
-        return cls.__output_directory
+    def make_directory(self, directory):
+        """Safely makes the specified directory if it does not exist.
 
-    def get_results_directory(cls):
-        res_directory = os.path.join(cls.__output_directory, "results")
-        safe_makedir(res_directory)
-        return res_directory
-
-    def get_logs_directory(cls):
-        log_directory = os.path.join(cls.__output_directory, "logs")
-        safe_makedir(log_directory)
-        return log_directory
-
-
-class DirectoriesManager(metaclass=MetaDirectoriesManager):
-    pass
+        Returns the path to the specified directory.
+        """
+        target_directory = os.path.join(self.get_directory('output'), directory)
+        safe_makedir(target_directory)
+        self.__directories.update({directory: target_directory})
+        return target_directory

@@ -9,30 +9,71 @@ from config_logger import ConfigLogger
 from directories_manager import DirectoriesManager
 
 
-class ConfigurationsManager(object):
-    """Manages all the configuration settings."""
-    # create output directories
-    dm = DirectoriesManager()
-    __directories = {'output': DirectoriesManager.get_output_directory(),
-                     'logs': DirectoriesManager.get_logs_directory(),
-                     'results': DirectoriesManager.get_results_directory()}
+class ConfigurationsManager:
+    """Manages all the configuration settings.
 
-    @classmethod
-    # retrieves directory
-    def get_directory(cls, key):
-        value = cls.__directories.get(key)
-        if value:
-            return cls.__directories.get(key)
-        else:
-            exit(1)  # TODO: better exception handling
+     Examples:
+    >>> config_manager = ConfigurationsManager()
 
-    @classmethod
-    def __load_configurations(cls, configuration_file):
-        return Parser.load_xml(configuration_file)
 
-    @classmethod
-    def load_log_configurations(cls, name, target_directory=None,
-                                configuration_file=CONFIG_FILE):
+    # make a directory
+    >>> config_manager.make_directory('test_directory') # doctest: +ELLIPSIS
+    ...\\test_directory
+    
+    # load specified component settings as a dictionary object from XML configuration file
+    >>> launcher_settings = config_manager.get_configuration_settings('launcher_configurations', CONFIG_FILE)
+    >>> print(launcher_settings)
+    {'foo': {'bar': None}, 'test_type': 'cluster'}
+
+    >>> print(type(launcher_settings))
+    <class 'dict'>
+
+    # configure and load logger
+    >>> myLogger = ConfigurationsManager().load_log_configurations(__name__)
+    >>> myLogger.info("configured") # doctest: +ELLIPSIS
+    20...INFO configurationsmanager... configured
+    """
+
+    __directories_manager = DirectoriesManager()
+    __parser = Parser()
+    __configuration_file = CONFIG_FILE
+
+    def make_directory(self, directory):
+        """Wrapper for making directories"""
+        return self.__directories_manager.make_directory(directory)
+
+    def get_directory(self, directory):
+        """Wrapper for retrieving directories"""
+        return self.__directories_manager.get_directory(directory)
+
+    def load_xml(self, configuration_file, component):
+        """Wrapper for loading an xml file"""
+        # loads the xml configuration file as an xml.etree.ElementTree
+        global_configurations_xml_tree = self.__parser.load_xml(configuration_file)
+        root = global_configurations_xml_tree.getroot()
+        # get the xml configuration settings for the desired component
+        component_configurations_xml = root.find(component)
+        if component_configurations_xml is None:
+            # TODO: a better exception handling
+            raise LookupError("configuration settings not found!", component)
+        return component_configurations_xml
+
+    def convert_xml_to_dictionary(self, xml):
+        """Wrapper for converting xml to dictionary"""
+        return self.__parser.convert_xml2dict(xml)
+
+    def get_configuration_settings(self, component, configuration_file=None):
+        """Returns the specified component_configuration settings from
+         the ``configuration_file``.
+        """
+        if configuration_file is None:
+            configuration_file = self.__configuration_file
+        component_configurations_xml = self.load_xml(configuration_file, component)
+        component_configurations_dict = self.convert_xml_to_dictionary(component_configurations_xml)
+        return component_configurations_dict
+
+    def load_log_configurations(self, name, directory=None,
+                                configuration_settings=None):
         """Creates a logger with the specified name and configuration settings.
 
         Parameters
@@ -40,27 +81,33 @@ class ConfigurationsManager(object):
         name : str
             Logger name
 
-        target_directory: str
-            target directory to emit the logs
+        directory: str
+            target directory for the log file
 
-        configuration_file: str
-            File name of the configuration settings
+        configuration_settings: dict
+            configuration settings for the logger
 
         Returns
         ------
         Return a logger
         """
-        if target_directory is None:
-            # default name for the logs directory
-            target_directory = cls.get_directory('logs')
-            # print(target_directory)
-        configurations = cls.__load_configurations(configuration_file)
-        root = configurations.getroot().find('log_configurations')
-        log_config_settings = Parser.convert_xml2dict(root)
+        if directory is None:
+            # Case: if no directory is specified,
+            # set the default directory for the logs
+            target_directory = self.get_directory(directory='logs')
+        else:
+            # Case: make specified directory for the logs
+            target_directory = self.make_directory(directory)
+        if configuration_settings is None:
+            log_configurations = self.get_configuration_settings(
+                                                    'log_configurations')
         logger = ConfigLogger()
-        return logger.initialize_logger(name, target_directory, 
-                                        xml_configurations=log_config_settings)
+        return logger.initialize_logger(name, target_directory,
+                                        configurations=log_configurations)
+
 
 if __name__ == '__main__':
+    # configure logger
     myLogger = ConfigurationsManager().load_log_configurations(__name__)
-    myLogger.info("configured")
+    # emit logs
+    myLogger.info("configured!")
