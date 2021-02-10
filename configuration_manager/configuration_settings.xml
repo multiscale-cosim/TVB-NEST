@@ -15,14 +15,17 @@
             <get_version_option>--version</get_version_option>
           </cluster>
         </executors>
-        <models>
-          <models_dir>${CO_SIM_INSTALL_DIR}/models/</models_dir>
-        </models>
+        <plans>
+          <plans_dir>${CO_SIM_INSTALL_DIR}/co_simulations_plans/</plans_dir>
+        </plans>
+        <actions>
+          <actions_dir>${CO_SIM_INSTALL_DIR}/co_simulations_actions/</actions_dir>
+        </actions>
         <transformers>
           <transformers_dir>${CO_SIM_INSTALL_DIR}/transformers/</transformers_dir>
         </transformers>
         <visualizers>
-          <visualizers_dir>${CO_SIM_INSTALL_DIR}/transformers/<visualizers_dir>
+          <visualizers_dir>${CO_SIM_INSTALL_DIR}/visualizers/</visualizers_dir>
         </visualizers>
     </orchestrator>
     <log_configurations>
