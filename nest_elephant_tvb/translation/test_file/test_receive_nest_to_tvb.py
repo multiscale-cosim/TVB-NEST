@@ -31,17 +31,17 @@ def simulate_TVB_reception(path):
     status_ = MPI.Status()
     while(True):
         # send to the translator, I want the next part
-        req = comm.isend(True, dest=0, tag=0)
+        req = comm.isend(True, dest=1, tag=0)
         req.wait()
 
         times=np.empty(2,dtype='d')
-        comm.Recv([times, MPI.FLOAT], source=0, tag=0)
+        comm.Recv([times, MPI.FLOAT], source=1, tag=0)
         # get the size of the rate
         size=np.empty(1,dtype='i')
-        comm.Recv([size, MPI.INT], source=0, tag=0)
+        comm.Recv([size, MPI.INT], source=1, tag=0)
         # get the rate
         rates = np.empty(size, dtype='d')
-        comm.Recv([rates,size, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
+        comm.Recv([rates,size, MPI.DOUBLE],source=1,tag=MPI.ANY_TAG,status=status_)
         # print the summary of the data
         if status_.Get_tag() == 0:
             print("TVB INPUT :",comm.Get_rank(),times,np.sum(rates));sys.stdout.flush()
@@ -50,7 +50,7 @@ def simulate_TVB_reception(path):
         if times[1] >9900:
             break
     # closing the connection at this end
-    req = comm.isend(True, dest=0, tag=1)
+    req = comm.isend(True, dest=1, tag=1)
     req.wait()
     print('TVB INPUT :end');sys.stdout.flush()
     comm.Disconnect()

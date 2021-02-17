@@ -3,192 +3,241 @@
 import time
 import numpy as np
 from mpi4py import MPI
-from threading import Thread, Lock
 from nest_elephant_tvb.translation.science_nest_to_tvb import store_data,analyse_data
-
-lock_status=Lock() # locker for manage the transfer of data from thread
 
 def init(path, param, comm, comm_receiver, comm_sender, loggers):
     '''
-    Initialize the translation with MPI. NOTE: more information will be added with more changes. Currently the multithreaded version is still in use.
+    Initialize the translation with MPI.
+    NOTE: more information will be added with more changes. This is still the very first version!
     
+    TODO: IMPORTANT!!! MPI communication on NEST and TVB side is somewhat hardcoded.
+        --> NEST sends to and receives from rank 0 on transformer side. This works here, since rank 0 is the receiving rank
+            --> https://github.com/sdiazpier/nest-simulator/blob/nest-i/nestkernel/recording_backend_mpi.cpp
+            --> line 396 ff (as of Feb 17th, 2021)
+        --> TVB sends and receives from rank 0 on transformer side.
+            --> nest_elephant_tvb/translation/test_file/test_receive_nest_to_tvb.py
+            --> line 32 ff (as of Feb 17th, 2021)
+            --> Here: Rank 1-x are doing analysis/science and sending to TVB
+            --> For now, hardcoded solution. All places with 'rank 0' are replaced with 'rank 1'
+            --> But as soon as we use more than two MPI ranks, this fails again!!!
+    
+    TODO: Renaming! Translator -> transformer, etc.
+    TODO: This is only the Nest to TVB direction. For other direction some generalizing changes will be needed.
+    TODO: Use RichEndPoints for communication encapsulation
+    TODO: Seperate 1)Receive 2)Analysis/Science and 3)Send. See also the many Todos in the code
+    TODO: Make use of / enable MPI parallelism! Solve hardcoded communication protocol first
     '''
     
     # destructure logger list to indivual variables
     logger_master, logger_receive, logger_send = loggers
     # science part, see import
     # TODO: use os.path (or similar) for proper file handling.
+    # TODO: move this object creation to a proper place. They are passed through many functions.
     store = store_data(path+'/log/',param)
     analyse = analyse_data(path+'/log/',param)
-    # variable for communication between thread
-    status_data=[0] # status of the buffer
     
-    ############ NEW Code: MPI intracommunicator
-    # receive on rank 0, science and send on rank 1
+    ############ NEW Code: 
     # TODO: future work: mpi parallel, use rank 1-x for science and sending
-    # NOTE: still copy-paste from kim master thesis code....
-    # new server-intracommunicator without receiving rank 0
-    intracomm = comm.Create(comm.Get_group().Excl([0]))
+    # TODO: use this MPI intracommunicator, without receiving rank 0
+    # intracomm = comm.Create(comm.Get_group().Excl([0]))
     # create the shared memory block / databuffer
-    buf_pkgs = 100 # NOTE: size hardcoded!
-    databuffer = _shared_mem_buffer(buf_pkgs,100,comm)
+    databuffer = _shared_mem_buffer(comm)
     ############# NEW Code end
     
-    # TODO:
-    # 1) receive package from nest, store in shared mem buffer
-    # 2) take from shared mem buffer, do science, send to tvb
-    # solve issues:
-    # - one package incoming, one package outgoing (synchronize)
-    # - mark buffer if new package arrived --> not to slow not to fast 
-    # - FIRST idea: 
-    #   - Receiving rank 0 check for 'NaN' in buffer, i.e. is it empty?
-    #   - if NaN then fill with new package
-    #   - Sending rank 1 (or more in the future) check for new package in buffer (not NaN)
-    #   - do science and send to TVB
-    #   - set buffer to NaN to mark as ready
-    # TODO: how to check for END of simulation?
+    ############ NEW Code: Receive/analyse/send
+    if comm.Get_rank() == 0: # Receiver from NEST, rank 0
+        # TODO: The choice of rank 0 here stems from the current communication with NEST. 
+        # All MPI communication is done with rank 0 from NESt side.
+        # Make this (and the TVB side as well) scalable. 
+        _receive(comm_receiver, databuffer, logger_receive)
+    else: #  Science/analyse and sender to TVB, rank 1-x
+        _send(comm_sender, databuffer, logger_send, store, analyse)
+    ############ NEW Code end
     
-    ############ OLD Code to replace: with threads, current solution
-    initialisation =np.load(param['init']) # initialisation value
-    buffer=[initialisation] # buffer of the rate to send it
-        
-    # create the thread for receive and send data
-    th_receive = Thread(target=receive, args=(logger_receive,store,status_data,buffer, comm_receiver))
-    th_send = Thread(target=send, args=(logger_send,analyse,status_data,buffer, comm_sender))
-
-    # start the threads
-    # FAT END POINT
-    logger_master.info('Start thread')
-    th_receive.start()
-    th_send.start()
-    th_receive.join()
-    th_send.join()
-    logger_master.info('thread join')
-    ############# OLD Code end
+    ############ NEW Code: disconnect
+    # TODO: should this be done here?
+    logger_master.info('Disconnect communicators...')
+    comm_receiver.Disconnect()
+    comm_sender.Disconnect()
+    ############ NEW Code end
 
 
-def _shared_mem_buffer(buf_pkgs,sizes,comm):
+def _shared_mem_buffer(comm):
     '''
-    Create a shared memory block.
-    MPI One-sided-Communication.
-    NOTE: still copy-paste from kim master thesis code...
+    Create shared memory buffer. MPI One-sided-Communication.
+    :param comm: MPI intra communicator to create the buffer.
+    :return buffer: 1D shared memory buffer array 
+    
+    TODO: Buffersize/max. expected number of events hardcoded
+    -> free param, handle properly!
+    Explanation:
+    -> each package from NEST contains a continuous list of the events of the current simulation step
+    -> the number of events in each package is unknown and not constant
+    -> each event is three doubles: Id_recording_device, neuronID, spiketimes
+    
+    TODO: reshaping of the buffer content is done in the science part
+    -> 1D array to shape (x,3) where x is the number of events.
+    -> this is decided by the nest I/O part, i.e. nest sends out events in 1D array 
+    -> can/should this be more generic?
     '''
-    pkg_size = np.sum(sizes)
     datasize = MPI.DOUBLE.Get_size()
+    bufsize = 1000000 * 3 # NOTE: hardcoded (max.expected events per package from nest)
     if comm.Get_rank() == 0:
-        bufbytes = buf_pkgs * datasize*2 * pkg_size 
+        bufbytes = datasize * bufsize
     else: 
         bufbytes= 0
     # rank 0: create the shared block
     # rank 1-x: get a handle to it
     win = MPI.Win.Allocate_shared(bufbytes, datasize, comm=comm)
-    buf, datasize = win.Shared_query(0) 
+    buf, datasize = win.Shared_query(0)
     assert datasize == MPI.DOUBLE.Get_size()
     # create a numpy array (buffer) whose data points to the shared mem
-    return np.ndarray(buffer=buf, dtype='d', shape=(buf_pkgs*pkg_size,2))
+    return np.ndarray(buffer=buf, dtype='d', shape=(bufsize,))
 
 
-
-def receive(logger,store,status_data,buffer, comm):
+# See todo in the beginning, encapsulate I/O, transformer, science parts
+def _receive(comm_receiver, databuffer, logger):
     '''
-    the receive part of the translator
-    :param logger : logger fro the thread
-    :param store : object for store the data before analysis
-    :param status_data: the status of the buffer (SHARED between thread)
-    :param buffer: the buffer which contains the data (SHARED between thread)
-    :return:
+    Receive data on rank 0. Put it into the shared mem buffer.
+    Replaces the former 'receive' function.
+    NOTE: First refactored version -> not pretty, not final. 
     '''
-    # initialise variables for the loop
-    status_ = MPI.Status() # status of the different message
-    source_sending = np.arange(0,comm.Get_remote_size(),1) # list of all the process for the commmunication
+    status_ = MPI.Status()
+    num_sending = comm_receiver.Get_remote_size() # how many NEST ranks are sending?
+    # TODO: It seems the 'check' variable is used to receive tags from NEST, i.e. ready for send...
+    # change this in the future, also mentioned in the FatEndPoint solution from Wouter.
     check = np.empty(1,dtype='b')
-    count=0
-    while True: # FAT END POINT
-        # send the confirmation of the process can send data
+    shape = np.empty(1, dtype='i')    
+    count = 0
+    # TODO: the last two buffer entries are used for shared information
+    # --> they replace the status_data variable from previous version
+    # --> find more elegant solution?
+    databuffer[-1] = 1 # set buffer to 'ready to receive from nest'
+    databuffer[-2] = 0 # marks the 'head' of the buffer
+    
+    while(True):
         logger.info(" Nest to TVB : wait all")
-        for source in source_sending:
-            comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
-
+        head_ = 0 # head of the buffer, reset after each iteration
+         
+        # TODO: This is still not correct. We only check for the Tag of the last rank.
+        # TODO: IF all ranks send always the same tag in one iteration (simulation step)
+        # TODO: then this works. But it should be handled differently!!!!
+        for i in range(num_sending):
+            # new: We do not care which source sends first, give MPI the freedom to send in whichever order.
+            comm_receiver.Recv([check, 1, MPI.CXX_BOOL], source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status_)
+        # TODO: handle properly, all ranks send tag 0?
         if status_.Get_tag() == 0:
-            logger.info(" Nest to TVB : start to receive")
-            #  Get the data/ spike
-            for source in source_sending:
-                comm.Send([np.array(True,dtype='b'),MPI.BOOL],dest=source,tag=0)
-                shape = np.empty(1, dtype='i')
-                comm.Recv([shape, 1, MPI.INT], source=source, tag=0, status=status_)
-                data = np.empty(shape[0], dtype='d')
-                comm.Recv([data, shape[0], MPI.DOUBLE], source=source, tag=0, status=status_)
-                store.add_spikes(count,data)
-            while status_data[0] != 1 and status_data[0] != 2: # FAT END POINT
+            # wait until ready to receive new data (i.e. the sender has cleared the buffer)
+            while databuffer[-1] != 1: # TODO: use MPI, remove the sleep
                 time.sleep(0.001)
                 pass
-            # wait until the data can be send to the sender thread
-            # Set lock to true and put the data in the shared buffer
-            buffer[0] = store.return_data()
-            with lock_status: # FAT END POINT
-                if status_data[0] != 2:
-                    status_data[0] = 0
+            for source in range(num_sending):
+                # send 'ready' to the nest rank
+                comm_receiver.Send([np.array(True,dtype='b'),MPI.BOOL],dest=source,tag=0)
+                # receive package size info
+                comm_receiver.Recv([shape, 1, MPI.INT], source=source, tag=0, status=status_)
+                # NEW: receive directly into the buffer
+                comm_receiver.Recv([databuffer[head_:], MPI.DOUBLE], source=source, tag=0, status=status_)
+                head_ += shape[0] # move head 
+                # TODO: revisit and check for proper encapsulation
+                # Here, storing and adding the spikes to the histogram was done
+                # Old code: store.add_spikes(count,data)
+                # This increased the workload of this MPI rank.
+                # All science and analysis stuff is moved to the 'sender' part. Because future parallel.
+            # Mark as 'ready to do analysis'
+            databuffer[-1] = 0
+            # important: head_ is first buffer index WITHOUT data.
+            databuffer[-2] = head_
+        # TODO: handle properly, all ranks send tag 1?
         elif status_.Get_tag() == 1:
-            logger.info("Nest to TVB : receive end " + str(count))
             count += 1
+            logger.info("Nest to TVB : receive end " + str(count))
+        # TODO: handle properly, all ranks send tag 2?
         elif status_.Get_tag() == 2:
-            with lock_status:
-                status_data[0] = 2
             logger.info("end simulation")
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
-    logger.info('communication disconnect')
-    comm.Disconnect()
-    logger.info('end thread')
-    return
+    
+    logger.info('NEST_to_TVB: End of receive function')
 
 
-def send(logger,analyse,status_data,buffer, comm):
+# See todo in the beginning, encapsulate I/O, transformer, science parts
+def _send(comm_sender, databuffer, logger, store, analyse):
     '''
-    the sending part of the translator
-    :param logger: logger fro the thread
-    :param analyse ; analyse object to transform spikes to state variable
-    :param status_data: the status of the buffer (SHARED between thread)
-    :param buffer: the buffer which contains the data (SHARED between thread)
-    :return:
+    Analysis/Science on INTRAcommunicator (multiple MPI ranks possible).
+    TODO: not yet used, see also analysis function below
+    Send data to TVB on INTERcommunicator comm_sender (multiple MPI ranks possible).
+    Replaces the former 'send' function.
+    NOTE: First refactored version -> not pretty, not final. 
+    
+    TODO: Ugly: 'store' and 'analyse' objects passed through all the way from the beginning.
+    TODO: Discuss communication protocol of NEST<->transformer and transformer<->TVB
     '''
+
     count=0
     status_ = MPI.Status()
     while True: # FAT END POINT
-        # wait until the translator accept the connections
+        # TODO: this communication has the 'rank 0' problem described in the beginning
         accept = False
         logger.info("Nest to TVB : wait to send " )
         while not accept:
-            req = comm.irecv(source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG)
+            req = comm_sender.irecv(source=MPI.ANY_SOURCE,tag=MPI.ANY_TAG)
             accept = req.wait(status_)
         logger.info(" Nest to TVB : send data status : " +str(status_.Get_tag()))
         if status_.Get_tag() == 0:
-            # send the rate when there ready
-            while status_data[0] != 0: # FAT END POINT
+            # wait until the receiver has cleared the buffer, i.e. filled with new data
+            while databuffer[-1] != 0: # TODO: use MPI, remove the sleep
                 time.sleep(0.001)
                 pass
-            times,data=analyse.analyse(count,buffer[0])
-            with lock_status:
-                if status_data[0] != 2:
-                    status_data[0] = 1
+            # TODO: All science/analysis here. Move to a proper place.
+            times,data = _analyse(count, databuffer, store, analyse)
+            
+            # Mark as 'ready to receive next simulation step'
+            databuffer[-1] = 1
+            
+            ############ OLD Code
+            # TODO: this communication has the 'rank 0' problem described in the beginning
             logger.info("Nest to TVB : send data :"+str(np.sum(data)) )
             # time of stating and ending step
-            comm.Send([times, MPI.DOUBLE], dest=status_.Get_source(), tag=0)
+            comm_sender.Send([times, MPI.DOUBLE], dest=status_.Get_source(), tag=0)
             # send the size of the rate
             size = np.array(int(data.shape[0]),dtype='i')
-            comm.Send([size,MPI.INT], dest=status_.Get_source(), tag=0)
+            comm_sender.Send([size,MPI.INT], dest=status_.Get_source(), tag=0)
             # send the rates
-            comm.Send([data,MPI.DOUBLE], dest=status_.Get_source(), tag=0)
+            comm_sender.Send([data,MPI.DOUBLE], dest=status_.Get_source(), tag=0)
+            ############ OLD Code end
         elif status_.Get_tag() == 1:
             # disconnect when everything is ending
-            with lock_status:
-                status_data[0] = 2
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
         count+=1
-    logger.info('communication disconnect')
-    comm.Disconnect()
-    logger.info('end thread')
-    return
+    logger.info('NEST_to_TVB: End of send function')
+
+
+# See todo in the beginning, encapsulate I/O, transformer, science parts
+def _analyse(count, databuffer, store, analyse):
+    '''
+    All analysis and science stuff in one place.
+    Done in three steps, that were previously disconnected.
+    Step 1 and 2 were done in the receiving thread, step 3 in the sending thread.
+    NOTE: All science and analysis is the same as before.
+    :param count: Simulation iteration/step
+    :param databuffer: The buffer contains the spikes of the current step
+    :param store: Python object, create the histogram 
+    :param analyse: Python object, calculate rates
+    :return times, data: simulation times and the calculated rates
+    
+    TODO: Step 1 and 2 can be merged into one step. Buffer is no longer filled rank by rank.
+    TODO: Make this parallel with the INTRA communicator (should be embarrassingly parallel).
+    '''
+    # Step 1) take all data from buffer and create histogram
+    # second to last index in databuffer denotes how much data there is
+    store.add_spikes(count,databuffer[:int(databuffer[-2])])
+    # Step 2) take the resulting histogram
+    data_to_analyse = store.return_data()
+    # Step 3) Analyse this data, i.e. calculate rates?
+    times,data = analyse.analyse(count,data_to_analyse)
+    
+    return times, data

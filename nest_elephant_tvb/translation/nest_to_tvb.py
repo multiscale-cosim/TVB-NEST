@@ -40,7 +40,7 @@ if __name__ == "__main__":
     if len(sys.argv)!=4:
         print('incorrect number of arguments')
         exit(1)
-
+    
     path = sys.argv[1]
     file_spike_detector = sys.argv[2]
     TVB_recev_file = sys.argv[3]
@@ -84,6 +84,10 @@ if __name__ == "__main__":
     ############# NEW Code end
     
     logger_master.info('clean file')
-    os.remove(path_to_files_receive)
-    os.remove(path_to_files_send)
+    # TODO: ugly solution, all MPI ranks want to delete, only the first one can.
+    try:
+        os.remove(path_to_files_receive)
+        os.remove(path_to_files_send)
+    except FileNotFoundError:
+        pass 
     logger_master.info('end')
