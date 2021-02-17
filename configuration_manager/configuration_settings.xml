@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <settings>
-    <launcher_configurations>
-        <foo>
-            <bar></bar>
-        </foo>
-        <test_type>cluster</test_type>
-    </launcher_configurations>
+    <orchestrator>
+        <executors>
+          <local>
+            <command>mpirun</command>
+            <n_tasks_option>-n</n_tasks_option>
+            <n_tasks_default_value>2</n_tasks_default_value>
+            <get_version_option>-V</get_version_option>
+          </local>
+          <cluster>
+            <command>srun</command>
+            <n_tasks_option>-n</n_tasks_option>
+            <n_tasks_default_value>2</n_tasks_default_value>
+            <get_version_option>--version</get_version_option>
+          </cluster>
+        </executors>
+        <plans>
+          <plans_dir>${CO_SIM_INSTALL_DIR}/co_simulations_plans/</plans_dir>
+        </plans>
+        <actions>
+          <actions_dir>${CO_SIM_INSTALL_DIR}/co_simulations_actions/</actions_dir>
+        </actions>
+        <transformers>
+          <transformers_dir>${CO_SIM_INSTALL_DIR}/transformers/</transformers_dir>
+        </transformers>
+        <visualizers>
+          <visualizers_dir>${CO_SIM_INSTALL_DIR}/visualizers/</visualizers_dir>
+        </visualizers>
+    </orchestrator>
     <log_configurations>
         <version>1</version>
         <disable_existing_loggers>False</disable_existing_loggers>
