@@ -13,9 +13,11 @@
 #
 #   Date: 2021.02.16
 # ------------------------------------------------------------------------------
+import os
 import common
 import configurations_manager
-import xml
+# import xml
+import json
 
 
 class Launcher:
@@ -27,89 +29,41 @@ class Launcher:
         run(args=None)
             Entry point to the launcher and executes the main loop of the tool
     """
+    # general members
     __args = None
-    __co_sim_plan_xml_dict = None
     __configuration_manager = None
+    __logs_root_dir = None
     __logger = None
 
-    __xml_main_tags = ('plan_parameters', 'action_plan_variables', 'action_plan')
-    __xml_main_dicts = {}  # will be created dynamically
+    # XML validators
+    __co_sim_parameters_validator = None
+    __co_sim_plan_validator = None
+
+    # dictionaries
+    __action_plan_parameters_dict = {}
     __action_plan_variables_dict = {}
+    __parameters_parameters_dict = {}
+    __parameters_variables_dict = {}
 
-    @property
-    def __co_simulation_plan_xml_to_dict(self):
+    def generate_parameters_json_file(self):
         """
-            Load the Co-Simulation plan XML file into __co_sim_plan_xml_dict
+            Dumps into the /path/to/co_sim/results/dir/filename.json file
+            the parameters gathered from the parameters XML file
 
         :return:
-            CO_SIM_PLAN_XML_FORMAT_ERROR: The Co-Simulation Plan XML file is not well-formed
-            CO_SIM_PLAN_XML_OK: The Co-Simulation Plan XML file has been loaded into __co_sim_plan_xml_dict
-        """
-        try:
-            self.__co_sim_plan_xml_dict = self.__configuration_manager.get_configuration_settings(
-                configuration_file=self.__args.plan,
-                component='co_simulation_plan')
-        except xml.etree.ElementTree.ParseError:
-            self.__logger.error('{} cannot be loaded, check XML format'.format(self.__args.plan))
-            return common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_FORMAT_ERROR
-        else:
-            self.__logger.info('{} Co-Simulation Plan XML file loaded'.format(self.__args.plan))
-
-        return common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_OK
-
-    def __co_sim_plan_xml_main_tags_to_dict(self):
-        """
-            Loading the Co-Simulation Plan XML file main sections into dictionaries
-
-        :return:
-            CO_SIM_PLAN_XML_TAG_ERROR:  When the Co-Simulation Plan XML file does not contains an expected tag
-                                        on the first level
-            CO_SIM_PLAN_XML_OK: Values present on the Co-Simulation Plan XML file are the expected ones.
+            JSON_FILE_ERROR: reporting error during the parameter JSON file
+            OK: parameter JSON file was generated properly
         """
 
-        for co_sim_plan_main_tag in self.__xml_main_tags:
-            try:
-                tmp_xml_dict = self.__co_sim_plan_xml_dict[co_sim_plan_main_tag]
-            except KeyError:
-                # Co-Simulation Plan XML File does not contains expected main tags
-                self.__logger.error('{} does not contains the <{}> tag'.format(self.__args.plan, co_sim_plan_main_tag))
-                return common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_TAG_ERROR
+        # TO BE DONE: exception management when the file cannot be created
 
-            self.__xml_main_dicts[co_sim_plan_main_tag] = tmp_xml_dict
+        results_dir = self.__configuration_manager.get_directory('results')
+        parameters_json_file = self.__parameters_parameters_dict['CO_SIM_PARAMETERS_JSON_FILENAME']
 
-        # a = self.__co_sim_plan_xml_dict['delay']
+        with open(results_dir+'/'+parameters_json_file, 'w') as json_output_file:
+            json.dump(self.__parameters_parameters_dict['CO_SIM_PARAMETERS_JSON_FILE_CONTENT'], json_output_file)
 
-        # In this point, __xml_dict dictionary contains the dictionaries based on the
-        # main expected tags on the Co-Simulation Plan XML configuration file,
-        # hence, the __co_sim_plan_xml_dict is deleted
-        del self.__co_sim_plan_xml_dict
-
-        return common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_OK
-
-    def __co_sim_plan_xml_check_plan_parameters(self):
-        """
-            Validating the values set on the Co-Simulation Plan XML file
-
-        :return:
-            CO_SIM_PLAN_XML_VALUE_ERROR: The Co-Simulation Plan XML file contains a wrong value
-            CO_SIM_PLAN_XML_OK: All the found values are valid
-        """
-        # Execution Environment
-        try:
-            tmp_exec_env = self.__xml_main_dicts['plan_parameters']['execution_environment']
-        except KeyError:
-            self.__logger.error('{} has no <execution_environment> tag in <plan_parameters>'.format(self.__args.plan))
-            return common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_TAG_ERROR
-
-        if 'LOCAL' == tmp_exec_env.upper():
-            self.__action_plan_variables_dict['__CO_SIM_EXECUTION_ENVIRONMENT'] = 'LOCAL'
-        elif 'CLUSTER' == tmp_exec_env.upper():
-            self.__action_plan_variables_dict['__CO_SIM_EXECUTION_ENVIRONMENT'] = 'CLUSTER'
-        else:
-            self.__logger.error('{} has {} for the <execution_environment> tag'.format(self.__args.plan, tmp_exec_env))
-            return common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_VALUE_ERROR
-
-        return common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_OK
+        return common.enums.LauncherReturnCodes.OK
 
     def run(self, args=None):
         """
@@ -121,33 +75,65 @@ class Launcher:
         :return:
             common.enums.LauncherReturnCodes
         """
-
+        ########
         # STEP 1 - Checking command line parameters
+        ########
         try:
             self.__args = common.args.arg_parse()
         except SystemExit as e:
             # argument parser has reported some issue with the arguments
             return common.enums.LauncherReturnCodes.PARAMETER_ERROR
 
-        # STEP 2 - Setting Up the Configuration Manager Configuration
+        ########
+        # STEP 2 - Setting Up the Configuration Manager
+        ########
+        # TO BE DONE: __logs_root_dir should be set based on environment variable or by using another mechanism
+        # e.g. self.__logs_root_dir = os.environ['HOME'] + '/co_sim/logs'
         self.__configuration_manager = configurations_manager.ConfigurationsManager()
-        self.__logger = self.__configuration_manager.load_log_configurations('launcher')
+        self.__logger = self.__configuration_manager.load_log_configurations(name='launcher')
         self.__logger.info('START: Co-Simulation Launcher')
 
-        # STEP 3 - Loading Co-Simulation Plan XML configuration file
-        if self.__co_simulation_plan_xml_to_dict == common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_FORMAT_ERROR:
+        ########
+        # STEP 3 - Co-Simulation Plan
+        ########
+        self.__co_sim_plan_validator = \
+            common.xml_managers.CoSimulationPlanXmlManager(configuration_manager=self.__configuration_manager,
+                                                           logger=self.__logger,
+                                                           xml_filename=self.__args.action_plan)
+
+        # STEP 3.1 - Validating Co-Simulation Plan XML file
+        if not self.__co_sim_plan_validator.dissect() == common.enums.XmlManagerReturnCodes.XML_OK:
             return common.enums.LauncherReturnCodes.XML_ERROR
 
-        # STEP 4 - Validating values on the Co-Simulation Plan XML configuration file
-        # STEP 4.1 - Main Tags
-        if self.__co_sim_plan_xml_main_tags_to_dict() == common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_TAG_ERROR:
+        # STEP 3.2 - Getting the parameters found on the Co-Simulation Plan XML file
+        self.__action_plan_parameters_dict = self.__co_sim_plan_validator.get_parameters_dict()
+
+        # STEP 3.3 - Getting the variables found on the Co-Simulation Plan XML file
+        self.__action_plan_variables_dict = self.__co_sim_plan_validator.get_variables_dict()
+
+        ###################################
+        # STEP 4 Co-Simulation Parameters #
+        ###################################
+        self.__co_sim_parameters_validator = \
+            common.xml_managers.CoSimulationParametersXmlManager(configuration_manager=self.__configuration_manager,
+                                                                 logger=self.__logger,
+                                                                 xml_filename=self.__args.parameters)
+
+        # STEP 4.1 - Validating Co-Simulation Parameters XML file
+        if not self.__co_sim_parameters_validator.dissect() == common.enums.XmlManagerReturnCodes.XML_OK:
             return common.enums.LauncherReturnCodes.XML_ERROR
 
-        # STEP 4.2 - Plan parameters
-        if self.__co_sim_plan_xml_check_plan_parameters() == common.enums.CoSimPlanXmlReturnCodes.CO_SIM_PLAN_XML_VALUE_ERROR:
-            return common.enums.LauncherReturnCodes.XML_ERROR
+        # STEP 4.2 - Getting the parameters found on the Co-Simulation Plan XML file
+        self.__parameters_parameters_dict = self.__co_sim_parameters_validator.get_parameters_dict()
 
-        # STEP 5 - Launching action plan
+        # STEP 4.3 - Getting the variables found on the Co-Simulation Plan XML file
+        self.__parameters_variables_dict = self.__co_sim_parameters_validator.get_variables_dict()
+
+        # STEP 5 - Converting Co-Simulation XML parameters into JSON
+        if not self.generate_parameters_json_file() == common.enums.LauncherReturnCodes.OK:
+            return common.enums.LauncherReturnCodes.JSON_FILE_ERROR
+
+        # STEP 6 - Launching action plan
         # TO BE DONE
 
         # STEP 99 - Finishing

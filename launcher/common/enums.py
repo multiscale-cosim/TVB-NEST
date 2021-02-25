@@ -16,15 +16,17 @@ import enum
 
 
 @enum.unique
-class CoSimPlanXmlReturnCodes(enum.Enum):
+class XmlManagerReturnCodes(enum.Enum):
     """
         Enum Class implementing the enumerations related to
         the validation of the Co-Simulation Plan XML input file
     """
-    CO_SIM_PLAN_XML_OK = 0
-    CO_SIM_PLAN_XML_FORMAT_ERROR = 201
-    CO_SIM_PLAN_XML_TAG_ERROR = 202
-    CO_SIM_PLAN_XML_VALUE_ERROR = 203
+    XML_OK = 0
+
+    XML_FORMAT_ERROR = 201
+    XML_TAG_ERROR = 202
+    XML_VALUE_ERROR = 203
+    XML_WRONG_MANAGER_ERROR = 204
 
 
 @enum.unique
@@ -39,11 +41,14 @@ class LauncherReturnCodes(enum.Enum):
     OK = 0
     NOT_OK = -1
 
+    # Returns related to parameters JSON file
+    JSON_FILE_ERROR = 5
+
     # Returns code related to command-line parameters
-    PARAMETER_ERROR = 101
+    PARAMETER_ERROR = 105
 
     # Returns code related to Co-Simulation Plan XML File
-    XML_ERROR = 201
+    XML_ERROR = 205
 
 
 @enum.unique

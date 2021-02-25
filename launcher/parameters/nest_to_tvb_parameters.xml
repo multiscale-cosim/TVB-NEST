@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_parameters>
+        <title>NEST to TVB parameters</title>
+        <description>Parameters used by nest_to_tvb.py transformer</description>
+        <variables>
+            <!-- no variables defined -->
+            <var_000>
+                <var_name>__no_variable_name__</var_name>
+                <var_value>__no_variable_value__</var_value>
+            </var_000>
+        </variables>
+        <parameters>
+            <par_000>
+                <!-- will be created on /path/to/results/dir provided by the configuration_manager -->
+                <par_name>CO_SIM_PARAMETERS_JSON_FILENAME</par_name>
+                <par_value>parameters.json</par_value>
+            </par_000>
+            <par_001>
+                <par_name>CO_SIM_PARAMETERS_JSON_FILE_CONTENT</par_name>
+                <par_value>
+                    <!-- tag names will be used as object names for the JSON data file -->
+                    <param_TR_nest_to_tvb>
+                        <init>init_spikes.npy</init>
+                        <resolution>0.1</resolution>
+                        <!-- TO BE DONE: assign the proper value based on a XML parameter -->
+                        <synch>100</synch>
+                        <width>20.0</width>
+                        <nb_neurons>20</nb_neurons>
+                        <!-- TO BE DONE: Establishing the proper LOG LEVEL based on the
+                              value specified in the plan XML file -->
+                        <level_log>0</level_log>
+                    </param_TR_nest_to_tvb>
+                </par_value>
+            </par_001>
+        </parameters>
+    </co_simulation_parameters>
+</settings>

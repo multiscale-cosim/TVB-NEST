@@ -19,7 +19,7 @@ from pathlib import Path
 def xml_file_exists(path_and_filename=None):
     """
 
-    :param path_and_filename: Location and XML filename defining the Co-Simulation Plan to be performed
+    :param path_and_filename: Location and XML filename  having a valid Co-Simulation XML structure
     :return:
         None: when the file has not been found
         Location path plus filename when the file is reachable
@@ -50,10 +50,19 @@ def arg_parse(args=None):
                                      formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument(
-        '--plan',
+        '--action-plan',
+        '-a',
+        help='XML file defining the Co-Simulations Plan to be executed',
+        metavar='co_simulation_plan.xml',
+        type=xml_file_exists,
+        required=True,
+    )
+
+    parser.add_argument(
+        '--parameters',
         '-p',
-        help='XML file defining the co-simulation jobs to be launched',
-        metavar='co_simulation_launch.xml',
+        help='XML file defining the Co-Simulation Parameters to be used',
+        metavar='co_simulation_parameters.xml',
         type=xml_file_exists,
         required=True,
     )

@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <settings>
-    <co_simulation_plan>
+    <co_simulation_action_plan>
         <title>Test the translator Nest to TVB</title>
         <description>Test the translator Nest to TVB</description>
-        <plan_parameters>
-            <actions_location_path>CO_SIM_XML_ACTIONS_DIR</actions_location_path>
-            <execution_environment>Local</execution_environment>
-        </plan_parameters>
-        <action_plan_variables>
+        <parameters>
+            <par_000>
+                <par_name>CO_SIM_XML_ACTIONS_DIR</par_name>
+                <par_value>${CO_SIM_TVB_NEST}/launcher/actions</par_value>
+            </par_000>
+            <par_001>
+                <par_name>CO_SIM_EXECUTION_ENVIRONMENT</par_name>
+                <par_value>Local</par_value>
+            </par_001>
+        </parameters>
+        <variables>
+            <!-- The variables under this section, will be created dynamically and held on a python dictionary
+                 NOTE: the NAME of the variable is the dictionary KEY to have access to its value
+            -->
             <var_000>
                 <var_name>CO_SIM_DELAY</var_name>
                 <var_value>100</var_value>
             </var_000>
             <var_001>
                 <var_name>CO_SIM_RESULTS_DIR</var_name>
-                <!-- generated on runtime by the configuration manager -->
+                <!-- NOTE:  CO_SIM_RUNTIME_RESULTS_DIR will be
+                            generated on run-time by the configuration manager
+                 -->
                 <var_value>CO_SIM_RUNTIME_RESULTS_DIR</var_value>
             </var_001>
             <var_002>
@@ -25,33 +36,41 @@
                 <var_name>CO_SIM_OUTPUT_FILE</var_name>
                 <var_value>output/0.txt</var_value>
             </var_003>
-        </action_plan_variables>
+        </variables>
         <action_plan>
+            <!-- prolegomenon -->
             <action_000>
-                <action_script>numpy_generator.py</action_script>
-                <action_parameters>CO_SIM_RESULTS_DIR</action_parameters>
+                <action_type>CO_SIM_ACTION_SCRIPT</action_type>
+                <action_script>initial_spikes_generator.xml</action_script>
+                <action_launch_method>synchronous</action_launch_method>
             </action_000>
+
             <action_002>
-                <action_script>nest_to_tvb.py</action_script>
-                <action_parameters>
-                    <argv_1_results_dir>CO_SIM_RESULTS_DIR</argv_1_results_dir>
-                    <argv_2_input_file>CO_SIM_INPUT_FILE</argv_2_input_file>
-                    <argv_3_output_file>CO_SIM_OUTPUT_FILE</argv_3_output_file>
-                </action_parameters>
+                <!-- waiting until the preceding action finishes -->
+                <action_type>CO_SIM_EVENT</action_type>
+                <action_event>CO_SIM_LAUNCHER_WAIT_FOR_SYNCHRONOUS_ACTIONS</action_event>
             </action_002>
+
+            <!-- main plan action proceeding -->
             <action_004>
-                <action_script>test_input_nest_to_tvb.py</action_script>
-                <action_parameters>
-                    <argv_1_input_file>CO_SIM_RESULTS_DIR/CO_SIM_INPUT_FILE</argv_1_input_file>
-                    <argv_2_delay>CO_SIM_DELAY</argv_2_delay>
-                </action_parameters>
+                <action>transformer_nest_to_tvb.xml</action>
+                <launching_method>asynchronous</launching_method>
             </action_004>
             <action_006>
-                <action_script>test_receive_nest_to_tvb.py</action_script>
-                <action_parameters>
-                    <argv_1_input_file>CO_SIM_RESULTS_DIR/CO_SIM_OUTPUT_FILE</argv_1_input_file>
-                </action_parameters>
+                <action>test_input_nest_to_tvb.xml</action>
+                <launching_method>asynchronous</launching_method>
             </action_006>
+            <action_008>
+                <action>test_receive_nest_to_tvb.xml</action>
+                <launching_method>asynchronous</launching_method>
+            </action_008>
+
+            <!-- epilogue -->
+            <action_010>
+                <!-- waiting until the preceding actions finishes -->
+                <action_type>CO_SIM_EVENT</action_type>
+                <action_event>CO_SIM_LAUNCHER_WAIT_FOR_ASYNCHRONOUS_ACTIONS</action_event>
+            </action_010>
         </action_plan>
-    </co_simulation_plan>
+    </co_simulation_action_plan>
 </settings>

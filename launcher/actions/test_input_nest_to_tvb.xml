@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_action>
+        <title>Nest to TVB transformer data producer</title>
+        <description>Test Nest to TVB transformer input data</description>
+        <action>
+            <script>test_input_nest_to_tvb.py</script>
+            <parameters>
+                <argv_1_results_dir>CO_SIM_RESULTS_DIR</argv_1_results_dir>
+                <argv_2_input_file>CO_SIM_INPUT_FILE</argv_2_input_file>
+                <argv_3_output_file>CO_SIM_DELAY</argv_3_output_file>
+            </parameters>
+        </action>
+    </co_simulation_action>
+</settings>

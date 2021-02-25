@@ -13,8 +13,10 @@
 #   Date: 2021.02.16
 # ------------------------------------------------------------------------------
 from .args import arg_parse
-from .enums import BashReturnCodes, LauncherReturnCodes, CoSimPlanXmlReturnCodes
+from .enums import BashReturnCodes, LauncherReturnCodes, XmlManagerReturnCodes
 from .launcher import Launcher
+from .xml_managers import CoSimulationPlanXmlManager, CoSimulationParametersXmlManager
+
 
 
 
