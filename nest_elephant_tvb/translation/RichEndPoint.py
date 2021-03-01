@@ -88,7 +88,6 @@ def tvb_connection(comm, root, info, logger_master, path_to_files_send):
 
 def close_and_finalize(port_send, port_receive, logger_master):
     # close port
-    MPI.Close_port(port_send)
     MPI.Close_port(port_receive)
     logger_master.info('close communicator')
     # finalise MPI

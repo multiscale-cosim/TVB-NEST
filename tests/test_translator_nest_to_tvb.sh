@@ -27,7 +27,7 @@ parameter='{"param_TR_nest_to_tvb" : {"init": "./test_nest_to_tvb/init_spikes.np
 echo "${parameter}" >./test_nest_to_tvb/parameter.json
 cp ./init_spikes.npy  ./test_nest_to_tvb/init_spikes.npy
 
-$RUN -n 2 python3 ../nest_elephant_tvb/translation/nest_to_tvb.py ./test_nest_to_tvb/ input/0.txt output/0.txt&
+$RUN -n 3 python3 ../nest_elephant_tvb/translation/nest_to_tvb.py ./test_nest_to_tvb/ input/0.txt output/0.txt&
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_input_nest_to_tvb.py  ./test_nest_to_tvb/input/0.txt $DELAY &
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_receive_nest_to_tvb.py  ./test_nest_to_tvb/output/0.txt &
 

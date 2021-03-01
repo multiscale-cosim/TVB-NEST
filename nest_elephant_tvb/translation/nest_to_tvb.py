@@ -1,37 +1,12 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
+from mpi4py import MPI
 import os
 import json
-import logging
-
-import nest_elephant_tvb.translation.RichEndPoint as REP
-import nest_elephant_tvb.translation.mpi_translator as mt
-
-def create_logger(path,name, log_level):
-    # Configure logger
-    logger = logging.getLogger(name)
-    fh = logging.FileHandler(path+'/log/'+name+'.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if log_level == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  log_level == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  log_level == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  log_level == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  log_level == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
-
-    return logger
+from nest_elephant_tvb.translation.Nest_IO import Receiver_Nest_Data
+from nest_elephant_tvb.translation.TVB_IO import Send_TVB_Data
+from nest_elephant_tvb.translation.translation_function import Translation_spike_to_rate
 
 
 if __name__ == "__main__":
@@ -49,45 +24,23 @@ if __name__ == "__main__":
     with open(path+'/parameter.json') as f:
         parameters = json.load(f)
     param = parameters['param_TR_nest_to_tvb']
-    
-    
-    ############ NEW Code: old logging code copied here for better overview
     level_log = param['level_log']
     id_spike_detector = os.path.splitext(os.path.basename(path+file_spike_detector))[0]
-    logger_master = create_logger(path, 'nest_to_tvb_master'+str(id_spike_detector), level_log)
-    logger_receive = create_logger(path, 'nest_to_tvb_receive'+str(id_spike_detector), level_log)
-    logger_send = create_logger(path, 'nest_to_tvb_send'+str(id_spike_detector), level_log)
-    ############# NEW Code end
-    
-    
-    ############ NEW Code: FAT END POINT for MPI and new connections
-    ### contains all MPI connection stuff for proper encapsulation
-    ### TODO: make this a proper interface
-    path_to_files_receive = path + file_spike_detector # TODO: use proper path operations
-    path_to_files_send = path + TVB_recev_file
-    comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
-    ############# NEW Code end
-    
-    
-    ############ NEW Code: removed threads, used MPI ranks...
-    ### TODO: encapsulate loggers
-    ### kept all logging stuff here for now to have them in one place
-    loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
-    mt.init(path, param, comm, comm_receiver, comm_sender, loggers)
-    ############ NEW Code end
-    
-    
-    ############ NEW Code: FAT END POINT for MPI and new connections
-    ### contains all MPI connection stuff for proper encapsulation
-    ### TODO: make this a proper interface
-    REP.close_and_finalize(port_send, port_receive,logger_master)
-    ############# NEW Code end
-    
-    logger_master.info('clean file')
-    # TODO: ugly solution, all MPI ranks want to delete, only the first one can.
-    try:
-        os.remove(path_to_files_receive)
-        os.remove(path_to_files_send)
-    except FileNotFoundError:
-        pass 
-    logger_master.info('end')
+
+
+    rank = MPI.COMM_WORLD.Get_rank()
+    if rank == 0:
+        receive_data_from_nest = Receiver_Nest_Data('nest_to_tvb_receive' + str(id_spike_detector),
+                                                    path,level_log,0,buffer_r_w=[2,0])
+        path_to_files_receive = [path + file_spike_detector] # TODO: use proper path operations
+        receive_data_from_nest.run(path_to_files_receive)
+    elif rank == 1:
+        send_data_to_TVB = Send_TVB_Data(2,'nest_to_tvb_send'+str(id_spike_detector),path,level_log,1,buffer_r_w=[2,0])
+        path_to_files_send = [path + TVB_recev_file]
+        send_data_to_TVB.run(path_to_files_send)
+    elif rank == 2:
+        send_data_to_TVB = Translation_spike_to_rate(param,1, 'nest_to_tvb_translate' + str(id_spike_detector), path, level_log, 2,
+                                         buffer_r_w=[2,0])
+        send_data_to_TVB.run(None)
+    else :
+        raise Exception('too much rank')
