@@ -1,0 +1,304 @@
+{
+  "param_nest": {
+    "sim_resolution": 0.1,
+    "master_seed": 46,
+    "total_num_virtual_procs": 6,
+    "overwrite_files": true,
+    "print_time": true,
+    "verbosity": 20
+  },
+  "param_nest_topology": {
+    "neuron_type": "aeif_cond_exp",
+    "param_neuron_excitatory": {
+      "C_m": 200.0,
+      "t_ref": 5.0,
+      "V_reset": -47.5,
+      "E_L": -74.0,
+      "g_L": 10.0,
+      "I_e": 0.0,
+      "a": 0.0,
+      "b": 50.0,
+      "Delta_T": 2.0,
+      "tau_w": 150.0,
+      "V_th": -50.0,
+      "E_ex": 0.0,
+      "tau_syn_ex": 5.0,
+      "E_in": -80.0,
+      "tau_syn_in": 5.0
+    },
+    "param_neuron_inhibitory": {
+      "C_m": 200.0,
+      "t_ref": 5.0,
+      "V_reset": -75.0,
+      "E_L": -75.0,
+      "g_L": 10.0,
+      "I_e": 0.0,
+      "a": 0.0,
+      "b": 0.0,
+      "Delta_T": 0.5,
+      "tau_w": 1.0,
+      "V_th": -50.0,
+      "E_ex": 0.0,
+      "tau_syn_ex": 5.0,
+      "E_in": -80.0,
+      "tau_syn_in": 5.0
+    },
+    "mean_I_ext": 0.0,
+    "sigma_I_ext": 0.0,
+    "sigma_V_0": 0.0,
+    "mean_w_0": 0.0,
+    "nb_region": 104,
+    "nb_neuron_by_region": 10000,
+    "percentage_inhibitory": 0.2
+  },
+  "param_nest_connection": {
+    "weight_local": 1.0,
+    "g": 10.0,
+    "p_connect": 0.005,
+    "weight_global": 1.0,
+    "nb_external_synapse": 90,
+    "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy",
+    "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy",
+    "velocity": 3.0
+  },
+  "param_nest_background": {
+    "poisson": false,
+    "rate_ex": 0.0,
+    "rate_in": 0.0,
+    "weight_poisson": 1.0,
+    "noise": false,
+    "stimulus": false,
+    "multimeter": true,
+    "multimeter_list": {
+      "VM_pop_1_ex": [
+        [
+          "V_m"
+        ],
+        0,
+        10
+      ],
+      "W_pop_1_ex": [
+        [
+          "w"
+        ],
+        0,
+        10
+      ],
+      "VM_pop_1_in": [
+        [
+          "V_m"
+        ],
+        8000,
+        8010
+      ],
+      "W_pop_1_in": [
+        [
+          "w"
+        ],
+        8000,
+        8010
+      ]
+    },
+    "record_spike": true,
+    "record_spike_list": {
+      "pop_1_ex": [
+        0,
+        8000
+      ],
+      "pop_2_ex": [
+        10000,
+        17999
+      ],
+      "pop_1_in": [
+        8000,
+        9999
+      ],
+      "pop_2_in": [
+        18000,
+        19999
+      ]
+    }
+  },
+  "param_tvb_model": {
+    "order": 2,
+    "T": 20.0,
+    "P_e": [
+      -0.0498,
+      0.00506,
+      -0.025,
+      0.0014,
+      -0.00041,
+      0.0105,
+      -0.036,
+      0.0074,
+      -0.0012,
+      -0.0407
+    ],
+    "P_i": [
+      -0.0514,
+      0.004,
+      -0.0083,
+      0.0002,
+      -0.0005,
+      0.0014,
+      -0.014,
+      0.0045,
+      0.0028,
+      -0.00153
+    ],
+    "initial_condition": {
+      "E": [
+        0.0,
+        0.0
+      ],
+      "I": [
+        0.0,
+        0.0
+      ],
+      "C_ee": [
+        0.0,
+        0.0
+      ],
+      "C_ei": [
+        0.0,
+        0.0
+      ],
+      "C_ii": [
+        0.0,
+        0.0
+      ],
+      "W_e": [
+        5.0,
+        0.0
+      ],
+      "W_i": [
+        0.0,
+        0.0
+      ]
+    },
+    "g_L": 10.0,
+    "E_L_e": -74.0,
+    "E_L_i": -75.0,
+    "C_m": 200.0,
+    "b_e": 50.0,
+    "a_e": 0.0,
+    "b_i": 0.0,
+    "a_i": 0.0,
+    "tau_w_e": 150.0,
+    "tau_w_i": 1.0,
+    "E_e": 0.0,
+    "E_i": -80.0,
+    "Q_e": 1.0,
+    "Q_i": 10.0,
+    "tau_e": 5.0,
+    "tau_i": 5.0,
+    "N_tot": 10000,
+    "p_connect": 0.005,
+    "g": 0.2,
+    "K_ext_e": 90
+  },
+  "param_tvb_connection": {
+    "path_region_labels": "/home/nest_elephant_tvb/parameter/data_mouse//region_labels.txt",
+    "path_centers": "/home/nest_elephant_tvb/parameter/data_mouse/centres.txt",
+    "path_cortical": "/home/nest_elephant_tvb/parameter/data_mouse/cortical.npy",
+    "orientation": true,
+    "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy",
+    "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy",
+    "nb_region": 104,
+    "velocity": 3.0
+  },
+  "param_tvb_coupling": {
+    "a": 1.0
+  },
+  "param_tvb_integrator": {
+    "tau_OU": 20.0,
+    "mu": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "nsig": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "weights": [
+      0.01,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "sim_resolution": 0.1,
+    "seed": 45,
+    "seed_init": 44
+  },
+  "param_tvb_monitor": {
+    "save_time": 20.0,
+    "Raw": true,
+    "TemporalAverage": false,
+    "parameter_TemporalAverage": {
+      "variables_of_interest": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "period": 1.0
+    },
+    "Bold": false,
+    "parameter_Bold": {
+      "variables_of_interest": [
+        0
+      ],
+      "period": 2000.0
+    },
+    "SEEG": true,
+    "parameter_SEEG": {
+      "path": "/home/nest_elephant_tvb/parameter/data_mouse/sensor_hypocampus.txt",
+      "scaling_projection": 100.0
+    }
+  },
+  "param_TR_nest_to_tvb": {
+    "scaling": 1.0,
+    "init": "./case_regular_burst//init_spikes.npy",
+    "resolution": 0.1,
+    "nb_neurons": 8000.0,
+    "synch": 2.0,
+    "width": 20.0,
+    "level_log": 1
+  },
+  "param_TR_tvb_to_nest": {
+    "percentage_shared": 0.01,
+    "function_select": 2,
+    "init": "./case_regular_burst//init_rates.npy",
+    "level_log": 1,
+    "seed": 43,
+    "nb_synapses": 90
+  },
+  "param_co_simulation": {
+    "co-simulation": true,
+    "nb_MPI_nest": 6,
+    "record_MPI": false,
+    "id_region_nest": [
+      26,
+      78
+    ],
+    "synchronization": 2.0,
+    "level_log": 1,
+    "cluster": false
+  },
+  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/case_regular_burst",
+  "begin": 0.0,
+  "end": 200.0
+}

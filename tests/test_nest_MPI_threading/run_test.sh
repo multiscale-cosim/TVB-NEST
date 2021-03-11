@@ -78,7 +78,7 @@ else
   $RUN -n $nb_mpi python3 ./nest_config.py ${folder} ${nb_VP} ${nb_mpi} ${nb_run} ${time_sim} ${spike_generator} ${parrot} ${iaf} ${nb_mpi_recorder} ${separate} ${nb_mpi_generator_spike} ${nb_mpi_generator_current} ${shared_mpi_input} ${mix_mpi}
 
   wait
-  python3 ./check_result ${nb_VP} ${nb_mpi} ${nb_run} ${time_sim} ${spike_generator} ${parrot} ${iaf} ${nb_mpi_recorder} ${separate} ${nb_mpi_generator_spike} ${nb_mpi_generator_current} ${shared_mpi_input} ${mix_mpi}
+  python3 ./check_result.py ${folder} ${nb_VP} ${nb_mpi} ${nb_run} ${time_sim} ${spike_generator} ${parrot} ${iaf} ${nb_mpi_recorder} ${separate} ${nb_mpi_generator_spike} ${nb_mpi_generator_current} ${shared_mpi_input} ${mix_mpi}
   if [ $? -ne 0 ]
   then
     exit

@@ -1,0 +1,123 @@
+// Artificial cells no longer need a default section.
+//Network cell templates
+//   BasketCell
+// Simplified version (BPG 27-9-08)
+//  - geometry and channels from Santhakumar et al 2005
+//  - geometry modified to preserve VCUs different dendrites
+
+proc init() {
+	topol()
+	subsets()
+	geom()
+	biophys()
+	geom_nseg()
+}
+
+create soma
+create radProx1, radMed1, radDist1, lmM1, lmt1
+create radProx2, radMed2, radDist2, lmM2, lmt2
+create oriProx1, oriMed1, oriDist1
+create oriProx2, oriMed2, oriDist2
+
+proc topol() { local i
+	connect radProx1(0), soma(0)
+	connect radMed1(0), radProx1(1)
+	connect radDist1(0), radMed1(1)
+	connect lmM1(0),  radDist1(1)
+	connect lmt1(0),  lmM1(1)
+	connect radProx2(0), soma(1)
+	connect radMed2(0), radProx2(1)
+	connect radDist2(0), radMed2(1)
+	connect lmM2(0),  radDist2(1)
+	connect lmt2(0),  lmM2(1)	
+	connect oriProx1(0), soma(0)
+	connect oriMed1(0), oriProx1(1)
+	connect oriDist1(0), oriMed1(1)
+	connect oriProx2(0), soma(1)
+	connect oriMed2(0), oriProx2(1)
+	connect oriDist2(0), oriMed2(1)
+	basic_shape()
+}
+
+proc basic_shape() {
+  	soma     { pt3dclear() pt3dadd(0, 0, 0, 10)      pt3dadd(0, 15, 0, 10)     }
+  	radProx2 { pt3dclear() pt3dadd(0, 15, 0, 4)      pt3dadd(0, 45, 30, 4)     }
+  	radMed2  { pt3dclear() pt3dadd(0, 45, 30, 3)     pt3dadd(0, 75, 60, 3)     }
+  	radDist2 { pt3dclear() pt3dadd(0, 75, 60, 2)     pt3dadd(0, 90, 75, 2)     }
+  	lmM2     { pt3dclear() pt3dadd(0, 90, 75, 1.5)   pt3dadd(0, 105, 90, 1.5)  }
+  	lmt2     { pt3dclear() pt3dadd(0, 105, 90, 1)    pt3dadd(0, 120, 105, 1)   }
+  	radProx1 { pt3dclear() pt3dadd(0, 0, 0, 4)       pt3dadd(0, -14, 15, 4)    }
+  	radMed1  { pt3dclear() pt3dadd(0, -14, 15, 3)    pt3dadd(0, -29, 30, 3)    }
+  	radDist1 { pt3dclear() pt3dadd(0, -29, 30, 2)    pt3dadd(0, -44, 45, 2)    }
+  	lmM1     { pt3dclear() pt3dadd(0, -44, 45, 1.5)  pt3dadd(0, -59, 60, 1.5)  }
+  	lmt1     { pt3dclear() pt3dadd(0, -59, 60, 1)    pt3dadd(0, -89, 90, 1)    }
+  	oriProx1 { pt3dclear() pt3dadd(0, 0, 0, 2)       pt3dadd(0, -29, -29, 2)   }
+  	oriMed1  { pt3dclear() pt3dadd(0, -29, -29, 1.5) pt3dadd(0, -59, -59, 1.5) }
+  	oriDist1 { pt3dclear() pt3dadd(0, -59, -59, 1)   pt3dadd(0, -89, -89, 1)   }
+  	oriProx2 { pt3dclear() pt3dadd(0, 15, 0, 2)      pt3dadd(0, 45, -29, 2)    }
+  	oriMed2  { pt3dclear() pt3dadd(0, 45, -29, 1.5)  pt3dadd(0, 75, -59, 1.5)  }
+  	oriDist2 { pt3dclear() pt3dadd(0, 75, -59, 1)    pt3dadd(0, 105, -89, 1)   }
+}
+
+objref all
+proc subsets() { local i
+	objref all
+	all = new SectionList()
+	soma     all.append()
+	radProx1 all.append()
+	radMed1  all.append()
+	radDist1 all.append()
+	lmM1     all.append()
+	lmt1     all.append()
+	radProx2 all.append()
+	radMed2  all.append()
+	radDist2 all.append()
+	lmM2     all.append()
+	lmt2     all.append()	
+	oriProx1 all.append()
+	oriMed1  all.append()
+	oriDist1 all.append()
+	oriProx2 all.append()
+	oriMed2  all.append()
+	oriDist2 all.append()
+}
+
+proc geom() {
+	forsec all {  }
+	soma     {  L = 20   diam = 10  }
+	radProx1 {  L = 100  diam = 4   }
+	radMed1  {  L = 100  diam = 3   }
+	radDist1 {  L = 200  diam = 2   }
+	lmM1     {  L = 100  diam = 1.5 }
+	lmt1     {  L = 100  diam = 1   }
+	radProx2 {  L = 100  diam = 4   }
+	radMed2  {  L = 100  diam = 3   }
+	radDist2 {  L = 200  diam = 2   }
+	lmM2     {  L = 100  diam = 1.5 }
+	lmt2     {  L = 100  diam = 1   }
+	oriProx1 {  L = 100  diam = 2   }
+	oriMed1  {  L = 100  diam = 1.5 }
+	oriDist1 {  L = 100  diam = 1   }
+	oriProx2 {  L = 100  diam = 2   }
+	oriMed2  {  L = 100  diam = 1.5 }
+	oriDist2 {  L = 100  diam = 1   }
+}
+
+proc geom_nseg() {
+}
+
+proc biophys() {
+
+}
+
+access soma
+// soma insert hh
+init()
+
+
+
+
+
+
+
+

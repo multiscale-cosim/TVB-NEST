@@ -72,7 +72,7 @@ TVB and Nest IO
     # install TVB 
     apt-get install -y llvm-dev llvm
     export LLVM_CONFIG=/usr/bin/llvm-config
-    pip install tvb-data tvb-gdist tvb-library
+    pip install tvb-data tvb-gdist tvb-library==2.0.10
 
 
     # Compile and Install Nest
@@ -96,3 +96,17 @@ TVB and Nest IO
 %apprun jupyter-notebook
    exec jupyter-notebook
 
+%apprun nest
+   exec /usr/bin/python3.7 /home/nest_elephant_tvb/Nest/simulation_Zerlaut.py "$@"
+
+%apprun TVB
+   exec /usr/bin/python3.7 /home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py "$@"
+
+%apprun NEST-TVB
+   exec /usr/bin/python3.7 /home/nest_elephant_tvb/translation/nest_to_tvb.py "$@"
+
+%apprun TVB-NEST
+   exec /usr/bin/python3.7 /home/nest_elephant_tvb/translation/tvb_to_nest.py "$@"
+
+%apprun create_launcher
+   exec cat /home/nest_elephant_tvb/orchestrator/run_exploration.py

@@ -333,8 +333,10 @@ def run_mpi(path):
     logger.info(" TVB finish")
     np.save(param_tvb_monitor['path_result']+'/step_'+str(count_save)+'.npy',save_result)
     for index,comm in  enumerate(comm_send):
+        logger.info('end comm send')
         end_mpi(comm,result_path+"/translation/receive_from_tvb/"+str(id_proxy[index])+".txt",True,logger)
     for index,comm in  enumerate(comm_receive):
+        logger.info('end comm receive')
         end_mpi(comm,result_path+"/translation/send_to_tvb/"+str(id_proxy[index])+".txt",False,logger)
     MPI.Finalize() # ending with MPI
     logger.info(" TVB exit")

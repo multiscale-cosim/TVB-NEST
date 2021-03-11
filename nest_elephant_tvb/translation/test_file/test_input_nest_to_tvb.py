@@ -39,7 +39,7 @@ def simulate_spike_detector(path,min_delay):
         comm.Recv([check, 1, MPI.CXX_BOOL], source=MPI.ANY_SOURCE, tag=0,status=status_)
         # create random data
         size= np.random.randint(0,1000)
-        times = starting+np.random.rand(size)*(min_delay-0.2)
+        times = starting+np.random.rand(size)*(min_delay-0.1)
         times = np.around(np.sort(np.array(times)),decimals=1)
         id_neurons = np.random.randint(0,10,size)
         id_detector = np.random.randint(0,10,size)

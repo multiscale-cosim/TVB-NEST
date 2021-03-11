@@ -1,0 +1,169 @@
+// Network cell template
+// PyramidalCell
+// Geometry: 14 sections + axon
+// Active properties: from Poirazi et al, Neuron 2003
+// Adjusted to get more decrementing BPAP
+// BPG & VCU, 2-1-09
+
+proc init() {
+  topol()
+  subsets()
+  geom()
+  biophys()
+  geom_nseg()
+}
+
+create soma, radTprox, radTmed, radTdist                           // apical trunk
+create lm_thick1, lm_medium1, lm_thin1a, lm_thin1b                 // slm 1
+create lm_thick2, lm_medium2, lm_thin2a, lm_thin2b                 // slm 2
+create rad_thick1, rad_medium1, rad_thin1a, rad_thin1b             // rad 1
+create rad_thick2, rad_medium2, rad_thin2a, rad_thin2b             // rad 2
+create oriprox1, oridist1a, oridist1b, oriprox2, oridist2a, oridist2b    // basal dends
+create axon
+
+proc topol() { local i
+  connect radTprox(0),    soma(1)
+  connect radTmed(0),     radTprox(1)
+  connect radTdist(0),    radTmed(1)
+  connect lm_thick2(0),   radTdist(1)
+  connect lm_medium2(0),  lm_thick2(1)
+  connect lm_thin2a(0),   lm_medium2(1)
+  connect lm_thin2b(0),   lm_medium2(1)
+  connect lm_thick1(0),   radTdist(1)
+  connect lm_medium1(0),  lm_thick1(1)
+  connect lm_thin1a(0),   lm_medium1(1)
+  connect lm_thin1b(0),   lm_medium1(1)
+  connect rad_thick2(0),  radTprox(1)
+  connect rad_medium2(0), rad_thick2(1)
+  connect rad_thin2a(0),  rad_medium2(1)
+  connect rad_thin2b(0),  rad_medium2(1)
+  connect rad_thick1(0),  radTprox(1)
+  connect rad_medium1(0), rad_thick1(1)
+  connect rad_thin1a(0),  rad_medium1(1)
+  connect rad_thin1b(0),  rad_medium1(1)
+  connect oriprox1(0),    soma(0)
+  connect oridist1a(0),   oriprox1(1)
+  connect oridist1b(0),   oriprox1(1)
+  connect oriprox2(0),    soma(0)
+  connect oridist2a(0),   oriprox2(1)
+  connect oridist2b(0),   oriprox2(1)
+  connect axon(0),        soma(0)
+  basic_shape()
+}
+
+proc basic_shape() {
+  soma        { pt3dclear() pt3dadd(0, -7, 0, 10)     pt3dadd(0, 8, 0, 10)      }
+  radTprox    { pt3dclear() pt3dadd(0, 0, 0, 4)       pt3dadd(0, 0, 100, 4)     }
+  radTmed     { pt3dclear() pt3dadd(0, 0, 100, 3)     pt3dadd(0, 0, 200, 3)     }
+  radTdist    { pt3dclear() pt3dadd(0, 0, 200, 2)     pt3dadd(0, 0, 400, 2)     }
+  rad_thick1  { pt3dclear() pt3dadd(0, 15, 0, 2)      pt3dadd(0, 60, 45, 2)     }
+  rad_medium1 { pt3dclear() pt3dadd(0, 60, 45, 1.5)   pt3dadd(0, 90, 75, 1.5)   }
+  rad_thick2  { pt3dclear() pt3dadd(0, -15, 0, 2)     pt3dadd(0, -60, 45, 2)    }
+  rad_medium2 { pt3dclear() pt3dadd(0, -60, 45, 1.5)  pt3dadd(0, -90, 75, 1.5)  }
+  rad_thin2a  { pt3dclear() pt3dadd(0, -90, 75, 1)    pt3dadd(0, -110, 155, 1)  }
+  rad_thin2b  { pt3dclear() pt3dadd(0, -90, 75, 1)    pt3dadd(0, -160, 105, 1)  }
+  rad_thin1a  { pt3dclear() pt3dadd(0, 90, 75, 1)     pt3dadd(0, 110, 155, 1)   }
+  rad_thin1b  { pt3dclear() pt3dadd(0, 90, 75, 1)     pt3dadd(0, 160, 105, 1)   }
+  lm_thick1   { pt3dclear() pt3dadd(0, 0, 200, 2)     pt3dadd(0, 25, 240, 2)    }
+  lm_medium1  { pt3dclear() pt3dadd(0, 25, 240, 1.5)  pt3dadd(0, 50, 275, 1.5)  }
+  lm_thin1a   { pt3dclear() pt3dadd(0, 50, 275, 1)    pt3dadd(0, 70, 345, 1)    }
+  lm_thin1b   { pt3dclear() pt3dadd(0, 50, 275, 1)    pt3dadd(0, 110, 315, 1)   }
+  lm_thick2   { pt3dclear() pt3dadd(0, 0, 200, 2)     pt3dadd(0, -25, 240, 2)   }
+  lm_medium2  { pt3dclear() pt3dadd(0, -25, 240, 1.5) pt3dadd(0, -50, 275, 1.5) }
+  lm_thin2a   { pt3dclear() pt3dadd(0, -50, 275, 1)   pt3dadd(0, -70, 345, 1)   }
+  lm_thin2b   { pt3dclear() pt3dadd(0, -50, 275, 1)   pt3dadd(0, -110, 315, 1)  }
+  oriprox1    { pt3dclear() pt3dadd(0, -7, 0, 2)     pt3dadd(40, 5, -29, 2)    }
+  oridist1a   { pt3dclear() pt3dadd(0, 45, -29, 1.5)  pt3dadd(0, 75, -90, 1.5)  }
+  oridist1b   { pt3dclear() pt3dadd(0, 45, -29, 1.5)  pt3dadd(0, 90, -20, 1.5)  }
+  oriprox2    { pt3dclear() pt3dadd(0, -7, 0, 2)     pt3dadd(-0, 45, -29, 2)   }
+  oridist2a   { pt3dclear() pt3dadd(0, -45, -29, 1.5) pt3dadd(0, -75, -90, 1.5) }
+  oridist2b   { pt3dclear() pt3dadd(0, -45, -29, 1.5) pt3dadd(0, -90, -20, 1.5) }
+  axon        { pt3dclear() pt3dadd(0, 15, 0, 1)      pt3dadd(0, 15, -149, 1)   }
+}
+
+objref all
+proc subsets() { local i
+  objref all
+  all = new SectionList()
+  
+  soma        all.append()
+  radTprox    all.append()
+  radTmed     all.append()
+  radTdist    all.append()
+  lm_thick1   all.append()
+  lm_medium1  all.append()
+  lm_thin1a   all.append()
+  lm_thin1b   all.append()
+  lm_thick2   all.append()
+  lm_medium2  all.append()
+  lm_thin2a   all.append()
+  lm_thin2b   all.append()
+  rad_thick1  all.append()
+  rad_medium1 all.append()
+  rad_thin1a  all.append()
+  rad_thin1b  all.append()
+  rad_thick2  all.append()
+  rad_medium2 all.append()
+  rad_thin2a  all.append()
+  rad_thin2b  all.append()  
+  oriprox1    all.append()
+  oridist1a   all.append()
+  oridist1b   all.append()
+  oriprox2    all.append()
+  oridist2a   all.append()
+  oridist2b   all.append()
+  axon        all.append()
+}
+
+proc geom() {
+  soma {  L = 10  diam = 10  }
+  // SR is first 500um of apical dendrite
+  radTprox {  L = 100  diam = 4.0  }
+  radTmed  {  L = 100  diam = 3.0  }
+  radTdist {  L = 200  diam = 2.0  }
+  // OLM is final 300um of apical dendrite
+  lm_thick1  {  L = 100  diam = 2.0  }
+  lm_medium1 {  L = 100  diam = 1.5  }
+  lm_thin1a  {  L = 50   diam = 1.0  }
+  lm_thin1b  {  L = 50   diam = 1.0  }
+  lm_thick2  {  L = 100  diam = 2.0  }
+  lm_medium2 {  L = 100  diam = 1.5  }
+  lm_thin2a  {  L = 50   diam = 1.0  }
+  lm_thin2b  {  L = 50   diam = 1.0  }
+  // Radiatum is final 300um of apical dendrite
+  rad_thick1  {  L = 100  diam = 2.0  }
+  rad_medium1 {  L = 100  diam = 1.5  }
+  rad_thin1a  {  L = 50   diam = 1.0  }
+  rad_thin1b  {  L = 50   diam = 1.0  }
+  rad_thick2  {  L = 100  diam = 2.0  }
+  rad_medium2 {  L = 100  diam = 1.5  }
+  rad_thin2a  {  L = 50   diam = 1.0  }
+  rad_thin2b  {  L = 50   diam = 1.0  }  
+  // Basal dendrites extend 300 um
+  oriprox1  {  L = 100  diam = 2.0  }
+  oridist1a {  L = 100  diam = 1.5  }
+  oridist1b {  L = 100  diam = 1.5  }
+  oriprox2  {  L = 100  diam = 2.0  }
+  oridist2a {  L = 100  diam = 1.5  }
+  oridist2b {  L = 100  diam = 1.5  }
+  // Short section of axon
+  axon {  L = 150  diam = 1.0  }
+}
+
+proc geom_nseg() {
+}
+
+proc biophys() {
+
+}
+access soma
+// soma insert hh
+init()
+
+
+
+
+
+
+
+
