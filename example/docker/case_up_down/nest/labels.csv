@@ -1,9 +1,0 @@
-label,type of data
-VM_pop_1_ex,['V_m']
-W_pop_1_ex,['w']
-VM_pop_1_in,['V_m']
-W_pop_1_in,['w']
-pop_1_ex,spikes
-pop_2_ex,spikes
-pop_1_in,spikes
-pop_2_in,spikes
