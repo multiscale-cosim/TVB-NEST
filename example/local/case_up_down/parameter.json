@@ -57,8 +57,8 @@
     "p_connect": 0.05,
     "weight_global": 1.0,
     "nb_external_synapse": 300,
-    "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy",
-    "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy",
+    "path_weight": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/weights.npy",
+    "path_distance": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/distance.npy",
     "velocity": 3.0
   },
   "param_nest_background": {
@@ -198,12 +198,12 @@
     "K_ext_e": 300
   },
   "param_tvb_connection": {
-    "path_region_labels": "/home/nest_elephant_tvb/parameter/data_mouse//region_labels.txt",
-    "path_centers": "/home/nest_elephant_tvb/parameter/data_mouse/centres.txt",
-    "path_cortical": "/home/nest_elephant_tvb/parameter/data_mouse/cortical.npy",
+    "path_region_labels": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse//region_labels.txt",
+    "path_centers": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/centres.txt",
+    "path_cortical": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/cortical.npy",
     "orientation": true,
-    "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy",
-    "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy",
+    "path_distance": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/distance.npy",
+    "path_weight": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/weights.npy",
     "nb_region": 104,
     "velocity": 3.0
   },
@@ -265,13 +265,13 @@
     },
     "SEEG": true,
     "parameter_SEEG": {
-      "path": "/home/nest_elephant_tvb/parameter/data_mouse/sensor_hypocampus.txt",
+      "path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/sensor_hypocampus.txt",
       "scaling_projection": 100.0
     }
   },
   "param_TR_nest_to_tvb": {
     "scaling": 1.0,
-    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/init_spikes.npy",
+    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_up_down/init_spikes.npy",
     "resolution": 0.1,
     "nb_neurons": 8000.0,
     "synch": 2.0,
@@ -281,7 +281,7 @@
   "param_TR_tvb_to_nest": {
     "percentage_shared": 0.1,
     "function_select": 2,
-    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/init_rates.npy",
+    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_up_down/init_rates.npy",
     "level_log": 1,
     "seed": 43,
     "nb_synapses": 300
@@ -296,10 +296,9 @@
     ],
     "synchronization": 2.0,
     "level_log": 1,
-    "docker": ["docker","run","--mount","type=bind,source=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/,target=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/","ab8051437fd7"],
     "mpi": ["mpirun"]
   },
-  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/",
+  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_up_down/",
   "begin": 0.0,
-  "end": 200.0
+  "end": 60000.0
 }

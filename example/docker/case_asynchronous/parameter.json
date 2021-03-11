@@ -296,9 +296,10 @@
     ],
     "synchronization": 2.0,
     "level_log": 1,
-    "cluster": false
+    "mpi": ["mpirun"],
+    "docker": ["docker","run","--mount","type=bind,source=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_asynchronous/,target=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_asynchronous/","ab8051437fd7"]
   },
-  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/case_asynchronous/",
+  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/docker/case_asynchronous/",
   "begin": 0.0,
   "end": 200.0
 }

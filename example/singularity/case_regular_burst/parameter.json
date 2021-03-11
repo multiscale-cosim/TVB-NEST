@@ -12,14 +12,14 @@
     "param_neuron_excitatory": {
       "C_m": 200.0,
       "t_ref": 5.0,
-      "V_reset": -64.5,
-      "E_L": -64.5,
+      "V_reset": -47.5,
+      "E_L": -74.0,
       "g_L": 10.0,
       "I_e": 0.0,
       "a": 0.0,
-      "b": 100.0,
+      "b": 50.0,
       "Delta_T": 2.0,
-      "tau_w": 500.0,
+      "tau_w": 150.0,
       "V_th": -50.0,
       "E_ex": 0.0,
       "tau_syn_ex": 5.0,
@@ -29,8 +29,8 @@
     "param_neuron_inhibitory": {
       "C_m": 200.0,
       "t_ref": 5.0,
-      "V_reset": -65.0,
-      "E_L": -65.0,
+      "V_reset": -75.0,
+      "E_L": -75.0,
       "g_L": 10.0,
       "I_e": 0.0,
       "a": 0.0,
@@ -53,10 +53,10 @@
   },
   "param_nest_connection": {
     "weight_local": 1.0,
-    "g": 5.0,
-    "p_connect": 0.05,
+    "g": 10.0,
+    "p_connect": 0.005,
     "weight_global": 1.0,
-    "nb_external_synapse": 300,
+    "nb_external_synapse": 90,
     "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy",
     "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy",
     "velocity": 3.0
@@ -177,28 +177,28 @@
       ]
     },
     "g_L": 10.0,
-    "E_L_e": -64.5,
-    "E_L_i": -65.0,
+    "E_L_e": -74.0,
+    "E_L_i": -75.0,
     "C_m": 200.0,
-    "b_e": 100.0,
+    "b_e": 50.0,
     "a_e": 0.0,
     "b_i": 0.0,
     "a_i": 0.0,
-    "tau_w_e": 500.0,
+    "tau_w_e": 150.0,
     "tau_w_i": 1.0,
     "E_e": 0.0,
     "E_i": -80.0,
     "Q_e": 1.0,
-    "Q_i": 5.0,
+    "Q_i": 10.0,
     "tau_e": 5.0,
     "tau_i": 5.0,
     "N_tot": 10000,
-    "p_connect": 0.05,
+    "p_connect": 0.005,
     "g": 0.2,
-    "K_ext_e": 300
+    "K_ext_e": 90
   },
   "param_tvb_connection": {
-    "path_region_labels": "/home/nest_elephant_tvb/parameter/data_mouse//region_labels.txt",
+    "path_region_labels": "/home/nest_elephant_tvb/parameter/data_mouse/region_labels.txt",
     "path_centers": "/home/nest_elephant_tvb/parameter/data_mouse/centres.txt",
     "path_cortical": "/home/nest_elephant_tvb/parameter/data_mouse/cortical.npy",
     "orientation": true,
@@ -213,7 +213,7 @@
   "param_tvb_integrator": {
     "tau_OU": 20.0,
     "mu": [
-      0.3,
+      1.0,
       0.0,
       0.0,
       0.0,
@@ -222,7 +222,7 @@
       0.0
     ],
     "nsig": [
-      0.2,
+      1.0,
       0.0,
       0.0,
       0.0,
@@ -271,7 +271,7 @@
   },
   "param_TR_nest_to_tvb": {
     "scaling": 1.0,
-    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/init_spikes.npy",
+    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/singularity/case_regular_burst/init_spikes.npy",
     "resolution": 0.1,
     "nb_neurons": 8000.0,
     "synch": 2.0,
@@ -279,12 +279,12 @@
     "level_log": 1
   },
   "param_TR_tvb_to_nest": {
-    "percentage_shared": 0.1,
+    "percentage_shared": 0.01,
     "function_select": 2,
-    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/init_rates.npy",
+    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/singularity/case_regular_burst/init_rates.npy",
     "level_log": 1,
     "seed": 43,
-    "nb_synapses": 300
+    "nb_synapses": 90
   },
   "param_co_simulation": {
     "co-simulation": true,
@@ -296,10 +296,10 @@
     ],
     "synchronization": 2.0,
     "level_log": 1,
-    "docker": ["docker","run","--mount","type=bind,source=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/,target=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/","ab8051437fd7"],
-    "mpi": ["mpirun"]
+    "singularity":"/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/install/singularity/Nest_TVB_full.simg",
+    "mpi":["mpirun"]
   },
-  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/",
+  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/singularity/case_regular_burst/",
   "begin": 0.0,
   "end": 200.0
 }

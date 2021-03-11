@@ -83,8 +83,11 @@ def run(parameters_file):
         #Run Nest and take information for the connection between all the mpi process
         if 'singularity' in param_co_simulation.keys() :
             argv = mpirun+['-n',str(param_co_simulation['nb_MPI_nest']),'singularity','run', '--app', 'nest',param_co_simulation['singularity'] ]
+        elif 'sarus' in param_co_simulation.keys():
+            argv = mpirun + ['-n', str(param_co_simulation['nb_MPI_nest'])] + param_co_simulation['sarus'] + [
+                'python3', 'home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
         elif 'docker' in param_co_simulation.keys():
-            argv = mpirun+['-n',str(param_co_simulation['nb_MPI_nest'])]+param_co_simulation['docker']+['python3','home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
+            argv = param_co_simulation['docker']+mpirun+['-n',str(param_co_simulation['nb_MPI_nest'])]+['python3','home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
         else:
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../Nest/run_mpi_nest.sh"
             argv=[
@@ -128,8 +131,10 @@ def run(parameters_file):
         # Run TVB in co-simulation
         if 'singularity' in param_co_simulation.keys()  :
             argv = mpirun + ['-n','1','singularity','run', '--app', 'TVB',param_co_simulation['singularity']]
+        elif 'sarus' in param_co_simulation.keys():
+            argv = mpirun + ['-n', '1'] + param_co_simulation['sarus'] + ['python3', 'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
         elif 'docker' in param_co_simulation.keys():
-            argv = mpirun + ['-n','1'] + param_co_simulation['docker']+['python3','home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
+            argv =  param_co_simulation['docker']+mpirun + ['-n','1'] +['python3','home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
         else:
             dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../Tvb/run_mpi_tvb.sh"
             argv = [
@@ -153,7 +158,9 @@ def run(parameters_file):
             if 'singularity' in param_co_simulation.keys() :
                 argv = mpirun+[ '-n','3','singularity', 'run', '--app', 'NEST-TVB',param_co_simulation['singularity']]
             elif 'docker' in param_co_simulation.keys():
-                argv = mpirun + ['-n','3'] + param_co_simulation['docker']+['python3','home/nest_elephant_tvb/translation/nest_to_tvb.py']
+                argv = param_co_simulation['docker'] + mpirun + ['-n', '3'] + ['python3','home/nest_elephant_tvb/translation/nest_to_tvb.py']
+            elif 'sarus' in param_co_simulation.keys():
+                argv = mpirun + ['-n','3'] + param_co_simulation['sarus']+['python3','home/nest_elephant_tvb/translation/nest_to_tvb.py']
             else:
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_nest_to_tvb.sh"
                 argv=[ '/bin/sh',
@@ -175,8 +182,10 @@ def run(parameters_file):
         for index,ids_spike_generator in enumerate(spike_generator):
             if 'singularity' in param_co_simulation.keys() :
                 argv = mpirun+['-n','3','singularity', 'run', '--app', 'TVB-NEST',param_co_simulation['singularity']]
+            elif 'sarus' in param_co_simulation.keys():
+                argv = mpirun + ['-n','3'] + param_co_simulation['sarus'] +['python3','home/nest_elephant_tvb/translation/tvb_to_nest.py']
             elif 'docker' in param_co_simulation.keys():
-                argv = mpirun + ['-n','3'] + param_co_simulation['docker'] +['python3','home/nest_elephant_tvb/translation/tvb_to_nest.py']
+                argv = param_co_simulation['docker'] + mpirun + ['-n', '3'] + ['python3','home/nest_elephant_tvb/translation/tvb_to_nest.py']
             else:
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_tvb_to_nest.sh"
                 argv=[ '/bin/sh',

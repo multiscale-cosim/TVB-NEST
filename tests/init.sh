@@ -1,6 +1,7 @@
 #!/bin/bash
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 CLUSTER=false  #false/true
 DEEPEST=false  #false/true
@@ -19,7 +20,7 @@ then
         OPTIONS_SLURM="--partition=dp-cn"
     fi
 
-    PACKAGE=${PWD}/../   # folder of co-simulation-tvb-nest
+    PACKAGE=${BASEDIR}/../   # folder of co-simulation-tvb-nest
     PYTHONLIB=../lib/site_packages # folder with python library
     REPERTORY_LIB_NEST=../lib/nest_run/lib64/python3.6/site-packages/ # folder with py-nest
     export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
@@ -27,9 +28,9 @@ then
 else
     echo " WARNING the python path are not defene"
 
-    PACKAGE=${PWD}/../   # folder of co-simulation-tvb-nest
-    PYTHONLIB=${PWD}/../venv/lib/python3.6/site-packages # folder with python library
-    REPERTORY_LIB_NEST=${PWD}/../lib/nest_run/lib/python3.6/site-packages/ # folder with py-nest
+    PACKAGE=${BASEDIR}/../   # folder of co-simulation-tvb-nest
+    PYTHONLIB=${BASEDIR}/../lib/lib-py/lib/python3.6/site-packages # folder with python library
+    REPERTORY_LIB_NEST=${BASEDIR}/../lib/nest_run/lib/python3.6/site-packages/ # folder with py-nest
     export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
     RUN="mpirun"
 fi
