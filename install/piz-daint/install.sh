@@ -17,6 +17,7 @@
 #KIND, either express or implied.  See the License for the
 #specific language governing permissions and limitations
 #under the License.
+#set -x
 
 # Script needs to be started from the directory it is located in
 CURRENT_REPERTORY=$(pwd)
@@ -25,12 +26,14 @@ cd $DIR || exit
 
 # load the module for all the installation
 module load daint-gpu
-module load cray-python/3.8.2.1
+module load cray-python/3.8.5.0
 
 module load CMake/3.14.5
-module load Boost/1.70.0-CrayGNU-20.08-python3
-module load GSL/2.5-CrayGNU-20.08
+module load GSL/2.5-CrayCCE-20.11
 module load python_virtualenv/15.0.3
+
+export CRAYPE_LINK_TYPE=dynamic
+export LD_LIBRARY_PATH=$CRAY_LD_LIBRARY_PATH:$LD_LIBRARY_PATH
 
 
 INSTALL_FOLDER=${PWD}/../../lib/
@@ -47,9 +50,12 @@ cmake "$PATH_INSTALLATION" \
 	-DCMAKE_INSTALL_PREFIX:PATH="${PATH_RUN}"\
 	-DCMAKE_C_COMPILER=cc -DCMAKE_CXX_COMPILER=CC\
 	 -Dwith-python=ON \
-	 -Dwith-mpi=ON -Dwith-openmp=ON \
-	 -Dwith-readline=ON -Dwith-ltdl=ON \
-	 -Dcythonize-pynest=ON
+	 -Dwith-mpi=ON -Dwith-openmp="-fopenmp" \
+	 -Dwith-readline=OFF -Dwith-ltdl=ON \
+         -DPYTHON_LIBRARY=/opt/python/3.8.5.0/lib/libpython3.8.so \
+         -DPYTHON_INCLUDE_DIR=/opt/python/3.8.5.0/include/python3.8/ \
+	 -Dwith-warning="-Wall"\
+	 -Dwith-optimize="-fp-model strict;-lmpich_crayclang_dpm"
 make -j 8
 make install
 
@@ -57,7 +63,7 @@ make install
 PYTHON_LIB=${INSTALL_FOLDER}/site_packages
 mkdir "$PYTHON_LIB"
 export PYTHONPATH=$PYTHON_LIB:$PYTHONPATH
-python -m venv $PYTHON_LIB
+python -m venv --system-site-packages $PYTHON_LIB
 source $PYTHON_LIB/bin/activate
 pip install elephant
 pip install tvb-data tvb-gdist tvb-library
