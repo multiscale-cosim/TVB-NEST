@@ -8,9 +8,8 @@
 #    Section: Jülich Supercomputing Centre (JSC)
 #   Division: High Performance Computing in Neuroscience
 # Laboratory: Simulation Laboratory Neuroscience
-#       Team: Multiscale Simulation and Design
+#       Team: Multi-scale Simulation and Design
 #
-#   Date: 2021.02.16
 # ------------------------------------------------------------------------------
 import argparse
 from pathlib import Path

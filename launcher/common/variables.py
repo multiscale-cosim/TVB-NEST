@@ -11,10 +11,13 @@
 #       Team: Multi-scale Simulation and Design
 #
 # ------------------------------------------------------------------------------
-import sys
 
-from .main import main
+# Environment variable names
+CO_SIM_ACTIONS_DIR = 'CO_SIM_ACTIONS_DIR'   # Variable name referring to the Actions XML configuration files
+CO_SIM_EMPTY = 'CO_SIM_EMPTY'  # empty string shall be the assigned value
+CO_SIM_EXECUTION_ENVIRONMENT = 'CO_SIM_EXECUTION_ENVIRONMENT'
+CO_SIM_ROUTINES_DIR = 'CO_SIM_ROUTINES_DIR'
 
+# The path must be assigned on run-time gathered by means of the configuration manager
+CO_SIM_RESULTS_DIR = 'CO_SIM_RESULTS_DIR'
 
-if __name__ == '__main__':
-    sys.exit(main(sys.argv))

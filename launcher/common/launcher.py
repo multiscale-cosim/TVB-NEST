@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # ------------------------------------------------------------------------------
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor
@@ -9,134 +8,354 @@
 #    Section: Jülich Supercomputing Centre (JSC)
 #   Division: High Performance Computing in Neuroscience
 # Laboratory: Simulation Laboratory Neuroscience
-#       Team: Multiscale Simulation and Design
+#       Team: Multi-scale Simulation and Design
 #
-#   Date: 2021.02.16
 # ------------------------------------------------------------------------------
 import os
+import multiprocessing
+
+# Co-Simulator's imports
 import common
-import configurations_manager
-# import xml
-import json
 
 
-class Launcher:
+class Launcher(object):
     """
-        Class representing the co-simulation launcher tool
+        Implements the Co-Simulation launcher component
 
     Methods:
     --------
-        run(args=None)
-            Entry point to the launcher and executes the main loop of the tool
+        carry_out_action_plan: Launches the sub-processes based on the action-plan dictionary
+
     """
-    # general members
-    __args = None
-    __configuration_manager = None
-    __logs_root_dir = None
+    __actions_to_be_carried_out_jq = None  # Joinable queue to trigger spawning actions processes
+    __action_plan_dict = {}  # The action plan to be carried out
+    __actions_popen_args_dict = {}  # Popen arguments keyed by action XML IDs
+    __actions_return_codes_q = None  # Queue where the actions return codes will be placed
+    __actions_xml_filenames_dict = {}  # XML filenames from the <action_xml> element of the action plan XML file
+    __configuration_manager = {}  # Object reference to a ConfigurationManager class instance
+    __launching_strategy_dict = {}  # Mapped action plan, actions grouped by events
+    __launcher_PID = 0  # The PID where the object of this class is being executed
     __logger = None
+    __maximum_number_actions_found = 0  # It will be the number of spawner to be started
 
-    # XML validators
-    __co_sim_parameters_validator = None
-    __co_sim_plan_validator = None
-
-    # dictionaries
-    __action_plan_parameters_dict = {}
-    __action_plan_variables_dict = {}
-    __parameters_parameters_dict = {}
-    __parameters_variables_dict = {}
-
-    def generate_parameters_json_file(self):
+    def __init__(self, action_plan_dict=None, actions_popen_args_dict=None, configuration_manager=None, logger=None):
         """
-            Dumps into the /path/to/co_sim/results/dir/filename.json file
-            the parameters gathered from the parameters XML file
+        :param action_plan_dict:
+            Contains the sketch about what action must be spawn and the expected events during
+            the execution of the spawned sub-processes
+        :param logger:
+            references to the logger manager where the log messages will be sent
+        """
+        self.__action_plan_dict = action_plan_dict
+        self.__actions_popen_args_dict = actions_popen_args_dict
+        self.__configuration_manager = configuration_manager
+        self.__logger = logger
+
+        self.__actions_to_be_carried_out_jq = multiprocessing.JoinableQueue()
+        self.__actions_return_codes_q = multiprocessing.Queue()
+
+        self.__launcher_PID = os.getpid()
+
+    def __map_out_launching_strategy(self):
+        """
+            Goes through the action plan dictionary and find the CO_SIM_EVENT entries
+            in order to establish the converging points where the launcher should
+            perform a wait for the actions previously launched.
 
         :return:
-            JSON_FILE_ERROR: reporting error during the parameter JSON file
-            OK: parameter JSON file was generated properly
+            LAUNCHER_OK: The launching strategy was built out properly
+            MAPPING_OUT_ERROR: The action plan contain some unlogical sequence of actions
+            XML_ERROR: The <action_plan> section contains some erroneous entries
         """
+        self.__launching_strategy_dict = {}
+        actions_list = []
+        self.__maximum_number_actions_found = 0
+        actions_counter = 0
 
-        # TO BE DONE: exception management when the file cannot be created
+        # looking for the events and grouping the actions based on them.
+        # i.e. based on {'action_type': 'CO_SIM_EVENT', 'action_event': 'CO_SIM_WAIT_FOR_SEQUENTIAL_ACTIONS'}
+        #
+        # the {'action_type': 'CO_SIM_ACTION_SCRIPT', 'action_script': 'initial_spikes_generator.xml',
+        #      'action_launch_method': 'CO_SIM_SEQUENTIAL_ACTION'}
+        # will be grouped
+        for key, value in self.__action_plan_dict.items():
+            # checking again the <action_type> value, just in case...
+            if value['action_type'] == common.constants.CO_SIM_ACTION:
+                # accumulating the actions before finding an event action type
+                actions_list.append(key)
 
-        results_dir = self.__configuration_manager.get_directory('results')
-        parameters_json_file = self.__parameters_parameters_dict['CO_SIM_PARAMETERS_JSON_FILENAME']
+                # counting the number the actions associated to the event
+                # to establish the number of spawner processes
+                # to be created later
+                actions_counter += 1
+            elif value['action_type'] == common.constants.CO_SIM_EVENT:
+                # an event has been found (meaning, a graph node)
+                # related to actions (task to be spawned),
+                # it must be SEQUENTIAL or CONCURRENT
+                self.__launching_strategy_dict[key] = {'action_event': value['action_event'],
+                                                       'actions_list': actions_list, }
+                actions_list = []
+                actions_counter = 0
+            else:
+                self.__logger.error('wrong <action_type> found: {}'.format(value['action_type']))
+                return common.enums.LauncherReturnCodes.XML_ERROR
 
-        with open(results_dir+'/'+parameters_json_file, 'w') as json_output_file:
-            json.dump(self.__parameters_parameters_dict['CO_SIM_PARAMETERS_JSON_FILE_CONTENT'], json_output_file)
+            if actions_counter > self.__maximum_number_actions_found:
+                # keeping the maximum number of actions associated to one event
+                # in order to use it as number of spawner process to be initiated
+                self.__maximum_number_actions_found = actions_counter
 
-        return common.enums.LauncherReturnCodes.OK
+            self.__logger.debug(
+                f'-> {self.__maximum_number_actions_found} <- is the maximum number of actions associated to a event')
 
-    def run(self, args=None):
+        if self.__launching_strategy_dict and actions_list:
+            self.__logger.error('<action_plan> must be ended with a CO_SIM_EVENT element')
+            return common.enums.LauncherReturnCodes.MAPPING_OUT_ERROR
+
+        # in this point
+        # __launching_strategy_dict contains the actions grouped by events
+        return common.enums.LauncherReturnCodes.LAUNCHER_OK
+
+    def __check_actions_grouping(self):
         """
-            Entry point of the Co-Simulation Launcher tool
-
-        :param args:
-            There is no parameters to be used since argparse takes the sys.argv by default
+            Goes through the launching strategy dictionary in order to check
+            whether the actions associated to the waiting events have the proper
+            action type, i.e. SEQUENTIAL or CONCURRENT
 
         :return:
-            common.enums.LauncherReturnCodes
+            LAUNCHER_OK: The actions' launching methods concord with the waiting event
+            ACTIONS_GROUPING_ERROR: The launcher strategy is inconsistent due to wrong grouping association
+            XML_ERROR: The <action_plan> section contains some erroneous entries
         """
-        ########
-        # STEP 1 - Checking command line parameters
-        ########
+
+        for key, value in self.__launching_strategy_dict.items():
+            action_xml_id = key  # e.g. action_010 taken from XML <action_010>
+            action_event = value['action_event']  # SEQUENTIAL or CONCURRENT
+            actions_list = value['actions_list']  # e.g. [action_006, action_008, ]
+            expected_action_launch_method = ''
+
+            if action_event == common.constants.CO_SIM_WAIT_FOR_SEQUENTIAL_ACTIONS:
+                expected_action_launch_method = common.constants.CO_SIM_SEQUENTIAL_ACTION
+            elif action_event == common.constants.CO_SIM_WAIT_FOR_CONCURRENT_ACTIONS:
+                expected_action_launch_method = common.constants.CO_SIM_CONCURRENT_ACTION
+            else:
+                self.__logger.error('wrong <action_event> entry found: {}'.format(action_event))
+                return common.enums.LauncherReturnCodes.XML_ERROR
+
+            for current_action in actions_list:
+                if self.__action_plan_dict[current_action]['action_launch_method'] == expected_action_launch_method:
+                    # the action has the expected launching method
+                    # NOTE: here could be placed additional code to grab information associated to the current_action
+                    #       notwithstanding, it has been preferred to keep each method performing one particular task
+                    pass
+                else:
+                    self.__logger.error('<{}> method {} expects <{}> having the {} launching method'.
+                                        format(action_xml_id, action_event, current_action,
+                                               expected_action_launch_method))
+                    return common.enums.LauncherReturnCodes.ACTIONS_GROUPING_ERROR
+
+        return common.enums.LauncherReturnCodes.LAUNCHER_OK
+
+    def __gather_action_xml_filenames(self):
+        """
+            - Goes through the launching strategy dictionary in order to gather the XML filenames
+                from the action plan XML file.
+
+        :return:
+            LAUNCHER_OK: All the XML filenames were gathered from the action plan XML file
+            GATHERING_XML_FILENAMES_ERROR: Error by gathering the XML filename from the section <action_xml>
+        """
+
+        self.__actions_xml_filenames_dict = {}
+
         try:
-            self.__args = common.args.arg_parse()
-        except SystemExit as e:
-            # argument parser has reported some issue with the arguments
-            return common.enums.LauncherReturnCodes.PARAMETER_ERROR
+            for key, value in self.__launching_strategy_dict.items():
+                actions_list = value['actions_list']  # e.g. [action_006, action_008, ]
+
+                for current_action in actions_list:
+                    self.__actions_xml_filenames_dict[current_action] = \
+                        {'action_xml': self.__action_plan_dict[current_action]['action_xml']}
+
+        except KeyError:
+            return common.enums.LauncherReturnCodes.GATHERING_XML_FILENAMES_ERROR
+
+        return common.enums.LauncherReturnCodes.LAUNCHER_OK
+
+    # def __ric_prepare_actions_popen_arguments(self):
+    #     """
+    #         - Goes through the launching strategy dictionary in order to generate a dictionary of actions arguments
+    #             keyed by action XML IDs.
+    #
+    #         NOTE:   The list of arguments will be used by the Action class to Popen each action and spawned
+    #                 by some of the spawner processes.
+    #
+    #         IMPORTANT: The Co-Simulation Variable CO_SIM_XML_ACTIONS_DIR must be configured/defined
+    #                     in the Co-Simulation Action Plan XML file under the <variables> section
+    #
+    #     :return:
+    #         LAUNCHER_OK: The Popen argument lists for each action were created properly
+    #         PREPARING_ARGUMENTS_ERROR: The run-time environment does not provide the required information. i.e.
+    #                                     environment variables
+    #     """
+    #     self.__actions_popen_arguments_dict = {}
+    #
+    #     for key, value in self.__actions_xml_filenames_dict.items():
+    #         current_action = key
+    #         action_xml_filename = value['action_xml']
+    #
+    #         # TO BE DONE: create a xml manager for actions
+    #         # the configuration manager object reference must be passed to the creator of the laucnher
+    #
+    #     # return common.enums.LauncherReturnCodes.PREPARING_ARGUMENTS_ERROR
+    #
+    #     return common.enums.LauncherReturnCodes.LAUNCHER_OK
+
+    def __start_spawner_processes(self):
+        """
+
+        :return:
+            LAUNCHER_OK:
+
+        """
+        # TO BE DONE: checking the proper number of child processes to be created
+        #                based on the number of CPU on the system
+        #                   when __maximum_number_actions_found is greater than it
+        #
+        self.__spawners = [common.Spawner(self.__launcher_PID,
+                                          actions_to_be_carried_out=self.__actions_to_be_carried_out_jq,
+                                          returned_codes=self.__actions_return_codes_q,
+                                          logger=self.__logger)
+                           for n_spawners in range(self.__maximum_number_actions_found)]
+
+        for current_spawner in self.__spawners:
+            current_spawner.start()
+
+        return common.enums.LauncherReturnCodes.LAUNCHER_OK
+
+    def __perform_spawning_strategy(self):
+        """
+            Spawns the actions and manage the outcomes based on the found events.
+
+        :return:
+            LAUNCHER_OK: all the action finished as expected
+            XML_ERROR: The <action_event> element contains a erroneous entry
+        """
+
+        # going through the launching strategy dictionary
+        # in order to get the events and the actions
+        # that belongs to such event
+        for key, value in self.__launching_strategy_dict.items():
+            event_action_xml_id = key  # the event
+            action_event = value['action_event']
+            actions_list = value['actions_list']
+
+            if action_event == common.constants.CO_SIM_WAIT_FOR_SEQUENTIAL_ACTIONS:
+                # Synchronous actions
+                current_action_popen_args = []
+                for action_xml_id in actions_list:
+                    try:
+
+                        action_popen_args_list = self.__actions_popen_args_dict[action_xml_id]
+                    except KeyError:
+                        self.__logger.error('There are no Popen args to spawn {}'.format(action_xml_id))
+                    self.__actions_to_be_carried_out_jq.put(common.Action(event_action_xml_id=event_action_xml_id,
+                                                                          action_xml_id=action_xml_id,
+                                                                          action_popen_args_list=action_popen_args_list,
+                                                                          logger=self.__logger))
+                    # wait until the Task is finished
+                    # print('synchronous waiting for the action be done')
+                    self.__actions_to_be_carried_out_jq.join()
+                    # print('action done!')
+                #self.__spawn_actions_syncronously(value)
+                print(value)
+
+            elif self.__action_plan_dict[key]['action_event'] == common.constants.CO_SIM_WAIT_FOR_CONCURRENT_ACTIONS:
+                # Asynchronous actions
+                # TO BE DONE: Spawns actions asynchronously
+                print('{} event is Asynchronous'.format(key))
+            else:
+                # wrong entry found
+                self.__logger.error('wrong <action_event>: {}'.format(self.__action_plan_dict[key]['action_event'])) 
+                return common.enums.LauncherReturnCodes.XML_ERROR
+
+        return common.enums.LauncherReturnCodes.LAUNCHER_OK
+
+    def carry_out_action_plan(self):
+        """
+            Goes through the action-plan dictionary and spawn the required actions
+            and waits for and manages  the happened events
+
+        :return:
+            LAUNCHER_OK: All the action were spawned according to the action-plan
+                        and the actions did not report any issue (return code != 0)
+
+            MAPPING_OUT_ERROR: The action plan has not proper logic to be mapped out into
+                                the launching strategy dictionary
+
+            PERFORMING_STRATEGY_ERROR: Some of the action ended with error
+        """
 
         ########
-        # STEP 2 - Setting Up the Configuration Manager
+        # STEP 1 - Grouping actions by events
         ########
-        # TO BE DONE: __logs_root_dir should be set based on environment variable or by using another mechanism
-        # e.g. self.__logs_root_dir = os.environ['HOME'] + '/co_sim/logs'
-        self.__configuration_manager = configurations_manager.ConfigurationsManager()
-        self.__logger = self.__configuration_manager.load_log_configurations(name='launcher')
-        self.__logger.info('START: Co-Simulation Launcher')
+        if not self.__map_out_launching_strategy() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+            self.__logger.debug('something went wrong by mapping out the action plan')
+            return common.enums.LauncherReturnCodes.MAPPING_OUT_ERROR
 
         ########
-        # STEP 3 - Co-Simulation Plan
+        # STEP 2 - Checking the actions grouping, i.e. SEQUENTIAL or CONCURRENT
         ########
-        self.__co_sim_plan_validator = \
-            common.xml_managers.CoSimulationPlanXmlManager(configuration_manager=self.__configuration_manager,
-                                                           logger=self.__logger,
-                                                           xml_filename=self.__args.action_plan)
+        if not self.__check_actions_grouping() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+            self.__logger.debug('an action inconsistently associated to a waiting event was found')
+            return common.enums.LauncherReturnCodes.ACTIONS_GROUPING_ERROR
 
-        # STEP 3.1 - Validating Co-Simulation Plan XML file
-        if not self.__co_sim_plan_validator.dissect() == common.enums.XmlManagerReturnCodes.XML_OK:
-            return common.enums.LauncherReturnCodes.XML_ERROR
+        ########
+        # STEP 3 - Gathering the XML filenames from the <action_xml> element of each action
+        ########
+        if not self.__gather_action_xml_filenames() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+            self.__logger.debug('error by gathering XML filenames from the action plan')
+            return common.enums.LauncherReturnCodes.GATHERING_XML_FILENAMES_ERROR
 
-        # STEP 3.2 - Getting the parameters found on the Co-Simulation Plan XML file
-        self.__action_plan_parameters_dict = self.__co_sim_plan_validator.get_parameters_dict()
+        ########
+        # STEP 4 - Preparing the actions' arguments to be used when the action is launched by means of Popen
+        ########
+        """
+        
+        if not self.__prepare_actions_popen_arguments() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+            self.__logger.debug('the environment variables were not set properly to prepare Popen arguments')
+            return common.enums.LauncherReturnCodes.PREPARING_ARGUMENTS_ERROR
+        """
 
-        # STEP 3.3 - Getting the variables found on the Co-Simulation Plan XML file
-        self.__action_plan_variables_dict = self.__co_sim_plan_validator.get_variables_dict()
+        ########
+        # STEP 5 - Starting the child processes which will spawn the actions
+        ########
+        if not self.__start_spawner_processes() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+            self.__logger.debug('something went wrong by starting spawners processes')
+            return common.enums.LauncherReturnCodes.STARTING_SPAWNERS_ERROR
 
-        ###################################
-        # STEP 4 Co-Simulation Parameters #
-        ###################################
-        self.__co_sim_parameters_validator = \
-            common.xml_managers.CoSimulationParametersXmlManager(configuration_manager=self.__configuration_manager,
-                                                                 logger=self.__logger,
-                                                                 xml_filename=self.__args.parameters)
+        ########
+        # STEP 6 - Carrying out the action plan, based on events and their associated actions
+        ########
+        if not self.__perform_spawning_strategy() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+            self.__logger.debug('something went wrong by executing the action plan')
+            return common.enums.LauncherReturnCodes.PERFORMING_STRATEGY_ERROR
 
-        # STEP 4.1 - Validating Co-Simulation Parameters XML file
-        if not self.__co_sim_parameters_validator.dissect() == common.enums.XmlManagerReturnCodes.XML_OK:
-            return common.enums.LauncherReturnCodes.XML_ERROR
+        ########
+        # STEP 7 - Stopping the spawner processes by poison pilling them
+        ########
+        for current_spawner in self.__spawners:
+            self.__actions_to_be_carried_out_jq.put(None)  # the poison pill
 
-        # STEP 4.2 - Getting the parameters found on the Co-Simulation Plan XML file
-        self.__parameters_parameters_dict = self.__co_sim_parameters_validator.get_parameters_dict()
+        # Waiting until all the spawner processes have taken their pill
+        self.__actions_to_be_carried_out_jq.join()
 
-        # STEP 4.3 - Getting the variables found on the Co-Simulation Plan XML file
-        self.__parameters_variables_dict = self.__co_sim_parameters_validator.get_variables_dict()
+        # STEP 8 - getting results
 
-        # STEP 5 - Converting Co-Simulation XML parameters into JSON
-        if not self.generate_parameters_json_file() == common.enums.LauncherReturnCodes.OK:
-            return common.enums.LauncherReturnCodes.JSON_FILE_ERROR
 
-        # STEP 6 - Launching action plan
-        # TO BE DONE
+        #########
+        # STEP 90 - Joining spawner processes (just in case)
+        #########
+        for current_spawner in self.__spawners:
+            current_spawner.join()
 
-        # STEP 99 - Finishing
-        self.__logger.info('END: Co-Simulation Launcher')
-
-        return common.enums.LauncherReturnCodes.OK
+        return common.enums.LauncherReturnCodes.LAUNCHER_OK

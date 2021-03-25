@@ -11,7 +11,6 @@
 # Laboratory: Simulation Laboratory Neuroscience
 #       Team: Multiscale Simulation and Design
 #
-#   Date: 2021.02.16
 # ------------------------------------------------------------------------------
 import sys
 import common
@@ -19,23 +18,27 @@ import common
 
 def main(args=None):
     """
-    :desc: Entry point for Co-Simulation Launcher tool
+    :desc: Entry point for Co-Simulation CoSimulator tool
     :param args: user command line arguments
-    :return: Launcher's return code to be used as exit code by the bash environment
+    :return: CoSimulator's return code to be used as exit code by the bash environment
     """
-    launcher = common.launcher.Launcher()
+    co_simulator = common.cosimulator.CoSimulator()
+    co_simulator_rc = co_simulator.run(sys.argv)
 
-    # launcher_rc = common.launcher.Launcher.run(sys.argv)
-    launcher_rc = launcher.run(sys.argv)
-
-    if launcher_rc == common.enums.LauncherReturnCodes.PARAMETER_ERROR:
-        return common.enums.BashReturnCodes.LAUNCHER_PARAMETER_ERROR
-    elif launcher_rc == common.enums.LauncherReturnCodes.XML_ERROR:
-        return common.enums.BashReturnCodes.LAUNCHER_XML_ERROR
-    elif launcher_rc == common.enums.LauncherReturnCodes.NOT_OK:
+    if co_simulator_rc == common.enums.CoSimulatorReturnCodes.OK:
+        # finished properly!
+        return common.enums.BashReturnCodes.SUCCESSFUL  # 0
+    # something went wrong
+    elif co_simulator_rc == common.enums.CoSimulatorReturnCodes.PARAMETER_ERROR:
+        return common.enums.BashReturnCodes.CO_SIMULATOR_PARAMETER_ERROR
+    elif co_simulator_rc == common.enums.CoSimulatorReturnCodes.VARIABLE_ERROR:
+        return common.enums.BashReturnCodes.CO_SIMULATOR_VARIABLE_ERROR
+    elif co_simulator_rc == common.enums.CoSimulatorReturnCodes.XML_ERROR:
+        return common.enums.BashReturnCodes.CO_SIMULATOR_XML_ERROR
+    elif co_simulator_rc == common.enums.CoSimulatorReturnCodes.LAUNCHER_ERROR:
         return common.enums.BashReturnCodes.LAUNCHER_ERROR
-
-    return common.enums.BashReturnCodes.SUCCESSFUL  # 0
+    else:
+        return common.enums.BashReturnCodes.COSIMULATOR_ERROR
 
 
 if __name__ == '__main__':

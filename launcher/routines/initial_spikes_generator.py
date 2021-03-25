@@ -11,10 +11,22 @@
 #       Team: Multi-scale Simulation and Design
 #
 # ------------------------------------------------------------------------------
+import os
 import sys
-
-from .main import main
+import numpy
+import logging
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv))
+    logger = logging.getLogger()
+    logger.setLevel(logging.ERROR)
+    logger.addHandler(logging.StreamHandler(sys.stdout))
+
+    logger.debug(sys.argv)
+
+    output_file = os.path.join(sys.argv[1], sys.argv[2])
+    output_array = numpy.zeros((110, 1))
+    numpy.save(file=output_file, arr=output_array)
+
+    logger.info('{} has been generated on {}'.format(sys.argv[1], sys.argv[2]))
+
