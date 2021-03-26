@@ -1,6 +1,14 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
+import os
+import json
+import logging
+
+import nest_elephant_tvb.translation.RichEndPoint as REP
+import nest_elephant_tvb.translation.mpi_translator as mt
+
+
 import numpy as np
 import os
 from mpi4py import MPI
@@ -11,6 +19,7 @@ import json
 import time
 import pathlib
 import copy
+
 
 lock_status=Lock() # locker for manage the transfer of data from thread
 
@@ -173,31 +182,35 @@ if __name__ == "__main__":
     nb_spike_generator = int(sys.argv[3])
     TVB_config = sys.argv[4]
 
-
     # object for analysing data
     with open(path_config+'/../../parameter.json') as f:
         parameters = json.load(f)
     param = parameters['param_TR_tvb_to_nest']
-    generator = generate_data(path_config+'/../../log/',nb_spike_generator,param)
+    
+    
+    ############ NEW Code: old logging code copied here for better overview
     log_level = param['level_log']
     logger_master = create_logger(path_config, 'tvb_to_nest_master'+str(id_first_spike_detector), log_level)
-
-    # variable for communication between thread
-    status_data=[0]
-    initialisation =np.load(param['init'])
-    buffer_spike=[initialisation]
-
-    ### Create Com objects for communications
-    info = MPI.INFO_NULL
-    root = 0
-        
-    ##############################################
-    # Create the port, file and set unlock for sender
-    logger_master.info('Translate SEND: before open_port')
-    port_send = MPI.Open_port(info)  # open a NEW port
-    logger_master.info('Translate SEND: after open_port : '+port_send)
-    path_to_files_sends = []
-    path_to_files_sends_unlock = []
+    logger_send = create_logger(path_config, 'tvb_to_nest_send'+str(id_first_spike_detector), log_level)
+    logger_receive = create_logger(path_config, 'tvb_to_nest_receive'+str(id_first_spike_detector), log_level)
+    ############# NEW Code end
+    
+    
+    ############ NEW Code: RICH END POINT for MPI and new connections
+    ### contains all MPI connection stuff for proper encapsulation
+    ### TODO: make this a proper interface
+    # TODO This is still a mess! Here and also in the nest_to_tvb direction
+    # TODO Check ALL! the command line arguments of 
+    # TODO 'test_translator_nest_to_tvb.py'
+    # TODO 'test_translator_tvb_to_nest.py
+    # TODO e.g. with '.txt', without. hardcoded path, without, ... etc etc.
+    path_to_files_receive = path_config + TVB_config
+    # NOTE: only one file with 'path/output/0.txt' instead of number of id_first_spike_detector...correct? see TODO below
+    path_to_files_send = os.path.join(path_config, str(id_first_spike_detector) + ".txt")
+    comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
+    # TODO: why is this needed, could not see where this is ever reused.
+    # TODO see NOTE above: only path/output/0.txt is reused.
+    ''' 
     for i in range(nb_spike_generator):
         # write file with port and unlock
         path_to_files_send = os.path.join(path_config, str(id_first_spike_detector+i) + ".txt")
@@ -209,38 +222,21 @@ if __name__ == "__main__":
         pathlib.Path(path_to_files_send_unlock).touch()
         path_to_files_sends.append(path_to_files_send)
         path_to_files_sends_unlock.append(path_to_files_send_unlock)
-    logger_master.info('Translate SEND: path_file: ' + path_to_files_send)
+    '''
+    ############# NEW Code end
+    
+    
+    generator = generate_data(path_config+'/../../log/',nb_spike_generator,param)
 
-    ##############################################
-    #  Create the port, file and set unlock for receiver       
-    logger_master.info('Translate RECEIVE: before open_port')
-    port_receive = MPI.Open_port(info)
-    logger_master.info('Translate RECEIVE: after open_port '+port_receive)
-        
-    # Write file configuration of the port
-    path_to_files_receive = path_config + TVB_config
-    logger_master.info('Translate RECEIVE: path_file: ' + path_to_files_receive)
-    fport_receive = open(path_to_files_receive, "w+")
-    fport_receive.write(port_receive)
-    fport_receive.close()
-    pathlib.Path(path_to_files_receive + ".unlock").touch()
+    # variable for communication between thread
+    status_data=[0]
+    initialisation =np.load(param['init'])
+    buffer_spike=[initialisation]
 
-    ############################################
-    # accept connections
-    logger_master.info('Translate SEND: before Accepted: '+ str([port_send, info, root]))
-    comm_send = MPI.COMM_WORLD.Accept(port_send, info, root)
-    logger_master.info('Translate SEND: Accepted')
-        
-    logger_master.info('Translate RECEIVE: before accept: '+ str([port_receive, info, root]))
-    comm_receive = MPI.COMM_WORLD.Accept(port_receive, info, root)
-    logger_master.info('Translate RECEIVE: after accept')
-    ##############################################
-
-    logger_send = create_logger(path_config, 'tvb_to_nest_send'+str(id_first_spike_detector), log_level)
-    logger_receive = create_logger(path_config, 'tvb_to_nest_receive'+str(id_first_spike_detector), log_level)
+    
     # create the thread for receive and send data
-    th_send = Thread(target=send, args=(logger_send,id_first_spike_detector,status_data,buffer_spike, comm_send))
-    th_receive = Thread(target=receive, args=(logger_receive,generator,status_data,buffer_spike, comm_receive ))
+    th_send = Thread(target=send, args=(logger_send,id_first_spike_detector,status_data,buffer_spike, comm_sender))
+    th_receive = Thread(target=receive, args=(logger_receive,generator,status_data,buffer_spike, comm_receiver ))
 
     # start the threads
     # FAT END POINT
@@ -254,10 +250,28 @@ if __name__ == "__main__":
     MPI.Close_port(port_receive)
     logger_master.info('close communicator')
     MPI.Finalize()
-
+    
+    '''
+    ############ NEW Code: removed threads, used MPI ranks...
+    ### TODO: encapsulate loggers
+    ### kept all logging stuff here for now to have them in one place
+    loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
+    mt.init(path, param, comm, comm_receiver, comm_sender, loggers)
+    ############ NEW Code end
+    
+    
+    ############ NEW Code: FAT END POINT for MPI and new connections
+    ### contains all MPI connection stuff for proper encapsulation
+    ### TODO: make this a proper interface
+    REP.close_and_finalize(port_send, port_receive,logger_master)
+    ############# NEW Code end
+    '''
+    
     logger_master.info('clean file')
-    # Clean up port files and locks
-    for path_send in path_to_files_sends :
-        os.remove(path_send)
-    os.remove(path_to_files_receive)
+    # TODO: ugly solution, all MPI ranks want to delete, only the first one can.
+    try:
+        os.remove(path_to_files_receive)
+        os.remove(path_to_files_send)
+    except FileNotFoundError:
+        pass 
     logger_master.info('end')
