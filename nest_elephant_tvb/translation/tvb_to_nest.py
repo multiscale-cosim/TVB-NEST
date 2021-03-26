@@ -226,13 +226,13 @@ if __name__ == "__main__":
     ############# NEW Code end
     
     
+    ############ OLD Code, to be changed to MPI
     generator = generate_data(path_config+'/../../log/',nb_spike_generator,param)
 
     # variable for communication between thread
     status_data=[0]
     initialisation =np.load(param['init'])
     buffer_spike=[initialisation]
-
     
     # create the thread for receive and send data
     th_send = Thread(target=send, args=(logger_send,id_first_spike_detector,status_data,buffer_spike, comm_sender))
@@ -246,10 +246,7 @@ if __name__ == "__main__":
     th_receive.join()
     th_send.join()
     logger_master.info('thread join')
-    MPI.Close_port(port_send)
-    MPI.Close_port(port_receive)
-    logger_master.info('close communicator')
-    MPI.Finalize()
+    ############# OLD Code end
     
     '''
     ############ NEW Code: removed threads, used MPI ranks...
@@ -258,6 +255,7 @@ if __name__ == "__main__":
     loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
     mt.init(path, param, comm, comm_receiver, comm_sender, loggers)
     ############ NEW Code end
+    '''
     
     
     ############ NEW Code: FAT END POINT for MPI and new connections
@@ -265,7 +263,7 @@ if __name__ == "__main__":
     ### TODO: make this a proper interface
     REP.close_and_finalize(port_send, port_receive,logger_master)
     ############# NEW Code end
-    '''
+    
     
     logger_master.info('clean file')
     # TODO: ugly solution, all MPI ranks want to delete, only the first one can.
