@@ -37,6 +37,7 @@ class Launcher(object):
     __launcher_PID = 0  # The PID where the object of this class is being executed
     __logger = None
     __maximum_number_actions_found = 0  # It will be the number of spawner to be started
+    __stopping_event = None  # Event to be used as alternative mechanism to stop Spawner children processes
 
     def __init__(self, action_plan_dict=None, actions_popen_args_dict=None, configuration_manager=None, logger=None):
         """
@@ -55,6 +56,8 @@ class Launcher(object):
         self.__actions_return_codes_q = multiprocessing.Queue()
 
         self.__launcher_PID = os.getpid()
+
+        self.__stopping_event = multiprocessing.Event()
 
     def __map_out_launching_strategy(self):
         """
@@ -181,35 +184,6 @@ class Launcher(object):
 
         return common.enums.LauncherReturnCodes.LAUNCHER_OK
 
-    # def __ric_prepare_actions_popen_arguments(self):
-    #     """
-    #         - Goes through the launching strategy dictionary in order to generate a dictionary of actions arguments
-    #             keyed by action XML IDs.
-    #
-    #         NOTE:   The list of arguments will be used by the Action class to Popen each action and spawned
-    #                 by some of the spawner processes.
-    #
-    #         IMPORTANT: The Co-Simulation Variable CO_SIM_XML_ACTIONS_DIR must be configured/defined
-    #                     in the Co-Simulation Action Plan XML file under the <variables> section
-    #
-    #     :return:
-    #         LAUNCHER_OK: The Popen argument lists for each action were created properly
-    #         PREPARING_ARGUMENTS_ERROR: The run-time environment does not provide the required information. i.e.
-    #                                     environment variables
-    #     """
-    #     self.__actions_popen_arguments_dict = {}
-    #
-    #     for key, value in self.__actions_xml_filenames_dict.items():
-    #         current_action = key
-    #         action_xml_filename = value['action_xml']
-    #
-    #         # TO BE DONE: create a xml manager for actions
-    #         # the configuration manager object reference must be passed to the creator of the laucnher
-    #
-    #     # return common.enums.LauncherReturnCodes.PREPARING_ARGUMENTS_ERROR
-    #
-    #     return common.enums.LauncherReturnCodes.LAUNCHER_OK
-
     def __start_spawner_processes(self):
         """
 
@@ -221,10 +195,11 @@ class Launcher(object):
         #                based on the number of CPU on the system
         #                   when __maximum_number_actions_found is greater than it
         #
-        self.__spawners = [common.Spawner(self.__launcher_PID,
+        self.__spawners = [common.Spawner(self.__launcher_PID,  # PPID for the Spawner
                                           actions_to_be_carried_out=self.__actions_to_be_carried_out_jq,
                                           returned_codes=self.__actions_return_codes_q,
-                                          logger=self.__logger)
+                                          logger=self.__logger,
+                                          stopping_event=self.__stopping_event)
                            for n_spawners in range(self.__maximum_number_actions_found)]
 
         for current_spawner in self.__spawners:
@@ -241,42 +216,59 @@ class Launcher(object):
             XML_ERROR: The <action_event> element contains a erroneous entry
         """
 
-        # going through the launching strategy dictionary
-        # in order to get the events and the actions
-        # that belongs to such event
-        for key, value in self.__launching_strategy_dict.items():
-            event_action_xml_id = key  # the event
-            action_event = value['action_event']
-            actions_list = value['actions_list']
+        try:
 
-            if action_event == common.constants.CO_SIM_WAIT_FOR_SEQUENTIAL_ACTIONS:
-                # Synchronous actions
-                current_action_popen_args = []
-                for action_xml_id in actions_list:
-                    try:
+            # going through the launching strategy dictionary
+            # in order to get the events and the actions
+            # that belongs to such event
+            for key, value in self.__launching_strategy_dict.items():
+                event_action_xml_id = key  # the event
+                action_event = value['action_event']  # the event defining the spawning strategy
+                actions_list = value['actions_list']  # list of actions owned by the event
 
-                        action_popen_args_list = self.__actions_popen_args_dict[action_xml_id]
-                    except KeyError:
-                        self.__logger.error('There are no Popen args to spawn {}'.format(action_xml_id))
-                    self.__actions_to_be_carried_out_jq.put(common.Action(event_action_xml_id=event_action_xml_id,
-                                                                          action_xml_id=action_xml_id,
-                                                                          action_popen_args_list=action_popen_args_list,
-                                                                          logger=self.__logger))
-                    # wait until the Task is finished
-                    # print('synchronous waiting for the action be done')
+                if action_event == common.constants.CO_SIM_WAIT_FOR_SEQUENTIAL_ACTIONS:
+                    # Sequential actions management
+                    self.__logger.info('Sequentially processing of actions owned by the event <{}>'.format(event_action_xml_id))
+                    for action_xml_id in actions_list:
+                        action_popen_args_list = []
+                        try:
+                            action_popen_args_list = self.__actions_popen_args_dict[action_xml_id]
+                        except KeyError:
+                            self.__logger.error('There are no Popen args to spawn the action {}'.format(action_xml_id))
+                        self.__actions_to_be_carried_out_jq.put(common.Action(event_action_xml_id=event_action_xml_id,
+                                                                              action_xml_id=action_xml_id,
+                                                                              action_popen_args_list=action_popen_args_list,
+                                                                              logger=self.__logger,
+                                                                              ))
+                        # SEQUENTIAL effect
+                        # waiting until the Task has finished (task by task)
+                        self.__actions_to_be_carried_out_jq.join()
+
+                elif action_event == common.constants.CO_SIM_WAIT_FOR_CONCURRENT_ACTIONS:
+                    # Concurrent actions management
+                    self.__logger.info('Concurrently Processing of actions owned by the event <{}>'.format(event_action_xml_id))
+                    for action_xml_id in actions_list:
+                        action_popen_args_list = []
+                        try:
+                            action_popen_args_list = self.__actions_popen_args_dict[action_xml_id]
+                        except KeyError:
+                            self.__logger.error('There are no Popen args to spawn the action <{}>'.format(action_xml_id))
+                        self.__actions_to_be_carried_out_jq.put(common.Action(event_action_xml_id=event_action_xml_id,
+                                                                              action_xml_id=action_xml_id,
+                                                                              action_popen_args_list=action_popen_args_list,
+                                                                              logger=self.__logger))
+                    # CONCURRENT effect
+                    # waiting until ALL the tasks have finished (task grouped by the event)
                     self.__actions_to_be_carried_out_jq.join()
-                    # print('action done!')
-                #self.__spawn_actions_syncronously(value)
-                print(value)
+                else:
+                    # wrong entry found
+                    self.__logger.error('wrong <action_event>: {}'.format(action_event))
+                    return common.enums.LauncherReturnCodes.XML_ERROR
 
-            elif self.__action_plan_dict[key]['action_event'] == common.constants.CO_SIM_WAIT_FOR_CONCURRENT_ACTIONS:
-                # Asynchronous actions
-                # TO BE DONE: Spawns actions asynchronously
-                print('{} event is Asynchronous'.format(key))
-            else:
-                # wrong entry found
-                self.__logger.error('wrong <action_event>: {}'.format(self.__action_plan_dict[key]['action_event'])) 
-                return common.enums.LauncherReturnCodes.XML_ERROR
+        except KeyboardInterrupt:
+            self.__logger.info("Caught KeyboardInterrupt! Setting stop event...")
+        finally:
+            self.__stopping_event.set()
 
         return common.enums.LauncherReturnCodes.LAUNCHER_OK
 
@@ -317,31 +309,21 @@ class Launcher(object):
             return common.enums.LauncherReturnCodes.GATHERING_XML_FILENAMES_ERROR
 
         ########
-        # STEP 4 - Preparing the actions' arguments to be used when the action is launched by means of Popen
-        ########
-        """
-        
-        if not self.__prepare_actions_popen_arguments() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
-            self.__logger.debug('the environment variables were not set properly to prepare Popen arguments')
-            return common.enums.LauncherReturnCodes.PREPARING_ARGUMENTS_ERROR
-        """
-
-        ########
-        # STEP 5 - Starting the child processes which will spawn the actions
+        # STEP 4 - Starting the child processes which will spawn the actions
         ########
         if not self.__start_spawner_processes() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
             self.__logger.debug('something went wrong by starting spawners processes')
             return common.enums.LauncherReturnCodes.STARTING_SPAWNERS_ERROR
 
         ########
-        # STEP 6 - Carrying out the action plan, based on events and their associated actions
+        # STEP 5 - Carrying out the action plan, based on events and their associated actions
         ########
         if not self.__perform_spawning_strategy() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
             self.__logger.debug('something went wrong by executing the action plan')
             return common.enums.LauncherReturnCodes.PERFORMING_STRATEGY_ERROR
 
         ########
-        # STEP 7 - Stopping the spawner processes by poison pilling them
+        # STEP 6 - Stopping the spawner processes by poison pilling them
         ########
         for current_spawner in self.__spawners:
             self.__actions_to_be_carried_out_jq.put(None)  # the poison pill
@@ -349,13 +331,26 @@ class Launcher(object):
         # Waiting until all the spawner processes have taken their pill
         self.__actions_to_be_carried_out_jq.join()
 
-        # STEP 8 - getting results
-
+        ########
+        # STEP 7 - getting results
+        ########
+        there_was_an_error = False
+        while not self.__actions_return_codes_q.empty():
+            current_action_result = self.__actions_return_codes_q.get()
+            if current_action_result == 0:
+                continue
+            else:
+                there_was_an_error = True
+                break
 
         #########
-        # STEP 90 - Joining spawner processes (just in case)
+        # STEP 8 - Joining spawner processes (just in case)
         #########
         for current_spawner in self.__spawners:
             current_spawner.join()
 
+        if there_was_an_error:
+            return common.enums.LauncherReturnCodes.ACTIONS_FINISHED_WITH_ERROR
+
+        # no errors! (all actions returned Popen rc=0)
         return common.enums.LauncherReturnCodes.LAUNCHER_OK

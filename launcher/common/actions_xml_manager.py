@@ -17,7 +17,7 @@ import os
 import common
 
 
-class XmlManagerActions(object):
+class ActionsXmlManager(object):
     """
         XML Manager for the Co-Simulation Actions XML files
 
@@ -28,10 +28,10 @@ class XmlManagerActions(object):
     """
     __actions_popen_arguments_dict = {}
 
-    def __init__(self, configuration_manager=None, logger=None, environment_variables_manager=None, action_plan=None):
+    def __init__(self, configuration_manager=None, logger=None, variables_manager=None, action_plan=None):
         self.__configuration_manager = configuration_manager
         self.__logger = logger
-        self.__variables_manager = environment_variables_manager
+        self.__variables_manager = variables_manager
         self.__action_plan = action_plan
 
     def __transform_co_sim_variables_into_values(self, popen_arguments_list=None):
@@ -128,26 +128,6 @@ class XmlManagerActions(object):
         def initialize_xml_elements(self):
             # TO BE DONE: there should be a global XML file where tags are defined
             self._component_xml_tag = common.xml_tags.CO_SIM_XML_ACTION_ROOT_TAG
-
-        def load_xml_into_dict(self):
-            """
-                Load a Co-Simulation Action XML file into _whole_xml_dict
-
-            :return:
-                CO_SIM_parameters_XML_FORMAT_ERROR: The Co-Simulation Action XML file is not well-formed
-                CO_SIM_parameters_XML_OK: The Co-Simulation Action XML file has been loaded into _whole_xml_dict
-            """
-            try:
-                self._whole_xml_dict = self._configuration_manager.get_configuration_settings(
-                    configuration_file=self._xml_filename,
-                    component=self._component_xml_tag)
-            except xml.etree.ElementTree.ParseError:
-                self._logger.error('{} cannot be loaded, check XML format'.format(self._xml_filename))
-                return common.enums.XmlManagerReturnCodes.XML_FORMAT_ERROR
-            else:
-                self._logger.info('{} Co-Simulation action XML file loaded'.format(self._xml_filename))
-
-            return common.enums.XmlManagerReturnCodes.XML_OK
 
         def __dissect_performer_section(self):
             """

@@ -14,7 +14,7 @@
             <par_000>
                 <!-- will be created on /path/to/results/dir provided by the configuration_manager -->
                 <par_name>CO_SIM_PARAMETERS_JSON_FILENAME</par_name>
-                <par_value>parameters.json</par_value>
+                <par_value>parameter.json</par_value>
             </par_000>
             <par_001>
                 <par_name>CO_SIM_PARAMETERS_JSON_FILE_CONTENT</par_name>

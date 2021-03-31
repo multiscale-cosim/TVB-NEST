@@ -14,6 +14,7 @@
 
 from .action import Action
 from .args import arg_parse
+from .arranger import Arranger
 from .constants import CO_SIM_ACTION_TYPES_TUPLE
 from .cosimulator import CoSimulator
 from .enums import (BashReturnCodes,
@@ -29,9 +30,9 @@ from .launcher import Launcher
 from .spawner import Spawner
 from .utils import transform_environment_variables_into_values
 from .xml_manager import XmlManager
-from .xml_manager_plan import XmlManagerPlan
-from .xml_manager_actions import XmlManagerActions
-from .xml_manager_parameters import XmlManagerParameters
+from .plan_xml_manager import PlanXmlManager
+from .actions_xml_manager import ActionsXmlManager
+from .parameters_xml_manager import ParametersXmlManager
 from .xml_tags import CO_SIM_XML_PLAN_ROOT_TAG
 
 

@@ -18,15 +18,27 @@ import logging
 
 
 if __name__ == '__main__':
+    # TO BE DONE: arguments validation
+    output_path = sys.argv[1]
+    output_file = sys.argv[2]
+
+    process_PPID = os.getppid()
+    process_PID = os.getpid()
+
     logger = logging.getLogger()
-    logger.setLevel(logging.ERROR)
     logger.addHandler(logging.StreamHandler(sys.stdout))
 
+    # TO BE DONE: as a command line argument the logging level should be set
+    logger.setLevel(logging.INFO)
     logger.debug(sys.argv)
 
-    output_file = os.path.join(sys.argv[1], sys.argv[2])
+    output_path_filename = os.path.join(output_path, output_file)
     output_array = numpy.zeros((110, 1))
-    numpy.save(file=output_file, arr=output_array)
 
-    logger.info('{} has been generated on {}'.format(sys.argv[1], sys.argv[2]))
+    numpy.save(file=output_path_filename, arr=output_array)
+
+    logger.info('PPID={}, PID={}, {} has been generated'.format(process_PPID,
+                                                                process_PID,
+                                                                output_path_filename))
+
 

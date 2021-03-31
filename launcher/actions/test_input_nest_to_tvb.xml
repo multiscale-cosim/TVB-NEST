@@ -19,15 +19,14 @@
             <performer>
                 <performer_binary>python3</performer_binary>
                 <performer_arguments>
-                    <argv_01_empty>CO_SIM_EMPTY</argv_01_empty>
+                    <argv_01_empty>{CO_SIM_EMPTY}</argv_01_empty>
                 </performer_arguments>
             </performer>
             <routine>
-                <routine_code>test_input_nest_to_tvb.py</routine_code>
+                <routine_code>{CO_SIM_ROUTINES_DIR}/nest_elephant_tvb/translation/test_file/test_input_nest_to_tvb.py</routine_code>
                 <routine_arguments>
-                    <argv_1_results_dir>CO_SIM_RESULTS_OUTPUT_DIR</argv_1_results_dir>
-                    <argv_2_input_file>CO_SIM_INPUT_FILE</argv_2_input_file>
-                    <argv_3_delay>CO_SIM_DELAY</argv_3_delay>
+                    <argv_1_comm_file>{CO_SIM_RESULTS_DIR}{CO_SIM_INPUT_FILE}</argv_1_comm_file>
+                    <argv_2_delay>{CO_SIM_DELAY}</argv_2_delay>
                 </routine_arguments>
             </routine>
         </action>

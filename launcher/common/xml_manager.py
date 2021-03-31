@@ -11,6 +11,8 @@
 #       Team: Multi-scale Simulation and Design
 #
 # ------------------------------------------------------------------------------
+import os
+import xml
 
 # Co-Simulator imports
 import common
@@ -58,9 +60,39 @@ class XmlManager(object):
         return common.enums.XmlManagerReturnCodes.XML_WRONG_MANAGER_ERROR
 
     def load_xml_into_dict(self):
-        # proper loading procedure must be implemented in the sub-class
-        self._logger.debug('invoking load_xml_into_dict from XmlManager super class')
-        return common.enums.XmlManagerReturnCodes.XML_WRONG_MANAGER_ERROR
+        """
+            Load the XML file into _whole_xml_dict
+
+        :return:
+            XML_FILE_NOT_FOUND: The XML file to be processed does not exists
+            XML_FORMAT_ERROR: The  XML file is not well-formed
+            XML_OK: The XML file has been loaded into _whole_xml_dict
+        """
+        if not os.path.isfile(self._xml_filename):
+            self._logger.error('{} does not exist'.format(self._xml_filename))
+            return common.enums.XmlManagerReturnCodes.XML_FILE_NOT_FOUND
+
+        try:
+            open(self._xml_filename)
+        except PermissionError:
+            self._logger.error('{} cannot be open, check access permissions'.format(self._xml_filename))
+            return common.enums.XmlManagerReturnCodes.XML_FILE_ACCESS_ERROR
+
+        try:
+            self._whole_xml_dict = self._configuration_manager.get_configuration_settings(
+                configuration_file=self._xml_filename,
+                component=self._component_xml_tag)
+        except xml.etree.ElementTree.ParseError:
+            self._logger.error('{} cannot be loaded, check the XML format'.format(self._xml_filename))
+            return common.enums.XmlManagerReturnCodes.XML_FORMAT_ERROR
+        except LookupError:
+            self._logger.error(
+                '{} cannot be loaded, <{}> tag not found'.format(self._xml_filename, self._component_xml_tag))
+            return common.enums.XmlManagerReturnCodes.XML_FORMAT_ERROR
+        else:
+            self._logger.info('{} loaded to be processed'.format(self._xml_filename))
+
+        return common.enums.XmlManagerReturnCodes.XML_OK
 
     def split_whole_xml_dict_into_dict_by_sections(self):
         """

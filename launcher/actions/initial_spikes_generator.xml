@@ -19,7 +19,7 @@
             <performer>
                 <performer_binary>python3</performer_binary>
                 <performer_arguments>
-                    <argv_01_empty>{CO_SIM_EMPTY}</argv_01_empty>
+                    <argv_1_empty>{CO_SIM_EMPTY}</argv_1_empty>
                 </performer_arguments>
             </performer>
             <routine>

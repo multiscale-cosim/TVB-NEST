@@ -38,7 +38,7 @@ def main(args=None):
     elif co_simulator_rc == common.enums.CoSimulatorReturnCodes.LAUNCHER_ERROR:
         return common.enums.BashReturnCodes.LAUNCHER_ERROR
     else:
-        return common.enums.BashReturnCodes.COSIMULATOR_ERROR
+        return common.enums.BashReturnCodes.CO_SIMULATOR_ERROR
 
 
 if __name__ == '__main__':

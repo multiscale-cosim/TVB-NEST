@@ -28,6 +28,18 @@ class ActionReturnCodes(enum.Enum):
 
 
 @enum.unique
+class ArrangerReturnCodes(enum.Enum):
+    """
+        Class implementing the return codes from the arranger component
+    """
+    OK = 0
+    NOT_OK = -1
+
+    DIR_NOT_EXISTS = 10
+    MKDIR_ERROR = 20
+
+
+@enum.unique
 class CoSimulatorReturnCodes(enum.Enum):
     """
         Class implementing the general enumerations to be used through whole CoSimulator tool
@@ -39,8 +51,12 @@ class CoSimulatorReturnCodes(enum.Enum):
     OK = 0
     NOT_OK = -1
 
+    # Returns reporting Arranger issues
+    ARRANGER_ERROR = 5
+
     # Returns related to parameters JSON file
-    JSON_FILE_ERROR = 5
+    JSON_FILE_ERROR = 10
+    JSON_FILE_OS_ERROR = 15
 
     # Returns related to the Launcher component
     LAUNCHER_ERROR = 50
@@ -122,6 +138,9 @@ class LauncherReturnCodes(enum.Enum):
     # Return codes related to the grouping of the actions
     ACTIONS_GROUPING_ERROR = 10
 
+    # Return codes related to the Actions results
+    ACTIONS_FINISHED_WITH_ERROR = 20
+
     # Return codes reported when the XML filenames are gathered from the XML action plan file
     GATHERING_XML_FILENAMES_ERROR = 50
 
@@ -186,7 +205,9 @@ class XmlManagerReturnCodes(enum.Enum):
     XML_OK = 0
     XML_CO_SIM_VARIABLE_ERROR = 200
     XML_ENVIRONMENT_VARIABLE_ERROR = 205
-    XML_FORMAT_ERROR = 210
-    XML_TAG_ERROR = 215
-    XML_VALUE_ERROR = 220
-    XML_WRONG_MANAGER_ERROR = 225
+    XML_FILE_ACCESS_ERROR = 210
+    XML_FILE_NOT_FOUND = 215
+    XML_FORMAT_ERROR = 220
+    XML_TAG_ERROR = 225
+    XML_VALUE_ERROR = 230
+    XML_WRONG_MANAGER_ERROR = 235

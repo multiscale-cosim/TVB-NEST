@@ -32,11 +32,11 @@
             </par_000>
             <par_001>
                 <par_name>CO_SIM_RESULTS_INPUT_DIR</par_name>
-                <par_value>{CO_SIM_RESULTS_DIR}/input</par_value>
+                <par_value>/input</par_value>
             </par_001>
             <par_002>
                 <par_name>CO_SIM_RESULTS_OUTPUT_DIR</par_name>
-                <par_value>{CO_SIM_RESULTS_DIR}/output</par_value>
+                <par_value>/output</par_value>
             </par_002>
             <par_003>
                 <par_name>CO_SIM_INPUT_FILE</par_name>
@@ -47,6 +47,20 @@
                 <par_value>{CO_SIM_RESULTS_OUTPUT_DIR}/0.txt</par_value>
             </par_004>
         </parameters>
+        <arrangement>
+            <arr_001>
+                <arr_duty>CO_SIM_ARRANGEMENT_DIR_CREATION</arr_duty>
+                <arr_what>{CO_SIM_RESULTS_DIR}/log</arr_what>
+            </arr_001>
+            <arr_002>
+                <arr_duty>CO_SIM_ARRANGEMENT_DIR_CREATION</arr_duty>
+                <arr_what>{CO_SIM_RESULTS_DIR}{CO_SIM_RESULTS_INPUT_DIR}</arr_what>
+            </arr_002>
+            <arr_003>
+                <arr_duty>CO_SIM_ARRANGEMENT_DIR_CREATION</arr_duty>
+                <arr_what>{CO_SIM_RESULTS_DIR}{CO_SIM_RESULTS_OUTPUT_DIR}</arr_what>
+            </arr_003>
+        </arrangement>
         <action_plan>
             <!--
                 NOTE: action_NNN will be sorted, meaning that NNN must be a correlative number

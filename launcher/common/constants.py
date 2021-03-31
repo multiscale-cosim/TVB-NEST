@@ -19,6 +19,19 @@ CO_SIM_VARIABLE_DESCRIPTION = 'description'
 CO_SIM_VARIABLE_VALUE = 'value'
 
 """
+CO_SIM_ARRANGEMENT_TYPES_TUPLE:
+    Represents the different kinds of arrangement that the Co-Simulator
+    could perform before launching the Co-Simulation Action Plan Strategy
+    
+Meanings:
+    CO_SIM_ARRANGEMENT_DIR_CREATION: A directory will be created by using the specified path
+"""
+CO_SIM_ARRANGEMENT_DIR_CREATION = 'CO_SIM_ARRANGEMENT_DIR_CREATION'
+CO_SIM_ARRANGEMENT_DUTIES_TUPLE = (
+    CO_SIM_ARRANGEMENT_DIR_CREATION,
+)
+
+"""
 CO_SIM_ACTION_TYPES_TUPLE:
     Represents the different kinds of Co-Simulation actions
     that could be used as part of the <action_type> XML element,

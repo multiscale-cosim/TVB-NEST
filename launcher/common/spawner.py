@@ -11,7 +11,11 @@
 #       Team: Multi-scale Simulation and Design
 #
 # ------------------------------------------------------------------------------
+import os
 import multiprocessing
+import time
+import traceback
+import queue
 
 
 class Spawner(multiprocessing.Process):
@@ -25,18 +29,24 @@ class Spawner(multiprocessing.Process):
         run: Spawn a action by means an Action object
 
     """
+
     __actions_to_be_carried_out = None  # Joinable Queue
     __launcher_PID = 0
     __logger = None  # logger object reference
     __returned_codes = None  # Queue
     __spawner_label = ''  # formed in run method PPID+PID+Name
+    __stop_action_event = None
+    __stopping_event = None  # Additional mechanism to be stopped
 
-    def __init__(self, launcher_PID=None, actions_to_be_carried_out=None, returned_codes=None, logger=None):
+    def __init__(self, launcher_PID=None, actions_to_be_carried_out=None,
+                 returned_codes=None, logger=None, stopping_event=None):
         multiprocessing.Process.__init__(self)
         self.__actions_to_be_carried_out = actions_to_be_carried_out
         self.__launcher_PID = launcher_PID
         self.__logger = logger
         self.__returned_codes = returned_codes
+        self.__stop_action_event = multiprocessing.Event()
+        self.__stopping_event = stopping_event
 
     def run(self) -> None:
         """
@@ -50,30 +60,55 @@ class Spawner(multiprocessing.Process):
              NOTE: the results codes queue will be controlled for the
                     parent process of the spawner(s), commonly the "launcher"
         """
+
         self.__spawner_label = 'PPID={},PID={},{}'.format(self.__launcher_PID, self.pid, self.name)
         self.__logger.info('{} started'.format(self.__spawner_label))
 
         while True:
             # getting next action (task) to be spawned
-            picked_action = self.__actions_to_be_carried_out.get()
+            try:
+                # TO BE DONE: Configuring the timeout value from XML files
+                picked_action = self.__actions_to_be_carried_out.get(timeout=1)
+            except queue.Empty:
+                self.__logger.info('{}: waiting for a new action (task)'.format(self.__spawner_label))
 
-            # should the Spawner stop by itself?
+                os.sched_yield()  # relinquishing for a while
+
+                # after informing it's still alive, goes for an action again
+                continue
+
+            # Checking if the Launcher has put the poison pill
+            # which is considered the "normal" ending procedure
             if picked_action is None:
-                # poison pill has been gotten
-                # it is taken as the "normal" stopping mechanism
+                self.__logger.info('{}: finishing, there is no more actions to be spawn'.format(self.__spawner_label))
                 self.__actions_to_be_carried_out.task_done()
 
-                # ending the spawner process
+                # Leaving the processing action loop
                 break
 
+            #######################
+            # Performing the action
+            # NOTE: Spawner (worker) will do the needful by means of the Action class
+            #######################
             self.__logger.info('{} has picked the action {}'.format(self.__spawner_label,
                                                                     picked_action.get_action_xml_id()))
 
-            # Action class will spawn the action by means of Popen
-            returned_code = picked_action.spawn_the_action()
+            try:
+                # Action class (picked_action) will spawn the action by means of Popen
+                # NOTE: Actions class will run another infinite loop to get the stdout and stderr from the action
+                returned_code = -1
+                self.__stop_action_event.clear()
+                returned_code = picked_action.spawn_the_action(stop_action_event=self.__stop_action_event)
+            except KeyboardInterrupt:
+                self.__logger.info('{} caught KeyboardInterrupt'.format(self.__spawner_label))
+                # Setting up the peremptory finishing request for the picked Action
+                self.__stop_action_event.set()
+                # JUST FOR TESTING time.sleep(1)
+            else:
+                self.__logger.info('{}: the <{}> action has finished'.format(self.__spawner_label,
+                                                                             picked_action.get_action_xml_id()))
+                # setting the action (task) as accomplished
+                self.__actions_to_be_carried_out.task_done()
 
-            # setting the action (task) as accomplished
-            self.__actions_to_be_carried_out.task_done()
-
-            # reporting the action returned code
-            self.__returned_codes.put(returned_code)
+                # reporting the action returned code
+                self.__returned_codes.put(returned_code)
