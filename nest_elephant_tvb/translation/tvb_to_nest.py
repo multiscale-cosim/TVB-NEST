@@ -1,6 +1,5 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
-
 import os
 import json
 import logging
@@ -55,6 +54,7 @@ if __name__ == "__main__":
     ############ Step 2: init all loggers.
     ### TODO: use proper logging interface 
     ### -> https://github.com/multiscale-cosim/TVB-NEST/tree/master/configuration_manager
+
     log_level = param['level_log']
     logger_master = create_logger(path_config, 'tvb_to_nest_master'+str(id_first_spike_detector), log_level)
     logger_send = create_logger(path_config, 'tvb_to_nest_send'+str(id_first_spike_detector), log_level)

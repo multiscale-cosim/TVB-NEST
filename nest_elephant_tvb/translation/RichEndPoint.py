@@ -45,7 +45,7 @@ def _open_port_accept_connection(comm, root, info, logger_master, path_to_files)
     In some MPI implementations, information about the rank is encoded in the port infos.
     Therefore only rank 0 opens the port and broadcasts the relevant info to all other ranks.
     So a M:N connection between two MPI applications is possible.
-    
+
     :param comm: the INTRA communicator of the calling application ('server') which opens and accepts the connection
     :param root: the root rank on which the 'main' connection before broadcast in done
     :param info: MPI info object
