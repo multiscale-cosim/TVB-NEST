@@ -7,7 +7,7 @@ import logging
 import sys
 
 import nest_elephant_tvb.translation.RichEndPoint as REP
-import nest_elephant_tvb.translation.nest_tvb_transformer as ntt
+import nest_elephant_tvb.translation.transformer_nest_tvb as tnt
 
 def create_logger(path,name, log_level):
     # Configure logger
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     ### TODO: encapsulate loggers, kept all logging stuff here for now to have them in one place
     ### TODO: split Transformer its sub-tasks: RichEndPoint, Transformation, Science
     loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
-    ntt.init(path, param, comm, comm_receiver, comm_sender, loggers)
+    tnt.init(path, param, comm, comm_receiver, comm_sender, loggers)
     ############
     
     ############ Step 5: RichEndPoint -- close MPI connections

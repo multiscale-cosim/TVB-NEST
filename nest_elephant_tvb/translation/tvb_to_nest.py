@@ -6,7 +6,7 @@ import logging
 import sys
 
 import nest_elephant_tvb.translation.RichEndPoint as REP
-import nest_elephant_tvb.translation.tvb_nest_transformer as tnt
+import nest_elephant_tvb.translation.transformer_tvb_nest as ttn
 
 def create_logger(path,name, log_level):
     # Configure logger
@@ -87,7 +87,8 @@ if __name__ == "__main__":
     ### TODO: encapsulate loggers, kept all logging stuff here for now to have them in one place
     ### TODO: split Transformer its sub-tasks: RichEndPoint, Transformation, Sciences
     ### TODO: looong parameter list. Do this properly after merging with the launcher from Rolando
-    tnt.init(path_config, nb_spike_generator, id_first_spike_detector, param,
+    loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
+    ttn.init(path_config, nb_spike_generator, id_first_spike_detector, param,
             comm, comm_receiver, comm_sender, loggers)
     ############
     

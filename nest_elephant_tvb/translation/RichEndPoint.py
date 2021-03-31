@@ -11,7 +11,6 @@ def make_connections(path_to_files_receive, path_to_files_send, logger_master):
     Currently:
         - either as a 'nest_to_tvb' server, with sender 'nest' and receiver 'tvb'
         - or vice versa
-    The goal is to have a 'transformer' (one for each direction) which CONTAINS a RichEndPoint
     
     :param path_to_files_receive: path to file, store information about receiving MPI connection
     :param path_to_files_send: path to file, store information about sending MPI connection

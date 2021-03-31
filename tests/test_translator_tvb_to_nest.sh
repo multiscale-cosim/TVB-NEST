@@ -28,8 +28,6 @@ echo "${parameter}" >./test_tvb_to_nest/parameter.json
 cp ./init_rates.npy  ./test_tvb_to_nest/init_rates.npy
 
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/tvb_to_nest.py ./test_tvb_to_nest/translation/output/ 0 10 ../input/0.txt&
-# TODO: remove the sleep. Change in 'test_input_ / receive_tvb_to_nest.py' needed.
-sleep 5 # wait for creation of file
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_input_tvb_to_nest.py  ./test_tvb_to_nest/translation/input/0.txt $DELAY &
 $RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_receive_tvb_to_nest.py  ./test_tvb_to_nest/translation/output/0.txt &
 

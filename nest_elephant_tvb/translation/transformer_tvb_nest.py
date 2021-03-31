@@ -13,22 +13,9 @@ lock_status=Lock() # locker for manage the transfer of data from thread
 def init(path_config, nb_spike_generator, id_first_spike_detector, param,
          comm, comm_receiver, comm_sender, loggers):
     '''
-    Initialize the translation with MPI.
+    Initialize the transformation with MPI. This is the TVB to NEST direction.
     NOTE: more information will be added with more changes. This is still the very first version!
-    
-    TODO: IMPORTANT!!! MPI communication on NEST and TVB side is somewhat hardcoded.
-        --> NEST sends to and receives from rank 0 on transformer side. This works here, since rank 0 is the receiving rank
-            --> https://github.com/sdiazpier/nest-simulator/blob/nest-i/nestkernel/recording_backend_mpi.cpp
-            --> line 396 ff (as of Feb 17th, 2021)
-        --> TVB sends and receives from rank 0 on transformer side.
-            --> nest_elephant_tvb/translation/test_file/test_receive_nest_to_tvb.py
-            --> line 32 ff (as of Feb 17th, 2021)
-            --> Here: Rank 1-x are doing analysis/science and sending to TVB
-            --> For now, hardcoded solution. All places with 'rank 0' are replaced with 'rank 1'
-            --> But as soon as we use more than two MPI ranks, this fails again!!!
-    
-    TODO: Renaming! Translator -> transformer, etc.
-    TODO: This is only the Nest to TVB direction. For other direction some generalizing changes will be needed.
+
     TODO: Use RichEndPoints for communication encapsulation
     TODO: Seperate 1)Receive 2)Analysis/Science and 3)Send. See also the many Todos in the code
     TODO: Make use of / enable MPI parallelism! Solve hardcoded communication protocol first
@@ -40,6 +27,25 @@ def init(path_config, nb_spike_generator, id_first_spike_detector, param,
     # TODO: use os.path (or similar) for proper file handling.
     # TODO: move this object creation to a proper place. They are passed through many functions.
     generator = generate_data(path_config+'/../../log/',nb_spike_generator,param)
+    
+    ############ NEW Code: 
+    # TODO: future work: mpi parallel, use rank 1-x for science and sending
+    # TODO: use this MPI intracommunicator, without receiving rank 0
+    # intracomm = comm.Create(comm.Get_group().Excl([0]))
+    # create the shared memory block / databuffer
+    databuffer = _shared_mem_buffer(comm)
+    ############# NEW Code end
+    '''
+    ############ NEW Code: Receive/analyse/send
+    if comm.Get_rank() == 0: # Receiver from NEST, rank 0
+        # TODO: The choice of rank 0 here stems from the current communication with NEST. 
+        # All MPI communication is done with rank 0 from NESt side.
+        # Make this (and the TVB side as well) scalable. 
+        _receive(comm_receiver, databuffer, logger_receive)
+    else: #  Science/analyse and sender to TVB, rank 1-x
+        _send(comm_sender, databuffer, logger_send, store, analyse)
+    ############ NEW Code end
+    '''
     
     ############ OLD Code, to be changed to MPI
     # variable for communication between thread
@@ -61,35 +67,62 @@ def init(path_config, nb_spike_generator, id_first_spike_detector, param,
     logger_master.info('thread join')
     ############# OLD Code end
     
-    '''
-    ############ NEW Code: 
-    # TODO: future work: mpi parallel, use rank 1-x for science and sending
-    # TODO: use this MPI intracommunicator, without receiving rank 0
-    # intracomm = comm.Create(comm.Get_group().Excl([0]))
-    # create the shared memory block / databuffer
-    databuffer = _shared_mem_buffer(comm)
-    ############# NEW Code end
-    
-    ############ NEW Code: Receive/analyse/send
-    if comm.Get_rank() == 0: # Receiver from NEST, rank 0
-        # TODO: The choice of rank 0 here stems from the current communication with NEST. 
-        # All MPI communication is done with rank 0 from NESt side.
-        # Make this (and the TVB side as well) scalable. 
-        _receive(comm_receiver, databuffer, logger_receive)
-    else: #  Science/analyse and sender to TVB, rank 1-x
-        _send(comm_sender, databuffer, logger_send, store, analyse)
-    ############ NEW Code end
-    '''
-    
-    
     ############ NEW Code: disconnect
     # TODO: should this be done here?
     #logger_master.info('Disconnect communicators...')
     #comm_receiver.Disconnect()
     #comm_sender.Disconnect()
     ############ NEW Code end
-    return 
     
+
+def _shared_mem_buffer(comm):
+    '''
+    Create shared memory buffer. MPI One-sided-Communication.
+    :param comm: MPI intra communicator to create the buffer.
+    :return buffer: 1D shared memory buffer array 
+    
+    TODO: Buffersize/max. expected number of events hardcoded
+    -> free param, handle properly!
+    Explanation:
+    -> each package from NEST contains a continuous list of the events of the current simulation step
+    -> the number of events in each package is unknown and not constant
+    -> each event is three doubles: Id_recording_device, neuronID, spiketimes
+    
+    TODO: reshaping of the buffer content is done in the science part
+    -> 1D array to shape (x,3) where x is the number of events.
+    -> this is decided by the nest I/O part, i.e. nest sends out events in 1D array 
+    -> can/should this be more generic?
+    '''
+    datasize = MPI.DOUBLE.Get_size()
+    bufsize = 1000000 * 3 # NOTE: hardcoded (max.expected events per package from nest)
+    if comm.Get_rank() == 0:
+        bufbytes = datasize * bufsize
+    else: 
+        bufbytes= 0
+    # rank 0: create the shared block
+    # rank 1-x: get a handle to it
+    win = MPI.Win.Allocate_shared(bufbytes, datasize, comm=comm)
+    buf, datasize = win.Shared_query(0)
+    assert datasize == MPI.DOUBLE.Get_size()
+    # create a numpy array (buffer) whose data points to the shared mem
+    return np.ndarray(buffer=buf, dtype='d', shape=(bufsize,))
+
+
+# See todo in the beginning, encapsulate I/O, transformer, science parts
+def _receive(comm_receiver, databuffer, logger):
+    '''
+    Receive data on rank 0. Put it into the shared mem buffer.
+    Replaces the former 'receive' function.
+    NOTE: First refactored version -> not pretty, not final. 
+    '''
+    status_ = MPI.Status()
+    num_sending = comm_receiver.Get_remote_size() # how many NEST ranks are sending?
+    
+
+
+# See todo in the beginning, encapsulate I/O, transformer, science parts
+def _send(comm_sender, databuffer, logger, store, analyse):
+    pass
 
 
 def send(logger,id_first_spike_detector,status_data,buffer_spike, comm):
