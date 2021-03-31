@@ -14,6 +14,8 @@ cd "$DIR" || exit
 
 DELAY=100.0
 
+rm  -rd test_tvb_to_nest
+
 mkdir ./test_tvb_to_nest
 mkdir ./test_tvb_to_nest/translation
 mkdir ./test_tvb_to_nest/translation/input/

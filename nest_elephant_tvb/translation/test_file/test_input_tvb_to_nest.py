@@ -14,6 +14,9 @@ def simulate_TVB_output(path,min_delay):
     :param min_delay: the time of one simulation
     :return:
     '''
+    
+    '''
+    ### OLD code...
     max_mpi_connection_attempts = 50
     file_unlock=False
     for attempt in range(max_mpi_connection_attempts):
@@ -26,9 +29,15 @@ def simulate_TVB_output(path,min_delay):
     if file_unlock is False:
         print("Could file not unlocked after 20 attempts, exit");sys.stdout.flush()
         sys.exit (1)
-
+    '''
+    
     # Init connection from file connection
     print("TVB_OUTPUT : Waiting for port details");sys.stdout.flush()
+        
+    while not os.path.exists(path):
+        print ("Port file not found yet, retry in 1 second")
+        time.sleep(1)
+        
     fport = open(path, "r")
     port = fport.readline()
     fport.close()

@@ -4,9 +4,10 @@
 import os
 import json
 import logging
+import sys
 
 import nest_elephant_tvb.translation.RichEndPoint as REP
-import nest_elephant_tvb.translation.mpi_translator as mt
+import nest_elephant_tvb.translation.nest_tvb_transformer as ntt
 
 def create_logger(path,name, log_level):
     # Configure logger
@@ -35,59 +36,57 @@ def create_logger(path,name, log_level):
 
 
 if __name__ == "__main__":
-    import sys
-
+    
+    ############ Step 1: all argument parsing stuff
+    ### TODO: cleanup and proper parsing.
     if len(sys.argv)!=4:
         print('incorrect number of arguments')
         exit(1)
-    
     path = sys.argv[1]
     file_spike_detector = sys.argv[2]
     TVB_recev_file = sys.argv[3]
-    
     # take the parameters and instantiate objects for analysing data
     with open(path+'/parameter.json') as f:
         parameters = json.load(f)
     param = parameters['param_TR_nest_to_tvb']
+    #############
     
-    
-    ############ NEW Code: old logging code copied here for better overview
+    ############ Step 2: init all loggers.
+    ### TODO: use proper logging interface 
+    ### -> https://github.com/multiscale-cosim/TVB-NEST/tree/master/configuration_manager
     level_log = param['level_log']
     id_spike_detector = os.path.splitext(os.path.basename(path+file_spike_detector))[0]
     logger_master = create_logger(path, 'nest_to_tvb_master'+str(id_spike_detector), level_log)
     logger_receive = create_logger(path, 'nest_to_tvb_receive'+str(id_spike_detector), level_log)
     logger_send = create_logger(path, 'nest_to_tvb_send'+str(id_spike_detector), level_log)
-    ############# NEW Code end
+    #############
     
-    
-    ############ NEW Code: FAT END POINT for MPI and new connections
-    ### contains all MPI connection stuff for proper encapsulation
+    ############ Step 3: RichEndPoint -- open MPI connections
     ### TODO: make this a proper interface
     path_to_files_receive = path + file_spike_detector # TODO: use proper path operations
     path_to_files_send = path + TVB_recev_file
     comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
-    ############# NEW Code end
+    #############
     
-    
-    ############ NEW Code: removed threads, used MPI ranks...
-    ### TODO: encapsulate loggers
-    ### kept all logging stuff here for now to have them in one place
+    ############ Step 4: MPI Transformer, init and start the co-simulation
+    ### TODO: encapsulate loggers, kept all logging stuff here for now to have them in one place
+    ### TODO: split Transformer its sub-tasks: RichEndPoint, Transformation, Science
     loggers = [logger_master, logger_receive, logger_send] # list of all the loggers
-    mt.init(path, param, comm, comm_receiver, comm_sender, loggers)
-    ############ NEW Code end
+    ntt.init(path, param, comm, comm_receiver, comm_sender, loggers)
+    ############
     
-    
-    ############ NEW Code: FAT END POINT for MPI and new connections
-    ### contains all MPI connection stuff for proper encapsulation
+    ############ Step 5: RichEndPoint -- close MPI connections
     ### TODO: make this a proper interface
     REP.close_and_finalize(port_send, port_receive,logger_master)
-    ############# NEW Code end
+    ############
     
+    ############ Step 6: cleanup, delete files
+    ### TODO: ugly solution, all MPI ranks want to delete, only the first one can.
     logger_master.info('clean file')
-    # TODO: ugly solution, all MPI ranks want to delete, only the first one can.
     try:
         os.remove(path_to_files_receive)
         os.remove(path_to_files_send)
     except FileNotFoundError:
         pass 
     logger_master.info('end')
+    ############

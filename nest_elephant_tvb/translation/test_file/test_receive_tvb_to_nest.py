@@ -4,6 +4,7 @@
 import numpy as np
 from mpi4py import MPI
 import os
+import time
 
 def simulate_nest_generator(path):
     '''
@@ -11,8 +12,9 @@ def simulate_nest_generator(path):
     :param path: the path to the file for the connections
     :return:
     '''
-    # Init connection
-
+    
+    '''
+    ### OLD Code
     max_mpi_connection_attempts = 50
     file_unlock=False
     for attempt in range(max_mpi_connection_attempts):
@@ -25,9 +27,16 @@ def simulate_nest_generator(path):
     if file_unlock is False:
         print("Could file not unlocked after 20 attempts, exit");sys.stdout.flush()
         sys.exit (1)
-
+    '''
+    
+    # Init connection
     print("Nest_Input:" + path)
     print("Nest_Input :Waiting for port details");sys.stdout.flush()
+    
+    while not os.path.exists(path):
+        print ("Port file not found yet, retry in 1 second")
+        time.sleep(1)
+    
     fport = open(path, "r")
     port=fport.readline()
     fport.close()

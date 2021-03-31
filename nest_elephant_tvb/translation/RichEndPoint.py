@@ -2,6 +2,7 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 from mpi4py import MPI
 import pathlib
+import sys
 
 def make_connections(path_to_files_receive, path_to_files_send, logger_master):
     '''
@@ -45,8 +46,6 @@ def _open_port_accept_connection(comm, root, info, logger_master, path_to_files)
     Therefore only rank 0 opens the port and broadcasts the relevant info to all other ranks.
     So a M:N connection between two MPI applications is possible.
     
-    TODO: better documentation.
-    
     :param comm: the INTRA communicator of the calling application ('server') which opens and accepts the connection
     :param root: the root rank on which the 'main' connection before broadcast in done
     :param info: MPI info object
@@ -58,10 +57,8 @@ def _open_port_accept_connection(comm, root, info, logger_master, path_to_files)
     '''
     logger_master.info('Transformer: before open port')
     if comm.Get_rank() == root:
-        ### Connection to simulation (incoming data)
         port = MPI.Open_port(info)
         logger_master.info('Transformer: after open port, port details:'+port)
-        # Write file configuration of the port
         fport = open(path_to_files, "w+")
         fport.write(port)
         fport.close()
@@ -69,10 +66,12 @@ def _open_port_accept_connection(comm, root, info, logger_master, path_to_files)
         logger_master.info('Transformer: path to file with port info:' + path_to_files)
     else:
         port = None
-    
+    ### NOTE: control print to console.
+    print("RichEndPoint\n -- port opened and file created:", path_to_files,
+          "\n -- I'm rank",comm.Get_rank());sys.stdout.flush()
     # broadcast port info, accept connection on all ranks!
-    # necessary to avoid problems with information about the mpi rank in open port file.
-    port = comm.bcast(port,root) # TODO: ask Lena if this is needed/correct.
+    # necessary to avoid conflicts in the port file -> contains MPI-Rank infos
+    port = comm.bcast(port,root)
     logger_master.info('Transformer: Rank ' + str(comm.Get_rank()) + ' accepting connection on: ' + port)
     intra_comm = comm.Accept(port, info, root) 
     logger_master.info('Transformer: Simulation client connected to' + str(intra_comm.Get_rank()))
