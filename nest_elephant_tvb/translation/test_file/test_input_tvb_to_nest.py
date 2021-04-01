@@ -53,6 +53,9 @@ def simulate_TVB_output(path,min_delay):
             req = comm.irecv(source=0,tag=0)
             accept = req.wait(status_)
         print("TVB_OUTPUT :accepted");sys.stdout.flush()
+        # TODO: the irecv above is from source 0, so 'source = status_.Get_source()' will be 0.
+        # TODO: If the goal was to send from multiple TVB ranks to multiple sources, this needs some work.
+        # TODO: essentially this would be an M:N coupling then
         source = status_.Get_source() # the id of the excepted source
         # create random data
         size= int(min_delay/0.1 )
@@ -65,6 +68,7 @@ def simulate_TVB_output(path,min_delay):
         print("TVB_OUTPUT :send shape : " +str(shape));sys.stdout.flush()
         comm.Send([shape,MPI.INT],dest=source,tag=0)
         print("TVB_OUTPUT :send data : " +str(np.sum(np.sum(data))));sys.stdout.flush()
+        print("TVB_OUTPUT :send data array : ", data.shape);sys.stdout.flush()
         comm.Send([data, MPI.DOUBLE], dest=source, tag=0)
         # print result and go to the next run
         starting+=min_delay

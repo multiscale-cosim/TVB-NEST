@@ -152,7 +152,7 @@ def _receive(comm_receiver, databuffer, logger):
             logger.info("Nest to TVB : receive end " + str(count))
         # TODO: handle properly, all ranks send tag 2?
         elif status_.Get_tag() == 2:
-            logger.info("end simulation")
+            logger.info("NEST: end simulation")
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
@@ -175,7 +175,7 @@ def _send(comm_sender, databuffer, logger, store, analyse):
 
     count=0
     status_ = MPI.Status()
-    while True: # FAT END POINT
+    while True:
         # TODO: this communication has the 'rank 0' problem described in the beginning
         accept = False
         logger.info("Nest to TVB : wait to send " )
