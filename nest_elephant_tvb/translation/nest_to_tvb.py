@@ -4,9 +4,9 @@
 from mpi4py import MPI
 import os
 import json
-from nest_elephant_tvb.translation.Nest_IO import Receiver_Nest_Data
-from nest_elephant_tvb.translation.TVB_IO import Send_TVB_Data
-from nest_elephant_tvb.translation.translation_function import Translation_spike_to_rate
+from nest_elephant_tvb.translation.mpi.Nest_IO import Receiver_Nest_Data
+from nest_elephant_tvb.translation.mpi.TVB_IO import Send_TVB_Data
+from nest_elephant_tvb.translation.mpi.translation_function import Translation_spike_to_rate
 
 
 if __name__ == "__main__":
@@ -28,19 +28,24 @@ if __name__ == "__main__":
     id_spike_detector = os.path.splitext(os.path.basename(path+file_spike_detector))[0]
 
 
-    rank = MPI.COMM_WORLD.Get_rank()
-    if rank == 0:
-        receive_data_from_nest = Receiver_Nest_Data('nest_to_tvb_receive' + str(id_spike_detector),
-                                                    path,level_log,0,buffer_r_w=[2,0])
-        path_to_files_receive = [path + file_spike_detector] # TODO: use proper path operations
-        receive_data_from_nest.run(path_to_files_receive)
-    elif rank == 1:
-        send_data_to_TVB = Send_TVB_Data(2,'nest_to_tvb_send'+str(id_spike_detector),path,level_log,1,buffer_r_w=[2,0])
-        path_to_files_send = [path + TVB_recev_file]
-        send_data_to_TVB.run(path_to_files_send)
-    elif rank == 2:
-        send_data_to_TVB = Translation_spike_to_rate(param,1, 'nest_to_tvb_translate' + str(id_spike_detector), path, level_log, 2,
-                                         buffer_r_w=[2,0])
-        send_data_to_TVB.run(None)
-    else :
-        raise Exception('too much rank')
+    if MPI.COMM_WORLD.Get_size() == 3:
+        rank = MPI.COMM_WORLD.Get_rank()
+        if rank == 0:
+            receive_data_from_nest = Receiver_Nest_Data('nest_to_tvb_receive' + str(id_spike_detector),
+                                                        path,level_log,0,buffer_r_w=[2,0])
+            path_to_files_receive = [path + file_spike_detector] # TODO: use proper path operations
+            receive_data_from_nest.run(path_to_files_receive)
+        elif rank == 1:
+            send_data_to_TVB = Send_TVB_Data(2,'nest_to_tvb_send'+str(id_spike_detector),path,level_log,1,buffer_r_w=[2,0])
+            path_to_files_send = [path + TVB_recev_file]
+            send_data_to_TVB.run(path_to_files_send)
+        elif rank == 2:
+            send_data_to_TVB = Translation_spike_to_rate(param,1, 'nest_to_tvb_translate' + str(id_spike_detector), path, level_log, 2,
+                                             buffer_r_w=[2,0])
+            send_data_to_TVB.run(None)
+        else :
+            raise Exception('too much rank')
+    elif MPI.COMM_WORLD.Get_size() == 1:
+            pass
+    else:
+        raise Exception('BAD number of MPI rank')

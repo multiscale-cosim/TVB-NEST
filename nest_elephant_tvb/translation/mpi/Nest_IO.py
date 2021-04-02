@@ -1,9 +1,21 @@
 from mpi4py import MPI
-from nest_elephant_tvb.translation.mpi_translator import MPI_communication
+from nest_elephant_tvb.translation.mpi.mpi_translator import MPI_communication
 import numpy as np
-import time
 
 class Receiver_Nest_Data(MPI_communication):
+    def ready_to_send_spikes(self):
+        self.logger.info(" Receiver Nest : ready send spikes")
+        self.ready_write_buffer()
+        return self.accept_buffer
+
+    def send_spikes(self):
+        self.logger.info(" Receiver Nest : spike send")
+        self.end_writing()
+
+    def end_send_spikes(self):
+        self.logger.info(" Receiver Nest : end send")
+        self.release_write_buffer()
+
     # See todo in the beginning, encapsulate I/O, transformer, science parts
     def simulation_time(self):
         '''
@@ -11,6 +23,7 @@ class Receiver_Nest_Data(MPI_communication):
         Replaces the former 'receive' function.
         NOTE: First refactored version -> not pretty, not final.
         '''
+        self.logger.info(" Receiver Nest : simulation time")
         status_ = MPI.Status()
         num_sending = self.port_comm.Get_remote_size()  # how many NEST ranks are sending?
         # TODO: It seems the 'check' variable is used to receive tags from NEST, i.e. ready for send...
@@ -21,10 +34,8 @@ class Receiver_Nest_Data(MPI_communication):
         # TODO: the last two buffer entries are used for shared information
         # --> they replace the status_data variable from previous version
         # --> find more elegant solution?
-        send_size = None
-        accept = False
         while (True):
-            self.logger.info(" Nest to TVB : wait all")
+            self.logger.info(" Receiver Nest : loop start : wait all")
 
             # TODO: This is still not correct. We only check for the Tag of the last rank.
             # TODO: IF all ranks send always the same tag in one iteration (simulation step)
@@ -35,10 +46,12 @@ class Receiver_Nest_Data(MPI_communication):
             # TODO: handle properly, all ranks send tag 0?
             if status_.Get_tag() == 0:
                 # ready to write in the buffer
-                self.ready_write_buffer()
-                if not self.accept_buffer:
+                self.logger.info(" Receiver Nest : prepare buffer")
+                ready = self.ready_to_send_spikes()
+                if not ready:
                     break
 
+                self.logger.info(" Receiver Nest : start get data")
                 for source in range(num_sending):
                     # send 'ready' to the nest rank
                     self.port_comm.Send([np.array(True, dtype='b'), MPI.BOOL], dest=source, tag=0)
@@ -52,26 +65,57 @@ class Receiver_Nest_Data(MPI_communication):
                     # Old code: store.add_spikes(count,data)
                     # This increased the workload of this MPI rank.
                     # All science and analysis stuff is moved to the 'sender' part. Because future parallel.
-                self.end_writing()
+                self.logger.info(" Receiver Nest : end receive data")
+                self.send_spikes()
 
             # TODO: handle properly, all ranks send tag 1?
             elif status_.Get_tag() == 1:
                 count += 1
-                self.logger.info("Nest to TVB : receive end " + str(count))
+                self.logger.info("Receiver Nest : receive end " + str(count))
             # TODO: handle properly, all ranks send tag 2?
             elif status_.Get_tag() == 2:
-                self.logger.info("end simulation")
-                self.release_write_buffer()
+                self.logger.info("Receiver Nest : end simulation")
+                self.end_send_spikes()
                 break
             else:
                 raise Exception("bad mpi tag" + str(status_.Get_tag()))
-
-        self.logger.info('NEST_to_TVB: End of receive function')
+        self.logger.info('Receiver Nest : End of receive function')
 
 class Send_Data_to_Nest(MPI_communication):
     def __init__(self,id_first_spike_detector,sender_rank,*arg,**karg):
         super().__init__(*arg,**karg)
+        self.logger.info('Send Nest : init')
         self.id_first_spike_detector = id_first_spike_detector
+        self.logger.info('Send Nest : end init')
+        self.shape_buffer = None
+
+    def get_spikes(self):
+        self.logger.info('Send Nest : spike(get) : begin ')
+        # wait until the data are ready to use
+        self.shape_buffer = self.ready_to_read()
+        if self.shape_buffer[0] == -1:
+            self.logger.info('Send Nest : spike(get) : receive end ')
+            return None
+        self.logger.info('Send Nest : spike(get) : reshape data')
+        spikes_times = []
+        index = 0
+        for nb_spike in self.shape_buffer:
+            self.logger.info(index)
+            spikes_times.append(self.databuffer[index:index + int(nb_spike)])
+            index += int(nb_spike)
+        self.logger.info('Send Nest : spike(get) : end reshape data')
+        self.end_read()
+        self.logger.info('Send Nest : spike(get) : end')
+        return spikes_times
+
+    def release_get_spikes(self):
+        self.logger.info('Send Nest : spike(release)')
+        pass
+
+    def end_get_spikes(self):
+        self.logger.info('Send Nest : spike(end) : begin')
+        self.release_read_buffer(self.shape_buffer)
+        self.logger.info('Send Nest : spike(end) : end')
 
     # See todo in the beginning, encapsulate I/O, transformer, science parts
     def simulation_time(self):
@@ -83,31 +127,23 @@ class Send_Data_to_Nest(MPI_communication):
         :param buffer_spike: the buffer which contains the data (SHARED between thread)
         :return:
         '''
+        self.logger.info('Send Nest : simulation')
         # initialisation variable before the loop
         status_ = MPI.Status()
         source_sending = np.arange(0,self.port_comm.Get_remote_size(),1) # list of all the process for the communication
         check = np.empty(1,dtype='b')
-        req_send = None
         while True: # FAT END POINT
+            self.logger.info('Send Nest : loop start')
             for source in source_sending:
                 self.port_comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
-            self.logger.info(" Get check : status : " +str(status_.Get_tag()))
+            self.logger.info("Send Nest : Get check : status : " +str(status_.Get_tag()))
             if status_.Get_tag() == 0:
-                self.logger.info(" TVB to Nest: start to send ")
-                # wait until the data are ready to use
-                if req_send is not None:
-                    req_send.wait()
-                shape_buffer = self.ready_to_read()
-                if shape_buffer[0] == -1:
+                self.logger.info("Send Nest : start to send ")
+                spikes_times = self.get_spikes()
+                self.logger.info("Send Nest : shape buffer "+str(self.shape_buffer[0]))
+                if self.shape_buffer[0] == -1:
                     break
-                spikes_times = []
-                index = 0
-                for nb_spike in shape_buffer:
-                    self.logger.info(index)
-                    spikes_times.append(self.databuffer[index:index+int(nb_spike)])
-                    index+=int(nb_spike)
-                self.end_read()
-                self.logger.info(" TVB to Nest: spike time")
+                self.logger.info("Send Nest : spike time")
                 # Waiting for some processus ask for receive the spikes
                 for source in source_sending:
                     # receive list ids
@@ -118,7 +154,7 @@ class Send_Data_to_Nest(MPI_communication):
                         self.port_comm.Recv([list_id, size_list, MPI.INT], source=status_.Get_source(), tag=0, status=status_)
                         # Select the good spike train and send it
                         # logger.info(" TVB to Nest:"+str(data))
-                        self.logger.info("rank "+str(source)+" list_id "+str(list_id))
+                        self.logger.info("Send Nest : rank "+str(source)+" list_id "+str(list_id))
                         data = []
                         shape = []
                         for i in list_id:
@@ -130,14 +166,16 @@ class Send_Data_to_Nest(MPI_communication):
                         # secondly send the spikes train
                         data = np.concatenate(data).astype('d')
                         self.port_comm.Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
-                self.logger.info(" end sending:")
+                self.logger.info("Send Nest : end receive data")
+                self.release_get_spikes()
+                self.logger.info("Send Nest : end sending")
             elif  status_.Get_tag() == 1:
                 # ending the update of the all the spike train from one processus
-                self.logger.info(" TVB to Nest end sending ")
+                self.logger.info("Send Nest : end run ")
             elif status_.Get_tag() == 2:
-                self.logger.info(" TVB to Nest end simulation ")
-                self.release_read_buffer(self.size_buffer)
-                self.logger.info(" send false ")
+                self.logger.info("Send Nest : end simulation ")
+                self.end_get_spikes()
+                self.logger.info("Send Nest : send false ")
                 break
             else:
                 raise Exception("bad mpi tag : "+str(status_.Get_tag()))
