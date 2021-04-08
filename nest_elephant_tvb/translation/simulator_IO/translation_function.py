@@ -1,5 +1,4 @@
-from nest_elephant_tvb.translation.mpi.mpi_translator import MPI_communication
-from mpi4py import MPI
+from nest_elephant_tvb.translation.communication.mpi_io_external import MPI_communication_extern
 import numpy as np
 from nest_elephant_tvb.translation.rate_spike import rates_to_spikes
 from quantities import ms,Hz
@@ -16,8 +15,8 @@ def slidding_window(data,width):
     return res.mean(axis=1)
 
 
-class Translation_spike_to_rate(MPI_communication):
-    def __init__(self,param,receiver_rank,*arg,**karg):
+class Translation_spike_to_rate(MPI_communication_extern):
+    def __init__(self,param,*arg,**karg):
         super().__init__(*arg,**karg)
         self.synch=param['synch']                # time of synchronization between 2 run
         self.dt=param['resolution']              # the resolution of the integrator
@@ -25,57 +24,6 @@ class Translation_spike_to_rate(MPI_communication):
         self.width = int(param['width']/param['resolution']) # the window of the average in time
         self.buffer = np.zeros((self.width,))                  #initialisation/ previous result for a good result
         self.coeff = 1 / ( param['nb_neurons'] * self.dt ) # for the mean firing rate in in KHZ
-        self.receiver_rank = receiver_rank
-        self.req_1=None
-        self.req_2=None
-        self.req_check =None
-        self.logger.info('TSR : end init translation')
-
-    def ready_get_spikes(self):
-        self.logger.info('TSR : spike(ready) : ready get spikes')
-        size_buffer = self.ready_to_read()
-        self.logger.info('TSR : spike(ready) : ready to write : ' + str(size_buffer))
-        return size_buffer
-
-    def release_get_spikes(self):
-        self.logger.info('TSR : spike(release) : release get spikes')
-        self.end_read()
-        self.logger.info('TSR : spike(release) : release end')
-
-    def end_get_spikes(self, size_buffer):
-        self.logger.info('TSR : spike(end) : end get spikes')
-        self.release_read_buffer(size_buffer)
-        self.logger.info('TSR : spike(end) :  end')
-
-    def send_time_rate(self,times,data):
-        self.logger.info('TSR :  rate(send) : send time and rate')
-        ready = True
-        if self.req_1 is not None:
-            self.logger.info('TSR :  rate(send) : request time')
-            self.req_1.wait()
-            self.logger.info('TSR :  rate(send) : request date')
-            self.req_2.wait()
-            self.logger.info('TSR :  rate(send) : request check')
-            ready = self.req_check.wait()
-            if not ready:
-                self.logger.info('TSR : rate(send) : end : ' + str(ready))
-                return ready
-        # time of stating and ending step
-        self.logger.info('TSR : rate(send) :  request 1 ')
-        self.req_1 = MPI.COMM_WORLD.isend(times, dest=self.receiver_rank, tag=0)
-        # send the size of the rate
-        self.logger.info('TSR : rate(send) :  request 2 ')
-        self.req_2 = MPI.COMM_WORLD.isend(data, dest=self.receiver_rank, tag=1)
-        self.logger.info('TSR : rate(send) :  request check ')
-        self.req_check = MPI.COMM_WORLD.irecv(source=self.receiver_rank)
-        self.logger.info('TSR : rate(send) :  ready :'+ str(ready))
-        return ready
-
-    def end_send_time_rate(self,ready):
-        self.logger.info('TSR : rate(end) :'+ str(ready))
-        if ready:
-            req_1 = MPI.COMM_WORLD.isend([-1], dest=self.receiver_rank, tag=0)
-        self.logger.info('TSR : rate(end): end')
 
     # See todo in the beginning, encapsulate I/O, transformer, science parts
     def simulation_time(self):
@@ -94,33 +42,33 @@ class Translation_spike_to_rate(MPI_communication):
         TODO: Make this parallel with the INTRA communicator (should be embarrassingly parallel).
         '''
         count = 0
-        ready = False
         while True:
-            size_buffer = self.ready_get_spikes()
-            self.logger.info('TSR : request TVB : ' + str(size_buffer))
-            if size_buffer == -1:
+            self.communication_internal.get_spikes_ready()
+            self.logger.info('TSR : request TVB : ' + str(self.communication_internal.shape_buffer))
+            if self.communication_internal.shape_buffer[0] == -1:
                 self.logger.info('TSR : break')
                 break
 
             # Step 1) take all data from buffer and create histogram
             # second to last index in databuffer denotes how much data there is
-            self.logger.info('TSR : add spikes')
-            hist = self.add_spikes(count,size_buffer,self.databuffer)
-            self.release_get_spikes()
+            self.logger.info('TSR : add spikes '+str(self.communication_internal.shape_buffer[0]))
+            hist = self.add_spikes(count,self.communication_internal.shape_buffer[0],self.communication_internal.databuffer)
+            self.communication_internal.get_spikes_release()
 
             # Step 2) Analyse this data, i.e. calculate rates?
             self.logger.info('TSR : analise')
             times,rate = self.analyse(count,hist)
 
             self.logger.info('TSR : send data')
-            ready = self.send_time_rate(times,rate)
-            self.logger.info('TSR : ready ? ' + str(ready))
-            if not ready:
+            self.communication_internal.send_time_rate(times,rate)
+            self.logger.info('TSR : ready ? ' + str(self.communication_internal.send_time_rate_exit))
+            if self.communication_internal.send_time_rate_exit:
+                self.logger.info('TSR : break 2')
                 break
             count += 1
         self.logger.info('TSR : end methods')
-        self.end_get_spikes(size_buffer)
-        self.end_send_time_rate(ready)
+        self.communication_internal.get_spikes_end()
+        self.communication_internal.send_time_rate_end()
         self.logger.info('TSR : end')
 
 
@@ -135,6 +83,7 @@ class Translation_spike_to_rate(MPI_communication):
         if size_buffer != 0:
             if size_buffer%3 !=0:
                 self.logger.info('TSR : add_spikes : bad shape of data '+str(size_buffer))
+                raise Exception('bad shape of the input ')
             for index_data in range(int(np.rint(size_buffer/3))):
                 index_hist = int(np.rint((buffer[index_data*3+2]-count*self.synch)/self.dt))-1
                 if index_hist>=hist.shape[0] or index_hist <0:
@@ -159,95 +108,42 @@ class Translation_spike_to_rate(MPI_communication):
         return times,data*self.coeff
 
 
-class Translation_rate_to_spike(MPI_communication):
-    def __init__(self,param,sender_rank,nb_spike_generator,*arg,**karg):
+class Translation_rate_to_spike(MPI_communication_extern):
+    def __init__(self,param,nb_spike_generator,*arg,**karg):
         super().__init__(*arg,**karg)
         self.percentage_shared = param['percentage_shared']  # percentage of shared rate between neurons
         self.nb_spike_generator = nb_spike_generator         # number of spike generator
         self.nb_synapse = param['nb_synapses']               # number of synapses by neurons
         self.function_translation = param['function_select'] # choose the function for the translation
         np.random.seed(param['seed'])
-        self.sender_rank = sender_rank
         self.path_init =param['init']
         self.req_send = None
         self.logger.info('TRS : end init translation')
 
-    def get_time_rate(self):
-        self.logger.info('TRS : rate(get) : begin')
-        if self.req_send is not None:
-            self.req_send.wait()
-        self.logger.info('TRS : rate(get) : receive time')
-        req_time = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=0)
-        time_step = req_time.wait()
-        if time_step[0] == -1:
-            self.logger.info('break end sender')
-            return time_step, None
-        self.logger.info('TRS : rate(get) : receive data')
-        req_data = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=1)
-        rate = req_data.wait()
-        self.logger.info('TRS : rate(get) : end')
-        return time_step,rate
-
-    def release_get_time_rate(self):
-        self.logger.info('TRS : rate(release)')
-        self.req_send = MPI.COMM_WORLD.isend(True, dest=self.sender_rank)
-
-    def end_get_time_rate(self,time_step):
-        self.logger.info('TRS : rate(end)')
-        if time_step[0] == -1:
-            self.logger.info('TRS : rate(end) : method by TVB')
-            MPI.COMM_WORLD.isend(False, dest=self.sender_rank)
-
-    def send_spikes(self,spike_trains):
-        self.logger.info('TRS : spike(send) : begin')
-        self.ready_write_buffer()
-        self.logger.info('TRS : spike(send) : buffer')
-        if not self.accept_buffer:
-            return self.accept_buffer
-        self.logger.info('TRS : spike(send) : start spike_trains in buffer')
-        data_shape = []
-        for index, spike_train in enumerate(spike_trains):
-            data_shape.append(len(spike_train))
-            # self.logger.info("TRS : spike times : "+str(index)+" " +str(len(spike_train))+
-            #                  "\n"+str(spike_train))
-        self.logger.info('TRS : spike(send) : '+str(np.concatenate(spike_trains)))
-        data = np.concatenate(spike_trains)
-        self.logger.info('TRS : spike(send) : '+str(data.shape))
-        self.size_buffer = data_shape
-        self.databuffer[:data.shape[0]] = data
-        self.logger.info('TRS : spike(send) : data write')
-        self.end_writing()
-        self.logger.info('TRS : spike(send) : end')
-        return self.accept_buffer
-
-    def release_send_spikes(self):
-        self.logger.info('TRS : spike(release) : begin')
-        self.release_write_buffer()
-        self.logger.info('TRS : spike(release) : end')
 
     def simulation_time(self):
         self.logger.info('TRS : begin sim')
         spike_trains = np.load(self.path_init)
         self.logger.info('TRS : init spike trains')
-        self.send_spikes(spike_trains)
+        self.communication_internal.send_spikes_trains(spike_trains)
         self.logger.info('TRS : send init')
         while True:
             self.logger.info('TRS : star loop')
-            times,rate = self.get_time_rate()
-            if times[0] == -1:
+            times,rate = self.communication_internal.get_time_rate()
+            if self.communication_internal.get_time_rate_exit:
                 self.logger.info('TRS : break end sender')
                 break
-            self.release_get_time_rate()
+            self.communication_internal.get_time_rate_release()
             self.logger.info('TRS : generate spike')
             spike_trains = self.generate_spike(0,times,rate)
             self.logger.info('TRS : send spike train')
-            ready = self.send_spikes(spike_trains)
-            if not ready:
+            self.communication_internal.send_spikes_trains(spike_trains)
+            if self.communication_internal.send_spike_exit:
                 self.logger.info('TRS : break')
                 break
-        self.logger.info('TRS : end method by TVB : '+str(times[0]))
-        self.end_get_time_rate(times)
-        self.release_write_buffer()
+        self.logger.info('TRS : end method by TVB : '+str(self.communication_internal.get_time_rate_exit))
+        self.communication_internal.get_time_rate_end()
+        self.communication_internal.send_spikes_end()
         self.logger.info('TRS : end')
 
     def generate_spike(self,count,time_step,rate):

@@ -1,46 +1,8 @@
 from mpi4py import MPI
-from nest_elephant_tvb.translation.mpi.mpi_translator import MPI_communication
+from nest_elephant_tvb.translation.communication.mpi_io_external import MPI_communication_extern
 import numpy as np
 
-class Send_TVB_Data(MPI_communication):
-    def __init__(self,sender_rank,*arg,**karg):
-        super().__init__(*arg,**karg)
-        self.sender_rank = sender_rank
-        self.req_send = None
-        self.logger.info("Send TVB Data : end init")
-
-    def get_time_rate(self):
-        self.logger.info("Send TVB Data : rate(get) : get time rate")
-        if self.req_send is not None:
-            self.req_send.wait()
-        self.logger.info("Send TVB Data : rate(get) : rate :"+str(self.sender_rank))
-        req_time = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=0)
-        times = req_time.wait()
-        if times[0] == -1:
-            self.logger.info("Send TVB Data : rate(get) : times"+str(self.sender_rank))
-            return times, None
-        req_data = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=1)
-        self.logger.info("Send TVB Data : rate(get) : data request")
-        data = req_data.wait()
-        self.logger.info("Send TVB Data : rate(get) : end")
-        return times,data
-
-    def release_get_time_rate(self):
-        self.logger.info("Send TVB Data : rate(release) : begin")
-        self.req_send = MPI.COMM_WORLD.isend(True, dest=self.sender_rank)
-        self.logger.info("Send TVB Data : rate(release) : end")
-
-    def end_get_time_rate(self):
-        self.logger.info("Send TVB Data : rate(end) : wait time")
-        req_time = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=0)
-        times = req_time.wait()
-        self.logger.info("Send TVB Data : rate(end) : time "+str(times))
-        if times[0] != -1:
-            self.logger.info("Send TVB Data : rate(end) : wait data ")
-            req_data = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=1)
-            data = req_data.wait()
-            self.req_send = MPI.COMM_WORLD.isend(False, dest=self.sender_rank)
-        self.logger.info("Send TVB Data : rate(end) : end ")
+class Send_TVB_Data(MPI_communication_extern):
 
     # See todo in the beginning, encapsulate I/O, transformer, science parts
     def simulation_time(self):
@@ -68,8 +30,8 @@ class Send_TVB_Data(MPI_communication):
             self.logger.info(" Send TVB Data : send data status : " +str(status_.Get_tag()))
             if status_.Get_tag() == 0:
                 self.logger.info("Send TVB Data :  get rate")
-                times, data = self.get_time_rate()
-                if times[0] == -1:
+                times, data = self.communication_internal.get_time_rate()
+                if self.communication_internal.get_time_rate_exit:
                     self.logger.info("Send TVB Data : end")
                     break
 
@@ -89,9 +51,9 @@ class Send_TVB_Data(MPI_communication):
                 ############ OLD Code end
 
                 self.logger.info("Send TVB Data : end send")
-                self.release_get_time_rate()
+                self.communication_internal.get_time_rate_release()
             elif status_.Get_tag() == 1:
-                self.end_get_time_rate()
+                self.communication_internal.get_time_rate_end()
                 self.logger.info("Send TVB Data : end sim")
                 break
             else:
@@ -100,39 +62,7 @@ class Send_TVB_Data(MPI_communication):
         self.logger.info('Send TVB Data : End of send function')
 
 
-class Receive_TVB_Data(MPI_communication):
-    def __init__(self,receiver_rank,*arg,**karg):
-        super().__init__(*arg,**karg)
-        self.receiver_rank = receiver_rank
-        self.req_1 = None
-        self.req_2 = None
-        self.req_check = None
-        self.logger.info("Receive TVB Data : end init")
-
-    def send_time_rate(self,time_step,rate):
-        self.logger.info("Receive TVB Data : rate(send) : init")
-        ready = True
-        if self.req_1 is not None:
-            self.logger.info("Receive TVB Data : rate(send) : wait request")
-            self.req_1.wait()
-            self.req_2.wait()
-            self.logger.info("Receive TVB Data : rate(send) : wait check")
-            ready = self.req_check.wait()
-            if not ready:
-                return ready
-        # time of stating and ending step
-        self.req_1 = MPI.COMM_WORLD.isend(time_step, dest=self.receiver_rank, tag=0)
-        # send the size of the rate
-        self.req_2 = MPI.COMM_WORLD.isend(rate, dest=self.receiver_rank, tag=1)
-        self.logger.info("Receive TVB Data : rate(send) : ask check")
-        self.req_check = MPI.COMM_WORLD.irecv(source=self.receiver_rank)
-        self.logger.info("Receive TVB Data : rate(send) : update buffer")
-        return ready
-
-    def end_send_rate_time(self):
-        self.logger.info("Receive TVB Data : rate(end) : begin")
-        self.req_1 = MPI.COMM_WORLD.isend([-1], dest=self.receiver_rank, tag=0)
-        self.logger.info(" Receive TVB Data : rate(end) : end")
+class Receive_TVB_Data(MPI_communication_extern):
 
     # See todo in the beginning, encapsulate I/O, transformer, science parts
     def simulation_time(self):
@@ -160,13 +90,13 @@ class Receive_TVB_Data(MPI_communication):
                 #  Get the rate
                 rate = np.empty(size[0], dtype='d')
                 self.port_comm.Recv([rate, size[0], MPI.DOUBLE], source=status_.Get_source(), tag=0, status=status_)
-                ready = self.send_time_rate(time_step,rate)
-                if not ready:
-                    self.logger.info('Receive TVB Data : end : ' + str(ready))
+                self.communication_internal.send_time_rate(time_step,rate)
+                if self.communication_internal.send_time_rate_exit:
+                    self.logger.info('Receive TVB Data : end : ' + str(self.communication_internal.send_time_rate_exit))
                     break
             elif status_.Get_tag() == 1:
                 self.logger.info("Receive TVB Data : end ")
-                self.end_send_rate_time()
+                self.communication_internal.send_time_rate_end()
                 self.logger.info("Receive TVB Data : send end ")
                 break
             else:

@@ -5,12 +5,13 @@ from nest_elephant_tvb.utils import create_logger
 
 class MPI_communication_extern:
 
-    def __init__(self,name,path,level_log):
+    def __init__(self,name,path,level_log,communication_intern,**karg):
         self.logger = create_logger(path,name, level_log)
         self.name = name
         self.ports = []
         self.path_ports = []
         self.logger.info('end MPI extern init')
+        self.communication_internal = communication_intern(self.logger,**karg)
 
     def run(self,path_connection):
         if path_connection is not None:
@@ -52,8 +53,13 @@ class MPI_communication_extern:
             MPI.Close_port(port)
         for path in self.path_ports:
             os.remove(path)
+        self.logger.info("close connection : delete file ")
         self.port_comm.Disconnect()
+        self.logger.info("disconnect connection ")
 
     def finalise(self):
         self.logger.info("finalise")
-        MPI.Finalize()
+        end = self.communication_internal.finalise()
+        if end:
+            self.logger.info(" real finalise")
+            MPI.Finalize()
