@@ -11,6 +11,7 @@ import numpy as np
 import copy
 from nest_elephant_tvb.utils import create_logger
 
+
 def run(parameters_file):
     '''
     run the simulation
@@ -20,7 +21,7 @@ def run(parameters_file):
     with open(parameters_file) as f:
         parameters = json.load(f)
 
-    #create the folder for result is not exist
+    # create the folder for result is not exist
     results_path = os.path.join(os.getcwd(),parameters['result_path'])
     # start to create the repertory for the simulation
     if not os.path.exists(results_path):
@@ -42,9 +43,12 @@ def run(parameters_file):
     logger.info('time: '+str(datetime.datetime.now())+' BEGIN SIMULATION \n')
 
     # chose between running on cluster or local pc
-    mpirun = param_co_simulation['mpi'] # example : ['mpirun'] , ['srun','-N','1']
+    mpirun = param_co_simulation['mpi']  # example : ['mpirun'] , ['srun','-N','1']
 
-    processes = [] # process generate for the co-simulation
+    # id of the region of nest of the brain
+    id_proxy = param_co_simulation['id_region_nest']
+
+    processes = []  # process generate for the co-simulation
     if param_co_simulation['co-simulation']:
         # First case : co-simulation
         if not os.path.exists(results_path + '/translation'):
@@ -60,47 +64,46 @@ def run(parameters_file):
         if not os.path.exists(results_path+"/translation/receive_from_tvb/"):
             os.makedirs(results_path+"/translation/receive_from_tvb/")
 
-        id_proxy = param_co_simulation['id_region_nest']
-
-        #Run Nest and take information for the connection between all the mpi process
-        if 'singularity' in param_co_simulation.keys() : # run with singularity image
+        # Run Nest and take information for the connection between all the mpi process
+        if 'singularity' in param_co_simulation.keys() :  # run with singularity image
             argv = mpirun+['-n',str(param_co_simulation['nb_MPI_nest']),'singularity','run',
-                           '--app', 'nest',param_co_simulation['singularity'] ]
-        elif 'sarus' in param_co_simulation.keys(): # run from sarus on a cluster
-            argv = mpirun + ['-n', str(param_co_simulation['nb_MPI_nest'])] + param_co_simulation['sarus'] \
+                           '--app', 'nest', param_co_simulation['singularity']]
+        elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
+            argv = mpirun + ['-n', str(param_co_simulation['nb_MPI_nest'])] + param_co_simulation['sarus']\
                    + ['python3', 'home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
-        elif 'docker' in param_co_simulation.keys(): # run with docker
+        elif 'docker' in param_co_simulation.keys():  # run with docker
             argv = param_co_simulation['docker']+mpirun+['-n',str(param_co_simulation['nb_MPI_nest'])]\
-                   +['python3','home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
-        else: # run local
+                   + ['python3','home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
+        else:  # run local or with slurm
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../Nest/simulation_Zerlaut.py"
             argv = copy.copy(mpirun)
-            argv += ['-n', str(param_co_simulation['nb_MPI_nest']), 'python3', dir_path ]
-        argv+= [ results_path ]
+            argv += ['-n', str(param_co_simulation['nb_MPI_nest']), 'python3', dir_path]
+        argv += [results_path]
         print("Nest start :", argv);sys.stdout.flush()
         processes.append(subprocess.Popen(argv,
-                 # need to check if it's needed or not (doesn't work for me)
-                 stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
-                 ))
+                         # need to check if it's needed or not (doesn't work for me)
+                         stdin=None, stdout=None, stderr=None, close_fds=True, # close the link with parent process
+                         ))
 
         # create translator between Nest to TVB :
         # one by proxy/spikedetector
         nb_mpi_translator = 1 if param_co_simulation['translation_thread'] else 3
         for index in range(len(id_proxy)):
-            if 'singularity' in param_co_simulation.keys() :
-                argv = mpirun+[ '-n',nb_mpi_translator,'singularity', 'run', '--app', 'NEST-TVB',param_co_simulation['singularity']]
-            elif 'docker' in param_co_simulation.keys():
-                argv = param_co_simulation['docker'] + mpirun + ['-n', '3'] + ['python3','home/nest_elephant_tvb/translation/nest_to_tvb.py']
-            elif 'sarus' in param_co_simulation.keys():
-                argv = mpirun + ['-n',nb_mpi_translator] + param_co_simulation['sarus']+['python3','home/nest_elephant_tvb/translation/nest_to_tvb.py']
-            else:
-                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/nest_to_tvb.py"
+            if 'singularity' in param_co_simulation.keys():  # run with singularity image
+                argv = mpirun+['-n',nb_mpi_translator,'singularity', 'run',
+                               '--app', 'NEST-TVB', param_co_simulation['singularity']]
+            elif 'docker' in param_co_simulation.keys():  # run from sarus on a cluster
+                argv = param_co_simulation['docker'] + mpirun + ['-n', '3']\
+                       + ['python3', 'home/nest_elephant_tvb/translation/nest_to_tvb.py']
+            elif 'sarus' in param_co_simulation.keys():  # run with docker
+                argv = mpirun + ['-n', nb_mpi_translator] + param_co_simulation['sarus']\
+                       + ['python3', 'home/nest_elephant_tvb/translation/nest_to_tvb.py']
+            else:  # run local or with slurm
+                dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../translation/nest_to_tvb.py"
                 argv = copy.copy(mpirun)
-                argv +=[ '-n', str(nb_mpi_translator), 'python3', dir_path ]
-            argv+= [ results_path,
-                   str(index),
-                   ]
-            print("Translator nest to tvb start : ",argv);sys.stdout.flush()
+                argv += ['-n', str(nb_mpi_translator), 'python3', dir_path]
+            argv += [results_path, str(index)]
+            print("Translator nest to tvb start : ", argv);sys.stdout.flush()
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
                              stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
@@ -109,41 +112,41 @@ def run(parameters_file):
         # create translator between TVB to Nest:
         # one by proxy/id_region
         for index in range(len(id_proxy)):
-            if 'singularity' in param_co_simulation.keys() :
-                argv = mpirun+['-n',nb_mpi_translator,'singularity', 'run', '--app', 'TVB-NEST',param_co_simulation['singularity']]
-            elif 'sarus' in param_co_simulation.keys():
-                argv = mpirun + ['-n',nb_mpi_translator] + param_co_simulation['sarus'] +['python3','home/nest_elephant_tvb/translation/tvb_to_nest.py']
-            elif 'docker' in param_co_simulation.keys():
-                argv = param_co_simulation['docker'] + mpirun + ['-n', '3'] + ['python3','home/nest_elephant_tvb/translation/tvb_to_nest.py']
-            else:
-                dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/tvb_to_nest.py"
+            if 'singularity' in param_co_simulation.keys() :  # run with singularity image
+                argv = mpirun+['-n', nb_mpi_translator, 'singularity', 'run',
+                               '--app', 'TVB-NEST', param_co_simulation['singularity']]
+            elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
+                argv = mpirun + ['-n',nb_mpi_translator] + param_co_simulation['sarus']\
+                       + ['python3', 'home/nest_elephant_tvb/translation/tvb_to_nest.py']
+            elif 'docker' in param_co_simulation.keys():  # run with docker
+                argv = param_co_simulation['docker'] + mpirun + ['-n', '3']\
+                       + ['python3', 'home/nest_elephant_tvb/translation/tvb_to_nest.py']
+            else:  # run local or with slurm
+                dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../translation/tvb_to_nest.py"
                 argv = copy.copy(mpirun)
-                argv += ['-n', str(nb_mpi_translator), 'python3',  dir_path ]
-            argv += [
-                   results_path,
-                   str(index)
-                   ]
+                argv += ['-n', str(nb_mpi_translator), 'python3',  dir_path]
+            argv += [results_path, str(index)]
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
                              stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
                              ))
+            print("Translator tvb to nest start : ", argv);sys.stdout.flush()
 
         # Run TVB in co-simulation
-        if 'singularity' in param_co_simulation.keys():
+        if 'singularity' in param_co_simulation.keys():  # run with singularity image
             argv = mpirun + ['-n', '1', 'singularity', 'run', '--app', 'TVB', param_co_simulation['singularity']]
-        elif 'sarus' in param_co_simulation.keys():
-            argv = mpirun + ['-n', '1'] + param_co_simulation['sarus'] + ['python3',
-                                                                          'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
-        elif 'docker' in param_co_simulation.keys():
-            argv = param_co_simulation['docker'] + mpirun + ['-n', '1'] + ['python3',
-                                                                           'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
-        else:
+        elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
+            argv = mpirun + ['-n', '1'] + param_co_simulation['sarus']\
+                   + ['python3', 'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
+        elif 'docker' in param_co_simulation.keys():  # run with docker
+            argv = param_co_simulation['docker'] + mpirun + ['-n', '1']\
+                   + ['python3', 'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
+        else:  # run local or with slurm
             dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../Tvb/simulation_Zerlaut.py"
             argv = copy.copy(mpirun)
             argv += ['-n', '1', "python3", dir_path]
         argv += [results_path]
-        print("TVB start : ", argv);
-        sys.stdout.flush()
+        print("TVB start : ", argv); sys.stdout.flush()
         processes.append(subprocess.Popen(argv,
                                           # need to check if it's needed or not (doesn't work for me)
                                           stdin=None, stdout=None, stderr=None, close_fds=True,
@@ -174,12 +177,12 @@ def run_exploration(results_path,parameter_default,dict_variable,begin,end):
         os.makedirs(newpath)
     else:
         try:
-            os.remove(newpath + '/parameter.py') # use it for synchronise all mpi the beginning
+            os.remove(newpath + '/parameter.py')  # use it for synchronise all mpi the beginning
         except OSError:
             pass
     # generate and save parameter for the  simulation
-    parameters = generate_parameter(parameter_default,results_path,dict_variable)
-    save_parameter(parameters,results_path,begin,end)
+    parameters = generate_parameter(parameter_default, results_path, dict_variable)
+    save_parameter(parameters, results_path, begin, end)
     # check if the file is available
     while not os.path.exists(results_path + '/parameter.json'):
         time.sleep(1)
@@ -196,14 +199,15 @@ def run_exploration_2D(path,parameter_default,dict_variables,begin,end):
     :param end: when end the recording simulation and the simulation
     :return:
     """
-    name_variable_1,name_variable_2 = dict_variables.keys()
+    name_variable_1, name_variable_2 = dict_variables.keys()
     print(path)
-    for variable_1 in  dict_variables[name_variable_1]:
-        for variable_2 in  dict_variables[name_variable_2]:
+    for variable_1 in dict_variables[name_variable_1]:
+        for variable_2 in dict_variables[name_variable_2]:
             # try:
             print('SIMULATION : '+name_variable_1+': '+str(variable_1)+' '+name_variable_2+': '+str(variable_2))
             results_path=path+'_'+name_variable_1+'_'+str(variable_1)+'_'+name_variable_2+'_'+str(variable_2)
-            run_exploration(results_path,parameter_default,{name_variable_1:variable_1,name_variable_2:variable_2},begin,end)
+            run_exploration(results_path, parameter_default, {name_variable_1: variable_1, name_variable_2: variable_2},
+                            begin, end)
             # except:
             #     sys.stderr.write('time: '+str(datetime.datetime.now())+' error: ERROR in simulation \n')
 
@@ -374,6 +378,7 @@ def save_parameter(parameters,results_path,begin,end):
     f.write('"end":' + str(end) + "\n")
     f.write("}")
     f.close()
+
 
 if __name__ == "__main__":
     if len(sys.argv)==2:
