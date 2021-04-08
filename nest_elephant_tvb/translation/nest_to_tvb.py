@@ -4,6 +4,9 @@
 from mpi4py import MPI
 import os
 import json
+import time
+import numpy as np
+from nest_elephant_tvb.utils import create_logger
 from nest_elephant_tvb.translation.simulator_IO.Nest_IO import Receiver_Nest_Data
 from nest_elephant_tvb.translation.simulator_IO.TVB_IO import Send_TVB_Data
 from nest_elephant_tvb.translation.simulator_IO.translation_function import Translation_spike_to_rate
@@ -14,24 +17,39 @@ from nest_elephant_tvb.translation.communication.internal_thread import Thread_c
 if __name__ == "__main__":
     import sys
 
-    if len(sys.argv)!=4:
+    if len(sys.argv)!=3:
         print('incorrect number of arguments')
         exit(1)
     
     path = sys.argv[1]
-    file_spike_detector = sys.argv[2]
-    TVB_recev_file = sys.argv[3]
-    
+    id_translator = int(sys.argv[2])
+
     # take the parameters and instantiate objects for analysing data
     with open(path+'/parameter.json') as f:
         parameters = json.load(f)
+    id_proxy = parameters['param_co_simulation']['id_region_nest']
     param = parameters['param_TR_nest_to_tvb']
     level_log = param['level_log']
+    logger = create_logger(path,'nest_to_tvb_'+str(id_translator),level_log)
+    rank = MPI.COMM_WORLD.Get_rank()
+
+    while not os.path.exists(path + '/nest/spike_detector.txt.unlock'):
+        logger.info("spike detector ids not found yet, retry in 1 second")
+        time.sleep(1)
+    spike_detector = np.loadtxt(path + '/nest/spike_detector.txt', dtype=int)
+    # case of one spike detector
+    try:
+        spike_detector = np.array([int(spike_detector)])
+    except:
+        pass
+
+    id_spike_detector = spike_detector[id_translator]
+    file_spike_detector = "/translation/spike_detector/" + str(id_spike_detector) + ".txt"
+    TVB_recev_file = "/translation/send_to_tvb/" + str(id_proxy[id_translator]) + ".txt"
     id_spike_detector = os.path.splitext(os.path.basename(path+file_spike_detector))[0]
 
 
     if MPI.COMM_WORLD.Get_size() == 3:
-        rank = MPI.COMM_WORLD.Get_rank()
         if rank == 0:
             receive_data_from_nest = Receiver_Nest_Data('nest_to_tvb_receive' + str(id_spike_detector),
                                                         path,level_log,
@@ -86,3 +104,6 @@ if __name__ == "__main__":
         th_send.join()
     else:
         raise Exception('BAD number of MPI rank')
+
+    if id_translator == 1 and rank == 1:
+        os.remove(path + '/nest/spike_detector.txt.unlock')

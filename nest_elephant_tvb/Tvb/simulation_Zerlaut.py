@@ -447,12 +447,7 @@ def run_normal(path_parameter):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==3:
-        if sys.argv[1] == '0': # run only tvb without mpi
-            run_normal(sys.argv[2])
-        elif sys.argv[1] == '1': # run tvb in co-simulation configuration
-            run_mpi(sys.argv[2])
-        else:
-            raise Exception('bad option of running')
+    if len(sys.argv)==2:
+        run_mpi(sys.argv[1])
     else:
         raise Exception('not good number of argument ')

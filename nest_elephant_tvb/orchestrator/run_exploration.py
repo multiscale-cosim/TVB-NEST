@@ -76,57 +76,17 @@ def run(parameters_file):
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../Nest/simulation_Zerlaut.py"
             argv = copy.copy(mpirun)
             argv += ['-n', str(param_co_simulation['nb_MPI_nest']), 'python3', dir_path ]
-        argv+= [ str(1), results_path ]
+        argv+= [ results_path ]
         print("Nest start :", argv);sys.stdout.flush()
         processes.append(subprocess.Popen(argv,
                  # need to check if it's needed or not (doesn't work for me)
                  stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
                  ))
-        while not os.path.exists(results_path+'/nest/spike_generator.txt.unlock'):
-            logger.info("spike generator ids not found yet, retry in 1 second")
-            time.sleep(1)
-        os.remove(results_path+'/nest/spike_generator.txt.unlock')
-        spike_generator = np.loadtxt(results_path+'/nest/spike_generator.txt',dtype=int)
-        while not os.path.exists(results_path+'/nest/spike_detector.txt.unlock'):
-            logger.info("spike detector ids not found yet, retry in 1 second")
-            time.sleep(1)
-        os.remove(results_path+'/nest/spike_detector.txt.unlock')
-        spike_detector = np.loadtxt(results_path+'/nest/spike_detector.txt',dtype=int)
-        # case of one spike detector
-        try :
-            spike_detector = np.array([int(spike_detector)])
-            spike_generator = np.expand_dims(spike_generator,0)
-        except:
-            pass
-
-        # print ids of nest population
-        print("Ids of different populations of Nest :\n")
-        f = open(results_path+'/nest/population_GIDs.dat', 'r')
-        print(f.read())
-        f.close()
-
-        # Run TVB in co-simulation
-        if 'singularity' in param_co_simulation.keys()  :
-            argv = mpirun + ['-n','1','singularity','run', '--app', 'TVB',param_co_simulation['singularity']]
-        elif 'sarus' in param_co_simulation.keys():
-            argv = mpirun + ['-n', '1'] + param_co_simulation['sarus'] + ['python3', 'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
-        elif 'docker' in param_co_simulation.keys():
-            argv =  param_co_simulation['docker']+mpirun + ['-n','1'] +['python3','home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
-        else:
-            dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../Tvb/simulation_Zerlaut.py"
-            argv = copy.copy(mpirun)
-            argv += ['-n', '1', "python3", dir_path ]
-        argv += [ str(1), results_path ]
-        print("TVB start : ",argv);sys.stdout.flush()
-        processes.append(subprocess.Popen(argv,
-                         # need to check if it's needed or not (doesn't work for me)
-                         stdin=None, stdout=None, stderr=None, close_fds=True,  # close the link with parent process
-                         ))
 
         # create translator between Nest to TVB :
         # one by proxy/spikedetector
         nb_mpi_translator = 1 if param_co_simulation['translation_thread'] else 3
-        for index,id_spike_detector in enumerate(spike_detector):
+        for index in range(len(id_proxy)):
             if 'singularity' in param_co_simulation.keys() :
                 argv = mpirun+[ '-n',nb_mpi_translator,'singularity', 'run', '--app', 'NEST-TVB',param_co_simulation['singularity']]
             elif 'docker' in param_co_simulation.keys():
@@ -138,8 +98,7 @@ def run(parameters_file):
                 argv = copy.copy(mpirun)
                 argv +=[ '-n', str(nb_mpi_translator), 'python3', dir_path ]
             argv+= [ results_path,
-                   "/translation/spike_detector/"+str(id_spike_detector)+".txt",
-                   "/translation/send_to_tvb/"+str(id_proxy[index])+".txt",
+                   str(index),
                    ]
             print("Translator nest to tvb start : ",argv);sys.stdout.flush()
             processes.append(subprocess.Popen(argv,
@@ -149,7 +108,7 @@ def run(parameters_file):
 
         # create translator between TVB to Nest:
         # one by proxy/id_region
-        for index,ids_spike_generator in enumerate(spike_generator):
+        for index in range(len(id_proxy)):
             if 'singularity' in param_co_simulation.keys() :
                 argv = mpirun+['-n',nb_mpi_translator,'singularity', 'run', '--app', 'TVB-NEST',param_co_simulation['singularity']]
             elif 'sarus' in param_co_simulation.keys():
@@ -161,15 +120,35 @@ def run(parameters_file):
                 argv = copy.copy(mpirun)
                 argv += ['-n', str(nb_mpi_translator), 'python3',  dir_path ]
             argv += [
-                   results_path+"/translation/spike_generator/",
-                   str(ids_spike_generator[0]),
-                   str(len(ids_spike_generator)),
-                   "/../receive_from_tvb/"+str(id_proxy[index])+".txt",
+                   results_path,
+                   str(index)
                    ]
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
                              stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
                              ))
+
+        # Run TVB in co-simulation
+        if 'singularity' in param_co_simulation.keys():
+            argv = mpirun + ['-n', '1', 'singularity', 'run', '--app', 'TVB', param_co_simulation['singularity']]
+        elif 'sarus' in param_co_simulation.keys():
+            argv = mpirun + ['-n', '1'] + param_co_simulation['sarus'] + ['python3',
+                                                                          'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
+        elif 'docker' in param_co_simulation.keys():
+            argv = param_co_simulation['docker'] + mpirun + ['-n', '1'] + ['python3',
+                                                                           'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
+        else:
+            dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../Tvb/simulation_Zerlaut.py"
+            argv = copy.copy(mpirun)
+            argv += ['-n', '1', "python3", dir_path]
+        argv += [results_path]
+        print("TVB start : ", argv);
+        sys.stdout.flush()
+        processes.append(subprocess.Popen(argv,
+                                          # need to check if it's needed or not (doesn't work for me)
+                                          stdin=None, stdout=None, stderr=None, close_fds=True,
+                                          # close the link with parent process
+                                          ))
     else:
         raise Exception('not implemented see the main project')
 
