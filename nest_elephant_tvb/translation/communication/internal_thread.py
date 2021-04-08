@@ -52,6 +52,10 @@ class Thread_communication(CommunicationInternAbstract):
 
     def release_write_buffer(self):
         self.logger.info('Thread : release write buffer '+str(self.status_write[0][0]))
+        while self.status_write[0][0] >= 0:
+            # self.logger.info('Thread : statut '+str(self.status_write[0][0]))
+            time.sleep(0.001)
+            pass
         with self.lock_write:
                 self.status_write[0][0] = -1
         self.logger.info('Thread : release write buffer end '+str(self.status_write[0][0]))
@@ -75,6 +79,10 @@ class Thread_communication(CommunicationInternAbstract):
 
     def release_read_buffer(self):
         self.logger.info('Thread : release read buffer '+str(self.status_read[0][0]))
+        while self.status_read[0][0] == -2: # FAT END POINT
+            # self.logger.info('Thread : statut '+str(self.status_read[0][0]))
+            time.sleep(0.001)
+            pass
         with self.lock_read:
             self.status_read[0][0] = -1
         self.logger.info('Thread : release read buffer unlock '+str(self.status_read[0][0]))
