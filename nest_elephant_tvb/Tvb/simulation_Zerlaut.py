@@ -13,8 +13,9 @@ from mpi4py import MPI
 import os
 import json
 import time
-import nest_elephant_tvb.Tvb.modify_tvb.noise as my_noise
-import nest_elephant_tvb.Tvb.modify_tvb.Zerlaut as Zerlaut
+from nest_elephant_tvb.utils import create_logger
+from nest_elephant_tvb.Tvb.modify_tvb import noise as my_noise
+from nest_elephant_tvb.Tvb.modify_tvb import Zerlaut as Zerlaut
 from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import Interface_co_simulation
 from nest_elephant_tvb.Tvb.helper_function_zerlaut import findVec
 
@@ -233,26 +234,7 @@ def run_mpi(path):
     end = parameters['end']
 
     # configuration of the logger
-    logger = logging.getLogger('tvb')
-    fh = logging.FileHandler(path + '/log/tvb.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if param_co_simulation['level_log'] == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  param_co_simulation['level_log'] == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  param_co_simulation['level_log'] == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  param_co_simulation['level_log'] == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  param_co_simulation['level_log'] == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
+    logger = create_logger(path,'tvb',param_co_simulation['level_log'])
 
     #initialise the TVB
     param_tvb_monitor['path_result']=result_path+'/tvb/'

@@ -6,9 +6,10 @@ import os
 import sys
 import json
 import subprocess
-import logging
 import time
 import numpy as np
+import copy
+from nest_elephant_tvb.utils import create_logger
 
 def run(parameters_file):
     '''
@@ -36,26 +37,7 @@ def run(parameters_file):
 
     # configuration of the logger
     level_log = param_co_simulation['level_log']
-    logger = logging.getLogger('orchestrator')
-    fh = logging.FileHandler(results_path + '/log/orchestrator.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if level_log == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif  level_log == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif  level_log == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif  level_log == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif  level_log == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
+    logger = create_logger(results_path, 'orchestrator', level_log)
 
     logger.info('time: '+str(datetime.datetime.now())+' BEGIN SIMULATION \n')
 
@@ -81,27 +63,21 @@ def run(parameters_file):
         id_proxy = param_co_simulation['id_region_nest']
 
         #Run Nest and take information for the connection between all the mpi process
-        if 'singularity' in param_co_simulation.keys() :
-            argv = mpirun+['-n',str(param_co_simulation['nb_MPI_nest']),'singularity','run', '--app', 'nest',param_co_simulation['singularity'] ]
-        elif 'sarus' in param_co_simulation.keys():
-            argv = mpirun + ['-n', str(param_co_simulation['nb_MPI_nest'])] + param_co_simulation['sarus'] + [
-                'python3', 'home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
-        elif 'docker' in param_co_simulation.keys():
-            argv = param_co_simulation['docker']+mpirun+['-n',str(param_co_simulation['nb_MPI_nest'])]+['python3','home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
-        else:
+        if 'singularity' in param_co_simulation.keys() : # run with singularity image
+            argv = mpirun+['-n',str(param_co_simulation['nb_MPI_nest']),'singularity','run',
+                           '--app', 'nest',param_co_simulation['singularity'] ]
+        elif 'sarus' in param_co_simulation.keys(): # run from sarus on a cluster
+            argv = mpirun + ['-n', str(param_co_simulation['nb_MPI_nest'])] + param_co_simulation['sarus'] \
+                   + ['python3', 'home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
+        elif 'docker' in param_co_simulation.keys(): # run with docker
+            argv = param_co_simulation['docker']+mpirun+['-n',str(param_co_simulation['nb_MPI_nest'])]\
+                   +['python3','home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
+        else: # run local
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../Nest/simulation_Zerlaut.py"
-            argv=[
-                mpirun[0],
-                '-n',
-                str(param_co_simulation['nb_MPI_nest']),
-                'python3',
-                dir_path
-            ]
-        argv+= [
-            str(1),
-            results_path,
-        ]
-        print(argv);sys.stdout.flush()
+            argv = copy.copy(mpirun)
+            argv += ['-n', str(param_co_simulation['nb_MPI_nest']), 'python3', dir_path ]
+        argv+= [ str(1), results_path ]
+        print("Nest start :", argv);sys.stdout.flush()
         processes.append(subprocess.Popen(argv,
                  # need to check if it's needed or not (doesn't work for me)
                  stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
@@ -138,18 +114,10 @@ def run(parameters_file):
             argv =  param_co_simulation['docker']+mpirun + ['-n','1'] +['python3','home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
         else:
             dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../Tvb/simulation_Zerlaut.py"
-            argv = [
-                mpirun[0],
-                '-n',
-                '1',
-                "python3",
-                dir_path,
-            ]
-        argv+= [
-            str(1),
-            results_path,
-        ]
-        print(argv);sys.stdout.flush()
+            argv = copy.copy(mpirun)
+            argv += ['-n', '1', "python3", dir_path ]
+        argv += [ str(1), results_path ]
+        print("TVB start : ",argv);sys.stdout.flush()
         processes.append(subprocess.Popen(argv,
                          # need to check if it's needed or not (doesn't work for me)
                          stdin=None, stdout=None, stderr=None, close_fds=True,  # close the link with parent process
@@ -167,19 +135,13 @@ def run(parameters_file):
                 argv = mpirun + ['-n',nb_mpi_translator] + param_co_simulation['sarus']+['python3','home/nest_elephant_tvb/translation/nest_to_tvb.py']
             else:
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/nest_to_tvb.py"
-                argv=[
-                    mpirun[0],
-                    '-n',
-                    str(nb_mpi_translator),
-                    'python3',
-                    dir_path,
-                       ]
-            argv+= [
-                   results_path,
+                argv = copy.copy(mpirun)
+                argv +=[ '-n', str(nb_mpi_translator), 'python3', dir_path ]
+            argv+= [ results_path,
                    "/translation/spike_detector/"+str(id_spike_detector)+".txt",
                    "/translation/send_to_tvb/"+str(id_proxy[index])+".txt",
                    ]
-            print(argv);sys.stdout.flush()
+            print("Translator nest to tvb start : ",argv);sys.stdout.flush()
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
                              stdin=None,stdout=None,stderr=None,close_fds=True, #close the link with parent process
@@ -196,14 +158,9 @@ def run(parameters_file):
                 argv = param_co_simulation['docker'] + mpirun + ['-n', '3'] + ['python3','home/nest_elephant_tvb/translation/tvb_to_nest.py']
             else:
                 dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/tvb_to_nest.py"
-                argv=[
-                   mpirun[0],
-                       '-n',
-                       str(nb_mpi_translator),
-                       'python3',
-                       dir_path,
-                       ]
-            argv+= [
+                argv = copy.copy(mpirun)
+                argv += ['-n', str(nb_mpi_translator), 'python3',  dir_path ]
+            argv += [
                    results_path+"/translation/spike_generator/",
                    str(ids_spike_generator[0]),
                    str(len(ids_spike_generator)),
@@ -218,7 +175,6 @@ def run(parameters_file):
 
     # FAT END POINT : add monitoring of the different process
     for process in processes:
-
         process.wait()
     logger.info('time: '+str(datetime.datetime.now())+' END SIMULATION \n')
 

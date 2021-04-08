@@ -6,7 +6,7 @@ import numpy as np
 import os
 import time
 import json
-import logging
+from nest_elephant_tvb.utils import create_logger
 import pathlib
 
 def network_initialisation(results_path,param_nest):
@@ -561,26 +561,7 @@ def run_mpi(path_parameter):
     level_log = param_co_simulation['level_log']
 
     # configuration of the logger
-    logger = logging.getLogger('nest')
-    fh = logging.FileHandler(path_parameter + '/log/nest.log')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-    if level_log == 0:
-        fh.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
-    elif level_log == 1:
-        fh.setLevel(logging.INFO)
-        logger.setLevel(logging.INFO)
-    elif level_log == 2:
-        fh.setLevel(logging.WARNING)
-        logger.setLevel(logging.WARNING)
-    elif level_log == 3:
-        fh.setLevel(logging.ERROR)
-        logger.setLevel(logging.ERROR)
-    elif level_log == 4:
-        fh.setLevel(logging.CRITICAL)
-        logger.setLevel(logging.CRITICAL)
+    logger = create_logger(path_parameter,'nest',level_log)
 
     # initialise Nest
     logger.info('configuration Nest')
