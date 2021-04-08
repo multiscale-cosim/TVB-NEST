@@ -164,7 +164,7 @@ class Thread_communication(CommunicationInternAbstract):
             self.get_time_rate_exit = True
             return [self.shape_buffer], None
         times = self.buffer_read_data[0][0]
-        self.logger.info("Thread : rate(get) : data request")
+        self.logger.info("Thread : rate(get) : data request : time :"+str(times))
         rate = self.buffer_read_data[0][1]
         self.logger.info("Thread : rate(get) : end")
         return times,rate

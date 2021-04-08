@@ -24,7 +24,8 @@ param_co_simulation={
     # level of log : debug 0, info 1, warning 2, error 3, critical 4
     'level_log':1,
     # if running in cluster:
-    'cluster':False
+    'mpi':['mpirun'],
+    'translation_thread': 1
 }
 
 #parameter simulators

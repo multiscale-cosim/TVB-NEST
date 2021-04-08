@@ -59,7 +59,7 @@ if __name__ == "__main__":
         import numpy as np
         receive_data_to_TVB = Receive_TVB_Data('tvb_to_nest_receiver'+str(id_first_spike_detector),path,level_log,
                                                     communication_intern=Thread_communication,
-                                                    buffer_write_status=np.ones(1),
+                                                    buffer_write_status=np.ones(1)*-2,
                                                     buffer_write_shape=(2,2),
                                                )
         path_to_files_receive = [path_config + TVB_config]
