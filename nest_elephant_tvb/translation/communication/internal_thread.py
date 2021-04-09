@@ -24,6 +24,16 @@ class Thread_communication(CommunicationInternAbstract):
     def __init__(self, logger=None,
                  buffer_write_shape=None, buffer_write_type=np.float, buffer_write_status=None,
                  buffer_read=None, status_read=None, lock_read=None):
+        """
+        initialisation of the thread
+        :param logger: logger for the communication
+        :param buffer_write_shape: shape of the buffer
+        :param buffer_write_type: datatype of buffer
+        :param buffer_write_status: initialisation of the status of buffer
+        :param buffer_read: variable of the shared writing buffer
+        :param status_read: status of a writing buffer
+        :param lock_read: locker of a writing buffer
+        """
         super().__init__(logger=logger)
         # set variable if reading buffer is used
         if buffer_read is not None and status_read is not None and lock_read is not None:
@@ -184,7 +194,7 @@ class Thread_communication(CommunicationInternAbstract):
             self.logger.info('Thread : spike(get) : receive end ')
             return None
         self.logger.info('Thread : spike(get) : reshape data')
-        # reshape the data for use by the communicator with the simulator
+        # reshape the data for usage by the communicator with the simulator
         spikes_times = []
         index = 0
         for nb_spike in self.shape_buffer:
