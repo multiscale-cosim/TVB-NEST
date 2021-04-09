@@ -5,7 +5,6 @@ from elephant.spike_train_generation import homogeneous_poisson_process, inhomog
 from elephant.statistics import mean_firing_rate
 import numpy as np
 from neo import AnalogSignal
-from quantities import Hz
 
 def rates_to_spikes( rates, t_start, t_stop, variation=False):
     """
