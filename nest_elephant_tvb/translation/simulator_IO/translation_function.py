@@ -12,6 +12,12 @@ class Translation_spike_to_rate(MPI_communication_extern):
     Class for the translation between spike to rate
     """
     def __init__(self, param, *arg, **karg):
+        """
+        translation object from spikes to rate
+        :param param: parameter of the translation function
+        :param arg: parameters
+        :param karg: other parameters
+        """
         super().__init__(*arg, **karg)
         self.synch = param['synch']                # time of synchronization between 2 run
         self.dt = param['resolution']              # the resolution of the integrator
@@ -109,6 +115,13 @@ class Translation_rate_to_spike(MPI_communication_extern):
     Class for the translation between rate to spike
     """
     def __init__(self, param, nb_spike_generator, *arg, **karg):
+        """
+        translation from rate to spike trains
+        :param param: parameter for the translation function
+        :param nb_spike_generator: number of spike generator
+        :param arg: parameters
+        :param karg: other parameters
+        """
         super().__init__(*arg, **karg)
         self.percentage_shared = param['percentage_shared']   # percentage of shared rate between neurons
         self.nb_spike_generator = nb_spike_generator          # number of spike generator

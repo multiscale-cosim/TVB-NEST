@@ -77,6 +77,12 @@ class Send_Data_to_Nest(MPI_communication_extern):
     """
 
     def __init__(self, id_first_spike_detector, *arg, **karg):
+        """
+        Consume dat/spikes trains from Nest
+        :param id_first_spike_detector: id of the first spike detector
+        :param arg: other parameters
+        :param karg: other parameters
+        """
         super().__init__(*arg, **karg)
         self.id_first_spike_detector = id_first_spike_detector
         self.logger.info('Send Nest : end init')

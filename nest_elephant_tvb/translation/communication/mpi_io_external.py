@@ -13,6 +13,14 @@ class MPI_communication_extern:
     Management of MPI communication for exchange of data with simulator.
     """
     def __init__(self, name, path, level_log, communication_intern, **karg):
+        """
+        Initialisation of the MPI communication
+        :param name: name of the module
+        :param path: path of the port
+        :param level_log: level of the logger
+        :param communication_intern: internal communication
+        :param karg: other parameter
+        """
         self.logger = create_logger(path, name, level_log)
         self.name = name  # name of module
         self.ports = []  # array to save the MPI port

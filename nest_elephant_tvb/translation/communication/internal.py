@@ -8,6 +8,11 @@ class CommunicationInternAbstract:
     """
 
     def __init__(self, logger=None):
+        """
+        Initialisation of the communication intern
+        here: definition of the logger
+        :param logger: logger for the internal communication
+        """
         if logger is None:
             raise Exception('Internal Communication : missing logger for the internal communication')
         self.logger = logger

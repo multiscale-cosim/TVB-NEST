@@ -218,6 +218,7 @@ class Thread_communication(CommunicationInternAbstract):
         self.release_read_buffer()
         self.logger.info('Thread : spike(end) : end')
 
+    # Section 2 : rate and time exchange
     def get_time_rate(self):
         """
         see super class
