@@ -19,7 +19,7 @@ class MPI_communication(CommunicationInternAbstract):
         :param receiver_rank: rank which send data
         """
         super().__init__(logger=logger)
-        self.logger.info('argument function logger :'+str(logger)+' buffer: '+str(buffer_r_w)+' sender_rank: '+str(sender_rank)+ ' receiver_rank: '+str(receiver_rank))
+        self.logger.info('MPI Internal : argument function logger :'+str(logger)+' buffer: '+str(buffer_r_w)+' sender_rank: '+str(sender_rank)+ ' receiver_rank: '+str(receiver_rank))
         self.rank = MPI.COMM_WORLD.Get_rank()
         # usage of shared memory
         self.win = None  # it's a MPI Window for shared buffer if it's required
@@ -32,7 +32,7 @@ class MPI_communication(CommunicationInternAbstract):
             self.request_read_buffer = None
         else:
             self.buffer_r_w = None
-        self.logger.info('MPI_communication: end MPI init')
+        self.logger.info('MPI Internal : buffer '+str(buffer_r_w))
         # variable for rate
         if sender_rank is not None:
             self.sender_rank = sender_rank
@@ -44,15 +44,16 @@ class MPI_communication(CommunicationInternAbstract):
             self.request_receive_time = None
             self.request_receive_rate = None
             self.request_read_done = None
+        self.logger.info('MPI Internal : end MPI init')
 
     def finalise(self):
         """
         see super class
         """
-        self.logger.info("MPI_communication: finalise")
+        self.logger.info("MPI Internal : finalise : begin")
         if self.win is not None:  # free windows if it's necessary
             MPI.Win.Free(self.win)
-        self.logger.info("MPI_communication: end finalise")
+        self.logger.info("MPI Internal : finalise : end")
         return True  # return true because all the rank need to Finalise MPI
 
     def _shared_mem_buffer(self, buffer_r_w, comm=MPI.COMM_WORLD):
@@ -71,7 +72,7 @@ class MPI_communication(CommunicationInternAbstract):
         -> 1D array to shape (x,3) where x is the number of events.
         -> this is decided by the nest I/O part, i.e. nest sends out events in 1D array
         """
-        self.logger.info('MPI_communication: start create buffer')
+        self.logger.info('MPI Internal : shared buffer : start create buffer')
         datasize = MPI.DOUBLE.Get_size()
         bufsize = 1000000 * 3  # NOTE: hardcoded (max.expected events per package from nest)
         self.logger.info(str(buffer_r_w))
@@ -79,16 +80,16 @@ class MPI_communication(CommunicationInternAbstract):
             bufbytes = datasize * bufsize
         else:
             bufbytes = 0
-        self.logger.info('MPI_communication: allocate buffer')
+        self.logger.info('MPI Internal : shared buffer : allocate buffer')
         win = MPI.Win.Allocate_shared(bufbytes, datasize, comm=comm)
-        self.logger.info('MPI_communication: start shared buffer')
+        self.logger.info('MPI Internal : shared buffer : start shared buffer')
         buf, datasize = win.Shared_query(buffer_r_w[1])
-        self.logger.info('MPI_communication: shared buffer')
+        self.logger.info('MPI Internal : shared buffer : shared buffer')
         assert datasize == MPI.DOUBLE.Get_size()
-        self.logger.info('MPI_communication: variable buffer')
+        self.logger.info('MPI Internal : shared buffer : variable buffer')
         # create a numpy array (buffer) whose data points to the shared mem
         self.databuffer = np.ndarray(buffer=buf, dtype='d', shape=(bufsize,))
-        self.logger.info('MPI_communication: end create buffer')
+        self.logger.info('MPI Internal : shared buffer : end create buffer')
 
     # Management of internal writing buffer
     def ready_write_buffer(self):
@@ -97,117 +98,117 @@ class MPI_communication(CommunicationInternAbstract):
         """
         status_ = MPI.Status()
         # wait until ready to receive new data (i.e. the sender has cleared the buffer)
-        self.logger.info("MPI_communication: write(ready) : buffer size wait ")
+        self.logger.info("MPI Internal : write(ready) : buffer size wait ")
         if self.request_send_size_buffer is not None:
             self.request_send_size_buffer.wait()
         self.shape_buffer = [0]  # head of the buffer, reset after each iteration
-        self.logger.info("MPI_communication: write : buffer receive :"+str(self.rank)+" to "+str(self.buffer_r_w[0]))
+        self.logger.info("MPI Internal : write(ready) : buffer receive :"+str(self.rank)+" to "+str(self.buffer_r_w[0]))
         request_buffer_read = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[0])
-        self.logger.info("MPI_communication: write(ready) : buffer receive wait")
+        self.logger.info("MPI Internal : write(ready) : buffer receive wait")
         self.send_spike_exit = not request_buffer_read.wait(status_)
-        self.logger.info("MPI_communication: write(ready) : buffer ready "+str(self.send_spike_exit))
+        self.logger.info("MPI Internal : write(ready) : buffer ready "+str(self.send_spike_exit))
 
     def end_writing(self):
         """
         send ending writing inside buffer
         """
-        self.logger.info("MPI_communication: write(end) : send size : "+str(self.shape_buffer)+" rank "+str(self.rank)
+        self.logger.info("MPI Internal : write(end) : send size : "+str(self.shape_buffer)+" rank "+str(self.rank)
                          + " to "+str(self.buffer_r_w[0]))
         self.request_send_size_buffer = MPI.COMM_WORLD.isend(self.shape_buffer, dest=self.buffer_r_w[0])
-        self.logger.info("MPI_communication: write(end) : end")
+        self.logger.info("MPI Internal : write(end) : end")
 
     def release_write_buffer(self):
         """
         close connection with the sending
         """
-        self.logger.info("MPI_communication: write(release) : end sim")
+        self.logger.info("MPI Internal : write(release) : end sim")
         status_ = MPI.Status()
         # wait until ready to receive new data (i.e. the sender has cleared the buffer)
-        self.logger.info("MPI_communication: write(release) : wait size")
+        self.logger.info("MPI Internal : write(release) : wait size")
         self.request_send_size_buffer.wait()
-        self.logger.info("MPI_communication: write(release) : transmit end "+str(self.send_spike_exit))
+        self.logger.info("MPI Internal : write(release) : transmit end "+str(self.send_spike_exit))
         if not self.send_spike_exit:
             req_buffer = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[0])
-            self.logger.info("MPI_communication: write(release) : receive buffer accept")
+            self.logger.info("MPI Internal : write(release) : receive buffer accept")
             req_buffer.wait(status_)
-            self.logger.info("MPI_communication: write(release) : send  end rank"
+            self.logger.info("MPI Internal : write(release) : send  end rank"
                              + str(self.rank)+" to "+str(self.buffer_r_w[1]))
             send_size = MPI.COMM_WORLD.isend(np.array([-1]), dest=self.buffer_r_w[0])
             send_size.wait(status_)
-        self.logger.info("MPI_communication: write(release) : end")
+        self.logger.info("MPI Internal : write(release) : end")
 
     # Management of internal reading buffer
     def ready_to_read(self):
         """
         wait until it's ready to read the buffer
         """
-        self.logger.info("MPI_communication: read(ready) : begin")
+        self.logger.info("MPI Internal : read(ready) : begin")
         status_ = MPI.Status()
         # wait until the receiver has cleared the buffer, i.e. filled with new data
-        self.logger.info("MPI_communication: read(ready) : wait buffer ready ")
+        self.logger.info("MPI Internal : read(ready) : wait buffer ready ")
         if self.request_read_buffer is None:
-            self.logger.info('MPI_communication: read(ready) : start read buffer: '
+            self.logger.info('MPI Internal : read(ready) : start read buffer: '
                              + str(self.rank)+" to "+str(self.buffer_r_w[1]))
             self.request_read_buffer = MPI.COMM_WORLD.isend(True, dest=self.buffer_r_w[1])
         self.request_read_buffer.wait()
-        self.logger.info("MPI_communication: read(ready) : receive size : rank "
+        self.logger.info("MPI Internal : read(ready) : receive size : rank "
                          + str(self.rank)+" from "+str(self.buffer_r_w[1]))
         send_state = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[1])
-        self.logger.info("MPI_communication: read(ready) : receive size wait")
+        self.logger.info("MPI Internal : read(ready) : receive size wait")
         return send_state.wait(status=status_)
 
     def end_read(self):
         """
         end to read the buffer
         """
-        self.logger.info("MPI_communication: read(end) : end read buffer ")
+        self.logger.info("MPI Internal : read(end) : end read buffer ")
         self.request_read_buffer = MPI.COMM_WORLD.isend(True, dest=self.buffer_r_w[1])
-        self.logger.info("MPI_communication: read(end) : send end ")
+        self.logger.info("MPI Internal : read(end) : send end ")
 
     def release_read_buffer(self):
         """
         close connection with sender
         """
-        self.logger.info("MPI_communication: read(release) : ending ")
+        self.logger.info("MPI Internal : read(release) : ending ")
         status_ = MPI.Status()
         self.request_read_buffer.wait()
         # disconnect when everything is ending
         if self.shape_buffer[0] != -1:
-            self.logger.info("MPI_communication: read(release) : transmit end ")
+            self.logger.info("MPI Internal : read(release) : transmit end ")
             send_state = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[1])
-            self.logger.info("MPI_communication: read(release) : receive end ")
+            self.logger.info("MPI Internal : read(release) : receive end ")
             send_state.wait(status=status_)
             req_buffer = MPI.COMM_WORLD.isend(False, dest=self.buffer_r_w[1])
-            self.logger.info("MPI_communication: read(release) : send end ")
+            self.logger.info("MPI Internal : read(release) : send end ")
             req_buffer.wait()
-        self.logger.info("MPI_communication: read(release) : end ")
+        self.logger.info("MPI Internal : read(release) : end ")
 
     # Section 1 : spike trains exchange
     def send_spikes_ready(self):
         """
         see super class
         """
-        self.logger.info(" Receiver Nest : ready send spikes")
+        self.logger.info("MPI Internal : spike(send) : ready send spikes")
         self.ready_write_buffer()
 
     def send_spikes(self):
         """
         see super class
         """
-        self.logger.info(" Receiver Nest : spike send")
+        self.logger.info("MPI Internal : spike(send) : spike send")
         self.end_writing()
 
     def send_spikes_trains(self, spike_trains):
         """
         see super class
         """
-        self.logger.info('TRS : spike(send) : begin')
+        self.logger.info('MPI Internal : spike(send) : begin')
         self.ready_write_buffer()
-        self.logger.info('TRS : spike(send) : buffer')
+        self.logger.info('MPI Internal : spike(send) : buffer')
         if self.send_spike_exit:
-            self.logger.info('Send Nest : spike(get) : receive end ')
+            self.logger.info('MPI Internal : spike(send) : receive end ')
             return
-        self.logger.info('TRS : spike(send) : start spike_trains in buffer')
+        self.logger.info('MPI Internal : spike(send) : start spike_trains in buffer')
         #  create continue data with all spike trains
         data_shape = []
         for index, spike_train in enumerate(spike_trains):
@@ -217,129 +218,129 @@ class MPI_communication(CommunicationInternAbstract):
         data = np.concatenate(spike_trains)
         self.shape_buffer = data_shape
         self.databuffer[:data.shape[0]] = data
-        self.logger.info('TRS : spike(send) : data write')
+        self.logger.info('MPI Internal : spike(send) : data write')
         self.end_writing()
-        self.logger.info('TRS : spike(send) : end')
+        self.logger.info('MPI Internal : spike(send) : end')
         return
 
     def send_spikes_end(self):
         """
         see super class
         """
-        self.logger.info(" Receiver Nest : end send")
+        self.logger.info("MPI Internal : spike(end) : end send")
         self.release_write_buffer()
 
     def get_spikes(self):
         """
         see super class
         """
-        self.logger.info('Send Nest : spike(get) : begin ')
+        self.logger.info('MPI Internal : spike(get) : begin ')
         # wait until the data are ready to use
         self.shape_buffer = self.ready_to_read()
-        self.logger.info('Send Nest : spike(get) : receive end '+str(self.shape_buffer))
+        self.logger.info('MPI Internal : spike(get) : receive end '+str(self.shape_buffer))
         if self.shape_buffer[0] == -1:
-            self.logger.info('Send Nest : spike(get) : receive end ')
+            self.logger.info('MPI Internal : spike(get) : receive end ')
             return None
-        self.logger.info('Send Nest : spike(get) : reshape data')
+        self.logger.info('MPI Internal : spike(get) : reshape data')
         # reshape the data for usage by the communicator with the simulator
         spikes_times = []
         index = 0
         for nb_spike in self.shape_buffer:
-            self.logger.info(index)
+            self.logger.info('MPI Internal : spike(get) :'+str(index))
             spikes_times.append(self.databuffer[index:index + int(nb_spike)])
             index += int(nb_spike)
-        self.logger.info('Send Nest : spike(get) : end reshape data')
+        self.logger.info('MPI Internal : spike(get) : end reshape data')
         return spikes_times
 
     def get_spikes_ready(self):
         """
         see super class
         """
-        self.logger.info('TSR : spike(ready) : ready get spikes')
+        self.logger.info('MPI Internal : spike(ready) : ready get spikes')
         self.shape_buffer = self.ready_to_read()
-        self.logger.info('TSR : spike(ready) : ready to write : ' + str(self.shape_buffer))
+        self.logger.info('MPI Internal : spike(ready) : ready to write : ' + str(self.shape_buffer))
 
     def get_spikes_release(self):
         """
         see super class
         """
-        self.logger.info('Send Nest : spike(release)')
+        self.logger.info('MPI Internal : spike(release)')
         self.end_read()
-        self.logger.info('Send Nest : spike(get) : end')
+        self.logger.info('MPI Internal : spike(release) : end')
 
     def get_spikes_end(self):
         """
         see super class
         """
-        self.logger.info('Send Nest : spike(end) : begin')
+        self.logger.info('MPI Internal : spike(end) : begin')
         self.release_read_buffer()
-        self.logger.info('Send Nest : spike(end) : end')
+        self.logger.info('MPI Internal : spike(end) : end')
 
     # Section 2 : rate and time exchange
     def get_time_rate(self):
         """
         see super class
         """
-        self.logger.info("Send TVB Data : rate(get) : get time rate")
+        self.logger.info("MPI Internal : rate(get) : get time rate")
         if self.request_send_done is not None:
             self.request_send_done.wait()
-        self.logger.info("Send TVB Data : rate(get) : rate :"+str(self.sender_rank))
+        self.logger.info("MPI Internal : rate(get) : rate :"+str(self.sender_rank))
         req_time = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=0)
         times = req_time.wait()
         if times[0] == -1:
             self.get_time_rate_exit = True
-            self.logger.info("Send TVB Data : rate(get) : times"+str(self.sender_rank))
+            self.logger.info("MPI Internal : rate(get) : times"+str(self.sender_rank))
             return times, None
         req_data = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=1)
-        self.logger.info("Send TVB Data : rate(get) : data request")
+        self.logger.info("MPI Internal : rate(get) : data request")
         rate = req_data.wait()
-        self.logger.info("Send TVB Data : rate(get) : end")
+        self.logger.info("MPI Internal : rate(get) : end")
         return times, rate
 
     def get_time_rate_release(self):
         """
         see super class
         """
-        self.logger.info("Send TVB Data : rate(release) : begin")
+        self.logger.info("MPI Internal : rate(release) : begin")
         self.request_send_done = MPI.COMM_WORLD.isend(True, dest=self.sender_rank)
-        self.logger.info("Send TVB Data : rate(release) : end")
+        self.logger.info("MPI Internal : rate(release) : end")
 
     def get_time_rate_end(self):
         """
         see super class
         """
-        self.logger.info("Send TVB Data : rate(end) : wait time")
+        self.logger.info("MPI Internal : rate(end) : wait time")
         if not self.get_time_rate_exit:
             self.request_send_done = MPI.COMM_WORLD.isend(False, dest=self.sender_rank)
-        self.logger.info("Send TVB Data : rate(end) : end ")
+        self.logger.info("MPI Internal : rate(end) : end ")
 
     def send_time_rate(self, time_step, rate):
         """
         see super class
         """
-        self.logger.info("Receive TVB Data : rate(send) : init")
+        self.logger.info("MPI Internal : rate(send) : init")
         if self.request_receive_time is not None:
-            self.logger.info("Receive TVB Data : rate(send) : wait request")
+            self.logger.info("MPI Internal : rate(send) : wait request")
             self.request_receive_time.wait()
             self.request_receive_rate.wait()
-            self.logger.info("Receive TVB Data : rate(send) : wait check")
+            self.logger.info("MPI Internal : rate(send) : wait check")
             self.send_time_rate_exit = not self.request_read_done.wait()
-            self.logger.info("Receive TVB Data : rate(send) : receive end "+str(self.send_time_rate_exit))
+            self.logger.info("MPI Internal : rate(send) : receive end "+str(self.send_time_rate_exit))
             if self.send_time_rate_exit:
                 return
         # time of stating and ending step
         self.request_receive_time = MPI.COMM_WORLD.isend(time_step, dest=self.receiver_rank, tag=0)
         # send the size of the rate
         self.request_receive_rate = MPI.COMM_WORLD.isend(rate, dest=self.receiver_rank, tag=1)
-        self.logger.info("Receive TVB Data : rate(send) : ask check")
+        self.logger.info("MPI Internal : rate(send) : ask check")
         self.request_read_done = MPI.COMM_WORLD.irecv(source=self.receiver_rank)
-        self.logger.info("Receive TVB Data : rate(send) : update buffer")
+        self.logger.info("MPI Internal : rate(send) : update buffer")
 
     def send_time_rate_end(self):
         """
         see super class
         """
-        self.logger.info("Receive TVB Data : rate(end) : begin "+str(not self.send_time_rate_exit))
+        self.logger.info("MPI Internal : rate(end) : begin "+str(not self.send_time_rate_exit))
         if not self.send_time_rate_exit:
             self.request_receive_time = MPI.COMM_WORLD.isend([-1], dest=self.receiver_rank, tag=0)
-        self.logger.info(" Receive TVB Data : rate(end) : end")
+        self.logger.info("MPI Internal : rate(end) : end")
