@@ -9,7 +9,7 @@ from nest_elephant_tvb.translation.communication.internal import CommunicationIn
 _final_barrier = BoundedSemaphore(2)  # n-1 thread # improvement be include in the class
 
 
-class Thread_communication(CommunicationInternAbstract):
+class ThreadCommunication(CommunicationInternAbstract):
     """
     Class for using thread for the internal communication
 

@@ -3,11 +3,11 @@
 
 import numpy as np
 from quantities import ms, Hz
-from nest_elephant_tvb.translation.communication.mpi_io_external import MPI_communication_extern
+from nest_elephant_tvb.translation.communication.mpi_io_external import MPICommunicationExtern
 from nest_elephant_tvb.translation.translation_function.rate_spike import rates_to_spikes, slidding_window
 
 
-class Translation_spike_to_rate(MPI_communication_extern):
+class TranslationSpikeRate(MPICommunicationExtern):
     """
     Class for the translation between spike to rate
     """
@@ -110,7 +110,7 @@ class Translation_spike_to_rate(MPI_communication_extern):
         return times, data*self.coeff
 
 
-class Translation_rate_to_spike(MPI_communication_extern):
+class TranslationRateSpike(MPICommunicationExtern):
     """
     Class for the translation between rate to spike
     """

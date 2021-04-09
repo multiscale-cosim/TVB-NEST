@@ -7,11 +7,11 @@ import json
 import time
 import numpy as np
 from nest_elephant_tvb.utils import create_logger
-from nest_elephant_tvb.translation.simulator_IO.Nest_IO import Receiver_Nest_Data
-from nest_elephant_tvb.translation.simulator_IO.TVB_IO import Send_TVB_Data
-from nest_elephant_tvb.translation.simulator_IO.translation_function import Translation_spike_to_rate
-from nest_elephant_tvb.translation.communication.internal_mpi import MPI_communication
-from nest_elephant_tvb.translation.communication.internal_thread import Thread_communication
+from nest_elephant_tvb.translation.simulator_IO.Nest_IO import ConsumerNestData
+from nest_elephant_tvb.translation.simulator_IO.TVB_IO import ProducerTVBData
+from nest_elephant_tvb.translation.simulator_IO.translation_function import TranslationSpikeRate
+from nest_elephant_tvb.translation.communication.internal_mpi import MPICommunication
+from nest_elephant_tvb.translation.communication.internal_thread import ThreadCommunication
 
 
 if __name__ == "__main__":
@@ -51,22 +51,22 @@ if __name__ == "__main__":
 
     if MPI.COMM_WORLD.Get_size() == 3:  # MPI internal communication
         if rank == 0:  # communication with Nest
-            receive_data_from_nest = Receiver_Nest_Data(
+            receive_data_from_nest = ConsumerNestData(
                 'nest_to_tvb_receive' + str(id_spike_detector), path, level_log,
-                communication_intern=MPI_communication, buffer_r_w=[2, 0])
+                communication_intern=MPICommunication, buffer_r_w=[2, 0])
             path_to_files_receive = [path + file_spike_detector]
             receive_data_from_nest.run(path_to_files_receive)
         elif rank == 1:  # communication with TVB
-            send_data_to_TVB = Send_TVB_Data(
+            send_data_to_TVB = ProducerTVBData(
                 'nest_to_tvb_send'+str(id_spike_detector), path, level_log,
-                communication_intern=MPI_communication, sender_rank=2, buffer_r_w=[2, 0])
+                communication_intern=MPICommunication, sender_rank=2, buffer_r_w=[2, 0])
             path_to_files_send = [path + TVB_recev_file]
             send_data_to_TVB.run(path_to_files_send)
         elif rank == 2:  # translation from spike to rate
-            translation = Translation_spike_to_rate(
+            translation = TranslationSpikeRate(
                 param,
                 'nest_to_tvb_translate' + str(id_spike_detector), path, level_log,
-                communication_intern=MPI_communication, receiver_rank=1, buffer_r_w=[2, 0])
+                communication_intern=MPICommunication, receiver_rank=1, buffer_r_w=[2, 0])
             translation.run(None)
         else:
             raise Exception('too much rank')
@@ -74,18 +74,18 @@ if __name__ == "__main__":
         from threading import Thread
         import numpy as np
         # creation of the object for Nest communication
-        receive_data_from_nest = Receiver_Nest_Data(
+        receive_data_from_nest = ConsumerNestData(
             'nest_to_tvb_receive' + str(id_spike_detector), path, level_log,
-            communication_intern=Thread_communication,
+            communication_intern=ThreadCommunication,
             buffer_write_status=np.ones((1, 1), dtype=np.int)*-2,
             buffer_write_shape=(1000000 * 3, 1),
             )
         path_to_files_receive = [path + file_spike_detector]
         # creation of the object for the translation from rate to spike
-        translation = Translation_spike_to_rate(
+        translation = TranslationSpikeRate(
             param,
             'nest_to_tvb_translate' + str(id_spike_detector), path, level_log,
-            communication_intern=Thread_communication,
+            communication_intern=ThreadCommunication,
             buffer_write_status=np.ones(1)*-2,
             buffer_write_shape=(2, int(param['synch']/param['resolution'])),
             buffer_read=receive_data_from_nest.communication_internal.buffer_write_data,
@@ -93,9 +93,9 @@ if __name__ == "__main__":
             lock_read=receive_data_from_nest.communication_internal.lock_write
             )
         # creation of the object for TVB communication
-        send_data_to_TVB = Send_TVB_Data(
+        send_data_to_TVB = ProducerTVBData(
             'nest_to_tvb_send'+str(id_spike_detector), path, level_log,
-            communication_intern=Thread_communication,
+            communication_intern=ThreadCommunication,
             buffer_read=translation.communication_internal.buffer_write_data,
             status_read=translation.communication_internal.status_write,
             lock_read=translation.communication_internal.lock_write

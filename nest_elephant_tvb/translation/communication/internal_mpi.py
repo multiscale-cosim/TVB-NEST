@@ -5,8 +5,7 @@ from mpi4py import MPI
 import numpy as np
 from nest_elephant_tvb.translation.communication.internal import CommunicationInternAbstract
 
-#todo change all the log name
-class MPI_communication(CommunicationInternAbstract):
+class MPICommunication(CommunicationInternAbstract):
     """
     Class for using MPI for the internal communication
     """
