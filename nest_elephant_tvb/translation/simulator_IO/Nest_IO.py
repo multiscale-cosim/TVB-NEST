@@ -17,17 +17,17 @@ class Receiver_Nest_Data(MPI_communication_extern):
         """
         self.logger.info("Receiver Nest : simulation time")
         status_ = MPI.Status()
-        num_sending = self.port_comm.Get_remote_size()  # The total number of the rank in Nest MPI_COMM_WORLD
+        num_sending = self.port_comms[0].Get_remote_size()  # The total number of the rank in Nest MPI_COMM_WORLD
         check = np.empty(1, dtype='b')  # variable to get the state of Nest
         shape = np.empty(1, dtype='i')  # variable to receive the shape of the data
         count = 0  # count the number of run
         while True:
             self.logger.info("Receiver Nest : loop start : wait all")
-            self.port_comm.Recv([check, 1, MPI.CXX_BOOL], source=0, tag=MPI.ANY_TAG, status=status_)
+            self.port_comms[0].Recv([check, 1, MPI.CXX_BOOL], source=0, tag=MPI.ANY_TAG, status=status_)
             state_nest = status_.Get_tag()
             for source in range(1, num_sending):
                 # improvement: We do not care which source sends first, give MPI the freedom to send in whichever order.
-                self.port_comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
+                self.port_comms[0].Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
                 if state_nest != status_.Get_tag():
                     raise Exception('Abnormal state : the state of Nest is different between rank')
 
@@ -42,12 +42,12 @@ class Receiver_Nest_Data(MPI_communication_extern):
                 self.logger.info("Receiver Nest : start get data")
                 for source in range(num_sending):
                     # send 'ready' to the nest rank
-                    self.port_comm.Send([np.array(True, dtype='b'), MPI.BOOL], dest=source, tag=0)
+                    self.port_comms[0].Send([np.array(True, dtype='b'), MPI.BOOL], dest=source, tag=0)
                     # receive package size info
-                    self.port_comm.Recv([shape, 1, MPI.INT], source=source, tag=0, status=status_)
+                    self.port_comms[0].Recv([shape, 1, MPI.INT], source=source, tag=0, status=status_)
                     self.logger.info("Receiver Nest : shape : "+str(self.communication_internal.shape_buffer))
                     # Add data in the buffer
-                    self.port_comm.Recv([self.communication_internal.databuffer[self.communication_internal.shape_buffer[0]:], MPI.DOUBLE],
+                    self.port_comms[0].Recv([self.communication_internal.databuffer[self.communication_internal.shape_buffer[0]:], MPI.DOUBLE],
                                         source=source, tag=0, status=status_)
                     self.communication_internal.shape_buffer[0] += shape[0]  # move head
                 self.logger.info("Receiver Nest : end receive data")
@@ -88,15 +88,15 @@ class Send_Data_to_Nest(MPI_communication_extern):
         self.logger.info('Send Nest : simulation')
         # initialisation variable before the loop
         status_ = MPI.Status()
-        source_sending = np.arange(0, self.port_comm.Get_remote_size(), 1)  # list of all the rank of Nest MPI_COMM_WORLD
+        source_sending = np.arange(0, self.port_comms[0].Get_remote_size(), 1)  # list of all the rank of Nest MPI_COMM_WORLD
         check = np.empty(1,dtype='b')  # variable to get the state of Nest
         while True:
             self.logger.info('Send Nest : loop start : wait all')
-            self.port_comm.Recv([check, 1, MPI.CXX_BOOL], source=0, tag=MPI.ANY_TAG, status=status_)
+            self.port_comms[0].Recv([check, 1, MPI.CXX_BOOL], source=0, tag=MPI.ANY_TAG, status=status_)
             state_nest = status_.Get_tag()
             for source in source_sending[1:]:
                 # improvement: We do not care which source sends first, give MPI the freedom to send in whichever order.
-                self.port_comm.Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
+                self.port_comms[0].Recv([check, 1, MPI.CXX_BOOL], source=source, tag=MPI.ANY_TAG, status=status_)
                 if state_nest != status_.Get_tag():
                     raise Exception('Abnormal state : the state of Nest is different between rank')
             self.logger.info("Send Nest : Get check : status : "+str(status_.Get_tag()))
@@ -119,10 +119,10 @@ class Send_Data_to_Nest(MPI_communication_extern):
                     #   give MPI the freedom to send in whichever order.
                     # receive list ids
                     size_list = np.empty(1, dtype='i')
-                    self.port_comm.Recv([size_list, 1, MPI.INT], source=source, tag=0, status=status_)
+                    self.port_comms[0].Recv([size_list, 1, MPI.INT], source=source, tag=0, status=status_)
                     if size_list[0] != 0:
                         list_id = np.empty(size_list, dtype='i')
-                        self.port_comm.Recv([list_id, size_list, MPI.INT], source=status_.Get_source(),
+                        self.port_comms[0].Recv([list_id, size_list, MPI.INT], source=status_.Get_source(),
                                             tag=0, status=status_)
                         # Select the good spike train and send it
                         self.logger.info("Send Nest : rank " + str(source) + " list_id " + str(list_id)
@@ -134,10 +134,10 @@ class Send_Data_to_Nest(MPI_communication_extern):
                             data += [spikes_times[i-self.id_first_spike_detector]]
                         send_shape = np.array(np.concatenate(([np.sum(shape)], shape)), dtype='i')
                         # firstly send the size of the spikes train
-                        self.port_comm.Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
+                        self.port_comms[0].Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
                         # secondly send the spikes train
                         data = np.concatenate(data).astype('d')
-                        self.port_comm.Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
+                        self.port_comms[0].Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
                 self.logger.info("Send Nest : end sending")
 
             elif status_.Get_tag() == 1:
