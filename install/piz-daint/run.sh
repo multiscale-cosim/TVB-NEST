@@ -44,7 +44,7 @@ source ${PYTHON_FOLD}/bin/activate
 
 export PYTHONPATH=${NEST_PY}:${PYTHON_LIB}:${PROJECT_LIB}:$PYTHONPATH
 
-python $DIR/../../nest_elephant_tvb/orchestrator/run.py $1
+python $DIR/../../nest_elephant_tvb/launcher/run.py $1
 desactivate
 
 # return to the calling repertory
