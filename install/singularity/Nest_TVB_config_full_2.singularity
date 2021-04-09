@@ -1,0 +1,119 @@
+Bootstrap: docker
+from:alpine:3.11
+
+%help
+Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+
+TVB and Nest i/o
+
+application :
+- python
+- mpi
+
+example for launch :
+singularity run --app python
+
+%files
+../../nest-io-dev /home/nest-io-dev
+../../nest_elephant_tvb /home/nest_elephant_tvb
+../../example/analyse /home/nest_elephant_tvb/analyse
+../../example/parameter /home/nest_elephant_tvb/parameter
+
+%post
+    apk update
+    apk add git file g++ gcc gfortran make gdb strace wget
+
+    # Install mpich
+    wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz
+    tar xf mpich-3.1.4.tar.gz
+    cd mpich-3.1.4
+    ./configure --disable-fortran --enable-fast=all,O3 --prefix=/usr
+    make -j$(nproc)
+    make install
+
+    # Install the dependence of Nest
+    apk del libstdc++
+    set -x && apk add --force-overwrite --no-cache --update libc6-compat libstdc++
+    apk add cmake readline-dev ncurses-dev gsl-dev curl python3 libbsd-dev
+    apk add python3-dev cython
+    apk add openblas-dev lapack-dev
+    apk add libffi-dev
+    apk add freetype-dev jpeg-dev zlib-dev
+    apk add zeromq-dev
+    cd /root
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py
+    rm get-pip.py
+    pip install --upgrade pip
+
+    NAME_SOURCE_NEST=/home/nest-io-dev
+    PATH_INSTALATION=/usr/lib/nest/
+    PATH_BUILD=/home/nest-build
+    export PATH_INSTALATION
+    export PATH_BUILD
+    export NAME_SOURCE_NEST
+    export NEST_DATA_PATH=$PATH_BUILD/pynest
+    pip install numpy
+    pip install scipy
+    pip install matplotlib
+    pip install elephant
+    pip install mpi4py
+    pip install jupyter
+
+    # install TVB
+    apk add llvm9-dev llvm9
+    echo which llvm-config
+    export LLVM_CONFIG=$(which llvm-config)
+    pip install tvb-data tvb-gdist tvb-library 
+
+    # Compile and install nest
+    cd /home/
+    mkdir $PATH_BUILD
+    cd $PATH_BUILD
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-python=ON
+    make -j$(nproc)
+    make install
+    #make test
+    cd /home/
+    # export pythonpath for include pynest in python
+    echo 'export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:$PYTHONPATH' >>$SINGULARITY_ENVIRONMENT
+
+%apprun python
+   exec /usr/bin/python3.8 "$@"
+
+%apprun mpi
+   exec /usr/bin/mpirun "$@"
+
+%apprun jupyter-notebook
+   exec jupyter-notebook
+
+%apprun nest
+   exec /usr/bin/python3.8 /home/nest_elephant_tvb/Nest/simulation_Zerlaut.py "$@"
+
+%apprun TVB
+   exec /usr/bin/python3.8 /home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py "$@"
+
+%apprun NEST-TVB
+   exec /usr/bin/python3.8 /home/nest_elephant_tvb/translation/nest_to_tvb.py "$@"
+
+%apprun TVB-NEST
+   exec /usr/bin/python3.8 /home/nest_elephant_tvb/translation/tvb_to_nest.py "$@"
+
+%apprun create_launcher
+   exec cat /home/nest_elephant_tvb/launcher/run_exploration.py

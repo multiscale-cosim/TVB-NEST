@@ -23,8 +23,9 @@ param_co_simulation={
     'synchronization':0.,#Todo compute with the min of delay
     # level of log : debug 0, info 1, warning 2, error 3, critical 4
     'level_log':1,
-    # if running in cluster:
-    'mpi':['mpirun'],
+    # command to launch mpi executable:
+    'mpi':['mpirun'],  # example : ['mpirun'] , ['srun','-N','1']
+    # Number of process for the translation : 1 => thread internal communication and  3 => MPI internal communication
     'translation_thread': 1
 }
 

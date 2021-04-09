@@ -6,9 +6,9 @@ cd "$DIR" || exit
 
 rm -rd */log */nest */translation */tvb
 
-python3 ../../nest_elephant_tvb/orchestrator/run_exploration.py ./case_up_down/parameter.json
-python3 ../../nest_elephant_tvb/orchestrator/run_exploration.py ./case_asynchronous/parameter.json
-python3 ../../nest_elephant_tvb/orchestrator/run_exploration.py ./case_regular_burst/parameter.json
+python3 ../../nest_elephant_tvb/launcher/run_exploration.py ./case_asynchronous/parameter.json
+python3 ../../nest_elephant_tvb/launcher/run_exploration.py ./case_up_down/parameter.json
+python3 ../../nest_elephant_tvb/launcher/run_exploration.py ./case_regular_burst/parameter.json
 
 rm -rd */log */nest */translation */tvb
 
