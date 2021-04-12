@@ -1,6 +1,7 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
+import os
 import numpy as np
 from quantities import ms, Hz
 from nest_elephant_tvb.translation.communication.mpi_io_external import MPICommunicationExtern
@@ -26,6 +27,23 @@ class TranslationSpikeRate(MPICommunicationExtern):
         self.buffer = np.zeros((self.width,))                 # initialisation/ previous result for a good result
         # multiplicative coefficient : change the counting of spike in mean firing rate (KHZ)
         self.coeff = 1 / (param['nb_neurons'] * self.dt)
+        # variable for saving values:
+        self.save_hist = bool(param['save_hist'])
+        if self.save_hist:
+            self.save_hist_buf = None
+            self.save_hist_path = arg[1] + '/translation/TSR_hist/'  # arg[1]: path of simulation + need path management
+            if not os.path.exists(self.save_hist_path):
+                os.mkdir(self.save_hist_path)
+            self.save_hist_count = param['save_hist_count']
+            self.save_hist_nb = 0
+        self.save_rate = bool(param['save_rate'])
+        if self.save_rate:
+            self.save_rate_buf = None
+            self.save_rate_path = arg[1] + '/translation/TSR_rate/'  # arg[1]: path of simulation + need path management
+            if not os.path.exists(self.save_rate_path):
+                os.mkdir(self.save_rate_path)
+            self.save_rate_count = param['save_rate_count']
+            self.save_rate_nb = 0
 
     def simulation_time(self):
         """
@@ -51,12 +69,33 @@ class TranslationSpikeRate(MPICommunicationExtern):
             hist = self.add_spikes(count,
                                    self.communication_internal.shape_buffer[0],
                                    self.communication_internal.databuffer)
+            # optional save the histogram
+            if self.save_hist:
+                if count % self.save_hist_count == 0:
+                    if self.save_hist_buf is not None:
+                        self.logger.info('TSR : save hist :' + str(self.save_rate_nb))
+                        np.save(self.save_hist_path+'/'+str(self.save_hist_nb)+'.npy', self.save_hist_buf)
+                        self.save_hist_nb += 1
+                    self.save_hist_buf = hist
+                else:
+                    self.save_hist_buf = np.concatenate((self.save_hist_buf, hist))
+
             # Step 2.2 : INTERNAL: end get spike (important to be here for optimization/synchronization propose)
             self.communication_internal.get_spikes_release()
 
             # Step 2.3: Analyse this data, i.e. calculate mean firing rate
             self.logger.info('TSR : analise')
             times, rate = self.analyse(count, hist)
+            # optional : save rate
+            if self.save_rate:
+                if count % self.save_rate_count == 0:
+                    self.logger.info('TSR : save rate :'+str(self.save_rate_nb))
+                    if self.save_rate_buf is not None:
+                        np.save(self.save_rate_path+'/'+str(self.save_rate_nb)+'.npy', self.save_rate_buf)
+                        self.save_rate_nb += 1
+                    self.save_rate_buf = rate
+                else:
+                    self.save_rate_buf = np.concatenate((self.save_rate_buf, rate))
 
             # Step 3: INTERNAL: send rate and time
             self.logger.info('TSR : send data')
@@ -72,6 +111,14 @@ class TranslationSpikeRate(MPICommunicationExtern):
         self.communication_internal.get_spikes_end()
         self.communication_internal.send_time_rate_end()
         self.logger.info('TSR : end')
+
+    def finalise(self):
+        super().finalise()
+        # Save the ending part of the simulation
+        if self.save_hist:
+            np.save(self.save_hist_path + '/' + str(self.save_hist_count) + '.npy', self.save_hist_buf)
+        if self.save_rate:
+            np.save(self.save_rate_path + '/' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
 
     def add_spikes(self, count, size_buffer, buffer):
         """
@@ -91,6 +138,7 @@ class TranslationSpikeRate(MPICommunicationExtern):
                 if index_hist >= hist.shape[0] or index_hist < 0:
                     self.logger.info('ERROR :TSR : add_spikes : buffer :'+str(buffer[:size_buffer]))
                     self.logger.info('ERROR : TSR : add_spikes : data :'+str(hist.shape[0])+' '+str(index_data*3+2)+' '+str(buffer[index_data*3+2])+' '+str(count*self.synch)+' '+str(self.synch)+' '+str(index_hist))
+                    self.logger.info('ERROR : TSR : add_spikes : cond 1 : '+str(index_hist >= hist.shape[0] )+'cond 2 :'+str(index_hist < 0))
                     raise Exception("TSR : add spike: The input data can't be add to the histogram")
                 hist[index_hist] += 1
         return hist
@@ -129,6 +177,23 @@ class TranslationRateSpike(MPICommunicationExtern):
         self.function_translation = param['function_select']  # choose the function for the translation
         self.path_init = param['init']              # path of numpy array which are use to initialise the communication
         np.random.seed(param['seed'])               # set the seed for repeatability
+        # variable for saving values:
+        self.save_spike = bool(param['save_spike'])
+        if self.save_spike:
+            self.save_spike_buf = None
+            self.save_spike_path = arg[1] + '/translation/TRS_spike/'  # arg[0]: path of simulation+need path management
+            if not os.path.exists(self.save_spike_path):
+                os.mkdir(self.save_spike_path)
+            self.save_spike_count = param['save_spike_count']
+            self.save_spike_nb = 0
+        self.save_rate = bool(param['save_rate'])
+        if self.save_rate:
+            self.save_rate_buf = None
+            self.save_rate_path = arg[1] + '/translation/TRS_rate/'  # arg[0]: path of simulation + need path management
+            if not os.path.exists(self.save_rate_path):
+                os.mkdir(self.save_rate_path)
+            self.save_rate_count = param['save_rate_count']
+            self.save_rate_nb = 0
         self.logger.info('TRS : end init translation')
 
     def simulation_time(self):
@@ -157,11 +222,31 @@ class TranslationRateSpike(MPICommunicationExtern):
                 break
             # Step 1.2: INTERNAL : end getting rate (important to be here for optimization/synchronization propose)
             self.communication_internal.get_time_rate_release()
+            # optional :  save the rate
+            if self.save_rate:
+                if count % self.save_rate_count == 0:
+                    if self.save_rate_buf is not None:
+                        np.save(self.save_rate_path + '/' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
+                        self.save_rate_nb += 1
+                    self.save_rate_buf = rate
+                else:
+                    self.save_rate_buf = np.concatenate((self.save_rate_buf, rate))
 
             # Step 2: generate spike trains
             # improvement : we can generate other type of data but Nest communication need to be adapted for it
             self.logger.info('TRS : generate spike')
             spike_trains = self.generate_spike(count, times, rate)
+            if self.save_spike:
+                if count % self.save_spike_count == 0:
+                    if self.save_spike_buf is not None:
+                        np.save(self.save_spike_path + '/' + str(self.save_spike_nb) + '.npy', self.save_spike_buf)
+                        self.save_spike_nb += 1
+                    self.save_spike_buf = [spikes for spikes in spike_trains]
+                else:
+                    tmp = []
+                    for index, spikes in enumerate(spike_trains):
+                        tmp.append(np.concatenate((self.save_spike_buf[index], spikes)))
+                    self.save_spike_buf = tmp
 
             # Step 3: send spike trains to Nest
             self.logger.info('TRS : send spike train')
@@ -177,6 +262,14 @@ class TranslationRateSpike(MPICommunicationExtern):
         self.communication_internal.get_time_rate_end()
         self.communication_internal.send_spikes_end()
         self.logger.info('TRS : end')
+
+    def finalise(self):
+        super().finalise()
+        # Save the ending part of the simulation
+        if self.save_rate:
+            np.save(self.save_rate_path + '/' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
+        if self.save_spike:
+            np.save(self.save_spike_path + '/' + str(self.save_spike_nb) + '.npy', self.save_spike_buf)
 
     def generate_spike(self, count, time_step, rate):
         """

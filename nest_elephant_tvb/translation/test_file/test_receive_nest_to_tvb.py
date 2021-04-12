@@ -7,7 +7,7 @@ import os
 import time
 
 
-def simulate_TVB_reception(path):
+def simulate_TVB_reception(path,file):
     '''
     simulate the receptor of the translator for nest to TVB
     :param path: the path to the file for the connections
@@ -17,11 +17,15 @@ def simulate_TVB_reception(path):
     print(path)
     print("TVB INPUT : Waiting for port details");sys.stdout.flush()
 
-    while not os.path.exists(path):
+    np.savetxt(path+'//nest/spike_detector.txt',np.array([0],dtype=int),fmt='%i')
+    np.savetxt(path+'//nest/spike_detector.txt.unlock',np.array([0],dtype=int),fmt='%i')
+
+
+    while not os.path.exists(path+file):
         print ("Port file not found yet, retry in 1 second")
         time.sleep(1)
 
-    fport = open(path, "r")
+    fport = open(path+file, "r")
     port=fport.readline()
     fport.close()
     print("TVB INPUT :wait connection "+port);sys.stdout.flush()
@@ -60,8 +64,8 @@ def simulate_TVB_reception(path):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==2:
-        simulate_TVB_reception(sys.argv[1])
+    if len(sys.argv)==3:
+        simulate_TVB_reception(sys.argv[1],sys.argv[2])
     else:
         print('missing argument')
 

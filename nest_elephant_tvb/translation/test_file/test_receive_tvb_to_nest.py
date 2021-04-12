@@ -4,8 +4,9 @@
 import numpy as np
 from mpi4py import MPI
 import os
+import time
 
-def simulate_nest_generator(path):
+def simulate_nest_generator(path,file,nb_generator):
     '''
     simulate the spike generator of the translator for tvb to nest
     :param path: the path to the file for the connections
@@ -13,22 +14,28 @@ def simulate_nest_generator(path):
     '''
     # Init connection
 
-    max_mpi_connection_attempts = 50
+    np.savetxt(path+'//nest/spike_generator.txt',np.array([i for i in range(nb_generator)],dtype=int),fmt='%i')
+    np.savetxt(path+'//nest/spike_generator.txt.unlock',np.array([0],dtype=int),fmt='%i')
+
+    max_mpi_connection_attempts = 600 # wait 1min
     file_unlock=False
     for attempt in range(max_mpi_connection_attempts):
-        print("file to read",path);sys.stdout.flush()
-        if os.path.exists(path+".unlock"):
+        # print("file to read",path+file);sys.stdout.flush()
+        if os.path.exists(path+file+".unlock"):
+            print("file to read",path+file);sys.stdout.flush()
             print ("MPI connection file available after t={0} seconds".format(attempt));sys.stdout.flush()
             file_unlock=True
             break
+        else:
+            time.sleep(0.1)
 
     if file_unlock is False:
         print("Could file not unlocked after 20 attempts, exit");sys.stdout.flush()
         sys.exit (1)
 
-    print("Nest_Input:" + path)
+    print("Nest_Input:" + path+file)
     print("Nest_Input :Waiting for port details");sys.stdout.flush()
-    fport = open(path, "r")
+    fport = open(path+file, "r")
     port=fport.readline()
     fport.close()
     print("Nest_Input :wait connection "+port);sys.stdout.flush()
@@ -78,8 +85,8 @@ def simulate_nest_generator(path):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv)==2:
-        simulate_nest_generator(sys.argv[1])
+    if len(sys.argv)==4:
+        simulate_nest_generator(sys.argv[1],sys.argv[2],int(sys.argv[3]))
     else:
         print('missing argument')
 

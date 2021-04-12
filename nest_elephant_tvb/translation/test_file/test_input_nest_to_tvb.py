@@ -30,7 +30,7 @@ def simulate_spike_detector(path,min_delay):
     comm = MPI.COMM_WORLD.Connect(port)
     print('Nest Output : connect to '+ port) ;sys.stdout.flush()
 
-    starting = 0.0 # the begging of each time of synchronization
+    starting = 0.1 # the begging of each time of synchronization
     check = np.empty(1,dtype='b')
     status_ = MPI.Status() # status of the different message
     while True:

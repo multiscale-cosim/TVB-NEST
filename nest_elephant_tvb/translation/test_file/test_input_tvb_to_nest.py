@@ -14,14 +14,17 @@ def simulate_TVB_output(path,min_delay):
     :param min_delay: the time of one simulation
     :return:
     '''
-    max_mpi_connection_attempts = 50
+    max_mpi_connection_attempts = 600 # wait 1min
     file_unlock=False
     for attempt in range(max_mpi_connection_attempts):
-        print("file to read",path);sys.stdout.flush()
+        # print("file to read",path);sys.stdout.flush()
         if os.path.exists(path+".unlock"):
+            print("file to read",path);sys.stdout.flush()
             print ("MPI connection file available after t={0} seconds".format(attempt));sys.stdout.flush()
             file_unlock=True
             break
+        else:
+            time.sleep(0.1)
 
     if file_unlock is False:
         print("Could file not unlocked after 20 attempts, exit");sys.stdout.flush()
