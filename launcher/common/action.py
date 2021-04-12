@@ -82,8 +82,9 @@ class Action:
             self.__logger.info('Action <{}> was spawned successfully'.format(self.__action_xml_id))
 
             self.__logger.info('PPID={},PID={} is running action <{}>'.format(os.getpid(),  # Spawner PID
-                                                                            popen_process.pid,  # The spawned action PID
-                                                                            self.__action_xml_id, ))
+                                                                              popen_process.pid,
+                                                                              # The spawned action PID
+                                                                              self.__action_xml_id, ))
 
         #
         poll_rc = None

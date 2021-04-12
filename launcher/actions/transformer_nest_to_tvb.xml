@@ -16,14 +16,17 @@
             </par_000>
         </parameters>
         <action>
-            <!--
-            please use a name suggesting the components and the
-            direction of the flow, e.g. transformer_nest_output_into_tvb_input.py
-            -->
+            <launcher>
+                <launcher_command>{CO_SIM_LAUNCHER}</launcher_command>
+                <launcher_arguments>
+                    <argv_1_option>-n</argv_1_option>
+                    <argv_1_value>2</argv_1_value>
+                </launcher_arguments>
+            </launcher>
             <performer>
                 <performer_binary>python3</performer_binary>
                 <performer_arguments>
-                    <argv_01_empty>{CO_SIM_EMPTY}</argv_01_empty>
+                    <argv_1_empty>{CO_SIM_EMPTY}</argv_1_empty>
                 </performer_arguments>
             </performer>
             <routine>

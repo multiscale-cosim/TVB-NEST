@@ -32,6 +32,27 @@ CO_SIM_ARRANGEMENT_DUTIES_TUPLE = (
 )
 
 """
+CO_SIM_DATA_TYPES_TUPLE:
+    Represents the different kind of Co-Simulation Data Types
+    that could be used to define the Co-Simulation parameters
+    to be used on run time
+Meanings:
+    CO_SIM_FLOAT_PRECISION_1: The value will be converted into a float number by using #.0 mask
+                                e.g. 20 will become 20.0
+    CO_SIM_INTEGER: The content of the value XML element wil be converted into integer
+    CO_SIM_STRING: The content of the value XML element will remain the same,
+                    there will be no conversion action taken on it.
+"""
+CO_SIM_FLOAT_PRECISION_1 = 'CO_SIM_FLOAT_PRECISION_1'
+CO_SIM_INTEGER = 'CO_SIM_INTEGER'
+CO_SIM_STRING = 'CO_SIM_STRING'
+CO_SIM_DATA_TYPES_TUPLE = (
+    CO_SIM_FLOAT_PRECISION_1,
+    CO_SIM_INTEGER,
+    CO_SIM_STRING,
+)
+
+"""
 CO_SIM_ACTION_TYPES_TUPLE:
     Represents the different kinds of Co-Simulation actions
     that could be used as part of the <action_type> XML element,

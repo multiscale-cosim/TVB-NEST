@@ -25,6 +25,9 @@ class ActionsXmlManager(object):
                 nevertheless, goes through the actions dictionary
                 and each entry in the dictionary is processed
                 with the XMLManager sub-class __CoSimulationActionXmlManager
+
+        IMPORTANT: __CoSimulationActionXmlManager processes each XML Action particularly
+
     """
     __actions_popen_arguments_dict = {}
 
@@ -47,9 +50,13 @@ class ActionsXmlManager(object):
                 popen_arguments_list[index] = \
                     common.utils.transform_co_simulation_variables_into_values(variables_manager=self.__variables_manager,
                                                                                functional_variable_value=item)
-            except KeyError:
-                self.__logger.error('{} references to a CO_SIM_ variable not have been set yet'.format(item))
+            # except KeyError:
+            #     self.__logger.error('{} references to a CO_SIM_ variable not have been set yet'.format(item))
+            #     return common.enums.XmlManagerReturnCodes.XML_CO_SIM_VARIABLE_ERROR
+            except common.exceptions.CoSimVariableNotFound:
+                self.__logger.error('{} is being referenced, nevertheless the variable has not been set yet'.format(item))
                 return common.enums.XmlManagerReturnCodes.XML_CO_SIM_VARIABLE_ERROR
+
 
         # Removing those items with empty value, i.e. equal to ''
         if self.__variables_manager.get_value(variable_name=common.variables.CO_SIM_EMPTY) in popen_arguments_list:
@@ -129,6 +136,38 @@ class ActionsXmlManager(object):
             # TO BE DONE: there should be a global XML file where tags are defined
             self._component_xml_tag = common.xml_tags.CO_SIM_XML_ACTION_ROOT_TAG
 
+        def __dissect_launcher_section(self):
+            """
+                Fills the Popen list from the launcher section
+            :return:
+                XML_TAG_ERROR: Error found dissecting the launcher section of the action section
+                XML_OK: The launcher section was dumped properly into the Popen arguments list
+            """
+            # peformer bynary
+            try:
+                self.__Popen_arguments_list.append(
+                    self.__launcher_dict[common.xml_tags.CO_SIM_XML_ACTION_LAUNCHER_COMMAND])
+            except KeyError:
+                self._logger.error('{} has no <{}>...</{}> section'.format(self._xml_filename,
+                                                                           common.xml_tags.CO_SIM_XML_ACTION_LAUNCHER_COMMAND,
+                                                                           common.xml_tags.CO_SIM_XML_ACTION_LAUNCHER_COMMAND))
+                return common.enums.XmlManagerReturnCodes.XML_TAG_ERROR
+
+            # arguments for the launcher binary
+            try:
+                launcher_arguments_dict = self.__launcher_dict[common.xml_tags.CO_SIM_XML_ACTION_LAUNCHER_ARGUMENTS]
+            except KeyError:
+                self._logger.error('{} has no <{}>...</{}> section'.format(self._xml_filename,
+                                                                           common.xml_tags.CO_SIM_XML_ACTION_LAUNCHER_ARGUMENTS,
+                                                                           common.xml_tags.CO_SIM_XML_ACTION_LAUNCHER_ARGUMENTS))
+                return common.enums.XmlManagerReturnCodes.XML_TAG_ERROR
+
+            for key, value in launcher_arguments_dict.items():
+                # key = argv_NN -> Argument identification
+                self.__Popen_arguments_list.append(value)
+
+            return common.enums.XmlManagerReturnCodes.XML_OK
+        
         def __dissect_performer_section(self):
             """
                 Fills the Popen list from the performer section
@@ -210,6 +249,18 @@ class ActionsXmlManager(object):
                 self._logger.error('{} has no <{}>...</{}> section'.format(self._xml_filename,
                                                                            common.xml_tags.CO_SIM_XML_ACTION,
                                                                            common.xml_tags.CO_SIM_XML_ACTION))
+                return common.enums.XmlManagerReturnCodes.XML_TAG_ERROR
+
+            # launcher
+            try:
+                self.__launcher_dict = xml_action_dict[common.xml_tags.CO_SIM_XML_ACTION_LAUNCHER]
+            except KeyError:
+                self._logger.error('{} has no <{}>...</{}> section'.format(self._xml_filename,
+                                                                           common.xml_tags.CO_SIM_XML_ACTION_PERFORMER,
+                                                                           common.xml_tags.CO_SIM_XML_ACTION_PERFORMER))
+                return common.enums.XmlManagerReturnCodes.XML_TAG_ERROR
+
+            if not self.__dissect_launcher_section() == common.enums.XmlManagerReturnCodes.XML_OK:
                 return common.enums.XmlManagerReturnCodes.XML_TAG_ERROR
 
             # performer

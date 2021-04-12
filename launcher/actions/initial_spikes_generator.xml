@@ -16,6 +16,13 @@
             </par_000>
         </parameters>
         <action>
+            <launcher>
+                <launcher_command>{CO_SIM_LAUNCHER}</launcher_command>
+                <launcher_arguments>
+                    <argv_1_option>-n</argv_1_option>
+                    <argv_1_value>1</argv_1_value>
+                </launcher_arguments>
+            </launcher>
             <performer>
                 <performer_binary>python3</performer_binary>
                 <performer_arguments>

@@ -45,7 +45,8 @@ class VariablesManager(object):
             # Routines Directory Path
             common.variables.CO_SIM_ROUTINES_DIR: {
                 common.constants.CO_SIM_VARIABLE_DESCRIPTION: 'Co-Simulation Routines directory location',
-                common.constants.CO_SIM_VARIABLE_VALUE: None}, }
+                common.constants.CO_SIM_VARIABLE_VALUE: None},
+        }
 
     def get_value(self, variable_name=None):
         """
@@ -71,7 +72,7 @@ class VariablesManager(object):
 
         return self.__dict[variable_name]
 
-    def set_variable_values_from_variables_dict(self, variables_dictionary_source=None):
+    def set_co_sim_variable_values_from_variables_dict(self, variables_dictionary_source=None):
         """
 
         :param variables_dictionary_source: Dictionary containing Co-Simulation Variables (CO_SIM_*)
@@ -127,9 +128,41 @@ class VariablesManager(object):
                                                                                functional_variable_value=value)
             except common.exceptions.CoSimVariableNotFound as CoSimVariableNotFound:
                 self.__logger.error(CoSimVariableNotFound)
-                return common.enums.XmlManagerReturnCodes.XML_CO_SIM_VARIABLE_ERROR
+                # return common.enums.XmlManagerReturnCodes.XML_CO_SIM_VARIABLE_ERROR
+                return common.enums.ParametersReturnCodes.VARIABLE_NOT_FOUND
 
             # creating the new CO_SIM_ variable
             self.__dict[key] = {common.constants.CO_SIM_VARIABLE_DESCRIPTION: 'created on run time',
                                 common.constants.CO_SIM_VARIABLE_VALUE: runtime_variable_value}
         return common.enums.ParametersReturnCodes.PARAMETER_OK
+
+    def create_co_sim_run_time_variables(self, action_plan_variables_dict=None, action_plan_parameters_dict=None):
+        """
+            Sets RUN TIME Co-Simulation variables based on the content of the variables
+            and parameters set on the Action Plan XML file
+
+        :return:
+            VARIABLE_OK
+        """
+        # CO_SIM_LAUNCHER
+        try:
+            execution_environment = \
+                self.__dict[common.variables.CO_SIM_EXECUTION_ENVIRONMENT][common.constants.CO_SIM_VARIABLE_VALUE]
+        except KeyError:
+            self.__logger.error('{} has not been set yet'.format(common.variables.CO_SIM_EXECUTION_ENVIRONMENT))
+            return common.enums.VariablesReturnCodes.VARIABLE_NOT_OK
+        else:
+            if execution_environment.upper() == 'LOCAL':
+                self.__dict[common.variables.CO_SIM_LAUNCHER] = \
+                    {common.constants.CO_SIM_VARIABLE_DESCRIPTION: 'launcher created on run time',
+                     common.constants.CO_SIM_VARIABLE_VALUE: 'mpirun'}
+            elif execution_environment.upper() == 'CLUSTER':
+                self.__dict[common.variables.CO_SIM_LAUNCHER] = \
+                    {common.constants.CO_SIM_VARIABLE_DESCRIPTION: 'launcher created on run time',
+                     common.constants.CO_SIM_VARIABLE_VALUE: 'srun'}
+            else:
+                self.__logger.error('{} wrong value set. <LOCAL|CLUSTER>'.format(
+                    common.variables.CO_SIM_EXECUTION_ENVIRONMENT))
+                return common.enums.VariablesReturnCodes.VARIABLE_NOT_OK
+
+        return common.enums.VariablesReturnCodes.VARIABLE_OK

@@ -12,27 +12,45 @@
         </variables>
         <parameters>
             <par_000>
-                <!-- will be created on /path/to/results/dir provided by the configuration_manager -->
-                <par_name>CO_SIM_PARAMETERS_JSON_FILENAME</par_name>
-                <par_value>parameter.json</par_value>
+                <par_name>__no_parameter_name__</par_name>
+                <par_value>__no_parameter_value__</par_value>
             </par_000>
-            <par_001>
-                <par_name>CO_SIM_PARAMETERS_JSON_FILE_CONTENT</par_name>
-                <par_value>
-                    <!-- tag names will be used as object names for the JSON data file -->
-                    <param_TR_nest_to_tvb>
-                        <init>init_spikes.npy</init>
-                        <resolution>0.1</resolution>
-                        <!-- TO BE DONE: assign the proper value based on a XML parameter -->
-                        <synch>100</synch>
-                        <width>20.0</width>
-                        <nb_neurons>20</nb_neurons>
-                        <!-- TO BE DONE: Establishing the proper LOG LEVEL based on the
-                              value specified in the plan XML file -->
-                        <level_log>0</level_log>
-                    </param_TR_nest_to_tvb>
-                </par_value>
-            </par_001>
         </parameters>
+        <parameters_json_file>
+            <filename>parameter.json</filename>
+            <root_object>param_TR_nest_to_tvb</root_object>
+            <pairs>
+                <pair_001>
+                    <name>init</name>
+                    <value>init_spikes.npy</value>
+                    <data_type>CO_SIM_STRING</data_type>
+                </pair_001>
+                <pair_002>
+                    <name>resolution</name>
+                    <value>0.1</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_002>
+                <pair_003>
+                    <name>synch</name>
+                    <value>100</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_003>
+                <pair_004>
+                    <name>width</name>
+                    <value>20.0</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_004>
+                <pair_005>
+                    <name>nb_neurons</name>
+                    <value>20</value>
+                    <data_type>CO_SIM_INTEGER</data_type>
+                </pair_005>
+                <pair_006>
+                    <name>level_log</name>
+                    <value>0</value>
+                    <data_type>CO_SIM_INTEGER</data_type>
+                </pair_006>
+            </pairs>
+        </parameters_json_file>
     </co_simulation_parameters>
 </settings>

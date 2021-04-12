@@ -179,6 +179,7 @@ class ParametersReturnCodes(enum.Enum):
 
     PARAMETER_NOT_FOUND = 10
     VALUE_NOT_SET = 20
+    VARIABLE_NOT_FOUND = 30
 
 
 @enum.unique

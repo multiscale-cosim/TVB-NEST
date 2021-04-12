@@ -53,6 +53,7 @@ class CoSimulator:
     __actions_popen_args_dict = {}
 
     __parameters_parameters_dict = {}
+    __parameters_parameters_for_json_file_dict = {}
     __parameters_variables_dict = {}
 
     def generate_parameters_json_file(self):
@@ -68,12 +69,15 @@ class CoSimulator:
         # TO BE DONE: exception management when the file cannot be created
 
         results_dir = self.__configuration_manager.get_directory('results')
-        json_output_filename = self.__parameters_parameters_dict['CO_SIM_PARAMETERS_JSON_FILENAME']
+        json_output_filename = \
+            self.__parameters_parameters_for_json_file_dict[common.xml_tags.CO_SIM_XML_CO_SIM_PARAMS_FILENAME]
         json_output_path_filename = os.path.join(results_dir, json_output_filename)
 
         try:
             with open(json_output_path_filename, 'w') as json_output_file:
-                json.dump(self.__parameters_parameters_dict['CO_SIM_PARAMETERS_JSON_FILE_CONTENT'], json_output_file)
+                json.dump(
+                    self.__parameters_parameters_for_json_file_dict[common.xml_tags.CO_SIM_XML_CO_SIM_PARAMS_JSON_FILE],
+                    json_output_file)
         except OSError:
             self.__logger.error('{} cannot be created, OS error'.format(json_output_path_filename))
             return common.enums.CoSimulatorReturnCodes.JSON_FILE_OS_ERROR
@@ -111,7 +115,7 @@ class CoSimulator:
         self.__logger.info('Co-Simulator STEP 2 done, configuration manager started')
 
         ########
-        # STEP 3 - Setting Up the CO_SIM_* Variables Manager
+        # STEP 3 - Setting Up CO_SIM_* Variables by means of the Variables Manager
         ########
         self.__logger.info('Co-Simulator STEP 3 running')
         self.__variables_manager = \
@@ -120,6 +124,9 @@ class CoSimulator:
         # STEP 3.1 - Setting Up the output location (path) for results
         self.__variables_manager.set_value(common.variables.CO_SIM_RESULTS_DIR,
                                            self.__configuration_manager.get_directory('results'))
+
+        # STEP 3.2 - Setting Up the launcher command based on the environment
+
         self.__logger.info(
             f'Co-Simulator STEP 3 done, Co-Simulation results location: '
             f'{self.__variables_manager.get_value(common.variables.CO_SIM_RESULTS_DIR)}')
@@ -144,7 +151,8 @@ class CoSimulator:
         # STEP 4.3 -    Validating the references to the CO_SIM_* variables
         #               by filling up the environment variables dictionary
         if not common.enums.VariablesReturnCodes.VARIABLE_OK == \
-                self.__variables_manager.set_variable_values_from_variables_dict(self.__action_plan_variables_dict):
+               self.__variables_manager.set_co_sim_variable_values_from_variables_dict(
+                   self.__action_plan_variables_dict):
             return common.enums.CoSimulatorReturnCodes.VARIABLE_ERROR
 
         # Parameters -> Could contain references to CO_SIM_ variables and become new CO_SIM_ variables
@@ -154,11 +162,18 @@ class CoSimulator:
         # STEP 4.5 -    Validating the references to the CO_SIM_* variables on the <parameters> sections
         #               by creating the new CO_SIM_* variables by means of the variables manager
         if not common.enums.ParametersReturnCodes.PARAMETER_OK == \
-                self.__variables_manager.create_variables_from_parameters_dict(self.__action_plan_parameters_dict):
+               self.__variables_manager.create_variables_from_parameters_dict(self.__action_plan_parameters_dict):
             return common.enums.CoSimulatorReturnCodes.PARAMETER_ERROR
 
+        # STEP 4.6 - Creates Co-Simulation variables based on the information
+        #            set on the variables and parameters sections of the processing XML action plan file
+        if not common.enums.VariablesReturnCodes.VARIABLE_OK == \
+               self.__variables_manager.create_co_sim_run_time_variables(self.__action_plan_variables_dict,
+                                                                         self.__action_plan_parameters_dict):
+            return common.enums.CoSimulatorReturnCodes.VARIABLE_ERROR
+
         # Action Plan -> ordered and grouped sequence of actions to achieve the Co-Simulation Experiment
-        # STEP 4.6 - Getting the action plan per se
+        # STEP 4.7 - Getting the action plan per se
         self.__action_plan_dict = self.__plan_xml_manager.get_action_plan_dict()
 
         self.__logger.info('{} -> {}'.format(common.variables.CO_SIM_ACTIONS_DIR,
@@ -185,6 +200,9 @@ class CoSimulator:
 
         # STEP 5.3 - Getting the parameters found in the Co-Simulation Parameters file
         self.__parameters_parameters_dict = self.__parameters_xml_manager.get_parameters_dict()
+
+        # STEP 5.4 - Getting the Co-Simulation parameters to be dump into a json file
+        self.__parameters_parameters_for_json_file_dict = self.__parameters_xml_manager.get_parameter_for_json_dict()
 
         self.__logger.info('Co-Simulation parameters loaded from {}'.format(self.__args.parameters))
         self.__logger.info('Co-Simulator STEP 5 done')
@@ -237,12 +255,16 @@ class CoSimulator:
                                           configuration_manager=self.__configuration_manager,
                                           logger=self.__logger)
         if not self.__launcher.carry_out_action_plan() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+            self.__logger.error('Error(s) were reported, check the errors log on {}'.format(
+                self.__variables_manager.get_value(common.variables.CO_SIM_RESULTS_DIR)))
             return common.enums.CoSimulatorReturnCodes.LAUNCHER_ERROR
         self.__logger.info('Co-Simulator STEP 8 done')
 
         ########
         # STEP 10 - Finishing
         ########
+        self.__logger.info('Information about Co-Simulation process could be found on: {}'.format(
+            self.__variables_manager.get_value(common.variables.CO_SIM_RESULTS_DIR)))
         self.__logger.info('END: Co-Simulation Co-Simulator')
 
         return common.enums.CoSimulatorReturnCodes.OK

@@ -68,7 +68,7 @@ class Spawner(multiprocessing.Process):
             # getting next action (task) to be spawned
             try:
                 # TO BE DONE: Configuring the timeout value from XML files
-                picked_action = self.__actions_to_be_carried_out.get(timeout=1)
+                picked_action = self.__actions_to_be_carried_out.get(timeout=5)
             except queue.Empty:
                 self.__logger.info('{}: waiting for a new action (task)'.format(self.__spawner_label))
 
@@ -76,6 +76,9 @@ class Spawner(multiprocessing.Process):
 
                 # after informing it's still alive, goes for an action again
                 continue
+            except KeyboardInterrupt:
+                picked_action = None
+                self.__logger.info('KeyboardInterrupt caught by {}'.format(self.__spawner_label))
 
             # Checking if the Launcher has put the poison pill
             # which is considered the "normal" ending procedure
@@ -101,9 +104,10 @@ class Spawner(multiprocessing.Process):
                 returned_code = picked_action.spawn_the_action(stop_action_event=self.__stop_action_event)
             except KeyboardInterrupt:
                 self.__logger.info('{} caught KeyboardInterrupt'.format(self.__spawner_label))
+
                 # Setting up the peremptory finishing request for the picked Action
                 self.__stop_action_event.set()
-                # JUST FOR TESTING time.sleep(1)
+                # JUST FOR TESTING ->time.sleep(1)
             else:
                 self.__logger.info('{}: the <{}> action has finished'.format(self.__spawner_label,
                                                                              picked_action.get_action_xml_id()))
