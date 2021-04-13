@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_parameters>
+        <title>Simple Parameters</title>
+        <description>Simple Parameters</description>
+        <variables>
+            <!-- no variables defined -->
+            <var_000>
+                <var_name>__no_variable_name__</var_name>
+                <var_value>__no_variable_value__</var_value>
+            </var_000>
+        </variables>
+        <parameters>
+            <par_000>
+                <par_name>__no_parameter_name__</par_name>
+                <par_value>__no_parameter_value__</par_value>
+            </par_000>
+        </parameters>
+        <parameters_json_file>
+            <filename>simple.json</filename>
+            <root_object>json_root_object</root_object>
+            <pairs>
+                <pair_001>
+                    <name>string_parameter</name>
+                    <value>AStringConstant</value>
+                    <data_type>CO_SIM_STRING</data_type>
+                </pair_001>
+                <pair_002>
+                    <name>float_parameter</name>
+                    <value>3.1416</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_002>
+                <pair_003>
+                    <name>integer_parameter</name>
+                    <value>61413</value>
+                    <data_type>CO_SIM_INTEGER</data_type>
+                </pair_003>
+            </pairs>
+        </parameters_json_file>
+    </co_simulation_parameters>
+</settings>

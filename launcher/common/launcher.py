@@ -337,7 +337,7 @@ class Launcher(object):
         there_was_an_error = False
         while not self.__actions_return_codes_q.empty():
             current_action_result = self.__actions_return_codes_q.get()
-            if current_action_result == 0:
+            if current_action_result == common.enums.ActionReturnCodes.OK:
                 continue
             else:
                 there_was_an_error = True

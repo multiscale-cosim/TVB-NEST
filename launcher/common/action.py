@@ -54,7 +54,9 @@ class Action:
         self.__logger.debug('event {}, spawning {}, {}'.format(self.__event_action_xml_id,
                                                                self.__action_xml_id,
                                                                self.__action_popen_args_list))
-        print('{},{}'.format(self.__action_xml_id, self.__action_popen_args_list))
+        """
+        # print('__spawning_troubleshooting__, {},{}'.format(self.__action_xml_id, self.__action_popen_args_list))
+        """
         try:
             # Turning off output buffering for the child process
             os.environ['PYTHONUNBUFFERED'] = "1"
