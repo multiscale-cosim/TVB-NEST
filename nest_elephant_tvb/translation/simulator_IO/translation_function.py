@@ -69,6 +69,9 @@ class TranslationSpikeRate(MPICommunicationExtern):
             hist = self.add_spikes(count,
                                    self.communication_internal.shape_buffer[0],
                                    self.communication_internal.databuffer)
+
+            # Step 2.2 : INTERNAL: end get spike (important to be here for optimization/synchronization propose)
+            self.communication_internal.get_spikes_release()
             # optional save the histogram
             if self.save_hist:
                 if count % self.save_hist_count == 0:
@@ -79,9 +82,6 @@ class TranslationSpikeRate(MPICommunicationExtern):
                     self.save_hist_buf = hist
                 else:
                     self.save_hist_buf = np.concatenate((self.save_hist_buf, hist))
-
-            # Step 2.2 : INTERNAL: end get spike (important to be here for optimization/synchronization propose)
-            self.communication_internal.get_spikes_release()
 
             # Step 2.3: Analyse this data, i.e. calculate mean firing rate
             self.logger.info('TSR : analise')

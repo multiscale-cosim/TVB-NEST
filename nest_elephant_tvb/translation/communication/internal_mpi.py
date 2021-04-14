@@ -152,9 +152,9 @@ class MPICommunication(CommunicationInternAbstract):
         self.request_read_buffer.wait()
         self.logger.info("MPI Internal : read(ready) : receive size : rank "
                          + str(self.rank)+" from "+str(self.buffer_r_w[1]))
-        send_state = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[1])
+        send_shape = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[1])
         self.logger.info("MPI Internal : read(ready) : receive size wait")
-        return send_state.wait(status=status_)
+        return send_shape.wait(status=status_)
 
     def end_read(self):
         """

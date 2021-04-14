@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>8</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>288</x>
-      <y>32</y>
-      <w>16</w>
-      <h>16</h>
+      <x>300</x>
+      <y>102</y>
+      <w>12</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>type=initial</panel_attributes>
     <additional_attributes/>
@@ -15,10 +15,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>40</y>
-      <w>24</w>
-      <h>56</h>
+      <x>300</x>
+      <y>108</y>
+      <w>18</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
@@ -26,10 +26,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>136</y>
-      <w>128</w>
-      <h>32</h>
+      <x>264</x>
+      <y>180</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>Initialise Nest</panel_attributes>
     <additional_attributes/>
@@ -37,10 +37,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>208</x>
-      <y>192</y>
-      <w>192</w>
-      <h>32</h>
+      <x>240</x>
+      <y>222</y>
+      <w>144</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>Initialise population of neurons</panel_attributes>
     <additional_attributes/>
@@ -49,20 +49,21 @@
     <id>UMLState</id>
     <coordinates>
       <x>240</x>
-      <y>248</y>
-      <w>128</w>
-      <h>32</h>
+      <y>264</y>
+      <w>144</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>Initialise connection</panel_attributes>
+    <panel_attributes>Initialise connection 
+between neuron population</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>80</y>
-      <w>128</w>
-      <h>32</h>
+      <x>264</x>
+      <y>138</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>configure logger</panel_attributes>
     <additional_attributes/>
@@ -70,10 +71,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>680</y>
-      <w>128</w>
-      <h>32</h>
+      <x>264</x>
+      <y>678</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>count + 1</panel_attributes>
     <additional_attributes/>
@@ -81,10 +82,10 @@
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>280</x>
-      <y>760</y>
-      <w>32</w>
-      <h>32</h>
+      <x>294</x>
+      <y>738</y>
+      <w>24</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -92,10 +93,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>160</y>
-      <w>24</w>
-      <h>48</h>
+      <x>300</x>
+      <y>198</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -103,10 +104,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>216</y>
-      <w>24</w>
-      <h>48</h>
+      <x>300</x>
+      <y>240</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -114,10 +115,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>272</y>
-      <w>24</w>
-      <h>48</h>
+      <x>300</x>
+      <y>282</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -125,10 +126,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>104</y>
-      <w>24</w>
-      <h>48</h>
+      <x>300</x>
+      <y>156</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -136,10 +137,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>400</y>
-      <w>24</w>
-      <h>48</h>
+      <x>300</x>
+      <y>468</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -147,10 +148,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>648</y>
-      <w>24</w>
-      <h>48</h>
+      <x>300</x>
+      <y>654</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -158,10 +159,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>704</y>
-      <w>96</w>
-      <h>72</h>
+      <x>300</x>
+      <y>696</y>
+      <w>72</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 count &gt; end</panel_attributes>
@@ -170,22 +171,22 @@ count &gt; end</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>304</x>
-      <y>568</y>
-      <w>208</w>
-      <h>224</h>
+      <x>312</x>
+      <y>540</y>
+      <w>156</w>
+      <h>222</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 False</panel_attributes>
-    <additional_attributes>10.0;260.0;210.0;260.0;210.0;10.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;350.0;210.0;350.0;210.0;10.0;160.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>784</y>
-      <w>48</w>
-      <h>64</h>
+      <x>300</x>
+      <y>756</y>
+      <w>36</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 True</panel_attributes>
@@ -194,21 +195,21 @@ True</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>880</y>
-      <w>24</w>
-      <h>56</h>
+      <x>300</x>
+      <y>828</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>288</x>
-      <y>920</y>
-      <w>16</w>
-      <h>16</h>
+      <x>300</x>
+      <y>852</y>
+      <w>12</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>type=final</panel_attributes>
     <additional_attributes/>
@@ -216,10 +217,10 @@ True</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>432</y>
-      <w>128</w>
-      <h>32</h>
+      <x>264</x>
+      <y>492</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>count = 0</panel_attributes>
     <additional_attributes/>
@@ -227,10 +228,10 @@ True</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>456</y>
-      <w>24</w>
-      <h>48</h>
+      <x>300</x>
+      <y>510</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -238,10 +239,10 @@ True</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>184</x>
-      <y>352</y>
-      <w>256</w>
-      <h>56</h>
+      <x>222</x>
+      <y>432</y>
+      <w>192</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>Nest Prepare
 --
@@ -254,10 +255,10 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>192</x>
-      <y>488</y>
-      <w>240</w>
-      <h>168</h>
+      <x>228</x>
+      <y>534</y>
+      <w>180</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Nest Run
 --
@@ -280,10 +281,10 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>208</x>
-      <y>832</y>
-      <w>240</w>
-      <h>56</h>
+      <x>240</x>
+      <y>792</y>
+      <w>180</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>Nest Clean
 --
@@ -296,10 +297,10 @@ valign=top
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>216</x>
-      <y>0</y>
-      <w>152</w>
-      <h>24</h>
+      <x>252</x>
+      <y>78</y>
+      <w>114</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>Wrapper of NEST</panel_attributes>
     <additional_attributes/>
@@ -307,23 +308,81 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>216</x>
-      <y>304</y>
-      <w>192</w>
-      <h>32</h>
+      <x>240</x>
+      <y>306</y>
+      <w>144</w>
+      <h>24</h>
     </coordinates>
-    <panel_attributes>Create file with id of mpi device</panel_attributes>
+    <panel_attributes>Create file with ids
+of mpi stimulating devices</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>328</y>
-      <w>24</w>
-      <h>40</h>
+      <x>300</x>
+      <y>408</y>
+      <w>18</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>240</x>
+      <y>348</y>
+      <w>144</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Create file with ids
+of mpi recording devices</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>294</x>
+      <y>342</y>
+      <w>18</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>240</x>
+      <y>390</y>
+      <w>144</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Wait for description of 
+MPI port files</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>324</y>
+      <w>18</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>366</y>
+      <w>18</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
 </diagram>
