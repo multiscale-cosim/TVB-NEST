@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_parameters>
+        <title>NEST to TVB parameters</title>
+        <description>Parameters used by nest_to_tvb.py transformer</description>
+        <variables>
+            <!-- no variables defined -->
+            <var_000>
+                <var_name>__no_variable_name__</var_name>
+                <var_value>__no_variable_value__</var_value>
+            </var_000>
+        </variables>
+        <parameters>
+            <par_000>
+                <par_name>__no_parameter_name__</par_name>
+                <par_value>__no_parameter_value__</par_value>
+            </par_000>
+        </parameters>
+        <parameters_json_file>
+            <filename>parameter.json</filename>
+            <root_object>param_TR_nest_to_tvb</root_object>
+            <pairs>
+                <pair_001>
+                    <name>init</name>
+                    <value>init_spikes.npy</value>
+                    <data_type>CO_SIM_STRING</data_type>
+                </pair_001>
+                <pair_002>
+                    <name>resolution</name>
+                    <value>0.1</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_002>
+                <pair_003>
+                    <name>synch</name>
+                    <value>100</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_003>
+                <pair_004>
+                    <name>width</name>
+                    <value>20.0</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_004>
+                <pair_005>
+                    <name>nb_neurons</name>
+                    <value>20</value>
+                    <data_type>CO_SIM_INTEGER</data_type>
+                </pair_005>
+                <pair_006>
+                    <name>level_log</name>
+                    <value>0</value>
+                    <data_type>CO_SIM_INTEGER</data_type>
+                </pair_006>
+            </pairs>
+        </parameters_json_file>
+    </co_simulation_parameters>
+</settings>

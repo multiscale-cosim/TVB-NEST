@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_action>
+        <title>Nest to TVB Transformer</title>
+        <description>Nest to TVB Transformer</description>
+        <variables>
+            <var_000>
+                <var_name>__no_variable_name__</var_name>
+                <var_value>__no_variable_value__</var_value>
+            </var_000>
+        </variables>
+        <parameters>
+            <par_000>
+                <par_name>__no_parameter_name__</par_name>
+                <par_value>__no_parameter_value__</par_value>
+            </par_000>
+        </parameters>
+        <action>
+            <launcher>
+                <launcher_command>{CO_SIM_LAUNCHER}</launcher_command>
+                <launcher_arguments>
+                    <argv_1_option>-n</argv_1_option>
+                    <argv_1_value>2</argv_1_value>
+                </launcher_arguments>
+            </launcher>
+            <performer>
+                <performer_binary>python3</performer_binary>
+                <performer_arguments>
+                    <argv_1_empty>{CO_SIM_EMPTY}</argv_1_empty>
+                </performer_arguments>
+            </performer>
+            <routine>
+                <routine_code>{CO_SIM_ROUTINES_DIR}/nest_elephant_tvb/translation/nest_to_tvb.py</routine_code>
+                <routine_arguments>
+                    <argv_1_results_dir>{CO_SIM_RESULTS_DIR}</argv_1_results_dir>
+                    <argv_2_input_file>{CO_SIM_INPUT_FILE}</argv_2_input_file>
+                    <argv_3_output_file>{CO_SIM_OUTPUT_FILE}</argv_3_output_file>
+                </routine_arguments>
+            </routine>
+        </action>
+    </co_simulation_action>
+</settings>
