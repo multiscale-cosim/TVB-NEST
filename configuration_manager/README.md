@@ -13,8 +13,8 @@ It provides with the basic functionalities including the directory management, l
 * **xml_parser.py**: It provides the functionalities for parsing an xml file and to manipulate it (e.g. converting an xml element tree into dictionary etc.). 
 * **config_logger.py**: Creates and configure logger using specified name and configuration settings.
 * **configurations_manager.py**: Mediator to communicate with all modules and a central point to manage the configurations.
-* **utils/directory_util.py**: Utility methods for directory management such as to safely creating a directory where there is a race condition i.e. multiple processes try to create the same directory.
-* **utils/dictionary_util.py**: Utility methods to manipulate the nested dictionaries such as to find a set a value in a nested dictionary.
+* **utils/directory_utils.py**: Utility methods for directory management such as to safely creating a directory where there is a race condition i.e. multiple processes try to create the same directory.
+* **utils/dictionary_utils.py**: Utility methods to manipulate the nested dictionaries such as to find and set a value in a nested dictionary.
 
 ## Example
 
