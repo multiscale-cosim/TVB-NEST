@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <settings>
+    <!--
+    <uuid> 128-bit universally unique identifier that is generated using a timestamp and
+    the MAC address of the computer on which it was generated.
+    -->
+    <uuid>fb76f166-9954-11eb-a8b3-0242ac130003</uuid>
+    <version>1.0</version>
+    <!--
+    The path to co-simulation outputs is defined here.
+    The output directories (such as results, logs, figures etc) will be
+    nested inside this location. The followings is provided as a working example.
+    It can be replaced with for example ${TARGET_LOCATION}/TVB-NEST/outputs
+    -->
+    <output_directory>Cosimulation_outputs</output_directory>
     <orchestrator>
         <executors>
           <local>
