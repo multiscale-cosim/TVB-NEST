@@ -397,20 +397,20 @@ if __name__ == '__main__':
     #             # save_path='../../mouse_3d.png'
     #             )
 
-    # mouse brain with logo
-    # print_mouse('../../parameter/data_mouse/','mouse_brain.stl','centres.txt',
-    #             [71/255,164/255,226/255,1.0],[255 / 255, 104 / 255, 65 / 255, 0.5],Nest_node = [26,78],
+    # # mouse brain with logo
+    # print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+    #             [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5], Nest_node=[26, 78],
     #             # save_path='../../mouse_3d.png',
-    #             logo=['../../analyse/3d_image/logo_Nest.png','../../analyse/3d_image/logo_TVB.png'],
+    #             logo=['../../analyse/3d_image/logo_Nest.png', '../../analyse/3d_image/logo_TVB.png'],
     #             transparency=0.3,
     #             # save_path='../../mouse_3d_logo.png'
     #             )
 
     # mouse brian with electrode
-    print_mouse('../../parameter/data_mouse/','mouse_brain.stl','centres.txt',
-                [71/255,164/255,226/255,1.0],[255 / 255, 104 / 255, 65 / 255, 0.5],
-                Nest_node = [26,78],
-                electrode='electrode_hypocampus.txt',  electrode_ECOG='sensor_hypocampus.txt' ,
-                transparency=0.2 # or 1.0
+    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+                [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5],
+                Nest_node=[26, 78],
+                electrode='electrode_hypocampus.txt', electrode_ECOG='sensor_hypocampus.txt',
+                transparency=0.2  # or 1.0
                 # save_path='../../mouse_3d.png'
                 )

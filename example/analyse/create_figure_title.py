@@ -4,17 +4,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import networkx as nx
 
-def create_figure_title(param, data_1, result_raw, image=None, alpha_image=0.4, threshold=1.0, size_edges=1.0, color_Nest='royalblue', color_TVB='tomato',
-                       size_node_TVB=50.0, size_node_Nest=100.0, alpha_node=1.0, size_neurons=0.1):
+
+def create_figure_title(param, data_1, result_raw, image=None, alpha_image=0.4, threshold=1.0, size_edges=1.0,
+                        color_Nest='royalblue', color_TVB='tomato',
+                        size_node_TVB=50.0, size_node_Nest=100.0, alpha_node=1.0, size_neurons=0.1):
     """
     print three figure and some text about the connectome for the simulation
     :param param: parameter for the simulation
-    # parameter for display the graph (only available if the centers of regions is available)
+    :param data_1: plot mean firing rate
+    :param result_raw: plot spike trains
     # parameter for the background image
-    :param data_1 : Nest data
-    :param result_raw : TVB data
     :param image: the image to ad in background of the graph
-    :param alpha_image: the transparency of the image
+    :param alpha_image: the transparency of the background image
     # parameter for edge of the graph
     :param threshold: the threshold for the plotting edge of the connectome
     :param size_edges: size of the line of the edges
@@ -24,6 +25,7 @@ def create_figure_title(param, data_1, result_raw, image=None, alpha_image=0.4, 
     :param size_node_TVB: the size of the node simulate with TVB
     :param size_node_Nest: the size of the node simulate with Nest
     :param alpha_node: the transparency of the node
+    :param size_neurons: size of the marker for neurons
     :return:
     """
     weights = np.load(param['param_nest_connection']["path_weight"])
@@ -56,7 +58,6 @@ def create_figure_title(param, data_1, result_raw, image=None, alpha_image=0.4, 
             node_shape='o', alpha=alpha_node)
     # display an image if one is give (change perhaps the format)
     if image is not None:
-        image = np.load(image)
         plt.imshow(image, cmap='gray', vmin=image.min(), vmax=image.max(), alpha=alpha_image)
         plt.xlim(xmax=image.shape[1], xmin=0)
         plt.ylim(ymax=image.shape[0], ymin=0)
@@ -66,23 +67,23 @@ def create_figure_title(param, data_1, result_raw, image=None, alpha_image=0.4, 
 
     plt.subplot(143)
     times = result_raw[0]
-    state_variable = np.concatenate(result_raw[1]).reshape((result_raw[1].shape[0], 7, nb_regions))  # shape : time, state variable, region
+    state_variable = np.concatenate(result_raw[1]).reshape(
+        (result_raw[1].shape[0], 7, nb_regions))  # shape : time, state variable, region
     for id in ids:
-        state_variable[:,0,id] /=2
-    max_rate_E = np.nanmax(state_variable[:, 0, :]) * 1e3 +10.0
+        state_variable[:, 0, id] /= 2
+    max_rate_E = np.nanmax(state_variable[:, 0, :]) * 1e3 + 10.0
     for i in range(int(nb_regions)):
         plt.plot(times, state_variable[:, 0, i] * 1e3 + i * max_rate_E, color=color_TVB)
     for i in ids:
         plt.gca().lines[i].set_color(color_Nest)
     plt.axis('off')
 
-
     spikes_ex = data_1['pop_1_ex']
     spikes_in = data_1['pop_1_in']
     plt.subplot(244)
     for i in range(spikes_ex[0].shape[0]):
         plt.plot(spikes_ex[1][i], np.repeat(spikes_ex[0][i], spikes_ex[1][i].shape[0]), '.b',
-             markersize=size_neurons)
+                 markersize=size_neurons)
     for i in range(spikes_in[0].shape[0]):
         plt.plot(spikes_in[1][i], np.repeat(spikes_in[0][i], spikes_in[1][i].shape[0]), '.r',
                  markersize=size_neurons)
@@ -93,41 +94,46 @@ def create_figure_title(param, data_1, result_raw, image=None, alpha_image=0.4, 
     plt.subplot(248)
     for i in range(spikes_ex[0].shape[0]):
         plt.plot(spikes_ex[1][i], np.repeat(spikes_ex[0][i], spikes_ex[1][i].shape[0]), '.b',
-             markersize=size_neurons)
+                 markersize=size_neurons)
     for i in range(spikes_in[0].shape[0]):
         plt.plot(spikes_in[1][i], np.repeat(spikes_in[0][i], spikes_in[1][i].shape[0]), '.r',
                  markersize=size_neurons)
     plt.axis('off')
-
-
-
     plt.show()
+
+
 # Test the function, helping for debugging
 if __name__ == '__main__':
-    from example.analyse.get_data import get_data_all,get_rate
-    param = { 'param_nest_connection':{"path_weight":'../../example/parameter/data_mouse/weights.npy',
+    from example.analyse.get_data import get_data_all, get_rate
+    import h5py
+
+    param = {'param_nest_connection': {"path_weight": '../../example/parameter/data_mouse/weights.npy',
                                        "path_distance": '../../example/parameter/data_mouse/distance.npy',
-                                        "velocity":3.0},
-              'param_co_simulation':{"id_region_nest":[29,81]},
-              'param_nest_topology':{"nb_region":104},
-              'param_tvb_connection':{'path_region_labels':'../../example/parameter/data_mouse/region_labels.txt',
-                                      'path_centers':'../../example/parameter/data_mouse/centres.txt'
+                                       "velocity": 3.0},
+             'param_co_simulation': {"id_region_nest": [29, 81]},
+             'param_nest_topology': {"nb_region": 104},
+             'param_tvb_connection': {'path_region_labels': '../../example/parameter/data_mouse/region_labels.txt',
+                                      'path_centers': '../../example/parameter/data_mouse/centres.txt'
                                       }
-              }
-    ## Test of colors
+             }
+    # Test color for TVB and Nest
     # color_Nest = 'royalblue'
     # color_TVB  = 'tomato'
     # color_Nest = 'darkviolet'
-    color_Nest = 'gold'
+    # color_Nest = 'gold'
+    color_Nest = [255 / 255, 104 / 255, 65 / 255]
     # color_TVB  = 'darkturquoise'
     # color_TVB  = 'lightseagreen'
     # color_TVB  = 'mediumturquoise'
-    color_TVB  = 'darkgreen'
+    # color_TVB  = 'darkgreen'
+    color_TVB = [71 / 255, 164 / 255, 226 / 255]
 
-    datas = get_data_all('../../example/long_simulation/nest/')
+    data = get_data_all('../../example/long_simulation/nest/')
     result_raw = get_rate('../../example/long_simulation/tvb/')[0]  # result of the Raw monitor
 
-    create_figure_title(param, datas, result_raw, image='../../example/parameter/data_mouse/StruturalMRI_allen_40.npy',
-                       color_Nest=color_Nest, color_TVB=color_TVB,
-                       size_edges=0.5,
-                       threshold=0.05, size_neurons=0.1)
+    image_FMRI = h5py.File('../../example/parameter/data_mouse/StructuralMRI.h5', 'r', libver='latest')['array_data'][:, :, 40].T
+    create_figure_title(param, data, result_raw, image=image_FMRI,
+                        color_Nest=color_Nest, color_TVB=color_TVB,
+                        alpha_image=1.0,
+                        size_edges=0.5,
+                        threshold=0.05, size_neurons=1)

@@ -1,13 +1,14 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
-
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
 import networkx as nx
 
-def display_connectome(param, image=None, alpha_image=0.4, threshold=1.0, size_edges=1.0, color_Nest='royalblue', color_TVB='tomato',
-                       size_node_TVB=50.0, size_node_Nest=100.0, alpha_node=1.0):
+
+def display_connectome(param, image=None, alpha_image=0.4, threshold=1.0, size_edges=1.0, color_Nest='royalblue',
+                       color_TVB='tomato', size_node_TVB=50.0, size_node_Nest=100.0,
+                       alpha_node=1.0, figsize=(20, 20)):
     """
     print three figure and some text about the connectome for the simulation
     :param param: parameter for the simulation
@@ -24,6 +25,7 @@ def display_connectome(param, image=None, alpha_image=0.4, threshold=1.0, size_e
     :param size_node_TVB: the size of the node simulate with TVB
     :param size_node_Nest: the size of the node simulate with Nest
     :param alpha_node: the transparency of the node
+    :param figsize: size of the figure
     :return:
     """
     weights = np.load(param['param_nest_connection']["path_weight"])
@@ -52,6 +54,7 @@ def display_connectome(param, image=None, alpha_image=0.4, threshold=1.0, size_e
     cs = axis_2.imshow(delays)
     fig.colorbar(cs, fraction=0.046, pad=0.04, ax=axis_2)
     axis_2.set_title('Delay connectivity matrix', fontsize=15)
+
     # Create a Rectangle patch
     for i in ids:
         rect = Rectangle((0, i), nb_regions, 1, linewidth=1, edgecolor=color_Nest, facecolor='none')
@@ -95,38 +98,45 @@ def display_connectome(param, image=None, alpha_image=0.4, threshold=1.0, size_e
         size_nodes[ids] = size_node_Nest
 
         # create the graph and print it
-        fig, ax = plt.subplots(figsize=(9.5, 6))
+        fig, ax = plt.subplots(figsize=figsize)
         G = nx.from_numpy_matrix(weights_threshold)
         nx.draw(G, width=size_edges, pos=Nposition, edge_color='#909089', ax=ax, node_color=color_nodes,
                 node_size=size_nodes,
                 node_shape='o', alpha=alpha_node)
         # display an image if one is give (change perhaps the format)
         if image is not None:
-            image = np.load(image)
             plt.imshow(image, cmap='gray', vmin=image.min(), vmax=image.max(), alpha=alpha_image)
             plt.xlim(xmax=image.shape[1], xmin=0)
             plt.ylim(ymax=image.shape[0], ymin=0)
         else:
-            plt.xlim(xmax=np.max(Nposition[:, 0]) + 0.1, xmin=np.min(Nposition[:, 0]) - 0.1)
-            plt.ylim(ymax=np.max(Nposition[:, 1]) + 0.1, ymin=np.min(Nposition[:, 1]) - 0.1)
-    plt.show()
+            plt.xlim(xmax=np.max(Nposition[:, 0]) + size_node_TVB * 1.1e-1,
+                     xmin=np.min(Nposition[:, 0]) - size_node_TVB * 1.1e-1)
+            plt.ylim(ymax=np.max(Nposition[:, 1]) + size_node_TVB * 1.1e-1,
+                     ymin=np.min(Nposition[:, 1]) - size_node_TVB * 1.1e-1)
+            plt.subplots_adjust(top=1.0, bottom=0.0, right=1.0, left=0.0)
+        ax.invert_yaxis()
 
-# Test the function, helping for debugging
+
 if __name__ == '__main__':
-    from example.analyse.get_data import get_data_all,get_rate
-    param = { 'param_nest_connection':{"path_weight":'../../example/parameter/data_mouse/weights.npy',
+    import h5py
+    param = {'param_nest_connection': {"path_weight": '../../example/parameter/data_mouse/weights.npy',
                                        "path_distance": '../../example/parameter/data_mouse/distance.npy',
-                                        "velocity":3.0},
-              'param_co_simulation':{"id_region_nest":[29,81]},
-              'param_nest_topology':{"nb_region":104},
-              'param_tvb_connection':{'path_region_labels':'../../example/parameter/data_mouse/region_labels.txt',
-                                      'path_centers':'../../example/parameter/data_mouse/centres.txt'
+                                       "velocity": 3.0},
+             'param_co_simulation': {"id_region_nest": [26, 78]},
+             'param_nest_topology': {"nb_region": 104},
+             'param_tvb_connection': {'path_region_labels': '../../example/parameter/data_mouse/region_labels.txt',
+                                      'path_centers': '../../example/parameter/data_mouse/centres.txt'
                                       }
-              }
-    color_Nest = 'gold'
-    color_TVB = 'darkgreen'
-
-    display_connectome(param, image='../../example/parameter/data_mouse/StruturalMRI_allen_40.npy',
+             }
+    color_Nest = [255 / 255, 104 / 255, 65 / 255]
+    color_TVB = [71 / 255, 164 / 255, 226 / 255]
+    image_FMRI = h5py.File('../../example/parameter/data_mouse/StructuralMRI.h5', 'r', libver='latest')['array_data'][:, :, 40].T
+    # display_connectome(param, image=image_FMRI,
+    #                    color_Nest=color_Nest, color_TVB=color_TVB,
+    #                    size_edges=0.5,
+    #                    threshold=0.05)
+    # plt.show()
+    display_connectome(param,
                        color_Nest=color_Nest, color_TVB=color_TVB,
-                       size_edges=0.5,
-                       threshold=0.05)
+                       alpha_image=1.0, size_edges=0.5, threshold=0.05, figsize=(10, 20))
+    plt.show()
