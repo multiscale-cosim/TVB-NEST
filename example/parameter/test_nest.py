@@ -259,7 +259,12 @@ param_tvb_monitor = {
         'variables_of_interest': [0],
         # 'period':param_nest['sim_resolution']*20000.0 # 20 min assuming the step size is 0.1 ms
     },
-    'SEEG': False
+    'ECOG': False,
+    'parameter_ECOG': {
+        #'path': , # path of sensor
+        # 'scaling':,
+        # 'sigma_noise'
+    },
 }
 
 # Parameters for the translator Nest to TVB
