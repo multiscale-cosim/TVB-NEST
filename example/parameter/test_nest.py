@@ -18,16 +18,16 @@ param_co_simulation = {
     # save or not nest( result with MPI )
     'record_MPI': False,
     # id of region simulate by nest
-    'id_region_nest': [],
+    'id_region_nest': [2, 5],
     # time of synchronization between node
-    'synchronization': 0.,  # Todo compute with the min of delay
+    'synchronization': 1.0,  # Todo compute with the min of delay
     # level of log : debug 0, info 1, warning 2, error 3, critical 4
     'level_log': 1,
     # command to launch mpi executable:
     'mpi': ['mpirun'],  # example : ['mpirun'] , ['srun','-N','1']
     # Number of process for the translation : 3 => MPI internal communication and 1 => thread internal communication
     # thread version doesn't work for cluster due to python interruption of MPI function
-    'translation_thread': 3
+    'translation_thread': False
 }
 
 # parameter simulators
@@ -37,7 +37,7 @@ param_nest = {
     # Masterseed for NEST and NumPy.
     'master_seed': 46,
     # Number of threads per MPI process.
-    'total_num_virtual_procs': 16,
+    'total_num_virtual_procs': 3,
     # If True, data will be overwritten,
     # If False, a NESTError is raised if the files already exist.
     'overwrite_files': True,
@@ -161,10 +161,10 @@ param_nest_background = {
     # stimulus populatin target
     'stimulus_target': 0,
     # multimeter => ask a lot of memory
-    'multimeter': True,
+    'multimeter': False,
     'multimeter_list': {'pop_1_ex_VM': (['V_m'], 0, 10), 'pop1_ex_W': (['w'], 0, 10),
                         'pop_1_in_VM': (['V_m'], 800, 810), 'pop1_in_W': (['w'], 800, 810)},
-    'record_spike': True,
+    'record_spike': False,
     'record_spike_list': {'pop_1_ex': (0, 799), 'pop_2_ex': (1000, 1799), 'pop_1_in': (800, 999),
                           'pop_2_in': (1800, 1999)},
 }
@@ -196,10 +196,6 @@ param_tvb_integrator = {
     # seed for the initialisation of the history
     # 'master_seed_init': param_nest['master_seed']-2
     # parameters for a special noise
-    'tau_OU': 20.0,
-    'mu': [700e-3, 0.0, 0., 0.0, 0.0, 0.0, 0.0],
-    'nsig': [50e-3, 0., 0., 0., 0., 0., 0.],
-    'weights': [1.e-2, 0., 0., 0., 0., 0., 0.],
 }
 
 # parameter for the model of the node : ZERLAUT model / Mean field AdEX
@@ -223,7 +219,8 @@ param_tvb_model = {
     # 'tau_e':param_nest_topology['param_neuron_excitatory']['tau_syn_ex']
     # 'tau_i':param_nest_topology['param_neuron_excitatory']['tau_syn_in']
     # 'N_tot':param_nest_topology['nb_neuron_by_region']
-    # 'p_connect':param_nest_connection['p_connect']
+    # 'p_connect_e':param_nest_connection['p_connect']
+    # 'p_connect_i':param_nest_connection['p_connect']
     # 'g':param_nest_topology['percentage_inhibitory']
     # 'K_ext_e':param_nest_connection['nb_external_synapse']
     # Time constant of the model
@@ -234,6 +231,8 @@ param_tvb_model = {
     # Polynome for inhibitory neurons | WARNING: should be change when the parameter of neurons change)
     'P_i': [-5.96722865e-02, 7.15675508e-03, 4.28252163e-03, 9.25089702e-03, 1.16632197e-06, -1.00659310e-02,
             3.89257235e-03, 4.45787751e-04, 4.20050937e-03, 4.37359879e-03],
+    'tau_OU': 5.0,
+    'weight_noise': 10.5*1e-5,
     # initial condition, should be simmilar than nest
     'initial_condition': {"E": [0.100, 0.001], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0],
                           "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
@@ -287,7 +286,6 @@ param_TR_tvb_to_nest = {
     'percentage_shared': 0.5,
     # 'seed':param_nest['master_seed']-3 # -3 because -1 and -2 is use by the simulation of TVB
     # 'nb_synapses' : param_nest_connection['nb_external_synapse'] # number of external synapses
-    # 'init': path of the initialisation of the translation if not the run exploration will create it
     # 'level_log': param_co_simulation['level_log']
     'function_select': 2,
     'save_rate': True,       # save the rate input of TVB

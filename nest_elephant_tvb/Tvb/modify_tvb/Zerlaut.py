@@ -1,13 +1,10 @@
-#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
-# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
-
 """
 Mean field model based on Master equation about adaptative exponential leacky integrate and fire neurons population
 """
 
-from tvb.simulator.models.base import Model,numpy
-import scipy.special as sp_spec
+from tvb.simulator.models.base import Model,  numpy
 from tvb.basic.neotraits.api import NArray, Range, Final, List
+import scipy.special as sp_spec
 from numba import jit
 
 class ZerlautAdaptationFirstOrder(Model):
@@ -114,166 +111,143 @@ class ZerlautAdaptationFirstOrder(Model):
         label=":math:`g_{L}`",
         default=numpy.array([10.]),  # 10 nS by default, i.e. ~ 100MOhm input resitance at rest
         domain=Range(lo=0.1, hi=100.0, step=0.1),  # 0.1nS would be a very small cell, 100nS a very big one
-        doc="""leak conductance [nS]""",
-        )
+        doc="""leak conductance [nS]""")
 
     E_L_e = NArray(
         label=":math:`E_{L}`",
         default=numpy.array([-65.0]),
         domain=Range(lo=-90.0, hi=-60.0, step=0.1),  # resting potential, usually between -85mV and -65mV
-        doc="""leak reversal potential for excitatory [mV]""",
-        )
+        doc="""leak reversal potential for excitatory [mV]""")
 
     E_L_i = NArray(
         label=":math:`E_{L}`",
         default=numpy.array([-65.0]),
         domain=Range(lo=-90.0, hi=-60.0, step=0.1),  # resting potential, usually between -85mV and -65mV
-        doc="""leak reversal potential for inhibitory [mV]""",
-        )
+        doc="""leak reversal potential for inhibitory [mV]""")
 
     # N.B. Not independent of g_L, C_m should scale linearly with g_L
     C_m = NArray(
         label=":math:`C_{m}`",
         default=numpy.array([200.0]),
         domain=Range(lo=10.0, hi=500.0, step=10.0),  # 20pF very small cell, 400pF very
-        doc="""membrane capacitance [pF]""",
-        )
+        doc="""membrane capacitance [pF]""")
 
     b_e = NArray(
         label=":math:`Excitatory b`",
         default=numpy.array([60.0]),
         domain=Range(lo=0.0, hi=150.0, step=1.0),
-        doc="""Excitatory adaptation current increment [pA]""",
-        )
+        doc="""Excitatory adaptation current increment [pA]""")
 
     a_e = NArray(
         label=":math:`Excitatory a`",
         default=numpy.array([4.0]),
         domain=Range(lo=0.0, hi=20.0, step=0.1),
-        doc="""Excitatory adaptation conductance [nS]""",
-        )
+        doc="""Excitatory adaptation conductance [nS]""")
 
     b_i = NArray(
         label=":math:`Inhibitory b`",
         default=numpy.array([0.0]),
         domain=Range(lo=0.0, hi=100.0, step=0.1),
-        doc="""Inhibitory adaptation current increment [pA]""",
-        )
+        doc="""Inhibitory adaptation current increment [pA]""")
 
     a_i = NArray(
         label=":math:`Inhibitory a`",
         default=numpy.array([0.0]),
         domain=Range(lo=0.0, hi=20.0, step=0.1),
-        doc="""Inhibitory adaptation conductance [nS]""",
-        )
+        doc="""Inhibitory adaptation conductance [nS]""")
 
     tau_w_e = NArray(
         label=":math:`tau_w_e`",
         default=numpy.array([500.0]),
         domain=Range(lo=1.0, hi=1000.0, step=1.0),
-        doc="""Adaptation time constant of excitatory neurons [ms]""",
-        )
+        doc="""Adaptation time constant of excitatory neurons [ms]""")
 
     tau_w_i = NArray(
         label=":math:`tau_w_e`",
         default=numpy.array([1.0]),
         domain=Range(lo=1.0, hi=1000.0, step=1.0),
-        doc="""Adaptation time constant of inhibitory neurons [ms]""",
-        )
+        doc="""Adaptation time constant of inhibitory neurons [ms]""")
 
     E_e = NArray(
         label=r":math:`E_e`",
         default=numpy.array([0.0]),
         domain=Range(lo=-20., hi=20., step=0.01),
-        doc="""excitatory reversal potential [mV]""",
-        )
+        doc="""excitatory reversal potential [mV]""")
 
     E_i = NArray(
         label=":math:`E_i`",
         default=numpy.array([-80.0]),
         domain=Range(lo=-100.0, hi=-60.0, step=1.0),
-        doc="""inhibitory reversal potential [mV]""",
-        )
+        doc="""inhibitory reversal potential [mV]""")
 
     Q_e = NArray(
         label=r":math:`Q_e`",
         default=numpy.array([1.5]),
         domain=Range(lo=0.0, hi=5.0, step=0.1),
-        doc="""excitatory quantal conductance [nS]""",
-        )
+        doc="""excitatory quantal conductance [nS]""")
 
     Q_i = NArray(
         label=r":math:`Q_i`",
         default=numpy.array([5.0]),
         domain=Range(lo=0.0, hi=10.0, step=0.1),
-        doc="""inhibitory quantal conductance [nS]""",
-        )
+        doc="""inhibitory quantal conductance [nS]""")
 
     tau_e = NArray(
         label=":math:`\tau_e`",
         default=numpy.array([5.0]),
         domain=Range(lo=1.0, hi=10.0, step=1.0),
-        doc="""excitatory decay [ms]""",
-        )
+        doc="""excitatory decay [ms]""")
 
     tau_i = NArray(
         label=":math:`\tau_i`",
         default=numpy.array([5.0]),
         domain=Range(lo=0.5, hi=10.0, step=0.01),
-        doc="""inhibitory decay [ms]""",
-        )
+        doc="""inhibitory decay [ms]""")
 
     N_tot = NArray(
         dtype=numpy.int,
         label=":math:`N_{tot}`",
         default=numpy.array([10000]),
         domain=Range(lo=1000, hi=50000, step=1000),
-        doc="""cell number""",
-        )
+        doc="""cell number""")
 
     p_connect_e = NArray(
         label=":math:`\epsilon`",
         default=numpy.array([0.05]),
         domain=Range(lo=0.001, hi=0.2, step=0.001),  # valid only for relatively sparse connectivities
-        doc="""connectivity probability""",
-        )
+        doc="""connectivity probability""")
 
     p_connect_i = NArray(
         label=":math:`\epsilon`",
         default=numpy.array([0.05]),
         domain=Range(lo=0.001, hi=0.2, step=0.001),  # valid only for relatively sparse connectivities
-        doc="""connectivity probability""",
-    )
+        doc="""connectivity probability""")
 
     g = NArray(
         label=":math:`g`",
         default=numpy.array([0.2]),
         domain=Range(lo=0.01, hi=0.4, step=0.01),  # inhibitory cell number never overcomes excitatory ones
-        doc="""fraction of inhibitory cells""",
-        )
+        doc="""fraction of inhibitory cells""")
 
     K_ext_e = NArray(
         dtype=numpy.int,
         label=":math:`K_ext_e`",
         default=numpy.array([400]),
         domain=Range(lo=0, hi=10000, step=1),  # inhibitory cell number never overcomes excitatory ones
-        doc="""Number of excitatory connexions from external population""",
-        )
+        doc="""Number of excitatory connexions from external population""")
 
     K_ext_i = NArray(
         dtype=numpy.int,
         label=":math:`K_ext_i`",
         default=numpy.array([0]),
         domain=Range(lo=0, hi=10000, step=1),  # inhibitory cell number never overcomes excitatory ones
-        doc="""Number of inhibitory connexions from external population""",
-        )
+        doc="""Number of inhibitory connexions from external population""")
 
     T = NArray(
         label=":math:`T`",
         default=numpy.array([20.0]),
         domain=Range(lo=1., hi=20.0, step=0.1),
-        doc="""time scale of describing network activity""",
-        )
+        doc="""time scale of describing network activity""")
 
     P_e = NArray(
         label=":math:`P_e`",  # TODO need to check the size of the array when it's used
@@ -281,8 +255,7 @@ class ZerlautAdaptationFirstOrder(Model):
                              0.0022951513725067503,
                               -0.0004105302652029825,  0.010547051343547399,  -0.03659252821136933,
                               0.007437487505797858,  0.001265064721846073, -0.04072161294490446]),
-        doc="""Polynome of excitatory phenomenological threshold (order 9)""",
-        )
+        doc="""Polynome of excitatory phenomenological threshold (order 9)""")
 
     P_i = NArray(
         label=":math:`P_i`",  # TODO need to check the size of the array when it's used
@@ -291,37 +264,44 @@ class ZerlautAdaptationFirstOrder(Model):
                               -0.0005070645080016026,  0.0014345394104282397, -0.014686689498949967,
                             0.004502706285435741,
                               0.0028472190352532454, -0.015357804594594548]),
-        doc="""Polynome of inhibitory phenomenological threshold (order 9)""",
-        )
+        doc="""Polynome of inhibitory phenomenological threshold (order 9)""")
 
 
     external_input_ex_ex = NArray(
         label=":math:`\nu_e^{drive}`",
         default=numpy.array([0.000]),
         domain=Range(lo=0.00, hi=0.1, step=0.001),
-        doc="""external drive""",
-        )
+        doc="""external drive""")
 
     external_input_ex_in = NArray(
         label=":math:`\nu_e^{drive}`",
         default=numpy.array([0.000]),
         domain=Range(lo=0.00, hi=0.1, step=0.001),
-        doc="""external drive""",
-        )
+        doc="""external drive""")
 
     external_input_in_ex = NArray(
         label=":math:`\nu_e^{drive}`",
         default=numpy.array([0.000]),
         domain=Range(lo=0.00, hi=0.1, step=0.001),
-        doc="""external drive""",
-        )
+        doc="""external drive""")
 
     external_input_in_in = NArray(
         label=":math:`\nu_e^{drive}`",
         default=numpy.array([0.000]),
         domain=Range(lo=0.00, hi=0.1, step=0.001),
-        doc="""external drive""",
-        )
+        doc="""external drive""")
+
+    tau_OU = NArray(
+        label=":math:`\ntau noise`",
+        default=numpy.array([5.0]),
+        domain=Range(lo=0.10, hi=10.0, step=0.01),
+        doc="""time constant noise""")
+
+    weight_noise =  NArray(
+        label=":math:`\nweight noise`",
+        default=numpy.array([10.5]),
+        domain=Range(lo=0., hi=50.0, step=1.0),
+        doc="""weight noise""")
 
     # Used for phase-plane axis ranges and to bound random initial() conditions.
     state_variable_range = Final(
@@ -330,6 +310,7 @@ class ZerlautAdaptationFirstOrder(Model):
                  "I": numpy.array([0.0, 0.0]),
                  "W_e": numpy.array([0.0,0.0]),
                  "W_i": numpy.array([0.0,0.0]),
+                 "noise": numpy.array([0.0,0.0]),
                      },
         doc="""The values for each state-variable should be set to encompass
         the expected dynamic range of that state-variable for the current
@@ -340,27 +321,27 @@ class ZerlautAdaptationFirstOrder(Model):
         I: firing rate of inhibitory population in KHz\n
         W_e: level of adaptation of excitatory in pA\n
         W_i: level of adaptation of inhibitory in pA\n
-        """,
-        )
+        """)
 
     variables_of_interest = List(
+        of=str,
         label="Variables watched by Monitors",
-        choices=["E", "I","W_e","W_i"],
-        default=["E"],
+        choices=("E", "I","W_e","W_i","noise"),
+        default=("E",),
         doc="""This represents the default state-variables of this Model to be
                monitored. It can be overridden for each Monitor if desired. The
                corresponding state-variable indices for this model are :math:`E = 0`,
-               :math:`I = 1` and :math:`W = 2`."""
-        )
+               :math:`I = 1` and :math:`W = 2`.""")
+
     state_variable_boundaries = Final(
         label="Firing rate of population is always positive",
-        default={"E": numpy.array([0.0, 1.0]),
-                 "I": numpy.array([0.0, 1.0])},
+        default={"E": numpy.array([0.0, None]),
+                 "I": numpy.array([0.0, None])},
         doc="""The values for each state-variable should be set to encompass
             the boundaries of the dynamic range of that state-variable. Set None for one-sided boundaries""")
 
-    state_variables = 'E I W_e W_i'.split()
-    _nvar = 4
+    state_variables = 'E I W_e W_i noise'.split()
+    _nvar = 5
     cvar = numpy.array([0], dtype=numpy.int32)
 
     def dfun(self, state_variables, coupling, local_coupling=0.00):
@@ -374,6 +355,7 @@ class ZerlautAdaptationFirstOrder(Model):
         I = state_variables[1, :]
         W_e = state_variables[2, :]
         W_i = state_variables[3, :]
+        noise = state_variables[4, :]
         derivative = numpy.empty_like(state_variables)
 
         # long-range coupling
@@ -384,7 +366,9 @@ class ZerlautAdaptationFirstOrder(Model):
         lc_I = local_coupling * I
 
         # external firing rate
-        Fe_ext = c_0 + lc_E
+        Fe_ext = c_0 + lc_E + self.weight_noise * noise
+        index_bad_input = numpy.where( Fe_ext*self.K_ext_e  < 0)
+        Fe_ext[index_bad_input] = 0.0
         Fi_ext = lc_I
 
         # Excitatory firing rate derivation
@@ -394,7 +378,7 @@ class ZerlautAdaptationFirstOrder(Model):
             W_e)-E)/self.T
         # Inhibitory firing rate derivation
         derivative[1] = (self.TF_inhibitory(
-            E, I, Fe_ext+self.external_input_in_ex,
+            E, I, Fe_ext + self.external_input_in_ex,
             Fi_ext+self.external_input_in_in,
             W_i)-I)/self.T
         # Adaptation excitatory
@@ -403,18 +387,19 @@ class ZerlautAdaptationFirstOrder(Model):
                 Fi_ext+self.external_input_ex_in,
                 W_e, self.Q_e, self.tau_e, self.E_e,
                 self.Q_i, self.tau_i, self.E_i,
-                self.g_L, self.C_m, self.E_L_e, self.N_tot,
-                self.p_connect, self.g,self.K_ext_e,self.K_ext_i)
+                self.g_L, self.C_m, self.E_L_e, self.N_tot,self.p_connect_e,
+                self.p_connect_i, self.g,self.K_ext_e,self.K_ext_i)
         derivative[2] = -W_e/self.tau_w_e+self.b_e*E+self.a_e*(mu_V-self.E_L_e)/self.tau_w_e
         # Adaptation inhibitory
         mu_V, sigma_V, T_V = self.get_fluct_regime_vars(
-                E, I, Fe_ext+self.external_input_in_ex,
+                E, I, Fe_ext + self.external_input_in_ex,
                 Fi_ext+self.external_input_in_in,
                 W_i, self.Q_e, self.tau_e, self.E_e,
                 self.Q_i, self.tau_i, self.E_i,
-                self.g_L, self.C_m, self.E_L_i, self.N_tot,
-                self.p_connect, self.g,self.K_ext_e,self.K_ext_i)
+                self.g_L, self.C_m, self.E_L_i, self.N_tot,self.p_connect_e,
+                self.p_connect_i, self.g,self.K_ext_e,self.K_ext_i)
         derivative[3] = -W_i/self.tau_w_i+self.b_i*I+self.a_i*(mu_V-self.E_L_i)/self.tau_w_i
+        derivative[4] = -noise/self.tau_OU
 
         return derivative
 
@@ -468,7 +453,7 @@ class ZerlautAdaptationFirstOrder(Model):
 
     @staticmethod
     @jit(nopython=True,cache=True)
-    def get_fluct_regime_vars(Fe, Fi, Fe_ext, Fi_ext, W, Q_e, tau_e, E_e, Q_i, tau_i, E_i, g_L, C_m, E_L, N_tot, p_connect_e, p_connect_i, g, K_ext_e, K_ext_i):
+    def get_fluct_regime_vars(Fe, Fi, Fe_ext, Fi_ext, W, Q_e, tau_e, E_e, Q_i, tau_i, E_i, g_L, C_m, E_L, N_tot, p_connect_e,p_connect_i, g, K_ext_e, K_ext_i):
         """
         Compute the mean characteristic of neurons.
         Inspired from the next repository :
@@ -489,8 +474,8 @@ class ZerlautAdaptationFirstOrder(Model):
         :param C_m: membrane capacitance
         :param E_L: leak reversal potential
         :param N_tot: cell number
-        :param p_connect_e: connectivity probability of connection of excitatory neurons
-        :param p_connect_i: connectivity probability of connection of inhibitory neurons
+        :param p_connect_e: connectivity probability of excitatory neurons
+        :param p_connect_i: connectivity probability of inhibitory neurons
         :param g: fraction of inhibitory cells
         :return: mean and variance of membrane voltage of neurons and autocorrelation time constant
         """
@@ -616,6 +601,7 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
                  "C_ii": numpy.array([0.0, 0.0]),  # variance is positive or null
                  "W_e":numpy.array([0.0, 0.0]),
                  "W_i":numpy.array([0.0, 0.0]),
+                 "noise":numpy.array([0.0, 0.0]),
                  },
         doc="""The values for each state-variable should be set to encompass
         the expected dynamic range of that state-variable for the current
@@ -628,21 +614,20 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
         C_ei: the covariance between the excitatory and inhibitory population activities (always symetric) \n
         C_ie: the variance of the inhibitory population activity \n
         W: level of adaptation
-        """,
-        )
+        """)
 
     variables_of_interest = List(
+        of=str,
         label="Variables watched by Monitors",
-        choices=["E", "I", "C_ee","C_ei","C_ii","W_e", "W_i"],
-        default=["E"],
+        choices=("E", "I", "C_ee","C_ei","C_ii","W_e", "W_i","noise"),
+        default=("E",),
         doc="""This represents the default state-variables of this Model to be
                monitored. It can be overridden for each Monitor if desired. The
                corresponding state-variable indices for this model are :math:`E = 0`,
-               :math:`I = 1`, :math:`C_ee = 2`, :math:`C_ei = 3`, :math:`C_ii = 4` and :math:`W = 5`.""",
-        )
+               :math:`I = 1`, :math:`C_ee = 2`, :math:`C_ei = 3`, :math:`C_ii = 4` and :math:`W = 5`.""")
 
-    state_variables = 'E I C_ee C_ei C_ii W_e W_i'.split()
-    _nvar = 7
+    state_variables = 'E I C_ee C_ei C_ii W_e W_i noise'.split()
+    _nvar = 8
 
     def dfun(self, state_variables, coupling, local_coupling=0.00):
         r"""
@@ -684,6 +669,7 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
         C_ii = state_variables[4, :]
         W_e = state_variables[5,:]
         W_i = state_variables[6,:]
+        noise = state_variables[7,:]
         derivative = numpy.empty_like(state_variables)
 
         # long-range coupling
@@ -694,8 +680,12 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
         lc_I = local_coupling * I
 
         # external firing rate for the different population
-        E_input_excitatory = c_0+lc_E+self.external_input_ex_ex
-        E_input_inhibitory = c_0+lc_E+self.external_input_in_ex
+        E_input_excitatory = c_0+lc_E+self.external_input_ex_ex + self.weight_noise * noise
+        index_bad_input = numpy.where( E_input_excitatory < 0)
+        E_input_excitatory[index_bad_input] = 0.0
+        E_input_inhibitory = c_0+lc_E+self.external_input_in_ex + self.weight_noise * noise
+        index_bad_input = numpy.where( E_input_inhibitory < 0)
+        E_input_inhibitory[index_bad_input] = 0.0
         I_input_excitatory = lc_I+self.external_input_ex_in
         I_input_inhibitory = lc_I+self.external_input_in_in
 
@@ -704,31 +694,32 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
         _TF_i = self.TF_inhibitory(E, I, E_input_inhibitory, I_input_inhibitory, W_i)
 
         # Derivatives taken numerically : use a central difference formula with spacing `dx`
-        def _diff_fe(TF, fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        df = 1e-7
+        def _diff_fe(TF, fe, fi, fe_ext, fi_ext, W, df=df):
             return (TF(fe+df, fi, fe_ext, fi_ext, W)-TF(fe-df, fi, fe_ext, fi_ext, W))/(2*df*1e3)
 
-        def _diff_fi(TF, fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        def _diff_fi(TF, fe, fi, fe_ext, fi_ext, W, df=df):
             return (TF(fe, fi+df, fe_ext, fi_ext, W)-TF(fe, fi-df, fe_ext, fi_ext, W))/(2*df*1e3)
 
-        def _diff2_fe_fe_e(fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        def _diff2_fe_fe_e(fe, fi, fe_ext, fi_ext, W, df=df):
             TF = self.TF_excitatory
             return (TF(fe+df, fi, fe_ext, fi_ext, W)-2*_TF_e+TF(fe-df, fi, fe_ext, fi_ext, W))/((df*1e3)**2)
 
-        def _diff2_fe_fe_i(fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        def _diff2_fe_fe_i(fe, fi, fe_ext, fi_ext, W, df=df):
             TF = self.TF_inhibitory
             return (TF(fe+df, fi, fe_ext, fi_ext, W)-2*_TF_i+TF(fe-df, fi, fe_ext, fi_ext, W))/((df*1e3)**2)
 
-        def _diff2_fi_fe(TF, fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        def _diff2_fi_fe(TF, fe, fi, fe_ext, fi_ext, W, df=df):
             return (_diff_fi(TF, fe+df, fi, fe_ext, fi_ext, W)-_diff_fi(TF, fe-df, fi, fe_ext, fi_ext, W))/(2*df*1e3)
 
-        def _diff2_fe_fi(TF, fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        def _diff2_fe_fi(TF, fe, fi, fe_ext, fi_ext, W, df=df):
             return (_diff_fe(TF, fe, fi+df, fe_ext, fi_ext, W)-_diff_fe(TF, fe, fi-df, fe_ext, fi_ext, W))/(2*df*1e3)
 
-        def _diff2_fi_fi_e(fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        def _diff2_fi_fi_e(fe, fi, fe_ext, fi_ext, W, df=df):
             TF = self.TF_excitatory
             return (TF(fe, fi+df, fe_ext, fi_ext, W)-2*_TF_e+TF(fe, fi-df, fe_ext, fi_ext, W))/((df*1e3)**2)
 
-        def _diff2_fi_fi_i(fe, fi, fe_ext, fi_ext, W, df=1e-7):
+        def _diff2_fi_fi_i(fe, fi, fe_ext, fi_ext, W, df=df):
             TF = self.TF_inhibitory
             return (TF(fe, fi+df, fe_ext, fi_ext, W)-2*_TF_i+TF(fe, fi-df, fe_ext, fi_ext, W))/((df*1e3)**2)
 
@@ -781,7 +772,7 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
         mu_V, sigma_V, T_V = self.get_fluct_regime_vars(
                 E, I,
                 E_input_excitatory,
-                E_input_inhibitory,
+                I_input_excitatory,
                 W_e, self.Q_e, self.tau_e, self.E_e,
                 self.Q_i, self.tau_i, self.E_i,
                 self.g_L, self.C_m, self.E_L_e, self.N_tot,
@@ -791,7 +782,7 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
         # Adaptation inhibitory
         mu_V, sigma_V, T_V = self.get_fluct_regime_vars(
                 E, I,
-                I_input_excitatory,
+                E_input_inhibitory,
                 I_input_inhibitory,
                 W_i, self.Q_e, self.tau_e, self.E_e,
                 self.Q_i, self.tau_i, self.E_i,
@@ -799,5 +790,6 @@ class ZerlautAdaptationSecondOrder(ZerlautAdaptationFirstOrder):
                 self.p_connect_e, self.p_connect_i, self.g,self.K_ext_e,self.K_ext_i)
         derivative[6] = -W_i/self.tau_w_i+self.b_i*I+self.a_i*(mu_V-self.E_L_i)/self.tau_w_i
 
+        derivative[7] = -noise/self.tau_OU
         return derivative
 

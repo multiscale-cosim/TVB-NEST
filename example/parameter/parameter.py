@@ -4,7 +4,7 @@ import os
 
 path = os.path.dirname(os.path.realpath(__file__)) + "/data_mouse/"
 
-param_nest = {"sim_resolution": 0.1, "master_seed": 46, "total_num_virtual_procs": 8, "overwrite_files": True,
+param_nest = {"sim_resolution": 0.1, "master_seed": 46, "total_num_virtual_procs": 3, "overwrite_files": True,
               "print_time": True, "verbosity": 20}
 param_nest_topology = {"neuron_type": "aeif_cond_exp",
                        "param_neuron_excitatory": {"C_m": 200.0, "t_ref": 5.0, "V_reset": -64.5, "E_L": -64.5,
@@ -35,13 +35,14 @@ param_tvb_model = {"order": 2,
                            -0.02600252, -0.00274499, -0.01051463],
                    "P_i": [-0.0596722865, 0.00715675508, 0.00428252163, 0.00925089702, 1.16632197e-06, -0.010065931,
                            0.00389257235, 0.000445787751, 0.00420050937, 0.00437359879],
+                   'tau_OU': 5.0, 'weight_noise': 10.5*1e-5,
                    "initial_condition": {
                        "E": [0.0, 0.0], "I": [0.0, 0.0], "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0],
                        "C_ii": [0.0, 0.0], "W_e": [5.0, 0.0], "W_i": [0.0, 0.0]},
                    "g_L": 10.0, "E_L_e": -64.5, "E_L_i": -65.0, "C_m": 200.0,
                    "b_e": 1.0, "a_e": 0.0, "b_i": 0.0, "a_i": 0.0, "tau_w_e": 500.0, "tau_w_i": 1.0,
                    "E_e": 0.0, "E_i": -80.0, "Q_e": 1.0, "Q_i": 5.0, "tau_e": 5.0, "tau_i": 5.0,
-                   "N_tot": 1000, "p_connect": 0.05, "g": 0.2, "K_ext_e": 115}
+                   "N_tot": 1000, "p_connect_e": 0.05, "p_connect_i": 0.05, "g": 0.2, "K_ext_e": 115}
 param_tvb_connection = {"path_region_labels": path + '/region_labels.txt',
                         "path_centers": path + '/centres.txt',
                         "path_cortical": path + "/cortical.npy",
@@ -51,9 +52,7 @@ param_tvb_connection = {"path_region_labels": path + '/region_labels.txt',
                         "nb_region": 104,
                         "velocity": 3.0}
 param_tvb_coupling = {"a": 1.0}
-param_tvb_integrator = {"tau_OU": 20.0, "mu": [2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-                        "nsig": [0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "weights": [0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-                        "sim_resolution": 0.1, "seed": 45, "seed_init": 44}
+param_tvb_integrator = {"sim_resolution": 0.1, "seed": 45, "seed_init": 44}
 param_tvb_monitor = {"save_time": 20.0,
                      "Raw": True,
                      "TemporalAverage": False,
@@ -74,6 +73,6 @@ param_co_simulation = {"co-simulation": True, "nb_MPI_nest": 1,
                        "synchronization": 2.0,
                        "level_log": 1,
                        "mpi": ['mpirun'],
-                       'translation_thread': 3}
+                       'translation_thread': False}
 begin = 0.0
 end = 2000.0

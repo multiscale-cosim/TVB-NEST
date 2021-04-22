@@ -113,7 +113,6 @@ class ProducerDataNest(MPICommunicationExtern):
                 # For the other type of data, the format to send it is different
                 self.logger.info("Produce Nest : start to send ")
                 spikes_times = self.communication_internal.get_spikes()
-                self.communication_internal.get_spikes_release()
                 self.logger.info("Produce Nest : shape buffer "+str(self.communication_internal.shape_buffer[0]))
                 if self.communication_internal.shape_buffer[0] == -1:
                     break
@@ -145,6 +144,7 @@ class ProducerDataNest(MPICommunicationExtern):
                         data = np.concatenate(data).astype('d')
                         self.port_comms[0].Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
                 self.logger.info("Produce Nest : end sending")
+                self.communication_internal.get_spikes_release()
 
             elif status_.Get_tag() == 1:
                 # ending the run of Nest

@@ -299,7 +299,8 @@ def create_linked_parameters(results_path,parameters):
     param_tvb_model['tau_e']=param_nest_topology['param_neuron_excitatory']['tau_syn_ex']
     param_tvb_model['tau_i']=param_nest_topology['param_neuron_excitatory']['tau_syn_in']
     param_tvb_model['N_tot']=param_nest_topology['nb_neuron_by_region']
-    param_tvb_model['p_connect']=param_nest_connection['p_connect']
+    param_tvb_model['p_connect_e']=param_nest_connection['p_connect']
+    param_tvb_model['p_connect_i']=param_nest_connection['p_connect']
     param_tvb_model['g']=param_nest_topology['percentage_inhibitory']
     param_tvb_model['K_ext_e']=param_nest_connection['nb_external_synapse']
     parameters['param_tvb_model'] = param_tvb_model
@@ -317,11 +318,6 @@ def create_linked_parameters(results_path,parameters):
             param_TR_tvb_to_nest = parameters['param_TR_tvb_to_nest']
         else:
             param_TR_tvb_to_nest = {}
-        if not 'init' in param_TR_tvb_to_nest.keys():
-            path_rates = results_path+'/init_rates.npy'
-            init_rates = np.array([[] for i in range(param_nest_topology['nb_neuron_by_region'])])
-            np.save(path_rates,init_rates)
-            param_TR_tvb_to_nest['init']= path_rates
         param_TR_tvb_to_nest['level_log']= param_co_simulation['level_log']
         param_TR_tvb_to_nest['seed'] = param_nest['master_seed']-3
         param_TR_tvb_to_nest['nb_synapses'] = param_nest_connection['nb_external_synapse']

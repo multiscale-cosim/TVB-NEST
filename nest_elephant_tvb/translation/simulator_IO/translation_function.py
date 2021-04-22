@@ -22,6 +22,7 @@ class TranslationSpikeRate(MPICommunicationExtern):
         super().__init__(*arg, **karg)
         self.synch = param['synch']                # time of synchronization between 2 run
         self.dt = param['resolution']              # the resolution of the integrator
+        self.path_init = param['init']              # path of numpy array which are use to initialise the communication
         self.shape = (int(self.synch/self.dt), 1)  # the shape of the buffer/histogram
         self.width = int(param['width']/param['resolution'])  # the window of the average in time
         self.buffer = np.zeros((self.width,))                 # initialisation/ previous result for a good result
@@ -55,10 +56,16 @@ class TranslationSpikeRate(MPICommunicationExtern):
         This dissociation allow the translation module to buffer one more step from the sender or the receiver.
         This function is very important for the speed of the simulation
         """
+        # initialisation of the communication
+        self.logger.info('TRS : begin sim')
+        rates = np.load(self.path_init)
+        self.logger.info('TRS : init rates')
+        self.communication_internal.send_time_rate(np.array([-self.synch,0.]), rates)
+        self.logger.info('TRS : send init')
         count = 0  # counter of the number of run. It can be useful for the translation function
         while True:
             # Step 1: INTERNAL : get spike
-            self.logger.info('TSR : receive data TVB')
+            self.logger.info('TSR : receive data Nest')
             self.communication_internal.get_spikes_ready()
             if self.communication_internal.shape_buffer[0] == -1:
                 self.logger.info('TSR : break')
@@ -175,7 +182,7 @@ class TranslationRateSpike(MPICommunicationExtern):
         self.nb_spike_generator = nb_spike_generator          # number of spike generator
         self.nb_synapse = param['nb_synapses']                # number of synapses by neurons
         self.function_translation = param['function_select']  # choose the function for the translation
-        self.path_init = param['init']              # path of numpy array which are use to initialise the communication
+        # self.path_init = param['init']              # path of numpy array which are use to initialise the communication
         np.random.seed(param['seed'])               # set the seed for repeatability
         # variable for saving values:
         self.save_spike = bool(param['save_spike'])
@@ -206,12 +213,12 @@ class TranslationRateSpike(MPICommunicationExtern):
         This dissociation allow the translation module to buffer one more step from the sender or the receiver.
         This function is very important for the speed of the simulation.
         """
-        # initialisation of the communication
-        self.logger.info('TRS : begin sim')
-        spike_trains = np.load(self.path_init)
-        self.logger.info('TRS : init spike trains')
-        self.communication_internal.send_spikes_trains(spike_trains)
-        self.logger.info('TRS : send init')
+        # initialisation of the communication # TVB already did it
+        # self.logger.info('TRS : begin sim')
+        # spike_trains = np.load(self.path_init)
+        # self.logger.info('TRS : init spike trains')
+        # self.communication_internal.send_spikes_trains(spike_trains)
+        # self.logger.info('TRS : send init')
         count = 0  # counter of the number of run. It use to send the good time to TVB
         while True:
             # Step 1.1: INTERNAL : get rate

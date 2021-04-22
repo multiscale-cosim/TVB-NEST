@@ -5,6 +5,17 @@
 */*/__pycache__
 */*/*/__pycache__
 example/.ipynb_checkpoints/
+example/*/*/log
+example/*/*/nest
+example/*/*/tvb
+example/*/*/translation
+example/*/*/LFPY/*/*/cells
+example/*/*/LFPY/*/*/figures
+example/*/*/LFPY/*/*/populations
+example/*/*/LFPY/*/*/sim_scripts
+example/*/*/LFPY/*/*/*.tar
+example/*/*/LFPY/*/*/*.h5
+example/analyse/LFPY/x86_64
 */test_file/*
 lib/
 */*/*.simg

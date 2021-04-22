@@ -7,7 +7,6 @@ logging.getLogger('numba').setLevel(logging.WARNING)
 logging.getLogger('tvb').setLevel(logging.ERROR)
 
 import tvb.simulator.lab as lab
-from tvb.datatypes.sensors import SensorsInternal
 import numpy.random as rgn
 import numpy as np
 from mpi4py import MPI
@@ -15,10 +14,9 @@ import os
 import json
 import time
 from nest_elephant_tvb.utils import create_logger
-from nest_elephant_tvb.Tvb.modify_tvb import noise as my_noise
 from nest_elephant_tvb.Tvb.modify_tvb import Zerlaut as Zerlaut
 from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import Interface_co_simulation
-from nest_elephant_tvb.Tvb.helper_function_zerlaut import findVec
+from nest_elephant_tvb.Tvb.helper_function_zerlaut import ECOG,findVec
 
 
 def init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_tvb_model, param_tvb_monitor,
@@ -60,13 +58,16 @@ def init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_t
     model.tau_e = np.array(param_tvb_model['tau_e'])
     model.tau_i = np.array(param_tvb_model['tau_i'])
     model.N_tot = np.array(param_tvb_model['N_tot'])
-    model.p_connect = np.array(param_tvb_model['p_connect'])
+    model.p_connect_e = np.array(param_tvb_model['p_connect_e'])
+    model.p_connect_i = np.array(param_tvb_model['p_connect_i'])
     model.g = np.array(param_tvb_model['g'])
     model.T = np.array(param_tvb_model['T'])
     model.P_e = np.array(param_tvb_model['P_e'])
     model.P_i = np.array(param_tvb_model['P_i'])
     model.K_ext_e = np.array(param_tvb_model['K_ext_e'])
     model.K_ext_i = np.array(0)
+    model.tau_OU = np.array(param_tvb_model['tau_OU'])
+    model.weight_noise = np.array(param_tvb_model['weight_noise'])
     model.external_input_ex_ex = np.array(0.)
     model.external_input_ex_in = np.array(0.)
     model.external_input_in_ex = np.array(0.0)
@@ -119,15 +120,13 @@ def init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_t
                                    b=np.array(0.0))
 
     ## Integrator
-    noise = my_noise.Ornstein_Ulhenbeck_process(
-        tau_OU=param_tvb_integrator['tau_OU'],
-        mu=np.array(param_tvb_integrator['mu']).reshape((7, 1, 1)),
-        nsig=np.array(param_tvb_integrator['nsig']),
-        weights=np.array(param_tvb_integrator['weights']).reshape((7, 1, 1))
+    # add gaussian noise to the noise of the model
+    noise = lab.noise.Additive(
+        nsig=np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]),
+        ntau=0.0
     )
     noise.random_stream.seed(param_tvb_integrator['seed'])
     integrator = lab.integrators.HeunStochastic(noise=noise, dt=param_tvb_integrator['sim_resolution'])
-    # integrator = lab.integrators.HeunDeterministic()
 
     ## Monitors
     monitors = []
@@ -143,14 +142,9 @@ def init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_t
             variables_of_interest=np.array(param_tvb_monitor['parameter_Bold']['variables_of_interest']),
             period=param_tvb_monitor['parameter_Bold']['period'])
         monitors.append(monitor_Bold)
-    if param_tvb_monitor['SEEG']:
-        sensor = SensorsInternal().from_file(param_tvb_monitor['parameter_SEEG']['path'])
-        projection_matrix = param_tvb_monitor['parameter_SEEG']['scaling_projection'] / np.array(
-            [np.linalg.norm(np.expand_dims(i, 1) - centers[:, cortical], axis=0) for i in sensor.locations])
-        np.save(param_tvb_monitor['path_result'] + '/projection.npy', projection_matrix)
-        monitors.append(lab.monitors.iEEG.from_file(
-            param_tvb_monitor['parameter_SEEG']['path'],
-            param_tvb_monitor['path_result'] + '/projection.npy'))
+    if param_tvb_monitor['ECOG']:
+        monitors.append(ECOG().from_file(param_tvb_monitor['parameter_ECOG']['path'],
+                                         param_tvb_monitor['parameter_ECOG']['scaling']))
     if cosim is not None:
         # special monitor for MPI
         monitor_IO = Interface_co_simulation(
@@ -255,7 +249,7 @@ def run_mpi(path):
     # configure for saving result of TVB
     # check how many monitor it's used
     nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold']\
-                 + param_tvb_monitor['SEEG']
+                 + param_tvb_monitor['ECOG']
     # initialise the variable for the saving the result
     save_result = []
     for i in range(nb_monitor):  # the input output monitor
@@ -270,17 +264,26 @@ def run_mpi(path):
     for i in id_proxy:
         comm_send.append(init_mpi(path_receive + str(i) + ".txt", logger))
 
+    initialisation_data = []
+    for i in np.arange(0,np.rint(time_synch/simulator.integrator.dt),1,dtype=np.int):
+        initialisation_data.append(simulator._loop_compute_node_coupling(i)[:, id_proxy, :])
+    initialisation_data = np.concatenate(initialisation_data)
+    time_init = [0, time_synch]
+    for index, comm in enumerate(comm_send):
+        send_mpi(comm, time_init, initialisation_data[:, index] * 1e3)
+
     # the loop of the simulation
     count = 0
     count_save = 0
     while count * time_synch < end:  # FAT END POINT
-        logger.info(" TVB receive data")
+        logger.info(" TVB receive data start")
         # receive MPI data
         data_value = []
         for comm in comm_receive:
             receive = receive_mpi(comm)
             time_data = receive[0]
             data_value.append(receive[1])
+        logger.info(" TVB receive data values")
         data = np.empty((2,), dtype=object)
         nb_step = np.rint((time_data[1] - time_data[0]) / param_tvb_integrator['sim_resolution'])
         nb_step_0 = np.rint(

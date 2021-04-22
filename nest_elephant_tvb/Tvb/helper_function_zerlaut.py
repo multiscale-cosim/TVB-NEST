@@ -23,3 +23,51 @@ def findVec(point1,point2,unitSphere = False):
       return unitVector
   else:
       return finalVector
+
+from tvb.simulator.monitors import Projection,Attr, Float
+from tvb.datatypes.sensors import SensorsEEG
+from tvb.datatypes.time_series import TimeSeriesEEG, List
+from tvb.datatypes.region_mapping import RegionMapping
+import numpy as np
+
+
+class SensorsECOG(SensorsEEG):
+    pass
+
+
+class TimeSeriesECOG(TimeSeriesEEG):
+    sensors = Attr(field_type=SensorsECOG)
+    labels_ordering = List(of=str, default=("Time", "1", "ECOG Sensor", "1"))
+
+
+class ECOG(Projection):
+    sensors = Attr(SensorsECOG, required=True, label="ECOG Sensors",
+                   doc='Sensors to use for this ECOG monitor')
+    scaling = Float(field_type=float,label="scaling factor",
+                            doc="""Scaling the signal""")
+
+    def analytic(self, loc, ori):
+        # localisation => source positions
+        # orientation => source orientation
+        gain = self.scaling / np.array(
+            [np.linalg.norm(np.expand_dims(i, 0) - loc, axis=1) for i in self.sensors.locations])
+        return gain
+
+    def create_time_series(self, connectivity=None, surface=None,
+                           region_map=None, region_volume_map=None):
+        return TimeSeriesECOG(sensors=self.sensors,
+                             sample_period=self.period,
+                             title=' ' + self.__class__.__name__)
+
+    @classmethod
+    def from_file(cls, sensors_fname, scaling, rm_f_name="regionMapping_16k_76.txt",
+                  period=1e3/1024.0, **kwds):
+        """
+        Build Projection-based monitor from sensors and projection files, and
+        any extra keyword arguments are passed to the monitor class constructor.
+
+        """
+        result = cls(scaling=scaling, period=period, **kwds)
+        result.sensors = cls.sensors.field_type.from_file(sensors_fname)
+        result.region_mapping = RegionMapping.from_file(rm_f_name)
+        return result
