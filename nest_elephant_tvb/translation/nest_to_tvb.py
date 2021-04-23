@@ -64,7 +64,7 @@ if __name__ == "__main__":
             send_data_to_TVB.run(path_to_files_send)
         elif rank == 2:  # translation from spike to rate
             translation = TranslationSpikeRate(
-                param,
+                id_translator, param,
                 'nest_to_tvb_translate' + str(id_spike_detector), path, level_log,
                 communication_intern=MPICommunication, receiver_rank=1, buffer_r_w=[2, 0])
             translation.run(None)
@@ -83,7 +83,7 @@ if __name__ == "__main__":
         path_to_files_receive = [path + file_spike_detector]
         # creation of the object for the translation from rate to spike
         translation = TranslationSpikeRate(
-            param,
+            id_translator, param,
             'nest_to_tvb_translate' + str(id_spike_detector), path, level_log,
             communication_intern=ThreadCommunication,
             buffer_write_status=np.ones(1)*-2,

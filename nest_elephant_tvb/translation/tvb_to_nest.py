@@ -72,7 +72,7 @@ if __name__ == "__main__":
             receive_data_to_TVB.run(path_to_files_receive)
         elif rank == 2:  # translation from rate to spike
             translate_rate_to_spike = TranslationRateSpike(
-                param, nb_spike_generator,
+                id_translator, param, nb_spike_generator,
                 'tvb_to_nest_translate' + str(id_first_spike_detector), path, level_log,
                 communication_intern=MPICommunication,
                 sender_rank=1, buffer_r_w=[0, 2])
@@ -92,7 +92,7 @@ if __name__ == "__main__":
         path_to_files_receive = [path+"/translation/receive_from_tvb/"+str(id_proxy[id_translator])+".txt"]
         # creation of the object for the traner Neurosciences & Philosophslation from rate to spike
         translate_rate_to_spike = TranslationRateSpike(
-            param, nb_spike_generator,
+            id_translator, param, nb_spike_generator,
             'tvb_to_nest_translate' + str(id_first_spike_detector), path, level_log,
             communication_intern=ThreadCommunication,
             buffer_write_status=np.ones((1, 1), dtype=np.int)*-2,

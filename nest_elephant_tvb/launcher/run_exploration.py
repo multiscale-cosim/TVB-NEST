@@ -106,8 +106,8 @@ def run(parameters_file):
             if not os.path.exists(results_path+'/translation/TRS_spike/'):
                 os.mkdir(results_path+'/translation/TRS_spike/')
         if parameters['param_TR_tvb_to_nest']['save_rate']:
-            if not os.path.exists(results_path+'/translation/TSR_rate/'):
-                os.mkdir(results_path+'/translation/TSR_rate/')
+            if not os.path.exists(results_path+'/translation/TRS_rate/'):
+                os.mkdir(results_path+'/translation/TRS_rate/')
 
         # Run Nest and take information for the connection between all the mpi process
         if 'singularity' in param_co_simulation.keys() :  # run with singularity image
