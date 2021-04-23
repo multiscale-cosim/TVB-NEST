@@ -33,16 +33,12 @@ class TranslationSpikeRate(MPICommunicationExtern):
         if self.save_hist:
             self.save_hist_buf = None
             self.save_hist_path = arg[1] + '/translation/TSR_hist/'  # arg[1]: path of simulation + need path management
-            if not os.path.exists(self.save_hist_path):
-                os.mkdir(self.save_hist_path)
             self.save_hist_count = param['save_hist_count']
             self.save_hist_nb = 0
         self.save_rate = bool(param['save_rate'])
         if self.save_rate:
             self.save_rate_buf = None
             self.save_rate_path = arg[1] + '/translation/TSR_rate/'  # arg[1]: path of simulation + need path management
-            if not os.path.exists(self.save_rate_path):
-                os.mkdir(self.save_rate_path)
             self.save_rate_count = param['save_rate_count']
             self.save_rate_nb = 0
 
@@ -189,16 +185,12 @@ class TranslationRateSpike(MPICommunicationExtern):
         if self.save_spike:
             self.save_spike_buf = None
             self.save_spike_path = arg[1] + '/translation/TRS_spike/'  # arg[0]: path of simulation+need path management
-            if not os.path.exists(self.save_spike_path):
-                os.mkdir(self.save_spike_path)
             self.save_spike_count = param['save_spike_count']
             self.save_spike_nb = 0
         self.save_rate = bool(param['save_rate'])
         if self.save_rate:
             self.save_rate_buf = None
             self.save_rate_path = arg[1] + '/translation/TRS_rate/'  # arg[0]: path of simulation + need path management
-            if not os.path.exists(self.save_rate_path):
-                os.mkdir(self.save_rate_path)
             self.save_rate_count = param['save_rate_count']
             self.save_rate_nb = 0
         self.logger.info('TRS : end init translation')

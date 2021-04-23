@@ -96,6 +96,18 @@ def run(parameters_file):
             os.makedirs(results_path+"/translation/spike_generator/")
         if not os.path.exists(results_path+"/translation/receive_from_tvb/"):
             os.makedirs(results_path+"/translation/receive_from_tvb/")
+        if parameters['param_TR_nest_to_tvb']['save_hist']:
+            if not os.path.exists(results_path+'/translation/TSR_hist/'):
+                os.mkdir(results_path+'/translation/TSR_hist/')
+        if parameters['param_TR_nest_to_tvb']['save_rate']:
+            if not os.path.exists(results_path+'/translation/TSR_rate/'):
+                os.mkdir(results_path+'/translation/TSR_rate/')
+        if parameters['param_TR_tvb_to_nest']['save_spike']:
+            if not os.path.exists(results_path+'/translation/TRS_spike/'):
+                os.mkdir(results_path+'/translation/TRS_spike/')
+        if parameters['param_TR_tvb_to_nest']['save_rate']:
+            if not os.path.exists(results_path+'/translation/TSR_rate/'):
+                os.mkdir(results_path+'/translation/TSR_rate/')
 
         # Run Nest and take information for the connection between all the mpi process
         if 'singularity' in param_co_simulation.keys() :  # run with singularity image
