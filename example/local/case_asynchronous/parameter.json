@@ -193,9 +193,13 @@
     "tau_e": 5.0,
     "tau_i": 5.0,
     "N_tot": 10000,
-    "p_connect": 0.05,
+    "p_connect_e": 0.05,
+    "p_connect_i": 0.05,
+    "excitatory_extern":0.001,
     "g": 0.2,
-    "K_ext_e": 115
+    "K_ext_e": 115,
+    "tau_OU": 20.0,
+    "weight_noise": 0.0002
   },
   "param_tvb_connection": {
     "path_region_labels": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/region_labels.txt",
@@ -211,34 +215,6 @@
     "a": 1.0
   },
   "param_tvb_integrator": {
-    "tau_OU": 20.0,
-    "mu": [
-      0.7,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "nsig": [
-      0.2,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "weights": [
-      0.01,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
     "sim_resolution": 0.1,
     "seed": 45,
     "seed_init": 44
@@ -305,9 +281,9 @@
     "synchronization": 2.0,
     "level_log": 1,
     "mpi": ["mpirun"],
-    "translation_thread":3
+    "translation_thread":true
   },
   "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_asynchronous/",
   "begin": 0.0,
-  "end": 10000.0
+  "end": 1000.0
 }

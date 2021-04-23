@@ -42,7 +42,8 @@ param_tvb_model = {"order": 2,
                    "g_L": 10.0, "E_L_e": -64.5, "E_L_i": -65.0, "C_m": 200.0,
                    "b_e": 1.0, "a_e": 0.0, "b_i": 0.0, "a_i": 0.0, "tau_w_e": 500.0, "tau_w_i": 1.0,
                    "E_e": 0.0, "E_i": -80.0, "Q_e": 1.0, "Q_i": 5.0, "tau_e": 5.0, "tau_i": 5.0,
-                   "N_tot": 1000, "p_connect_e": 0.05, "p_connect_i": 0.05, "g": 0.2, "K_ext_e": 115}
+                   "N_tot": 1000, "p_connect_e": 0.05, "p_connect_i": 0.05, "g": 0.2, "K_ext_e": 115,
+                   "excitatory_extern": 0.0}
 param_tvb_connection = {"path_region_labels": path + '/region_labels.txt',
                         "path_centers": path + '/centres.txt',
                         "path_cortical": path + "/cortical.npy",

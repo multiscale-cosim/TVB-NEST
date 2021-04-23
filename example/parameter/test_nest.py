@@ -233,6 +233,7 @@ param_tvb_model = {
             3.89257235e-03, 4.45787751e-04, 4.20050937e-03, 4.37359879e-03],
     'tau_OU': 5.0,
     'weight_noise': 10.5*1e-5,
+    "excitatory_extern": 0.0,
     # initial condition, should be simmilar than nest
     'initial_condition': {"E": [0.100, 0.001], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0],
                           "C_ee": [0.0, 0.0], "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},

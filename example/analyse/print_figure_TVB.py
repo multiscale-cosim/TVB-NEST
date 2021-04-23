@@ -139,12 +139,12 @@ def print_tvb_figure(param, begin, end, spikes_ex, spikes_in, TVB_data):
             ax_rate_compare.plot(state_times, state_variable[:, 0, i] * 1e3 + j * max_rate, 'r', linewidth=1.0)
             ax_rate_compare.plot(state_times, state_variable[:, 1, i] * 1e3 + j * max_rate, 'b', linewidth=1.0)
     scalebar = AnchoredSizeBar(ax_rate_compare.transData,
-                               10, '10Hz', 'center right',
+                               size=0.1, label='30Hz', loc='center right',
                                pad=0.0,
                                borderpad=0.0,
                                color='red',
                                frameon=False,
-                               size_vertical=1)
+                               size_vertical=20)
     ax_rate_compare.add_artist(scalebar)
     # ax_rate_compare.set_xlabel('time in ms')
     ax_rate_compare.set_ylabel('Region Id')
@@ -203,8 +203,8 @@ if __name__ == '__main__':
     param['param_nest_topology']["nb_region"] = 104
     id_proxy = [26, 78]
     data = get_data_all('../local//case_asynchronous/nest/'); title = " Asynchronous network "; rates = get_rate('../local//case_asynchronous/tvb/')
-    # data = get_data_all('../local//case_regular_burst/nest/'); title = " Regular Bursting network "; rates = get_rate('../local//case_regular_burst/tvb/')
-    # data = get_data_all('../local//case_up_down/nest/'); title = " Synchronise network "; rates = get_rate('../local//case_up_down/tvb/')
+    data = get_data_all('../local//case_regular_burst/nest/'); title = " Regular Bursting network "; rates = get_rate('../local//case_regular_burst/tvb/')
+    data = get_data_all('../local//case_up_down/nest/'); title = " Synchronise network "; rates = get_rate('../local//case_up_down/tvb/')
     # test for the plot
     print_tvb_figure(param, 00.0, 10000.0, data['pop_1_ex'], data['pop_1_in'], rates)
     # # paper figure
