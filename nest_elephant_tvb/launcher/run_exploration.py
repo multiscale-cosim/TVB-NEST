@@ -99,7 +99,7 @@ def run(parameters_file):
 
         # Run Nest and take information for the connection between all the mpi process
         if 'singularity' in param_co_simulation.keys() :  # run with singularity image
-            argv = mpirun+['-n',str(param_co_simulation['nb_MPI_nest']),'singularity','run',
+            argv = mpirun+['-n', str(param_co_simulation['nb_MPI_nest']),'singularity','run',
                            '--app', 'nest', param_co_simulation['singularity']]
         elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
             argv = mpirun + ['-n', str(param_co_simulation['nb_MPI_nest'])] + param_co_simulation['sarus']\
@@ -123,13 +123,13 @@ def run(parameters_file):
         nb_mpi_translator = 1 if param_co_simulation['translation_thread'] else 3
         for index in range(len(id_proxy)):
             if 'singularity' in param_co_simulation.keys():  # run with singularity image
-                argv = mpirun+['-n',nb_mpi_translator,'singularity', 'run',
+                argv = mpirun+['-n', str(nb_mpi_translator),'singularity', 'run',
                                '--app', 'NEST-TVB', param_co_simulation['singularity']]
             elif 'docker' in param_co_simulation.keys():  # run from sarus on a cluster
-                argv = param_co_simulation['docker'] + mpirun + ['-n', '3']\
+                argv = param_co_simulation['docker'] + mpirun + ['-n', str(nb_mpi_translator)]\
                        + ['python3', 'home/nest_elephant_tvb/translation/nest_to_tvb.py']
             elif 'sarus' in param_co_simulation.keys():  # run with docker
-                argv = mpirun + ['-n', nb_mpi_translator] + param_co_simulation['sarus']\
+                argv = mpirun + ['-n', str(nb_mpi_translator)] + param_co_simulation['sarus']\
                        + ['python3', 'home/nest_elephant_tvb/translation/nest_to_tvb.py']
             else:  # run local or with slurm
                 dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../translation/nest_to_tvb.py"
@@ -146,13 +146,13 @@ def run(parameters_file):
         # one by proxy/id_region
         for index in range(len(id_proxy)):
             if 'singularity' in param_co_simulation.keys() :  # run with singularity image
-                argv = mpirun+['-n', nb_mpi_translator, 'singularity', 'run',
+                argv = mpirun+['-n', str(nb_mpi_translator), 'singularity', 'run',
                                '--app', 'TVB-NEST', param_co_simulation['singularity']]
             elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
-                argv = mpirun + ['-n',nb_mpi_translator] + param_co_simulation['sarus']\
+                argv = mpirun + ['-n',str(nb_mpi_translator)] + param_co_simulation['sarus']\
                        + ['python3', 'home/nest_elephant_tvb/translation/tvb_to_nest.py']
             elif 'docker' in param_co_simulation.keys():  # run with docker
-                argv = param_co_simulation['docker'] + mpirun + ['-n', '3']\
+                argv = param_co_simulation['docker'] + mpirun + ['-n', str(nb_mpi_translator)]\
                        + ['python3', 'home/nest_elephant_tvb/translation/tvb_to_nest.py']
             else:  # run local or with slurm
                 dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../translation/tvb_to_nest.py"
