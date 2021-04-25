@@ -69,7 +69,7 @@ def init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_t
     model.tau_OU = np.array(param_tvb_model['tau_OU'])
     model.weight_noise = np.array(param_tvb_model['weight_noise'])
     model.external_input_ex_ex = np.array(param_tvb_model['excitatory_extern'])
-    model.external_input_ex_in = np.array(param_tvb_model['excitatory_extern'])
+    model.external_input_in_ex = np.array(param_tvb_model['excitatory_extern'])
     model.external_input_in_ex = np.array(0.0)
     model.external_input_in_in = np.array(0.0)
     model.state_variable_range['E'] = np.array(param_tvb_model['initial_condition']['E'])
@@ -123,7 +123,8 @@ def init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_t
     # add gaussian noise to the noise of the model
     noise = lab.noise.Additive(
         nsig=np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]),
-        ntau=0.0
+        ntau=0.0,
+        noise_seed = param_tvb_integrator['seed']
     )
     noise.random_stream.seed(param_tvb_integrator['seed'])
     integrator = lab.integrators.HeunStochastic(noise=noise, dt=param_tvb_integrator['sim_resolution'])
@@ -172,7 +173,7 @@ def run_simulation(simulator, times, parameter_tvb):
     :param parameter_tvb: the parameter for the simulator
     '''
     # check how many monitor it's used
-    nb_monitor = parameter_tvb['Raw'] + parameter_tvb['TemporalAverage'] + parameter_tvb['Bold'] + parameter_tvb['SEEG']
+    nb_monitor = parameter_tvb['Raw'] + parameter_tvb['TemporalAverage'] + parameter_tvb['Bold'] + parameter_tvb['ECOG']
     # initialise the variable for the saving the result
     save_result = []
     for i in range(nb_monitor):

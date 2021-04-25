@@ -15,6 +15,7 @@ class TranslationSpikeRate(MPICommunicationExtern):
     def __init__(self, id_translator, param, *arg, **karg):
         """
         translation object from spikes to rate
+        :param id_translator : id of the translator
         :param param: parameter of the translation function
         :param arg: parameters
         :param karg: other parameters
@@ -81,7 +82,7 @@ class TranslationSpikeRate(MPICommunicationExtern):
                 if count % self.save_hist_count == 0:
                     if self.save_hist_buf is not None:
                         self.logger.info('TSR : save hist :' + str(self.save_rate_nb))
-                        np.save(self.save_hist_path+'/'+self.id+'_'+str(self.save_hist_nb)+'.npy', self.save_hist_buf)
+                        np.save(self.save_hist_path+'/'+str(self.id)+'_'+str(self.save_hist_nb)+'.npy', self.save_hist_buf)
                         self.save_hist_nb += 1
                     self.save_hist_buf = hist
                 else:
@@ -95,7 +96,7 @@ class TranslationSpikeRate(MPICommunicationExtern):
                 if count % self.save_rate_count == 0:
                     self.logger.info('TSR : save rate :'+str(self.save_rate_nb))
                     if self.save_rate_buf is not None:
-                        np.save(self.save_rate_path+'/'+self.id+'_'+str(self.save_rate_nb)+'.npy', self.save_rate_buf)
+                        np.save(self.save_rate_path+'/'+str(self.id)+'_'+str(self.save_rate_nb)+'.npy', self.save_rate_buf)
                         self.save_rate_nb += 1
                     self.save_rate_buf = rate
                 else:
@@ -120,9 +121,9 @@ class TranslationSpikeRate(MPICommunicationExtern):
         super().finalise()
         # Save the ending part of the simulation
         if self.save_hist:
-            np.save(self.save_hist_path + '/' + self.id + '_' + str(self.save_hist_count) + '.npy', self.save_hist_buf)
+            np.save(self.save_hist_path + '/' + str(self.id) + '_' + str(self.save_hist_count) + '.npy', self.save_hist_buf)
         if self.save_rate:
-            np.save(self.save_rate_path + '/' + self.id + '_' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
+            np.save(self.save_rate_path + '/' + str(self.id) + '_' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
 
     def add_spikes(self, count, size_buffer, buffer):
         """
@@ -227,7 +228,7 @@ class TranslationRateSpike(MPICommunicationExtern):
             if self.save_rate:
                 if count % self.save_rate_count == 0:
                     if self.save_rate_buf is not None:
-                        np.save(self.save_rate_path + '/' + self.id + '_' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
+                        np.save(self.save_rate_path + '/' + str(self.id) + '_' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
                         self.save_rate_nb += 1
                     self.save_rate_buf = rate
                 else:
@@ -240,7 +241,7 @@ class TranslationRateSpike(MPICommunicationExtern):
             if self.save_spike:
                 if count % self.save_spike_count == 0:
                     if self.save_spike_buf is not None:
-                        np.save(self.save_spike_path + '/' + self.id + '_' + str(self.save_spike_nb) + '.npy', self.save_spike_buf)
+                        np.save(self.save_spike_path + '/' + str(self.id) + '_' + str(self.save_spike_nb) + '.npy', self.save_spike_buf)
                         self.save_spike_nb += 1
                     self.save_spike_buf = [spikes for spikes in spike_trains]
                 else:
@@ -268,9 +269,9 @@ class TranslationRateSpike(MPICommunicationExtern):
         super().finalise()
         # Save the ending part of the simulation
         if self.save_rate:
-            np.save(self.save_rate_path + '/' + self.id + '_' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
+            np.save(self.save_rate_path + '/' + str(self.id) + '_' + str(self.save_rate_nb) + '.npy', self.save_rate_buf)
         if self.save_spike:
-            np.save(self.save_spike_path + '/' + self.id + '_' + str(self.save_spike_nb) + '.npy', self.save_spike_buf)
+            np.save(self.save_spike_path + '/' + str(self.id) + '_' + str(self.save_spike_nb) + '.npy', self.save_spike_buf)
 
     def generate_spike(self, count, time_step, rate):
         """
