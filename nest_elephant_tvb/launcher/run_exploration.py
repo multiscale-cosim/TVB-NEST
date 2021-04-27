@@ -116,9 +116,6 @@ def run(parameters_file):
         elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
             argv = mpirun + ['-n', str(param_co_simulation['nb_MPI_nest'])] + param_co_simulation['sarus']\
                    + ['python3', 'home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
-        elif 'docker' in param_co_simulation.keys():  # run with docker
-            argv = param_co_simulation['docker']+mpirun+['-n',str(param_co_simulation['nb_MPI_nest'])]\
-                   + ['python3','home/nest_elephant_tvb/Nest/simulation_Zerlaut.py']
         else:  # run local or with slurm
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../Nest/simulation_Zerlaut.py"
             argv = copy.copy(mpirun)
@@ -137,9 +134,6 @@ def run(parameters_file):
             if 'singularity' in param_co_simulation.keys():  # run with singularity image
                 argv = mpirun+['-n', str(nb_mpi_translator),'singularity', 'run',
                                '--app', 'NEST-TVB', param_co_simulation['singularity']]
-            elif 'docker' in param_co_simulation.keys():  # run from sarus on a cluster
-                argv = param_co_simulation['docker'] + mpirun + ['-n', str(nb_mpi_translator)]\
-                       + ['python3', 'home/nest_elephant_tvb/translation/nest_to_tvb.py']
             elif 'sarus' in param_co_simulation.keys():  # run with docker
                 argv = mpirun + ['-n', str(nb_mpi_translator)] + param_co_simulation['sarus']\
                        + ['python3', 'home/nest_elephant_tvb/translation/nest_to_tvb.py']
@@ -163,9 +157,6 @@ def run(parameters_file):
             elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
                 argv = mpirun + ['-n',str(nb_mpi_translator)] + param_co_simulation['sarus']\
                        + ['python3', 'home/nest_elephant_tvb/translation/tvb_to_nest.py']
-            elif 'docker' in param_co_simulation.keys():  # run with docker
-                argv = param_co_simulation['docker'] + mpirun + ['-n', str(nb_mpi_translator)]\
-                       + ['python3', 'home/nest_elephant_tvb/translation/tvb_to_nest.py']
             else:  # run local or with slurm
                 dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../translation/tvb_to_nest.py"
                 argv = copy.copy(mpirun)
@@ -182,9 +173,6 @@ def run(parameters_file):
             argv = mpirun + ['-n', '1', 'singularity', 'run', '--app', 'TVB', param_co_simulation['singularity']]
         elif 'sarus' in param_co_simulation.keys():  # run from sarus on a cluster
             argv = mpirun + ['-n', '1'] + param_co_simulation['sarus']\
-                   + ['python3', 'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
-        elif 'docker' in param_co_simulation.keys():  # run with docker
-            argv = param_co_simulation['docker'] + mpirun + ['-n', '1']\
                    + ['python3', 'home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py']
         else:  # run local or with slurm
             dir_path = os.path.dirname(os.path.realpath(__file__)) + "/../Tvb/simulation_Zerlaut.py"
