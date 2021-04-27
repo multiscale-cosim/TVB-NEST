@@ -13,6 +13,7 @@ from mpi4py import MPI
 import os
 import json
 import time
+import copy
 from nest_elephant_tvb.utils import create_logger
 from nest_elephant_tvb.Tvb.modify_tvb import Zerlaut as Zerlaut
 from nest_elephant_tvb.Tvb.modify_tvb.Interface_co_simulation_parallel import Interface_co_simulation
@@ -265,13 +266,15 @@ def run_mpi(path):
     for i in id_proxy:
         comm_send.append(init_mpi(path_receive + str(i) + ".txt", logger))
 
+    logger.info("send initialisation of TVB : prepare data")
     initialisation_data = []
     for i in np.arange(0,np.rint(time_synch/simulator.integrator.dt),1,dtype=np.int):
         initialisation_data.append(simulator._loop_compute_node_coupling(i)[:, id_proxy, :])
     initialisation_data = np.concatenate(initialisation_data)
     time_init = [0, time_synch]
+    logger.info("send initialisation of TVB : send data")
     for index, comm in enumerate(comm_send):
-        send_mpi(comm, time_init, initialisation_data[:, index] * 1e3)
+        send_mpi(comm, time_init, initialisation_data[:, index] * 1e3, logger)
 
     # the loop of the simulation
     count = 0
@@ -281,7 +284,7 @@ def run_mpi(path):
         # receive MPI data
         data_value = []
         for comm in comm_receive:
-            receive = receive_mpi(comm)
+            receive = receive_mpi(comm, logger)
             time_data = receive[0]
             data_value.append(receive[1])
         logger.info(" TVB receive data values")
@@ -304,8 +307,8 @@ def run_mpi(path):
             nest_data.append([result[-1][0], result[-1][1]])
 
             # save the result in file
-            if result[-1][0] >= param_tvb_monitor['save_time'] * (
-                    count_save + 1):  # check if the time for saving at some time step
+            # check if the time for saving at some time step
+            if result[-1][0] >= param_tvb_monitor['save_time'] * ( count_save + 1):
                 np.save(param_tvb_monitor['path_result'] + '/step_' + str(count_save) + '.npy', save_result)
                 save_result = []
                 for i in range(nb_monitor):
@@ -318,7 +321,7 @@ def run_mpi(path):
         time = [nest_data[0, 0], nest_data[-1, 0]]
         rate = np.concatenate(nest_data[:, 1])
         for index, comm in enumerate(comm_send):
-            send_mpi(comm, time, rate[:, index] * 1e3)
+            send_mpi(comm, time, rate[:, index] * 1e3, logger)
 
         # increment of the loop
         count += 1
@@ -358,7 +361,7 @@ def init_mpi(path, logger):
     return comm
 
 
-def send_mpi(comm, times, data):
+def send_mpi(comm, times, data, logger):
     """
     send mpi data
     :param comm: MPI communicator
@@ -366,27 +369,32 @@ def send_mpi(comm, times, data):
     :param data: rates inputs
     :return:nothing
     """
+    logger.info("start send")
     status_ = MPI.Status()
     # wait until the translator accept the connections
     accept = False
     while not accept:
         req = comm.irecv(source=0, tag=0)
         accept = req.wait(status_)
+        logger.info("send accept")
     source = status_.Get_source()  # the id of the excepted source
+    logger.info("get source")
     data = np.ascontiguousarray(data, dtype='d')  # format the rate for sending
     shape = np.array(data.shape[0], dtype='i')  # size of data
     times = np.array(times, dtype='d')  # time of starting and ending step
     comm.Send([times, MPI.DOUBLE], dest=source, tag=0)
     comm.Send([shape, MPI.INT], dest=source, tag=0)
     comm.Send([data, MPI.DOUBLE], dest=source, tag=0)
+    logger.info("end send")
 
 
-def receive_mpi(comm):
+def receive_mpi(comm, logger):
     """
         receive proxy values the
     :param comm: MPI communicator
     :return: rate of all proxy
     """
+    logger.info("start receive")
     status_ = MPI.Status()
     # send to the translator : I want the next part
     req = comm.isend(True, dest=0, tag=0)
@@ -399,6 +407,7 @@ def receive_mpi(comm):
     # get the rate
     rates = np.empty(size, dtype='d')
     comm.Recv([rates, size, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
+    logger.info("end receive "+str(time_step))
     # print the summary of the data
     if status_.Get_tag() == 0:
         return time_step, rates

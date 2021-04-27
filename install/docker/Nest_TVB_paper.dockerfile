@@ -18,22 +18,15 @@
 
 FROM debian:buster-slim
 
-COPY  ./nest-io-dev /home/nest-io-dev
-COPY  ./nest_elephant_tvb /home/nest_elephant_tvb
-COPY  ./analyse /home/nest_elephant_tvb/analyse
-COPY  ./parameter /home/nest_elephant_tvb/parameter
-
+# install MPI
 RUN apt-get update;\
     apt-get install -y g++ gcc gfortran make strace wget
-
-# install MPI
 RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     tar xf mpich-3.1.4.tar.gz;\
     cd mpich-3.1.4;\
     ./configure --disable-fortran --enable-fast=all,O3 --prefix=/usr;\
     make -j$(nproc);\
     make install
-
 
 # Install the dependance for Nest
 RUN apt-get install -y build-essential cmake python3-distutils python3-dev python3.7 libltdl-dev libreadline-dev libncurses-dev libgsl-dev curl;\
@@ -77,6 +70,8 @@ RUN apt-get install -y llvm-dev llvm;\
     pip install tvb-data tvb-gdist tvb-library==2.0.10
 
 # Compile and Install package for Nest
+COPY  ./nest-io-dev /home/nest-io-dev
+
 RUN cd /home/;\
     NAME_SOURCE_NEST=/home/nest-io-dev;\
     PATH_INSTALATION=/usr/lib/nest/;\
@@ -93,6 +88,11 @@ RUN cd /home/;\
     make;\
     make install
     #make installcheck
+
+# Copy files of the project
+COPY  ./nest_elephant_tvb /home/nest_elephant_tvb
+COPY  ./analyse /home/nest_elephant_tvb/analyse
+COPY  ./parameter /home/nest_elephant_tvb/parameter
 
 ENV PYTHONPATH=/usr/lib/nest/lib/python3.7/site-packages/:/home/:$PYTHONPATH
 
