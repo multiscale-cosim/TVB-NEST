@@ -193,9 +193,13 @@
     "tau_e": 5.0,
     "tau_i": 5.0,
     "N_tot": 10000,
-    "p_connect": 0.005,
+    "p_connect_e": 0.05,
+    "p_connect_i": 0.05,
+    "excitatory_extern":0.001,
     "g": 0.2,
-    "K_ext_e": 90
+    "K_ext_e": 90,
+    "tau_OU": 20.0,
+    "weight_noise": 0.001
   },
   "param_tvb_connection": {
     "path_region_labels": "/home/nest_elephant_tvb/parameter/data_mouse//region_labels.txt",
@@ -211,34 +215,6 @@
     "a": 1.0
   },
   "param_tvb_integrator": {
-    "tau_OU": 20.0,
-    "mu": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "nsig": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "weights": [
-      0.01,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
     "sim_resolution": 0.1,
     "seed": 45,
     "seed_init": 44
@@ -263,10 +239,10 @@
       ],
       "period": 2000.0
     },
-    "SEEG": true,
-    "parameter_SEEG": {
+    "ECOG": true,
+    "parameter_ECOG":{
       "path": "/home/nest_elephant_tvb/parameter/data_mouse/sensor_hypocampus.txt",
-      "scaling_projection": 100.0
+      "scaling":1000.0
     }
   },
   "param_TR_nest_to_tvb": {
@@ -276,7 +252,11 @@
     "nb_neurons": 8000.0,
     "synch": 2.0,
     "width": 20.0,
-    "level_log": 1
+    "level_log": 1,
+    "save_hist":true,
+    "save_hist_count": 50,
+    "save_rate":true,
+    "save_rate_count": 50
   },
   "param_TR_tvb_to_nest": {
     "percentage_shared": 0.01,
@@ -284,11 +264,15 @@
     "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_regular_burst/init_rates.npy",
     "level_log": 1,
     "seed": 43,
-    "nb_synapses": 90
+    "nb_synapses": 90,
+    "save_spike":true,
+    "save_spike_count": 50,
+    "save_rate":true,
+    "save_rate_count": 50
   },
   "param_co_simulation": {
     "co-simulation": true,
-    "nb_MPI_nest": 6,
+    "nb_MPI_nest": 1,
     "record_MPI": false,
     "id_region_nest": [
       26,
@@ -297,7 +281,7 @@
     "synchronization": 2.0,
     "level_log": 1,
     "mpi": ["mpirun"],
-    "docker": ["docker","run","--mount","type=bind,source=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_regular_burst/,target=/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_regular_burst/","ab8051437fd7"]
+    "translation_thread":false
   },
   "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_regular_burst",
   "begin": 0.0,
