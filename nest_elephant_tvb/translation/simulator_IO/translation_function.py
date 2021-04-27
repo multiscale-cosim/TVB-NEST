@@ -58,7 +58,7 @@ class TranslationSpikeRate(MPICommunicationExtern):
         self.logger.info('TRS : begin sim')
         rates = np.load(self.path_init)
         self.logger.info('TRS : init rates')
-        self.communication_internal.send_time_rate(np.array([-self.synch,0.]), rates)
+        self.communication_internal.send_time_rate(np.array([0.,self.synch]), rates)  # The time is not good because the TVB interface has a bug
         self.logger.info('TRS : send init')
         count = 0  # counter of the number of run. It can be useful for the translation function
         while True:
@@ -90,7 +90,7 @@ class TranslationSpikeRate(MPICommunicationExtern):
 
             # Step 2.3: Analyse this data, i.e. calculate mean firing rate
             self.logger.info('TSR : analise')
-            times, rate = self.analyse(count, hist)
+            times, rate = self.analyse(count+1, hist)  # if fix bug of initilisation remove +1
             # optional : save rate
             if self.save_rate:
                 if count % self.save_rate_count == 0:
