@@ -27,7 +27,8 @@ class MetaDirectoriesManager(type):
 
 
 class DirectoriesManager(metaclass=MetaDirectoriesManager):
-
+    __directories = {}
+    
     def setup_default_directories(self, path) -> None:
         """ Setup default directories at specified location
         Default directories: Output, Output/Results, Output/Logs,
@@ -42,7 +43,7 @@ class DirectoriesManager(metaclass=MetaDirectoriesManager):
         # setup output directory at specified location
         output_dir = self.__setup_output_directory("outputs", path)
         # add default directory in dictionary
-        self.__directories = ({DefaultDirectories.OUTPUT: output_dir})
+        self.__directories.update({DefaultDirectories.OUTPUT: output_dir})
         self.get_directory(DefaultDirectories.OUTPUT)
         # setup other default directories
         self.__directories.update({DefaultDirectories.LOGS:

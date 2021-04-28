@@ -66,6 +66,15 @@ def arg_parse(args=None):
         required=True,
     )
 
+    parser.add_argument(
+        '--global-settings',
+        '-g',
+        help='XML file defining the common settings for Co-Simulation',
+        metavar='co_simulation_global_settings.xml',
+        type=xml_file_exists,
+        required=True,
+    )
+
     args = parser.parse_args()
 
     return args

@@ -72,9 +72,7 @@ class XmlManager(object):
             self._logger.error('{} does not exist'.format(self._xml_filename))
             return common.enums.XmlManagerReturnCodes.XML_FILE_NOT_FOUND
 
-        try:
-            open(self._xml_filename)
-        except PermissionError:
+        if not os.access(self._xml_filename, os.R_OK):
             self._logger.error('{} cannot be open, check access permissions'.format(self._xml_filename))
             return common.enums.XmlManagerReturnCodes.XML_FILE_ACCESS_ERROR
 

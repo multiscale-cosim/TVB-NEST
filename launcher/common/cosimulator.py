@@ -17,6 +17,7 @@ import json
 # Co-Simulator imports
 import common
 import configurations_manager
+from default_directories_enum import DefaultDirectories
 
 
 class CoSimulator:
@@ -56,6 +57,8 @@ class CoSimulator:
     __parameters_parameters_for_json_file_dict = {}
     __parameters_variables_dict = {}
 
+    __log_configurations_dict = {}
+
     def generate_parameters_json_file(self):
         """
             Dumps into the /path/to/co_sim/results/dir/filename.json file
@@ -65,10 +68,9 @@ class CoSimulator:
             JSON_FILE_ERROR: reporting error during the parameter JSON file
             OK: parameter JSON file was generated properly
         """
-
         # TO BE DONE: exception management when the file cannot be created
 
-        results_dir = self.__configuration_manager.get_directory('results')
+        results_dir = self.__configuration_manager.get_directory(DefaultDirectories.RESULTS)
         json_output_filename = \
             self.__parameters_parameters_for_json_file_dict[common.xml_tags.CO_SIM_XML_CO_SIM_PARAMS_FILENAME]
         json_output_path_filename = os.path.join(results_dir, json_output_filename)
@@ -108,10 +110,25 @@ class CoSimulator:
         ########
         # STEP 2 - Setting Up the Configuration Manager
         ########
-        # TO BE DONE: __logs_root_dir should be set based on environment variable or by using another mechanism
-        # e.g. self.__logs_root_dir = os.environ['HOME'] + '/co_sim/logs'
+
+        ####################
+        # instantiate configuration manager
         self.__configuration_manager = configurations_manager.ConfigurationsManager()
-        self.__logger = self.__configuration_manager.load_log_configurations(name='co-simulator')
+        
+        # get path to setup the output directories
+        default_dir = self.__configuration_manager.get_configuration_settings(
+            'output_directory', self.__args.global_settings)
+        
+        # setup default directories (Output, Output/Results, Output/Logs,
+        # Output/Figures, Output/Monitoring_DATA)
+        self.__configuration_manager.setup_default_directories(default_dir['output_directory'])
+
+        # load common settings for the logging
+        logger_settings = self.__configuration_manager.get_configuration_settings(
+                            'log_configurations', self.__args.global_settings)
+                            
+        self.__logger = self.__configuration_manager.load_log_configurations(
+                            name=__name__, log_configurations=logger_settings)
         self.__logger.info('Co-Simulator STEP 2 done, configuration manager started')
 
         ########
@@ -122,8 +139,11 @@ class CoSimulator:
             common.variables_manager.VariablesManager(logger=self.__logger)
 
         # STEP 3.1 - Setting Up the output location (path) for results
+#        self.__variables_manager.set_value(common.variables.CO_SIM_RESULTS_DIR,
+ #                                          self.__configuration_manager.get_directory('results'))
         self.__variables_manager.set_value(common.variables.CO_SIM_RESULTS_DIR,
-                                           self.__configuration_manager.get_directory('results'))
+                                           self.__configuration_manager.get_directory(DefaultDirectories.RESULTS))
+
 
         # STEP 3.2 - Setting Up the launcher command based on the environment
 
