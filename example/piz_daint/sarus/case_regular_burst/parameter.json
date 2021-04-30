@@ -57,8 +57,8 @@
     "p_connect": 0.005,
     "weight_global": 1.0,
     "nb_external_synapse": 90,
-    "path_weight": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/weights.npy",
-    "path_distance": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/distance.npy",
+    "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy",
+    "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy",
     "velocity": 3.0
   },
   "param_nest_background": {
@@ -247,7 +247,7 @@
   },
   "param_TR_nest_to_tvb": {
     "scaling": 1.0,
-    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_regular_burst//init_spikes.npy",
+    "init": "/scratch/snx3000/bp000266/co_sim_local/TVB-NEST/example/piz_daint/sarus/case_regular_burst//init_spikes.npy",
     "resolution": 0.1,
     "nb_neurons": 8000.0,
     "synch": 2.0,
@@ -261,7 +261,7 @@
   "param_TR_tvb_to_nest": {
     "percentage_shared": 0.01,
     "function_select": 2,
-    "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_regular_burst//init_rates.npy",
+    "init": "/scratch/snx3000/bp000266/co_sim_local/TVB-NEST/example/piz_daint/sarus/case_regular_burst/init_rates.npy",
     "level_log": 1,
     "seed": 43,
     "nb_synapses": 90,
@@ -284,7 +284,7 @@
     "sarus": ["sarus","run","--mount=type=bind,source=/scratch/snx3000/bp000266/co_sim_local/TVB-NEST/example/piz_daint/sarus/case_regular_burst/,destination=/scratch/snx3000/bp000266/co_sim_local/TVB-NEST/example/piz_daint/sarus/case_regular_burst/","load/library/PAPER_v1"],
     "translation_thread":false
   },
-  "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_regular_burst",
+  "result_path": "/scratch/snx3000/bp000266/co_sim_local/TVB-NEST/example/piz_daint/sarus/case_regular_burst/",
   "begin": 0.0,
   "end": 61000.0
 }

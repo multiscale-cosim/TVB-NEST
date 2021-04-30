@@ -19,12 +19,8 @@
 #under the License.
 
 # Script needs to be started from the directory it is located in
-CURRENT_REPERTORY=$(pwd)
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd "$DIR" || exit
-
 module load daint-gpu
 module load cray-python 
 module load sarus
 
-python3 ../../../nest_elephant_tvb/launcher/run_exploration.py $1
+python3 $1/nest_elephant_tvb/launcher/run_exploration.py $2
