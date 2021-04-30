@@ -18,9 +18,21 @@
 
 FROM debian:buster-slim
 
-# install MPI
+# get compiler and access to web interface
 RUN apt-get update;\
-    apt-get install -y g++ gcc gfortran make strace wget
+    apt-get install -y g++ gcc gfortran make strace wget git
+
+# install pip
+RUN apt-get install -y build-essential cmake python3-distutils python3-dev python3.7 libltdl-dev libreadline-dev libncurses-dev libgsl-dev curl;\
+    cd /root ;\
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;\
+    python3.7 get-pip.py;\
+    rm get-pip.py;\
+    pip install --upgrade pip
+
+
+
+# install MPI
 RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     tar xf mpich-3.1.4.tar.gz;\
     cd mpich-3.1.4;\
@@ -29,13 +41,7 @@ RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     make install
 
 # Install the dependance for Nest
-RUN apt-get install -y build-essential cmake python3-distutils python3-dev python3.7 libltdl-dev libreadline-dev libncurses-dev libgsl-dev curl;\
-    cd /root ;\
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;\
-    python3.7 get-pip.py;\
-    rm get-pip.py;\
-    pip install --upgrade pip;\
-    pip install nose;\
+RUN pip install nose;\
     pip install numpy cython Pillow;\
     pip install matplotlib;\
     pip install mpi4py;\
@@ -43,16 +49,32 @@ RUN apt-get install -y build-essential cmake python3-distutils python3-dev pytho
     pip install scipy ;\
     pip install elephant
 
-RUN apt-get install -y git;\
-    git clone https://github.com/NeuralEnsemble/parameters;\
+RUN git clone https://github.com/NeuralEnsemble/parameters;\
     cd parameters;\
-    python3 setup.py install --user;\
+    python3 setup.py install;\
     cd .. ;\
     rm -rd parameters
 
+# install neuron
+RUN apt-get install -y bison flex libxcomposite-dev
+
+RUN git clone https://github.com/neuronsimulator/nrn.git;\
+    cd nrn;\
+    mkdir build;\
+    cd build;\
+    cmake .. \
+    -DNRN_ENABLE_INTERVIEWS=OFF \
+    -DNRN_ENABLE_MPI=OFF \
+    -DNRN_ENABLE_RX3D=OFF \
+    -DCMAKE_INSTALL_PREFIX=/usr/local/nrn;\
+    cmake --build . --parallel 8 --target install
+
+ENV PATH=/usr/local/nrn/bin:$PATH
+
+ENV PYTHONPATH=/usr/local/nrn/lib/python:$PYTHONPATH
+
 # install LPFy
-RUN pip install neuron;\
-    pip install LFPy;\
+RUN pip install LFPy;\
     pip install lfpykit;\
     pip install MEAutility;\
     pip install LFPy
@@ -60,7 +82,7 @@ RUN pip install neuron;\
 # install HybridLFPy from github
 RUN git clone --branch nest-3-lio https://github.com/lionelkusch/hybridLFPy.git;\
     cd hybridLFPy;\
-    python3 setup.py install --user;\
+    python3 setup.py install;\
     cd .. ;\
     rm -rd hybridLFPy
 
@@ -93,6 +115,10 @@ RUN cd /home/;\
 COPY  ./nest_elephant_tvb /home/nest_elephant_tvb
 COPY  ./analyse /home/nest_elephant_tvb/analyse
 COPY  ./parameter /home/nest_elephant_tvb/parameter
+
+# initilisation of special synapse for Neuron
+RUN cd /home/nest_elephant_tvb/analyse/LFPY;\
+    nrnivmodl
 
 ENV PYTHONPATH=/usr/lib/nest/lib/python3.7/site-packages/:/home/:$PYTHONPATH
 

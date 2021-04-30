@@ -90,7 +90,7 @@ if __name__ == "__main__":
             buffer_write_shape=(2, 2),
             )
         path_to_files_receive = [path+"/translation/receive_from_tvb/"+str(id_proxy[id_translator])+".txt"]
-        # creation of the object for the traner Neurosciences & Philosophslation from rate to spike
+        # creation of the object for the translation from rate to spike
         translate_rate_to_spike = TranslationRateSpike(
             id_translator, param, nb_spike_generator,
             'tvb_to_nest_translate' + str(id_first_spike_detector), path, level_log,

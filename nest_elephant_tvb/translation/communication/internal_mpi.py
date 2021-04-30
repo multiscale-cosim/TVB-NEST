@@ -113,7 +113,7 @@ class MPICommunication(CommunicationInternAbstract):
         """
         send ending writing inside buffer
         """
-        self.logger.info("MPI Internal : write(end) : send size : "+str(self.shape_buffer)+" rank "+str(self.rank)
+        self.logger.info("MPI Internal : write(end) : send size : "+str(np.sum(self.shape_buffer))+" rank "+str(self.rank)
                          + " to "+str(self.buffer_r_w[0]))
         self.request_send_size_buffer = MPI.COMM_WORLD.isend(self.shape_buffer, dest=self.buffer_r_w[0])
         self.logger.info("MPI Internal : write(end) : end")
@@ -237,7 +237,7 @@ class MPICommunication(CommunicationInternAbstract):
         self.logger.info('MPI Internal : spike(get) : begin ')
         # wait until the data are ready to use
         self.shape_buffer = self.ready_to_read()
-        self.logger.info('MPI Internal : spike(get) : receive end '+str(self.shape_buffer))
+        self.logger.info('MPI Internal : spike(get) : receive end '+str(np.sum(self.shape_buffer)))
         if self.shape_buffer[0] == -1:
             self.logger.info('MPI Internal : spike(get) : receive end ')
             return None
@@ -246,7 +246,6 @@ class MPICommunication(CommunicationInternAbstract):
         spikes_times = []
         index = 0
         for nb_spike in self.shape_buffer:
-            self.logger.info('MPI Internal : spike(get) :'+str(index))
             spikes_times.append(self.databuffer[index:index + int(nb_spike)])
             index += int(nb_spike)
         self.logger.info('MPI Internal : spike(get) : end reshape data')
@@ -258,7 +257,7 @@ class MPICommunication(CommunicationInternAbstract):
         """
         self.logger.info('MPI Internal : spike(ready) : ready get spikes')
         self.shape_buffer = self.ready_to_read()
-        self.logger.info('MPI Internal : spike(ready) : ready to write : ' + str(self.shape_buffer))
+        self.logger.info('MPI Internal : spike(ready) : ready to write : ' + str(np.sum(self.shape_buffer)))
 
     def get_spikes_release(self):
         """

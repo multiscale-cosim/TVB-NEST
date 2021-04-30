@@ -7,7 +7,7 @@ from matplotlib.collections import PolyCollection
 import matplotlib.pyplot as plt
 import LFPy
 import MEAutility
-from example.analyse.LFPY.example_plotting import remove_axis_junk
+from .example_plotting import remove_axis_junk
 
 
 def plot_electrode_neurons(ax, X, isometricangle, markers, colors,
