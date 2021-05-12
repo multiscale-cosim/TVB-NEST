@@ -76,7 +76,11 @@ class Parser:
             Dictionary built out of the elements of xml.etree.ElementTree
         """
         xml_dictionary = dict()
-        if parent_element.items():
+        if (len(parent_element)) == 0:
+            # Case: if there is no nested element,
+            # then add it into the dictionary
+            xml_dictionary.update({parent_element.tag: parent_element.text})
+        elif parent_element.items():
             # Case: if the parent element has attributes,
             # then add them into the dictionary
             xml_dictionary.update(dict(parent_element.items()))
