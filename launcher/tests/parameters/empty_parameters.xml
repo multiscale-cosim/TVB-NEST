@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_parameters>
+        <title>Empty Parameters</title>
+        <description>Empty Parameters</description>
+        <variables>
+            <var_000>
+                <var_name>__no_name__</var_name>
+                <var_value>__no_value__</var_value>
+            </var_000>
+        </variables>
+        <parameters>
+            <par_000>
+                <par_name>__no_name__</par_name>
+                <par_value>__no_value__</par_value>
+            </par_000>
+        </parameters>
+        <parameters_json_file>
+            <filename>empty.json</filename>
+            <root_object>json_root_object</root_object>
+            <pairs>
+                <pair_001>
+                    <name>string_parameter</name>
+                    <value>__no_string__</value>
+                    <data_type>CO_SIM_STRING</data_type>
+                </pair_001>
+                <pair_002>
+                    <name>float_parameter</name>
+                    <value>0.00</value>
+                    <data_type>CO_SIM_FLOAT_PRECISION_1</data_type>
+                </pair_002>
+                <pair_003>
+                    <name>integer_parameter</name>
+                    <value>0</value>
+                    <data_type>CO_SIM_INTEGER</data_type>
+                </pair_003>
+            </pairs>
+        </parameters_json_file>
+    </co_simulation_parameters>
+</settings>
