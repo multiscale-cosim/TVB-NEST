@@ -19,9 +19,14 @@ import neuron
 import json
 import sys
 import copy
+if __name__ == '__main__':
+    from example.analyse.LFPY.select_spikes import select_spikes
+else:
+    from .select_spikes import select_spikes
 
 ################# Initialization of MPI stuff ##################################
-neuron.load_mechanisms(os.path.dirname(__file__))
+if not hasattr(neuron.h, 'ExpSynI'):
+    neuron.load_mechanisms(os.path.dirname(__file__))
 
 
 def param_set_up(path, save_folder, param, parameters):
@@ -167,7 +172,7 @@ def param_set_up(path, save_folder, param, parameters):
     return PS
 
 
-def set_up_network_sim(path, label, GIDs_ex, GIDs_in, parameters):
+def set_up_network_sim(path, label, simulation_time, GIDs_ex, GIDs_in, parameters):
     """
     set up the network for the LFP simulation
     :param path: path of the simulation
@@ -181,9 +186,9 @@ def set_up_network_sim(path, label, GIDs_ex, GIDs_in, parameters):
     # simulation output that uses sqlite3. Again, kwargs are derived from the brunel
     # network instance.
     networkSim = CachedNetwork(
-        simtime=parameters['end'] - parameters['begin'],
+        simtime=simulation_time,
         dt=parameters['param_nest']["sim_resolution"],
-        spike_output_path=path + '/nest/',
+        spike_output_path=path,
         label=label,
         ext='dat',
         GIDs={'ex': [GIDs_ex[0], GIDs_ex[1]], 'in': [GIDs_in[0], GIDs_in[1]]},
@@ -281,7 +286,10 @@ def plot_electrode(PS):
     :param PS: parameters
     :return:
     """
-    from .example_plotting import plot_population
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population
+    else:
+        from .example_plotting import plot_population
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
                     PS.layerBoundaries,
@@ -298,7 +306,10 @@ def plot_soma(PS):
     :param PS: parameters
     :return:
     """
-    from .example_plotting import plot_population, plot_soma_locations
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_soma_locations
+    else:
+        from .example_plotting import plot_population, plot_soma_locations
     # plot cell locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -320,7 +331,10 @@ def plot_cell(PS):
     :param PS:
     :return:
     """
-    from .example_plotting import plot_population, plot_morphologies
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
+    else:
+        from .example_plotting import plot_population, plot_morphologies
     # plot morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -342,7 +356,10 @@ def plot_cell_model(PS):
     :param PS:  parameters
     :return:
     """
-    from .example_plotting import plot_population, plot_individual_morphologies
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_individual_morphologies
+    else:
+        from .example_plotting import plot_population, plot_individual_morphologies
     # plot morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -365,7 +382,10 @@ def plot_cell_and_indication(PS):
     :param PS: parameters
     :return:
     """
-    from .example_plotting import plot_population, plot_morphologies
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
+    else:
+        from .example_plotting import plot_population, plot_morphologies
     # plot morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -403,7 +423,10 @@ def plot_excitatory_cell(PS):
     :param PS: parameter
     :return:
     """
-    from .example_plotting import plot_population, plot_morphologies
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
+    else:
+        from .example_plotting import plot_population, plot_morphologies
     # plot ex morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -425,7 +448,10 @@ def plot_inhibitory_cell(PS):
     :param PS: parameters
     :return:
     """
-    from .example_plotting import plot_population, plot_morphologies
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
+    else:
+        from .example_plotting import plot_population, plot_morphologies
     # plot IN morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -448,7 +474,10 @@ def plot_compute_signal(PS, T):
     :param T: times
     :return:
     """
-    from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    else:
+        from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
     # plot compound LFP and CSD traces
     fig = plt.figure()
     gs = gridspec.GridSpec(2, 8)
@@ -485,7 +514,10 @@ def plot_excitatory_signal(PS, T):
     :param T: times
     :return:
     """
-    from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    else:
+        from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
     # plot compound LFP and CSD traces
     fig = plt.figure()
     gs = gridspec.GridSpec(2, 8)
@@ -523,7 +555,10 @@ def plot_inhibitory_signal(PS,T):
     :param T: times
     :return:
     """
-    from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    else:
+        from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
     # plot compound LFP and CSD traces
     fig = plt.figure()
     gs = gridspec.GridSpec(2, 8)
@@ -562,7 +597,10 @@ def plot_compute_all_signal(PS, T, networkSim, parameters):
     :param parameters: simulation parameters
     :return:
     """
-    from .example_plotting import plot_signal_sum, plot_correlation
+    if __name__ == '__main__':
+        from example.analyse.LFPY.example_plotting import plot_signal_sum, plot_correlation
+    else:
+        from .example_plotting import plot_signal_sum, plot_correlation
     # correlate global firing rate of network with CSD/LFP across channels
     # compute firing rates
     x, y = networkSim.get_xy((0, parameters['end']))
@@ -641,7 +679,7 @@ def plot_all(parameters, networkSim, PS, morphology=False, position=False, signa
         plot_inhibitory_signal(PS, T)
 
 
-def generate_LFP(path, label, GIDs_ex, GIDs_in, properrun=True, name=''):
+def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name=''):
     """
     Generate LFP
     :param path: file of the simulation
@@ -761,13 +799,18 @@ def generate_LFP(path, label, GIDs_ex, GIDs_in, properrun=True, name=''):
         f = open(save_folder + '/parameter.json', "wt")
         json.dump(param_save, f)
         f.close()
+        if not os.path.exists(path + '/LFPY/' + name + label + '/spikes/'):
+            os.makedirs(path + '/LFPY/' + name + label + '/spikes/')
+            select_spikes(begin, end, path + '/nest/', label+'ex', path + '/LFPY/' + name + label + '/spikes/')
+            select_spikes(begin, end, path + '/nest/', label+'in', path + '/LFPY/' + name + label + '/spikes/')
 
     ################################################################################
     # MAIN simulation procedure                                                    #
     ################################################################################
     COMM.Barrier()
     print("rank",RANK,"network simulation  begin");sys.stdout.flush()
-    networkSim = set_up_network_sim(path, label, GIDs_ex, GIDs_in, parameters)
+    networkSim = set_up_network_sim(path + '/LFPY/' + name + label + '/spikes/', label, end - begin,
+                                    GIDs_ex, GIDs_in, parameters)
     print("rank",RANK,"network simulation end");sys.stdout.flush()
     if param['properrun']:
         print("rank",RANK,"process start"); sys.stdout.flush()
@@ -801,7 +844,7 @@ if __name__ == '__main__':
         '/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_regular_burst_2/',
     ]
     for path in pathes:
-        generate_LFP(path, 'pop_1_', [0, 20], [8000, 8020], name='/small_init_test_4/')
+        generate_LFP(path, 'pop_1_', 100, 200, [0, 20], [8000, 8020], name='/small_init_test_4/')
         # generate_LFP(path,'pop_1_',[0,  8000],[8000,  2000],name='/small_init_test_3/')
         # generate_LFP(path,'small_pop_2',[10000,  8000],[18000,  2000],name='/small_init/')
         # generate_LFP(path,'pop_1_',[0,  8000],[8000,  2000],name='/small_init_test_image/')

@@ -242,7 +242,8 @@
     "ECOG":true,
     "parameter_ECOG":{
       "path": "//home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/sensor_hypocampus.txt",
-      "scaling":1000.0
+      "path_volume": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/region_volume.txt",
+      "scaling":0.1
     }
   },
   "param_TR_nest_to_tvb": {

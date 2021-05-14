@@ -24,7 +24,7 @@ def findVec(point1,point2,unitSphere = False):
   else:
       return finalVector
 
-from tvb.simulator.monitors import Projection,Attr, Float
+from tvb.simulator.monitors import Projection,Attr, Float, NArray
 from tvb.datatypes.sensors import SensorsEEG
 from tvb.datatypes.time_series import TimeSeriesEEG, List
 from tvb.datatypes.region_mapping import RegionMapping
@@ -43,14 +43,26 @@ class TimeSeriesECOG(TimeSeriesEEG):
 class ECOG(Projection):
     sensors = Attr(SensorsECOG, required=True, label="ECOG Sensors",
                    doc='Sensors to use for this ECOG monitor')
-    scaling = Float(field_type=float,label="scaling factor",
+    scaling = Float(field_type=float, label="scaling factor",
                             doc="""Scaling the signal""")
+    volume = NArray(label="volume", doc="volume of the region", default=np.array([1.0]))
+
+    def config_for_sim(self, simulator):
+        self.volume_cortical = self.volume[simulator.connectivity.cortical]
+        non_cortical_indices, = np.where(~simulator.connectivity.cortical)
+        self.volume_non_cortical = self.volume[non_cortical_indices]
+        super().config_for_sim(simulator)
+
 
     def analytic(self, loc, ori):
         # localisation => source positions
         # orientation => source orientation
+        if loc.shape[0] == self.volume_cortical.shape[0]:
+            volume = self.volume_cortical
+        else:
+            volume = self.volume_non_cortical
         gain = self.scaling / np.array(
-            [np.linalg.norm(np.expand_dims(i, 0) - loc, axis=1) for i in self.sensors.locations])
+            [np.linalg.norm(np.expand_dims(i, 0) - loc, axis=1) / volume for i in self.sensors.locations])
         return gain
 
     def create_time_series(self, connectivity=None, surface=None,
@@ -61,13 +73,13 @@ class ECOG(Projection):
 
     @classmethod
     def from_file(cls, sensors_fname, scaling, rm_f_name="regionMapping_16k_76.txt",
-                  period=1e3/1024.0, **kwds):
+                  period=1e3/1024.0, volume=np.array([1.0]), **kwds):
         """
         Build Projection-based monitor from sensors and projection files, and
         any extra keyword arguments are passed to the monitor class constructor.
 
         """
-        result = cls(scaling=scaling, period=period, **kwds)
+        result = cls(scaling=scaling, period=period, volume=volume, **kwds)
         result.sensors = cls.sensors.field_type.from_file(sensors_fname)
         result.region_mapping = RegionMapping.from_file(rm_f_name)
         return result

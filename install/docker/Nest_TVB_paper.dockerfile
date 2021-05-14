@@ -30,8 +30,6 @@ RUN apt-get install -y build-essential cmake python3-distutils python3-dev pytho
     rm get-pip.py;\
     pip install --upgrade pip
 
-
-
 # install MPI
 RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     tar xf mpich-3.1.4.tar.gz;\
@@ -49,6 +47,7 @@ RUN pip install nose;\
     pip install scipy ;\
     pip install elephant
 
+# install parameters
 RUN git clone https://github.com/NeuralEnsemble/parameters;\
     cd parameters;\
     python3 setup.py install;\

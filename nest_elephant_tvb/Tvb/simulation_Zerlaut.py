@@ -145,8 +145,11 @@ def init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_t
             period=param_tvb_monitor['parameter_Bold']['period'])
         monitors.append(monitor_Bold)
     if param_tvb_monitor['ECOG']:
+        volume = np.loadtxt(param_tvb_monitor['parameter_ECOG']['path_volume'])[:nb_region]  # volume of the regions
         monitors.append(ECOG().from_file(param_tvb_monitor['parameter_ECOG']['path'],
-                                         param_tvb_monitor['parameter_ECOG']['scaling']))
+                                         param_tvb_monitor['parameter_ECOG']['scaling'],
+                                         volume=volume
+                                         ))
     if cosim is not None:
         # special monitor for MPI
         monitor_IO = Interface_co_simulation(

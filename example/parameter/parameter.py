@@ -61,7 +61,8 @@ param_tvb_monitor = {"save_time": 20.0,
                      "Bold": False,
                      "parameter_Bold": {"variables_of_interest": [0], "period": 2000.0},
                      "ECOG": True,
-                     "parameter_ECOG": {"path": path + '/sensor_hypocampus.txt', "scaling": 1.e3}}
+                     "parameter_ECOG": {"path": path + '/sensor_hypocampus.txt', "scaling": 0.1,
+                                        'path_volume': path + '/region_volume.txt'}}
 param_TR_nest_to_tvb = {"resolution": 0.1, "nb_neurons": 800.0, "synch": 2.0, "width": 20.0, "level_log": 1,
                         'save_hist': True, 'save_hist_count': 50,
                         'save_rate': True, 'save_rate_count': 50}

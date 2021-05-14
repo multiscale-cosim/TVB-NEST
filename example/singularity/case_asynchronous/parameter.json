@@ -263,10 +263,11 @@
       ],
       "period": 2000.0
     },
-    "SEEG": true,
-    "parameter_SEEG": {
+    "ECOG":true,
+    "parameter_ECOG":{
       "path": "/home/nest_elephant_tvb/parameter/data_mouse/sensor_hypocampus.txt",
-      "scaling_projection": 100.0
+      "path_volume": "/home/nest_elephant_tvb/parameter/data_mouse/region_volume.txt",
+      "scaling":0.1
     }
   },
   "param_TR_nest_to_tvb": {

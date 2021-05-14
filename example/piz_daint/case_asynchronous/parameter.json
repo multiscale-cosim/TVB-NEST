@@ -263,8 +263,12 @@
       ],
       "period": 2000.0
     },
-    "SEEG": true,
-    "parameter_SEEG": {
+    "ECOG":true,
+    "parameter_ECOG":{
+      "path": "$SCRATCH/co_sim_local/TVB-NEST/example/parameter/data_mouse/sensor_hypocampus.txt",
+      "path_volume": "$SCRATCH/co_sim_local/TVB-NEST/example/parameter/data_mouse/region_volume.txt",
+      "scaling":0.1
+    },
       "path": "$SCRATCH/co_sim_local/TVB-NEST/example/parameter/data_mouse/sensor_hypocampus.txt",
       "scaling_projection": 100.0
     }

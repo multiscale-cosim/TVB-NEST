@@ -261,7 +261,8 @@ param_tvb_monitor = {
     },
     'ECOG': False,
     'parameter_ECOG': {
-        #'path': , # path of sensor
+        # 'path': , # path of sensor
+        # 'path_volume': , # path of text file with the volume size of each region (1 by line)
         # 'scaling':,
         # 'sigma_noise'
     },

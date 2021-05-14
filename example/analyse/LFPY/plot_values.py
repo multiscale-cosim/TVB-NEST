@@ -4,7 +4,11 @@ import os
 import numpy as np
 import matplotlib.pylab as plt
 from example_plotting import plot_signal_sum
-from ..print_nest_pop import compute_rate, bin_array
+
+if __name__ == '__main__':
+    from example.analyse.print_nest_pop import bin_array
+else:
+    from ..print_nest_pop import bin_array
 
 
 def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None, W_ex=None, W_in=None, path_LFP='.',
