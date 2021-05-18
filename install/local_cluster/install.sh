@@ -67,15 +67,15 @@ export PATH=$PATH:/home/lionel.kusch/TVB-NEST/lib/ncurses/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/lionel.kusch/TVB-NEST/lib/ncurses/include/ncurses
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/lionel.kusch/TVB-NEST/lib/ncurses/include/
 
-wget https://invisible-island.net/datafiles/release/tack.tar.gz
-tar -xf tack.tar.gz
-cd tack-1.09
-./configure --prefix=/home/lionel.kusch/TVB-NEST/lib/tack --with-curses-dir=/home/lionel.kusch/TVB-NEST/lib/ncurses/
-make
-make install
-cd ..
-rm -rfd tack-1.09 tack.tar.gz
-export PATH=$PATH:/home/lionel.kusch/TVB-NEST/lib/task/bin
+#wget https://invisible-island.net/datafiles/release/tack.tar.gz
+#tar -xf tack.tar.gz
+#cd tack-1.09
+#./configure --prefix=/home/lionel.kusch/TVB-NEST/lib/tack --with-curses-dir=/home/lionel.kusch/TVB-NEST/lib/ncurses/
+#make
+#make install
+#cd ..
+#rm -rfd tack-1.09 tack.tar.gz
+#export PATH=$PATH:/home/lionel.kusch/TVB-NEST/lib/task/bin
 
 wget https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
 tar -xf libiconv-1.16.tar.gz
@@ -176,6 +176,19 @@ cd ..
 rm -rd cmake-3.20.2 cmake-3.20.2.tar.gz
 export PATH=/home/lionel.kusch/TVB-NEST/lib/cmake/bin:$PATH
 
+wget https://mirror.ibcp.fr/pub/gnu/gsl/gsl-2.6.tar.gz
+tar -xf gsl-2.6.tar.gz
+cd gsl-2.6
+./configure --prefix=/home/lionel.kusch/TVB-NEST/lib/gsl
+make
+make install
+cd ..
+rm -rfd gsl-2.6 gsl-2.6.tar.gz
+export PATH=$PATH:/home/lionel.kusch/TVB-NEST/lib/gsl/bin/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/lionel.kusch/TVB-NEST/lib/gsl/lib
+export LD_RUN_PATH=$LD_RUN_PATH:/home/lionel.kusch/TVB-NEST/lib/gsl/lib
+
+
 NAME_SOURCE_NEST=/home/lionel.kusch/TVB-NEST/nest-io-dev
 PATH_INSTALATION=/home/lionel.kusch/TVB-NEST/lib/nest
 PATH_BUILD=/home/lionel.kusch/TVB-NEST/lib/nest_build
@@ -183,7 +196,7 @@ export PATH_INSTALATION
 export PATH_BUILD
 export NAME_SOURCE_NEST
 export NEST_DATA_PATH=$PATH_BUILD/pynest
-export PYTHONPATH=$PATH_INSTALATION/lib/python3.6/site-packages:$PYTHONPATH
+export PYTHONPATH=$PATH_INSTALATION/lib64/python3.6/site-packages:$PYTHONPATH
 export PATH=$PATH:$PATH_INSTALATION/bin
 mkdir $PATH_BUILD
 cd $PATH_BUILD
@@ -195,5 +208,5 @@ cd /home/lionel.kusch/TVB-NEST/example/analyse/LFPY/
 nrnivmodl
 
 cd $DIR
-echo "export PATH=$PATH\nexport PYTHONPATH=$PYTHONPATH" > init_run.sh
+echo -e "source /home/lionel.kusch/TVB-NEST/lib/tvb_nest_lib/bin/activate\nexport PATH=$PATH\nexport PYTHONPATH=$PYTHONPATH:/home/lionel.kusch/TVB-NEST/" > init_run.sh
 
