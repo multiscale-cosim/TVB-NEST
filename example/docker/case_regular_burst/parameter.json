@@ -56,7 +56,7 @@
     "g": 10.0,
     "p_connect": 0.005,
     "weight_global": 1.0,
-    "nb_external_synapse": 90,
+    "nb_external_synapse": 80,
     "path_weight": "/home/nest_elephant_tvb/parameter/data_mouse/weights.npy",
     "path_distance": "/home/nest_elephant_tvb/parameter/data_mouse/distance.npy",
     "velocity": 3.0
@@ -193,13 +193,13 @@
     "tau_e": 5.0,
     "tau_i": 5.0,
     "N_tot": 10000,
-    "p_connect_e": 0.05,
-    "p_connect_i": 0.05,
-    "excitatory_extern":0.001,
+    "p_connect_e": 0.005,
+    "p_connect_i": 0.005,
+    "excitatory_extern":0.0005,
     "g": 0.2,
-    "K_ext_e": 90,
+    "K_ext_e": 80,
     "tau_OU": 20.0,
-    "weight_noise": 0.001
+    "weight_noise": 0.002
   },
   "param_tvb_connection": {
     "path_region_labels": "/home/nest_elephant_tvb/parameter/data_mouse//region_labels.txt",
@@ -239,7 +239,7 @@
       ],
       "period": 2000.0
     },
-    "ECOG": true,
+    "ECOG":true,
     "parameter_ECOG":{
       "path": "/home/nest_elephant_tvb/parameter/data_mouse/sensor_hypocampus.txt",
       "path_volume": "/home/nest_elephant_tvb/parameter/data_mouse/region_volume.txt",
@@ -265,7 +265,7 @@
     "init": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_regular_burst/init_rates.npy",
     "level_log": 1,
     "seed": 43,
-    "nb_synapses": 90,
+    "nb_synapses": 80,
     "save_spike":true,
     "save_spike_count": 50,
     "save_rate":true,
@@ -282,7 +282,7 @@
     "synchronization": 2.0,
     "level_log": 1,
     "mpi": ["mpirun"],
-    "translation_thread":false
+    "translation_thread":true
   },
   "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_regular_burst",
   "begin": 0.0,

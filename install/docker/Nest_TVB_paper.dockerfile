@@ -22,11 +22,25 @@ FROM debian:buster-slim
 RUN apt-get update;\
     apt-get install -y g++ gcc gfortran make strace wget git
 
+# install python
+RUN  apt-get install -y build-essential cmake zlib1g-dev libltdl-dev libncurses5-dev libgdbm-dev libreadline-dev \
+     libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev libgsl-dev libbz2-dev curl;\
+     cd /root ;\
+     curl -O https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz ;\
+     tar -xf Python-3.8.10.tar.xz ;\
+     cd Python-3.8.10 ;\
+     ./configure --enable-optimizations --enable-shared ;\
+     make ;\
+     make altinstall ;\
+     cd .. ;\
+     rm -rdf  Python-3.8.10.tar.xz Python-3.8.10
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
+
 # install pip
-RUN apt-get install -y build-essential cmake python3-distutils python3-dev python3.7 libltdl-dev libreadline-dev libncurses-dev libgsl-dev curl;\
-    cd /root ;\
+RUN cd /root ;\
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;\
-    python3.7 get-pip.py;\
+    python3.8 get-pip.py;\
     rm get-pip.py;\
     pip install --upgrade pip
 
@@ -50,7 +64,7 @@ RUN pip install nose;\
 # install parameters
 RUN git clone https://github.com/NeuralEnsemble/parameters;\
     cd parameters;\
-    python3 setup.py install;\
+    python3.8 setup.py install;\
     cd .. ;\
     rm -rd parameters
 
@@ -81,7 +95,7 @@ RUN pip install LFPy;\
 # install HybridLFPy from github
 RUN git clone --branch nest-3-lio https://github.com/lionelkusch/hybridLFPy.git;\
     cd hybridLFPy;\
-    python3 setup.py install;\
+    python3.8 setup.py install;\
     cd .. ;\
     rm -rd hybridLFPy
 
@@ -101,7 +115,7 @@ RUN cd /home/;\
     export PATH_BUILD	;\
     export NAME_SOURCE_NEST;\
     export NEST_DATA_PATH=$PATH_BUILD/pynest;\
-    export PYTHONPATH=$PATH_INSTALATION/lib/python3.7/site-packages:$PYTHONPATH;\
+    export PYTHONPATH=$PATH_INSTALATION/lib/python3.8/site-packages:$PYTHONPATH;\
     export PATH=$PATH:$PATH_INSTALATION/bin;\
     mkdir $PATH_BUILD;\
     cd $PATH_BUILD;\
@@ -115,9 +129,12 @@ COPY  ./nest_elephant_tvb /home/nest_elephant_tvb
 COPY  ./analyse /home/nest_elephant_tvb/analyse
 COPY  ./parameter /home/nest_elephant_tvb/parameter
 
-# initilisation of special synapse for Neuron
+# initialisation of special synapse for Neuron
 RUN cd /home/nest_elephant_tvb/analyse/LFPY;\
     nrnivmodl
 
-ENV PYTHONPATH=/usr/lib/nest/lib/python3.7/site-packages/:/home/:$PYTHONPATH
+# create python3 executable
+RUN ln -s /usr/local/bin/python3.8 /usr/local/bin/python3
+
+ENV PYTHONPATH=/usr/lib/nest/lib/python3.8/site-packages/:/home/:$PYTHONPATH
 

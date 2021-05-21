@@ -282,7 +282,7 @@
     "synchronization": 2.0,
     "level_log": 1,
     "mpi": ["mpirun"],
-    "translation_thread":false
+    "translation_thread":true
   },
   "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_up_down/",
   "begin": 0.0,

@@ -267,7 +267,7 @@
       ],
       "period": 2000.0
     },
-    "ECOG":false,
+    "ECOG":true,
     "parameter_ECOG":{
       "path": "/home/nest_elephant_tvb/parameter/data_mouse/sensor_hypocampus.txt",
       "path_volume": "/home/nest_elephant_tvb/parameter/data_mouse/region_volume.txt",
@@ -310,7 +310,7 @@
     "synchronization": 2.0,
     "level_log": 1,
     "mpi": ["mpirun"],
-    "translation_thread":false
+    "translation_thread":true
   },
   "result_path": "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/docker/case_asynchronous/",
   "begin": 0.0,
