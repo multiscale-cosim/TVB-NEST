@@ -40,10 +40,8 @@ def network_initialisation(results_path, param_nest):
         # "local_num_threads": total_num_virtual_procs,
         # Path to save the output data
         'data_path': results_path + '/nest/',
-        # Masterseed for NEST and NumPy
-        'grng_seed': master_seed + total_num_virtual_procs,
         # Seeds for the individual processes
-        'rng_seeds': range(master_seed + 1 + total_num_virtual_procs, master_seed + 1 + (2 * total_num_virtual_procs)),
+        'rng_seed': master_seed + 1,
     })
     if nest.Rank() == 0:
         nest.SetKernelStatus({"print_time": True})
@@ -563,7 +561,7 @@ def simulate_mpi_co_simulation(time_synch, end, logger):
     logger.info("Nest Prepare")
     nest.Prepare()
     while count * time_synch < end:  # FAT END POINT
-        logger.info(" Nest run time " + str(nest.GetKernelStatus('time')))
+        logger.info(" Nest run time " + str(nest.GetKernelStatus('biological_time')))
         nest.Run(time_synch)
         logger.info(" Nest end")
         count += 1
