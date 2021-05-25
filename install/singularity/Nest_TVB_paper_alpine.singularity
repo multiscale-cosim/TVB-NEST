@@ -1,5 +1,5 @@
 Bootstrap: docker
-from:debian:buster-slim
+from:alpine:3.13.5
 
 %help
 Copyright 2019 Forschungszentrum Jülich GmbH and Aix-Marseille Université
@@ -21,6 +21,12 @@ specific language governing permissions and limitations
 under the License.
 
 TVB and Nest IO
+application :
+- python
+- mpi
+
+example for launch :
+singularity run --app python
 
 %files
 ../../nest-io-dev /home/nest-io-dev
@@ -29,7 +35,7 @@ TVB and Nest IO
 ../../example/parameter /home/nest_elephant_tvb/parameter
 
 %post
-    apt-get update
+    apk update
 
     # set environment variable
     export PATH_NEST_INSTALL=/usr/lib/nest/
@@ -37,19 +43,25 @@ TVB and Nest IO
     export PATH=$PATH:$PATH_NEST_INSTALL/bin/:/usr/local/nrn/bin/
 
     # get compiler and access to web interface
-    apt-get install -y g++ gcc gfortran make strace wget git
+    apk add g++ gcc gfortran make strace wget git bash
+
+    # Install the dependence of Nest
+    apk del libstdc++
+    set -x && apk add --force-overwrite --no-cache --update libc6-compat libstdc++
 
     # install python
-    apt-get install -y build-essential cmake zlib1g-dev libltdl-dev libncurses5-dev libgdbm-dev libreadline-dev \
-     libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev libgsl-dev libbz2-dev curl
+    apk add cmake zlib-dev libltdl ncurses-dev gdbm-dev readline-dev \
+     nss libressl-dev sqlite-dev readline-dev libffi-dev gsl-dev bzip2-dev curl
+    apk add  libbsd-dev openblas-dev lapack-dev freetype-dev jpeg-dev zeromq-dev
+    cd /home/
     curl -O https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz
     tar -xf Python-3.8.10.tar.xz
     cd Python-3.8.10
     ./configure --enable-optimizations --enable-shared
     make
-    make altinstall
+    make install
     cd ..
-    rm -rdf  Python-3.8.10.tar.xz Python-3.8.10
+    rm -rf  Python-3.8.10.tar.xz Python-3.8.10
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
     # install pip
@@ -60,7 +72,7 @@ TVB and Nest IO
     pip install --upgrade pip
 
     # install MPI
-    apt-get install -y g++ gcc gfortran make strace wget
+    apk add g++ gcc gfortran make strace wget
     wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz
     tar xf mpich-3.1.4.tar.gz
     cd mpich-3.1.4
@@ -68,7 +80,7 @@ TVB and Nest IO
     make -j$(nproc)
     make install
     cd ..
-    rm -rdf mpich-3.1.4.tar.gz mpich-3.1.4
+    rm -r mpich-3.1.4.tar.gz  mpich-3.1.4
 
     # for python library
     pip install --upgrade pip
@@ -77,13 +89,13 @@ TVB and Nest IO
     pip install matplotlib
     pip install networkx
     pip install mpi4py
-    apt-get install -y liblapack-dev
+    apk add lapack-dev
     pip install scipy
     pip install elephant
     pip install jupyter
 
     # install TVB
-    apt-get install -y llvm-dev llvm
+    apk add llvm-dev llvm hdf5-dev
     export LLVM_CONFIG=/usr/bin/llvm-config
     pip install tvb-data tvb-gdist tvb-library==2.0.10
 
@@ -92,10 +104,10 @@ TVB and Nest IO
     cd parameters
     python3.8 setup.py install
     cd ..
-    rm -rd parameters
+    rm -r parameters
 
     # install neuron
-    apt-get install -y bison flex libxcomposite-dev
+    apk add bison flex libxcomposite-dev
     git clone https://github.com/neuronsimulator/nrn.git
     cd nrn
     mkdir build
@@ -107,7 +119,7 @@ TVB and Nest IO
     -DCMAKE_INSTALL_PREFIX=/usr/local/nrn
     cmake --build . --parallel 7 --target install
     cd ../..
-    rm -rdf nrn
+    rm -r nrn
     # initialisation of synapse
     cd /home/nest_elephant_tvb/analyse/LFPY
     nrnivmodl
@@ -124,7 +136,7 @@ TVB and Nest IO
     cd hybridLFPy
     python3.8 setup.py install
     cd ..
-    rm -rd hybridLFPy
+    rm -r hybridLFPy
 
     # Set up environment for Nest installation
     NAME_SOURCE_NEST=/home/nest-io-dev
@@ -141,9 +153,9 @@ TVB and Nest IO
     make install
     #make test
     cd /home/
-    rm -dr $PATH_NEST_BUILD
-
-    echo "export  PYTHONPATH=$PYTHONPATH\n export PATH=$PATH" >>$SINGULARITY_ENVIRONMENT
+    rm -r $PATH_NEST_BUILD
+    # export pythonpath for include pynest in python
+    echo "export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:/home/:/usr/local/nrn/lib/python/:$PYTHONPATH" >>$SINGULARITY_ENVIRONMENT
 
 %apprun python
    exec /usr/local/bin/python3.8 "$@"
