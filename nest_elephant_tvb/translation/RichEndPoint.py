@@ -83,8 +83,9 @@ def close_and_finalize(port_send, port_receive, logger_master):
     MPI.Close_port(port_send)
     MPI.Close_port(port_receive)
     logger_master.info('close communicator')
-    # finalise MPI
-    MPI.Finalize()
+    # Finalize not needed in mpi4py
+    # source:  https://mpi4py.readthedocs.io/en/stable/overview.html
+    # MPI.Finalize()
 
 
 '''
