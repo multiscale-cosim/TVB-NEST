@@ -2,16 +2,22 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 from mpi4py import MPI
 import pathlib
+import sys
 
 def make_connections(path_to_files_receive, path_to_files_send, logger_master):
     '''
-    Rich End Point. Still a first draft, will be changed to a proper interface.
-    This function establishes two MPI intercommunicators. One to NEST and one to TVB.
+    Rich End Point, first draft, to be changed soon.
+    This function establishes two MPI intercommunicators, e.g. one to NEST and one to TVB.
+    Currently:
+        - either as a 'nest_to_tvb' server, with sender 'nest' and receiver 'tvb'
+        - or vice versa
+    
     :param path_to_files_receive: path to file, store information about receiving MPI connection
     :param path_to_files_send: path to file, store information about sending MPI connection
     :param logger_master: main logger for the connections
     '''
-    use_mpi = True
+    # NOTE: this is a placeholder. The whole RichEndPoint will be implemented properly soon.
+    use_mpi = True 
     # init MPI
     if use_mpi:
         comm = MPI.COMM_WORLD  # INTRA communicator
@@ -19,71 +25,57 @@ def make_connections(path_to_files_receive, path_to_files_send, logger_master):
         root=0
     else:
         comm = None
-    ### nest connection
-    comm_receiver, port_receive = nest_connection(comm, root, info, logger_master, path_to_files_receive)
-    ### tvb connecction
-    comm_sender, port_send = tvb_connection(comm, root, info, logger_master, path_to_files_send)
+    
+    ### receiver connection
+    comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)
+    ### sender connection
+    comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)
     logger_master.info('Connections made, starting translation...')
     
     return comm, comm_receiver, port_receive, comm_sender, port_send
 
 
-def nest_connection(comm, root, info, logger_master, path_to_files_receive):
+def _open_port_accept_connection(comm, root, info, logger_master, path_to_files):
     '''
-    MPI inter communicator to NEST
+    General MPI Server-Client connection.
+    Opens a port and writes the details to file. Then accepts an incoming connection
+    from another application on this port. The resulting INTER communicator is returned.
     
-    '''
-    logger_master.info('Translate Receive: before open_port')
-    if comm.Get_rank() == 0:
-        ### Connection to simulation (incoming data)
-        port_receive = MPI.Open_port(info)
-        logger_master.info('Translate Receive: after open_port: '+port_receive)
-        # Write file configuration of the port
-        fport = open(path_to_files_receive, "w+")
-        fport.write(port_receive)
-        fport.close()
-        pathlib.Path(path_to_files_receive+'.unlock').touch()
-        logger_master.info('Translate Receive: path_file: ' + path_to_files_receive)
-    else:
-        port_receive = None
-    
-    # broadcast port info, accept connection on all ranks!
-    # necessary to avoid problems with information about the mpi rank in open port file.
-    port_receive = comm.bcast(port_receive,root) # TODO: ask Lena if this is needed/correct.
-    logger_master.info('Translate Receive: Rank ' + str(comm.Get_rank()) + ' accepting connection on: ' + port_receive)
-    comm_receiver = comm.Accept(port_receive, info, root) 
-    logger_master.info('Translate Receive: Simulation client connected to' + str(comm_receiver.Get_rank()))
-    
-    return comm_receiver, port_receive
+    In some MPI implementations, information about the rank is encoded in the port infos.
+    Therefore only rank 0 opens the port and broadcasts the relevant info to all other ranks.
+    So a M:N connection between two MPI applications is possible.
 
-
-def tvb_connection(comm, root, info, logger_master, path_to_files_send):
-    '''
-    MPI inter communicator to TVB
+    :param comm: the INTRA communicator of the calling application ('server') which opens and accepts the connection
+    :param root: the root rank on which the 'main' connection before broadcast in done
+    :param info: MPI info object
+    :param logger_master: the master logger of this cosim run
+    :param path_to_files: location of the files 
     
+    :return intra_comm: the newly created intra communicator between the two applications
+    :return port: the port information, needed to properly close the connection after the job
     '''
-    logger_master.info('Translate SEND: before open_port')
-    if comm.Get_rank() == 0:
-        ### Connection to simulation (incoming data)
-        port_send = MPI.Open_port(info)
-        logger_master.info('Translate SEND: after open_port : '+port_send)
-        # Write file configuration of the port
-        fport = open(path_to_files_send, "w+")
-        fport.write(port_send)
+    logger_master.info('Transformer: before open port')
+    if comm.Get_rank() == root:
+        port = MPI.Open_port(info)
+        logger_master.info('Transformer: after open port, port details:'+port)
+        fport = open(path_to_files, "w+")
+        fport.write(port)
         fport.close()
-        pathlib.Path(path_to_files_send+'.unlock').touch()
-        logger_master.info('Translate SEND: path_file: ' + path_to_files_send)
+        pathlib.Path(path_to_files+'.unlock').touch()
+        logger_master.info('Transformer: path to file with port info:' + path_to_files)
     else:
-        port_send = None
-    
+        port = None
+    ### NOTE: control print to console.
+    print("RichEndPoint\n -- port opened and file created:", path_to_files,
+          "\n -- I'm rank",comm.Get_rank());sys.stdout.flush()
     # broadcast port info, accept connection on all ranks!
-    # necessary to avoid problems with information about the mpi rank in open port file.
-    port_send = comm.bcast(port_send,root)
-    logger_master.info('Translate SEND: Rank ' + str(comm.Get_rank()) + 'accepting connection on: ' + port_send)
-    comm_sender = comm.Accept(port_send, info, root) 
-    logger_master.info('Translate SEND: Simulation client connected to' + str(comm_sender.Get_rank()))
+    # necessary to avoid conflicts in the port file -> contains MPI-Rank infos
+    port = comm.bcast(port,root)
+    logger_master.info('Transformer: Rank ' + str(comm.Get_rank()) + ' accepting connection on: ' + port)
+    intra_comm = comm.Accept(port, info, root) 
+    logger_master.info('Transformer: Simulation client connected to' + str(intra_comm.Get_rank()))
     
-    return comm_sender, port_send
+    return intra_comm, port
 
 
 def close_and_finalize(port_send, port_receive, logger_master):
@@ -91,10 +83,9 @@ def close_and_finalize(port_send, port_receive, logger_master):
     MPI.Close_port(port_send)
     MPI.Close_port(port_receive)
     logger_master.info('close communicator')
-    # finalise MPI
-    MPI.Finalize()
-
-
+    # Finalize not needed in mpi4py
+    # source:  https://mpi4py.readthedocs.io/en/stable/overview.html
+    # MPI.Finalize()
 
 
 '''

@@ -7,7 +7,7 @@ from nest_elephant_tvb.translation.science_nest_to_tvb import store_data,analyse
 
 def init(path, param, comm, comm_receiver, comm_sender, loggers):
     '''
-    Initialize the translation with MPI.
+    Initialize the transformation with MPI. This is the NEST to TVB direction.
     NOTE: more information will be added with more changes. This is still the very first version!
     
     TODO: IMPORTANT!!! MPI communication on NEST and TVB side is somewhat hardcoded.
@@ -21,8 +21,6 @@ def init(path, param, comm, comm_receiver, comm_sender, loggers):
             --> For now, hardcoded solution. All places with 'rank 0' are replaced with 'rank 1'
             --> But as soon as we use more than two MPI ranks, this fails again!!!
     
-    TODO: Renaming! Translator -> transformer, etc.
-    TODO: This is only the Nest to TVB direction. For other direction some generalizing changes will be needed.
     TODO: Use RichEndPoints for communication encapsulation
     TODO: Seperate 1)Receive 2)Analysis/Science and 3)Send. See also the many Todos in the code
     TODO: Make use of / enable MPI parallelism! Solve hardcoded communication protocol first
@@ -154,7 +152,7 @@ def _receive(comm_receiver, databuffer, logger):
             logger.info("Nest to TVB : receive end " + str(count))
         # TODO: handle properly, all ranks send tag 2?
         elif status_.Get_tag() == 2:
-            logger.info("end simulation")
+            logger.info("NEST: end simulation")
             break
         else:
             raise Exception("bad mpi tag"+str(status_.Get_tag()))
@@ -177,7 +175,7 @@ def _send(comm_sender, databuffer, logger, store, analyse):
 
     count=0
     status_ = MPI.Status()
-    while True: # FAT END POINT
+    while True:
         # TODO: this communication has the 'rank 0' problem described in the beginning
         accept = False
         logger.info("Nest to TVB : wait to send " )
