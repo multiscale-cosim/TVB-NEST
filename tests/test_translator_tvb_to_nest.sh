@@ -28,8 +28,8 @@ echo "${parameter}" >./test_tvb_to_nest/parameter.json
 cp ./init_rates.npy  ./test_tvb_to_nest/init_rates.npy
 
 $RUN -n $1 python3 ../nest_elephant_tvb/translation/tvb_to_nest.py ./test_tvb_to_nest/ 0&
-$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_input_tvb_to_nest.py  ./test_tvb_to_nest/translation/receive_from_tvb/0.txt $DELAY &
-$RUN -n 1 python3 ../nest_elephant_tvb/translation/test_file/test_receive_tvb_to_nest.py  ./test_tvb_to_nest/ translation/spike_generator/0.txt 10 &
+$RUN -n 1 python3 ./test_translation/test_input_tvb_to_nest.py  ./test_tvb_to_nest/translation/receive_from_tvb/0.txt $DELAY &
+$RUN -n 1 python3 ./test_translation/test_receive_tvb_to_nest.py  ./test_tvb_to_nest/ translation/spike_generator/0.txt 10 &
 
 wait
 rm  -rd test_tvb_to_nest
