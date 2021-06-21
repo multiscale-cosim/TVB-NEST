@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_action_plan>
+        <title>Simple Integration Test Plan</title>
+        <description>Simple Integration Test Plan</description>
+        <variables>
+            <var_000>
+                <var_name>CO_SIM_ACTIONS_DIR</var_name>
+                <var_value>${MULTISCALETVBNEST}/launcher/tests/actions</var_value>
+            </var_000>
+            <var_001>
+                <var_name>CO_SIM_ROUTINES_DIR</var_name>
+                <var_value>${MULTISCALETVBNEST}/launcher/tests/routines</var_value>
+            </var_001>
+            <var_002>
+                <var_name>CO_SIM_EXECUTION_ENVIRONMENT</var_name>
+                <var_value>Cluster</var_value>
+            </var_002>
+        </variables>
+        <parameters>
+            <par_000>
+                <par_name>CO_SIM_MMAP_SHM_FILENAME</par_name>
+                <par_value>mmap.shm</par_value>
+            </par_000>
+            <par_001>
+                <par_name>CO_SIM_MPI_TAG</par_name>
+                <par_value>20210503</par_value>
+            </par_001>
+            <par_002>
+                <par_name>CO_SIM_PING_VALUE</par_name>
+                <par_value>3.14159</par_value>
+            </par_002>
+            <par_003>
+                <par_name>CO_SIM_PONG_VALUE</par_name>
+                <par_value>2.71828</par_value>
+            </par_003>
+        </parameters>
+        <arrangement>
+            <arr_001>
+                <arr_duty>CO_SIM_ARRANGEMENT_DIR_CREATION</arr_duty>
+                <arr_what>{CO_SIM_RESULTS_DIR}/shm</arr_what>
+            </arr_001>
+        </arrangement>
+        <action_plan>
+            <action_000>
+                <action_type>CO_SIM_ACTION</action_type>
+                <action_xml>mmap_file_creator_on_cluster.xml</action_xml>
+                <action_launch_method>CO_SIM_SEQUENTIAL_ACTION</action_launch_method>
+            </action_000>
+            <action_002>
+                <!-- waiting until the preceding action finishes -->
+                <action_type>CO_SIM_EVENT</action_type>
+                <action_event>CO_SIM_WAIT_FOR_SEQUENTIAL_ACTIONS</action_event>
+            </action_002>
+
+            <!-- main plan action proceeding -->
+            <action_004>
+                <action_type>CO_SIM_ACTION</action_type>
+                <action_xml>mpi_intercommunication_server_on_cluster.xml</action_xml>
+                <action_launch_method>CO_SIM_CONCURRENT_ACTION</action_launch_method>
+            </action_004>
+            <action_006>
+                <action_type>CO_SIM_ACTION</action_type>
+                <action_xml>mpi_intercommunication_client_on_cluster.xml</action_xml>
+                <action_launch_method>CO_SIM_CONCURRENT_ACTION</action_launch_method>
+            </action_006>
+
+            <!-- epilogue -->
+            <action_010>
+                <!-- waiting until the preceding actions finishes -->
+                <action_type>CO_SIM_EVENT</action_type>
+                <action_event>CO_SIM_WAIT_FOR_CONCURRENT_ACTIONS</action_event>
+            </action_010>
+        </action_plan>
+    </co_simulation_action_plan>
+</settings>
