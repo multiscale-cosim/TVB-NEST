@@ -78,7 +78,7 @@ rm -rfd help2man-1.48.3 help2man-1.48.3.tar.xz
 wget https://invisible-island.net/datafiles/release/ncurses.tar.gz
 tar -xf ncurses.tar.gz
 cd ncurses-6.2
-./configure --prefix=/home/lionel.kusch/TVB-NEST/lib/soft
+./configure --prefix=/home/lionel.kusch/TVB-NEST/lib/soft --with-shared
 make 
 make install
 cd ..
@@ -154,7 +154,6 @@ cd ../../
 rm -rdf nrn
 export PYTHONPATH=$PYTHONPATH:/home/lionel.kusch/TVB-NEST/lib/soft/lib64/python/
 
-ln -s /usr/lib64/libncurses.so.6 /home/lionel.kusch/TVB-NEST/lib/soft/lib/libncurses.so.so
 pip install LFPy
 pip install lfpykit
 pip install MEAutility
@@ -190,12 +189,43 @@ export LD_RUN_PATH=$LD_RUN_PATH:/home/lionel.kusch/TVB-NEST/lib/soft/lib
 wget https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz
 tar -xf boost_1_76_0.tar.gz
 cd boost_1_76_0
-./bootstrap.sh
+./bootstrap.sh --prefix=/home/lionel.kusch/TVB-NEST/lib/soft
 ./b2 --prefix=/home/lionel.kusch/TVB-NEST/lib/soft
+./b2 headers
 ./b2 stage threading=multi link=shared
 ./b2 install threading=multi link=shared
 cd ..
 rm -rd boost_1_76_0.tar.gz boost_1_76_0
+
+wget https://doxygen.nl/files/doxygen-1.9.1.src.tar.gz
+tar -xf doxygen-1.9.1.src.tar.gz
+cd doxygen-1.9.1
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX:PATH=/home/lionel.kusch/TVB-NEST/lib/soft
+make
+make install
+cd ../../
+rm -rd doxygen-1.9.1 doxygen-1.9.1.src.tar.gz
+
+wget https://ftpmirror.gnu.org/libtool/libtool-2.4.6.tar.gz
+tar -xf libtool-2.4.6.tar.gz
+cd libtool-2.4.6
+./configure --prefix=/home/lionel.kusch/TVB-NEST/lib/soft
+make
+make install
+cd ..
+rm -rfd libtool-2.4.6.tar.gz libtool-2.4.6
+
+wget ftp://ftp.cwru.edu/pub/bash/readline-8.1.tar.gz
+tar -xf readline-8.1.tar.gz
+cd readline-8.1
+./configure --prefix=/home/lionel.kusch/TVB-NEST/lib/soft
+make
+make install
+cd ..
+rm -rfd readline-8.1.tar.gz readline-8.1
+
 
 NAME_SOURCE_NEST=/home/lionel.kusch/TVB-NEST/nest-io-dev
 PATH_INSTALATION=/home/lionel.kusch/TVB-NEST/lib/soft
@@ -207,7 +237,7 @@ export NEST_DATA_PATH=$PATH_BUILD/pynest
 export PYTHONPATH=$PATH_INSTALATION/lib64/python3.8/site-packages:$PYTHONPATH
 mkdir $PATH_BUILD
 cd $PATH_BUILD
-/home/lionel.kusch/TVB-NEST/lib/soft/bin/cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-readline=On -Dwith-ltdl=ON -Dwith-python=ON -Dcythonize-pynest=ON 
+/home/lionel.kusch/TVB-NEST/lib/soft/bin/cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_INSTALATION $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-readline=ON -Dwith-ltdl=ON -Dwith-python=ON -Dcythonize-pynest=ON 
 make
 make install
 cd ..
@@ -217,5 +247,5 @@ cd /home/lionel.kusch/TVB-NEST/example/analyse/LFPY/
 nrnivmodl
 
 cd $DIR
-echo -e "source /home/lionel.kusch/TVB-NEST/lib/tvb_nest_lib/bin/activate\nexport PATH=$PATH\nexport PYTHONPATH=$PYTHONPATH:/home/lionel.kusch/TVB-NEST/" > init_run.sh
+echo -e "source /home/lionel.kusch/TVB-NEST/lib/tvb_nest_lib/bin/activate\nexport PATH=$PATH\nexport PYTHONPATH=$PYTHONPATH:/home/lionel.kusch/TVB-NEST/\nexport LD_LIBRARY_PATH=$LD_LIBRARY_PATH" > init_run.sh
 
