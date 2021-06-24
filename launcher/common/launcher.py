@@ -244,6 +244,14 @@ class Launcher(object):
                         # waiting until the Task has finished (task by task)
                         self.__actions_to_be_carried_out_jq.join()
 
+                        # TO BE DONE: Checking the returns code of the spawned actions in order to 
+                        #             determine whether the spawning process must be stopped,
+                        #             meaning that the action plan will be canceled due to an error
+                        #             reported (returned) for a spawned action
+                        #             NOTE: It will be good allowing the user to configure (XML) which behaviour
+                        #                   should be followed by the launcher when an error has been 
+                        #                   returned by a spawned action. 
+
                 elif action_event == common.constants.CO_SIM_WAIT_FOR_CONCURRENT_ACTIONS:
                     # Concurrent actions management
                     self.__logger.info('Concurrently Processing of actions owned by the event <{}>'.format(event_action_xml_id))
@@ -334,6 +342,9 @@ class Launcher(object):
         ########
         # STEP 7 - getting results
         ########
+        #
+        # TO BE DONE: Please check the note in the method __perform_spawning_strategy
+        #             related to managing return codes from spawned actions
         there_was_an_error = False
         while not self.__actions_return_codes_q.empty():
             current_action_result = self.__actions_return_codes_q.get()
