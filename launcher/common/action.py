@@ -54,9 +54,9 @@ class Action:
         self.__logger.debug('event {}, spawning {}, {}'.format(self.__event_action_xml_id,
                                                                self.__action_xml_id,
                                                                self.__action_popen_args_list))
-        """
-        # print('__spawning_troubleshooting__, {},{}'.format(self.__action_xml_id, self.__action_popen_args_list))
-        """
+        #
+        # __just_for_debugging__ print('__spawning_troubleshooting__, {},{}'.format(self.__action_xml_id, self.__action_popen_args_list))
+        #
         try:
             # Turning off output buffering for the child process
             os.environ['PYTHONUNBUFFERED'] = "1"
@@ -149,7 +149,10 @@ class Action:
                                                    stdout_line.strip().decode('utf-8')))
 
             if stderr_line:
-                # some error has been reported by the spawned action
+                # some error has been reported by the spawned action,
+                # NOTE: on cluster, slurm tools could send back 
+                #       informative message to the stderr. e.g.:
+                #  srun: job 3884042 has been allocated resources
                 self.__logger.error('{}: {}'.format(self.__action_xml_id,
                                                     stderr_line.strip().decode('utf-8')))
 

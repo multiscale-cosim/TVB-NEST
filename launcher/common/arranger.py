@@ -39,7 +39,9 @@ class Arranger(object):
         try:
             # NOTE: It's OK if the directory already exists
             os.makedirs(dir_to_be_created, exist_ok=True)
-            print(dir_to_be_created)
+            #
+            # _just_for_debugging_ print(dir_to_be_created)
+            #
         except OSError:
             self.__logger.error('{} making dir(s) went wrong'.format(dir_to_be_created))
             return common.enums.ArrangerReturnCodes.MKDIR_ERROR
