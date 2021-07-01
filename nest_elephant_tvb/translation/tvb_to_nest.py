@@ -12,7 +12,7 @@ from nest_elephant_tvb.translation.simulator_IO.TVB_IO import ConsumerTVBData
 from nest_elephant_tvb.translation.simulator_IO.translation_function import TranslationRateSpike
 from nest_elephant_tvb.translation.communication.internal_mpi import MPICommunication
 from nest_elephant_tvb.translation.communication.internal_thread import ThreadCommunication
-
+from timer.Timer import Timer
 
 if __name__ == "__main__":
     import sys
@@ -20,7 +20,11 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print('missing argument')
         exit(1)
+    rank = MPI.COMM_WORLD.Get_rank()
 
+    if rank == 0:
+        timer_master = Timer(1, 5)
+        timer_master.start(0)
     # Parse arguments
     path = sys.argv[1]  # path of the simulation
     id_translator = int(sys.argv[2])  # index of the translator
@@ -32,8 +36,9 @@ if __name__ == "__main__":
     level_log = param['level_log']
     id_proxy = parameters['param_co_simulation']['id_region_nest']
     logger = create_logger(path, 'tvb_to_nest_'+str(id_translator), level_log)
-    rank = MPI.COMM_WORLD.Get_rank()
 
+    if rank == 0:
+       timer_master.change(0, 0)
     while not os.path.exists(path + '/nest/spike_generator.txt.unlock'):
         logger.info("spike generator ids not found yet, retry in 1 second")
         time.sleep(1)
@@ -49,6 +54,8 @@ if __name__ == "__main__":
     id_first_spike_detector = spike_generator[id_translator][0]
     nb_spike_generator = len(spike_generator[id_translator])
 
+    if rank == 0:
+       timer_master.change(0, 0)
     if MPI.COMM_WORLD.Get_size() == 3:  # MPI internal communication
         if rank == 0:  # communication with Nest
             send_data_to_Nest = ProducerDataNest(
@@ -62,6 +69,8 @@ if __name__ == "__main__":
                 path_to_files_send = os.path.join(path + "/translation/spike_generator/",
                                                   str(id_first_spike_detector+i) + ".txt")
                 path_to_files_sends.append(path_to_files_send)
+            if rank == 0:
+                timer_master.change(0, 0)
             send_data_to_Nest.run(path_to_files_sends)
         elif rank == 1:  # communication with TVB
             receive_data_to_TVB = ConsumerTVBData(
@@ -95,7 +104,7 @@ if __name__ == "__main__":
             id_translator, param, nb_spike_generator,
             'tvb_to_nest_translate' + str(id_first_spike_detector), path, level_log,
             communication_intern=ThreadCommunication,
-            buffer_write_status=np.ones((1, 1), dtype=np.int)*-2,
+            buffer_write_status=np.ones((1, 1), dtype=int)*-2,
             buffer_write_shape=(1000000 * 3, 1),
             buffer_read=receive_data_to_TVB.communication_internal.buffer_write_data,
             status_read=receive_data_to_TVB.communication_internal.status_write,
@@ -116,6 +125,8 @@ if __name__ == "__main__":
             path_to_files_send = os.path.join(path + "/translation/spike_generator/",
                                               str(id_first_spike_detector + i) + ".txt")
             path_to_files_sends.append(path_to_files_send)
+        if rank == 0:
+            timer_master.change(0, 0)
 
         # creation of the threads and run them
         th_receive = Thread(target=receive_data_to_TVB.run, args=(path_to_files_receive,))
@@ -129,6 +140,11 @@ if __name__ == "__main__":
         th_send.join()
     else:
         raise Exception(' BAD number of MPI rank')
+    if rank == 0:
+        timer_master.change(0, 0)
     # remove the locker file
     if id_translator == 1 and rank == 1:
         os.remove(path + '/nest/spike_generator.txt.unlock')
+    if rank == 0:
+        timer_master.stop(0)
+        timer_master.save(path+"/timer_"+logger.name+'.npy')

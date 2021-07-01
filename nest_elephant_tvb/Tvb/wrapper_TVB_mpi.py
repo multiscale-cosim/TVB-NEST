@@ -13,6 +13,8 @@ import json
 import time
 from nest_elephant_tvb.utils import create_logger
 
+from timer.Timer import Timer
+timer_tvb = Timer(6, 100000)
 
 def run_mpi(init, path):
     """
@@ -20,6 +22,7 @@ def run_mpi(init, path):
     :param init: function of the initialisation of TVB simulator
     :param path: the folder of the simulation
     """
+    timer_tvb.start(0)
     # take the parameters of the simulation from the saving file
     with open(path + '/parameter.json') as f:
         parameters = json.load(f)
@@ -41,12 +44,14 @@ def run_mpi(init, path):
     time_synch = param_co_simulation['synchronization']
     path_send = result_path + "/translation/send_to_tvb/"
     path_receive = result_path + "/translation/receive_from_tvb/"
+    timer_tvb.change(0, 0)
     simulator = init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_tvb_model, param_tvb_monitor,
                      {'id_proxy': np.array(id_proxy),
                       'time_synchronize': time_synch,
                       'path_send': path_send,
                       'path_receive': path_receive,
                       })
+    timer_tvb.change(0, 0)
     # configure for saving result of TVB
     # check how many monitor it's used
     nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold'] \
@@ -66,6 +71,7 @@ def run_mpi(init, path):
     for i in id_proxy:
         comm_send.append(init_mpi(path_receive + str(i) + ".txt", logger))
 
+    timer_tvb.change(0, 0)
     logger.info("send initialisation of TVB : prepare data")
     initialisation_data = []
     for i in np.arange(0, np.rint(time_synch / simulator.integrator.dt), 1, dtype=np.int):
@@ -79,7 +85,9 @@ def run_mpi(init, path):
     # the loop of the simulation
     count = 0
     count_save = 0
+    timer_tvb.stop(0)
     while count * time_synch < end:  # FAT END POINT
+        timer_tvb.start(1)
         logger.info(" TVB receive data start")
         # receive MPI data
         data_value = []
@@ -97,9 +105,11 @@ def run_mpi(init, path):
         if data_value.shape[0] != time_data.shape[0]:
             raise (Exception('Bad shape of data'))
         data[:] = [time_data, data_value]
+        timer_tvb.stop(1)
 
         logger.info(" TVB start simulation " + str(count * time_synch))
         nest_data = []
+        timer_tvb.start(2)
         for result in simulator(simulation_length=time_synch, proxy_data=data):
             for i in range(nb_monitor):
                 if param_tvb_monitor['save_time'] > 0 and result[i] is not None:
@@ -115,17 +125,21 @@ def run_mpi(init, path):
                 for i in range(nb_monitor):
                     save_result.append([])
                 count_save += 1
+        timer_tvb.stop(2)
         logger.info(" TVB end simulation")
 
         # prepare to send data with MPI
+        timer_tvb.start(3)
         nest_data = np.array(nest_data)
         time = [nest_data[0, 0], nest_data[-1, 0]]
         rate = np.concatenate(nest_data[:, 1])
         for index, comm in enumerate(comm_send):
             send_mpi(comm, time, rate[:, index] * 1e3, logger)
+        timer_tvb.stop(3)
 
         # increment of the loop
         count += 1
+    timer_tvb.start(0)
     # save the last part
     logger.info(" TVB finish")
     if param_tvb_monitor['save_time'] > 0:
@@ -138,6 +152,8 @@ def run_mpi(init, path):
         end_mpi(comm, result_path + "/translation/send_to_tvb/" + str(id_proxy[index]) + ".txt", False, logger)
     MPI.Finalize()  # ending with MPI
     logger.info(" TVB exit")
+    timer_tvb.stop(0)
+    timer_tvb.save(path+'/timer_tvb.npy')
     return
 
 
@@ -176,10 +192,12 @@ def send_mpi(comm, times, data, logger):
     status_ = MPI.Status()
     # wait until the translator accept the connections
     accept = False
+    timer_tvb.start(4)
     while not accept:
         req = comm.irecv(source=0, tag=0)
         accept = req.wait(status_)
         logger.info("send accept")
+    timer_tvb.stop(4)
     source = status_.Get_source()  # the id of the excepted source
     logger.info("get source")
     data = np.ascontiguousarray(data, dtype='d')  # format the rate for sending
@@ -201,10 +219,12 @@ def receive_mpi(comm, logger):
     logger.info("start receive")
     status_ = MPI.Status()
     # send to the translator : I want the next part
+    timer_tvb.start(5)
     req = comm.isend(True, dest=0, tag=0)
     req.wait()
     time_step = np.empty(2, dtype='d')
     comm.Recv([time_step, 2, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
+    timer_tvb.stop(5)
     # get the size of the rate
     size = np.empty(1, dtype='i')
     comm.Recv([size, MPI.INT], source=0, tag=0)

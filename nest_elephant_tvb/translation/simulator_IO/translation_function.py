@@ -62,12 +62,15 @@ class TranslationSpikeRate(MPICommunicationExtern):
         self.logger.info('TRS : send init')
         count = 0  # counter of the number of run. It can be useful for the translation function
         while True:
+            self.timer.start(1)
             # Step 1: INTERNAL : get spike
             self.logger.info('TSR : receive data Nest')
             self.communication_internal.get_spikes_ready()
             if self.communication_internal.shape_buffer[0] == -1:
                 self.logger.info('TSR : break')
+                self.timer.stop(1)
                 break
+            self.timer.change(1, 2)
 
             # Step 2.1: take all data from buffer and create histogram
             self.logger.info('TSR : add spikes '+str(self.communication_internal.shape_buffer[0]))
@@ -75,14 +78,17 @@ class TranslationSpikeRate(MPICommunicationExtern):
                                    self.communication_internal.shape_buffer[0],
                                    self.communication_internal.databuffer)
 
+            self.timer.change(2, 3)
             # Step 2.2 : INTERNAL: end get spike (important to be here for optimization/synchronization propose)
             self.communication_internal.get_spikes_release()
+            self.timer.change(3, 4)
             # optional save the histogram
             if self.save_hist:
                 if count % self.save_hist_count == 0:
                     if self.save_hist_buf is not None:
                         self.logger.info('TSR : save hist :' + str(self.save_rate_nb))
-                        np.save(self.save_hist_path+'/'+str(self.id)+'_'+str(self.save_hist_nb)+'.npy', self.save_hist_buf)
+                        np.save(self.save_hist_path+'/'+str(self.id)+'_'+str(self.save_hist_nb)+'.npy',
+                                self.save_hist_buf)
                         self.save_hist_nb += 1
                     self.save_hist_buf = hist
                 else:
@@ -90,21 +96,26 @@ class TranslationSpikeRate(MPICommunicationExtern):
 
             # Step 2.3: Analyse this data, i.e. calculate mean firing rate
             self.logger.info('TSR : analise')
+            self.timer.change(4, 5)
             times, rate = self.analyse(count+1, hist)  # if fix bug of initilisation remove +1
+            self.timer.change(5, 6)
             # optional : save rate
             if self.save_rate:
                 if count % self.save_rate_count == 0:
                     self.logger.info('TSR : save rate :'+str(self.save_rate_nb))
                     if self.save_rate_buf is not None:
-                        np.save(self.save_rate_path+'/'+str(self.id)+'_'+str(self.save_rate_nb)+'.npy', self.save_rate_buf)
+                        np.save(self.save_rate_path+'/'+str(self.id)+'_'+str(self.save_rate_nb)+'.npy',
+                                self.save_rate_buf)
                         self.save_rate_nb += 1
                     self.save_rate_buf = rate
                 else:
                     self.save_rate_buf = np.concatenate((self.save_rate_buf, rate))
+            self.timer.change(6, 7)
 
             # Step 3: INTERNAL: send rate and time
             self.logger.info('TSR : send data')
             self.communication_internal.send_time_rate(times, rate)
+            self.timer.stop(7)
             if self.communication_internal.send_time_rate_exit:
                 self.logger.info('TSR : break 2')
                 break
@@ -181,7 +192,7 @@ class TranslationRateSpike(MPICommunicationExtern):
         self.nb_spike_generator = nb_spike_generator          # number of spike generator
         self.nb_synapse = param['nb_synapses']                # number of synapses by neurons
         self.function_translation = param['function_select']  # choose the function for the translation
-        # self.path_init = param['init']              # path of numpy array which are use to initialise the communication
+        # self.path_init = param['init']            # path of numpy array which are use to initialise the communication
         np.random.seed(param['seed'])               # set the seed for repeatability
         # variable for saving values:
         self.save_spike = bool(param['save_spike'])
@@ -216,14 +227,18 @@ class TranslationRateSpike(MPICommunicationExtern):
         # self.logger.info('TRS : send init')
         count = 0  # counter of the number of run. It use to send the good time to TVB
         while True:
+            self.timer.start(1)
             # Step 1.1: INTERNAL : get rate
             self.logger.info('TRS : get rate')
             times, rate = self.communication_internal.get_time_rate()
             if self.communication_internal.get_time_rate_exit:
+                self.timer.stop(1)
                 self.logger.info('TRS : break end sender')
                 break
+            self.timer.change(1, 2)
             # Step 1.2: INTERNAL : end getting rate (important to be here for optimization/synchronization propose)
             self.communication_internal.get_time_rate_release()
+            self.timer.change(2, 3)
             # optional :  save the rate
             if self.save_rate:
                 if count % self.save_rate_count == 0:
@@ -237,7 +252,9 @@ class TranslationRateSpike(MPICommunicationExtern):
             # Step 2: generate spike trains
             # improvement : we can generate other type of data but Nest communication need to be adapted for it
             self.logger.info('TRS : generate spike')
+            self.timer.change(3, 4)
             spike_trains = self.generate_spike(count, times, rate)
+            self.timer.change(4, 5)
             if self.save_spike:
                 if count % self.save_spike_count == 0:
                     if self.save_spike_buf is not None:
@@ -252,7 +269,9 @@ class TranslationRateSpike(MPICommunicationExtern):
 
             # Step 3: send spike trains to Nest
             self.logger.info('TRS : send spike train')
+            self.timer.change(5, 6)
             self.communication_internal.send_spikes_trains(spike_trains)
+            self.timer.stop(6)
             if self.communication_internal.send_spike_exit:
                 self.logger.info('TRS : break')
                 break
@@ -260,10 +279,12 @@ class TranslationRateSpike(MPICommunicationExtern):
             # Step 4 : end loop
             count += 1
         # INTERNAL: Close all the internal communication
+        self.timer.start(7)
         self.logger.info('TRS : end method by TVB : '+str(self.communication_internal.get_time_rate_exit))
         self.communication_internal.get_time_rate_end()
         self.communication_internal.send_spikes_end()
         self.logger.info('TRS : end')
+        self.timer.stop(7)
 
     def finalise(self):
         super().finalise()
