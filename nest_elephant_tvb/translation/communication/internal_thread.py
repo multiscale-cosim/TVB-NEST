@@ -192,16 +192,7 @@ class ThreadCommunication(CommunicationInternAbstract):
         if self.shape_buffer[0] == -1:
             self.logger.info('Thread Internal : spike(get) : receive end ')
             return None
-        self.logger.info('Thread Internal : spike(get) : reshape data')
-        # reshape the data for usage by the communicator with the simulator
-        spikes_times = []
-        index = 0
-        for nb_spike in self.shape_buffer:
-            self.logger.info("Thread Internal : spike(get) : nb spike shape " + str(index))
-            spikes_times.append(self.databuffer[index:index + int(nb_spike)])
-            index += int(nb_spike)
-        self.logger.info('Thread Internal : spike(get) : end reshape data')
-        return spikes_times
+        return np.cumsum(np.insert(self.shape_buffer, 0, 0))
 
     def get_spikes_ready(self):
         """

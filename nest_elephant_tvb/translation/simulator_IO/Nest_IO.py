@@ -112,7 +112,7 @@ class ProducerDataNest(MPICommunicationExtern):
                 # (here is spike trains but Nest can receive other type of data.
                 # For the other type of data, the format to send it is different
                 self.logger.info("Produce Nest : start to send ")
-                spikes_times = self.communication_internal.get_spikes()
+                index = self.communication_internal.get_spikes()
                 self.logger.info("Produce Nest : shape buffer "+str(self.communication_internal.shape_buffer[0]))
                 if self.communication_internal.shape_buffer[0] == -1:
                     break
@@ -131,12 +131,15 @@ class ProducerDataNest(MPICommunicationExtern):
                                             tag=0, status=status_)
                         # Select the good spike train and send it
                         self.logger.info("Produce Nest : rank " + str(source) + " list_id " + str(list_id)
-                                         + " spikes :" + str(spikes_times[0]))
+                                         + " spikes :" + str(self.communication_internal.databuffer[
+                                                             index[0]:index[0+1]]))
                         data = []
                         shape = []
                         for i in list_id:
-                            shape += [len(spikes_times[i-self.id_first_spike_detector])]
-                            data += [spikes_times[i-self.id_first_spike_detector]]
+                            id_spike_generator = i-self.id_first_spike_detector
+                            shape += [index[id_spike_generator+1]-index[id_spike_generator]]
+                            data += [self.communication_internal.databuffer[
+                                     index[id_spike_generator]:index[id_spike_generator + 1]]]
                         send_shape = np.array(np.concatenate(([np.sum(shape)], shape)), dtype='i')
                         # firstly send the size of the spikes train
                         self.port_comms[0].Send([send_shape, MPI.INT], dest=status_.Get_source(), tag=list_id[0])
