@@ -14,7 +14,6 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
     :param id_TR_T_to_N: the ids of Translator TVB to Nest
     :return:
     """
-
     # get times for Nest
     values = []
     labels = []
@@ -23,11 +22,13 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
     values.append(values_nest)
     labels.append(labels_nest)
     parents.append(parents_nest)
+
     # get times for TVB
     values_tvb, labels_tvb, parents_tvb = data_time.get('TVB').to_array_for_print()
     values.append(values_tvb)
     labels.append(labels_tvb)
     parents.append(parents_tvb)
+
     # get times for translator Nest to TVB
     for index_tr, i in enumerate(id_TR_N_to_T):
         for name in [': Producer Nest data ', ': Translate function ', ': Consumer TVB data ']:
@@ -82,6 +83,7 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
     )
     trace.marker.pad.update({'t': marker_size})
     fig.add_trace(trace, col=2, row=1)
+    # TRANSLATION
     for i in range(4):
         for j in range(3):
             trace = go.Treemap(
@@ -106,6 +108,6 @@ if __name__ == '__main__':
     # dict_time, index = get_dictionnary('./test_file/test_MPI/ln_g_1.0_mean_I_ext_0.0/',True)
     # dict_time, index = get_dictionnary('./test_file/test_thread/_g_1.0_mean_I_ext_0.0/',False)
     dict_time, index = get_dictionnary('./test_file/test_thread/ln_g_1.0_mean_I_ext_0.0/', False)
-    # print_tree_data(dict_time,index[0],index[1])
-    # print_data_time(dict_time,index[0],index[1]) doesn't work
+    print_tree_data(dict_time, index[0], index[1])
+    # print_data_time(dict_time, index[0], index[1]) doesn't work
     print('end')

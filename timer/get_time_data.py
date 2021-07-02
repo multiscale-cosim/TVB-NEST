@@ -241,8 +241,8 @@ def analyse_nest(nest, nest_init, nest_sim, nest_timer, nest_timer_input_init, n
     pre_run.addNode('pre_run_record', values=timer_value_nest_time_io[0])
     pre_run.addNode('pre_run_input', values=timer_value_nest_time_io[1])
     # wait_time = nest_timer_input[:,3]-nest_timer_input[:,0]
-    pre_run.get('pre_run_input').addNode('pre_run_input_receive_data',values=timer_value_nest_time_input[0]-wait_time[np.logical_not(np.isnan(wait_time))])
-    pre_run.get('pre_run_input').addNode('pre_run_input_wait',values=wait_time[np.logical_not(np.isnan(wait_time))])
+    pre_run.get('pre_run_input').addNode('pre_run_input_receive_data', values=timer_value_nest_time_input[0]-wait_time[np.logical_not(np.isnan(wait_time))])
+    pre_run.get('pre_run_input').addNode('pre_run_input_wait', values=wait_time[np.logical_not(np.isnan(wait_time))])
     # pre_run.get('pre_run_input').addNode('pre_run_update', values=timer_value_nest_time_input[0]) # not precise
     # pre_run.get('pre_run_input').get('pre_run_update').addNode('pre-run wait send first',         # not precise
     #                                                            values=timer_value_nest_time_input[1])
@@ -255,17 +255,18 @@ def analyse_nest(nest, nest_init, nest_sim, nest_timer, nest_timer_input_init, n
     return nest_node
 
 
-def init_transformation(master, data, create_connection=True):
+def init_transformation(master, data, name_root, create_connection=True):
     """
     create the tree of simulation time for translation TVB to Nest
     :param master: time of the main program
+    :param name_root: name of root
     :param data: time of each process/thread
     :param create_connection: creation or not of the MPI connection with simulator
     :return: tree of times
     """
     time_value_master = get_time(master)
     time_value_io_mpi_ext = get_time(data[0])
-    tree = Node('', master[0, 9] - master[0, 0])
+    tree = Node(name_root, master[0, 9] - master[0, 0])
     initialisation = Node('initialisation', master[0, 6] - master[0, 0])
     initialisation.addNode('start', time_value_master[0, 0])
     initialisation.addNode('wait file with id of nest devices', time_value_master[0, 1])
@@ -319,8 +320,8 @@ def analyse_tvb_to_nest_sender(index, master, data_send, mpi):
     :return: tree of times
     """
     time_value_send = get_time(data_send)
-    prefix = 'TVB_NEST_' + str(index) + ': Producer Nest data '
-    translate = init_transformation(master, data_send)
+    name = 'TVB_NEST_' + str(index) + ': Producer Nest data '
+    translate = init_transformation(master, data_send, name)
 
     sim_process = translate.get('simulation')
     sim_process.addNode('receive spikes', values=remove_NAN(time_value_send[1, :]))
@@ -340,7 +341,6 @@ def analyse_tvb_to_nest_sender(index, master, data_send, mpi):
         sim_process.get('send spikes').addNode("reshape read buffer", values=remove_NAN(time_value_send[6, :]))
         sim_process.addNode("release read buffer", values=remove_NAN(time_value_send[13, :]))
 
-    add_prefix(translate, prefix)
     return translate
 
 
@@ -355,8 +355,8 @@ def analyse_tvb_to_nest_receiver(index, master, data_receive, mpi):
     :return: tree of times
     """
     time_value_receive = get_time(data_receive)
-    prefix = 'TVB_NEST_' + str(index) + ': Consumer TVB data '
-    translate = init_transformation(master, data_receive)
+    name = 'TVB_NEST_' + str(index) + ': Consumer TVB data '
+    translate = init_transformation(master, data_receive, name)
 
     sim_process = translate.get('simulation')
     sim_process.addNode('send check', values=remove_NAN(time_value_receive[1, :]))
@@ -371,7 +371,6 @@ def analyse_tvb_to_nest_receiver(index, master, data_receive, mpi):
         sim_process.get('get rate').addNode("end write buffer", values=remove_NAN(time_value_receive[9, :]))
         sim_process.addNode("release write buffer", values=remove_NAN(time_value_receive[10, :]))
 
-    add_prefix(translate, prefix)
     return translate
 
 
@@ -386,8 +385,8 @@ def analyse_tvb_to_nest_translate(index, master, data_translate, mpi):
     :return: tree of times
     """
     time_value_translate = get_time(data_translate)
-    prefix = 'TVB_NEST_' + str(index) + ': Translate function '
-    translate = init_transformation(master, data_translate, create_connection=False)
+    name = 'TVB_NEST_' + str(index) + ': Translate function '
+    translate = init_transformation(master, data_translate, name, create_connection=False)
 
     sim_process = translate.get('simulation')
     sim_process.addNode('get rate', values=remove_NAN(time_value_translate[1, :]))
@@ -416,7 +415,6 @@ def analyse_tvb_to_nest_translate(index, master, data_translate, mpi):
         sim_process.get('get rate').addNode("end read", values=remove_NAN(time_value_translate[12, :]))
         sim_process.get('end connection').addNode("release read buffer", values=remove_NAN(time_value_translate[13, :]))
 
-    add_prefix(translate, prefix)
     return translate
 
 
@@ -431,8 +429,8 @@ def analyse_nest_to_tvb_send(index, master, data_sender, mpi):
     :return: tree of times
     """
     time_value_sender = get_time(data_sender)
-    prefix = 'NEST_TVB_' + str(index) + ': Producer TVB data '
-    translate = init_transformation(master, data_sender)
+    name = 'NEST_TVB_' + str(index) + ': Producer TVB data '
+    translate = init_transformation(master, data_sender, name)
 
     sim_process = translate.get('simulation')
     sim_process.addNode('receive check', values=remove_NAN(time_value_sender[1, :]))
@@ -447,7 +445,6 @@ def analyse_nest_to_tvb_send(index, master, data_sender, mpi):
         sim_process.get('get rate and time').addNode("wait read buffer", values=remove_NAN(time_value_sender[11, :]))
         sim_process.get('release buffer').addNode("end read buffer", values=remove_NAN(time_value_sender[12, :]))
         sim_process.addNode("release read buffer", values=remove_NAN(time_value_sender[13, :]))
-    add_prefix(translate, prefix)
     return translate
 
 
@@ -462,8 +459,8 @@ def analyse_nest_to_tvb_receive(index, master, data_receive, mpi):
     :return: tree of times
     """
     time_value_receive = get_time(data_receive)
-    prefix = 'NEST_TVB_' + str(index) + ': Consumer Nest data '
-    translate = init_transformation(master, data_receive)
+    name = 'NEST_TVB_' + str(index) + ': Consumer Nest data '
+    translate = init_transformation(master, data_receive,name)
 
     sim_process = translate.get('simulation')
     sim_process.addNode('receive spikes', values=remove_NAN(time_value_receive[1, :]))
@@ -481,7 +478,6 @@ def analyse_nest_to_tvb_receive(index, master, data_receive, mpi):
         sim_process.get('send internal spike').addNode("end write buffer", values=remove_NAN(time_value_receive[9, :]))
         sim_process.addNode("release write buffer", values=remove_NAN(time_value_receive[10, :]))
 
-    add_prefix(translate, prefix)
     return translate
 
 
@@ -496,8 +492,8 @@ def analyse_nest_to_tvb_translate(index, master, data_translate, mpi):
     :return: tree of times
     """
     time_value_translate = get_time(data_translate)
-    prefix = 'NEST_TVB_' + str(index) + ': Translate function '
-    translate = init_transformation(master, data_translate, create_connection=False)
+    name = 'NEST_TVB_' + str(index) + ': Translate function '
+    translate = init_transformation(master, data_translate, name, create_connection=False)
 
     sim_process = translate.get('simulation')
     sim_process.addNode('ready to get data', values=remove_NAN(time_value_translate[1, :]))
@@ -520,7 +516,6 @@ def analyse_nest_to_tvb_translate(index, master, data_translate, mpi):
         sim_process.get('send rates').addNode("end write buffer", values=remove_NAN(time_value_translate[9, :]))
         sim_process.get('send rates').addNode("release write buffer", values=remove_NAN(time_value_translate[10, :]))
 
-    add_prefix(translate, prefix)
     return translate
 
 
@@ -588,7 +583,7 @@ def get_dictionnary(path, mpi):
 
 
 if __name__ == '__main__':
-    # dict, index = get_dictionnary('./test_file/test_thread/_g_1.0_mean_I_ext_0.0/',False)
-    dict, index = get_dictionnary('./test_file/test_MPI/_g_1.0_mean_I_ext_0.0/', True)
-    print(index)
-    print(dict)
+    # tree, indexes = get_dictionnary('./test_file/test_thread/_g_1.0_mean_I_ext_0.0/',False)
+    tree, indexes = get_dictionnary('./test_file/test_MPI/_g_1.0_mean_I_ext_0.0/', True)
+    print(indexes)
+    print(tree)
