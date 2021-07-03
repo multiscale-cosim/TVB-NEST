@@ -9,7 +9,7 @@ from timer.compare_time_paper import full_figure
 if __name__ == '__main__':
     mpi = False
     folders_list = [
-        # ('./test_file/paper_mpi/',np.arange(1,13,1),'only MPI'),
+        ('./test_file/paper_mpi/',np.arange(1,13,1),'only MPI'),
         ('./test_file/paper_time_thread/', np.arange(1, 13, 1), 'only Thread'),
         ('./test_file/paper_mpi_vp_2/', np.arange(2, 13, 2), 'Thread  and 2 MPI'),
         ('./test_file/paper_mpi_vp_4/', np.arange(4, 13, 4), 'Thread  and 4 MPI'),

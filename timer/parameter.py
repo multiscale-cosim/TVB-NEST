@@ -15,7 +15,7 @@ param_co_simulation = {
     'co-simulation': True,
     # number of MPI process for nest
     # select if nest is use or not
-    'nb_MPI_nest': 6,
+    'nb_MPI_nest': 1,
     # save or not nest( result with MPI )
     'record_MPI': False,
     # id of region simulate by nest

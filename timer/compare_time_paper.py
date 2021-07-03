@@ -125,21 +125,19 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, 
 # figure for the optimisation for the paper TVB-ebrains
 if __name__ == '__main__':
     folders_list = [
-        # ('./test_file/paper_nb_neurons/',
-        #  np.concatenate((np.array(np.around(np.logspace(1,4,30)),dtype=np.int),[11000])), # [11000,16681,27825,46415,77426]
-        #  'number of neurons simulated with Nest'),
-        ('./test_file/paper_mpi/', np.arange(1, 10, 1),
+        ('./test_file/paper_nb_neurons/',
+         np.array(np.around(np.logspace(1,5,30)),dtype=int),
+         'number of neurons simulated with Nest'),
+        ('./test_file/paper_mpi/', np.arange(1, 13, 1),
          'number of MPI using by Nest ( 1 MPI = 1 VP)'),
-        # ('./test_file/paper_mpi/', np.arange(1, 10, 1),
-        #  'number of MPI using by Nest ( 1 MPI = 1 VP)'),
-        # ('./test_file/paper_time_thread/', np.arange(1, 13, 1),
-        #  'number of virtual process of Nest (number of MPI : 1)'),
-        # ('./test_file/paper_mpi_vp_2/', np.arange(2, 13, 2),
-        #  'number of virtual process of Nest (number of MPI : 2)'),
-        # ('./test_file/paper_mpi_vp_4/', np.arange(4, 13, 4),
-        #  'number of virtual process of Nest (number of MPI : 4)'),
-        # ('./test_file/paper_time_synch/', [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
-        #  'time of synchronization between Nest and TVB (in ms)'),
+        ('./test_file/paper_time_thread/', np.arange(1, 13, 1),
+         'number of virtual process of Nest (number of MPI : 1)'),
+        ('./test_file/paper_mpi_vp_2/', np.arange(2, 13, 2),
+         'number of virtual process of Nest (number of MPI : 2)'),
+        ('./test_file/paper_mpi_vp_4/', np.arange(4, 13, 4),
+         'number of virtual process of Nest (number of MPI : 4)'),
+        ('./test_file/paper_time_synch/', [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
+         'time of synchronization between Nest and TVB (in ms)'),
     ]  # same data for the three case
     mpi = False
     folders = [[] for i in folders_list]  # same data for the three case
@@ -215,7 +213,7 @@ if __name__ == '__main__':
                     + tree.get('TVB').get('simulation').get('send data').time)
         full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
                     time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
-                    label, log_option=index_run == 1)
+                    label, log_option=index_run < 1)
         # full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
         #             time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
         #             label,function=np.min )
