@@ -20,11 +20,13 @@ FROM debian:buster-slim
 
 # get compiler and access to web interface
 RUN apt-get update;\
-    apt-get install -y g++ gcc gfortran make strace wget git
+    apt-get install -y g++=4:8.3.0-1 gcc=4:8.3.0-1 gfortran=4:8.3.0-1 make=4.2.1-1.2 strace=4.26-0.2 wget=1.20.1-1.1 git=1:2.20.1-2+deb10u3
 
 # install python
-RUN  apt-get install -y build-essential cmake zlib1g-dev libltdl-dev libncurses5-dev libgdbm-dev libreadline-dev \
-     libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev libgsl-dev libbz2-dev curl;\
+RUN  apt-get install -y build-essential=12.6 cmake=3.13.4-1 zlib1g-dev=1:1.2.11.dfsg-1 libltdl-dev=2.4.6-9\
+     libncurses5-dev=6.1+20181013-2+deb10u2 libgdbm-dev=1.18.1-4 libreadline-dev=7.0-5 \
+     libnss3-dev=2:3.42.1-1+deb10u3 libssl-dev=1.1.1d-0+deb10u6 libsqlite3-dev=3.27.2-3+deb10u1\
+     libffi-dev=3.2.1-9 libgsl-dev=2.5+dfsg-6 libbz2-dev=1.0.6-9.2~deb10u1 curl=7.64.0-4+deb10u2;\
      cd /root ;\
      curl -O https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz ;\
      tar -xf Python-3.8.10.tar.xz ;\
@@ -42,7 +44,7 @@ RUN cd /root ;\
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;\
     python3.8 get-pip.py;\
     rm get-pip.py;\
-    pip install --upgrade pip
+    pip install --upgrade pip==21.1.2
 
 # install MPI
 RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
@@ -53,13 +55,25 @@ RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     make install
 
 # Install the dependance for Nest
-RUN pip install nose;\
-    pip install numpy cython Pillow;\
-    pip install matplotlib;\
-    pip install mpi4py;\
+RUN pip install nose==1.3.7;\
+    pip install numpy==1.20.3 cython==0.29.23 Pillow==8.2.0;\
+    pip install mpi4py==3.0.3;\
     apt-get install -y liblapack-dev;\
-    pip install scipy ;\
-    pip install elephant
+    pip install scipy==1.6.3 ;\
+    pip install elephant==0.10.0;\
+    pip install matplotlib==3.4.2;\
+    pip install networkx==2.5.1;\
+    pip install jupyter==1.0.0;\
+    pip install vtk==9.0.1;\
+    pip install h5py==3.2.1;\
+    pip install cycler==0.10.0;\
+    pip install jupyter==1.0.0;\
+    pip install vtk==9.0.1
+
+# install TVB
+RUN apt-get install -y llvm-dev=1:7.0-47 llvm=1:7.0-47;\
+    export LLVM_CONFIG=/usr/bin/llvm-config;\
+    pip install tvb-data==2.0 tvb-gdist==2.1.0 tvb-library==2.0.10
 
 # install parameters
 RUN git clone https://github.com/NeuralEnsemble/parameters;\
@@ -69,10 +83,11 @@ RUN git clone https://github.com/NeuralEnsemble/parameters;\
     rm -rd parameters
 
 # install neuron
-RUN apt-get install -y bison flex libxcomposite-dev
+RUN apt-get install -y bison=2:3.3.2.dfsg-1 flex=2.6.4-6.2 libxcomposite-dev=1:0.4.4-2
 
 RUN git clone https://github.com/neuronsimulator/nrn.git;\
     cd nrn;\
+    git checkout 8.0.0;\
     mkdir build;\
     cd build;\
     cmake .. \
@@ -87,10 +102,9 @@ ENV PATH=/usr/local/nrn/bin:$PATH
 ENV PYTHONPATH=/usr/local/nrn/lib/python:$PYTHONPATH
 
 # install LPFy
-RUN pip install LFPy;\
-    pip install lfpykit;\
-    pip install MEAutility;\
-    pip install LFPy
+RUN pip install lfpykit==0.3;\
+    pip install MEAutility==1.4.9;\
+    pip install LFPy==2.2.1
 
 # install HybridLFPy from github
 RUN git clone --branch nest-3-lio https://github.com/lionelkusch/hybridLFPy.git;\
@@ -99,10 +113,6 @@ RUN git clone --branch nest-3-lio https://github.com/lionelkusch/hybridLFPy.git;
     cd .. ;\
     rm -rd hybridLFPy
 
-# install TVB
-RUN apt-get install -y llvm-dev llvm;\
-    export LLVM_CONFIG=/usr/bin/llvm-config;\
-    pip install tvb-data tvb-gdist tvb-library==2.0.10
 
 # Compile and Install package for Nest
 COPY  ./nest-io-dev /home/nest-io-dev
@@ -137,4 +147,5 @@ RUN cd /home/nest_elephant_tvb/analyse/LFPY;\
 RUN ln -s /usr/local/bin/python3.8 /usr/local/bin/python3
 
 ENV PYTHONPATH=/usr/lib/nest/lib/python3.8/site-packages/:/home/:$PYTHONPATH
+ENV PATH=/usr/lib/nest/:$PATH
 

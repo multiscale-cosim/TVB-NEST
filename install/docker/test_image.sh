@@ -32,12 +32,8 @@ if [ -z "$1" ]
 fi
 if [ $1 -eq 0 ]
 then
-  IMAGE=local:NEST_TVB_IO
-  echo ' test image from alpine OS Nest and TVB'
-elif [ $1 -eq 1 ]
-then
-  IMAGE=local:NEST_TVB_IO_2
-  echo ' test image from debian OS Nest and TVB '
+  IMAGE=local:NEST_TVB_IO_PAPER
+  echo ' test image for paper Nest and TVB'
 else
   echo ' No image to test '
   exit
