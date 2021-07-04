@@ -2,6 +2,7 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 import logging
+
 logging.getLogger('numba').setLevel(logging.WARNING)
 logging.getLogger('tvb').setLevel(logging.ERROR)
 import sys
@@ -13,11 +14,12 @@ import time
 from nest_elephant_tvb.utils import create_logger
 
 
-def run_mpi(init,path):
-    '''
+def run_mpi(init, path):
+    """
     return the result of the simulation between the wanted time
+    :param init: function of the initialisation of TVB simulator
     :param path: the folder of the simulation
-    '''
+    """
     # take the parameters of the simulation from the saving file
     with open(path + '/parameter.json') as f:
         parameters = json.load(f)
@@ -47,12 +49,13 @@ def run_mpi(init,path):
                       })
     # configure for saving result of TVB
     # check how many monitor it's used
-    nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold']\
+    nb_monitor = param_tvb_monitor['Raw'] + param_tvb_monitor['TemporalAverage'] + param_tvb_monitor['Bold'] \
                  + param_tvb_monitor['ECOG']
-    # initialise the variable for the saving the result
-    save_result = []
-    for i in range(nb_monitor):  # the input output monitor
-        save_result.append([])
+    if param_tvb_monitor['save_time'] > 0:
+        # initialise the variable for the saving the result
+        save_result = []
+        for i in range(nb_monitor):  # the input output monitor
+            save_result.append([])
 
     # init MPI :
     data = None  # data for the proxy node (no initialisation in the parameter)
@@ -65,7 +68,7 @@ def run_mpi(init,path):
 
     logger.info("send initialisation of TVB : prepare data")
     initialisation_data = []
-    for i in np.arange(0,np.rint(time_synch/simulator.integrator.dt),1,dtype=np.int):
+    for i in np.arange(0, np.rint(time_synch / simulator.integrator.dt), 1, dtype=np.int):
         initialisation_data.append(simulator._loop_compute_node_coupling(i)[:, id_proxy, :])
     initialisation_data = np.concatenate(initialisation_data)
     time_init = [0, time_synch]
@@ -99,13 +102,14 @@ def run_mpi(init,path):
         nest_data = []
         for result in simulator(simulation_length=time_synch, proxy_data=data):
             for i in range(nb_monitor):
-                if result[i] is not None:
+                if param_tvb_monitor['save_time'] > 0 and result[i] is not None:
                     save_result[i].append(result[i])
             nest_data.append([result[-1][0], result[-1][1]])
 
             # save the result in file
             # check if the time for saving at some time step
-            if result[-1][0] >= param_tvb_monitor['save_time'] * ( count_save + 1):
+            if param_tvb_monitor['save_time'] > 0 and result[-1][0] >= param_tvb_monitor['save_time'] * (
+                    count_save + 1):
                 np.save(param_tvb_monitor['path_result'] + '/step_' + str(count_save) + '.npy', save_result)
                 save_result = []
                 for i in range(nb_monitor):
@@ -124,7 +128,8 @@ def run_mpi(init,path):
         count += 1
     # save the last part
     logger.info(" TVB finish")
-    np.save(param_tvb_monitor['path_result'] + '/step_' + str(count_save) + '.npy', save_result)
+    if param_tvb_monitor['save_time'] > 0:
+        np.save(param_tvb_monitor['path_result'] + '/step_' + str(count_save) + '.npy', save_result)
     for index, comm in enumerate(comm_send):
         logger.info('end comm send')
         end_mpi(comm, result_path + "/translation/receive_from_tvb/" + str(id_proxy[index]) + ".txt", True, logger)
@@ -140,8 +145,8 @@ def run_mpi(init,path):
 def init_mpi(path, logger):
     """
     initialise MPI connection
-    :param logger: logger of the modules
     :param path: path of the file for the port
+    :param logger: logger of the modules
     :return:
     """
     while not os.path.exists(path + '.unlock'):  # FAT END POINT
@@ -164,6 +169,7 @@ def send_mpi(comm, times, data, logger):
     :param comm: MPI communicator
     :param times: times of values
     :param data: rates inputs
+    :param logger: logger of wrapper
     :return:nothing
     """
     logger.info("start send")
@@ -189,6 +195,7 @@ def receive_mpi(comm, logger):
     """
         receive proxy values the
     :param comm: MPI communicator
+    :param logger: logger of wrapper
     :return: rate of all proxy
     """
     logger.info("start receive")
@@ -204,7 +211,7 @@ def receive_mpi(comm, logger):
     # get the rate
     rates = np.empty(size, dtype='d')
     comm.Recv([rates, size, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
-    logger.info("end receive "+str(time_step))
+    logger.info("end receive " + str(time_step))
     # print the summary of the data
     if status_.Get_tag() == 0:
         return time_step, rates
