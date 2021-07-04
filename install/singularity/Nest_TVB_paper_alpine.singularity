@@ -99,6 +99,7 @@ singularity run --app python
     pip install cycler==0.10.0
     pip install jupyter==1.0.0
     pip install vtk==9.0.1
+    pip install plotly==5.1.0
 
     # install TVB
     apk add llvm-dev llvm hdf5-dev

@@ -68,7 +68,8 @@ RUN pip install nose==1.3.7;\
     pip install h5py==3.2.1;\
     pip install cycler==0.10.0;\
     pip install jupyter==1.0.0;\
-    pip install vtk==9.0.1
+    pip install vtk==9.0.1;\
+    pip install plotly==5.1.0
 
 # install TVB
 RUN apt-get install -y llvm-dev=1:7.0-47 llvm=1:7.0-47;\
