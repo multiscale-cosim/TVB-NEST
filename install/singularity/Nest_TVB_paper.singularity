@@ -51,6 +51,7 @@ TVB and Nest IO
     cd ..
     rm -rdf  Python-3.8.10.tar.xz Python-3.8.10
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
+    ln -s /usr/local/bin/python3.8 /usr/local/bin/python3
 
     # install pip
     cd /root

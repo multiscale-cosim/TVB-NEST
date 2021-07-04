@@ -84,20 +84,26 @@ singularity run --app python
 
     # for python library
     pip install --upgrade pip
-    pip install nose
-    pip install numpy cython Pillow
-    pip install matplotlib
-    pip install networkx
-    pip install mpi4py
+    pip install nose==1.3.7
+    pip install numpy==1.20.3 cython==0.29.23 Pillow==8.2.0
+    pip install mpi4py==3.0.3
     apk add lapack-dev
-    pip install scipy
-    pip install elephant
-    pip install jupyter
+    pip install scipy==1.6.3
+    pip install elephant==0.10.0
+    # for plotting function
+    pip install matplotlib==3.4.2
+    pip install networkx==2.5.1
+    pip install jupyter==1.0.0
+    pip install vtk==9.0.1
+    pip install h5py==3.2.1
+    pip install cycler==0.10.0
+    pip install jupyter==1.0.0
+    pip install vtk==9.0.1
 
     # install TVB
     apk add llvm-dev llvm hdf5-dev
     export LLVM_CONFIG=/usr/bin/llvm-config
-    pip install tvb-data tvb-gdist tvb-library==2.0.10
+    pip install tvb-data==2.0 tvb-gdist==2.1.0 tvb-library==2.0.10
 
     # install parameters
     git clone https://github.com/NeuralEnsemble/parameters
@@ -110,6 +116,7 @@ singularity run --app python
     apk add bison flex libxcomposite-dev
     git clone https://github.com/neuronsimulator/nrn.git
     cd nrn
+    git checkout 8.0.0
     mkdir build
     cd build
     cmake .. \
@@ -126,10 +133,9 @@ singularity run --app python
     cd
 
     # install LPFy
-    pip install LFPy
-    pip install lfpykit
-    pip install MEAutility
-    pip install LFPy
+    pip install lfpykit==0.3
+    pip install MEAutility==1.4.9
+    pip install LFPy==2.2.1
 
     # install HybridLFPy from github
     git clone --branch nest-3-lio https://github.com/lionelkusch/hybridLFPy.git

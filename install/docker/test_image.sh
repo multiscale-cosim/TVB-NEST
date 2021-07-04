@@ -41,10 +41,9 @@ fi
 
 # Run the docker image
 cd ../../
-mkdir $(pwd)/tests/test_docker/
-sudo docker run -it --mount type=bind,source="$(pwd)",target=/home $IMAGE python3 /home/tests/run_co-sim_test.py ./tests/test_docker/ 4 4 false
-rm -rd $(pwd)/tests/test_docker/
-cd install/docker/ || exit
+mkdir $(pwd)/tests/test_file/test_docker/
+sudo docker run -it --mount type=bind,source="$(pwd)",target=/home $IMAGE python3 /home/tests/run_co-sim_test.py /home/tests/test_file/test_docker/ 4 4 false
+sudo rm -rd $(pwd)/tests/test_file/test_docker/
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

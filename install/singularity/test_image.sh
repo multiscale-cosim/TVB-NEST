@@ -31,16 +31,12 @@ if [ -z "$1" ]
 fi
 if [ $1 -eq 0 ]
 then
-  IMAGE=./install/singularity/Nest_TVB_full.simg
-  echo ' test image full Nest and TVB'
+  IMAGE=./install/singularity/Nest_TVB_paper.simg
+  echo ' test image paper Nest and TVB'
 elif [ $1 -eq 1 ]
 then
-  IMAGE=./install/singularity/Nest_TVB.simg
-  echo ' test image from alpine OS Nest and TVB'
-elif [ $1 -eq 2 ]
-then
-  IMAGE=./install/singularity/Nest_TVB_2.simg
-  echo ' test image from debian OS Nest and TVB '
+  IMAGE=./install/singularity/Nest_TVB_paper_alpine.simg
+  echo ' test image paper alpine OS Nest and TVB'
 else
   echo ' No image to test '
   exit
@@ -49,7 +45,7 @@ fi
 # launch the test
 cd ../../
 mkdir $(pwd)/tests/test_singularity/
-singularity run --app python $IMAGE ./tests/run_co-sim_test.py $(pwd)/tests/test_singularity/ 4 4 false
+singularity run --app python $IMAGE ./tests/run_co-sim_test.py $(pwd)/tests/test_file/test_singularity/ 4 4 false
 rm -rd $(pwd)/tests/test_singularity/
 cd install/singularity || exit
 
