@@ -3,10 +3,10 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 PACKAGE=${PWD}/../   # folder of co-simulation-tvb-nest
-PYTHONLIB=${PWD}/../lib/tvb_nest_lib/python3.8/site-packages/ # folder with python library
-REPERTORY_LIB_NEST=${PWD}/../lib/nest_run/lib/python3.8/site-packages/ # folder with py-nest
+PYTHONLIB=${PWD}/../lib/lib_py/lib/python3.8/site-packages/ # folder with python library
+REPERTORY_LIB_NEST=${PWD}/../lib/nest/lib/python3.8/site-packages/ # folder with py-nest
 export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
-export PATH=$PATH:${PWD}/../lib/tvb_nest_lib/bin
+export PATH=${PWD}/../lib/lib_py/bin:$PATH
 
 for i in {1..12}
 do
