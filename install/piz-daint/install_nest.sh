@@ -53,8 +53,11 @@ cmake "$PATH_INSTALLATION" \
 	 -Dwith-python=ON \
 	 -Dwith-mpi=ON -Dwith-openmp=ON \
 	 -Dwith-readline=OFF -Dwith-ltdl=ON \
-   -DPYTHON_LIBRARY=/opt/python/3.8.5.0/lib/libpython3.8.so \
-   -DPYTHON_INCLUDE_DIR=/opt/python/3.8.5.0/include/python3.8/
+   	 -DPYTHON_LIBRARY=/opt/python/3.8.5.0/lib/libpython3.8.so \
+   	 -DPYTHON_INCLUDE_DIR=/opt/python/3.8.5.0/include/python3.8/ \
+	 -DMPI_C_INCLUDE_PATH=$INSTALL_FOLDER/soft/include -DMPI_C_LIB_NAMES=C -DMPI_C_LIBRARY=$INSTALL_FOLDER/soft/lib/libmpi.so.12.1.11 \
+	 -DMPI_CXX_INCLUDE_PATH=$INSTALL_FOLDER/soft/include -DMPI_CXX_LIB_NAMES=CXX -DMPI_CXX_LIBRARY=$INSTALL_FOLDER/soft/lib/libmpicxx.so.12.1.11
+
 make -j 8
 make install
 
