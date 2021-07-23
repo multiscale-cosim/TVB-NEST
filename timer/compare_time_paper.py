@@ -128,21 +128,21 @@ if __name__ == '__main__':
         ('./test_file/paper_nb_neurons/',
          np.array(np.around(np.logspace(1,5,30)),dtype=int),
          'number of neurons simulated with Nest'),
-        ('./test_file/paper_mpi/', np.arange(1, 13, 1),
-         'number of MPI using by Nest ( 1 MPI = 1 VP)'),
+        # ('./test_file/paper_mpi/', np.arange(1, 13, 1),
+        #  'number of MPI using by Nest ( 1 MPI = 1 VP)'),
         ('./test_file/paper_time_thread/', np.arange(1, 13, 1),
          'number of virtual process of Nest (number of MPI : 1)'),
-        ('./test_file/paper_mpi_vp_2/', np.arange(2, 13, 2),
-         'number of virtual process of Nest (number of MPI : 2)'),
-        ('./test_file/paper_mpi_vp_4/', np.arange(4, 13, 4),
-         'number of virtual process of Nest (number of MPI : 4)'),
+        # ('./test_file/paper_mpi_vp_2/', np.arange(2, 13, 2),
+        #  'number of virtual process of Nest (number of MPI : 2)'),
+        # ('./test_file/paper_mpi_vp_4/', np.arange(4, 13, 4),
+        #  'number of virtual process of Nest (number of MPI : 4)'),
         ('./test_file/paper_time_synch/', [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
          'time of synchronization between Nest and TVB (in ms)'),
     ]  # same data for the three case
     mpi = False
     folders = [[] for i in folders_list]  # same data for the three case
     data = [[] for i in folders_list]  # same data for the three case
-    nb_trial = 1  # the number of trial
+    nb_trial = 10  # the number of trial
     for index, (folder, list_nb, label) in enumerate(folders_list):
         for nb in list_nb:
             # the three test
@@ -176,8 +176,8 @@ if __name__ == '__main__':
             time_TVB_IO.append([])
             time_TVB_tot.append([])
             for trial in range(nb_trial):
-                print(name_folder + '/' + str(trial) + '/_g_5.0_mean_I_ext_0.0/')
-                tree, index = get_dictionnary(name_folder + '/' + str(trial) + '/_g_5.0_mean_I_ext_0.0/', mpi=mpi)
+                print(name_folder + '/' + str(trial) + '/_g_10.0_mean_I_ext_0.0/')
+                tree, index = get_dictionnary(name_folder + '/' + str(trial) + '/_g_10.0_mean_I_ext_0.0/', mpi=mpi)
                 time_sim[index_folder].append(tree.get('Nest').time)
                 time_nest_sim[index_folder].append(
                     tree.get('Nest').get('simulation nest').get('run').get('simulation kernel nest').time)

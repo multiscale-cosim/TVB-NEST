@@ -16,6 +16,9 @@ def run_exploration(path, trial, begin, end, time_syn):
     :param time_syn: time of synchronization
     :return:
     """
+    import os
+    if os.path.exists(path + '/' + str(time_syn) + '/' + str(trial) + '/'):
+        return
     # exploration performance for different time of synchronization
     parameter.param_co_simulation['synchronization'] = time_syn
     run_exploration_2D(path + '/' + str(time_syn) + '/' + str(trial) + '/', parameter,

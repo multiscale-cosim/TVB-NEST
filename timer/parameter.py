@@ -68,7 +68,7 @@ param_nest_topology = {
         'g_L': 10.0,
         'I_e': 0.0,
         'a': 0.0,
-        'b': 100.0,
+        'b': 10.0,
         'Delta_T': 2.0,
         'tau_w': 500.0,
         'V_th': -50.0,
@@ -111,11 +111,11 @@ param_nest_connection = {
     # weigth in the population from excitatory neurons
     'weight_local': 1.0,
     # ratio between excitatory weight and inhibitory weight
-    'g': 5.0,
+    'g': 10.0,
     # probability inside the region
     'p_connect': 0.05,
     # number of external synapse:
-    'nb_external_synapse': 300,
+    'nb_external_synapse': 115,
     # path for the connectivity matrix (normalise in order to sum of input for region egual 1)
     'path_weight': path + '/weights.npy',
     # path for the distance matrix
@@ -132,12 +132,12 @@ param_nest_connection = {
 
 param_nest_background = {
     # define if the simulation use or not a poisson generator
-    'poisson': False,
+    'poisson': True,
     # rate of poisson
-    'rate_ex': 0.0,
+    'rate_ex': 2.0,
     'rate_in': 0.0,
     # the weight on the connection
-    # 'weight_poisson':param_nest_connection['weight_local'],
+    'weight_poisson': 1.0,
     # define if the simulation have or not noise
     'noise': False,
     # Mean of the noise in pA
@@ -228,8 +228,8 @@ param_tvb_model = {
     'initial_condition': {"E": [0.0, 0.0], "I": [0.0, 0.0], "C_ii": [0.0, 0.0], "W_e": [0.0, 0.0], "C_ee": [0.0, 0.0],
                           "C_ei": [0.0, 0.0], "W_i": [0.0, 0.0]},
     "tau_OU": 20.0,
-    "weight_noise": 0.0006,
-    "excitatory_extern": 0.0006
+    "weight_noise": 0.0002,
+    "excitatory_extern": 0.001
 }
 
 # parameter TVB for the monitors
@@ -271,7 +271,7 @@ param_TR_nest_to_tvb = {
 # Parameters for the translator TVB to Nest
 param_TR_tvb_to_nest = {
     # percentage of shared rate between neurons of the same region
-    'percentage_shared': 0.1,
+    'percentage_shared': 0.01,
     # 'seed':param_nest['master_seed']-3 # -3 because -1 and -2 is use by the simulation of TVB
     # 'nb_synapses' : param_nest_connection['nb_external_synapse'] # number of external synapses
     # 'init': path of the initialisation of the translation if not the run exploration will create it

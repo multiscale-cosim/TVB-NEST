@@ -8,13 +8,13 @@ REPERTORY_LIB_NEST=${PWD}/../lib/nest/lib/python3.8/site-packages/ # folder with
 export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
 export PATH=${PWD}/../lib/lib_py/bin:$PATH
 
-for i in {1..12}
-do
-  for trail in {0..10}
-  do
-    python3 ./run_co-sim_mpi.py './test_file/paper_mpi/' $trail 0.0 1000.0 $i
-  done
-done
+#for i in {1..12}
+#do
+#  for trail in {0..10}
+#  do
+#    python3 ./run_co-sim_mpi.py './test_file/paper_mpi/' $trail 0.0 1000.0 $i
+#  done
+#done
 
 for i in {1..12}
 do
@@ -24,21 +24,21 @@ do
   done
 done
 
-for i in $(seq 2 2 12)
-do
-  for trail in {0..10}
-  do
-    python3 ./run_co-sim_mpi_vp_2.py './test_file/paper_mpi_vp_2/' $trail 0.0 1000.0 $i
-  done
-done
-
-for i in $(seq 4 4 12)
-do
-  for trail in {0..10}
-  do
-    python3 ./run_co-sim_mpi_vp_4.py './test_file/paper_mpi_vp_4/' $trail 0.0 1000.0 $i
-  done
-done
+#for i in $(seq 2 2 12)
+#do
+#  for trail in {0..10}
+#  do
+#    python3 ./run_co-sim_mpi_vp_2.py './test_file/paper_mpi_vp_2/' $trail 0.0 1000.0 $i
+#  done
+#done
+#
+#for i in $(seq 4 4 12)
+#do
+#  for trail in {0..10}
+#  do
+#    python3 ./run_co-sim_mpi_vp_4.py './test_file/paper_mpi_vp_4/' $trail 0.0 1000.0 $i
+#  done
+#done
 
 for i in {10,14,19,26,36,49,67,92,127,174,240,329,452,621,853,1172,1610,2212,3039,4175,5736,7880,10826,14874,20434,28072,38566,52983,72790,100000}
 do

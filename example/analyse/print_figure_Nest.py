@@ -117,6 +117,7 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
 
     # Frequency analysis of histogram
     FS = 1 / (param['param_nest']["sim_resolution"] * 1e-3)
+    FS = 1
     NFFT = int(FS)
     noverlap = int(NFFT / 2)
     vmin = spectogram['DBmin']
@@ -317,11 +318,21 @@ if __name__ == '__main__':
     param['param_nest_topology']["nb_neuron_by_region"] = 10000
     # param['result_path'] = '../local/case_up_down/nest/'; title = " Synchronise network "
     # param['result_path'] ='../local/case_asynchronous/nest/'; title = " Asynchronous network "
-    param['result_path'] = '../local/case_regular_burst/nest/'; title = " Regular Bursting network "
+    # param['result_path'] = '../local/case_regular_burst/nest/'; title = " Regular Bursting network "
+    # param['result_path'] = '../piz_daint/sarus/v1/case_asynchronous/nest/'; title = " Regular Bursting network "
+    # param['result_path'] = '../piz_daint/sarus/v1/case_regular_burst/nest/'; title = " Regular Bursting network "
+    # param['result_path'] = '../piz_daint/sarus/v1/case_up_down/nest/'; title = " Synchronise network "
+    # param['result_path'] = '../singularity/case_up_down/nest/'; title = " Synchronise network "
+    # param['result_path'] = '../docker/case_up_down/nest/'; title = " Synchronise network "
+    # param['result_path'] = '../singularity/case_asynchronous/nest/'; title = " Asynchronous network "
+    # param['result_path'] = '../docker/case_asynchronous/nest/'; title = " Asynchronous network "
+    # param['result_path'] = '../singularity/case_regular_burst/nest/'; title = " Regular Bursting network "
+    param['result_path'] = '../docker/case_regular_burst/nest/'; title = " Regular Bursting network "
     data = get_data_all(param['result_path'])
     # print_figure_nest(param, 49000.0, 60000.0,data['pop_1_ex'],data['pop_1_in'],
-    print_figure_nest(param, 000.0, 10000.0, data['pop_1_ex'], data['pop_1_in'],
-                      V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
+    # print_figure_nest(param, 6000.0, 10000.0, data['pop_1_ex'], data['pop_1_in'],
+    print_figure_nest(param, 0.0, 200.0, data['pop_1_ex'], data['pop_1_in'],
+                                        V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
                       W_excitatory=data['W_pop_1_ex'], W_inhibitory=data['W_pop_1_in'],
                       spectogram={'DBmin': -65,
                                   'DBmax': -25,
