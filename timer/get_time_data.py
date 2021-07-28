@@ -519,7 +519,7 @@ def analyse_nest_to_tvb_translate(index, master, data_translate, mpi):
     return translate
 
 
-def get_dictionnary(path, mpi):
+def get_dictionnary(path, mpi, translation=True):
     """
     function for getting the tree for all the simulation
     :param path: folder of the simulation
@@ -527,36 +527,41 @@ def get_dictionnary(path, mpi):
     """
     # get data from path
     data = get_data(path)
-    # get the id of translator
-    pattern_nest_to_tvb = re.compile('timer_nest_to_tvb_send*')
-    index_translator_nest_to_tvb = []
-    pattern_tvb_to_nest = re.compile('timer_tvb_to_nest_sender*')
-    index_translator_tvb_to_nest = []
-    for i in data.keys():
-        if pattern_nest_to_tvb.match(i) is not None:
-            index_translator_nest_to_tvb.append(int(pattern_nest_to_tvb.split(i)[1]))
-        if pattern_tvb_to_nest.match(i) is not None:
-            index_translator_tvb_to_nest.append(int(pattern_tvb_to_nest.split(i)[1]))
-    index_translator_nest_to_tvb = np.sort(index_translator_nest_to_tvb)
-    index_translator_tvb_to_nest = np.sort(index_translator_tvb_to_nest)
 
-    # get the time of waiting data in the translator for TVB
-    wait_time_nest = [0]
-    index_wait = 10 if mpi else 11
-    for index in index_translator_tvb_to_nest:
-        wait_time = get_time(data['timer_tvb_to_nest_sender' + str(index)])[index_wait]
-        wait_time = wait_time[np.logical_not(np.isnan(wait_time))]
-        if np.sum(wait_time) > np.sum(wait_time_nest):
-            wait_time_nest = wait_time
+    if translation :
+        # get the id of translator
+        pattern_nest_to_tvb = re.compile('timer_nest_to_tvb_send*')
+        index_translator_nest_to_tvb = []
+        pattern_tvb_to_nest = re.compile('timer_tvb_to_nest_sender*')
+        index_translator_tvb_to_nest = []
+        for i in data.keys():
+            if pattern_nest_to_tvb.match(i) is not None:
+                index_translator_nest_to_tvb.append(int(pattern_nest_to_tvb.split(i)[1]))
+            if pattern_tvb_to_nest.match(i) is not None:
+                index_translator_tvb_to_nest.append(int(pattern_tvb_to_nest.split(i)[1]))
+        index_translator_nest_to_tvb = np.sort(index_translator_nest_to_tvb)
+        index_translator_tvb_to_nest = np.sort(index_translator_tvb_to_nest)
 
-    # get the time of waiting data in the translator for TVB
-    wait_time_tvb = [0]
-    index_wait = 15 if mpi else 11
-    for index in index_translator_nest_to_tvb:
-        wait_time = get_time(data['timer_nest_to_tvb_send' + str(index)])[index_wait]
-        wait_time = wait_time[np.logical_not(np.isnan(wait_time))]
-        if np.sum(wait_time) > np.sum(wait_time_tvb):
-            wait_time_tvb = wait_time
+        # get the time of waiting data in the translator for TVB
+        wait_time_nest = np.zeros((500,))
+        index_wait = 10 if mpi else 11
+        for index in index_translator_tvb_to_nest:
+            wait_time = get_time(data['timer_tvb_to_nest_sender' + str(index)])[index_wait]
+            wait_time = wait_time[np.logical_not(np.isnan(wait_time))]
+            if np.sum(wait_time) > np.sum(wait_time_nest):
+                wait_time_nest = wait_time
+
+        # get the time of waiting data in the translator for TVB
+        wait_time_tvb = np.zeros((500,))
+        index_wait = 15 if mpi else 11
+        for index in index_translator_nest_to_tvb:
+            wait_time = get_time(data['timer_nest_to_tvb_send' + str(index)])[index_wait]
+            wait_time = wait_time[np.logical_not(np.isnan(wait_time))]
+            if np.sum(wait_time) > np.sum(wait_time_tvb):
+                wait_time_tvb = wait_time
+    else:
+        wait_time_tvb = np.zeros((500,))
+        wait_time_nest = np.zeros((500,))
 
     # creation of the tree of times
     data_time = Node('root', 0.0)
@@ -565,21 +570,24 @@ def get_dictionnary(path, mpi):
         analyse_nest(data['timer_nest'], data['timer_nest_init'], data['timer_nest_sim'], data['nest_timer_0'],
                      data['nest_timer_input_0_init'], data['nest_timer_input_0'], wait_time_nest,
                      data['nest_timer_io_0']))
-    for index, i in enumerate(index_translator_nest_to_tvb):
-        data_time.add(analyse_nest_to_tvb_send(index, data['timer_nest_to_tvb_' + str(index)],
-                                               data['timer_nest_to_tvb_send' + str(i)], mpi))
-        data_time.add(analyse_nest_to_tvb_translate(index, data['timer_nest_to_tvb_' + str(index)],
-                                                    data['timer_nest_to_tvb_translate' + str(i)], mpi))
-        data_time.add(analyse_nest_to_tvb_receive(index, data['timer_nest_to_tvb_' + str(index)],
-                                                  data['timer_nest_to_tvb_receive' + str(i)], mpi))
-    for index, i in enumerate(index_translator_tvb_to_nest):
-        data_time.add(analyse_tvb_to_nest_sender(index, data['timer_tvb_to_nest_' + str(index)],
-                                                 data['timer_tvb_to_nest_sender' + str(i)], mpi))
-        data_time.add(analyse_tvb_to_nest_translate(index, data['timer_tvb_to_nest_' + str(index)],
-                                                    data['timer_tvb_to_nest_translate' + str(i)], mpi))
-        data_time.add(analyse_tvb_to_nest_receiver(index, data['timer_tvb_to_nest_' + str(index)],
-                                                   data['timer_tvb_to_nest_receiver' + str(i)], mpi))
-    return data_time, (index_translator_nest_to_tvb, index_translator_tvb_to_nest)
+    if translation:
+        for index, i in enumerate(index_translator_nest_to_tvb):
+            data_time.add(analyse_nest_to_tvb_send(index, data['timer_nest_to_tvb_' + str(index)],
+                                                   data['timer_nest_to_tvb_send' + str(i)], mpi))
+            data_time.add(analyse_nest_to_tvb_translate(index, data['timer_nest_to_tvb_' + str(index)],
+                                                        data['timer_nest_to_tvb_translate' + str(i)], mpi))
+            data_time.add(analyse_nest_to_tvb_receive(index, data['timer_nest_to_tvb_' + str(index)],
+                                                      data['timer_nest_to_tvb_receive' + str(i)], mpi))
+        for index, i in enumerate(index_translator_tvb_to_nest):
+            data_time.add(analyse_tvb_to_nest_sender(index, data['timer_tvb_to_nest_' + str(index)],
+                                                     data['timer_tvb_to_nest_sender' + str(i)], mpi))
+            data_time.add(analyse_tvb_to_nest_translate(index, data['timer_tvb_to_nest_' + str(index)],
+                                                        data['timer_tvb_to_nest_translate' + str(i)], mpi))
+            data_time.add(analyse_tvb_to_nest_receiver(index, data['timer_tvb_to_nest_' + str(index)],
+                                                       data['timer_tvb_to_nest_receiver' + str(i)], mpi))
+        return data_time, (index_translator_nest_to_tvb, index_translator_tvb_to_nest)
+    else:
+        return data_time
 
 
 if __name__ == '__main__':
