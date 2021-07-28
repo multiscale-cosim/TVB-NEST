@@ -8,10 +8,10 @@ REPERTORY_LIB_NEST=${PWD}/../lib/nest/lib/python3.8/site-packages/ # folder with
 export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
 export PATH=${PWD}/../lib/lib_py/bin:$PATH
 
-for i in $(seq 2 2 8)
+for i in $(seq 4 4 8)
 do
   for trail in {0..10}
   do
-    python3 ./run_co-sim_mpi_vp.py './test_file/paper_mpi_vp_4/' $trail 0.0 1000.0 $i
+    python3 ./run_co-sim_mpi_vp_4.py './test_file/paper_mpi_vp_4/' $trail 0.0 10.0 $i
   done
 done

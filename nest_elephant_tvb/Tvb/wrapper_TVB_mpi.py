@@ -266,11 +266,13 @@ def end_mpi(comm, path, sending, logger):
         source = status_.Get_source()  # the id of the excepted source
         times = np.array([0., 0.], dtype='d')  # time of starting and ending step
         comm.Send([times, MPI.DOUBLE], dest=source, tag=1)
+        comm.Barrier()
     else:
         logger.info("TVB close connection receive " + port)
         # send to the translator : I want the next part
         req = comm.isend(True, dest=0, tag=1)
         req.wait()
+        comm.Barrier()
     # closing the connection at this end
     logger.info("TVB disconnect communication")
     comm.Disconnect()

@@ -59,6 +59,8 @@ class ProducerTVBData(MPICommunicationExtern):
                 # INTERNAL : release the communication
                 self.communication_internal.get_time_rate_end()
                 self.logger.info("Produce TVB Data : end sim")
+                self.port_comms[0].Barrier()
+                self.logger.info("Produce TVB Data : Barrier")
                 break
 
             else:
@@ -114,6 +116,8 @@ class ConsumerTVBData(MPICommunicationExtern):
                 # INTERNAL : close communication with translation function
                 self.communication_internal.send_time_rate_end()
                 self.logger.info("Consumer TVB Data : send end ")
+                self.port_comms[0].Barrier()
+                self.logger.info("Consumer TVB Data : Barrier")
                 break
 
             else:

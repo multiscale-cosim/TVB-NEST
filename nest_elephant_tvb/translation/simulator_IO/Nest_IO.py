@@ -68,6 +68,7 @@ class ConsumerNestData(MPICommunicationExtern):
                                              self.communication_internal.shape_buffer[0]:], MPI.DOUBLE],
                                             source=source, tag=0, status=status_)
                     self.communication_internal.shape_buffer[0] += shape[0]  # move head
+                    # self.logger.info("Consumer Nest : end receive data source "+str(source)+" time :"+str(self.communication_internal.databuffer[self.communication_internal.shape_buffer[0]-1]))
                 self.logger.info("Consumer Nest : end receive data")
                 self.timer.change(5, 6)  # wait for receive data + receive data
 
@@ -83,6 +84,8 @@ class ConsumerNestData(MPICommunicationExtern):
                 self.logger.info("Consumer Nest : end simulation")
                 # INTERNAL : close the communication
                 self.communication_internal.send_spikes_end()
+                self.port_comms[0].Barrier()
+                self.logger.info("Consumer Nest : Barrier")
                 break
 
             else:
@@ -185,6 +188,7 @@ class ProducerDataNest(MPICommunicationExtern):
                         # secondly send the spikes train
                         data = np.concatenate(data).astype('d')
                         self.port_comms[0].Send([data, MPI.DOUBLE], dest=source, tag=list_id[0])
+                    # self.logger.info('Producer Nest : '+str(size_list))
                 self.logger.info("Produce Nest : end sending")
                 self.timer.change(4, 5)
                 self.communication_internal.get_spikes_release()
@@ -199,6 +203,8 @@ class ProducerDataNest(MPICommunicationExtern):
                 # INTERNAL : close the buffer
                 self.communication_internal.get_spikes_end()
                 self.logger.info("Produce Nest : send false")
+                self.port_comms[0].Barrier()
+                self.logger.info("Produce Nest : Barrier")
                 break
 
             else:
