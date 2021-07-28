@@ -60,7 +60,7 @@ class ProducerTVBData(MPICommunicationExtern):
                 self.communication_internal.get_time_rate_end()
                 self.logger.info("Produce TVB Data : end sim")
                 self.port_comms[0].Barrier()
-                self.logger.info("Produce TVB Data : Barrier")
+                self.logger.info("Produce TVB Datat add  : Barrier")
                 break
 
             else:
