@@ -16,6 +16,9 @@ def run_exploration(path, trial, begin, end, nb_th):
     :param nb_th: number of thread
     :return:
     """
+    import os
+    if os.path.exists(path + '/' + str(nb_th) + '/' + str(trial) + '/'):
+        return
     parameter.param_co_simulation['nb_MPI_nest'] = 1
     parameter.param_nest['total_num_virtual_procs'] = nb_th
     run_exploration_2D(path + '/' + str(nb_th) + '/' + str(trial) + '/', parameter,

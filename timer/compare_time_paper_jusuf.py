@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
+def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                 time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
                 title,
                 function=np.mean,
@@ -21,8 +21,6 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, 
     :param time_nest_sim: time of nest simulation
     :param time_nest_IO: time of communication of nest
     :param time_nest_wait: time of waiting data by nest
-    :param time_TR_1_wait: time of translation wait
-    :param time_TR_2_wait: time of translation wait
     :param time_nest_tot: total time of Nest simulation
     :param time_TVB_sim: time of simulation of TVB
     :param time_TVB_IO: time of communication of TVB
@@ -46,13 +44,13 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, 
                     function(time_sim, axis=1),
                     color='y', label='co-simulation', alpha=0.2)
     ax.fill_between(list_nb,
-                    np.zeros_like(function(time_nest_sim, axis=1)),
-                    (function(time_nest_sim, axis=1)),
-                    color=[255 / 255, 104 / 255, 65 / 255], label='Nest simulation', alpha=0.5, hatch='o')
+                    np.zeros_like(function(time_nest_IO, axis=1)),
+                    (function(time_nest_IO, axis=1)),
+                    color=[255 / 255, 104 / 255, 65 / 255], label='Nest simulation', alpha=0.5, hatch='oo')
     ax.fill_between(list_nb,
-                    (function(time_nest_sim, axis=1)),
+                    (function(time_nest_IO, axis=1)),
                     (function(time_nest_IO, axis=1) + function(time_nest_sim, axis=1)),
-                    color=[255 / 255, 104 / 255, 65 / 255], label='Nest IO', alpha=0.5, hatch='oo')
+                    color=[255 / 255, 104 / 255, 65 / 255], label='Nest IO', alpha=0.5, hatch='o')
     ax.fill_between(list_nb,
                     (function(time_nest_IO, axis=1) + function(time_nest_sim, axis=1)),
                     (function(time_nest_wait, axis=1) + function(time_nest_IO, axis=1) + function(time_nest_sim,
@@ -125,21 +123,10 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, 
 # figure for the optimisation for the paper TVB-ebrains
 if __name__ == '__main__':
     folders_list = [
-        ('./test_file/paper_nb_neurons/',
-         np.array(np.around(np.logspace(1,5,30)),dtype=int),
-         'number of neurons simulated with Nest'),
-        # ('./test_file/paper_mpi/', np.arange(1, 13, 1),
-        #  'number of MPI using by Nest ( 1 MPI = 1 VP)'),
-        ('./test_file/paper_time_thread/', np.arange(1, 13, 1),
-         'number of virtual process of Nest (number of MPI : 1)'),
-        # ('./test_file/paper_mpi_vp_2/', np.arange(2, 13, 2),
-        #  'number of virtual process of Nest (number of MPI : 2)'),
-        # ('./test_file/paper_mpi_vp_4/', np.arange(4, 13, 4),
-        #  'number of virtual process of Nest (number of MPI : 4)'),
-        ('./test_file/paper_time_synch/', [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
-         'time of synchronization between Nest and TVB (in ms)'),
+        ('./test_file/test_file/paper_mpi/jusuf/', np.arange(1, 11, 1),
+         'number of node use by Nest ( 1 MPI per node)'),
     ]  # same data for the three case
-    mpi = False
+    mpi = True
     folders = [[] for i in folders_list]  # same data for the three case
     data = [[] for i in folders_list]  # same data for the three case
     nb_trial = 10  # the number of trial
@@ -158,8 +145,6 @@ if __name__ == '__main__':
         time_nest_sim = []
         time_nest_IO = []
         time_nest_wait = []
-        time_TR_1_wait = []
-        time_TR_2_wait = []
         time_nest_tot = []
         time_TVB_sim = []
         time_TVB_IO = []
@@ -169,15 +154,13 @@ if __name__ == '__main__':
             time_nest_sim.append([])
             time_nest_IO.append([])
             time_nest_wait.append([])
-            time_TR_1_wait.append([])
-            time_TR_2_wait.append([])
             time_nest_tot.append([])
             time_TVB_sim.append([])
             time_TVB_IO.append([])
             time_TVB_tot.append([])
             for trial in range(nb_trial):
-                print(name_folder + '/' + str(trial) + '/_g_10.0_mean_I_ext_0.0/')
-                tree, index = get_dictionnary(name_folder + '/' + str(trial) + '/_g_10.0_mean_I_ext_0.0/', mpi=mpi)
+                print(name_folder + '/' + str(trial) + '/_g_5.0_mean_I_ext_0.0/')
+                tree = get_dictionnary(name_folder + '/' + str(trial) + '/_g_5.0_mean_I_ext_0.0/', mpi=mpi, translation=False)
                 time_sim[index_folder].append(tree.get('Nest').time)
                 time_nest_sim[index_folder].append(
                     tree.get('Nest').get('simulation nest').get('run').get('simulation kernel nest').time)
@@ -189,12 +172,6 @@ if __name__ == '__main__':
                 time_nest_wait[index_folder].append(
                     tree.get('Nest').get('simulation nest').get('run').get('pre-run').get(
                         'pre_run_input').get('pre_run_input_wait').time)
-                time_TR_1_wait[index_folder].append(
-                    tree.get('TVB_NEST_0: Producer Nest data ').get('simulation').get('get internal spikes').get(
-                        'wait read buffer').time)
-                time_TR_2_wait[index_folder].append(
-                    tree.get('TVB_NEST_1: Producer Nest data ').get('simulation').get('get internal spikes').get(
-                        'wait read buffer').time)
                 time_nest_tot[index_folder].append(
                     tree.get('Nest').get('simulation nest').get('run').get('simulation kernel nest').time
                     + tree.get('Nest').get('simulation nest').get('run').get('pre-run').get('pre_run_input').time
@@ -211,13 +188,13 @@ if __name__ == '__main__':
                     + tree.get('TVB').get('simulation').get('receive data').time
                     - tree.get('TVB').get('simulation').get('receive data').get('receive time').time
                     + tree.get('TVB').get('simulation').get('send data').time)
-        full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
+        full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                     time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
-                    label, log_option=index_run < 1)
-        # full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
-        #             time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
-        #             label,function=np.min )
-        # full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
-        #             time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
-        #             label,function=np.max )
+                    label)
+        full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
+                    time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
+                    label,function=np.min )
+        full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
+                    time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
+                    label,function=np.max )
     plt.show()

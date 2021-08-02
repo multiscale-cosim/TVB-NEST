@@ -16,6 +16,9 @@ def run_exploration(path, trial, begin, end, nb_neurons):
     :param nb_neurons: number of neurons
     :return:
     """
+    import os
+    if os.path.exists(path + '/' + str(nb_neurons) + '/' + str(trial) + '/'):
+        return
     parameter.param_nest_topology['nb_neuron_by_region'] = nb_neurons
     run_exploration_2D(path + '/' + str(nb_neurons) + '/' + str(trial) + '/', parameter,
                        {'g': np.arange(parameter.param_nest_connection['g'],

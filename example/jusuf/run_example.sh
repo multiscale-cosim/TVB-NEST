@@ -39,7 +39,6 @@ module load h5py/2.10.0-Python-3.8.5
 module load mpi4py/3.0.3-Python-3.8.5
 
 
-set -x
 export INSTALL_FOLDER=${DIR}/../../lib/
 export PYTHON_FOLD=${INSTALL_FOLDER}/lib_py
 export PYTHON_LIB=${PYTHON_FOLD}/lib64/python3.8/site-packages/

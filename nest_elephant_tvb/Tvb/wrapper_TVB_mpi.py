@@ -131,10 +131,10 @@ def run_mpi(init, path):
         # prepare to send data with MPI
         timer_tvb.start(3)
         nest_data = np.array(nest_data)
-        time = [nest_data[0, 0], nest_data[-1, 0]]
+        times = [nest_data[0, 0], nest_data[-1, 0]]
         rate = np.concatenate(nest_data[:, 1])
         for index, comm in enumerate(comm_send):
-            send_mpi(comm, time, rate[:, index] * 1e3, logger)
+            send_mpi(comm, times, rate[:, index] * 1e3, logger)
         timer_tvb.stop(3)
 
         # increment of the loop
@@ -150,7 +150,6 @@ def run_mpi(init, path):
     for index, comm in enumerate(comm_receive):
         logger.info('end comm receive')
         end_mpi(comm, result_path + "/translation/send_to_tvb/" + str(id_proxy[index]) + ".txt", False, logger)
-    MPI.Finalize()  # ending with MPI
     logger.info(" TVB exit")
     timer_tvb.stop(0)
     timer_tvb.save(path+'/timer_tvb.npy')
@@ -267,11 +266,13 @@ def end_mpi(comm, path, sending, logger):
         source = status_.Get_source()  # the id of the excepted source
         times = np.array([0., 0.], dtype='d')  # time of starting and ending step
         comm.Send([times, MPI.DOUBLE], dest=source, tag=1)
+        comm.Barrier()
     else:
         logger.info("TVB close connection receive " + port)
         # send to the translator : I want the next part
         req = comm.isend(True, dest=0, tag=1)
         req.wait()
+        comm.Barrier()
     # closing the connection at this end
     logger.info("TVB disconnect communication")
     comm.Disconnect()

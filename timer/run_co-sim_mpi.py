@@ -16,6 +16,9 @@ def run_exploration(path, trial, begin, end, nb_mpi):
     :param nb_mpi: number of mpi
     :return:
     """
+    import os
+    if os.path.exists(path + '/' + str(nb_mpi) + '/' + str(trial) + '/'):
+        return
     # exploration performance for different number of MPI process
     parameter.param_co_simulation['nb_MPI_nest'] = nb_mpi
     parameter.param_nest['total_num_virtual_procs'] = nb_mpi

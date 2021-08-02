@@ -16,6 +16,9 @@ def run_exploration(path, trial, begin, end, nb_vp):
     :param nb_vp: number of virtual process
     :return:
     """
+    import os
+    if os.path.exists(path + '/' + str(nb_vp) + '/' + str(trial) + '/'):
+        return
     parameter.param_co_simulation['nb_MPI_nest'] = 2
     parameter.param_nest['total_num_virtual_procs'] = nb_vp
     run_exploration_2D(path + '/' + str(nb_vp) + '/' + str(trial) + '/', parameter,
