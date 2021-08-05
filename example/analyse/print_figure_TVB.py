@@ -116,7 +116,7 @@ def print_tvb_figure(param, begin, end, spikes_ex, spikes_in, TVB_data):
     fig = plt.figure(figsize=(20, 20))
     grid = gridspec.GridSpec(3, 2, figure=fig)
     ax_hist_ex = fig.add_subplot(grid[0, 0])
-    grid_ECOG = gridspec.GridSpecFromSubplotSpec(1, 2, subplot_spec=grid[1:, 0], hspace=0.01, wspace=0.1)
+    grid_ECOG = gridspec.GridSpecFromSubplotSpec(1, 2, subplot_spec=grid[1:, 0], hspace=0.01, wspace=0.15)
     ECOG_1 = fig.add_subplot(grid_ECOG[0, 0])
     ECOG_2 = fig.add_subplot(grid_ECOG[0, 1])
     ax_rate = fig.add_subplot(grid[:, 1])
@@ -176,17 +176,19 @@ def print_tvb_figure(param, begin, end, spikes_ex, spikes_in, TVB_data):
         custom_cycler = (cycler(color=plt.cm.jet(np.linspace(0, 1, 7))))
         ax.set_prop_cycle(custom_cycler)
         for i in range(8):
-            ax.plot(ECOG_time, ECOG[:, i + index * ECOG.shape[1]/2] + i * max_ecog, linewidth=0.1)
+            ax.plot(ECOG_time, ECOG[:, i + index * ECOG.shape[1]//2] + i * max_ecog, linewidth=0.1)
         ax.tick_params(axis='both', which='both', left='off', bottom='off', labelbottom='off', length=0)
         plt.setp(ax.get_xticklabels(), visible=False)
         plt.setp(ax.get_yticklabels(), visible=False)
-        ax.set_ylabel('electrode ' + str(index))
+        ax.set_ylabel('set of electrodes ' + str(index))
     ECOG_1.set_xlabel('Time (ms)')
     plt.setp(ECOG_1.get_xticklabels(), visible=True)
     ECOG_1.tick_params(axis='x', which='both', left='on', bottom='on', labelbottom='on', length=1.0)
     ECOG_2.set_xlabel('Time (ms)')
     plt.setp(ECOG_2.get_xticklabels(), visible=True)
     ECOG_2.tick_params(axis='x', which='both', left='on', bottom='on', labelbottom='on', length=1.0)
+
+    plt.subplots_adjust(wspace=0.1,left=0.04,right=0.98,top=0.98,bottom=0.06)
     plt.show()
 
 
@@ -203,8 +205,11 @@ if __name__ == '__main__':
     param['param_nest_topology']["nb_neuron_by_region"] = 10000
     param['param_nest_topology']["nb_region"] = 104
     id_proxy = [26, 78]
+    data = get_data_all('../local_cluster//case_regular_burst/nest/'); title = " Regular Bursting network "; rates = get_rate('../local_cluster//case_regular_burst/tvb/'); ecog_max= 16.0; rates[1] = np.load('../local_cluster//case_regular_burst/tvb/ECOG.npy',allow_pickle=True)
+    # data = get_data_all('../local_cluster//case_asynchronous/nest/'); title = " Asynchronous network "; rates = get_rate('../local_cluster//case_asynchronous/tvb/'); ecog_max= 2.0; rates[1] = np.load('../local_cluster//case_asynchronous/tvb/ECOG.npy',allow_pickle=True)
+    # data = get_data_all('../local_cluster//case_up_down/nest/'); title = " Synchronise network "; rates = get_rate('../local_cluster//case_up_down/tvb/'); ecog_max= 2.0 ; rates[1] = np.load('../local_cluster//case_up_down/tvb/ECOG.npy',allow_pickle=True)
     # data = get_data_all('../local//case_asynchronous/nest/'); title = " Asynchronous network "; rates = get_rate('../local//case_asynchronous/tvb/')
-    # data = get_data_all('../local//case_regular_burst_2/nest/'); title = " Regular Bursting network "; rates = get_rate('../local//case_regular_burst/tvb/')
+    # data = get_data_all('../local//case_regular_burst/nest/'); title = " Regular Bursting network "; rates = get_rate('../local//case_regular_burst/tvb/')
     # data = get_data_all('../local//case_up_down/nest/'); title = " Synchronise network "; rates = get_rate('../local//case_up_down/tvb/')
     # data = get_data_all('../piz_daint/sarus/v1/case_up_down_1/nest/'); title = " Regular Bursting network ";rates = get_rate('../piz_daint/sarus/v1/case_up_down_1/tvb/')
     # data = get_data_all('../piz_daint/sarus/v1/case_regular_burst/nest/'); title = " Regular Bursting network ";rates = get_rate('../piz_daint/sarus/v1/case_regular_burst/tvb/')
@@ -212,11 +217,12 @@ if __name__ == '__main__':
     # test for the plot
     # print_tvb_figure(param, 000.0, 100000.0, data['pop_1_ex'], data['pop_1_in'], rates)
     # # paper figure
-    # print_tvb_figure(param, 49000.0, 60000.0,data['pop_1_ex'],data['pop_1_in'],rates)
+    print_tvb_figure(param, 42500.0, 53500.0,data['pop_1_ex'],data['pop_1_in'],rates,max_ecog=ecog_max)
 
     # print compare rate
     nb_regions = 104
-    result_raw = get_rate('../local//case_regular_burst/tvb/')
+    # result_raw= rates
+    # result_raw = get_rate('../local//case_regular_burst/tvb/')
     # result_raw = get_rate('../local//case_up_down/tvb/')
     # result_raw = get_rate('../piz_daint/sarus/v1/case_up_down_1/tvb/')
     state_times = result_raw[0][0]
