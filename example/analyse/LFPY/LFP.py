@@ -233,11 +233,12 @@ def process(PS,parameters,networkSim):
             synDelayScale=PS.synDelayScale[Y],
             J_yX=PS.J_yX[Y],
             tau_yX=PS.tau_yX[Y],
+            save_in_file=True
         )
 
         # run population simulation and collect the data
         pop.run()
-        pop.collect_data()
+        #pop.collect_data()
 
         # object no longer needed
         del pop
@@ -708,6 +709,10 @@ def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name
     # parameters['end'] = 10.0
     # parameters['end'] = 11000.0
 
+    # number of neurons:
+    # GIDs_ex[1] = int(parameters['param_nest_topology']['nb_neuron_by_region'] * (1 - parameters['param_nest_topology']['percentage_inhibitory']))
+    # GIDs_in[1] = int(parameters['param_nest_topology']['nb_neuron_by_region'] * parameters['param_nest_topology']['percentage_inhibitory'])
+
     param = {
         'properrun': properrun,
         # if True, execute full model. If False, do only the plotting. Simulation results must exist.
@@ -726,17 +731,14 @@ def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name
         'rand_rot_axis': {'ex': ['z'], 'in': ['z']},
         # set up parameters corresponding to cylindrical model populations
         'populationParams': {'ex': {
-            'number': int(parameters['param_nest_topology']['nb_neuron_by_region'] * (
-                        1 - parameters['param_nest_topology']['percentage_inhibitory'])),
+            'number': GIDs_ex[1],
             'radius': 2000,
             'z_min': -50,
             'z_max': 50,
             'min_cell_interdist': 1.,
             'min_r': [[-1E199, -150, 700, 1E99], [0, 0, 1, 1]],
         },
-            'in': {'number': int(
-                parameters['param_nest_topology']['nb_neuron_by_region'] * parameters['param_nest_topology'][
-                    'percentage_inhibitory']),
+            'in': {'number': GIDs_in[1],
                    'radius': 2000,
                    'z_min': -50,
                    'z_max': 50,
@@ -788,7 +790,7 @@ def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name
         os.makedirs(path + '/LFPY/' + name)
     if param['properrun']:
         # set up the file destination, removing old results by default
-        setup_file_dest(PS, clearDestination=True)
+        setup_file_dest(PS, clearDestination=False)
     if RANK == 0:
         param_save = copy.deepcopy(param)
         if 'probe' in param_save['electrodeParams'].keys():
