@@ -2,3 +2,6 @@
 	path = nest-io-dev
 	url = https://github.com/sdiazpier/nest-simulator.git
 	branch = nest-io-dev
+[submodule "launcher/EBRAINS-RichEndpoint"]
+	path = launcher/EBRAINS-RichEndpoint
+	url = https://github.com/multiscale-cosim/EBRAINS-RichEndpoint

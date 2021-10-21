@@ -18,7 +18,7 @@ import json
 import common
 import configurations_manager
 from default_directories_enum import DefaultDirectories
-
+from common.launching_manager import LaunchingManager
 
 class CoSimulator:
     """
@@ -57,7 +57,7 @@ class CoSimulator:
     __parameters_parameters_for_json_file_dict = {}
     __parameters_variables_dict = {}
 
-    __log_configurations_dict = {}
+    __logger_settings = {}
 
     def generate_parameters_json_file(self):
         """
@@ -124,11 +124,11 @@ class CoSimulator:
         self.__configuration_manager.setup_default_directories(default_dir['output_directory'])
 
         # load common settings for the logging
-        logger_settings = self.__configuration_manager.get_configuration_settings(
+        self.__logger_settings = self.__configuration_manager.get_configuration_settings(
                             'log_configurations', self.__args.global_settings)
                             
         self.__logger = self.__configuration_manager.load_log_configurations(
-                            name=__name__, log_configurations=logger_settings)
+                            name=__name__, log_configurations=self.__logger_settings)
         self.__logger.info('Co-Simulator STEP 2 done, configuration manager started')
 
         ########
@@ -270,14 +270,23 @@ class CoSimulator:
         # STEP 9 - Launching the Action Plan
         ########
         self.__logger.info('Co-Simulator STEP 9, carrying out the Co-Simulation Action Plan Strategy')
-        self.__launcher = common.Launcher(action_plan_dict=self.__action_plan_dict,
-                                          actions_popen_args_dict=self.__actions_popen_args_dict,
-                                          configuration_manager=self.__configuration_manager,
-                                          logger=self.__logger)
-        if not self.__launcher.carry_out_action_plan() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+        # self.__launcher = common.Launcher(action_plan_dict=self.__action_plan_dict,
+        #                                   actions_popen_args_dict=self.__actions_popen_args_dict,
+        #                                   configuration_manager=self.__configuration_manager,
+        #                                   logger=self.__logger,
+        #                                   log_Settings=self.__logger_settings)
+        launching_manager = LaunchingManager(self.__action_plan_dict,
+                                          self.__actions_popen_args_dict,
+                                          self.__logger_settings,
+                                          self.__configuration_manager)
+        if not launching_manager.carry_out_action_plan() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
             self.__logger.error('Error(s) were reported, check the errors log on {}'.format(
                 self.__variables_manager.get_value(common.variables.CO_SIM_RESULTS_DIR)))
             return common.enums.CoSimulatorReturnCodes.LAUNCHER_ERROR
+        # if not self.__launcher.carry_out_action_plan() == common.enums.LauncherReturnCodes.LAUNCHER_OK:
+        #     self.__logger.error('Error(s) were reported, check the errors log on {}'.format(
+        #         self.__variables_manager.get_value(common.variables.CO_SIM_RESULTS_DIR)))
+        #     return common.enums.CoSimulatorReturnCodes.LAUNCHER_ERROR
         self.__logger.info('Co-Simulator STEP 8 done')
 
         ########
