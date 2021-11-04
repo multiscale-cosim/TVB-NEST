@@ -30,10 +30,12 @@
                 </performer_arguments>
             </performer>
             <routine>
-                <routine_code>{CO_SIM_ROUTINES_DIR}/nest_elephant_tvb/translation/test_file/test_input_nest_to_tvb.py</routine_code>
+                <!-- <routine_code>{CO_SIM_ROUTINES_DIR}/nest_elephant_tvb/translation/test_file/test_input_nest_to_tvb.py</routine_code> -->
+                <routine_code>{CO_SIM_ROUTINES_DIR}/EBRAINS-InterscaleHUB/python/tests/app_sim1.py</routine_code>
                 <routine_arguments>
-                    <argv_1_comm_file>{CO_SIM_RESULTS_DIR}{CO_SIM_INPUT_FILE}</argv_1_comm_file>
-                    <argv_2_delay>{CO_SIM_DELAY}</argv_2_delay>
+                    <!-- <argv_1_comm_file>{CO_SIM_RESULTS_DIR}{CO_SIM_INPUT_FILE}</argv_1_comm_file>
+                    <argv_2_delay>{CO_SIM_DELAY}</argv_2_delay> -->
+                    <argv_1_value>2</argv_1_value>
                 </routine_arguments>
             </routine>
         </action>

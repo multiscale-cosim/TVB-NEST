@@ -5,3 +5,6 @@
 [submodule "launcher/EBRAINS-RichEndpoint"]
 	path = launcher/EBRAINS-RichEndpoint
 	url = https://github.com/multiscale-cosim/EBRAINS-RichEndpoint
+[submodule "launcher/routines/EBRAINS-InterscaleHUB"]
+	path = launcher/routines/EBRAINS-InterscaleHUB
+	url = git@github.com:multiscale-cosim/EBRAINS-InterscaleHUB.git
