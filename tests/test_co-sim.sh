@@ -18,14 +18,14 @@ mkdir ./test_co-sim
 ${execute} python3 run_co-sim_test.py ./test_co-sim/ 1 1 $CLUSTER
 rm  -rd test_co-sim
 
-mkdir ./test_co-sim
-${execute} python3 run_co-sim_test.py ./test_co-sim/ 4 1 $CLUSTER
-rm  -rd test_co-sim
+# mkdir ./test_co-sim
+# ${execute} python3 run_co-sim_test.py ./test_co-sim/ 4 1 $CLUSTER
+# rm  -rd test_co-sim
 
-mkdir ./test_co-sim
-${execute} python3 run_co-sim_test.py ./test_co-sim/ 4 2 $CLUSTER
-rm  -rd test_co-sim
+# mkdir ./test_co-sim
+# ${execute} python3 run_co-sim_test.py ./test_co-sim/ 4 2 $CLUSTER
+# rm  -rd test_co-sim
 
-mkdir ./test_co-sim
-${execute} python3 run_co-sim_test.py ./test_co-sim/ 4 4 $CLUSTER
-rm  -rd test_co-sim
+# mkdir ./test_co-sim
+# ${execute} python3 run_co-sim_test.py ./test_co-sim/ 4 4 $CLUSTER
+# rm  -rd test_co-sim

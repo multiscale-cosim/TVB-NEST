@@ -27,9 +27,9 @@ def make_connections(path_to_files_receive, path_to_files_send, logger_master):
         comm = None
     
     ### receiver connection
-    comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)
+    comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
     ### sender connection
-    comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)
+    comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
     logger_master.info('Connections made, starting translation...')
     
     return comm, comm_receiver, port_receive, comm_sender, port_send

@@ -143,8 +143,8 @@ def run(parameters_file):
                    dir_path,
                    mpirun,
                    results_path,
-                   "/translation/spike_detector/"+str(id_spike_detector)+".txt",
-                   "/translation/send_to_tvb/"+str(id_proxy[index])+".txt",
+                   "translation/spike_detector/"+str(id_spike_detector)+".txt",
+                   "translation/send_to_tvb/"+str(id_proxy[index])+".txt",
                    ]
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
@@ -158,10 +158,10 @@ def run(parameters_file):
             argv=[ '/bin/sh',
                    dir_path,
                    mpirun,
-                   results_path+"/translation/spike_generator/",
+                   results_path,
                    str(ids_spike_generator[0]),
-                   str(len(ids_spike_generator)),
-                   "/../receive_from_tvb/"+str(id_proxy[index])+".txt",
+                  str(len(ids_spike_generator)),
+                   "translation/receive_from_tvb/"+str(id_proxy[index])+".txt",
                    ]
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
