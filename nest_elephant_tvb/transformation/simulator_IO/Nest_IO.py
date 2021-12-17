@@ -3,12 +3,12 @@
 
 from mpi4py import MPI
 import numpy as np
-from nest_elephant_tvb.translation.communication.mpi_io_external import MPICommunicationExtern
+from nest_elephant_tvb.transformation.communication.mpi_io_external import MPICommunicationExtern
 
 
 class ConsumerNestData(MPICommunicationExtern):
     """
-    Class for the receiving data from Nest and transfer them to the translation function process.
+    Class for the receiving data from Nest and transfer them to the transformation function process.
     """
 
     def simulation_time(self):
@@ -96,7 +96,7 @@ class ConsumerNestData(MPICommunicationExtern):
 
 class ProducerDataNest(MPICommunicationExtern):
     """
-    Class for sending data to Nest. The data are from the translated function.
+    Class for sending data to Nest. The data are from the transformation function.
     """
 
     def __init__(self, id_first_spike_detector, *arg, **karg):

@@ -6,7 +6,11 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from scipy import signal
 from nest_elephant_tvb.translation.translation_function.rate_spike import slidding_window
-from .print_figure_Nest import compute_rate
+
+if __name__ == '__main__':
+    from example.analyse.print_figure_macro import compute_rate
+else:
+    from .print_figure_macro import compute_rate
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
 

@@ -26,7 +26,7 @@ class CommunicationInternAbstract:
         raise Exception("Not implemented")
 
     # Section 1 : spike trains exchange
-    databuffer = None    # shared buffer for spike exchange
+    databuffer = None  # shared buffer for spike exchange
     # shape of the data inside the buffer
     # 2 types of shape : 1) array with 1 number for continuous data
     #                    2) arrays with multiple number for a sequence of data
@@ -95,7 +95,7 @@ class CommunicationInternAbstract:
         raise Exception("Not implemented")
 
     # Section 2 : rate and time exchange
-    get_time_rate_exit = False   # boolean to identify the end from getting function
+    get_time_rate_exit = False  # boolean to identify the end from getting function
     send_time_rate_exit = False  # boolean to identify the end from sending function
 
     # 1.1) Function to get time and rate

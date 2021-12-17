@@ -3,13 +3,14 @@
 
 from mpi4py import MPI
 import numpy as np
-from nest_elephant_tvb.translation.communication.internal import CommunicationInternAbstract
+from nest_elephant_tvb.transformation.communication.internal import CommunicationInternAbstract
 
 
 class MPICommunication(CommunicationInternAbstract):
     """
     Class for using MPI for the internal communication
     """
+
     def __init__(self, logger=None, buffer_r_w=None, sender_rank=None, receiver_rank=None, timer=None):
         """
         initialisation of MPI communication
@@ -20,7 +21,9 @@ class MPICommunication(CommunicationInternAbstract):
         """
         super().__init__(logger=logger, timer=timer)
         self.rank = MPI.COMM_WORLD.Get_rank()
-        self.logger.info('MPI Internal :rank '+str(self.rank)+' argument function logger :'+str(logger)+' buffer: '+str(buffer_r_w)+' sender_rank: '+str(sender_rank)+ ' receiver_rank: '+str(receiver_rank))
+        self.logger.info(
+            'MPI Internal :rank ' + str(self.rank) + ' argument function logger :' + str(logger) + ' buffer: ' + str(
+                buffer_r_w) + ' sender_rank: ' + str(sender_rank) + ' receiver_rank: ' + str(receiver_rank))
         # usage of shared memory
         self.win = None  # it's a MPI Window for shared buffer if it's required
         if buffer_r_w is not None:
@@ -32,12 +35,12 @@ class MPICommunication(CommunicationInternAbstract):
             self.request_read_buffer = None
         else:
             self.buffer_r_w = None
-        self.logger.info('MPI Internal : buffer '+str(buffer_r_w))
+        self.logger.info('MPI Internal : buffer ' + str(buffer_r_w))
         # variable for rate
         if sender_rank is not None:
             self.sender_rank = sender_rank
             self.request_send_done = None
-        self.logger.info('MPI Internal : init receive variable cond :'+str(receiver_rank is not None))
+        self.logger.info('MPI Internal : init receive variable cond :' + str(receiver_rank is not None))
         if receiver_rank is not None:
             self.logger.info('MPI Internal : init receive variable')
             self.receiver_rank = receiver_rank
@@ -103,7 +106,8 @@ class MPICommunication(CommunicationInternAbstract):
             self.timer.start(8)
             self.request_send_size_buffer.wait()
             self.timer.change(8, 9)
-            self.logger.info("MPI Internal : write(ready) : buffer receive :"+str(self.rank)+" from "+str(self.buffer_r_w[0]))
+            self.logger.info(
+                "MPI Internal : write(ready) : buffer receive :" + str(self.rank) + " from " + str(self.buffer_r_w[0]))
             request_buffer_read = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[0])
             self.logger.info("MPI Internal : write(ready) : buffer receive wait")
             self.send_spike_exit = not request_buffer_read.wait(status_)
@@ -111,14 +115,15 @@ class MPICommunication(CommunicationInternAbstract):
         else:
             self.send_spike_exit = False
         self.shape_buffer = [0]  # head of the buffer, reset after each iteration
-        self.logger.info("MPI Internal : write(ready) : buffer ready "+str(self.send_spike_exit))
+        self.logger.info("MPI Internal : write(ready) : buffer ready " + str(self.send_spike_exit))
 
     def end_writing(self):
         """
         send ending writing inside buffer
         """
-        self.logger.info("MPI Internal : write(end) : send size : "+str(np.sum(self.shape_buffer))+" rank "+str(self.rank)
-                         + " to "+str(self.buffer_r_w[0]))
+        self.logger.info(
+            "MPI Internal : write(end) : send size : " + str(np.sum(self.shape_buffer)) + " rank " + str(self.rank)
+            + " to " + str(self.buffer_r_w[0]))
         self.request_send_size_buffer = MPI.COMM_WORLD.isend(self.shape_buffer, dest=self.buffer_r_w[0])
         self.logger.info("MPI Internal : write(end) : end")
 
@@ -133,7 +138,7 @@ class MPICommunication(CommunicationInternAbstract):
         self.timer.start(18)
         self.request_send_size_buffer.wait()
         self.timer.stop(18)
-        self.logger.info("MPI Internal : write(release) : transmit end "+str(self.send_spike_exit))
+        self.logger.info("MPI Internal : write(release) : transmit end " + str(self.send_spike_exit))
         if not self.send_spike_exit:
             self.timer.start(18)
             req_buffer = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[0])
@@ -141,7 +146,7 @@ class MPICommunication(CommunicationInternAbstract):
             req_buffer.wait(status_)
             req_buffer = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[0])
             self.logger.info("MPI Internal : write(release) : send  end rank"
-                             + str(self.rank)+" to "+str(self.buffer_r_w[1]))
+                             + str(self.rank) + " to " + str(self.buffer_r_w[1]))
             send_size = MPI.COMM_WORLD.isend(np.array([-1]), dest=self.buffer_r_w[0])
             send_size.wait(status_)
             self.timer.stop(18)
@@ -159,12 +164,12 @@ class MPICommunication(CommunicationInternAbstract):
         if self.request_read_buffer is not None:
             self.timer.start(11)
             self.logger.info('MPI Internal : read(ready) : start read buffer: '
-                             + str(self.rank)+" to "+str(self.buffer_r_w[1]))
+                             + str(self.rank) + " to " + str(self.buffer_r_w[1]))
             self.request_read_buffer.wait()
             self.timer.stop(11)
         self.timer.start(10)
         self.logger.info("MPI Internal : read(ready) : receive size : rank "
-                         + str(self.rank)+" from "+str(self.buffer_r_w[1]))
+                         + str(self.rank) + " from " + str(self.buffer_r_w[1]))
         send_shape = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[1])
         self.logger.info("MPI Internal : read(ready) : receive size wait")
         res = send_shape.wait(status=status_)
@@ -257,7 +262,7 @@ class MPICommunication(CommunicationInternAbstract):
         self.logger.info('MPI Internal : spike(get) : begin ')
         # wait until the data are ready to use
         self.shape_buffer = self.ready_to_read()
-        self.logger.info('MPI Internal : spike(get) : receive end '+str(np.sum(self.shape_buffer)))
+        self.logger.info('MPI Internal : spike(get) : receive end ' + str(np.sum(self.shape_buffer)))
         if self.shape_buffer[0] == -1:
             self.logger.info('MPI Internal : spike(get) : receive end ')
             return None
@@ -296,13 +301,13 @@ class MPICommunication(CommunicationInternAbstract):
         self.logger.info("MPI Internal : rate(get) : get time rate")
         if self.request_send_done is not None:
             self.request_send_done.wait()
-        self.logger.info("MPI Internal : rate(get) : rate :"+str(self.sender_rank))
+        self.logger.info("MPI Internal : rate(get) : rate :" + str(self.sender_rank))
         req_time = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=0)
         times = req_time.wait()
         self.timer.stop(15)
         if times[0] == -1e5:
             self.get_time_rate_exit = True
-            self.logger.info("MPI Internal : rate(get) : times"+str(self.sender_rank))
+            self.logger.info("MPI Internal : rate(get) : times" + str(self.sender_rank))
             return times, None
         self.timer.start(16)
         req_data = MPI.COMM_WORLD.irecv(source=self.sender_rank, tag=1)
@@ -341,7 +346,7 @@ class MPICommunication(CommunicationInternAbstract):
             self.request_receive_rate.wait()
             self.logger.info("MPI Internal : rate(send) : wait check")
             self.send_time_rate_exit = not self.request_read_done.wait()
-            self.logger.info("MPI Internal : rate(send) : receive end "+str(self.send_time_rate_exit))
+            self.logger.info("MPI Internal : rate(send) : receive end " + str(self.send_time_rate_exit))
             self.timer.stop(17)
             if self.send_time_rate_exit:
                 return
@@ -357,7 +362,7 @@ class MPICommunication(CommunicationInternAbstract):
         """
         see super class
         """
-        self.logger.info("MPI Internal : rate(end) : begin "+str(not self.send_time_rate_exit))
+        self.logger.info("MPI Internal : rate(end) : begin " + str(not self.send_time_rate_exit))
         if not self.send_time_rate_exit:
             self.request_receive_time = MPI.COMM_WORLD.isend([-1e5], dest=self.receiver_rank, tag=0)
         self.logger.info("MPI Internal : rate(end) : end")

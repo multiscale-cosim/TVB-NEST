@@ -159,10 +159,12 @@ def compute_ecog(parameters):
         if value is not None:
             monitor_time.append(value[0])
             monitor_value.append(value[1])
-    plt.plot(monitor_time,np.concatenate(monitor_value)[:,0])
+    max_value = np.max(monitor_value)
+    for i in range(monitor_value[0].shape[1]):
+        plt.plot(monitor_time,np.concatenate(monitor_value)[:,i]+i*max_value)
     plt.xlim(xmin=42500.0, xmax=53500.0)
     plt.show()
-    np.save(parameters['result_path']+'/tvb/ECOG.npy',[monitor_time,monitor_value])
+    np.save(parameters['result_path']+'/tvb/ECOG'+str(parameters['param_tvb_monitor']['parameter_ECOG']['scaling'])+'.npy',[monitor_time,monitor_value])
 
 if __name__ == '__main__':
     path_parameter = '/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local_cluster/case_up_down/'
@@ -173,7 +175,7 @@ if __name__ == '__main__':
         parameters = json.load(f)
     parameters['param_tvb_monitor']['parameter_ECOG']['path'] = "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/sensor_hypocampus.txt"
     parameters['param_tvb_monitor']['parameter_ECOG']['path_volume'] = "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/region_volume.txt"
-    parameters['param_tvb_monitor']['parameter_ECOG']['scaling'] = 1.0
+    parameters['param_tvb_monitor']['parameter_ECOG']['scaling'] = 0.5
     parameters['param_tvb_connection']["path_region_labels"] = "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/region_labels.txt"
     parameters['param_tvb_connection']["path_centers"] = "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/centres.txt"
     parameters['param_tvb_connection']["path_cortical"] = "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/parameter/data_mouse/cortical.npy"

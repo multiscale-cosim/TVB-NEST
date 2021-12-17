@@ -42,8 +42,8 @@ def run_mpi(init, path):
     param_tvb_monitor['path_result'] = result_path + '/tvb/'
     id_proxy = param_co_simulation['id_region_nest']
     time_synch = param_co_simulation['synchronization']
-    path_send = result_path + "/translation/send_to_tvb/"
-    path_receive = result_path + "/translation/receive_from_tvb/"
+    path_send = result_path + "/transformation/send_to_tvb/"
+    path_receive = result_path + "/transformation/receive_from_tvb/"
     timer_tvb.change(0, 0)
     simulator = init(param_tvb_connection, param_tvb_coupling, param_tvb_integrator, param_tvb_model, param_tvb_monitor,
                      {'id_proxy': np.array(id_proxy),
@@ -146,10 +146,10 @@ def run_mpi(init, path):
         np.save(param_tvb_monitor['path_result'] + '/step_' + str(count_save) + '.npy', save_result)
     for index, comm in enumerate(comm_send):
         logger.info('end comm send')
-        end_mpi(comm, result_path + "/translation/receive_from_tvb/" + str(id_proxy[index]) + ".txt", True, logger)
+        end_mpi(comm, result_path + "/transformation/receive_from_tvb/" + str(id_proxy[index]) + ".txt", True, logger)
     for index, comm in enumerate(comm_receive):
         logger.info('end comm receive')
-        end_mpi(comm, result_path + "/translation/send_to_tvb/" + str(id_proxy[index]) + ".txt", False, logger)
+        end_mpi(comm, result_path + "/transformation/send_to_tvb/" + str(id_proxy[index]) + ".txt", False, logger)
     logger.info(" TVB exit")
     timer_tvb.stop(0)
     timer_tvb.save(path+'/timer_tvb.npy')
@@ -189,7 +189,7 @@ def send_mpi(comm, times, data, logger):
     """
     logger.info("start send")
     status_ = MPI.Status()
-    # wait until the translator accept the connections
+    # wait until the transformer accept the connections
     accept = False
     timer_tvb.start(4)
     while not accept:
@@ -217,7 +217,7 @@ def receive_mpi(comm, logger):
     """
     logger.info("start receive")
     status_ = MPI.Status()
-    # send to the translator : I want the next part
+    # send to the transformer : I want the next part
     timer_tvb.start(5)
     req = comm.isend(True, dest=0, tag=0)
     req.wait()
@@ -243,7 +243,7 @@ def end_mpi(comm, path, sending, logger):
     ending the communication
     :param comm: MPI communicator
     :param path: for the close the port
-    :param sending: if the translator is for sending or receiving data
+    :param sending: if the transformer is for sending or receiving data
     :param logger: logger of the module
     :return: nothing
     """
@@ -251,12 +251,12 @@ def end_mpi(comm, path, sending, logger):
     fport = open(path, "r")
     port = fport.readline()
     fport.close()
-    # different ending of the translator
+    # different ending of the transformer
     if sending:
         logger.info("TVB close connection send " + port)
         sys.stdout.flush()
         status_ = MPI.Status()
-        # wait until the translator accept the connections
+        # wait until the transformer accept the connections
         logger.info("TVB send check")
         accept = False
         while not accept:
@@ -269,7 +269,7 @@ def end_mpi(comm, path, sending, logger):
         comm.Barrier()
     else:
         logger.info("TVB close connection receive " + port)
-        # send to the translator : I want the next part
+        # send to the transformer : I want the next part
         req = comm.isend(True, dest=0, tag=1)
         req.wait()
         comm.Barrier()

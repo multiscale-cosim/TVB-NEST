@@ -325,7 +325,7 @@ def network_device(results_path, dic_layer, min_time, time_simulation, param_bac
         param_spike_dec = {"start": min_time,
                            "stop": time_simulation,
                            "record_to": "mpi",
-                           'label': '/../translation/spike_detector'
+                           'label': '/../transformation/spike_detector'
                            }
         nest.CopyModel('spike_recorder', 'spike_detector_record_mpi')
         nest.SetDefaults("spike_detector_record_mpi", param_spike_dec)
@@ -459,7 +459,7 @@ def network_device(results_path, dic_layer, min_time, time_simulation, param_bac
         param_spike_gen = {"start": 0.0,
                            "stop": time_simulation,
                            'stimulus_source': 'mpi',
-                           'label': '../translation/spike_generator'
+                           'label': '../transformation/spike_generator'
                            }
         nest.CopyModel('spike_generator', 'spike_generator_mpi')
         nest.SetDefaults("spike_generator_mpi", param_spike_gen)
@@ -657,14 +657,14 @@ def run_mpi(path_parameter):
         for ids_spike_generator in list_spike_generator:
             for id_spike_generator in ids_spike_generator:
                 while not os.path.exists(
-                        results_path + '/translation/spike_generator/' + str(id_spike_generator) + '.txt.unlock'):
+                        results_path + '/transformation/spike_generator/' + str(id_spike_generator) + '.txt.unlock'):
                     time.sleep(1)
-                os.remove(results_path + '/translation/spike_generator/' + str(id_spike_generator) + '.txt.unlock')
+                os.remove(results_path + '/transformation/spike_generator/' + str(id_spike_generator) + '.txt.unlock')
         for id_spike_detector in list_spike_detector:
             while not os.path.exists(
-                    results_path + '/translation/spike_detector/' + str(id_spike_detector[0]) + '.txt.unlock'):
+                    results_path + '/transformation/spike_detector/' + str(id_spike_detector[0]) + '.txt.unlock'):
                 time.sleep(1)
-            os.remove(results_path + '/translation/spike_detector/' + str(id_spike_detector[0]) + '.txt.unlock')
+            os.remove(results_path + '/transformation/spike_detector/' + str(id_spike_detector[0]) + '.txt.unlock')
         timer_master.change(0, 0)
 
     # launch the simulation

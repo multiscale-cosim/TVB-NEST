@@ -1,5 +1,7 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
+import copy
+
 import numpy as np
 import os
 import matplotlib.pyplot as plt
@@ -7,7 +9,7 @@ import matplotlib.gridspec as gridspec
 import matplotlib.ticker as ticker
 from scipy import signal
 import matplotlib.ticker as tkr
-# from example.analyse.LFPY.example_plotting import plot_signal_sum
+from example.analyse.LFPY.example_plotting import plot_signal_sum
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
 
@@ -33,9 +35,11 @@ def compute_rate(data, time, N, Dt):
     return rate_each_t / (Dt * 1e-3)
 
 
-def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
-                      V_excitatory=None, V_inhibitory=None, W_excitatory=None, W_inhibitory=None,
-                      size_neurons=0.1, spectogram=None, path_LFP='.', LFP_inc=300.0):
+def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
+                          V_excitatory=None, V_inhibitory=None, W_excitatory=None, W_inhibitory=None,
+                          size_neurons=0.1, spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0,
+                          grid=None, nb_grid=0, fig=None, font_ticks_size=7, font_labels={'size': 7}
+                          ,labelpad_hist_incr=0):
     """
     print the result of Nest
     :param param: the parameter of the simulation
@@ -117,7 +121,6 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
 
     # Frequency analysis of histogram
     FS = 1 / (param['param_nest']["sim_resolution"] * 1e-3)
-    FS = 1
     NFFT = int(FS)
     noverlap = int(NFFT / 2)
     vmin = spectogram['DBmin']
@@ -125,26 +128,30 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
     fmin = spectogram['fmin']
     fmax = spectogram['fmax']
     nb_f = spectogram['nb_f']
-    nb_v = spectogram['nb_DB']
     data = (hist_ex + hist_in) / np.max(hist_ex + hist_in)
     data = data[data.shape[0] - int(int(data.shape[0] / NFFT) * NFFT):]
     freqs, psd = signal.welch(data, FS, nfft=NFFT, nperseg=NFFT, noverlap=noverlap, detrend='constant')
 
     # preparation figure
-    fig = plt.figure(figsize=(20, 20))
-    # plt.suptitle(title)
-    grid = gridspec.GridSpec(3, 3, figure=fig)
+    if fig is None:
+        fig = plt.figure(figsize=(20, 20))
+        # plt.suptitle(title)
+    if grid is None:
+        grid = gridspec.GridSpec(3, 3, figure=fig)
+    else:
+        grid = gridspec.GridSpecFromSubplotSpec(3, 3, subplot_spec=grid[nb_grid, 0])
+
     grid_neuron = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=grid[:2, 0], hspace=0.001)
     ax_V = fig.add_subplot(grid_neuron[0, 0])
     ax_W = fig.add_subplot(grid_neuron[1, 0])
     grid_last = gridspec.GridSpecFromSubplotSpec(1, 90, subplot_spec=grid[2, :])
     ax_LFP = fig.add_subplot(grid_last[0, :21])
-    grid_spike = gridspec.GridSpecFromSubplotSpec(4, 1, subplot_spec=grid[:2, 1:], hspace=0.01)
-    ax_spike_train = fig.add_subplot(grid_spike[:2, 0])
-    ax_hist_ex = fig.add_subplot(grid_spike[2, 0])
-    ax_hist_in = fig.add_subplot(grid_spike[3, 0])
-    ax_frequency_1 = fig.add_subplot(grid_last[0, 27:32])
-    ax_frequency_2 = fig.add_subplot(grid_last[0, 32:])
+    grid_spike = gridspec.GridSpecFromSubplotSpec(7, 1, subplot_spec=grid[:2, 1:], hspace=0.01)
+    ax_spike_train = fig.add_subplot(grid_spike[:3, 0])
+    ax_hist_ex = fig.add_subplot(grid_spike[3:5, 0])
+    ax_hist_in = fig.add_subplot(grid_spike[5:, 0])
+    ax_frequency_1 = fig.add_subplot(grid_last[0, 30:35])
+    ax_frequency_2 = fig.add_subplot(grid_last[0, 35:85])
 
     # Voltage
     for a in range(10):
@@ -158,14 +165,16 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
     ax_V.plot(time_V_in, min_V_in, 'b--', linewidth=0.1)
     ax_V.set_ylim([-90, -30])
     ax_V.set_xlim([begin, end])
-    ax_V.set_ylabel('V in (mV)')
+    ax_V.set_ylabel('V in (mV)', fontdict=font_labels)
     ax_V.spines["right"].set_visible(False)
     ax_V.yaxis.set_ticks_position('left')
     ax_V.spines["bottom"].set_visible(False)
     ax_V.spines["top"].set_visible(False)
     ax_V.xaxis.set_ticks_position('bottom')
     plt.setp(ax_V.get_xticklabels(), visible=False)
+    ax_V.locator_params(axis='x', nbins=5)
     ax_V.get_yticklabels()[0].set_visible(False)
+    ax_V.tick_params(axis='both', labelsize=font_ticks_size)
 
     # Adaptation
     for a in range(10):
@@ -177,12 +186,14 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
     ax_W.plot(time_W_in, mean_W_in, 'b', linewidth=1.0)
     ax_W.plot(time_W_in, max_W_in, 'b--', linewidth=0.1)
     ax_W.plot(time_W_in, min_W_in, 'b--', linewidth=0.1)
-    ax_W.set_ylabel('W in (pA)')
-    ax_W.set_xlabel('Time (ms)')
+    ax_W.set_ylabel('W in (pA)', fontdict=font_labels)
+    ax_W.set_xlabel('Time (ms)', fontdict=font_labels)
     ax_W.set_xlim([begin, end])
     ax_W.spines["right"].set_visible(False)
     ax_W.yaxis.set_ticks_position('left')
+    ax_W.locator_params(axis='x', nbins=5)
     ax_W.xaxis.set_ticks_position('bottom')
+    ax_W.tick_params(axis='both', labelsize=font_ticks_size)
 
     @ticker.FuncFormatter
     def format_hist(x, pos):
@@ -190,18 +201,28 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
         return s
 
     ax_W.xaxis.set_major_formatter(format_hist)
-
+    fig.canvas.draw()
     # LFP
-    # plot_signal_sum(ax_LFP, z=np.arange(0,12,1)*LFP_inc,
-    #                 fname=os.path.join(param['result_path']+path_LFP, 'LFPsum.h5'),
-    #                 unit='mV', T=(0,11000))
-    # def format_LFP(shift):
-    #     def numfmt(x, pos):
-    #         s = '{}'.format(shift + x)
-    #         return s
-    #     return tkr.FuncFormatter(numfmt)
-    # ax_LFP.xaxis.set_major_formatter(format_LFP(begin))
-    # ax_LFP.set_xlabel('Time (ms)',labelpad=ax_frequency_2.get_xaxis().labelpad)
+    z = np.ones(32) * (LFP_inc * 15)
+    z[10:22] = np.arange(0, 12, 1) + 0.1
+    plot_signal_sum(ax_LFP, z=z * LFP_inc,
+                    fname=os.path.join(param['result_path'] + path_LFP, 'RecExtElectrode_sum.h5'),
+                    unit='mV', T=(LFP_start, LFP_start + end - begin),
+                    scalebar_font={'size': font_ticks_size}, modulelabel=2)
+
+    def format_LFP(shift):
+        def numfmt(x, pos):
+            s = '{}'.format(shift + x)
+            return s
+
+        return tkr.FuncFormatter(numfmt)
+
+    ax_LFP.xaxis.set_major_formatter(format_LFP(begin - LFP_start))
+    ax_LFP.set_xlabel('Time (ms)', labelpad=2, fontdict=font_labels)
+    ax_LFP.set_ylim(ymax=11.3 * LFP_inc)
+    ax_LFP.set_xticks([ax_W.xaxis.get_major_ticks()[i].get_loc() - begin + LFP_start for i in
+                       range(1, len(ax_W.xaxis.get_major_ticks()) - 1)])
+    ax_LFP.tick_params(axis='both', labelsize=font_ticks_size)
 
     # spike_train
     for i in range(spikes_ex[0].shape[0]):
@@ -210,7 +231,7 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
     for i in range(spikes_in[0].shape[0]):
         ax_spike_train.plot(spikes_inhibitory[i], np.repeat(spikes_in[0][i], spikes_inhibitory[i].shape[0]), '.b',
                             markersize=size_neurons)
-    ax_spike_train.set_ylabel('Neuron index')
+    ax_spike_train.set_ylabel('Neuron index', fontdict=font_labels, labelpad=2+labelpad_hist_incr)
     ax_spike_train.set_xlim([begin - 100, end + 100])
     ax_spike_train.spines["top"].set_visible(False)
     ax_spike_train.spines["right"].set_visible(False)
@@ -218,10 +239,13 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
     ax_spike_train.xaxis.set_ticks_position('bottom')
     ax_spike_train.get_yticklabels()[0].set_visible(False)
     plt.setp(ax_spike_train.get_xticklabels(), visible=False)
+    ax_spike_train.tick_params(axis='both', labelsize=font_ticks_size)
+    ax_spike_train.ticklabel_format(axis='y', style="scientific", scilimits=[3, 3])
+    ax_spike_train.yaxis.get_offset_text().set_fontsize(font_ticks_size)
 
     # histogram
     ax_hist_ex.plot(time_array + begin, hist_ex, 'r', linewidth=0.1)
-    ax_hist_ex.set_ylabel('IFR (Hz)\n')
+    ax_hist_ex.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2)
     ax_hist_ex.set_xlim([begin - 100, end + 100])
     ax_hist_ex.spines["top"].set_visible(False)
     ax_hist_ex.spines["right"].set_visible(False)
@@ -229,14 +253,17 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
     ax_hist_ex.xaxis.set_ticks_position('bottom')
     plt.setp(ax_hist_ex.get_xticklabels(), visible=False)
     ax_hist_ex.get_yticklabels()[0].set_visible(False)
+    ax_hist_ex.tick_params(axis='both', labelsize=font_ticks_size)
+    ax_hist_ex.locator_params(axis='y', nbins=4)
     ax_hist_in.plot(time_array + begin, hist_in, 'b', linewidth=0.1)
-    ax_hist_in.set_xlabel('Time (ms)')
-    ax_hist_in.set_ylabel('IFR (Hz)\n')
+    ax_hist_in.set_xlabel('Time (ms)', fontdict=font_labels, labelpad=2)
+    ax_hist_in.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2-labelpad_hist_incr)
     ax_hist_in.set_xlim([begin - 100, end + 100])
     ax_hist_in.spines["top"].set_visible(False)
     ax_hist_in.spines["right"].set_visible(False)
     ax_hist_in.yaxis.set_ticks_position('left')
     ax_hist_in.xaxis.set_ticks_position('bottom')
+    ax_hist_in.locator_params(axis='y', nbins=4)
 
     @ticker.FuncFormatter
     def format_hist(x, pos):
@@ -244,16 +271,18 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
         return s
 
     ax_hist_in.xaxis.set_major_formatter(format_hist)
+    ax_hist_in.tick_params(axis='both', labelsize=font_ticks_size)
 
     # spectogram
     spectogram_plot = ax_frequency_2.specgram(data, Fs=FS, NFFT=NFFT, noverlap=noverlap, detrend='mean', vmin=vmin,
                                               vmax=vmax, cmap='viridis')
+    position_axis = ax_frequency_2.get_subplotspec().get_position(fig).bounds
     cax = plt.axes(
-        [ax_frequency_2.figbox.bounds[2] + ax_frequency_2.figbox.bounds[0] + 0.01, ax_frequency_2.figbox.bounds[1],
-         0.02, ax_frequency_2.figbox.bounds[3]])
+        [position_axis[2] + position_axis[0] + 0.01, position_axis[1], 0.02, position_axis[3]])
     cb = plt.colorbar(spectogram_plot[-1], cax=cax)
-    cb.set_label('power spectral density (DB)')
-    cb.ax.tick_params(axis='y')
+    cb.set_label('power spectral density (DB)', fontdict=font_labels)
+    cb.ax.tick_params(axis='y', labelsize=font_ticks_size)
+    cb.ax.locator_params(axis='y', nbins=4)
     ax_frequency_2.set_ylim(ymax=fmax, ymin=fmin)
 
     # FuncFormatter can be used as a decorator
@@ -262,14 +291,17 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
         return "%.1f" % (x * 1e3 + begin)
 
     ax_frequency_2.xaxis.set_major_formatter(major_formatter)
-    ax_frequency_2.set_xlabel('Time (ms)')
+    ax_frequency_2.set_xlabel('Time (ms)', fontdict=font_labels, labelpad=2)
     ax_frequency_2.get_yaxis().set_visible(False)
     ax_frequency_2.tick_params(axis='both')
     ax_frequency_2.set_xlim([0.1, (end - begin) * 1e-3])
+    ax_frequency_2.set_xticks([(ax_hist_in.xaxis.get_major_ticks()[i].get_loc()) * 10 for i in
+                               range(1, len(ax_hist_in.xaxis.get_major_ticks()) - 2)])
     ax_frequency_2.spines["top"].set_visible(False)
     ax_frequency_2.spines["right"].set_visible(False)
     ax_frequency_2.yaxis.set_ticks_position('left')
     ax_frequency_2.xaxis.set_ticks_position('bottom')
+    ax_frequency_2.tick_params(axis='both', labelsize=font_ticks_size)
 
     # spectogram concatenate
     ax_frequency_1.plot(10 * np.log10(psd), freqs)
@@ -285,64 +317,91 @@ def print_figure_nest(param, begin, end, spikes_ex, spikes_in,
     ax_frequency_1.set_yticklabels(position_label)
     ax_frequency_1.set_yticks(position)
     ax_frequency_1.get_yticklabels()[-1].set_color('r')
-    ax_frequency_1.set_ylabel('Frequency (Hz)')
+    ax_frequency_1.set_ylabel('Frequency (Hz)', fontdict=font_labels, labelpad=2)
     ax_frequency_1.vlines(x=10 * np.log10(psd[np.argmax(psd)]),
                           ymin=fmin,
                           ymax=freqs[np.argmax(psd)],
                           color='r',
                           linestyle='--')
-    position = [vmin + 5, vmax, 10 * np.log10(psd[np.argmax(psd)])]
-    position_label = [vmin + 5, vmax, str(np.around(10 * np.log10(psd[np.argmax(psd)]), 1))]
+    position = [vmin + 5, 10 * np.log10(psd[np.argmax(psd)])]
+    position_label = [vmin + 5,  str(np.around(10 * np.log10(psd[np.argmax(psd)]), 1))]
     ax_frequency_1.set_xticklabels(position_label)
     ax_frequency_1.set_xticks(position)
     ax_frequency_1.get_xticklabels()[-1].set_color('r')
-    ax_frequency_1.set_xlabel('power spectral density (DB)')
+    ax_frequency_1.set_xlabel('power spectral density (DB)', fontdict=font_labels, labelpad=2)
     ax_frequency_1.tick_params(axis='both')
     ax_frequency_1.yaxis.set_ticks_position('both')
     ax_frequency_1.xaxis.set_ticks_position('bottom')
+    ax_frequency_1.tick_params(axis='both', labelsize=font_ticks_size)
     print(freqs[np.argmax(psd)], psd[np.argmax(psd)])
 
-    plt.show()
+
+def print_figure_nest(parameters, begin, end, labelpad_hist_incr, size_neurons=0.1,
+                      spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0
+                      ):
+    fig = plt.figure(figsize=(6.8, 8.56))
+    plt.subplots_adjust(top=0.98, bottom=0.05, left=0.08, right=0.95, hspace=0.25, wspace=0.25)
+    # plt.suptitle(param['title'])
+    grid = gridspec.GridSpec(len(parameters), 1, figure=fig)
+    for index, param in enumerate(parameters):
+        data = get_data_all(param['result_path'])
+        print_figure_nest_one(
+            param, begin, end, data['pop_1_ex'], data['pop_1_in'],
+            V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
+            W_excitatory=data['W_pop_1_ex'], W_inhibitory=data['W_pop_1_in'],
+            size_neurons=size_neurons,
+            spectogram=spectogram,
+            path_LFP=path_LFP,
+            LFP_inc=LFP_inc,
+            LFP_start=LFP_start,
+            grid=grid,
+            nb_grid=index,
+            fig=fig,
+            labelpad_hist_incr=labelpad_hist_incr[index],
+        )
+    plt.savefig("Nest_figure.png", dpi=300)
+    plt.savefig("Nest_figure.svg", dpi=300)
 
 
 if __name__ == '__main__':
     from example.analyse.get_data import get_data_all
 
-    param = {}
-    param['param_nest'] = {}
-    param['param_nest']["sim_resolution"] = 0.1
-    param['param_tvb_model'] = {}
-    param['param_tvb_model']['T'] = 20.0
-    param['param_nest_topology'] = {}
-    param['param_nest_topology']["percentage_inhibitory"] = 0.2
-    param['param_nest_topology']["nb_neuron_by_region"] = 10000
-    # param['result_path'] = '../local/case_up_down/nest/'; title = " Synchronise network "
-    # param['result_path'] ='../local/case_asynchronous/nest/'; title = " Asynchronous network "
-    # param['result_path'] = '../local/case_regular_burst/nest/'; title = " Regular Bursting network "
-    # param['result_path'] = '../piz_daint/sarus/v1/case_asynchronous/nest/'; title = " Regular Bursting network "
-    # param['result_path'] = '../piz_daint/sarus/v1/case_regular_burst/nest/'; title = " Regular Bursting network "
-    # param['result_path'] = '../piz_daint/sarus/v1/case_up_down/nest/'; title = " Synchronise network "
-    # param['result_path'] = '../singularity/case_up_down/nest/'; title = " Synchronise network "
-    # param['result_path'] = '../docker/case_up_down/nest/'; title = " Synchronise network "
-    # param['result_path'] = '../singularity/case_asynchronous/nest/'; title = " Asynchronous network "
-    # param['result_path'] = '../docker/case_asynchronous/nest/'; title = " Asynchronous network "
-    # param['result_path'] = '../singularity/case_regular_burst/nest/'; title = " Regular Bursting network "
-    param['result_path'] = '../docker/case_regular_burst/nest/'; title = " Regular Bursting network "
-    data = get_data_all(param['result_path'])
-    # print_figure_nest(param, 49000.0, 60000.0,data['pop_1_ex'],data['pop_1_in'],
-    # print_figure_nest(param, 6000.0, 10000.0, data['pop_1_ex'], data['pop_1_in'],
-    print_figure_nest(param, 0.0, 200.0, data['pop_1_ex'], data['pop_1_in'],
-                                        V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
-                      W_excitatory=data['W_pop_1_ex'], W_inhibitory=data['W_pop_1_in'],
+    param_default = {}
+    param_default['param_nest'] = {}
+    param_default['param_nest']["sim_resolution"] = 0.1
+    param_default['param_tvb_model'] = {}
+    param_default['param_tvb_model']['T'] = 20.0
+    param_default['param_nest_topology'] = {}
+    param_default['param_nest_topology']["percentage_inhibitory"] = 0.2
+    param_default['param_nest_topology']["nb_neuron_by_region"] = 10000
+
+    params = []
+    param_asynchronous = copy.copy(param_default)
+    param_asynchronous['result_path'] = '../local_cluster/case_asynchronous/nest/'
+    param_asynchronous['title'] = " Asynchronous network "
+    params.append(param_asynchronous)
+    param_up_down = copy.copy(param_default)
+    param_up_down['result_path'] = '../local_cluster/case_up_down/nest/'
+    param_up_down['title'] = " Synchronise network "
+    params.append(param_up_down)
+    param_regular_burst = copy.copy(param_default)
+    # param_regular_burst['result_path'] = '../local_cluster/case_up_down/nest/'
+    param_regular_burst['result_path'] = '../local_cluster/case_regular_burst/nest/'
+    param_regular_burst['title'] = " Regular Bursting network "
+    params.append(param_regular_burst)
+
+    print_figure_nest(params, 42000.0, 53000.0,
+                      # print_figure_nest(params, 6000.0, 10000.0,
+                      # print_figure_nest(params, 43000.0, 44100.0,
                       spectogram={'DBmin': -65,
                                   'DBmax': -25,
-                                  'nb_DB': 3,
                                   'fmin': 0.0,
                                   'fmax': 200.0,
                                   'nb_f': 4,
-                                  'nb_time': 11,
-                                  'title_figure': 'Spectrogram of ' + title + ' for 10 s of simulation'
+                                  # 'title_figure': 'Spectrogram of ' + title + ' for 10 s of simulation'
                                   },
-                      # path_LFP='../LFPY/small_init_test_2/small_pop_1/',
-                      # LFP_inc=150.0
+                      path_LFP='../LFPY/v2/pop_1_/',
+                      LFP_inc=100.0,
+                      LFP_start=500.0,
+                      labelpad_hist_incr=[0,0,4]
                       )

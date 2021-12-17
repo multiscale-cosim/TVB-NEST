@@ -21,7 +21,7 @@ def rates_to_spikes(rates, t_start, t_stop, variation=False):
         # We generate the inhomogenous poisson
         if len(rates.shape) == 1:
             # the case where we have only one rate
-            signal = AnalogSignal(rates, t_start=t_start, sampling_period=(t_stop-t_start)/rates.shape[-1])
+            signal = AnalogSignal(rates, t_start=t_start, sampling_period=(t_stop - t_start) / rates.shape[-1])
             result = [inhomogeneous_poisson_process(signal, as_array=True)]
             return np.array(result)
         else:
@@ -50,7 +50,7 @@ def spikes_to_rate(spikes, t_start, t_stop, windows=0.0):
     #WARNING function unused but keep it for idea
     Compute the rate of one spike train or multiple of spike trains
 
-    #TODO : need to have add the overlapping of windows
+    #FUTURE : adding the overlapping of windows
     :param spikes: one spike train or multiple spike train
     :param t_start: time to start to compute rate
     :param t_stop: time to stop to compute rate
@@ -74,8 +74,8 @@ def spikes_to_rate(spikes, t_start, t_stop, windows=0.0):
         # case with variation of rate
         rate = []
         for time in np.arange(t_start, t_stop, windows):
-            t_start_window = time*t_start.units
-            t_stop_window = t_start_window+windows
+            t_start_window = time * t_start.units
+            t_stop_window = t_start_window + windows
             if len(spikes[0].shape) == 0:
                 # for only one spike train
                 result = [mean_firing_rate(spiketrain=spikes, t_start=t_start_window, t_stop=t_stop_window).rescale(Hz)]
@@ -83,7 +83,8 @@ def spikes_to_rate(spikes, t_start, t_stop, windows=0.0):
                 # for multiple spike train
                 result = []
                 for spike in spikes:
-                    result.append(mean_firing_rate(spiketrain=spike, t_start=t_start_window, t_stop=t_stop_window).rescale(Hz))
+                    result.append(
+                        mean_firing_rate(spiketrain=spike, t_start=t_start_window, t_stop=t_stop_window).rescale(Hz))
             rate.append(result)
         return np.array(rate)
 
@@ -95,20 +96,21 @@ def slidding_window(data, width):
     :param width: windows or times average of the mean field
     :return: state variable of the mean field
     """
-    res = np.zeros((data.shape[0]-width, width))
-    res[:, :] = np.squeeze(data[np.array([[i+j for i in range(width)] for j in range(data.shape[0]-width)])])
+    res = np.zeros((data.shape[0] - width, width))
+    res[:, :] = np.squeeze(data[np.array([[i + j for i in range(width)] for j in range(data.shape[0] - width)])])
     return res.mean(axis=1)
 
 
 if __name__ == '__main__':
     from quantities import ms, Hz
+
     result_test = rates_to_spikes(
-        [7942.65518188, 7168.64013672, 6612.2756958,  4990.57312012, 5077.53219604,
-         7417.4659729,  7284.71984863, 6751.57318115, 5528.10173035, 5102.45170593,
+        [7942.65518188, 7168.64013672, 6612.2756958, 4990.57312012, 5077.53219604,
+         7417.4659729, 7284.71984863, 6751.57318115, 5528.10173035, 5102.45170593,
          6506.46362305, 6908.81881714, 4290.93399048, 5575.27732849, 7972.46932983,
          9518.87893677, 7561.74240112, 7813.84735107, 8878.12805176, 6734.36965942,
          7277.06069946, 7547.31292725, 9538.67263794, 6232.00950623, 8005.1651001,
          5534.51652527, 7441.41998291, 7747.13668823, 8784.91744995, 9481.22253418,
-         7909.23614502, 6691.65420532, 7793.50280762, 8774.40795898, 7772.98965454]*Hz,
-        7.1*ms, 10.5*ms, variation=True)
+         7909.23614502, 6691.65420532, 7793.50280762, 8774.40795898, 7772.98965454] * Hz,
+        7.1 * ms, 10.5 * ms, variation=True)
     print(result_test)

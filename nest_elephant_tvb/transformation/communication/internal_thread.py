@@ -4,7 +4,7 @@
 import numpy as np
 import time
 from threading import Lock, BoundedSemaphore
-from nest_elephant_tvb.translation.communication.internal import CommunicationInternAbstract
+from nest_elephant_tvb.transformation.communication.internal import CommunicationInternAbstract
 
 _final_barrier = BoundedSemaphore(2)  # n-1 thread # improvement be include in the class
 
@@ -18,6 +18,7 @@ class ThreadCommunication(CommunicationInternAbstract):
         -1 : close connection
         -2 : end to read buffer
     """
+
     # can be improve with condition and semaphore or event :
     # https://hackernoon.com/synchronization-primitives-in-python-564f89fee732
 
@@ -34,13 +35,13 @@ class ThreadCommunication(CommunicationInternAbstract):
         :param status_read: status of a writing buffer
         :param lock_read: locker of a writing buffer
         """
-        super().__init__(logger=logger,timer=timer)
+        super().__init__(logger=logger, timer=timer)
         # set variable if reading buffer is used
         if buffer_read is not None and status_read is not None and lock_read is not None:
             self.logger.info('Thread Internal : read buffer')
             self.buffer_read_data = buffer_read  # variable contains reading buffer
-            self.status_read = status_read       # status of read buffer and it can contain the dimension of the data
-            self.lock_read = lock_read           # lock for write in the status
+            self.status_read = status_read  # status of read buffer and it can contain the dimension of the data
+            self.lock_read = lock_read  # lock for write in the status
         elif buffer_read is not None or status_read is not None or lock_read is not None:
             raise Exception('Thread Internal : missing parameter for using reading buffer')
         # set variable if writing buffer is used
@@ -48,9 +49,9 @@ class ThreadCommunication(CommunicationInternAbstract):
             self.logger.info('Thread Internal : write buffer')
             self.databuffer = np.empty(buffer_write_shape, dtype=buffer_write_type)  # create buffer
             self.buffer_write_data = [self.databuffer]  # variable for shared buffer
-            self.status_write = [buffer_write_status]   # status of buffer and contains the dimension of the data
-            self.lock_write = Lock()                    # lock for write in the status
-            self.shape_buffer = [0]                     # dimension of the data
+            self.status_write = [buffer_write_status]  # status of buffer and contains the dimension of the data
+            self.lock_write = Lock()  # lock for write in the status
+            self.shape_buffer = [0]  # dimension of the data
         elif buffer_write_shape is not None or buffer_write_status is not None:
             raise Exception('missing parameter for using writing buffer')
         self.logger.info('Thread Internal : end Thread init')
@@ -69,12 +70,12 @@ class ThreadCommunication(CommunicationInternAbstract):
         wait until it's ready to write in the buffer
         :return if the communication is ending
         """
-        self.logger.info('Thread Internal : write(ready) : wait '+str(self.status_write[0][0]))
+        self.logger.info('Thread Internal : write(ready) : wait ' + str(self.status_write[0][0]))
         self.timer.start(8)
         while self.status_write[0][0] >= 0:  # wait to write
             time.sleep(0.001)
         self.timer.stop(8)
-        self.logger.info('Thread Internal : write(ready) : end wait '+str(self.shape_buffer))
+        self.logger.info('Thread Internal : write(ready) : end wait ' + str(self.shape_buffer))
         self.shape_buffer = [0]  # reinitialise the buffer shape
         return self.status_write[0][0] == -1
 
@@ -97,14 +98,14 @@ class ThreadCommunication(CommunicationInternAbstract):
         """
         release writing buffer and send the end of the communication
         """
-        self.logger.info('Thread Internal : write(release) : write buffer '+str(self.status_write[0][0]))
+        self.logger.info('Thread Internal : write(release) : write buffer ' + str(self.status_write[0][0]))
         self.timer.start(10)
         while self.status_write[0][0] >= 0:  # wait before change the buffer
             time.sleep(0.001)
         with self.lock_write:
             self.status_write[0][0] = -1  # Close connection
         self.timer.stop(10)
-        self.logger.info('Thread Internal : write(release) : write buffer end '+str(self.status_write[0][0]))
+        self.logger.info('Thread Internal : write(release) : write buffer end ' + str(self.status_write[0][0]))
 
     # Management of internal reading buffer
     def ready_to_read(self):
@@ -112,12 +113,12 @@ class ThreadCommunication(CommunicationInternAbstract):
         wait until it's ready to read in the buffer
         :return: if the communication is ending
         """
-        self.logger.info('Thread Internal : read(ready) : buffer wait '+str(self.status_read[0][0]))
+        self.logger.info('Thread Internal : read(ready) : buffer wait ' + str(self.status_read[0][0]))
         self.timer.start(11)
         while self.status_read[0][0] == -2:  # wait the end of reading buffer
             time.sleep(0.001)
         self.timer.stop(11)
-        self.logger.info('Thread Internal : read(ready) : buffer end '+str(self.status_read[0][0]))
+        self.logger.info('Thread Internal : read(ready) : buffer end ' + str(self.status_read[0][0]))
         self.databuffer = self.buffer_read_data[0]  # write in the buffer
         return self.status_read[0]  # return status
 
@@ -125,26 +126,26 @@ class ThreadCommunication(CommunicationInternAbstract):
         """
         end to read in the buffer
         """
-        self.logger.info('Thread Internal : read(end) : begin '+str(self.status_read[0][0]))
+        self.logger.info('Thread Internal : read(end) : begin ' + str(self.status_read[0][0]))
         self.timer.start(12)
         with self.lock_read:
             if self.status_read[0][0] != -1:
                 self.status_read[0][0] = -2  # end the reading of the buffer
         self.timer.stop(12)
-        self.logger.info('Thread Internal : read(end) : buffer end '+str(self.status_read[0][0]))
+        self.logger.info('Thread Internal : read(end) : buffer end ' + str(self.status_read[0][0]))
 
     def release_read_buffer(self):
         """
         release reading buffer and send the end of the communication
         """
-        self.logger.info('Thread Internal : read(release): buffer '+str(self.status_read[0][0]))
+        self.logger.info('Thread Internal : read(release): buffer ' + str(self.status_read[0][0]))
         self.timer.start(13)
         while self.status_read[0][0] == -2:  # wait until the written is ending
             time.sleep(0.001)
         with self.lock_read:
             self.status_read[0][0] = -1  # close the connection
         self.timer.stop(13)
-        self.logger.info('Thread Internal : read(release): read buffer unlock '+str(self.status_read[0][0]))
+        self.logger.info('Thread Internal : read(release): read buffer unlock ' + str(self.status_read[0][0]))
 
     # Section 1 : spike trains exchange
     def send_spikes_ready(self):
@@ -202,7 +203,7 @@ class ThreadCommunication(CommunicationInternAbstract):
         self.logger.info('Thread Internal : spike(get) : begin ')
         # wait until the data are ready to use
         self.shape_buffer = self.ready_to_read()
-        self.logger.info('Thread Internal : spike(get) : receive end '+str(self.shape_buffer))
+        self.logger.info('Thread Internal : spike(get) : receive end ' + str(self.shape_buffer))
         if self.shape_buffer[0] == -1:
             self.logger.info('Thread Internal : spike(get) : receive end ')
             return None
@@ -244,7 +245,7 @@ class ThreadCommunication(CommunicationInternAbstract):
             self.get_time_rate_exit = True
             return [self.shape_buffer], None
         times = self.buffer_read_data[0][0]
-        self.logger.info("Thread Internal : rate(get) : data request : time :"+str(times))
+        self.logger.info("Thread Internal : rate(get) : data request : time :" + str(times))
         rate = self.buffer_read_data[0][1]
         self.logger.info("Thread Internal : rate(get) : end")
         return times, rate
@@ -276,8 +277,8 @@ class ThreadCommunication(CommunicationInternAbstract):
             self.logger.info('Thread Internal : rate(get) : receive end ')
             return
         self.shape_buffer = [time_step.shape[0]]
-        self.logger.info('Thread Internal : rate(send) : time :'+str(time_step))
-        self.logger.info('Thread Internal : rate(send) : buffer :'+str(np.array(self.databuffer).shape))
+        self.logger.info('Thread Internal : rate(send) : time :' + str(time_step))
+        self.logger.info('Thread Internal : rate(send) : buffer :' + str(np.array(self.databuffer).shape))
         self.databuffer = [time_step, rate]
         self.logger.info('Thread Internal : rate(send) : data write')
         self.end_write_buffer()
@@ -287,7 +288,7 @@ class ThreadCommunication(CommunicationInternAbstract):
         """
         see super class
         """
-        self.logger.info("Thread Internal : rate(end) : begin "+str(not self.send_time_rate_exit))
+        self.logger.info("Thread Internal : rate(end) : begin " + str(not self.send_time_rate_exit))
         if not self.send_time_rate_exit:
             self.release_write_buffer()
         self.logger.info("Thread Internal : rate(end) : end")

@@ -3,12 +3,12 @@
 
 from mpi4py import MPI
 import numpy as np
-from nest_elephant_tvb.translation.communication.mpi_io_external import MPICommunicationExtern
+from nest_elephant_tvb.transformation.communication.mpi_io_external import MPICommunicationExtern
 
 
 class ProducerTVBData(MPICommunicationExtern):
     """
-    Class for sending data to TVB. The data are from the translated function.
+    Class for sending data to TVB. The data are from the transformation function.
     TVB is only 1 rank.
     """
 
@@ -26,12 +26,12 @@ class ProducerTVBData(MPICommunicationExtern):
             while not accept:
                 req = self.port_comms[0].irecv(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG)
                 accept = req.wait(status_)
-            self.logger.info(" Produce TVB Data : send data status : "+str(status_.Get_tag()))
+            self.logger.info(" Produce TVB Data : send data status : " + str(status_.Get_tag()))
 
             self.timer.stop(1)
             if status_.Get_tag() == 0:
                 self.timer.start(2)
-                # INTERNAL : receive the data from translator function
+                # INTERNAL : receive the data from transformation function
                 self.logger.info("Produce TVB Data : get rate")
                 times, data = self.communication_internal.get_time_rate()
                 if self.communication_internal.get_time_rate_exit:
@@ -40,7 +40,7 @@ class ProducerTVBData(MPICommunicationExtern):
                     break
 
                 self.timer.change(2, 3)
-                self.logger.info("Produce TVB Data : send data :"+str(np.sum(data)))
+                self.logger.info("Produce TVB Data : send data :" + str(np.sum(data)))
                 # time of stating and ending step
                 self.port_comms[0].Send([times, MPI.DOUBLE], dest=status_.Get_source(), tag=0)
                 # send the size of the rate
@@ -64,19 +64,19 @@ class ProducerTVBData(MPICommunicationExtern):
                 break
 
             else:
-                raise Exception("Abnormal tag : bad mpi tag"+str(status_.Get_tag()))
+                raise Exception("Abnormal tag : bad mpi tag" + str(status_.Get_tag()))
         self.logger.info('Produce TVB Data : End of send function')
 
 
 class ConsumerTVBData(MPICommunicationExtern):
     """
-    Class for the receiving data from Nest and transfer them to the translation function process.
+    Class for the receiving data from Nest and transfer them to the transformation function process.
     TVB is only 1 rank.
     """
 
     def simulation_time(self):
         """
-        Consumer data from TVB and transfer them to the translation function.
+        Consumer data from TVB and transfer them to the transformation function.
         """
         self.logger.info("Consumer TVB Data : start")
         status_ = MPI.Status()
@@ -92,7 +92,8 @@ class ConsumerTVBData(MPICommunicationExtern):
             # get the starting and ending time of the simulation
             time_step = np.empty(2, dtype='d')
             self.port_comms[0].Recv([time_step, 2, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
-            self.logger.info("Consumer TVB Data : get time_step "+str(time_step)+" status : " + str(status_.Get_tag()))
+            self.logger.info(
+                "Consumer TVB Data : get time_step " + str(time_step) + " status : " + str(status_.Get_tag()))
 
             self.timer.stop(2)
             if status_.Get_tag() == 0:
@@ -108,12 +109,13 @@ class ConsumerTVBData(MPICommunicationExtern):
                 self.communication_internal.send_time_rate(time_step, rate)
                 self.timer.stop(4)
                 if self.communication_internal.send_time_rate_exit:
-                    self.logger.info('Consumer TVB Data : end : ' + str(self.communication_internal.send_time_rate_exit))
+                    self.logger.info(
+                        'Consumer TVB Data : end : ' + str(self.communication_internal.send_time_rate_exit))
                     break
 
             elif status_.Get_tag() == 1:
                 self.logger.info("Consumer TVB Data : end ")
-                # INTERNAL : close communication with translation function
+                # INTERNAL : close communication with transformation function
                 self.communication_internal.send_time_rate_end()
                 self.logger.info("Consumer TVB Data : send end ")
                 self.port_comms[0].Barrier()
@@ -121,5 +123,5 @@ class ConsumerTVBData(MPICommunicationExtern):
                 break
 
             else:
-                raise Exception("Abnormal tag: bad mpi tag"+str(status_.Get_tag()))
+                raise Exception("Abnormal tag: bad mpi tag" + str(status_.Get_tag()))
         self.logger.info('Consumer TVB Data : End of send function')

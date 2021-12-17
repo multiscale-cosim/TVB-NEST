@@ -13,6 +13,7 @@ class MPICommunicationExtern:
     Abstract class for MPI communication with a simulator.
     Management of MPI communication for exchange of data with simulator.
     """
+
     def __init__(self, name, path, level_log, communication_intern, **karg):
         """
         Initialisation of the MPI communication
@@ -27,8 +28,9 @@ class MPICommunicationExtern:
         self.ports = []  # array to save the MPI port
         self.path_ports = []  # path for sharing the connection ports
         self.port_comms = []  # communication
-        self.timer = Timer(19,100000)
-        self.communication_internal = communication_intern(self.logger, timer=self.timer, **karg)  # connection between function
+        self.timer = Timer(19, 100000)
+        self.communication_internal = communication_intern(self.logger, timer=self.timer,
+                                                           **karg)  # connection between function
         self.logger.info('MPI IO ext : end MPI extern init')
         self.path = path
 
@@ -42,18 +44,18 @@ class MPICommunicationExtern:
         if path_connection is not None:
             self.logger.info('MPI IO ext : run : create connection')
             self.create_connection(path_connection)
-        self.timer.change(0,0)
+        self.timer.change(0, 0)
         # Step 2 : simulation time / communication with the simulator during the simulation
         self.simulation_time()
-        self.timer.change(0,0)
+        self.timer.change(0, 0)
         # Step 3 : close the connection
         if path_connection is not None:
             self.close_connection()
-        self.timer.change(0,0)
+        self.timer.change(0, 0)
         # Finalise the MPI communication
         self.finalise()
         self.timer.stop(0)
-        self.timer.save(self.path+"/timer_"+self.logger.name+'.npy')
+        self.timer.save(self.path + "/timer_" + self.logger.name + '.npy')
 
     def create_connection(self, paths, info=MPI.INFO_NULL, comm=MPI.COMM_SELF, root_node=0):
         """
@@ -76,9 +78,9 @@ class MPICommunicationExtern:
             fport.close()
             pathlib.Path(path + '.unlock').touch()
             self.path_ports.append(path)
-        self.timer.change(0,0)
-        self.logger.info('MPI IO ext : create connection : Translate '+self.name+': path_file: ' + paths[-1])
-        self.logger.info('MPI IO ext : create connection : Wait for Translate : '+port)
+        self.timer.change(0, 0)
+        self.logger.info('MPI IO ext : create connection : Translate ' + self.name + ': path_file: ' + paths[-1])
+        self.logger.info('MPI IO ext : create connection : Wait for Translate : ' + port)
         self.port_comms.append(comm.Accept(port, info, root_node))
         self.logger.info('MPI IO ext : create connection : Connection accepted')
 
