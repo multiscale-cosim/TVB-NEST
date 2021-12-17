@@ -65,12 +65,12 @@ class MPICommunicationExtern:
         :param comm: MPI communicator
         :param root_node: the root node of the communication
         """
-        self.logger.info('MPI IO ext : create connection : Translate Receive: before open_port')
+        self.logger.info('MPI IO ext : create connection : Transform Receive: before open_port')
         # Creation of MPI port
         port = MPI.Open_port(info)
         self.ports.append(port)
         # Create the files for simulator to connect
-        self.logger.info('MPI IO ext : create connection : Translate ' + self.name + ': after open_port: ' + port)
+        self.logger.info('MPI IO ext : create connection : Transform ' + self.name + ': after open_port: ' + port)
         for path in paths:
             # Write file configuration of the port
             fport = open(path, "w+")
@@ -79,8 +79,8 @@ class MPICommunicationExtern:
             pathlib.Path(path + '.unlock').touch()
             self.path_ports.append(path)
         self.timer.change(0, 0)
-        self.logger.info('MPI IO ext : create connection : Translate ' + self.name + ': path_file: ' + paths[-1])
-        self.logger.info('MPI IO ext : create connection : Wait for Translate : ' + port)
+        self.logger.info('MPI IO ext : create connection : Transform ' + self.name + ': path_file: ' + paths[-1])
+        self.logger.info('MPI IO ext : create connection : Wait for Transform : ' + port)
         self.port_comms.append(comm.Accept(port, info, root_node))
         self.logger.info('MPI IO ext : create connection : Connection accepted')
 

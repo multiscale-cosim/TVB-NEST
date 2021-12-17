@@ -9,7 +9,7 @@ from nest_elephant_tvb.transformation.transformation_function.rate_spike import 
 
 class TransformationSpikeRate(MPICommunicationExtern):
     """
-    Class for the translation between spike to rate
+    Class for the transformation between spike to rate
     """
 
     def __init__(self, id_transformer, param, *arg, **karg):
@@ -48,7 +48,7 @@ class TransformationSpikeRate(MPICommunicationExtern):
 
     def simulation_time(self):
         """
-        Translation function of the spike to rate :
+        Transformation function of the spike to rate :
             1) get the spike
             2) transform spike to rate
             3) send rate
@@ -222,7 +222,7 @@ class TransformationRateSpike(MPICommunicationExtern):
 
     def simulation_time(self):
         """
-        Translation function of the rate to spike :
+        Transformation function of the rate to spike :
             1) get the rate
             2) transform rate to spike
             3) send spike trains

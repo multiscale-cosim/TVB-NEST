@@ -9,7 +9,7 @@ import numpy as np
 from nest_elephant_tvb.utils import create_logger
 from nest_elephant_tvb.transformation.simulator_IO.Nest_IO import ProducerDataNest
 from nest_elephant_tvb.transformation.simulator_IO.TVB_IO import ConsumerTVBData
-from nest_elephant_tvb.transformation.transformation_function.translation_function import TransformationRateSpike
+from nest_elephant_tvb.transformation.transformation_function.transformation_function import TransformationRateSpike
 from nest_elephant_tvb.transformation.communication.internal_mpi import MPICommunication
 from nest_elephant_tvb.transformation.communication.internal_thread import ThreadCommunication
 from timer.Timer import Timer
