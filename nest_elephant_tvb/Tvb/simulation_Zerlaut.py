@@ -286,12 +286,14 @@ def run_mpi(path):
     # the loop of the simulation
     count = 0
     count_save = 0
+    logger.info(f' TVB pid:{os.getpid()}')
+    time.sleep(10)
     while count*time_synch < end: # FAT END POINT
         logger.info(" TVB receive data")
         #receive MPI data
         data_value = []
         for comm in comm_receive:
-            receive = receive_mpi(comm)
+            receive = receive_mpi(comm, logger)
             time_data = receive[0]
             data_value.append(receive[1])
         data=np.empty((2,),dtype=object)
@@ -322,10 +324,10 @@ def run_mpi(path):
 
         # prepare to send data with MPI
         nest_data = np.array(nest_data)
-        time = [nest_data[0,0],nest_data[-1,0]]
+        time1 = [nest_data[0,0],nest_data[-1,0]]
         rate = np.concatenate(nest_data[:,1])
         for index,comm in enumerate(comm_send):
-            send_mpi(comm,time,rate[:,index]*1e3)
+            send_mpi(comm,time1,rate[:,index]*1e3)
 
         #increment of the loop
         count+=1
@@ -385,7 +387,7 @@ def send_mpi(comm,times,data):
     comm.Send([data, MPI.DOUBLE], dest=source, tag=0)
 
 
-def receive_mpi(comm):
+def receive_mpi(comm, logger):
     """
         receive proxy values the
     :param comm: MPI communicator

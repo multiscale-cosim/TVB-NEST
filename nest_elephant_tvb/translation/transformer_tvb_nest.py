@@ -21,14 +21,14 @@ def init(path_config, nb_spike_generator, id_first_spike_detector, param,
     This is vice versa in the nest to tvb direction.
     TODO: solve this together with the rest of the communication protocol.
     '''
-    
+   
     # destructure logger list to indivual variables
     logger_master, logger_receive, logger_send = loggers
     # science part, see import
     # TODO: use os.path (or similar) for proper file handling.
     # TODO: move this object creation to a proper place. They are passed through many functions.
-    generator = generate_data(path_config+'/../../log/',nb_spike_generator,param)
-    
+    generator = generate_data(path_config+'/log/',nb_spike_generator,param)
+ 
     ############ NEW Code: 
     # TODO: future work: mpi parallel, use rank 1-x for science and sending
     # TODO: use this MPI intracommunicator, without receiving rank 0
@@ -36,7 +36,7 @@ def init(path_config, nb_spike_generator, id_first_spike_detector, param,
     # create the shared memory block / databuffer
     databuffer = _shared_mem_buffer(comm)
     ############# NEW Code end
-    
+   
     ############ NEW Code: Receive/analyse/send
     if comm.Get_rank() == 0: # Receiver from TVB
         # All MPI communication is done with rank 0 from TVB side
@@ -154,6 +154,7 @@ def _send(comm_sender, databuffer, logger, generator, id_first_spike_detector):
     # init placeholder for incoming data
     check = np.empty(1,dtype='b')
     size_list = np.empty(1, dtype='i')
+    logger.info('starting sending loop')
     while(True):
         # TODO: This is still not correct. We only check for the Tag of the last rank.
         # TODO: IF all ranks send always the same tag in one iteration (simulation step)

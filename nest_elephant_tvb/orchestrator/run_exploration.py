@@ -153,6 +153,7 @@ def run(parameters_file):
 
         # create translator between TVB to Nest:
         # one by proxy/id_region
+        # NOTE create files for each region
         for index,ids_spike_generator in enumerate(spike_generator):
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_tvb_to_nest.sh"
             argv=[ '/bin/sh',

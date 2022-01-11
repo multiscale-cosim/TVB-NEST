@@ -4,7 +4,7 @@ from mpi4py import MPI
 import pathlib
 import sys
 
-def make_connections(path_to_files_receive, path_to_files_send, logger_master):
+def make_connections(path_to_files_receive, path_to_files_send, logger_master, order):
     '''
     Rich End Point, first draft, to be changed soon.
     This function establishes two MPI intercommunicators, e.g. one to NEST and one to TVB.
@@ -25,11 +25,53 @@ def make_connections(path_to_files_receive, path_to_files_send, logger_master):
         root=0
     else:
         comm = None
+
+    # if order == 1:
+    #     if comm.Get_rank() == 0:
+    #         ### sender connection
+    #         comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+    #         ### receiver connection
+    #         comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
+    #     elif comm.Get_rank() ==  1:
+    #         ### receiver connection
+    #         comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
+    #         ### sender connection
+    #         comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+    # elif order == 2:
+    #     if comm.Get_rank() == 0:
+    #         ### receiver connection
+    #         comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
+    #         ### sender connection
+    #         comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+    #     elif comm.Get_rank() ==  1:
+    #         ### sender connection
+    #         comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+    #         ### receiver connection
+    #         comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
+    import os
+    logger_master.info(f'order: {order}, pid:{os.getpid()}, rank:{comm.Get_rank()}')    
+    if order == 1:  # nest_to_tvb
+        ### sender connection
+        comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+        # logger_master.info(f'order:1, port_send: {port_send}')
+        ### receiver connection
+        comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
+        # logger_master.info(f'order:1, port_receive: {port_receive}')
+    elif order == 2:  # tvb_to_nest
+        ### receiver connection
+        comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
+        # logger_master.info(f'order:2, port_send: {port_receive}')
+        ### sender connection
+        comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+        # logger_master.info(f'order:2, port_send: {port_send}')
+
     
-    ### receiver connection
-    comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
-    ### sender connection
-    comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+    # ### sender connection
+    # comm_sender, port_send = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_send)  # NOTE starting point for Monday
+    # ### receiver connection
+    # comm_receiver, port_receive = _open_port_accept_connection(comm, root, info, logger_master, path_to_files_receive)  # NOTE starting point for Monday
+
+
     logger_master.info('Connections made, starting translation...')
     
     return comm, comm_receiver, port_receive, comm_sender, port_send
@@ -54,6 +96,7 @@ def _open_port_accept_connection(comm, root, info, logger_master, path_to_files)
     :return intra_comm: the newly created intra communicator between the two applications
     :return port: the port information, needed to properly close the connection after the job
     '''
+    intra_comm = None
     logger_master.info('Transformer: before open port')
     if comm.Get_rank() == root:
         port = MPI.Open_port(info)
@@ -72,7 +115,7 @@ def _open_port_accept_connection(comm, root, info, logger_master, path_to_files)
     # necessary to avoid conflicts in the port file -> contains MPI-Rank infos
     port = comm.bcast(port,root)
     logger_master.info('Transformer: Rank ' + str(comm.Get_rank()) + ' accepting connection on: ' + port)
-    intra_comm = comm.Accept(port, info, root) 
+    intra_comm = comm.Accept(port, info, root)
     logger_master.info('Transformer: Simulation client connected to' + str(intra_comm.Get_rank()))
     
     return intra_comm, port

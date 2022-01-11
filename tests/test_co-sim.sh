@@ -4,6 +4,19 @@
 
 # Test a simple simulation of co-simulation for different number of MPI and thread
 
+
+if [ $1 -eq 1 ] 
+then
+     P=$PWD
+
+     cd ../lib/build/nest_install/
+
+     make -j8 install
+     # make -j8 nest
+     # make install/local
+     cd $P
+fi
+
 # configuration variable
 . ./init.sh
 
@@ -14,9 +27,10 @@ else
      execute=""
 fi
 
+rm  -rd test_co-sim
 mkdir ./test_co-sim
 ${execute} python3 run_co-sim_test.py ./test_co-sim/ 1 1 $CLUSTER
-rm  -rd test_co-sim
+# rm  -rd test_co-sim
 
 # mkdir ./test_co-sim
 # ${execute} python3 run_co-sim_test.py ./test_co-sim/ 4 1 $CLUSTER

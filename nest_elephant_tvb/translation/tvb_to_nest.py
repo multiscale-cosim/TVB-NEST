@@ -4,6 +4,7 @@ import os
 import json
 import logging
 import sys
+import pathlib
 
 import nest_elephant_tvb.translation.RichEndPoint as REP
 import nest_elephant_tvb.translation.transformer_tvb_nest as ttn
@@ -64,26 +65,28 @@ if __name__ == "__main__":
     ############ Step 3: RichEndPoint -- open MPI connections
     ### TODO: make this a proper interface
     path_to_files_receive = path_config + TVB_config
-    print(f'DEBUG {__file__}=> path_to_files_receive: {path_to_files_receive}')
+    # print(f'DEBUG {__file__}=> path_to_files_receive: {path_to_files_receive}')
     # path_to_files_send = os.path.join(path_config, str(id_first_spike_detector) + ".txt")
     path_to_files_send = os.path.join(path_config, "translation/spike_generator/"+str(id_first_spike_generator) + ".txt")
-    print(f'DEBUG {__file__}=> path_to_files_send: {path_to_files_send}')
-    comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
-    '''
+    # print(f'DEBUG {__file__}=> path_to_files_send: {path_to_files_send}')
+    comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master, 2)
+    
     # TODO: why is the loop needed, could not see where this is ever reused.
     # TODO: only path/output/0.txt is
-    for i in range(nb_spike_generator):
+    for i in range(1,nb_spike_generator):
         # write file with port and unlock
-        path_to_files_send = os.path.join(path_config, str(id_first_spike_generator+i) + ".txt")
+        path_to_files_send = os.path.join(path_config, "translation/spike_generator/"+str(id_first_spike_generator+i) + ".txt")
         fport_send = open(path_to_files_send, "w+")
         fport_send.write(port_send)
         fport_send.close()
 
-        path_to_files_send_unlock = os.path.join(path_config, str(id_first_spike_generator+i) + ".txt.unlock")
+        path_to_files_send_unlock = os.path.join(path_config, "translation/spike_generator/"+str(id_first_spike_generator+i) + ".txt.unlock")
         pathlib.Path(path_to_files_send_unlock).touch()
-        path_to_files_sends.append(path_to_files_send)
-        path_to_files_sends_unlock.append(path_to_files_send_unlock)
-    '''
+        # path_to_files_sends.append(path_to_files_send)
+        # path_to_files_sends_unlock.append(path_to_files_send_unlock)
+
+
+    
     ############
     
     ############ Step 4: MPI Transformer, init and start the co-simulation
