@@ -200,14 +200,14 @@ def analyse_tvb(tvb, wait_time):
 def analyse_nest(nest, nest_init, nest_sim, nest_timer, nest_timer_input_init, nest_timer_input, wait_time,
                  nest_timer_io):
     """
-    create the tree of simulation time for Nest
-    :param nest: time from python of Nest
+    create the tree of simulation time for NEST
+    :param nest: time from python of NEST
     :param nest_init: time from initialisation timer
     :param nest_sim: time from simulation timer
     :param nest_timer: time from kernel of nest
     :param nest_timer_input_init: time form the initialisation of the input of nest
     :param nest_timer_input: time from the input of nest
-    :param wait_time : time waiting by translator
+    :param wait_time : time waiting by transformer
     :param nest_timer_io: time from the io_manager of nest
     :return: tree of times
     """
@@ -218,7 +218,7 @@ def analyse_nest(nest, nest_init, nest_sim, nest_timer, nest_timer_input_init, n
     timer_value_nest_time_input = get_nest_time_input(nest_timer_input)
     timer_value_nest_time_io = get_nest_time(nest_timer_io)
 
-    nest_node = Node('Nest', nest[0, 9] - nest[0, 0])
+    nest_node = Node('NEST', nest[0, 9] - nest[0, 0])
     init_nest = Node('initialisation', nest[0, 7] - nest[0, 0])
     init_nest.addNode('start', timer_value_nest[0, 0])
     init_config = Node('configuration', timer_value_nest[0, 1])
@@ -257,7 +257,7 @@ def analyse_nest(nest, nest_init, nest_sim, nest_timer, nest_timer_input_init, n
 
 def init_transformation(master, data, name_root, create_connection=True):
     """
-    create the tree of simulation time for translation TVB to Nest
+    create the tree of simulation time for transformation TVB to NEST
     :param master: time of the main program
     :param name_root: name of root
     :param data: time of each process/thread
@@ -298,7 +298,7 @@ def init_transformation(master, data, name_root, create_connection=True):
 
 def add_prefix(tree, prefix):
     """
-    add the prefix of translator for
+    add the prefix of transformer for
     :param tree: tree of timer
     :param prefix: prefix to add to all names
     :return:
@@ -311,19 +311,19 @@ def add_prefix(tree, prefix):
 
 def analyse_tvb_to_nest_sender(index, master, data_send, mpi):
     """
-    create the tree of simulation time for translation TVB to Nest
+    create the tree of simulation time for transformation TVB to NEST
     producer of data in nest
-    :param index: index of the translator
-    :param master: from the master process of the translator
+    :param index: index of the transformer
+    :param master: from the master process of the transformer
     :param data_send : timer of process or thread
     :param mpi: mpi for internal communication
     :return: tree of times
     """
     time_value_send = get_time(data_send)
-    name = 'TVB_NEST_' + str(index) + ': Producer Nest data '
-    translate = init_transformation(master, data_send, name)
+    name = 'TVB_NEST_' + str(index) + ': Producer NEST data '
+    transform = init_transformation(master, data_send, name)
 
-    sim_process = translate.get('simulation')
+    sim_process = transform.get('simulation')
     sim_process.addNode('receive spikes', values=remove_NAN(time_value_send[1, :]))
     sim_process.addNode('receive end run', values=remove_NAN(time_value_send[2, :]))
     sim_process.addNode('get internal spikes', values=remove_NAN(time_value_send[3, :]))
@@ -336,29 +336,30 @@ def analyse_tvb_to_nest_sender(index, master, data_send, mpi):
         sim_process.get('send spikes').addNode("reshape buffer", values=remove_NAN(time_value_send[6, :]))
         sim_process.addNode("release buffer", remove_NAN(time_value_send[12, :]))
     else:
-        sim_process.get('get internal spikes').addNode("wait read buffer", values=remove_NAN(time_value_send[11, :]))
+        sim_process.get('get internal spikes').addNode("wait read buffer", values=remove_NAN(time_value_send[11, :]),
+                                                       print_name="wait<br>write buffer")
         sim_process.get('get internal spikes').addNode("end read buffer", values=remove_NAN(time_value_send[12, :]))
         sim_process.get('send spikes').addNode("reshape read buffer", values=remove_NAN(time_value_send[6, :]))
         sim_process.addNode("release read buffer", values=remove_NAN(time_value_send[13, :]))
 
-    return translate
+    return transform
 
 
 def analyse_tvb_to_nest_receiver(index, master, data_receive, mpi):
     """
-    create the tree of simulation time for translation TVB to Nest
+    create the tree of simulation time for transformation TVB to NEST
     Consumer TVB data
-    :param index: index of the translator
-    :param master: from the master process of the translator
+    :param index: index of the transformer
+    :param master: from the master process of the transformer
     :param data_receive : timer of process or thread
     :param mpi: mpi for internal communication
     :return: tree of times
     """
     time_value_receive = get_time(data_receive)
     name = 'TVB_NEST_' + str(index) + ': Consumer TVB data '
-    translate = init_transformation(master, data_receive, name)
+    transform = init_transformation(master, data_receive, name)
 
-    sim_process = translate.get('simulation')
+    sim_process = transform.get('simulation')
     sim_process.addNode('send check', values=remove_NAN(time_value_receive[1, :]))
     sim_process.addNode('receive time', values=remove_NAN(time_value_receive[2, :]))
     sim_process.addNode('get rate', values=remove_NAN(time_value_receive[3, :]))
@@ -367,72 +368,73 @@ def analyse_tvb_to_nest_receiver(index, master, data_receive, mpi):
     if mpi:
         sim_process.get('transfer end').addNode("release read buffer", values=remove_NAN(time_value_receive[17, :]))
     else:
-        sim_process.get('get rate').addNode("wait write buffer", values=remove_NAN(time_value_receive[8, :]))
+        sim_process.get('get rate').addNode("wait write buffer", values=remove_NAN(time_value_receive[8, :]),
+                                            print_name="wait<br>write buffer")
         sim_process.get('get rate').addNode("end write buffer", values=remove_NAN(time_value_receive[9, :]))
         sim_process.addNode("release write buffer", values=remove_NAN(time_value_receive[10, :]))
 
-    return translate
+    return transform
 
 
-def analyse_tvb_to_nest_translate(index, master, data_translate, mpi):
+def analyse_tvb_to_nest_transformer(index, master, data_transform, mpi):
     """
-    create the tree of simulation time for translation TVB to Nest
+    create the tree of simulation time for transformation TVB to NEST
     transformer function
-    :param index: index of the translator
-    :param master: from the master process of the translator
-    :param data_translate: timer of process or thread
+    :param index: index of the transformer
+    :param master: from the master process of the transformer
+    :param data_transform: timer of process or thread
     :param mpi: mpi for internal communication
     :return: tree of times
     """
-    time_value_translate = get_time(data_translate)
-    name = 'TVB_NEST_' + str(index) + ': Translate function '
-    translate = init_transformation(master, data_translate, name, create_connection=False)
+    time_value_transformer = get_time(data_transform)
+    name = 'TVB_NEST_' + str(index) + ': Transformer function '
+    transform = init_transformation(master, data_transform, name, create_connection=False)
 
-    sim_process = translate.get('simulation')
-    sim_process.addNode('get rate', values=remove_NAN(time_value_translate[1, :]))
-    sim_process.addNode('release rate', values=remove_NAN(time_value_translate[2, :]))
-    sim_process.addNode('save rate', values=remove_NAN(time_value_translate[3, :]))
-    sim_process.addNode('generate spikes', values=remove_NAN(time_value_translate[4, :]))
-    sim_process.addNode('save spikes', values=remove_NAN(time_value_translate[5, :]))
-    sim_process.addNode('send spike trains', values=remove_NAN(time_value_translate[6, :]))
-    sim_process.addNode('end connection', values=remove_NAN(time_value_translate[7, :]))
+    sim_process = transform.get('simulation')
+    sim_process.addNode('get rate', values=remove_NAN(time_value_transformer[1, :]))
+    sim_process.addNode('release rate', values=remove_NAN(time_value_transformer[2, :]))
+    sim_process.addNode('save rate', values=remove_NAN(time_value_transformer[3, :]))
+    sim_process.addNode('generate spikes', values=remove_NAN(time_value_transformer[4, :]))
+    sim_process.addNode('save spikes', values=remove_NAN(time_value_transformer[5, :]))
+    sim_process.addNode('send spike trains', values=remove_NAN(time_value_transformer[6, :]))
+    sim_process.addNode('end connection', values=remove_NAN(time_value_transformer[7, :]))
 
     if mpi:
-        sim_process.get('send spike trains').addNode("send size", values=remove_NAN(time_value_translate[8, :]))
-        sim_process.get('send spike trains').addNode("reshape data", values=remove_NAN(time_value_translate[13, :]))
-        sim_process.get('end connection').addNode("release read buffer", values=remove_NAN(time_value_translate[18, :]))
+        sim_process.get('send spike trains').addNode("send size", values=remove_NAN(time_value_transformer[8, :]))
+        sim_process.get('send spike trains').addNode("reshape data", values=remove_NAN(time_value_transformer[13, :]))
+        sim_process.get('end connection').addNode("release read buffer", values=remove_NAN(time_value_transformer[18, :]))
         sim_process.get('end connection').time -= 0.04
         sim_process.get('end connection').get("release read buffer").time -= 0.04
-        sim_process.get('get rate').addNode("receive time", values=remove_NAN(time_value_translate[15, :]))
-        sim_process.get('get rate').addNode("receive rate", values=remove_NAN(time_value_translate[16, :]))
+        sim_process.get('get rate').addNode("receive time", values=remove_NAN(time_value_transformer[15, :]))
+        sim_process.get('get rate').addNode("receive rate", values=remove_NAN(time_value_transformer[16, :]))
     else:
-        sim_process.get('send spike trains').addNode("wait write buffer", values=remove_NAN(time_value_translate[8, :]))
-        sim_process.get('send spike trains').addNode("reshape data", values=remove_NAN(time_value_translate[14, :]))
-        sim_process.get('send spike trains').addNode("end write", values=remove_NAN(time_value_translate[9, :]))
+        sim_process.get('send spike trains').addNode("wait write buffer", values=remove_NAN(time_value_transformer[8, :]), print_name="wait<br>write buffer")
+        sim_process.get('send spike trains').addNode("reshape data", values=remove_NAN(time_value_transformer[14, :]))
+        sim_process.get('send spike trains').addNode("end write", values=remove_NAN(time_value_transformer[9, :]))
         sim_process.get('end connection').addNode("release write buffer",
-                                                  values=remove_NAN(time_value_translate[10, :]))
-        sim_process.get('get rate').addNode("wait read buffer", values=remove_NAN(time_value_translate[11, :]))
-        sim_process.get('get rate').addNode("end read", values=remove_NAN(time_value_translate[12, :]))
-        sim_process.get('end connection').addNode("release read buffer", values=remove_NAN(time_value_translate[13, :]))
+                                                  values=remove_NAN(time_value_transformer[10, :]))
+        sim_process.get('get rate').addNode("wait read buffer", values=remove_NAN(time_value_transformer[11, :]))
+        sim_process.get('get rate').addNode("end read", values=remove_NAN(time_value_transformer[12, :]))
+        sim_process.get('end connection').addNode("release read buffer", values=remove_NAN(time_value_transformer[13, :]))
 
-    return translate
+    return transform
 
 
 def analyse_nest_to_tvb_send(index, master, data_sender, mpi):
     """
-    create the tree of simulation time for translation Nest to TVB
+    create the tree of simulation time for transformation NEST to TVB
     Producer TVB data
-    :param index: index of the translator
-    :param master: from the master process of the translator
+    :param index: index of the transformer
+    :param master: from the master process of the transformer
     :param data_sender: timer of process or thread
     :param mpi: mpi for internal communication
     :return: tree of times
     """
     time_value_sender = get_time(data_sender)
     name = 'NEST_TVB_' + str(index) + ': Producer TVB data '
-    translate = init_transformation(master, data_sender, name)
+    transform = init_transformation(master, data_sender, name)
 
-    sim_process = translate.get('simulation')
+    sim_process = transform.get('simulation')
     sim_process.addNode('receive check', values=remove_NAN(time_value_sender[1, :]))
     sim_process.addNode('get rate and time', values=remove_NAN(time_value_sender[2, :]))
     sim_process.addNode('send rate and time', values=remove_NAN(time_value_sender[3, :]))
@@ -445,24 +447,24 @@ def analyse_nest_to_tvb_send(index, master, data_sender, mpi):
         sim_process.get('get rate and time').addNode("wait read buffer", values=remove_NAN(time_value_sender[11, :]))
         sim_process.get('release buffer').addNode("end read buffer", values=remove_NAN(time_value_sender[12, :]))
         sim_process.addNode("release read buffer", values=remove_NAN(time_value_sender[13, :]))
-    return translate
+    return transform
 
 
 def analyse_nest_to_tvb_receive(index, master, data_receive, mpi):
     """
-    create the tree of simulation time for translation Nest to TVB
+    create the tree of simulation time for transformation NEST to TVB
     Consumer nest data
-    :param index: index of the translator
-    :param master: from the master process of the translator
+    :param index: index of the transformer
+    :param master: from the master process of the transformer
     :param data_receive: timer of process or thread
     :param mpi: mpi for internal communication
     :return: tree of times
     """
     time_value_receive = get_time(data_receive)
-    name = 'NEST_TVB_' + str(index) + ': Consumer Nest data '
-    translate = init_transformation(master, data_receive,name)
+    name = 'NEST_TVB_' + str(index) + ': Consumer NEST data '
+    transform = init_transformation(master, data_receive,name)
 
-    sim_process = translate.get('simulation')
+    sim_process = transform.get('simulation')
     sim_process.addNode('receive spikes', values=remove_NAN(time_value_receive[1, :]))
     sim_process.addNode('receive end run', values=remove_NAN(time_value_receive[2, :]))
     sim_process.addNode('buffer ready', values=remove_NAN(time_value_receive[3, :]))
@@ -474,87 +476,87 @@ def analyse_nest_to_tvb_receive(index, master, data_receive, mpi):
         sim_process.get('send internal spike').addNode("send size", values=remove_NAN(time_value_receive[8, :]))
         sim_process.addNode("release write buffer", remove_NAN(time_value_receive[9, :]))
     else:
-        sim_process.get('buffer ready').addNode("wait write buffer", values=remove_NAN(time_value_receive[8, :]))
+        sim_process.get('buffer ready').addNode("wait write buffer", values=remove_NAN(time_value_receive[8, :]),print_name="wait<br>write buffer")
         sim_process.get('send internal spike').addNode("end write buffer", values=remove_NAN(time_value_receive[9, :]))
         sim_process.addNode("release write buffer", values=remove_NAN(time_value_receive[10, :]))
 
-    return translate
+    return transform
 
 
-def analyse_nest_to_tvb_translate(index, master, data_translate, mpi):
+def analyse_nest_to_tvb_transfomer(index, master, data_transformer, mpi):
     """
-    create the tree of simulation time for translation Nest to TVB
-    function for translate
-    :param index: index of the translator
-    :param master: from the master process of the translator
-    :param data_translate: timer of process or thread
+    create the tree of simulation time for transformation NEST to TVB
+    function for transformer
+    :param index: index of the transformer
+    :param master: from the master process of the transformer
+    :param data_transformer: timer of process or thread
     :param mpi: mpi for internal communication
     :return: tree of times
     """
-    time_value_translate = get_time(data_translate)
-    name = 'NEST_TVB_' + str(index) + ': Translate function '
-    translate = init_transformation(master, data_translate, name, create_connection=False)
+    time_value_transformer = get_time(data_transformer)
+    name = 'NEST_TVB_' + str(index) + ': Transformer function '
+    transform = init_transformation(master, data_transformer, name, create_connection=False)
 
-    sim_process = translate.get('simulation')
-    sim_process.addNode('ready to get data', values=remove_NAN(time_value_translate[1, :]))
-    sim_process.addNode('create histogram', values=remove_NAN(time_value_translate[2, :]))
-    sim_process.addNode('release buffer', values=remove_NAN(time_value_translate[3, :]))
-    sim_process.addNode('save_hist', values=remove_NAN(time_value_translate[4, :]))
-    sim_process.addNode('analyse', values=remove_NAN(time_value_translate[5, :]))
-    sim_process.addNode('save_rate', values=remove_NAN(time_value_translate[6, :]))
-    sim_process.addNode('send rates', values=remove_NAN(time_value_translate[7, :]))
+    sim_process = transform.get('simulation')
+    sim_process.addNode('ready to get data', values=remove_NAN(time_value_transformer[1, :]))
+    sim_process.addNode('create histogram', values=remove_NAN(time_value_transformer[2, :]))
+    sim_process.addNode('release buffer', values=remove_NAN(time_value_transformer[3, :]))
+    sim_process.addNode('save_hist', values=remove_NAN(time_value_transformer[4, :]))
+    sim_process.addNode('analyse', values=remove_NAN(time_value_transformer[5, :]))
+    sim_process.addNode('save_rate', values=remove_NAN(time_value_transformer[6, :]))
+    sim_process.addNode('send rates', values=remove_NAN(time_value_transformer[7, :]))
 
     if mpi:
-        sim_process.get('ready to get data').addNode("receive size", values=remove_NAN(time_value_translate[10, :]))
-        sim_process.get('ready to get data').addNode("wait buffer", values=remove_NAN(time_value_translate[11, :]))
-        sim_process.get('send rates').addNode("send rate", values=remove_NAN(time_value_translate[17, :]))
+        sim_process.get('ready to get data').addNode("receive size", values=remove_NAN(time_value_transformer[10, :]))
+        sim_process.get('ready to get data').addNode("wait buffer", values=remove_NAN(time_value_transformer[11, :]))
+        sim_process.get('send rates').addNode("send rate", values=remove_NAN(time_value_transformer[17, :]))
     else:
-        sim_process.get('ready to get data').addNode("wait read buffer", values=remove_NAN(time_value_translate[11, :]))
-        sim_process.get('ready to get data').addNode("end read buffer", values=remove_NAN(time_value_translate[12, :]))
-        sim_process.get('release buffer').addNode("release read buffer", values=remove_NAN(time_value_translate[13, :]))
-        sim_process.get('send rates').addNode("wait write buffer", values=remove_NAN(time_value_translate[8, :]))
-        sim_process.get('send rates').addNode("end write buffer", values=remove_NAN(time_value_translate[9, :]))
-        sim_process.get('send rates').addNode("release write buffer", values=remove_NAN(time_value_translate[10, :]))
+        sim_process.get('ready to get data').addNode("wait read buffer", values=remove_NAN(time_value_transformer[11, :]))
+        sim_process.get('ready to get data').addNode("end read buffer", values=remove_NAN(time_value_transformer[12, :]))
+        sim_process.get('release buffer').addNode("release read buffer", values=remove_NAN(time_value_transformer[13, :]))
+        sim_process.get('send rates').addNode("wait write buffer", values=remove_NAN(time_value_transformer[8, :]))
+        sim_process.get('send rates').addNode("end write buffer", values=remove_NAN(time_value_transformer[9, :]))
+        sim_process.get('send rates').addNode("release write buffer", values=remove_NAN(time_value_transformer[10, :]))
 
-    return translate
+    return transform
 
 
-def get_dictionnary(path, mpi, translation=True):
+def get_dictionnary(path, mpi, transformation=True):
     """
     function for getting the tree for all the simulation
     :param path: folder of the simulation
-    :return: the tree of times and the index of the translator
+    :return: the tree of times and the index of the transformer
     """
     # get data from path
     data = get_data(path)
 
-    if translation :
-        # get the id of translator
+    if transformation:
+        # get the id of transformer
         pattern_nest_to_tvb = re.compile('timer_nest_to_tvb_send*')
-        index_translator_nest_to_tvb = []
+        index_transformer_nest_to_tvb = []
         pattern_tvb_to_nest = re.compile('timer_tvb_to_nest_sender*')
-        index_translator_tvb_to_nest = []
+        index_transformer_tvb_to_nest = []
         for i in data.keys():
             if pattern_nest_to_tvb.match(i) is not None:
-                index_translator_nest_to_tvb.append(int(pattern_nest_to_tvb.split(i)[1]))
+                index_transformer_nest_to_tvb.append(int(pattern_nest_to_tvb.split(i)[1]))
             if pattern_tvb_to_nest.match(i) is not None:
-                index_translator_tvb_to_nest.append(int(pattern_tvb_to_nest.split(i)[1]))
-        index_translator_nest_to_tvb = np.sort(index_translator_nest_to_tvb)
-        index_translator_tvb_to_nest = np.sort(index_translator_tvb_to_nest)
+                index_transformer_tvb_to_nest.append(int(pattern_tvb_to_nest.split(i)[1]))
+        index_transformer_nest_to_tvb = np.sort(index_transformer_nest_to_tvb)
+        index_transformer_tvb_to_nest = np.sort(index_transformer_tvb_to_nest)
 
-        # get the time of waiting data in the translator for TVB
+        # get the time of waiting data in the transformer for TVB
         wait_time_nest = np.zeros((500,))
         index_wait = 10 if mpi else 11
-        for index in index_translator_tvb_to_nest:
+        for index in index_transformer_tvb_to_nest:
             wait_time = get_time(data['timer_tvb_to_nest_sender' + str(index)])[index_wait]
             wait_time = wait_time[np.logical_not(np.isnan(wait_time))]
             if np.sum(wait_time) > np.sum(wait_time_nest):
                 wait_time_nest = wait_time
 
-        # get the time of waiting data in the translator for TVB
+        # get the time of waiting data in the transformer for TVB
         wait_time_tvb = np.zeros((500,))
         index_wait = 15 if mpi else 11
-        for index in index_translator_nest_to_tvb:
+        for index in index_transformer_nest_to_tvb:
             wait_time = get_time(data['timer_nest_to_tvb_send' + str(index)])[index_wait]
             wait_time = wait_time[np.logical_not(np.isnan(wait_time))]
             if np.sum(wait_time) > np.sum(wait_time_tvb):
@@ -570,28 +572,28 @@ def get_dictionnary(path, mpi, translation=True):
         analyse_nest(data['timer_nest'], data['timer_nest_init'], data['timer_nest_sim'], data['nest_timer_0'],
                      data['nest_timer_input_0_init'], data['nest_timer_input_0'], wait_time_nest,
                      data['nest_timer_io_0']))
-    if translation:
-        for index, i in enumerate(index_translator_nest_to_tvb):
+    if transformation:
+        for index, i in enumerate(index_transformer_nest_to_tvb):
             data_time.add(analyse_nest_to_tvb_send(index, data['timer_nest_to_tvb_' + str(index)],
                                                    data['timer_nest_to_tvb_send' + str(i)], mpi))
-            data_time.add(analyse_nest_to_tvb_translate(index, data['timer_nest_to_tvb_' + str(index)],
-                                                        data['timer_nest_to_tvb_translate' + str(i)], mpi))
+            data_time.add(analyse_nest_to_tvb_transfomer(index, data['timer_nest_to_tvb_' + str(index)],
+                                                         data['timer_nest_to_tvb_transformer' + str(i)], mpi))
             data_time.add(analyse_nest_to_tvb_receive(index, data['timer_nest_to_tvb_' + str(index)],
                                                       data['timer_nest_to_tvb_receive' + str(i)], mpi))
-        for index, i in enumerate(index_translator_tvb_to_nest):
+        for index, i in enumerate(index_transformer_tvb_to_nest):
             data_time.add(analyse_tvb_to_nest_sender(index, data['timer_tvb_to_nest_' + str(index)],
                                                      data['timer_tvb_to_nest_sender' + str(i)], mpi))
-            data_time.add(analyse_tvb_to_nest_translate(index, data['timer_tvb_to_nest_' + str(index)],
-                                                        data['timer_tvb_to_nest_translate' + str(i)], mpi))
+            data_time.add(analyse_tvb_to_nest_transformer(index, data['timer_tvb_to_nest_' + str(index)],
+                                                          data['timer_tvb_to_nest_transformer' + str(i)], mpi))
             data_time.add(analyse_tvb_to_nest_receiver(index, data['timer_tvb_to_nest_' + str(index)],
                                                        data['timer_tvb_to_nest_receiver' + str(i)], mpi))
-        return data_time, (index_translator_nest_to_tvb, index_translator_tvb_to_nest)
+        return data_time, (index_transformer_nest_to_tvb, index_transformer_tvb_to_nest)
     else:
         return data_time
 
 
 if __name__ == '__main__':
-    # tree, indexes = get_dictionnary('./test_file/test_thread/_g_1.0_mean_I_ext_0.0/',False)
-    tree, indexes = get_dictionnary('./test_file/test_MPI/_g_1.0_mean_I_ext_0.0/', True)
+    # tree, indexes = get_dictionnary('../test_file/test_thread/_g_1.0_mean_I_ext_0.0/',False)
+    tree, indexes = get_dictionnary('../test_file/test_MPI/_g_1.0_mean_I_ext_0.0/', True)
     print(indexes)
     print(tree)
