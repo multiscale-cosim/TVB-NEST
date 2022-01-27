@@ -8,7 +8,7 @@ import time
 
 def simulate_nest_generator(path,file,nb_generator):
     '''
-    simulate the spike generator of the translator for tvb to nest
+    simulate the spike generator of the transform for tvb to nest
     :param path: the path to the file for the connections
     :return:
     '''
@@ -23,7 +23,7 @@ def simulate_nest_generator(path,file,nb_generator):
         # print("file to read",path+file);sys.stdout.flush()
         if os.path.exists(path+file+".unlock"):
             print("file to read",path+file);sys.stdout.flush()
-            print ("MPI connection file available after t={0} seconds".format(attempt));sys.stdout.flush()
+            print("MPI connection file available after t={0} seconds".format(attempt));sys.stdout.flush()
             file_unlock=True
             break
         else:
@@ -54,13 +54,13 @@ def simulate_nest_generator(path,file,nb_generator):
         # receive the number of spikes for updating the spike detector
         size=np.empty(11,dtype='i')
         comm.Recv([size,11, MPI.INT], source=0, tag=ids[0],status=status_)
-        print ("Nest_Input (" + str(ids[0]) + ") :receive size : " + str(size));sys.stdout.flush()
+        print("Nest_Input (" + str(ids[0]) + ") :receive size : " + str(size));sys.stdout.flush()
         # receive the spikes for updating the spike detector
         data = np.empty(size[0], dtype='d')
         comm.Recv([data,size[0], MPI.DOUBLE],source=0,tag=ids[0],status=status_)
-        print ("Nest_Input (" + str(id) + ") : " + str(np.sum(data)));sys.stdout.flush()
+        print("Nest_Input (" + str(id) + ") : " + str(np.sum(data)));sys.stdout.flush()
         # printing value and exist
-        print ("Nest_Input: Before print ");sys.stdout.flush()
+        print("Nest_Input: Before print ");sys.stdout.flush()
         if ids[0] == 0:
             print ("Nest_Input:" + str([ids[0], data,np.sum(data)]) );sys.stdout.flush()
         print ("Nest_Input: debug end of loop");sys.stdout.flush()
@@ -73,7 +73,6 @@ def simulate_nest_generator(path,file,nb_generator):
         # print ("Nest_Input: before break" + str(data > 10000));sys.stdout.flush()
         if np.any(data > 10000):
             break
-        
 
     # closing the connection at this end
     print('Nest_Input : Disconnect')

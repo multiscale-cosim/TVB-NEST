@@ -7,9 +7,10 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.ticker as ticker
+from matplotlib.text import Text
 from scipy import signal
-import matplotlib.ticker as tkr
 from example.analyse.LFPY.example_plotting import plot_signal_sum
+from example.analyse.get_data import get_data_all
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
 
@@ -35,11 +36,11 @@ def compute_rate(data, time, N, Dt):
     return rate_each_t / (Dt * 1e-3)
 
 
-def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
+def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
                           V_excitatory=None, V_inhibitory=None, W_excitatory=None, W_inhibitory=None,
                           size_neurons=0.1, spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0,
-                          grid=None, nb_grid=0, fig=None, font_ticks_size=7, font_labels={'size': 7}
-                          ,labelpad_hist_incr=0):
+                          grid=None, nb_grid=0, fig=None, font_ticks_size=7, font_labels={'size': 7},
+                          labelpad_hist_incr=0):
     """
     print the result of Nest
     :param param: the parameter of the simulation
@@ -55,6 +56,12 @@ def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
     :param spectogram: parameter for spectogram analysis
     :param path_LFP: path for file of LFP
     :param LFP_inc: space for LFP
+    :param grid: grid where to plot the result
+    :param nb_grid: the position along this grid to plot the result
+    :param fig: figure of the plot
+    :param font_ticks_size: font size of the ticks and label
+    :param font_labels: font of labels
+    :param labelpad_hist_incr: pad for the label of the histogram
     :return:
     """
     # parameter of the simulation
@@ -139,7 +146,7 @@ def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
     if grid is None:
         grid = gridspec.GridSpec(3, 3, figure=fig)
     else:
-        grid = gridspec.GridSpecFromSubplotSpec(3, 3, subplot_spec=grid[nb_grid, 0])
+        grid = gridspec.GridSpecFromSubplotSpec(3, 3, subplot_spec=grid[nb_grid, 0], hspace=0.25)
 
     grid_neuron = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=grid[:2, 0], hspace=0.001)
     ax_V = fig.add_subplot(grid_neuron[0, 0])
@@ -165,7 +172,7 @@ def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
     ax_V.plot(time_V_in, min_V_in, 'b--', linewidth=0.1)
     ax_V.set_ylim([-90, -30])
     ax_V.set_xlim([begin, end])
-    ax_V.set_ylabel('V in (mV)', fontdict=font_labels)
+    ax_V.set_ylabel('V in (mV)', labelpad=-1, fontdict=font_labels)
     ax_V.spines["right"].set_visible(False)
     ax_V.yaxis.set_ticks_position('left')
     ax_V.spines["bottom"].set_visible(False)
@@ -186,7 +193,10 @@ def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
     ax_W.plot(time_W_in, mean_W_in, 'b', linewidth=1.0)
     ax_W.plot(time_W_in, max_W_in, 'b--', linewidth=0.1)
     ax_W.plot(time_W_in, min_W_in, 'b--', linewidth=0.1)
-    ax_W.set_ylabel('W in (pA)', fontdict=font_labels)
+    if nb_grid == 0:
+        ax_W.set_ylabel('W in (pA)', labelpad=3, fontdict=font_labels)
+    else:
+        ax_W.set_ylabel('W in (pA)', labelpad=0, fontdict=font_labels)
     ax_W.set_xlabel('Time (ms)', fontdict=font_labels)
     ax_W.set_xlim([begin, end])
     ax_W.spines["right"].set_visible(False)
@@ -215,7 +225,7 @@ def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
             s = '{}'.format(shift + x)
             return s
 
-        return tkr.FuncFormatter(numfmt)
+        return ticker.FuncFormatter(numfmt)
 
     ax_LFP.xaxis.set_major_formatter(format_LFP(begin - LFP_start))
     ax_LFP.set_xlabel('Time (ms)', labelpad=2, fontdict=font_labels)
@@ -231,7 +241,7 @@ def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
     for i in range(spikes_in[0].shape[0]):
         ax_spike_train.plot(spikes_inhibitory[i], np.repeat(spikes_in[0][i], spikes_inhibitory[i].shape[0]), '.b',
                             markersize=size_neurons)
-    ax_spike_train.set_ylabel('Neuron index', fontdict=font_labels, labelpad=2+labelpad_hist_incr)
+    ax_spike_train.set_ylabel('   Neuron index', fontdict=font_labels, labelpad=2+labelpad_hist_incr)
     ax_spike_train.set_xlim([begin - 100, end + 100])
     ax_spike_train.spines["top"].set_visible(False)
     ax_spike_train.spines["right"].set_visible(False)
@@ -336,16 +346,29 @@ def print_figure_nest_one(param, begin, end, spikes_ex, spikes_in,
     print(freqs[np.argmax(psd)], psd[np.argmax(psd)])
 
 
-def print_figure_nest(parameters, begin, end, labelpad_hist_incr, size_neurons=0.1,
+def print_figure_micro(parameters, begin, end, labelpad_hist_incr, size_neurons=0.1,
                       spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0
                       ):
+    """
+    plot of the figure of the paper
+    :param parameters: parameter for the getting data
+    :param begin: start of plot
+    :param end: end of the plot
+    :param labelpad_hist_incr: label pads for the histogram
+    :param size_neurons: size of the point of spike for neurons
+    :param spectogram: parameter for spectogram analysis
+    :param path_LFP: path for file of LFP
+    :param LFP_inc: space for LFP
+    :param LFP_start: start for plotting LFP
+    :return:
+    """
     fig = plt.figure(figsize=(6.8, 8.56))
-    plt.subplots_adjust(top=0.98, bottom=0.05, left=0.08, right=0.95, hspace=0.25, wspace=0.25)
+    plt.subplots_adjust(top=0.98, bottom=0.05, left=0.06, right=0.95, hspace=0.21, wspace=0.25)
     # plt.suptitle(param['title'])
     grid = gridspec.GridSpec(len(parameters), 1, figure=fig)
     for index, param in enumerate(parameters):
         data = get_data_all(param['result_path'])
-        print_figure_nest_one(
+        print_figure_micro_one(
             param, begin, end, data['pop_1_ex'], data['pop_1_in'],
             V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
             W_excitatory=data['W_pop_1_ex'], W_inhibitory=data['W_pop_1_in'],
@@ -359,13 +382,19 @@ def print_figure_nest(parameters, begin, end, labelpad_hist_incr, size_neurons=0
             fig=fig,
             labelpad_hist_incr=labelpad_hist_incr[index],
         )
-    plt.savefig("Nest_figure.png", dpi=300)
-    plt.savefig("Nest_figure.svg", dpi=300)
+        # plt.show()
+
+    # add letter of the graph
+    fig.add_artist(Text(0.01, 0.97, "a", fontproperties={'size': 7}))
+    fig.add_artist(Text(0.01, 0.64, "b", fontproperties={'size': 7}))
+    fig.add_artist(Text(0.01, 0.32, "c", fontproperties={'size': 7}))
+    # plt.show()
+
+    plt.savefig("figure/Nest_figure.pdf", dpi=300)
+    plt.savefig("figure/Nest_figure.png", dpi=150)
 
 
 if __name__ == '__main__':
-    from example.analyse.get_data import get_data_all
-
     param_default = {}
     param_default['param_nest'] = {}
     param_default['param_nest']["sim_resolution"] = 0.1
@@ -390,15 +419,12 @@ if __name__ == '__main__':
     param_regular_burst['title'] = " Regular Bursting network "
     params.append(param_regular_burst)
 
-    print_figure_nest(params, 42000.0, 53000.0,
-                      # print_figure_nest(params, 6000.0, 10000.0,
-                      # print_figure_nest(params, 43000.0, 44100.0,
+    print_figure_micro(params, 42000.0, 53000.0,
                       spectogram={'DBmin': -65,
                                   'DBmax': -25,
                                   'fmin': 0.0,
                                   'fmax': 200.0,
                                   'nb_f': 4,
-                                  # 'title_figure': 'Spectrogram of ' + title + ' for 10 s of simulation'
                                   },
                       path_LFP='../LFPY/v2/pop_1_/',
                       LFP_inc=100.0,

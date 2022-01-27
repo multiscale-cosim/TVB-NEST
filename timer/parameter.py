@@ -27,7 +27,7 @@ param_co_simulation = {
     # command to run
     "mpi": ['mpirun'],
     # thread or not
-    'translation_thread': True
+    'transformation_thread': True
 }
 
 # parameter simulators
@@ -255,9 +255,9 @@ param_tvb_monitor = {
     "ECOG": False
 }
 
-# Parameters for the translator Nest to TVB
+# Parameters for the transformer Nest to TVB
 param_TR_nest_to_tvb = {
-    # 'init': path of the initialisation of the translation if not the run exploration will create it
+    # 'init': path of the initialisation of the transformation if not the run exploration will create it
     # 'resolution': param_nest['sim_resolution']
     # 'synch': param_co_simulation['synchronization']
     # 'width': param_zerlaut['T']
@@ -268,13 +268,13 @@ param_TR_nest_to_tvb = {
     "save_rate": False
 }
 
-# Parameters for the translator TVB to Nest
+# Parameters for the transformer TVB to Nest
 param_TR_tvb_to_nest = {
     # percentage of shared rate between neurons of the same region
     'percentage_shared': 0.01,
     # 'seed':param_nest['master_seed']-3 # -3 because -1 and -2 is use by the simulation of TVB
     # 'nb_synapses' : param_nest_connection['nb_external_synapse'] # number of external synapses
-    # 'init': path of the initialisation of the translation if not the run exploration will create it
+    # 'init': path of the initialisation of the transformation if not the run exploration will create it
     # 'level_log': param_co_simulation['level_log']
     'function_select': 2,
     "save_spike": False,

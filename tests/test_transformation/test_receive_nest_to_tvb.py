@@ -9,7 +9,7 @@ import time
 
 def simulate_TVB_reception(path,file):
     '''
-    simulate the receptor of the translator for nest to TVB
+    simulate the receptor of the transformer for nest to TVB
     :param path: the path to the file for the connections
     :return:
     '''
@@ -34,7 +34,7 @@ def simulate_TVB_reception(path,file):
 
     status_ = MPI.Status()
     while(True):
-        # send to the translator, I want the next part
+        # send to the transformer, I want the next part
         req = comm.isend(True, dest=0, tag=0)
         req.wait()
 
@@ -51,7 +51,7 @@ def simulate_TVB_reception(path,file):
             print("TVB INPUT :",comm.Get_rank(),times,np.sum(rates));sys.stdout.flush()
         else:
             break
-        if times[1] >9900:
+        if times[1] >10000:
             break
     # closing the connection at this end
     req = comm.isend(True, dest=0, tag=1)
@@ -60,7 +60,6 @@ def simulate_TVB_reception(path,file):
     comm.Disconnect()
     MPI.Close_port(port)
     print('TVB INPUT :exit');sys.stdout.flush()
-    MPI.Finalize()
 
 if __name__ == "__main__":
     import sys

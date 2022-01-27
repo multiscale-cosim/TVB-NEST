@@ -110,10 +110,10 @@ def plot_electrode_neurons(ax, X, isometricangle, markers, colors,
 
 
 if __name__ == '__main__':
-    path = "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_regular_burst/LFPY/small_init_test_image/pop_1_/populations"
+    path = os.path.dirname(os.path.realpath(__file__)) + "../local_cluster/case_regular_burst/LFPY/v1/pop_1_/populations"
     morphology = {
-        'ex': os.path.dirname(os.path.realpath(__file__)) + '/../../parameter/morphologies/pyramidal_cell_14VbTest.hoc',
-        'in': os.path.dirname(os.path.realpath(__file__)) + "/../../parameter/morphologies/basket_cell17S.hoc"}
+        'ex': os.path.dirname(os.path.realpath(__file__)) + '/../parameter/morphologies/pyramidal_cell_14VbTest.hoc',
+        'in': os.path.dirname(os.path.realpath(__file__)) + "/../parameter/morphologies/basket_cell17S.hoc"}
     electrodeParams = {
         # ELECTRODE SHAPE
         'probe': MEAutility.return_mea('Neuronexus-32'),

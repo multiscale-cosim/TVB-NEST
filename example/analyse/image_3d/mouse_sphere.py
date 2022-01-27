@@ -88,7 +88,7 @@ def create_electrode_ECOG(center, angleY=0, angleX=0, radius_ext=1.0, radius_in=
     disk.SetCircumferentialResolution(100)
     disk.Update()
 
-    # translation of the disk
+    # transformation of the disk
     transform = vtk.vtkTransform()
     transform.RotateY(angleY)
     transform.RotateX(angleX)
@@ -229,7 +229,7 @@ class MyInteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
 
 
 def print_mouse(path, file_3d, file_center, color_TVB, color_Nest, Nest_node, electrode=None, electrode_ECOG=None,
-                save_path=None, logo=None, transparency=0.3):
+                save_path=None, logo=None, transparency=0.3, figsize=(1000, 1000)):
     """
     plot the 3d plot of te mouse
     :param path: path of the data
@@ -332,7 +332,7 @@ def print_mouse(path, file_3d, file_center, color_TVB, color_Nest, Nest_node, el
     renWin = vtk.vtkRenderWindow()
     renWin.AddRenderer(ren)
     ren.SetBackground([1, 1, 1])
-    renWin.SetSize(1000, 1000)
+    renWin.SetSize(figsize[0], figsize[1])
 
     # Create a renderwindowinteractor
     iren = vtk.vtkRenderWindowInteractor()
@@ -393,26 +393,34 @@ def print_mouse(path, file_3d, file_center, color_TVB, color_Nest, Nest_node, el
 
 
 if __name__ == '__main__':
-    # # mouse brain
-    # print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
-    #             [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5], Nest_node=[26, 78],
-    #             # save_path='../../mouse_3d.png'
-    #             )
+    # mouse brain
+    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+                [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5], Nest_node=[26, 78],
+                # save_path='../figure/mouse_3d.png'
+                )
 
-    # # mouse brain with logo
-    # print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
-    #             [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5], Nest_node=[26, 78],
-    #             # save_path='../../mouse_3d.png',
-    #             logo=['../../analyse/3d_image/logo_Nest.png', '../../analyse/3d_image/logo_TVB.png'],
-    #             transparency=0.3,
-    #             # save_path='../../mouse_3d_logo.png'
-    #             )
+    # mouse brain with logo
+    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+                [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5], Nest_node=[26, 78],
+                # save_path='../../mouse_3d.png',
+                logo=['./logo_Nest.png', './logo_TVB.png'],
+                transparency=0.3,
+                # save_path='../figure/mouse_3d_logo.png'
+                )
 
     # mouse brian with electrode
     print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
                 [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5],
                 Nest_node=[26, 78],
                 electrode='electrode_hypocampus.txt', electrode_ECOG='sensor_hypocampus.txt',
-                transparency=0.2  # or 1.0
-                # save_path='../../mouse_3d.png'
+                transparency=0.2,  # or 1.0
+                save_path='../figure/mouse_elect.png'
+                )
+
+    # mouse brian for the overview
+    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+                [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5],
+                Nest_node=[26, 78],
+                transparency=0.2,  # or 1.0
+                save_path='../figure/mouse_overview.png'
                 )

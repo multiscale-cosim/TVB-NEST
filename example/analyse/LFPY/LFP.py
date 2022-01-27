@@ -849,7 +849,8 @@ if __name__ == '__main__':
         # '/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_regular_burst_2/',
     ]
     for path in pathes:
-        generate_LFP(path, 'pop_1_', 42500.0, 53500.0, [0, 8000], [8000, 2000], name='/run/')
+        generate_LFP(path, 'pop_1_', 44000.0, 44200.0, [0, 80], [8000, 20], name='/test/')
+        # generate_LFP(path, 'pop_1_', 42500.0, 53500.0, [0, 8000], [8000, 2000], name='/run/')
         # generate_LFP(path,'pop_1_',[0,  8000],[8000,  2000],name='/small_init_test_3/')
         # generate_LFP(path,'small_pop_2',[10000,  8000],[18000,  2000],name='/small_init/')
         # generate_LFP(path,'pop_1_',[0,  8000],[8000,  2000],name='/small_init_test_image/')

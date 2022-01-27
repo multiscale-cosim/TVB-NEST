@@ -30,7 +30,7 @@ def create_cross_section(param, image=None, alpha_image=0.4, node=False, thresho
     # parameter for showing the electrode
     :param electrodes : array of [number of contact point, color in RGB]
     or
-    :param electrodes: posiotn
+    :param electrodes: position
     :param electrodes_position: position of ECOG electrode ( hard code of the angles need to increase the flexibility)
     :return:
     """
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     #                      color_Nest=color_Nest, color_TVB=color_TVB,
     #                      alpha_image=1.0, size_edges=0.5, threshold=0.05, node=True,figsize=(10,20),
     #                      )
-    # # create a cross section based on FMRI for implemented electrode
+    # create a cross section based on FMRI for implemented electrode
     create_cross_section(param, image=image_FMRI,
                          color_Nest=color_Nest, color_TVB=color_TVB,
                          alpha_image=1.0, size_edges=0.5, threshold=0.05, node=False, figsize=(10, 20),

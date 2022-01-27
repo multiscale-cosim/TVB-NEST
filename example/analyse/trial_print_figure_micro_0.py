@@ -3,12 +3,12 @@
 import os
 import numpy as np
 import matplotlib.pylab as plt
-from example_plotting import plot_signal_sum
-
 if __name__ == '__main__':
-    from example.analyse.print_nest_pop import bin_array
+    from example.analyse.LFPY.example_plotting import plot_signal_sum
+    from example.analyse.trial_print_figure_micro import bin_array
 else:
-    from ..print_nest_pop import bin_array
+    from .LFPY.example_plotting import plot_signal_sum
+    from .trial_print_figure_micro import bin_array
 
 
 def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None, W_ex=None, W_in=None, path_LFP='.',
@@ -140,7 +140,7 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
 
         ax_5 = fig.add_subplot(233)
         plot_signal_sum(ax_5, z=np.arange(0, 12, 1) * LFP_inc,
-                        fname=os.path.join(param['result_path'] + path_LFP, 'LFPsum.h5'),
+                        fname=os.path.join(param['result_path'] + path_LFP, 'RecExtElectrode_sum.h5'),
                         unit='mV', T=(xmin, xmax))
         plt.subplots_adjust(hspace=0.5)
 
@@ -188,10 +188,10 @@ if __name__ == '__main__':
     from example.analyse.get_data import get_data_all
 
     pathes = [
-        'case_asynchronous',
+        'local_cluster/case_asynchronous',
     ]
     for path in pathes:
-        data = get_data_all('../../' + path + '/nest/')
+        data = get_data_all('../' + path + '/nest/')
         param = {}
         param['param_nest'] = {}
         param['param_nest']["sim_resolution"] = 0.1
@@ -200,11 +200,11 @@ if __name__ == '__main__':
         param['param_nest_topology'] = {}
         param['param_nest_topology']["percentage_inhibitory"] = 0.2
         param['param_nest_topology']["nb_neuron_by_region"] = 10000
-        param['result_path'] = '../../' + path
-        print_nest_pop(param, 0.0, 60000.0, data['pop_1_ex'], data['pop_1_in'],
+        param['result_path'] = '../' + path
+        print_nest_pop(param, 0.0, 61000.0, data['pop_1_ex'], data['pop_1_in'],
                        V_ex=data['VM_pop_1_ex'], V_in=data['VM_pop_1_in'],
                        W_ex=data['W_pop_1_ex'], W_in=data['W_pop_1_in'],
-                       path_LFP='/LFPY/small_init_test_2/small_pop_1/', LFP_inc=70,
+                       path_LFP='/LFPY/v1/pop_1_/', LFP_inc=70,
                        # xmin=3650,xmax=3750
                        )
         # print_nest_pop(param, 0.0, 4000.0,data['pop_2_ex'],data['pop_2_in'],

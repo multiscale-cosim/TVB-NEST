@@ -9,6 +9,7 @@ example/*/*/log
 example/*/*/nest
 example/*/*/tvb
 example/*/*/translation
+example/*/*/transformation
 example/*/*/LFPY/*/*/cells
 example/*/*/LFPY/*/*/figures
 example/*/*/LFPY/*/*/populations

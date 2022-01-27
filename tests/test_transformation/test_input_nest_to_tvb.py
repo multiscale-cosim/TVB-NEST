@@ -9,7 +9,7 @@ import time
 
 def simulate_spike_detector(path,min_delay):
     '''
-    simulate spike detector output for testing the nest to tvb translator input
+    simulate spike detector output for testing the nest to tvb transformer input
     :param path: the path to the file for the connections
     :param min_delay: the time of one simulation
     :return:
@@ -34,7 +34,7 @@ def simulate_spike_detector(path,min_delay):
     check = np.empty(1,dtype='b')
     status_ = MPI.Status() # status of the different message
     while True:
-        # wait until the translator accept the connections
+        # wait until the transformer accept the connections
         comm.Send([np.array([True],dtype='b'), 1, MPI.CXX_BOOL], dest=0, tag=0)
         comm.Recv([check, 1, MPI.CXX_BOOL], source=MPI.ANY_SOURCE, tag=0,status=status_)
         # create random data
@@ -56,7 +56,7 @@ def simulate_spike_detector(path,min_delay):
             break
     # closing the connection at this end
     print("Nest Output : ending" );sys.stdout.flush()
-    # send the signal for end the translation
+    # send the signal for end the transformation
     comm.Send([np.array([True], dtype='b'), 1, MPI.CXX_BOOL], dest=0, tag=2)
     print("Nest Output : ending" );sys.stdout.flush()
     comm.Disconnect()

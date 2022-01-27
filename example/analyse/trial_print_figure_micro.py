@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from scipy import signal
-from nest_elephant_tvb.translation.translation_function.rate_spike import slidding_window
+from nest_elephant_tvb.transformation.transformation_function.rate_spike import slidding_window
 
 if __name__ == '__main__':
     from example.analyse.print_figure_macro import compute_rate

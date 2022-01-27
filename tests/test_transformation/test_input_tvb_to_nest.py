@@ -9,7 +9,7 @@ import sys
 
 def simulate_TVB_output(path,min_delay):
     '''
-    simulate the input of the translator tvb_to_nest
+    simulate the input of the transformer tvb_to_nest
     :param path: the path to the file for the connections
     :param min_delay: the time of one simulation
     :return:
@@ -42,7 +42,7 @@ def simulate_TVB_output(path,min_delay):
     status_ = MPI.Status()
     starting = 0.0 # the begging of each time of synchronization
     while True:
-        # wait until the translator accept the connections
+        # wait until the transformer accept the connections
         accept = False
         print("TVB_OUTPUT :wait acceptation");sys.stdout.flush()
         while not accept:

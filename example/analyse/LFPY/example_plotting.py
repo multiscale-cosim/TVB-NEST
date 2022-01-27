@@ -27,8 +27,8 @@ def remove_axis_junk(ax, which=['right', 'top']):
 
 
 def plot_signal_sum(ax, z, fname='LFPsum.h5', unit='mV',
-                    ylabels=True, scalebar=True, vlimround=None,
-                    T=[0, 1000], color='k',
+                    ylabels=True, scalebar=True, scalebar_font=None, vlimround=None,
+                    T=[0, 1000], color='k', modulelabel=1,
                     label=''):
     """
     on axes plot the signal contributions
@@ -73,15 +73,16 @@ def plot_signal_sum(ax, z, fname='LFPsum.h5', unit='mV',
         else:
             ax.plot(tvec[slica], data[i, slica] * 100 / vlimround + z,
                     color=colors[i], rasterized=False, clip_on=False)
-        yticklabels.append('ch. %i' % (i + 1))
-        yticks.append(z)
+        if i % modulelabel == 0:
+            yticklabels.append('ch. %i' % (i + 1))
+            yticks.append(z)
 
     if scalebar:
         ax.plot([tvec[slica][-1], tvec[slica][-1]],
                 [-0, -100], lw=2, color='k', clip_on=False)
         ax.text(tvec[slica][-1] + np.diff(T) * 0.02, -50,
-                r'%g %s' % (vlimround, unit),
-                color='k', rotation='vertical')
+                r'%g %s' % (vlimround, unit), fontdict=scalebar_font,
+                color='k', rotation='vertical' )
 
     ax.axis(ax.axis('tight'))
     ax.yaxis.set_ticks(yticks)

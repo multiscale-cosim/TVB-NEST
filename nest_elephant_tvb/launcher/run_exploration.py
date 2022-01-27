@@ -143,7 +143,7 @@ def run(parameters_file):
                 argv = copy.copy(mpirun)
                 argv += ['-n', str(nb_mpi_transformer), 'python3', dir_path]
             argv += [results_path, str(index)]
-            print("Translator nest to tvb start : ", argv); sys.stdout.flush()
+            print("Transform nest to tvb start : ", argv); sys.stdout.flush()
             processes.append(subprocess.Popen(argv,
                                               # need to check if it's needed or not (doesn't work for me)
                                               stdin=None, stdout=None, stderr=None, close_fds=True,
@@ -169,7 +169,7 @@ def run(parameters_file):
                                               stdin=None, stdout=None, stderr=None, close_fds=True,
                                               # close the link with parent process
                                               ))
-            print("Translator tvb to nest start : ", argv); sys.stdout.flush()
+            print("Transform tvb to nest start : ", argv); sys.stdout.flush()
 
         # Run TVB in co-simulation
         if 'singularity' in param_co_simulation.keys():  # run with singularity image
