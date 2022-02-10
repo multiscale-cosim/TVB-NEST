@@ -37,10 +37,10 @@ def compute_rate(data, time, N, Dt):
 
 
 def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
-                          V_excitatory=None, V_inhibitory=None, W_excitatory=None, W_inhibitory=None,
-                          size_neurons=0.1, spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0,
-                          grid=None, nb_grid=0, fig=None, font_ticks_size=7, font_labels={'size': 7},
-                          labelpad_hist_incr=0):
+                           V_excitatory=None, V_inhibitory=None, W_excitatory=None, W_inhibitory=None,
+                           size_neurons=0.1, spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0,
+                           grid=None, nb_grid=0, fig=None, font_ticks_size=7, font_labels={'size': 7},
+                           labelpad_hist_incr=0):
     """
     print the result of Nest
     :param param: the parameter of the simulation
@@ -241,7 +241,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     for i in range(spikes_in[0].shape[0]):
         ax_spike_train.plot(spikes_inhibitory[i], np.repeat(spikes_in[0][i], spikes_inhibitory[i].shape[0]), '.b',
                             markersize=size_neurons)
-    ax_spike_train.set_ylabel('   Neuron index', fontdict=font_labels, labelpad=2+labelpad_hist_incr)
+    ax_spike_train.set_ylabel('   Neuron index', fontdict=font_labels, labelpad=2 + labelpad_hist_incr)
     ax_spike_train.set_xlim([begin - 100, end + 100])
     ax_spike_train.spines["top"].set_visible(False)
     ax_spike_train.spines["right"].set_visible(False)
@@ -267,7 +267,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_hist_ex.locator_params(axis='y', nbins=4)
     ax_hist_in.plot(time_array + begin, hist_in, 'b', linewidth=0.1)
     ax_hist_in.set_xlabel('Time (ms)', fontdict=font_labels, labelpad=2)
-    ax_hist_in.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2-labelpad_hist_incr)
+    ax_hist_in.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2 - labelpad_hist_incr)
     ax_hist_in.set_xlim([begin - 100, end + 100])
     ax_hist_in.spines["top"].set_visible(False)
     ax_hist_in.spines["right"].set_visible(False)
@@ -333,11 +333,18 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
                           ymax=freqs[np.argmax(psd)],
                           color='r',
                           linestyle='--')
-    position = [vmin + 5, 10 * np.log10(psd[np.argmax(psd)])]
-    position_label = [vmin + 5,  str(np.around(10 * np.log10(psd[np.argmax(psd)]), 1))]
-    ax_frequency_1.set_xticklabels(position_label)
-    ax_frequency_1.set_xticks(position)
-    ax_frequency_1.get_xticklabels()[-1].set_color('r')
+    if nb_grid == 0:
+        position = [10 * np.log10(psd[np.argmax(psd)])]
+        position_label = [str(np.around(10 * np.log10(psd[np.argmax(psd)]), 1))]
+        ax_frequency_1.set_xticklabels(position_label)
+        ax_frequency_1.set_xticks(position)
+        ax_frequency_1.get_xticklabels()[-1].set_color('r')
+    else:
+        position = [vmin + 5, 10 * np.log10(psd[np.argmax(psd)])]
+        position_label = [vmin + 5, str(np.around(10 * np.log10(psd[np.argmax(psd)]), 1))]
+        ax_frequency_1.set_xticklabels(position_label)
+        ax_frequency_1.set_xticks(position)
+        ax_frequency_1.get_xticklabels()[-1].set_color('r')
     ax_frequency_1.set_xlabel('power spectral density (DB)', fontdict=font_labels, labelpad=2)
     ax_frequency_1.tick_params(axis='both')
     ax_frequency_1.yaxis.set_ticks_position('both')
@@ -347,8 +354,8 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
 
 
 def print_figure_micro(parameters, begin, end, labelpad_hist_incr, size_neurons=0.1,
-                      spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0
-                      ):
+                       spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0
+                       ):
     """
     plot of the figure of the paper
     :param parameters: parameter for the getting data
@@ -420,14 +427,14 @@ if __name__ == '__main__':
     params.append(param_regular_burst)
 
     print_figure_micro(params, 42000.0, 53000.0,
-                      spectogram={'DBmin': -65,
-                                  'DBmax': -25,
-                                  'fmin': 0.0,
-                                  'fmax': 200.0,
-                                  'nb_f': 4,
-                                  },
-                      path_LFP='../LFPY/v2/pop_1_/',
-                      LFP_inc=100.0,
-                      LFP_start=500.0,
-                      labelpad_hist_incr=[0,0,4]
-                      )
+                       spectogram={'DBmin': -65,
+                                   'DBmax': -25,
+                                   'fmin': 0.0,
+                                   'fmax': 200.0,
+                                   'nb_f': 4,
+                                   },
+                       path_LFP='../LFPY/v2/pop_1_/',
+                       LFP_inc=100.0,
+                       LFP_start=500.0,
+                       labelpad_hist_incr=[0, 0, 4]
+                       )
