@@ -2,7 +2,7 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
-# Test the translator Nest to TVB
+# Test the transformer Nest to TVB
 
 # Script needs to be started from the directory it is located in
 CURRENT_REPERTORY=$(pwd)
@@ -19,9 +19,9 @@ rm  -rd test_nest_to_tvb
 
 mkdir ./test_nest_to_tvb
 mkdir ./test_nest_to_tvb/nest/
-mkdir ./test_nest_to_tvb/translation/
-mkdir ./test_nest_to_tvb/translation/spike_detector
-mkdir ./test_nest_to_tvb/translation/send_to_tvb
+mkdir ./test_nest_to_tvb/transformation/
+mkdir ./test_nest_to_tvb/transformation/spike_detector
+mkdir ./test_nest_to_tvb/transformation/send_to_tvb
 mkdir ./test_nest_to_tvb/log/
 
 DELAY=100.0
@@ -29,12 +29,12 @@ parameter='{"param_co_simulation": {"id_region_nest":[0]},"param_TR_nest_to_tvb"
 echo "${parameter}" >./test_nest_to_tvb/parameter.json
 cp ./init_spikes.npy  ./test_nest_to_tvb/init_spikes.npy
 
-$RUN -n $1 python3 ../nest_elephant_tvb/translation/nest_to_tvb.py ./test_nest_to_tvb/ 0&
-$RUN -n 1 python3 ./test_translation/test_input_nest_to_tvb.py  ./test_nest_to_tvb/translation/spike_detector/0.txt $DELAY &
-$RUN -n 1 python3 ./test_translation/test_receive_nest_to_tvb.py  ./test_nest_to_tvb/ /translation/send_to_tvb/0.txt &
+$RUN -n $1 python3 ../nest_elephant_tvb/transformation/nest_to_tvb.py ./test_nest_to_tvb/ 0&
+$RUN -n 1 python3 ./test_transformation/test_input_nest_to_tvb.py  ./test_nest_to_tvb/transformation/spike_detector/0.txt $DELAY &
+$RUN -n 1 python3 ./test_transformation/test_receive_nest_to_tvb.py  ./test_nest_to_tvb/ /transformation/send_to_tvb/0.txt &
 
 wait
-rm  -rd test_nest_to_tvb
+#rm  -rd test_nest_to_tvb
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

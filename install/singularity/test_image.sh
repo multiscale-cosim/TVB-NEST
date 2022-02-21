@@ -31,11 +31,11 @@ if [ -z "$1" ]
 fi
 if [ $1 -eq 0 ]
 then
-  IMAGE=./install/singularity/Nest_TVB_paper.simg
+  IMAGE=./install/singularity/Nest_TVB_paper_timer.simg
   echo ' test image paper Nest and TVB'
 elif [ $1 -eq 1 ]
 then
-  IMAGE=./install/singularity/Nest_TVB_paper_alpine.simg
+  IMAGE=./install/singularity/Nest_TVB_paper_timer_alpine.simg
   echo ' test image paper alpine OS Nest and TVB'
 else
   echo ' No image to test '

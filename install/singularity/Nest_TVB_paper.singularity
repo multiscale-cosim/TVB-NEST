@@ -25,8 +25,8 @@ TVB and Nest IO
 %files
 ../../nest-io-dev /home/nest-io-dev
 ../../nest_elephant_tvb /home/nest_elephant_tvb
-../../example/analyse /home/nest_elephant_tvb/analyse
-../../example/parameter /home/nest_elephant_tvb/parameter
+../../analyse /home/analyse
+../../timer /home/timer
 
 %post
     apt-get update
@@ -41,7 +41,8 @@ TVB and Nest IO
 
     # install python
     apt-get install -y build-essential=12.6 cmake=3.13.4-1 zlib1g-dev=1:1.2.11.dfsg-1 libltdl-dev=2.4.6-9 libncurses5-dev=6.1+20181013-2+deb10u2 libgdbm-dev=1.18.1-4 libreadline-dev=7.0-5 \
-     libnss3-dev=2:3.42.1-1+deb10u3 libssl-dev=1.1.1d-0+deb10u6 libsqlite3-dev=3.27.2-3+deb10u1 libffi-dev=3.2.1-9 libgsl-dev=2.5+dfsg-6 libbz2-dev=1.0.6-9.2~deb10u1 curl=7.64.0-4+deb10u2
+     libnss3-dev=2:3.42.1-1+deb10u3 libssl-dev=1.1.1d-0+deb10u7 libsqlite3-dev=3.27.2-3+deb10u1 libffi-dev=3.2.1-9 libgsl-dev=2.5+dfsg-6 libbz2-dev=1.0.6-9.2~deb10u1 curl=7.64.0-4+deb10u2 \
+     libnss3=2:3.42.1-1+deb10u3
     curl -O https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz
     tar -xf Python-3.8.10.tar.xz
     cd Python-3.8.10
@@ -61,7 +62,7 @@ TVB and Nest IO
     pip install --upgrade pip==21.1.2
 
     # install MPI
-    wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz
+    wget -q --no-check-certificate http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz
     tar xf mpich-3.1.4.tar.gz
     cd mpich-3.1.4
     ./configure --disable-fortran --enable-fast=all,O2 --prefix=/usr
@@ -71,7 +72,7 @@ TVB and Nest IO
     rm -rdf mpich-3.1.4.tar.gz mpich-3.1.4
 
     # for python library
-    pip install --upgrade pip
+    pip install --upgrade pip==21.1.2
     pip install nose==1.3.7
     pip install numpy==1.20.3 cython==0.29.23 Pillow==8.2.0
     pip install mpi4py==3.0.3
@@ -82,7 +83,6 @@ TVB and Nest IO
     pip install matplotlib==3.4.2
     pip install networkx==2.5.1
     pip install jupyter==1.0.0
-    pip install vtk==9.0.1
     pip install h5py==3.2.1
     pip install cycler==0.10.0
     pip install jupyter==1.0.0
@@ -92,7 +92,7 @@ TVB and Nest IO
     # install TVB
     apt-get install -y llvm-dev=1:7.0-47 llvm=1:7.0-47
     export LLVM_CONFIG=/usr/bin/llvm-config
-    pip install tvb-data==2.0 tvb-gdist==2.1.0 tvb-library==2.0.10
+    pip install tvb-data==2.0 tvb-gdist==2.0.0 tvb-library==2.0.10
 
     # install parameters
     git clone https://github.com/NeuralEnsemble/parameters
@@ -118,7 +118,7 @@ TVB and Nest IO
     cd ../..
     rm -rdf nrn
     # initialisation of synapse
-    cd /home/nest_elephant_tvb/analyse/LFPY
+    cd /home/analyse/LFPY
     nrnivmodl
     cd
 
@@ -169,13 +169,13 @@ TVB and Nest IO
    exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py "$@"
 
 %apprun NEST-TVB
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/translation/nest_to_tvb.py "$@"
+   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/transformation/nest_to_tvb.py "$@"
 
 %apprun TVB-NEST
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/translation/tvb_to_nest.py "$@"
+   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/transformation/tvb_to_nest.py "$@"
 
 %apprun create_launcher
-   exec cat /home/nest_elephant_tvb/orchestrator/run_exploration.py
+   exec cat /home/nest_elephant_tvb/launcher/run_exploration.py
 
 %apprun LFP
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/analyse/LFPY/run_LFP.py "$@"
+   exec /usr/local/bin/python3.8 /home/analyse/LFPY/run_LFP.py "$@"

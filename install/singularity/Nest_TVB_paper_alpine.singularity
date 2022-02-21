@@ -1,5 +1,5 @@
 Bootstrap: docker
-from:alpine:3.13.5
+from:alpine:3.14.3
 
 %help
 Copyright 2019 Forschungszentrum Jülich GmbH and Aix-Marseille Université
@@ -31,15 +31,15 @@ singularity run --app python
 %files
 ../../nest-io-dev /home/nest-io-dev
 ../../nest_elephant_tvb /home/nest_elephant_tvb
-../../example/analyse /home/nest_elephant_tvb/analyse
-../../example/parameter /home/nest_elephant_tvb/parameter
+../../analyse /home/analyse
+../../timer /home/timer
 
 %post
     apk update
 
     # set environment variable
     export PATH_NEST_INSTALL=/usr/lib/nest/
-    export PYTHONPATH=$PATH_NEST_INSTALL/lib/python3.8/site-packages/:$PYTHONPATH:/home/:/usr/local/nrn/lib/python/
+    export PYTHONPATH=$PATH_NEST_INSTALL/lib/python3.9/site-packages/:$PYTHONPATH:/home/:/usr/local/nrn/lib/python/
     export PATH=$PATH:$PATH_NEST_INSTALL/bin/:/usr/local/nrn/bin/
 
     # get compiler and access to web interface
@@ -47,29 +47,7 @@ singularity run --app python
 
     # Install the dependence of Nest
     apk del libstdc++
-    set -x && apk add --force-overwrite --no-cache --update libc6-compat libstdc++
-
-    # install python
-    apk add cmake zlib-dev libltdl ncurses-dev gdbm-dev readline-dev \
-     nss libressl-dev sqlite-dev readline-dev libffi-dev gsl-dev bzip2-dev curl
-    apk add  libbsd-dev openblas-dev lapack-dev freetype-dev jpeg-dev zeromq-dev
-    cd /home/
-    curl -O https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz
-    tar -xf Python-3.8.10.tar.xz
-    cd Python-3.8.10
-    ./configure --enable-optimizations --enable-shared
-    make
-    make install
-    cd ..
-    rm -rf  Python-3.8.10.tar.xz Python-3.8.10
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
-
-    # install pip
-    cd /root
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python3.8 get-pip.py
-    rm get-pip.py
-    pip install --upgrade pip
+    set -x && apk add --force-overwrite --no-cache --update libc6-compat libstdc++ hdf5-dev gsl-dev
 
     # install MPI
     apk add g++ gcc gfortran make strace wget
@@ -82,66 +60,80 @@ singularity run --app python
     cd ..
     rm -r mpich-3.1.4.tar.gz  mpich-3.1.4
 
+    # install python
+    apk add syslinux-dev linux-headers qhull-dev build-base boost-dev doxygen ffmpeg-dev gdal-dev glew-dev jpeg-dev \
+            libexecinfo-dev libpng-dev libxml2-dev pdal-dev qt5-qtbase-dev qt5-qttools-dev qt5-qtx11extras-dev \
+            sqlite-dev tk-dev unixodbc-dev zlib-dev netcdf-dev curl-dev cmake samurai xvfb-run mesa mesa-dri-gallium\
+             python3-dev curl py3-numpy-dev py3-scipy py3-pillow py3-matplotlib py3-pip
+    echo "#include <unistd.h>" > /usr/include/sys/unistd.h
+    wget https://www.vtk.org/files/release/9.1/VTK-9.1.0.tar.gz
+    tar xf VTK-9.1.0.tar.gz
+    mkdir VTK-9.1.0_build
+    cd VTK-9.1.0_build
+    cmake ../VTK-9.1.0 -DBUILD_SHARED_LIBS=ON -DVTK_WRAP_PYTHON=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DVTK_WHEEL_BUILD=ON -DMPI_C_LIBRARIES=/usr/lib/libmpi.so -DMPI_C_INCLUDE_PATH=/usr/include/mpi
+    make -j$(nproc)
+    make install
+
+    # install pip
+    cd /root
+
     # for python library
-    pip install --upgrade pip
-    pip install nose==1.3.7
-    pip install numpy==1.20.3 cython==0.29.23 Pillow==8.2.0
-    pip install mpi4py==3.0.3
-    apk add lapack-dev
-    pip install scipy==1.6.3
-    pip install elephant==0.10.0
+    apk add llvm-dev llvm blas-dev lapack-dev
+    pip3 install --upgrade pip==21.1.2
+    pip3 install setuptools==57.0.0
+    pip3 install numba==0.55.1
+    pip3 install nose==1.3.7 cython==0.29.23 Pillow==8.2.0
+    pip3 install mpi4py==3.0.3
+    pip3 install elephant==0.10.0
+    pip3 install h5py==3.2.1
     # for plotting function
-    pip install matplotlib==3.4.2
-    pip install networkx==2.5.1
-    pip install jupyter==1.0.0
-    pip install vtk==9.0.1
-    pip install h5py==3.2.1
-    pip install cycler==0.10.0
-    pip install jupyter==1.0.0
-    pip install vtk==9.0.1
-    pip install plotly==5.1.0
+    pip3 install networkx==2.5.1
+    pip3 install jupyter==1.0.0
+    pip3 install cycler==0.10.0
+    pip3 install jupyter==1.0.0
+    pip3 install plotly==5.1.0
 
     # install TVB
-    apk add llvm-dev llvm hdf5-dev
     export LLVM_CONFIG=/usr/bin/llvm-config
-    pip install tvb-data==2.0 tvb-gdist==2.1.0 tvb-library==2.0.10
+    pip3 install tvb-data==2.0 tvb-gdist==2.0.0 tvb-library==2.0.10 numexpr==2.8.0
 
     # install parameters
     git clone https://github.com/NeuralEnsemble/parameters
     cd parameters
-    python3.8 setup.py install
+    python3 setup.py install
     cd ..
     rm -r parameters
 
     # install neuron
-    apk add bison flex libxcomposite-dev
+    apk add bison flex libxcomposite-dev ncurses-dev  libc-dev musl-dev readline-dev libexecinfo-dev
     git clone https://github.com/neuronsimulator/nrn.git
     cd nrn
-    git checkout 8.0.0
+    # git checkout 8.0.0
     mkdir build
     cd build
     cmake .. \
     -DNRN_ENABLE_INTERVIEWS=OFF \
     -DNRN_ENABLE_MPI=OFF \
-    -DNRN_ENABLE_RX2D=OFF \
     -DCMAKE_INSTALL_PREFIX=/usr/local/nrn
-    cmake --build . --parallel 7 --target install
+    echo $(cat ./src/nrniv/CMakeFiles/nrniv.dir/link.txt) /usr/lib/libexecinfo.so > ./src/nrniv/CMakeFiles/nrniv.dir/link.txt
+    cmake --build . --parallel $(nproc) --target install
     cd ../..
     rm -r nrn
+    sed -i 's/UserLDFLAGS=""/UserLDFLAGS="-lexecinfo"/g' /usr/local/nrn/bin/nrnivmodl
     # initialisation of synapse
-    cd /home/nest_elephant_tvb/analyse/LFPY
+    cd /home/analyse/LFPY
     nrnivmodl
     cd
 
     # install LPFy
-    pip install lfpykit==0.3
-    pip install MEAutility==1.4.9
-    pip install LFPy==2.2.1
+    pip3 install lfpykit==0.3
+    pip3 install MEAutility==1.4.9
+    pip3 install LFPy==2.2.1
 
     # install HybridLFPy from github
     git clone --branch nest-3-lio https://github.com/lionelkusch/hybridLFPy.git
     cd hybridLFPy
-    python3.8 setup.py install
+    python3 setup.py install
     cd ..
     rm -r hybridLFPy
 
@@ -151,42 +143,42 @@ singularity run --app python
     export PATH_NEST_BUILD
     export NAME_SOURCE_NEST
 
-    # Compile and Install Nest
+    ## Compile and Install Nest
     cd /home/
     mkdir $PATH_NEST_BUILD
     cd $PATH_NEST_BUILD
     cmake -DCMAKE_INSTALL_PREFIX:PATH=$PATH_NEST_INSTALL $NAME_SOURCE_NEST -Dwith-mpi=ON -Dwith-openmp=ON -Dwith-readline=On -Dwith-ltdl=ON -Dwith-python=ON -Dcythonize-pynest=ON
-    make
+    make -j$(nproc)
     make install
     #make test
     cd /home/
     rm -r $PATH_NEST_BUILD
     # export pythonpath for include pynest in python
-    echo "export  PYTHONPATH=/usr/lib/nest/lib64/python3.8/site-packages/:/home/:/usr/local/nrn/lib/python/:$PYTHONPATH" >>$SINGULARITY_ENVIRONMENT
+    echo "export  PYTHONPATH=/usr/lib/nest/lib64/python3.9/site-packages/:/home/:/usr/local/nrn/lib/python/:$PYTHONPATH" >>$SINGULARITY_ENVIRONMENT
 
 %apprun python
-   exec /usr/local/bin/python3.8 "$@"
+   exec /usr/bin/python3 "$@"
 
 %apprun mpi
-   exec /usr/local/bin/mpirun "$@"
+   exec /usr/bin/mpirun "$@"
 
 %apprun jupyter-notebook
    exec jupyter-notebook
 
 %apprun nest
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/Nest/simulation_Zerlaut.py "$@"
+   exec /usr/bin/python3 /home/nest_elephant_tvb/Nest/simulation_Zerlaut.py "$@"
 
 %apprun TVB
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py "$@"
+   exec /usr/bin/python3 /home/nest_elephant_tvb/Tvb/simulation_Zerlaut.py "$@"
 
 %apprun NEST-TVB
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/translation/nest_to_tvb.py "$@"
+   exec /usr/bin/python3 /home/nest_elephant_tvb/transformation/nest_to_tvb.py "$@"
 
 %apprun TVB-NEST
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/translation/tvb_to_nest.py "$@"
+   exec /usr/bin/python3 /home/nest_elephant_tvb/transformation/tvb_to_nest.py "$@"
 
 %apprun create_launcher
-   exec cat /home/nest_elephant_tvb/orchestrator/run_exploration.py
+   exec cat /home/nest_elephant_tvb/launcher/run_exploration.py
 
 %apprun LFP
-   exec /usr/local/bin/python3.8 /home/nest_elephant_tvb/analyse/LFPY/run_LFP.py "$@"
+   exec /usr/bin/python3 /home/analyse/LFPY/run_LFP.py "$@"

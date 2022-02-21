@@ -25,9 +25,9 @@ param_co_simulation = {
     'level_log': 1,
     # command to launch mpi executable:
     'mpi': ['mpirun'],  # example : ['mpirun'] , ['srun','-N','1']
-    # Number of process for the translation : 3 => MPI internal communication and 1 => thread internal communication
+    # Number of process for the transformation : 3 => MPI internal communication and 1 => thread internal communication
     # thread version doesn't work for cluster due to python interruption of MPI function
-    'translation_thread': False
+    'transformation_thread': False
 }
 
 # parameter simulators
@@ -268,9 +268,9 @@ param_tvb_monitor = {
     },
 }
 
-# Parameters for the translator Nest to TVB
+# Parameters for the transformation from Nest to TVB
 param_TR_nest_to_tvb = {
-    # 'init': path of the initialisation of the translation if not the run exploration will create it
+    # 'init': path of the initialisation of the transformation if not the run exploration will create it
     # 'resolution': param_nest['sim_resolution']
     # 'synch': param_co_simulation['synchronization']
     # 'width': param_zerlaut['T']
@@ -282,7 +282,7 @@ param_TR_nest_to_tvb = {
     'save_hist_count': 10,   # number of run before saving
 }
 
-# Parameters for the translator TVB to Nest
+# Parameters for the transformation from TVB to Nest
 param_TR_tvb_to_nest = {
     # percentage of shared rate between neurons of the same region
     'percentage_shared': 0.5,

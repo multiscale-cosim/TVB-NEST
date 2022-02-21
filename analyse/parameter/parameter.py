@@ -75,6 +75,6 @@ param_co_simulation = {"co-simulation": True, "nb_MPI_nest": 1,
                        "synchronization": 2.0,
                        "level_log": 1,
                        "mpi": ['mpirun'],
-                       'translation_thread': False}
+                       'transformation_thread': False}
 begin = 0.0
 end = 2000.0
