@@ -22,3 +22,5 @@ lib/
 */*/*.simg
 ./timer/test_file/
 ./tests/test_nest_MPI_threading/files/*
+doc/UML/*.svg
+doc/UML/*.png
