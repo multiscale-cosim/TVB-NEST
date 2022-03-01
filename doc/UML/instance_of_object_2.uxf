@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>104</x>
+      <y>184</y>
+      <w>432</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ConsumerNESTData&gt;&gt;
+Package::SimulatorIO
+--
+
+--
+simulation_time : Receive data from NEST and add them in a shared buffer
+--
+Responsibilities
+-- Get data from NEST
+-- transfert to transformer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>544</x>
+      <y>136</y>
+      <w>152</w>
+      <h>616</h>
+    </coordinates>
+    <panel_attributes>nest_to_tvb
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>552</x>
+      <y>184</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>NEST Output</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>552</x>
+      <y>304</y>
+      <w>128</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>Transformer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>552</x>
+      <y>632</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>TVB Input</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>104</x>
+      <y>304</y>
+      <w>432</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;TransformerSpikeRate&gt;&gt;
+Package::SimulatorIO
+--
+synch: time of synchronization
+dt: time of integration
+path_init: path of file with initial condition 
+shape: shape of the buffer
+width: the size fo the window
+buffer: buffer with the count of spikes
+save_hist: saving the histogram
+...
+save_rate: saving the rate generate
+...
+--
+simulation_time : Transformation function of the spike to rate 
+add_spikes(count, size_buffer, buffer): adding spike in the histogram
+analyse(count, hist): analyse the histogram to generate state variable
+                                 and the time
+--
+Responsibilities
+-- 1) get the spike
+-- 2) transform spike to rate
+-- 3) send rate
+The step 1 and 3 need to be dissociate for synchronization requirement.
+This dissociation allow the transformation module to buffer one more step 
+from the sender or the receiver.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>104</x>
+      <y>632</y>
+      <w>432</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ProducerTVBData&gt;&gt;
+Package::SimulatorIO
+--
+
+--
+simulation_time : Produce data to TVB from receiving data.
+--
+Responsibilities
+-- Receiving data from transformer
+-- Send to TVB</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>184</y>
+      <w>432</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ConsumerTVBData&gt;&gt;
+Package::SimulatorIO
+--
+
+--
+simulation_time : Receive data from TVB and transfert them to transformer
+--
+Responsibilities
+-- Get data from TVB
+-- transfert to transformer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>704</x>
+      <y>136</y>
+      <w>152</w>
+      <h>616</h>
+    </coordinates>
+    <panel_attributes>nest_to_tvb
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>712</x>
+      <y>184</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>TVB Output</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>712</x>
+      <y>304</y>
+      <w>128</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>Transformer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>712</x>
+      <y>632</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>NEST Input</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>304</y>
+      <w>432</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;TransformerRateSpike&gt;&gt;
+Package::SimulatorIO
+--
+id: id of NEST devices
+percentage_shared: percentage of shared spikes
+nb_spike_generator: number of spike generator
+nb_synapse: number of synapse attach to the generator
+function_transformation: selection function of transformation
+save_hist: saving the histogram
+...
+save_rate: saving the rate generate
+...
+
+--
+simulation_time : Transformation function of the spike to rate 
+generate_spike(count,time_step,rate): generator of spikes from
+               rates using elephant
+               
+--
+Responsibilities
+-- 1) get the spike
+-- 2) transform spike to rate
+-- 3) send rate
+The step 1 and 3 need to be dissociate for synchronization requirement.
+This dissociation allow the transformation module to buffer one more step 
+from the sender or the receiver.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>632</y>
+      <w>432</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ProducerDataNEST&gt;&gt;
+Package::SimulatorIO
+--
+id_first_spike_detector: id of the first spike detector
+--
+simulation_time : Produce data to NEST from a shared buffer
+--
+Responsibilities
+-- Receiving data from transformer
+-- Send to NEST</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -4,7 +4,7 @@
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>32</y>
       <w>16</w>
       <h>16</h>
@@ -15,7 +15,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>40</y>
       <w>24</w>
       <h>64</h>
@@ -26,7 +26,7 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>88</y>
       <w>128</w>
       <h>32</h>
@@ -37,7 +37,7 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>144</y>
       <w>128</w>
       <h>32</h>
@@ -48,7 +48,7 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>200</y>
       <w>128</w>
       <h>32</h>
@@ -59,19 +59,19 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>320</y>
       <w>128</w>
       <h>32</h>
     </coordinates>
     <panel_attributes>MPI connection
-with translators</panel_attributes>
+with transformer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>376</y>
       <w>128</w>
       <h>32</h>
@@ -82,7 +82,7 @@ with translators</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>488</y>
       <w>128</w>
       <h>32</h>
@@ -93,7 +93,7 @@ with translators</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>544</y>
       <w>128</w>
       <h>32</h>
@@ -104,7 +104,7 @@ with translators</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>432</y>
       <w>128</w>
       <h>32</h>
@@ -116,7 +116,7 @@ of proxy node</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>608</y>
       <w>128</w>
       <h>32</h>
@@ -127,7 +127,7 @@ of proxy node</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>680</x>
+      <x>688</x>
       <y>680</y>
       <w>32</w>
       <h>32</h>
@@ -138,7 +138,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>112</y>
       <w>24</w>
       <h>48</h>
@@ -149,7 +149,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>168</y>
       <w>24</w>
       <h>48</h>
@@ -160,7 +160,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>224</y>
       <w>24</w>
       <h>48</h>
@@ -171,7 +171,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>344</y>
       <w>24</w>
       <h>48</h>
@@ -182,7 +182,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>400</y>
       <w>24</w>
       <h>48</h>
@@ -193,7 +193,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>512</y>
       <w>24</w>
       <h>48</h>
@@ -204,7 +204,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>568</y>
       <w>24</w>
       <h>56</h>
@@ -215,7 +215,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>456</y>
       <w>24</w>
       <h>48</h>
@@ -226,7 +226,7 @@ of proxy node</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>632</y>
       <w>96</w>
       <h>64</h>
@@ -238,7 +238,7 @@ count &gt; end</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>704</x>
+      <x>712</x>
       <y>440</y>
       <w>152</w>
       <h>272</h>
@@ -250,42 +250,42 @@ False</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>704</y>
       <w>48</w>
-      <h>72</h>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 True</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
       <x>632</x>
-      <y>760</y>
-      <w>144</w>
+      <y>808</y>
+      <w>160</w>
       <h>32</h>
     </coordinates>
-    <panel_attributes>disconnect of translators</panel_attributes>
+    <panel_attributes>disconnect of transformers</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
-      <y>784</y>
+      <x>696</x>
+      <y>832</y>
       <w>24</w>
-      <h>56</h>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>688</x>
-      <y>824</y>
+      <x>696</x>
+      <y>864</y>
       <w>16</w>
       <h>16</h>
     </coordinates>
@@ -295,7 +295,7 @@ True</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>624</x>
+      <x>632</x>
       <y>0</y>
       <w>152</w>
       <h>24</h>
@@ -306,7 +306,7 @@ True</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>640</x>
+      <x>648</x>
       <y>256</y>
       <w>128</w>
       <h>40</h>
@@ -318,8 +318,30 @@ of MPI port files</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
+      <x>696</x>
       <y>288</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>640</x>
+      <y>752</y>
+      <w>144</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>MPI barrier</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>776</y>
       <w>24</w>
       <h>48</h>
     </coordinates>

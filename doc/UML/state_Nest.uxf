@@ -31,7 +31,7 @@
       <w>96</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Initialise Nest</panel_attributes>
+    <panel_attributes>Initialise NEST</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -196,7 +196,7 @@ True</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>300</x>
-      <y>828</y>
+      <y>834</y>
       <w>18</w>
       <h>36</h>
     </coordinates>
@@ -207,7 +207,7 @@ True</panel_attributes>
     <id>UMLSpecialState</id>
     <coordinates>
       <x>300</x>
-      <y>852</y>
+      <y>858</y>
       <w>12</w>
       <h>12</h>
     </coordinates>
@@ -244,7 +244,7 @@ True</panel_attributes>
       <w>192</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>Nest Prepare
+    <panel_attributes>NEST Prepare
 --
 1) Read all the file with the port description
 2) Connect with MPI to all the different port
@@ -260,7 +260,7 @@ valign=top
       <w>180</w>
       <h>126</h>
     </coordinates>
-    <panel_attributes>Nest Run
+    <panel_attributes>NEST Run
 --
 Input backend :
 
@@ -284,12 +284,13 @@ valign=top
       <x>240</x>
       <y>792</y>
       <w>180</w>
-      <h>42</h>
+      <h>48</h>
     </coordinates>
-    <panel_attributes>Nest Clean
+    <panel_attributes>NEST Clean
 --
 1) Send end of simulation 
-2) Disconnect
+2) MPI barrier
+3) Disconnect
 valign=top
 </panel_attributes>
     <additional_attributes/>

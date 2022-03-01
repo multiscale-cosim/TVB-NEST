@@ -117,7 +117,7 @@ fill buffer</panel_attributes>
       <w>72</w>
       <h>48</h>
     </coordinates>
-    <panel_attributes>translate
+    <panel_attributes>transform
 spikes to rates</panel_attributes>
     <additional_attributes/>
   </element>
@@ -788,7 +788,7 @@ rates .</panel_attributes>
       <w>72</w>
       <h>48</h>
     </coordinates>
-    <panel_attributes>translate
+    <panel_attributes>transform
 rates to spikes
 </panel_attributes>
     <additional_attributes/>
@@ -1059,7 +1059,7 @@ layer=1</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Nest
+    <panel_attributes>NEST
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1071,8 +1071,8 @@ layer=1</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translator
-Nest to TVB</panel_attributes>
+    <panel_attributes>Transfer
+NEST to TVB</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1095,8 +1095,8 @@ Nest to TVB</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translator
-TVB to Nest</panel_attributes>
+    <panel_attributes>Transfer
+TVB to NEST</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1108,7 +1108,7 @@ TVB to Nest</panel_attributes>
       <h>24</h>
     </coordinates>
     <panel_attributes>Consumer of
-Nest data</panel_attributes>
+NEST data</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1130,7 +1130,7 @@ Nest data</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translation 
+    <panel_attributes>Transformation 
 Spike to rate</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1210,7 +1210,7 @@ TVB data</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translation 
+    <panel_attributes>Transformation 
 Rate to spike</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1223,7 +1223,7 @@ Rate to spike</panel_attributes>
       <h>24</h>
     </coordinates>
     <panel_attributes>Consumer of
-Nest data</panel_attributes>
+NEST data</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

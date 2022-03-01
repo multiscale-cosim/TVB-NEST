@@ -22,7 +22,7 @@ layer=-1</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Nest
+    <panel_attributes>NEST
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -34,8 +34,8 @@ layer=-1</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translator
-Nest to TVB</panel_attributes>
+    <panel_attributes>Transfer
+NEST to TVB</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -69,8 +69,8 @@ Nest to TVB</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translator
-TVB to Nest</panel_attributes>
+    <panel_attributes>Transfer
+TVB to NEST</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -81,7 +81,7 @@ TVB to Nest</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>configure Nest
+    <panel_attributes>configure NEST
 kernel
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -107,7 +107,7 @@ TVB data</panel_attributes>
       <h>24</h>
     </coordinates>
     <panel_attributes>Consumer of
-Nest data</panel_attributes>
+NEST data</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -373,7 +373,7 @@ bg=yellow</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translation 
+    <panel_attributes>Transformation
 Spike to rate</panel_attributes>
     <additional_attributes/>
   </element>
@@ -446,7 +446,7 @@ bg=green</panel_attributes>
       <h>24</h>
     </coordinates>
     <panel_attributes>Consumer of
-Nest data</panel_attributes>
+NEST data</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -546,7 +546,7 @@ bg=yellow</panel_attributes>
       <w>90</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Translation 
+    <panel_attributes>Transformation
 Rate to spike</panel_attributes>
     <additional_attributes/>
   </element>
@@ -595,7 +595,7 @@ bg=green</panel_attributes>
       <h>36</h>
     </coordinates>
     <panel_attributes>start loop
-translate data
+transforming data
 bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
@@ -737,7 +737,7 @@ bg=orange</panel_attributes>
       <h>36</h>
     </coordinates>
     <panel_attributes>start loop
-translate data
+transforming data
 bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1679,7 +1679,7 @@ bg=yellow</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>Read list of IDs
-from Nest
+from NEST
 bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1714,7 +1714,7 @@ bg=orange</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>Read list of IDs
-from Nest
+from NEST
 bg=orange</panel_attributes>
     <additional_attributes/>
   </element>

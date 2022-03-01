@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLHierarchy</id>
+    <coordinates>
+      <x>20</x>
+      <y>0</y>
+      <w>460</w>
+      <h>870</h>
+    </coordinates>
+    <panel_attributes>type=Package
+nest_elephant_tvb
+	util.py
+	launcher
+		run_exploration.py
+		run_tvb_only.py
+	NEST
+		simulation_Zerlaut.py
+	transfer
+		nest_to_tvb.py
+		nest_to_tvb.py
+		communication
+			internal.py
+			internal_mpi.py
+			internal_thread.py
+			mpi_io_external.py
+		simulator_IO
+			Nest_IO.py
+			TVB_IO.py
+		transformation_function
+			rate_spike.py
+			transformation_function.py
+	TVB
+		helper_function_zerlaut.py
+		simulation_Zerlaut.py
+		wrapper_TVB.py
+		wrapper_TVB_mpi.py
+		Zerlaut.py</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>8</y>
+      <w>200</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ConsumerNESTData&gt;&gt;
+Package::SimulatorIO
+--
+(see instance)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>120</y>
+      <w>200</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;TransformerSpikeRate&gt;&gt;
+Package::Transform
+--
+(see instance)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>288</y>
+      <w>200</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ProducerTVBData&gt;&gt;
+Package::SimulatorIO
+--
+(see instance)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>176</y>
+      <w>200</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;TransformerRateSpike&gt;&gt;
+Package::Transform
+--
+(see instance)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>528</x>
+      <y>0</y>
+      <w>560</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>/MPICommunicationExtern/
+Package::communication
+Abstract class for MPI communication with a simulator
+Management of MPI communication for exchange of data with simulator
+--
+-logger: logger for the class
+-name: name of the module
+-ports: array of MPI port
+-path_ports: path for the port file
+-communication_internal: CommunicationInterne between instance
+--
+run(path_connection): main function
+create_connection(paths, info=MPI.INFO_NULL, comm=MPI.COMM_SELF, root_node=0):
+                  Create the port the get external connection
+close_connection(): close connection port
+finalise(): finalise MPI
+--
+Abstract classes
+simulation_time(): Connection with simulator
+--
+Responsibilities
+-- running the process:
+	1) creation of the connection if it's necessary
+	2) simulation time / communication with the simulator during the simulation
+	3) close the connection if it's necessary
+	4) finalise the MPI communication</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>24</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>72</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>136</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>184</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>240</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>296</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>232</y>
+      <w>200</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ConsumerTVBData&gt;&gt;
+Package::SimulatorIO
+--
+(see instance)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>64</y>
+      <w>200</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ProducerDataNEST&gt;&gt;
+Package::SimulatorIO
+--
+(see instance)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>744</x>
+      <y>304</y>
+      <w>136</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=[communication_internal]-&gt;&gt;&gt;&gt;&gt;
+m2=1
+m1=*
+</panel_attributes>
+    <additional_attributes>80.0;10.0;80.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>536</x>
+      <y>360</y>
+      <w>544</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>/CommunicationInternAbstract/
+Package::communication
+Abstract class for internal communication
+Limitation of spike and rate exchange
+--
+-logger: logger for the class
+1) for spike trains exchanges 
+-databuffer: shared buffer for spike exchange
+-shape_buffer: shape of the buffer
+-send_spike_exit: boolean to identify the end of the simulation
+2) for rate and time exchange
+-get_time_rate_exit: boolean to identify the end from getting function
+-send_time_rate_exit: boolean to identify the end from sending function
+--
+
+--
+Abstract classes
+finalise: Procedure before finalise MPI
+1) for spike trains exchanges 
+-send_spikes_ready: wait until it's ready to use the buffer
+-send_spikes: buffer ready to use 
+-send_spikes_trains(spike_trains): Write spike trains in buffer and send them
+-send_spikes_end: close internal connection for sending spikes
+-get_spikes: wait the sender to be ready and return the spikes trains
+-get_spikes_ready: wait the buffer is ready
+-get_spikes_release: realse the buffer
+-get_spikes_end: close internal connection for getting spikes
+2) for rate and time exchange
+-get_time_rate: wait that the data are available and return them when it's ready
+-get_time_rate_release: end the read of the data
+-get_time_rate_end: close the connection for receiving data
+-send_time_rate: send time and rate
+-send_time_rate_end: close the connection for sending data
+--
+Responsibilities
+-- all function for exchange data between processes in the transformer function</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>944</x>
+      <y>792</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>792</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>296</x>
+      <y>824</y>
+      <w>432</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;MPICommunication&gt;&gt;
+Package::communication
+Class for using MPI for the internal communication
+--
+-rank
+Usage of shared memory
+-win: it's a MPI Window for shared buffer if it's required
+-buffer_r_w: rank for the shared memory
+-request_send_size_buffer: writer of the buffer
+-request_read_buffer: read of the buffer variable for rate
+-sender_rank: sender rank
+-request_send_done: request for ending of send data
+-receiver_rank: receiver rank
+-request_receive_time: request for time
+-request_receive_rate: requets for rate
+-request_read_done: request for ending of receive data
+--
+_shared_mem_buffer(buffer_r_w, comm=MPI.COMM_WORLD):
+	Create shared memory buffer
+--
+Responsibilities
+MPI implementation of exchange of data between 3 MPI processes </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>744</x>
+      <y>824</y>
+      <w>400</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ThreadCommunicationn&gt;&gt;
+Package::communication
+Class for using thread for the internal communication
+--
+-buffer_read_data: variable contains reading buffer
+-status_read: status of read buffer and it can contain 
+	the dimension of the data
+-lock_read: lock for write in the status
+-databuffer: buffer where to right
+-buffer_write_data: variable for shared buffer
+-status_write: status of buffer and contains the dimension of the data
+-lock_write: lock for write in the status
+-shape_buffer: dimension of the data
+--
+
+--
+Responsibilities
+Thread implementation of exchange of data between 3 threads </panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
