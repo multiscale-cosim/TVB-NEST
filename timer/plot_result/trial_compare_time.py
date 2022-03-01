@@ -1,14 +1,16 @@
 from timer.plot_result.get_time_data import get_dictionnary
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 if __name__ == '__main__':
+    path = os.path.dirname(os.path.realpath(__file__))
     # test for neurons
     folders = [
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/100/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/1000/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10000/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/10/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/100/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/1000/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/10000/_g_1.0_mean_I_ext_0.0/',
     ]
     time_sim = []
     time_nest_sim = []
@@ -69,10 +71,10 @@ if __name__ == '__main__':
 
     # test for same trail
     folders = [
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10000/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10000_2/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10000_3/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/tests/test_file/new/10000_4/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/10000/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/10000_2/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/10000_3/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new/10000_4/_g_1.0_mean_I_ext_0.0/',
     ]
     time_sim = []
     for i in folders:
@@ -89,16 +91,16 @@ if __name__ == '__main__':
 
     # test for different trail
     folders = [
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/1/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/2/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/3/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/4/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/5/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/6/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/7/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/8/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/9/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/new_2/10000/10/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/1/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/2/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/3/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/4/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/5/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/6/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/7/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/8/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/9/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/new_2/10000/10/_g_1.0_mean_I_ext_0.0/',
     ]
     time_sim = []
     time_nest_sim = []
@@ -159,16 +161,16 @@ if __name__ == '__main__':
 
     # test for multithread
     folders = [
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/1/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/2/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/3/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/4/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/5/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/6/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/7/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/8/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/9/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/thread/10000/10/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/1/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/2/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/3/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/4/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/5/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/6/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/7/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/8/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/9/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/thread/10000/10/_g_1.0_mean_I_ext_0.0/',
     ]
     time_sim = []
     time_nest_sim = []
@@ -229,30 +231,30 @@ if __name__ == '__main__':
 
     # test for synchrotime
     folders = [
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/0.1/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/0.2/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/0.4/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/0.5/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/0.8/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/0.9/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/1.0/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/1.1/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/1.3/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/1.5/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/1.6/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/1.7/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/1.8/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/2.0/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/2.1/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/2.2/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/2.5/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/2.6/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/2.7/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.0/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.1/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.2/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.4/_g_1.0_mean_I_ext_0.0/',
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/time_syn/10000/3.5/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/0.1/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/0.2/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/0.4/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/0.5/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/0.8/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/0.9/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/1.0/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/1.1/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/1.3/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/1.5/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/1.6/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/1.7/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/1.8/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/2.0/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/2.1/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/2.2/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/2.5/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/2.6/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/2.7/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/3.0/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/3.1/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/3.2/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/3.4/_g_1.0_mean_I_ext_0.0/',
+        path + '/test_file/time_syn/10000/3.5/_g_1.0_mean_I_ext_0.0/',
     ]
     time_sim = []
     time_nest_sim = []
@@ -320,34 +322,34 @@ if __name__ == '__main__':
     # test for different benchmark
     folders = [
         [
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/10/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/40/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/100/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/400/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/1000/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/4000/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/inst/10000/_g_1.0_mean_I_ext_0.0/', ],
+            path + '/test_file/benchmark/inst/10/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/inst/40/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/inst/100/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/inst/400/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/inst/1000/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/inst/4000/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/inst/10000/_g_1.0_mean_I_ext_0.0/', ],
         [
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/10/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/40/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/100/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/400/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/1000/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/4000/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark/delay/10000/_g_1.0_mean_I_ext_0.0/', ],
+            path + '/test_file/benchmark/delay/10/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/delay/40/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/delay/100/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/delay/400/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/delay/1000/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/delay/4000/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark/delay/10000/_g_1.0_mean_I_ext_0.0/', ],
         [
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST-timer/timer/test_file/benchmark/delay_vp/10/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST-timer/timer/test_file/benchmark/delay_vp/40/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST-timer/timer/test_file/benchmark/delay_vp/100/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST-timer/timer/test_file/benchmark/delay_vp/400/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST-timer/timer/test_file/benchmark/delay_vp/1000/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST-timer/timer/test_file/benchmark/delay_vp/4000/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST-timer/timer/test_file/benchmark/delay_vp/10000/_g_1.0_mean_I_ext_0.0/', ],
+            path + '/timer/test_file/benchmark/delay_vp/10/_g_1.0_mean_I_ext_0.0/',
+            path + '/timer/test_file/benchmark/delay_vp/40/_g_1.0_mean_I_ext_0.0/',
+            path + '/timer/test_file/benchmark/delay_vp/100/_g_1.0_mean_I_ext_0.0/',
+            path + '/timer/test_file/benchmark/delay_vp/400/_g_1.0_mean_I_ext_0.0/',
+            path + '/timer/test_file/benchmark/delay_vp/1000/_g_1.0_mean_I_ext_0.0/',
+            path + '/timer/test_file/benchmark/delay_vp/4000/_g_1.0_mean_I_ext_0.0/',
+            path + '/timer/test_file/benchmark/delay_vp/10000/_g_1.0_mean_I_ext_0.0/', ],
         [
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/10/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/100/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/1000/_g_1.0_mean_I_ext_0.0/',
-            '/home/kusch/Documents/project/co_simulation/TVB-NEST/timer/test_file/benchmark_1/delay_vp/10000/_g_1.0_mean_I_ext_0.0/', ]
+            path + '/test_file/benchmark_1/delay_vp/10/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark_1/delay_vp/100/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark_1/delay_vp/1000/_g_1.0_mean_I_ext_0.0/',
+            path + '/test_file/benchmark_1/delay_vp/10000/_g_1.0_mean_I_ext_0.0/', ]
     ]
 
     labels = ['single-step synchronization between simulators', 'delayed synchronization between simulators',

@@ -93,7 +93,7 @@ def plot_compare(ax, data, folders_list,
             maximum = data[i]['sim'].max()
     for i in range(len(data)):
         ax.plot(folders_list[i][1], data[i]['sim'], color[i], marker=markers[i],
-                 label=folders_list[i][2])
+                label=folders_list[i][2])
     ax.set_ylim(ymax=ymax)
     ax.vlines(8, 0, maximum, linestyles='dashed')
     plt.legend(fontsize=font_ticks_size, loc=legend_position)
@@ -270,11 +270,15 @@ def add_figure_compare(ax, folders_list, mpi=False, nb_trial=10, legend_position
 
 # figure for the optimisation for the paper TVB-ebrains
 if __name__ == '__main__':
+    import os
+
+    path_global = os.path.dirname(os.path.realpath(__file__))
     folders_list_one = [
-        ('../test_file/paper_nb_neurons/',
+        (path_global + '/../../data/timer/paper_nb_neurons/',
          np.array(np.around(np.logspace(1, 5, 30)) * 2, dtype=int),
          'Number of neurons simulated with NEST'),
-        ('../test_file/paper_time_synch/', [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
+        (path_global + '/../../data/timer/paper_time_synch/',
+         [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
          'Time of synchronization between\n NEST and TVB (in ms)'),
     ]  # same data for the three case
     fig = plt.figure(figsize=(2.92, 5.35))
@@ -284,14 +288,14 @@ if __name__ == '__main__':
     add_figure(fig.add_subplot(grid[1, 0]), folders_list_one[1][0], folders_list_one[1][1], folders_list_one[1][2],
                log_option=False, legend_position=1)
     folders_list_compare = [
-        ('../test_file/paper_mpi/', np.arange(1, 13, 1), 'only MPI'),
-        ('../test_file/paper_time_thread/', np.arange(1, 13, 1), 'only Thread'),
-        ('../test_file/paper_mpi_vp_2/', np.arange(2, 13, 2), 'Thread  and 2 MPI'),
-        ('../test_file/paper_mpi_vp_4/', np.arange(4, 13, 4), 'Thread  and 4 MPI'),
+        (path_global + '/../../data/timer/paper_mpi/', np.arange(1, 13, 1), 'only MPI'),
+        (path_global + '/../../data/timer/paper_time_thread/', np.arange(1, 13, 1), 'only Thread'),
+        (path_global + '/../../data/timer/paper_mpi_vp_2/', np.arange(2, 13, 2), 'Thread  and 2 MPI'),
+        (path_global + '/../../data/timer/paper_mpi_vp_4/', np.arange(4, 13, 4), 'Thread  and 4 MPI'),
     ]  # same data for the three case
     add_figure_compare(fig.add_subplot(grid[2, 0]), folders_list_compare, legend_position=2)
 
     plt.subplots_adjust(top=0.98, bottom=0.06, left=0.14, right=0.99, hspace=0.26, wspace=0.25)
 
     # plt.show()
-    plt.savefig('../../example/analyse/figure/figure_3_compare.pdf')
+    plt.savefig(path_global + '/../../data/figure/figure_3_compare.pdf')

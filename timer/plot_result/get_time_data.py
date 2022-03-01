@@ -241,12 +241,15 @@ def analyse_nest(nest, nest_init, nest_sim, nest_timer, nest_timer_input_init, n
     pre_run.addNode('pre_run_record', values=timer_value_nest_time_io[0])
     pre_run.addNode('pre_run_input', values=timer_value_nest_time_io[1])
     # wait_time = nest_timer_input[:,3]-nest_timer_input[:,0]
-    pre_run.get('pre_run_input').addNode('pre_run_input_receive_data', values=timer_value_nest_time_input[0]-wait_time[np.logical_not(np.isnan(wait_time))])
+    pre_run.get('pre_run_input').addNode('pre_run_input_receive_data',
+                                         values=timer_value_nest_time_input[0] - wait_time[
+                                             np.logical_not(np.isnan(wait_time))])
     pre_run.get('pre_run_input').addNode('pre_run_input_wait', values=wait_time[np.logical_not(np.isnan(wait_time))])
     # pre_run.get('pre_run_input').addNode('pre_run_update', values=timer_value_nest_time_input[0]) # not precise
     # pre_run.get('pre_run_input').get('pre_run_update').addNode('pre-run wait send first',         # not precise
     #                                                            values=timer_value_nest_time_input[1])
-    pre_run.get('pre_run_input').get('pre_run_input_receive_data').addNode('send message', values=timer_value_nest_time_input[2])
+    pre_run.get('pre_run_input').get('pre_run_input_receive_data').addNode('send message',
+                                                                           values=timer_value_nest_time_input[2])
     run_nest.addNode('simulation kernel nest', values=timer_value_nest_time[2])
     run_nest.addNode('post-run', values=timer_value_nest_time[3])
     run_nest.get('post-run').addNode('post-run input', values=timer_value_nest_time_input[3])
@@ -402,20 +405,24 @@ def analyse_tvb_to_nest_transformer(index, master, data_transform, mpi):
     if mpi:
         sim_process.get('send spike trains').addNode("send size", values=remove_NAN(time_value_transformer[8, :]))
         sim_process.get('send spike trains').addNode("reshape data", values=remove_NAN(time_value_transformer[13, :]))
-        sim_process.get('end connection').addNode("release read buffer", values=remove_NAN(time_value_transformer[18, :]))
+        sim_process.get('end connection').addNode("release read buffer",
+                                                  values=remove_NAN(time_value_transformer[18, :]))
         sim_process.get('end connection').time -= 0.04
         sim_process.get('end connection').get("release read buffer").time -= 0.04
         sim_process.get('get rate').addNode("receive time", values=remove_NAN(time_value_transformer[15, :]))
         sim_process.get('get rate').addNode("receive rate", values=remove_NAN(time_value_transformer[16, :]))
     else:
-        sim_process.get('send spike trains').addNode("wait write buffer", values=remove_NAN(time_value_transformer[8, :]), print_name="wait<br>write buffer")
+        sim_process.get('send spike trains').addNode("wait write buffer",
+                                                     values=remove_NAN(time_value_transformer[8, :]),
+                                                     print_name="wait<br>write buffer")
         sim_process.get('send spike trains').addNode("reshape data", values=remove_NAN(time_value_transformer[14, :]))
         sim_process.get('send spike trains').addNode("end write", values=remove_NAN(time_value_transformer[9, :]))
         sim_process.get('end connection').addNode("release write buffer",
                                                   values=remove_NAN(time_value_transformer[10, :]))
         sim_process.get('get rate').addNode("wait read buffer", values=remove_NAN(time_value_transformer[11, :]))
         sim_process.get('get rate').addNode("end read", values=remove_NAN(time_value_transformer[12, :]))
-        sim_process.get('end connection').addNode("release read buffer", values=remove_NAN(time_value_transformer[13, :]))
+        sim_process.get('end connection').addNode("release read buffer",
+                                                  values=remove_NAN(time_value_transformer[13, :]))
 
     return transform
 
@@ -462,7 +469,7 @@ def analyse_nest_to_tvb_receive(index, master, data_receive, mpi):
     """
     time_value_receive = get_time(data_receive)
     name = 'NEST_TVB_' + str(index) + ': Consumer NEST data '
-    transform = init_transformation(master, data_receive,name)
+    transform = init_transformation(master, data_receive, name)
 
     sim_process = transform.get('simulation')
     sim_process.addNode('receive spikes', values=remove_NAN(time_value_receive[1, :]))
@@ -476,7 +483,8 @@ def analyse_nest_to_tvb_receive(index, master, data_receive, mpi):
         sim_process.get('send internal spike').addNode("send size", values=remove_NAN(time_value_receive[8, :]))
         sim_process.addNode("release write buffer", remove_NAN(time_value_receive[9, :]))
     else:
-        sim_process.get('buffer ready').addNode("wait write buffer", values=remove_NAN(time_value_receive[8, :]),print_name="wait<br>write buffer")
+        sim_process.get('buffer ready').addNode("wait write buffer", values=remove_NAN(time_value_receive[8, :]),
+                                                print_name="wait<br>write buffer")
         sim_process.get('send internal spike').addNode("end write buffer", values=remove_NAN(time_value_receive[9, :]))
         sim_process.addNode("release write buffer", values=remove_NAN(time_value_receive[10, :]))
 
@@ -511,9 +519,12 @@ def analyse_nest_to_tvb_transfomer(index, master, data_transformer, mpi):
         sim_process.get('ready to get data').addNode("wait buffer", values=remove_NAN(time_value_transformer[11, :]))
         sim_process.get('send rates').addNode("send rate", values=remove_NAN(time_value_transformer[17, :]))
     else:
-        sim_process.get('ready to get data').addNode("wait read buffer", values=remove_NAN(time_value_transformer[11, :]))
-        sim_process.get('ready to get data').addNode("end read buffer", values=remove_NAN(time_value_transformer[12, :]))
-        sim_process.get('release buffer').addNode("release read buffer", values=remove_NAN(time_value_transformer[13, :]))
+        sim_process.get('ready to get data').addNode("wait read buffer",
+                                                     values=remove_NAN(time_value_transformer[11, :]))
+        sim_process.get('ready to get data').addNode("end read buffer",
+                                                     values=remove_NAN(time_value_transformer[12, :]))
+        sim_process.get('release buffer').addNode("release read buffer",
+                                                  values=remove_NAN(time_value_transformer[13, :]))
         sim_process.get('send rates').addNode("wait write buffer", values=remove_NAN(time_value_transformer[8, :]))
         sim_process.get('send rates').addNode("end write buffer", values=remove_NAN(time_value_transformer[9, :]))
         sim_process.get('send rates').addNode("release write buffer", values=remove_NAN(time_value_transformer[10, :]))
@@ -593,7 +604,10 @@ def get_dictionnary(path, mpi, transformation=True):
 
 
 if __name__ == '__main__':
-    # tree, indexes = get_dictionnary('../test_file/test_thread/_g_1.0_mean_I_ext_0.0/',False)
-    tree, indexes = get_dictionnary('../test_file/test_MPI/_g_1.0_mean_I_ext_0.0/', True)
+    import os
+
+    path_global = os.path.dirname(os.path.realpath(__file__))
+    tree, indexes = get_dictionnary(path_global + '/../../data/timer/paper_time_thread/1/0/_g_10.0_mean_I_ext_0.0/', False)
+    # tree, indexes = get_dictionnary(path_global + '/../../data/timer/paper_mpi/1/0/_g_10.0_mean_I_ext_0.0/', True)
     print(indexes)
     print(tree)

@@ -6,19 +6,20 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
-def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
+def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N, path):
     """
     Function for plotting the time of all the modules
     :param data_time: tree with time
-    :param id_TR_N_to_T: the ids of Transformer Nest to TVB
-    :param id_TR_T_to_N: the ids of Transformer TVB to Nest
+    :param id_TR_N_to_T: the ids of Transformer NEST to TVB
+    :param id_TR_T_to_N: the ids of Transformer TVB to NEST
+    :param path for saving figure
     :return:
     """
-    # get times for Nest
+    # get times for NEST
     values = []
     labels = []
     parents = []
-    values_nest, labels_nest, parents_nest = data_time.get('Nest').to_array_for_print()
+    values_nest, labels_nest, parents_nest = data_time.get('NEST').to_array_for_print()
     values.append(values_nest)
     labels.append(labels_nest)
     parents.append(parents_nest)
@@ -29,18 +30,18 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
     labels.append(labels_tvb)
     parents.append(parents_tvb)
 
-    # get times for transformer Nest to TVB
+    # get times for transformer NEST to TVB
     for index_tr, i in enumerate(id_TR_N_to_T):
-        for name in [': Producer Nest data ', ': Transformer function ', ': Consumer TVB data ']:
+        for name in [': Producer NEST data ', ': Transformer function ', ': Consumer TVB data ']:
             TR = data_time.get('TVB_NEST_' + str(index_tr) + name)
             values_TR, labels_TR, parents_TR = TR.to_array_for_print()
             values.append(values_TR)
             labels.append(labels_TR)
             parents.append(parents_TR)
 
-    # get times for transformer TVB to Nest
+    # get times for transformer TVB to NEST
     for index_tr, i in enumerate(id_TR_T_to_N):
-        for name in [': Consumer Nest data ', ': Transformer function ', ': Producer TVB data ']:
+        for name in [': Consumer NEST data ', ': Transformer function ', ': Producer TVB data ']:
             TR = data_time.get('NEST_TVB_' + str(index_tr) + name)
             values_TR, labels_TR, parents_TR = TR.to_array_for_print()
             values.append(values_TR)
@@ -63,7 +64,7 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
         vertical_spacing=0.0001,
         horizontal_spacing=0.0001,
     )
-    # Nest
+    # NEST
     trace = go.Treemap(
         labels=labels[0],
         values=values[0],
@@ -103,16 +104,17 @@ def print_tree_data(data_time, id_TR_N_to_T, id_TR_T_to_N):
     # fig.update_layout(height=1100, width=1800, title_text="Simulation 10000 neurons MPI=8 time_syn=3.5",
     #                   uniformtext_minsize=20, font={'size': 40})
     # fig.update_layout(uniformtext=dict(minsize=7, mode='hide'))
-    fig.update_layout(treemapcolorway = ['#17becf', '#ff7f0e','#17becf'],height=2000, width=1000)
+    fig.update_layout(treemapcolorway=['#17becf', '#ff7f0e', '#17becf'], height=2000, width=1000)
     fig.show()
-    fig.write_image("timer_reference.svg", scale=1)
+    fig.write_image(path+"timer_reference.svg", scale=1)
 
 
 if __name__ == '__main__':
-    # dict_time, index = get_dictionnary('./test_file/test_MPI/_g_1.0_mean_I_ext_0.0/',True)
-    # dict_time, index = get_dictionnary('./test_file/test_MPI/ln_g_1.0_mean_I_ext_0.0/',True)
-    # dict_time, index = get_dictionnary('./test_file/test_thread/_g_1.0_mean_I_ext_0.0/',False)
-    dict_time, index = get_dictionnary('./test_file/paper_time_synch/2.0/0/_g_10.0_mean_I_ext_0.0/', False)
-    print_tree_data(dict_time, index[0], index[1])
-    # print_data_time(dict_time, index[0], index[1]) doesn't work
+    import os
+
+    path_global = os.path.dirname(os.path.realpath(__file__))
+    # dict_time, index = get_dictionnary(path_global+'/../../data/timer/paper_time_thread/1/0/_g_10.0_mean_I_ext_0.0/',False)
+    # dict_time, index = get_dictionnary(path_global+'/../../data/timer/paper_mpi/1/0/_g_10.0_mean_I_ext_0.0/', True)
+    dict_time, index = get_dictionnary(path_global+'/../../data/timer/paper_time_synch/2.0/0/_g_10.0_mean_I_ext_0.0/', False)
+    print_tree_data(dict_time, index[0], index[1], path_global+'/../../data/figure/timer/')
     print('end')

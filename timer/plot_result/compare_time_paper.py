@@ -2,16 +2,21 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 from timer.plot_result.get_time_data import get_dictionnary
 import matplotlib.pyplot as plt
+from matplotlib.text import Text
 import numpy as np
 
 
 def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
-                time_TVB_sim, time_TVB_IO,
-                title,
-                function=np.mean,
-                log_option=False,
-                ylabel_1='Wall time of the simulation in s',
-                ):
+               time_TVB_sim, time_TVB_IO,
+               title,
+               function=np.mean,
+               log_option=False,
+               ylabel='Wall time of the simulation in s',
+               labelsize=40,
+               labellegend=30,
+               figsize=(20, 20),
+               wspase=0.17
+               ):
     """
     create figure for comparison time of multiple configuration
     :param list_nb: list of increment of x axis
@@ -34,7 +39,7 @@ def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
     :return: figure
     """
     # plot the result
-    fig = plt.figure(figsize=(20, 20))
+    fig = plt.figure(figsize=figsize)
 
     ax = plt.gca()
     ax.fill_between(list_nb,
@@ -66,12 +71,14 @@ def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
     plt.ylim(ymin=0.0)
     if log_option:
         plt.xscale('log')
-    plt.legend(fontsize=30, loc=1)
-    plt.tick_params(axis='both', labelsize=40)
-    ax.set_ylabel(ylabel_1, fontsize=40)
+    plt.legend(fontsize=labellegend, loc=1)
+    plt.tick_params(axis='both', labelsize=labelsize, pad=1)
+    ax.set_ylabel(ylabel, fontsize=labelsize, labelpad=0)
+    ax.set_xlabel('', fontsize=labelsize, labelpad=0)
     # add labels and some configuration
-    fig.text(0.5, 0.04, title, ha='center', va='center', fontsize=40)
-    plt.subplots_adjust(left=0.13, right=0.99, top=0.97, bottom=0.13)
+    fig.text(0.5, 0.04, title, ha='center', va='center', fontsize=labelsize)
+    plt.subplots_adjust(left=0.13, right=0.99, top=0.97, bottom=0.13, wspace=wspase)
+    return fig
 
 
 def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
@@ -81,7 +88,12 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                 log_option=False,
                 ylabel_1='Wall time of the simulation in s',
                 ylabel_2='Stack of percentage of\nsimulated time',
-                ylabel_3='Percentage of\nsimulated time'
+                ylabel_3='Percentage of\nsimulated time',
+                figsize=(20, 20),
+                labelsize=20,
+                labellegend=15,
+                fontsize=20,
+                wspase=0.17
                 ):
     """
     create figure for comparison time of multiple configuration
@@ -105,7 +117,7 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
     :return: figure
     """
     # plot the result
-    fig = plt.figure(figsize=(20, 20))
+    fig = plt.figure(figsize=figsize)
 
     # print time
     plt.subplot(121)
@@ -139,9 +151,9 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
     plt.ylim(ymin=0.0)
     if log_option:
         plt.xscale('log')
-    plt.legend(fontsize=15, loc=2)
-    plt.tick_params(axis='both', labelsize=20)
-    ax.set_ylabel(ylabel_1, fontsize=20)
+    plt.legend(fontsize=labellegend, loc=2)
+    plt.tick_params(axis='both', labelsize=labelsize)
+    ax.set_ylabel(ylabel_1, fontsize=fontsize)
 
     # print percentage cumulative
     plt.subplot(222)
@@ -166,9 +178,9 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
     plt.ylim(ymin=0.0)
     if log_option:
         plt.xscale('log')
-    plt.tick_params(axis='both', labelsize=20)
-    plt.legend(fontsize=15)
-    plt.ylabel(ylabel_2, fontsize=20, labelpad=-1)
+    plt.tick_params(axis='both', labelsize=labelsize)
+    plt.legend(fontsize=labellegend)
+    plt.ylabel(ylabel_2, fontsize=fontsize, labelpad=-1)
 
     # print percentage
     plt.subplot(224)
@@ -181,30 +193,35 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
     plt.ylim(ymin=0.0)
     if log_option:
         plt.xscale('log')
-    plt.legend(fontsize=15)
-    plt.tick_params(axis='both', labelsize=20)
-    plt.ylabel(ylabel_3, fontsize=20, labelpad=-1)
+    plt.legend(fontsize=labellegend)
+    plt.tick_params(axis='both', labelsize=labelsize)
+    plt.ylabel(ylabel_3, fontsize=fontsize, labelpad=-1)
 
     # add labels and some configuration
-    fig.text(0.5, 0.04, title, ha='center', va='center', fontsize=20)
-    plt.subplots_adjust(left=0.07,right=0.99,top=0.99)
+    fig.text(0.5, 0.01, title, ha='center', va='center', fontsize=fontsize)
+    plt.subplots_adjust(left=0.07, right=0.99, top=0.99, wspace=wspase, hspace=0.1, bottom=0.05)
+    return fig
 
 
 # figure for the optimisation for the paper TVB-ebrains
 if __name__ == '__main__':
+    import os
+
+    path_global = os.path.dirname(os.path.realpath(__file__))
     folders_list = [
-        ('./test_file/paper_nb_neurons/',
-         np.array(np.around(np.logspace(1,5,30))*2,dtype=int),
+        (path_global + '/../../data/timer/paper_nb_neurons/',
+         np.array(np.around(np.logspace(1, 5, 30)) * 2, dtype=int),
          'Number of neurons simulated with NEST'),
-        ('./test_file/paper_mpi/', np.arange(1, 13, 1),
+        (path_global + '/../../data/timer/paper_mpi/', np.arange(1, 13, 1),
          'Number of MPI using by NEST ( 1 MPI = 1 VP)'),
-        ('./test_file/paper_time_thread/', np.arange(1, 13, 1),
+        (path_global + '/../../data/timer/paper_time_thread/', np.arange(1, 13, 1),
          'Number of virtual processes of NEST (number of MPI : 1)'),
-        ('./test_file/paper_mpi_vp_2/', np.arange(2, 13, 2),
+        (path_global + '/../../data/timer/paper_mpi_vp_2/', np.arange(2, 13, 2),
          'Number of virtual processes of NEST (number of MPI : 2)'),
-        ('./test_file/paper_mpi_vp_4/', np.arange(4, 13, 4),
+        (path_global + '/../../data/timer/paper_mpi_vp_4/', np.arange(4, 13, 4),
          'Number of virtual processes of NEST (number of MPI : 4)'),
-        ('./test_file/paper_time_synch/', [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
+        (path_global + '/../../data/timer/paper_time_synch/',
+         [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
          'Time of synchronization between NEST and TVB (in ms)'),
     ]  # same data for the three case
     mpi = False
@@ -214,7 +231,7 @@ if __name__ == '__main__':
     for index, (folder, list_nb, label) in enumerate(folders_list):
         for nb in list_nb:
             if index == 0:
-                folders[index].append(folder + str(nb//2))
+                folders[index].append(folder + str(nb // 2))
             else:
                 # the three test
                 folders[index].append(folder + str(nb))
@@ -235,6 +252,8 @@ if __name__ == '__main__':
         time_TVB_sim = []
         time_TVB_IO = []
         time_TVB_tot = []
+        if not os.path.exists(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2]):
+            os.mkdir(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2])
         for index_folder, name_folder in enumerate(folder):
             time_sim.append([])
             time_nest_sim.append([])
@@ -282,16 +301,47 @@ if __name__ == '__main__':
                     + tree.get('TVB').get('simulation').get('receive data').time
                     - tree.get('TVB').get('simulation').get('receive data').get('receive time').time
                     + tree.get('TVB').get('simulation').get('send data').time)
-        full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
-                    time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
-                    label, log_option=index_run < 1)
+        wspase = 0.17 if index_run != 5 else 0.20
+        fig = full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
+                          time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
+                          label, log_option=index_run < 1, wspase=wspase,
+                          labelsize=7, labellegend=7, fontsize=7, figsize=(7.09, 7.28))
+        fig.add_artist(Text(0.01, 0.98, "a", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.98, "b", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.49, "c", fontproperties={'size': 7}))
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_mean.pdf',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_mean.png',
+                    dpi=150)
         print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
-                    time_TVB_sim, time_TVB_IO,
-                    label, log_option=index_run < 1)
-        full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
-                    time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
-                    label,function=np.min )
-        full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait, time_TR_1_wait, time_TR_2_wait,
-                    time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
-                    label,function=np.max )
-    plt.show()
+                   time_TVB_sim, time_TVB_IO,
+                   label, log_option=index_run < 1, wspase=wspase,
+                   labelsize=7, labellegend=7, figsize=(7.09, 7.28))
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_time.pdf',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_time.png',
+                    dpi=150)
+        fig = full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
+                          time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
+                          label, function=np.min, log_option=index_run < 1, wspase=wspase,
+                          labelsize=7, labellegend=7, fontsize=7, figsize=(7.09, 7.28))
+        fig.add_artist(Text(0.01, 0.98, "a", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.98, "b", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.49, "c", fontproperties={'size': 7}))
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_min.pdf',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_min.png',
+                    dpi=150)
+        fig = full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
+                          time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
+                          label, function=np.max, log_option=index_run < 1, wspase=wspase,
+                          labelsize=7, labellegend=7, fontsize=7, figsize=(7.09, 7.28))
+        fig.add_artist(Text(0.01, 0.98, "a", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.98, "b", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.49, "c", fontproperties={'size': 7}))
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_max.pdf',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_max.png',
+                    dpi=150)
+        plt.close('all')
+    # plt.show()
