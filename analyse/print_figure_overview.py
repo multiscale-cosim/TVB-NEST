@@ -28,14 +28,13 @@ def print_rate_to_spike(folder_simulation, begin, end, selected_region=4, nb_reg
     :param pad: pad for the labels
     :return:
     """
-    from example.analyse.get_data import get_rate
+    from analyse.get_data import get_rate
     from quantities import ms, Hz
     result_raw = get_rate(folder_simulation + '/tvb/')[0]  # result of the Raw monitor
 
     # separate the different variable
     times = result_raw[0]
-    state_variable = np.concatenate(result_raw[1]).reshape((result_raw[1].shape[0], 7, nb_regions))[:, 0,
-                     :selected_region] * 1e3  # shape : time, state variable, region
+    state_variable = np.concatenate(result_raw[1]).reshape((result_raw[1].shape[0], 7, nb_regions))[:, 0, :selected_region] * 1e3  # shape : time, state variable, region
     max_FE = np.max(state_variable)
 
     # print figure of rate
@@ -100,7 +99,7 @@ def print_spike_to_rate(folder_simulation, nb_neurons, begin_1, begin_2, time_en
     :param pad: pad for the labels
     :return:
     """
-    from example.analyse.get_data import get_data_all
+    from analyse.get_data import get_data_all
     from nest_elephant_tvb.transformation.transformation_function.rate_spike import slidding_window
     # get data
     data_1 = get_data_all(folder_simulation + '/nest/')['pop_1_ex']
@@ -166,27 +165,30 @@ def print_spike_to_rate(folder_simulation, nb_neurons, begin_1, begin_2, time_en
 
 
 if __name__ == '__main__':
+    import os
+
+    path = os.path.dirname(os.path.realpath(__file__))
     # test function
-    # print_rate_to_spike('../local_cluster/case_regular_burst/', 1000.0, 20000.0)
-    # print_spike_to_rate('../local_cluster/case_regular_burst/', 100, 100.0, 200.0, 1000.0)
-    # plt.show()
+    print_rate_to_spike(path + '/../data/local_cluster/case_regular_burst/', 1000.0, 20000.0)
+    print_spike_to_rate(path + '/../data/local_cluster/case_regular_burst/', 100, 100.0, 200.0, 1000.0)
+    plt.show()
     # plot for first figure
-    fig_1, fig_2 = print_rate_to_spike('../local_cluster/case_up_down/', 10000.0, 20000.0,
+    fig_1, fig_2 = print_rate_to_spike(path + '/../data/local_cluster/case_up_down/', 10000.0, 20000.0,
                                        figure_size=(0.9, 0.63), font_ticks_size=5, size_neurons=0.001,
                                        linewidth=0.1, pad=0)
     plt.figure(fig_1.number)
     plt.subplots_adjust(top=0.99, bottom=0.18, left=0.02, right=0.88)
-    plt.savefig("figure/fig_1_rate_to_spike_rate.pdf", dpi=300)
+    plt.savefig(path + "/../data/figure/fig_1_rate_to_spike_rate.pdf", dpi=300)
     plt.figure(fig_2.number)
     plt.subplots_adjust(top=0.94, bottom=0.18, left=0.21, right=0.88)
-    plt.savefig("figure/fig_1_rate_to_spike_spike.pdf", dpi=300)
+    plt.savefig(path + "/../data/figure/fig_1_rate_to_spike_spike.pdf", dpi=300)
 
-    fig_3, fig_4 = print_spike_to_rate('../local_cluster/case_up_down/', 100, 10000.0, 20000.0, 10000.0,
+    fig_3, fig_4 = print_spike_to_rate(path + '/../data/local_cluster/case_up_down/', 100, 10000.0, 20000.0, 10000.0,
                                        figure_size=(0.9, 0.63), font_ticks_size=5, size_neurons=0.001,
                                        linewidth=0.1, pad=0)
     plt.figure(fig_3.number)
     plt.subplots_adjust(top=0.94, bottom=0.18, left=0.21, right=0.88)
-    plt.savefig("figure/fig_1_spike_to_rate_spike.pdf", dpi=300)
+    plt.savefig(path + "/../data/figure/fig_1_spike_to_rate_spike.pdf", dpi=300)
     plt.figure(fig_4.number)
     plt.subplots_adjust(top=0.99, bottom=0.18, left=0.02, right=0.88)
-    plt.savefig("figure/fig_1_spike_to_rate_rate.pdf", dpi=300)
+    plt.savefig(path + "/../data/figure/fig_1_spike_to_rate_rate.pdf", dpi=300)

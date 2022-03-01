@@ -19,10 +19,7 @@ import neuron
 import json
 import sys
 import copy
-if __name__ == '__main__':
-    from example.analyse.LFPY.select_spikes import select_spikes
-else:
-    from .select_spikes import select_spikes
+from analyse.LFPY.select_spikes import select_spikes
 
 ################# Initialization of MPI stuff ##################################
 if not hasattr(neuron.h, 'ExpSynI'):
@@ -47,16 +44,14 @@ def param_set_up(path, save_folder, param, parameters):
         savefolder=save_folder,
 
         # make a local copy of main files used in simulations
-        sim_scripts_path=os.path.join(save_folder,
-                                      'sim_scripts'),
+        sim_scripts_path=os.path.join(save_folder, 'sim_scripts'),
 
         # destination of single-cell output during simulation
         cells_path=os.path.join(save_folder, 'cells'),
 
         # destination of cell- and population-specific signals, i.e., compund LFPs,
         # CSDs etc.
-        populations_path=os.path.join(save_folder,
-                                      'populations'),
+        populations_path=os.path.join(save_folder, 'populations'),
 
         # location of spike output from the network model
         spike_output_path=os.path.join(path + '/nest/'),
@@ -123,10 +118,9 @@ def param_set_up(path, save_folder, param, parameters):
         # layer per postsynaptic population, preserving overall indegree
         k_yXL={
             'ex': [[int(
-                param['populationParams']['ex']['number'] * parameters['param_nest_connection']['p_connect'] * 0.5), 0],
-                   [int(param['populationParams']['ex']['number'] * parameters['param_nest_connection'][
-                       'p_connect'] * 0.5),
-                    int(param['populationParams']['in']['number'] * parameters['param_nest_connection']['p_connect'])]],
+             param['populationParams']['ex']['number'] * parameters['param_nest_connection']['p_connect'] * 0.5), 0],
+             [int(param['populationParams']['ex']['number'] * parameters['param_nest_connection']['p_connect'] * 0.5),
+              int(param['populationParams']['in']['number'] * parameters['param_nest_connection']['p_connect'])]],
             'in': [[0, 0],
                    [int(param['populationParams']['ex']['number'] * parameters['param_nest_connection']['p_connect']),
                     int(param['populationParams']['in']['number'] * parameters['param_nest_connection']['p_connect'])]],
@@ -197,7 +191,8 @@ def set_up_network_sim(path, label, simulation_time, GIDs_ex, GIDs_in, parameter
     )
     return networkSim
 
-def process(PS,parameters,networkSim):
+
+def process(PS, parameters, networkSim):
     """
     SImulate the LFP
     :param PS: parameters
@@ -238,7 +233,7 @@ def process(PS,parameters,networkSim):
 
         # run population simulation and collect the data
         pop.run()
-        #pop.collect_data()
+        # pop.collect_data()
 
         # object no longer needed
         del pop
@@ -287,10 +282,7 @@ def plot_electrode(PS):
     :param PS: parameters
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population
-    else:
-        from .example_plotting import plot_population
+    from analyse.LFPY.example_plotting import plot_population
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
                     PS.layerBoundaries,
@@ -307,10 +299,7 @@ def plot_soma(PS):
     :param PS: parameters
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_soma_locations
-    else:
-        from .example_plotting import plot_population, plot_soma_locations
+    from analyse.LFPY.example_plotting import plot_population, plot_soma_locations
     # plot cell locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -332,10 +321,7 @@ def plot_cell(PS):
     :param PS:
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
-    else:
-        from .example_plotting import plot_population, plot_morphologies
+    from analyse.LFPY.example_plotting import plot_population, plot_morphologies
     # plot morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -357,10 +343,7 @@ def plot_cell_model(PS):
     :param PS:  parameters
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_individual_morphologies
-    else:
-        from .example_plotting import plot_population, plot_individual_morphologies
+    from analyse.LFPY.example_plotting import plot_population, plot_individual_morphologies
     # plot morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -383,10 +366,7 @@ def plot_cell_and_indication(PS):
     :param PS: parameters
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
-    else:
-        from .example_plotting import plot_population, plot_morphologies
+    from analyse.LFPY.example_plotting import plot_population, plot_morphologies
     # plot morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -424,10 +404,7 @@ def plot_excitatory_cell(PS):
     :param PS: parameter
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
-    else:
-        from .example_plotting import plot_population, plot_morphologies
+    from analyse.LFPY.example_plotting import plot_population, plot_morphologies
     # plot ex morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -449,10 +426,7 @@ def plot_inhibitory_cell(PS):
     :param PS: parameters
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies
-    else:
-        from .example_plotting import plot_population, plot_morphologies
+    from analyse.LFPY.example_plotting import plot_population, plot_morphologies
     # plot IN morphologies in their respective locations
     fig, ax = plt.subplots(1, 1, figsize=(5, 8))
     plot_population(ax, PS.populationParams, PS.electrodeParams,
@@ -475,10 +449,7 @@ def plot_compute_signal(PS, T):
     :param T: times
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
-    else:
-        from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    from analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
     # plot compound LFP and CSD traces
     fig = plt.figure()
     gs = gridspec.GridSpec(2, 8)
@@ -515,10 +486,7 @@ def plot_excitatory_signal(PS, T):
     :param T: times
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
-    else:
-        from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    from analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
     # plot compound LFP and CSD traces
     fig = plt.figure()
     gs = gridspec.GridSpec(2, 8)
@@ -548,18 +516,14 @@ def plot_excitatory_signal(PS, T):
     plt.close(fig)
 
 
-
-def plot_inhibitory_signal(PS,T):
+def plot_inhibitory_signal(PS, T):
     """
     plot inhibitory neurons and the signal
     :param PS: parameters
     :param T: times
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
-    else:
-        from .example_plotting import plot_population, plot_morphologies, plot_signal_sum
+    from analyse.LFPY.example_plotting import plot_population, plot_morphologies, plot_signal_sum
     # plot compound LFP and CSD traces
     fig = plt.figure()
     gs = gridspec.GridSpec(2, 8)
@@ -598,10 +562,7 @@ def plot_compute_all_signal(PS, T, networkSim, parameters):
     :param parameters: simulation parameters
     :return:
     """
-    if __name__ == '__main__':
-        from example.analyse.LFPY.example_plotting import plot_signal_sum, plot_correlation
-    else:
-        from .example_plotting import plot_signal_sum, plot_correlation
+    from analyse.LFPY.example_plotting import plot_signal_sum, plot_correlation
     # correlate global firing rate of network with CSD/LFP across channels
     # compute firing rates
     x, y = networkSim.get_xy((0, parameters['end']))
@@ -694,11 +655,11 @@ def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name
     COMM = MPI.COMM_WORLD
     SIZE = COMM.Get_size()
     RANK = COMM.Get_rank()
-    print("rank :",RANK," size : ",SIZE)
+    print("rank :", RANK, " size : ", SIZE)
     with open(path + '/parameter.json') as f:
         parameters = json.load(f)
     parameters['begin'] = 0.0
-    parameters['end'] = end-begin
+    parameters['end'] = end - begin
 
     # # modification of parameter for testing
     # parameters['param_nest_topology']['nb_neuron_by_region'] = 20
@@ -717,9 +678,9 @@ def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name
         'properrun': properrun,
         # if True, execute full model. If False, do only the plotting. Simulation results must exist.
         'morphologie_ex': os.path.dirname(
-            os.path.realpath(__file__)) + '/../../parameter/morphologies/pyramidal_cell_14VbTest.hoc',
+            os.path.realpath(__file__)) + '/../parameter/morphologies/pyramidal_cell_14VbTest.hoc',
         'morphologie_in': os.path.dirname(
-            os.path.realpath(__file__)) + "/../../parameter/morphologies/basket_cell17S.hoc",
+            os.path.realpath(__file__)) + "/../parameter/morphologies/basket_cell17S.hoc",
         'Ra': 150.0,  # LFPy : Axial resistance (reduce it increase the LFP)
         'passive': True,  # LFPy : Passive mechanisms are initialized if True. Defaults to False
         'nsegs_method': 'lambda_f',
@@ -805,21 +766,21 @@ def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name
         f.close()
         if not os.path.exists(path + '/LFPY/' + name + label + '/spikes/'):
             os.makedirs(path + '/LFPY/' + name + label + '/spikes/')
-            select_spikes(begin, end, path + '/nest/', label+'ex', path + '/LFPY/' + name + label + '/spikes/')
-            select_spikes(begin, end, path + '/nest/', label+'in', path + '/LFPY/' + name + label + '/spikes/')
+            select_spikes(begin, end, path + '/nest/', label + 'ex', path + '/LFPY/' + name + label + '/spikes/')
+            select_spikes(begin, end, path + '/nest/', label + 'in', path + '/LFPY/' + name + label + '/spikes/')
 
     ################################################################################
     # MAIN simulation procedure                                                    #
     ################################################################################
     COMM.Barrier()
-    print("rank",RANK,"network simulation  begin");sys.stdout.flush()
+    print("rank", RANK, "network simulation  begin"); sys.stdout.flush()
     networkSim = set_up_network_sim(path + '/LFPY/' + name + label + '/spikes/', label, parameters['end'],
                                     GIDs_ex, GIDs_in, parameters)
-    print("rank",RANK,"network simulation end");sys.stdout.flush()
+    print("rank", RANK, "network simulation end"); sys.stdout.flush()
     if param['properrun']:
-        print("rank",RANK,"process start"); sys.stdout.flush()
+        print("rank", RANK, "process start"); sys.stdout.flush()
         process(PS, parameters, networkSim)
-        print("rank",RANK,"process end"); sys.stdout.flush()
+        print("rank", RANK, "process end"); sys.stdout.flush()
         COMM.Barrier()
         sys.stdout.flush()
 
@@ -834,9 +795,12 @@ def generate_LFP(path, label, begin, end, GIDs_ex, GIDs_in, properrun=True, name
 
 
 if __name__ == '__main__':
+    import os
     COMM = MPI.COMM_WORLD
     SIZE = COMM.Get_size()
     RANK = COMM.Get_rank()
+
+    path_global = os.path.dirname(os.path.realpath(__file__))
 
     if not hasattr(neuron.h, 'ExpSynI'):
         # compile the exponential synapse which is not a default equation in neurons
@@ -844,9 +808,9 @@ if __name__ == '__main__':
             os.system('nrnivmodl')
         COMM.Barrier()
     pathes = [
-        '/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local_cluster/case_up_down/',
-        # '/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_asynchronous/',
-        # '/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/local/case_regular_burst_2/',
+        path_global + '/../../data/local_cluster/case_up_down/',
+        # path_global + '/../../data/local_cluster/case_asynchronous/',
+        # path_global + '/../../data/local_cluster/case_regular_burst_2/',
     ]
     for path in pathes:
         generate_LFP(path, 'pop_1_', 44000.0, 44200.0, [0, 80], [8000, 20], name='/test/')

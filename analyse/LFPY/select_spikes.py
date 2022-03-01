@@ -38,6 +38,8 @@ def select_spikes(begin, end, path_spikes, label, path_result):
                 np.savetxt(path_result+'/'+file, data[index], header=header, comments='', fmt='%r\t%.3f')
 
 if __name__ == '__main__':
-    select_spikes(100, 200, '/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/lfpy_test/nest/',
+    import os
+    path_global = os.path.dirname(os.path.realpath(__file__))
+    select_spikes(100, 200, path_global + '/../data/local_cluster/nest/',
                   'pop_1_ex',
-                  "/home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/lfpy_test/LFPY/small_init_test_2/pop_1_/spikes/")
+                  path_global + '/../data/local_cluster/LFPY/test/pop_1_/spikes/')

@@ -9,7 +9,7 @@ from cycler import cycler
 import copy
 
 from nest_elephant_tvb.transformation.transformation_function.rate_spike import slidding_window
-from example.analyse.get_data import get_data_all, get_rate
+from analyse.get_data import get_data_all, get_rate
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
 
@@ -217,12 +217,13 @@ def print_figure_macro_one(param, begin, end, spikes_ex, spikes_in, TVB_data,
                        bottom='on', labelbottom='on', length=1.0, labelsize=font_ticks_size)
 
 
-def print_figure_macro(parameters, begin, end):
+def print_figure_macro(parameters, begin, end, path):
     """
     create the figure for the paper
     :param parameters: parameter for the getting data
     :param begin: start of plot
     :param end: end of the plot
+    :param path: path of the figure
     :return:
     """
     fig = plt.figure(figsize=(6.8, 8.56))
@@ -245,11 +246,14 @@ def print_figure_macro(parameters, begin, end):
     fig.add_artist(Text(0.01, 0.34, "c", fontproperties={'size': 7}))
 
     # plt.show()
-    plt.savefig("figure/TVB_figure.pdf", dpi=300)
-    plt.savefig("figure/TVB_figure.png", dpi=150)
+    plt.savefig(path+"/../data/figure/TVB_figure.pdf", dpi=300)
+    plt.savefig(path+"/../data/figure/TVB_figure.png", dpi=150)
 
 
 if __name__ == '__main__':
+    import os
+
+    path = os.path.dirname(os.path.realpath(__file__))
     param_default = {}
     param_default['param_nest'] = {}
     param_default['param_nest']["sim_resolution"] = 0.1
@@ -262,17 +266,17 @@ if __name__ == '__main__':
 
     params = []
     param_asynchronous = copy.copy(param_default)
-    param_asynchronous['result_path'] = '../local_cluster/case_asynchronous/'
+    param_asynchronous['result_path'] = path+'/../data/local_cluster/case_asynchronous/'
     param_asynchronous['title'] = " Asynchronous network "
     params.append(param_asynchronous)
     param_up_down = copy.copy(param_default)
-    param_up_down['result_path'] = '../local_cluster/case_up_down/'
+    param_up_down['result_path'] = path+'/../data/local_cluster/case_up_down/'
     param_up_down['title'] = " Synchronise network "
     params.append(param_up_down)
     param_regular_burst = copy.copy(param_default)
-    param_regular_burst['result_path'] = '../local_cluster/case_regular_burst/'
+    param_regular_burst['result_path'] = path+'/../data/local_cluster/case_regular_burst/'
     param_regular_burst['title'] = " Regular Bursting network "
     params.append(param_regular_burst)
 
     # paper figure
-    print_figure_macro(params, 42500.0, 53500.0)
+    print_figure_macro(params, 42500.0, 53500.0, path)

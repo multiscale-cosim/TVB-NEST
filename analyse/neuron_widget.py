@@ -238,4 +238,4 @@ def neuron_widget(nb_thread=4):
                  duration=ipw.FloatSlider(value=200.0, min=10.0, max=20000.0, step=10.0, continuous_update=False,
                                           description=r"time simulation (ms)", style=style,
                                           layout=layout)
-                 );
+                 )

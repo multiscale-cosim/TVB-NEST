@@ -4,11 +4,10 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.ticker as ticker
 from cycler import cycler
-import os
 import numpy as np
 
-from example.analyse.LFPY.example_plotting import plot_signal_sum
-from example.analyse.get_data import get_data_all, get_rate
+from analyse.LFPY.example_plotting import plot_signal_sum
+from analyse.get_data import get_data_all, get_rate
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
 
@@ -290,6 +289,9 @@ def print_figure_macro_one(param, begin, end, TVB_data,
 
 
 if __name__ == "__main__":
+    import os
+
+    path = os.path.dirname(os.path.realpath(__file__))
     param_up_down = {}
     param_up_down['param_nest'] = {}
     param_up_down['param_nest']["sim_resolution"] = 0.1
@@ -298,7 +300,7 @@ if __name__ == "__main__":
     param_up_down['param_nest_topology'] = {}
     param_up_down['param_nest_topology']["percentage_inhibitory"] = 0.2
     param_up_down['param_nest_topology']["nb_neuron_by_region"] = 10000
-    param_up_down['result_path'] = '../local_cluster/case_up_down/nest/'
+    param_up_down['result_path'] = path+'/../data/local_cluster/case_up_down/nest/'
     param_up_down['title'] = " Synchronise network "
     data = get_data_all(param_up_down['result_path'])
     print_figure_micro_one(
@@ -310,7 +312,7 @@ if __name__ == "__main__":
             LFP_inc=300.0,
             LFP_start=0.0,
             figsize=(3.47, 2.57),
-            path_fig='./figure/fig_2_neuron_activity.pdf'
+            path_fig=path+'/../data/figure/fig_2_neuron_activity.pdf'
         )
 
     param_regular_burst = {}
@@ -322,14 +324,14 @@ if __name__ == "__main__":
     param_regular_burst['param_nest_topology']["percentage_inhibitory"] = 0.2
     param_regular_burst['param_nest_topology']["nb_neuron_by_region"] = 10000
     param_regular_burst['param_nest_topology']["nb_region"] = 104
-    param_regular_burst['result_path'] = '../local_cluster/case_regular_burst/'
+    param_regular_burst['result_path'] = path+'/../data/local_cluster/case_regular_burst/'
     param_regular_burst['title'] = " Regular Bursting network "
 
     # paper figure
     rates = get_rate(param_regular_burst['result_path'] + '/tvb/')
     rates[1] = np.load(param_regular_burst['result_path'] + '/tvb/ECOG.npy', allow_pickle=True)
     print_figure_macro_one(param_regular_burst, 42500.0, 53500.0, rates, figsize=(3.47, 2.57),
-                           path_fig='./figure/fig_2_brain_activity.pdf')
+                           path_fig=path+'/../data/figure/fig_2_brain_activity.pdf')
 
 
 

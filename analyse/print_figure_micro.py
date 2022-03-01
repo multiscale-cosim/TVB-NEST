@@ -1,7 +1,6 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 import copy
-
 import numpy as np
 import os
 import matplotlib.pyplot as plt
@@ -9,8 +8,9 @@ import matplotlib.gridspec as gridspec
 import matplotlib.ticker as ticker
 from matplotlib.text import Text
 from scipy import signal
-from example.analyse.LFPY.example_plotting import plot_signal_sum
-from example.analyse.get_data import get_data_all
+
+from analyse.LFPY.example_plotting import plot_signal_sum
+from analyse.get_data import get_data_all
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
 
@@ -39,8 +39,8 @@ def compute_rate(data, time, N, Dt):
 def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
                            V_excitatory=None, V_inhibitory=None, W_excitatory=None, W_inhibitory=None,
                            size_neurons=0.1, spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0,
-                           grid=None, nb_grid=0, fig=None, font_ticks_size=7, font_labels={'size': 7},
-                           labelpad_hist_incr=0):
+                           grid=None, nb_grid=0, hspace=0.25, fig=None, font_ticks_size=7, font_labels={'size': 7},
+                           labelpad_hist_incr=0, nbins_x=5, nbins_y=4):
     """
     print the result of Nest
     :param param: the parameter of the simulation
@@ -146,7 +146,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     if grid is None:
         grid = gridspec.GridSpec(3, 3, figure=fig)
     else:
-        grid = gridspec.GridSpecFromSubplotSpec(3, 3, subplot_spec=grid[nb_grid, 0], hspace=0.25)
+        grid = gridspec.GridSpecFromSubplotSpec(3, 3, subplot_spec=grid[nb_grid, 0], hspace=hspace)
 
     grid_neuron = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=grid[:2, 0], hspace=0.001)
     ax_V = fig.add_subplot(grid_neuron[0, 0])
@@ -179,7 +179,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_V.spines["top"].set_visible(False)
     ax_V.xaxis.set_ticks_position('bottom')
     plt.setp(ax_V.get_xticklabels(), visible=False)
-    ax_V.locator_params(axis='x', nbins=5)
+    ax_V.locator_params(axis='x', nbins=nbins_x)
     ax_V.get_yticklabels()[0].set_visible(False)
     ax_V.tick_params(axis='both', labelsize=font_ticks_size)
 
@@ -201,7 +201,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_W.set_xlim([begin, end])
     ax_W.spines["right"].set_visible(False)
     ax_W.yaxis.set_ticks_position('left')
-    ax_W.locator_params(axis='x', nbins=5)
+    ax_W.locator_params(axis='x', nbins=nbins_x)
     ax_W.xaxis.set_ticks_position('bottom')
     ax_W.tick_params(axis='both', labelsize=font_ticks_size)
 
@@ -264,7 +264,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     plt.setp(ax_hist_ex.get_xticklabels(), visible=False)
     ax_hist_ex.get_yticklabels()[0].set_visible(False)
     ax_hist_ex.tick_params(axis='both', labelsize=font_ticks_size)
-    ax_hist_ex.locator_params(axis='y', nbins=4)
+    ax_hist_ex.locator_params(axis='y', nbins=nbins_y)
     ax_hist_in.plot(time_array + begin, hist_in, 'b', linewidth=0.1)
     ax_hist_in.set_xlabel('Time (ms)', fontdict=font_labels, labelpad=2)
     ax_hist_in.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2 - labelpad_hist_incr)
@@ -273,7 +273,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_hist_in.spines["right"].set_visible(False)
     ax_hist_in.yaxis.set_ticks_position('left')
     ax_hist_in.xaxis.set_ticks_position('bottom')
-    ax_hist_in.locator_params(axis='y', nbins=4)
+    ax_hist_in.locator_params(axis='y', nbins=nbins_y)
 
     @ticker.FuncFormatter
     def format_hist(x, pos):
@@ -290,9 +290,9 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     cax = plt.axes(
         [position_axis[2] + position_axis[0] + 0.01, position_axis[1], 0.02, position_axis[3]])
     cb = plt.colorbar(spectogram_plot[-1], cax=cax)
-    cb.set_label('power spectral density (DB)', fontdict=font_labels)
+    cb.set_label('power spectral density(DB)', fontdict=font_labels)
     cb.ax.tick_params(axis='y', labelsize=font_ticks_size)
-    cb.ax.locator_params(axis='y', nbins=4)
+    cb.ax.locator_params(axis='y', nbins=nbins_y)
     ax_frequency_2.set_ylim(ymax=fmax, ymin=fmin)
 
     # FuncFormatter can be used as a decorator
@@ -304,9 +304,9 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_frequency_2.set_xlabel('Time (ms)', fontdict=font_labels, labelpad=2)
     ax_frequency_2.get_yaxis().set_visible(False)
     ax_frequency_2.tick_params(axis='both')
-    ax_frequency_2.set_xlim([0.1, (end - begin) * 1e-3])
-    ax_frequency_2.set_xticks([(ax_hist_in.xaxis.get_major_ticks()[i].get_loc()) * 10 for i in
+    ax_frequency_2.set_xticks([(ax_hist_in.xaxis.get_major_ticks()[i].get_loc()) * (end - begin)*10/NFFT for i in
                                range(1, len(ax_hist_in.xaxis.get_major_ticks()) - 2)])
+    ax_frequency_2.set_xlim([0, (end - begin)*10/NFFT])
     ax_frequency_2.spines["top"].set_visible(False)
     ax_frequency_2.spines["right"].set_visible(False)
     ax_frequency_2.yaxis.set_ticks_position('left')
@@ -395,13 +395,62 @@ def print_figure_micro(parameters, begin, end, labelpad_hist_incr, size_neurons=
     fig.add_artist(Text(0.01, 0.97, "a", fontproperties={'size': 7}))
     fig.add_artist(Text(0.01, 0.64, "b", fontproperties={'size': 7}))
     fig.add_artist(Text(0.01, 0.32, "c", fontproperties={'size': 7}))
+    plt.show()
+
+    plt.savefig("../data/figure/Nest_figure.pdf", dpi=300)
+    plt.savefig("../data/figure/Nest_figure.png", dpi=150)
+
+
+def print_figure_micro_zoom(parameters, begin, end, labelpad_hist_incr, size_neurons=0.1,
+                       spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0
+                       ):
+    """
+    plot of the figure of the paper
+    :param parameters: parameter for the getting data
+    :param begin: start of plot
+    :param end: end of the plot
+    :param labelpad_hist_incr: label pads for the histogram
+    :param size_neurons: size of the point of spike for neurons
+    :param spectogram: parameter for spectogram analysis
+    :param path_LFP: path for file of LFP
+    :param LFP_inc: space for LFP
+    :param LFP_start: start for plotting LFP
+    :return:
+    """
+    fig = plt.figure(figsize=(6.8, 2.9))
+    plt.subplots_adjust(top=0.94, bottom=0.12, left=0.06, right=0.95, hspace=0.21, wspace=0.25)
+    # plt.suptitle(param['title'])
+    grid = gridspec.GridSpec(len(parameters), 1, figure=fig)
+    for index, param in enumerate(parameters):
+        data = get_data_all(param['result_path'])
+        print_figure_micro_one(
+            param, begin, end, data['pop_1_ex'], data['pop_1_in'],
+            V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
+            W_excitatory=data['W_pop_1_ex'], W_inhibitory=data['W_pop_1_in'],
+            size_neurons=size_neurons,
+            spectogram=spectogram,
+            path_LFP=path_LFP,
+            LFP_inc=LFP_inc,
+            LFP_start=LFP_start,
+            grid=grid,
+            nb_grid=index,
+            fig=fig,
+            labelpad_hist_incr=labelpad_hist_incr[index],
+            hspace=0.33,
+            nbins_x=4,
+            nbins_y=4
+        )
+        # plt.show()
+
     # plt.show()
 
-    plt.savefig("figure/Nest_figure.pdf", dpi=300)
-    plt.savefig("figure/Nest_figure.png", dpi=150)
-
+    plt.savefig("../data/figure/Nest_zoom_figure.pdf", dpi=300)
+    plt.savefig("../data/figure/Nest_zoom_figure.png", dpi=150)
 
 if __name__ == '__main__':
+    import os
+
+    path = os.path.dirname(os.path.realpath(__file__))
     param_default = {}
     param_default['param_nest'] = {}
     param_default['param_nest']["sim_resolution"] = 0.1
@@ -413,16 +462,15 @@ if __name__ == '__main__':
 
     params = []
     param_asynchronous = copy.copy(param_default)
-    param_asynchronous['result_path'] = '../local_cluster/case_asynchronous/nest/'
+    param_asynchronous['result_path'] = path+'/../data/local_cluster/case_asynchronous/nest/'
     param_asynchronous['title'] = " Asynchronous network "
     params.append(param_asynchronous)
     param_up_down = copy.copy(param_default)
-    param_up_down['result_path'] = '../local_cluster/case_up_down/nest/'
+    param_up_down['result_path'] = path+'/../data/local_cluster/case_up_down/nest/'
     param_up_down['title'] = " Synchronise network "
     params.append(param_up_down)
     param_regular_burst = copy.copy(param_default)
-    # param_regular_burst['result_path'] = '../local_cluster/case_up_down/nest/'
-    param_regular_burst['result_path'] = '../local_cluster/case_regular_burst/nest/'
+    param_regular_burst['result_path'] = path+'/../data/local_cluster/case_regular_burst/nest/'
     param_regular_burst['title'] = " Regular Bursting network "
     params.append(param_regular_burst)
 
@@ -433,8 +481,22 @@ if __name__ == '__main__':
                                    'fmax': 200.0,
                                    'nb_f': 4,
                                    },
-                       path_LFP='../LFPY/v2/pop_1_/',
+                       path_LFP='/../LFPY/v2/pop_1_/',
                        LFP_inc=100.0,
                        LFP_start=500.0,
                        labelpad_hist_incr=[0, 0, 4]
+                       )
+    plt.close()
+
+    print_figure_micro_zoom([params[-1]], 43000.0, 44000.0,
+                       spectogram={'DBmin': -65,
+                                   'DBmax': -25,
+                                   'fmin': 0.0,
+                                   'fmax': 200.0,
+                                   'nb_f': 4,
+                                   },
+                       path_LFP='/../LFPY/v2/pop_1_/',
+                       LFP_inc=100.0,
+                       LFP_start=500.0,
+                       labelpad_hist_incr=[4]
                        )

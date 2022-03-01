@@ -26,7 +26,7 @@ def min_delay_respect(param):
 if __name__ == '__main__':
     import os
 
-    path = os.path.dirname(os.path.realpath(__file__)) + "/../parameter/data_mouse/"
+    path = os.path.dirname(os.path.realpath(__file__)) + "/parameter/data_mouse/"
     param = {'param_co_simulation': {'synchronization': 1.7, 'id_region_nest': [26, 76]},
              'param_nest_connection': {'path_distance': path + '/distance.npy', 'velocity': 3.0},
              'param_nest': {"sim_resolution": 0.1, }}

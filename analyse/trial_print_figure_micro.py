@@ -1,16 +1,12 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
-
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from scipy import signal
 from nest_elephant_tvb.transformation.transformation_function.rate_spike import slidding_window
 
-if __name__ == '__main__':
-    from example.analyse.print_figure_macro import compute_rate
-else:
-    from .print_figure_macro import compute_rate
+from analyse.print_figure_macro import compute_rate
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
 
@@ -316,7 +312,7 @@ def print_rate(folder_simulation, begin, end, nb_regions):
     :param nb_regions: number of region
     :return:
     """
-    from example.analyse.get_data import get_rate
+    from analyse.get_data import get_rate
     plt.figure(figsize=(20, 20))
     result_raw = get_rate(folder_simulation + '/tvb/')[0]  # result of the Raw monitor
 
@@ -347,13 +343,16 @@ def print_rate(folder_simulation, begin, end, nb_regions):
 
 # Test the function, helping for debugging
 if __name__ == '__main__':
-    from example.analyse.get_data import get_data_all
+    import os
+    from analyse.get_data import get_data_all
 
-    # # Test function fo rate and spike trains
-    # data = get_data_all('../local/case_up_down/nest/')
-    # print_rate('../local/case_up_down/', 0.0, 2000.0, 104)
-    # print_spiketrain(50.0,2000.0,data['pop_1_ex'],10.0)
-    # print_spiketrain(30.0,1950.0,data['pop_2_ex'],10.0)
+    path = os.path.dirname(os.path.realpath(__file__))
+
+    # Test function fo rate and spike trains
+    data = get_data_all(path+'/../data/local_cluster/case_up_down/nest/')
+    print_rate(path+'/../data/local_cluster/case_up_down/', 0.0, 2000.0, 104)
+    print_spiketrain(50.0, 2000.0, data['pop_1_ex'], 10.0)
+    print_spiketrain(30.0, 1950.0, data['pop_2_ex'], 10.0)
 
     param = {}
     param['param_nest'] = {}
@@ -363,12 +362,12 @@ if __name__ == '__main__':
     param['param_nest_topology'] = {}
     param['param_nest_topology']["percentage_inhibitory"] = 0.2
     param['param_nest_topology']["nb_neuron_by_region"] = 10000
-    data = get_data_all('../local/case_asynchronous/nest/'); title = " Asynchronous network "
-    # data = get_data_all('../local/case_regular_burst/nest/'); title = " Regular Bursting network "
-    # data = get_data_all('../local/case_up_down/nest/'); title = " Synchronise network "
+    data = get_data_all(path+'/../data/local_cluster/case_asynchronous/nest/'); title = " Asynchronous network "
+    # data = get_data_all(path+'/../data/local_cluster/case_regular_burst/nest/'); title = " Regular Bursting network "
+    # data = get_data_all(path+'/../data/local_cluster/case_up_down/nest/'); title = " Synchronise network "
     # print_nest_pop(param, 39500.0, 50500.0, data['pop_1_ex'], data['pop_1_in'],
     print_nest_pop(param, 500.0, 10000.0, data['pop_1_ex'], data['pop_1_in'],
-                                  V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
+                   V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
                    W_excitatory=data['W_pop_1_ex'], W_inhibitory=data['W_pop_1_in'],
                    histogram=True,
                    spectogram={'DBmin': -65,

@@ -99,43 +99,48 @@ def create_cross_section(param, image=None, alpha_image=0.4, node=False, thresho
 
 if __name__ == '__main__':
     import h5py
+    import os
+
+    path = os.path.dirname(os.path.realpath(__file__))
+
     color_Nest = [255 / 255, 104 / 255, 65 / 255]
     color_TVB = [71 / 255, 164 / 255, 226 / 255]
     # version one of implemented electrode : old code
-    # param = {'param_nest_connection': {"path_weight": '../../example/parameter/data_mouse/weights.npy'},
-    #          'param_co_simulation': {"id_region_nest": [26, 78]},
-    #          'param_nest_topology': {"nb_region": 104},
-    #          'param_tvb_connection': {'path_region_labels': '../../example/parameter/data_mouse/region_labels.txt',
-    #                                   'path_centers': '../../example/parameter/data_mouse/centres.txt'
-    #                                   },
-    #          "param_tvb_monitor": {
-    #              "SEEG": True,
-    #              "parameter_SEEG": {"path": "../../example/parameter/data_mouse/sensor_hypocampus_V1.txt"}}
-    #          }
-    # image_FMRI = h5py.File('../../example/parameter/data_mouse/StructuralMRI.h5', 'r', libver='latest')['array_data'][:, :, 40].T
-    # create_cross_section(param, image=image_FMRI,
-    #                    color_Nest=color_Nest, color_TVB=color_TVB,
-    #                     alpha_image=1.0, size_edges=0.5, threshold=0.05, node=True)
-    # create_cross_section(param, image=image_FMRI,
-    #                  alpha_image=1.0,  electrodes=[[14,0,1,0],[28,191/255, 191/255, 0/255]])
-
-    # version 2
-    image_FMRI = h5py.File('../../example/parameter/data_mouse/StructuralMRI.h5', 'r', libver='latest')['array_data'][39, :, :].T
-    param = {'param_nest_connection': {"path_weight": '../../example/parameter/data_mouse/weights.npy'},
+    param = {'param_nest_connection': {"path_weight": path + '/parameter/data_mouse/weights.npy'},
              'param_co_simulation': {"id_region_nest": [26, 78]},
              'param_nest_topology': {"nb_region": 104},
-             'param_tvb_connection': {'path_region_labels': '../../example/parameter/data_mouse/region_labels.txt',
-                                      'path_centers': '../../example/parameter/data_mouse/centres.txt'
+             'param_tvb_connection': {'path_region_labels': path + '/parameter/data_mouse/region_labels.txt',
+                                      'path_centers': path + '/parameter/data_mouse/centres.txt'
+                                      },
+             "param_tvb_monitor": {
+                 "SEEG": True,
+                 "parameter_SEEG": {"path": path + "/parameter/data_mouse/sensor_hypocampus_V1.txt"}}
+             }
+    image_FMRI = h5py.File(path + '/parameter/data_mouse/StructuralMRI.h5', 'r', libver='latest')['array_data'][:, :,
+                 40].T
+    create_cross_section(param, image=image_FMRI,
+                         color_Nest=color_Nest, color_TVB=color_TVB,
+                         alpha_image=1.0, size_edges=0.5, threshold=0.05, node=True)
+    create_cross_section(param, image=image_FMRI,
+                         alpha_image=1.0, electrodes=[[14, 0, 1, 0], [28, 191 / 255, 191 / 255, 0 / 255]])
+
+    # version 2
+    image_FMRI = h5py.File(path+'/parameter/data_mouse/StructuralMRI.h5', 'r', libver='latest')['array_data'][39, :, :].T
+    param = {'param_nest_connection': {"path_weight": path+'/parameter/data_mouse/weights.npy'},
+             'param_co_simulation': {"id_region_nest": [26, 78]},
+             'param_nest_topology': {"nb_region": 104},
+             'param_tvb_connection': {'path_region_labels': path+'/parameter/data_mouse/region_labels.txt',
+                                      'path_centers': path+'/parameter/data_mouse/centres.txt'
                                       },
              "param_tvb_monitor": {
                  "SEEG": False,
              }
              }
-    # # plot only connectome in spatial dimension
-    # create_cross_section(param,
-    #                      color_Nest=color_Nest, color_TVB=color_TVB,
-    #                      alpha_image=1.0, size_edges=0.5, threshold=0.05, node=True,figsize=(10,20),
-    #                      )
+    # plot only connectome in spatial dimension
+    create_cross_section(param,
+                         color_Nest=color_Nest, color_TVB=color_TVB,
+                         alpha_image=1.0, size_edges=0.5, threshold=0.05, node=True, figsize=(10, 20),
+                         )
     # create a cross section based on FMRI for implemented electrode
     create_cross_section(param, image=image_FMRI,
                          color_Nest=color_Nest, color_TVB=color_TVB,

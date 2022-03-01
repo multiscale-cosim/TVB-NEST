@@ -160,28 +160,25 @@ def print_connectome_graph(param, threshold, image=None, alpha_image=0.4,
 
 if __name__ == '__main__':
     import h5py
+    import os
 
-    param = {'param_nest_connection': {"path_weight": '../../example/parameter/data_mouse/weights.npy',
-                                       "path_distance": '../../example/parameter/data_mouse/distance.npy',
+    path = os.path.dirname(os.path.realpath(__file__))
+    param = {'param_nest_connection': {"path_weight": path + '/parameter/data_mouse/weights.npy',
+                                       "path_distance": path + '/parameter/data_mouse/distance.npy',
                                        "velocity": 3.0},
              'param_co_simulation': {"id_region_nest": [26, 78]},
              'param_nest_topology': {"nb_region": 104},
-             'param_tvb_connection': {'path_region_labels': '../../example/parameter/data_mouse/region_labels.txt',
-                                      'path_centers': '../../example/parameter/data_mouse/centres.txt'
+             'param_tvb_connection': {'path_region_labels': path + '/parameter/data_mouse/region_labels.txt',
+                                      'path_centers': path + '/parameter/data_mouse/centres.txt'
                                       }
              }
     color_Nest = [255 / 255, 104 / 255, 65 / 255]
     color_TVB = [71 / 255, 164 / 255, 226 / 255]
-    image_FMRI = h5py.File('../../example/parameter/data_mouse/StructuralMRI.h5',
-                           'r', libver='latest')['array_data'][:,:, 40].T
-    # display_connectome(param, image=image_FMRI,
-    #                    color_Nest=color_Nest, color_TVB=color_TVB,
-    #                    size_edges=0.5,
-    #                    threshold=0.05)
-    # plt.show()
-    display_connectome(param,
-                       color_Nest=color_Nest, color_TVB=color_TVB,
-                       alpha_image=1.0, size_edges=0.5, threshold=0.05, figsize=(10, 20))
+    image_FMRI = h5py.File(path + '/parameter/data_mouse/StructuralMRI.h5',
+                           'r', libver='latest')['array_data'][:, :, 40].T
+    display_connectome(param, color_Nest=color_Nest)
+    plt.show()
+    display_connectome(param, color_Nest=color_Nest, figsize=(10, 20))
     # plot 2d connectome
     if 'path_centers' in param['param_tvb_connection'].keys():
         print_connectome_graph(param, color_Nest=color_Nest, color_TVB=color_TVB,

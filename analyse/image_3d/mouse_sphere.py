@@ -393,34 +393,35 @@ def print_mouse(path, file_3d, file_center, color_TVB, color_Nest, Nest_node, el
 
 
 if __name__ == '__main__':
+    import os
+    path_global = os.path.dirname(os.path.realpath(__file__))
     # mouse brain
-    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+    print_mouse(path_global + '/../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
                 [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5], Nest_node=[26, 78],
-                # save_path='../figure/mouse_3d.png'
+                # save_path=path_global + '/../data/figure//mouse_3d.png'
                 )
 
     # mouse brain with logo
-    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+    print_mouse(path_global + '/../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
                 [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5], Nest_node=[26, 78],
-                # save_path='../../mouse_3d.png',
                 logo=['./logo_Nest.png', './logo_TVB.png'],
                 transparency=0.3,
-                # save_path='../figure/mouse_3d_logo.png'
+                # save_path=path_global + '/../data/figure/mouse_3d_logo.png'
                 )
 
     # mouse brian with electrode
-    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+    print_mouse(path_global + '/../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
                 [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5],
                 Nest_node=[26, 78],
                 electrode='electrode_hypocampus.txt', electrode_ECOG='sensor_hypocampus.txt',
                 transparency=0.2,  # or 1.0
-                save_path='../figure/mouse_elect.png'
+                save_path=path_global + '/../data/figure/mouse_elect.png'
                 )
 
     # mouse brian for the overview
-    print_mouse('../../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
+    print_mouse(path_global + '/../parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
                 [71 / 255, 164 / 255, 226 / 255, 1.0], [255 / 255, 104 / 255, 65 / 255, 0.5],
                 Nest_node=[26, 78],
                 transparency=0.2,  # or 1.0
-                save_path='../figure/mouse_overview.png'
+                save_path=path_global + '/../data/figure/mouse_overview.png'
                 )

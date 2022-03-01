@@ -1,14 +1,10 @@
 #  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
-import os
 import numpy as np
 import matplotlib.pylab as plt
-if __name__ == '__main__':
-    from example.analyse.LFPY.example_plotting import plot_signal_sum
-    from example.analyse.trial_print_figure_micro import bin_array
-else:
-    from .LFPY.example_plotting import plot_signal_sum
-    from .trial_print_figure_micro import bin_array
+
+from analyse.LFPY.example_plotting import plot_signal_sum
+from analyse.trial_print_figure_micro import bin_array
 
 
 def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None, W_ex=None, W_in=None, path_LFP='.',
@@ -185,13 +181,15 @@ def print_nest_pop(param, begin, end, spikes_ex, spikes_in, V_ex=None, V_in=None
 
 
 if __name__ == '__main__':
-    from example.analyse.get_data import get_data_all
+    import os
+    from analyse.get_data import get_data_all
 
+    path_global = os.path.dirname(os.path.realpath(__file__))
     pathes = [
-        'local_cluster/case_asynchronous',
+        path_global + '/../data/local_cluster/case_asynchronous',
     ]
     for path in pathes:
-        data = get_data_all('../' + path + '/nest/')
+        data = get_data_all(path + '/nest/')
         param = {}
         param['param_nest'] = {}
         param['param_nest']["sim_resolution"] = 0.1
@@ -200,14 +198,14 @@ if __name__ == '__main__':
         param['param_nest_topology'] = {}
         param['param_nest_topology']["percentage_inhibitory"] = 0.2
         param['param_nest_topology']["nb_neuron_by_region"] = 10000
-        param['result_path'] = '../' + path
+        param['result_path'] = path
         print_nest_pop(param, 0.0, 61000.0, data['pop_1_ex'], data['pop_1_in'],
                        V_ex=data['VM_pop_1_ex'], V_in=data['VM_pop_1_in'],
                        W_ex=data['W_pop_1_ex'], W_in=data['W_pop_1_in'],
                        path_LFP='/LFPY/v1/pop_1_/', LFP_inc=70,
                        # xmin=3650,xmax=3750
                        )
-        # print_nest_pop(param, 0.0, 4000.0,data['pop_2_ex'],data['pop_2_in'],
-        #                path_LFP='/LFPY/test_6/pop_2/',
-        #               )
+        # print_nest_pop(param, 0.0, 61000.0, data['pop_1_ex'], data['pop_1_in'],
+        #                path_LFP='/LFPY/v2/pop_1_/',
+        #                )
     plt.show()

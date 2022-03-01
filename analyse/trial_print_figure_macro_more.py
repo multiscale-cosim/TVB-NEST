@@ -1,8 +1,11 @@
+#  Copyright 2020 Forschungszentrum Jülich GmbH and Aix-Marseille Université
+# "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1.anchored_artists import AnchoredSizeBar
 from cycler import cycler
-from example.analyse.get_data import get_rate
+
+from analyse.get_data import get_rate
 
 
 def print_compare_rate(result_raw, nb_regions, index):
@@ -94,11 +97,13 @@ def print_Ecog(result_raw):
 
 
 if __name__ == '__main__':
+    import os
+
+    path = os.path.dirname(os.path.realpath(__file__))
     nb_regions = 104
     index = [26, 31, 96, 78, 83, 44]
-    rate = get_rate('../local//case_regular_burst/tvb/')
-    # result_raw = get_rate('../local//case_up_down/tvb/')
-    # result_raw = get_rate('../piz_daint/sarus/v1/case_up_down_1/tvb/')
+    rate = get_rate(path + '/../data/local_cluster/case_regular_burst/tvb/')
+    # result_raw = get_rate(path+'../data/local_cluster/case_up_down/tvb/')
     print_compare_rate(rate, nb_regions, index)
     print_Ecog(rate)
     plt.show()
