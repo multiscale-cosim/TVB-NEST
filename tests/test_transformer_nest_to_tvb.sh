@@ -34,7 +34,7 @@ $RUN -n 1 python3 ./test_transformation/test_input_nest_to_tvb.py  ./test_nest_t
 $RUN -n 1 python3 ./test_transformation/test_receive_nest_to_tvb.py  ./test_nest_to_tvb/ /transformation/send_to_tvb/0.txt &
 
 wait
-#rm  -rd test_nest_to_tvb
+rm  -rd test_nest_to_tvb
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

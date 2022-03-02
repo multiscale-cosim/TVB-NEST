@@ -85,6 +85,7 @@ def input(path,file,nb_mpi,nb_run,time_sim):
         else:
             logger.info(tag)
             break
+    comm.Barrier()
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)

@@ -29,8 +29,8 @@ else
     echo " WARNING the python path are not defene"
 
     PACKAGE=${BASEDIR}/../   # folder of co-simulation-tvb-nest
-    PYTHONLIB=${BASEDIR}/../lib/lib-py/lib/python3.6/site-packages # folder with python library
-    REPERTORY_LIB_NEST=${BASEDIR}/../lib/nest_run/lib/python3.6/site-packages/ # folder with py-nest
+    PYTHONLIB=${BASEDIR}/../lib/lib_py/lib/python3.8/site-packages # folder with python library
+    REPERTORY_LIB_NEST=${BASEDIR}/../lib/nest/lib/python3.8/site-packages/ # folder with py-nest
     export PYTHONPATH=$PYTHONPATH:$PACKAGE:$PYTHONLIB:$REPERTORY_LIB_NEST
     RUN="mpirun"
 fi

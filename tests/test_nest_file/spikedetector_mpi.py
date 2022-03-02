@@ -12,22 +12,22 @@ import os
 nest.ResetKernel()
 # Set parameter of kernel. The most important is the set of the path
 nest.SetKernelStatus({"overwrite_files": True,
-                      "data_path": os.path.dirname(os.path.realpath(__file__))+"/../",
+                      "data_path": os.path.dirname(os.path.realpath(__file__)) + "/../test_nest_record/",
                       })
 # Creation of neurons
 n = nest.Create("iaf_psc_alpha",
                 params={"tau_syn_ex": 1.0, "V_reset": -70.0})
 n_2 = nest.Create("iaf_psc_alpha",
-                params={"tau_syn_ex": 2.0, "V_reset": -70.0})
+                  params={"tau_syn_ex": 2.0, "V_reset": -70.0})
 # creation of spike detector with MPI
 m = nest.Create("spike_recorder",
                 params={
-                        "record_to": "mpi",
-                        "label": "test_nest_record"})
-m_2 = nest.Create("spike_recorder",
-                params={
                     "record_to": "mpi",
-                    "label":"test_nest_record"})
+                    "label": "./"})
+m_2 = nest.Create("spike_recorder",
+                  params={
+                      "record_to": "mpi",
+                      "label": "./"})
 # Creation of spike generator
 s_ex = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([10.0, 20.0, 50.0])})
@@ -35,17 +35,17 @@ s_in = nest.Create("spike_generator",
                    params={"spike_times": numpy.array([15.0, 25.0, 55.0])})
 # Creation of current generator
 dc = nest.Create("dc_generator",
-                 params={"amplitude":900.0})
+                 params={"amplitude": 900.0})
 dc_2 = nest.Create("dc_generator",
-                 params={"amplitude":1000.0})
+                   params={"amplitude": 1000.0})
 print("create nodes")
 # Creation of connections
 nest.Connect(s_ex, n, syn_spec={"weight": 100.0})
 nest.Connect(s_in, n, syn_spec={"weight": 0.0})
-nest.Connect(dc,n)
-nest.Connect(dc_2,n_2)
-nest.Connect(n,m)
-nest.Connect(n_2,m_2)
+nest.Connect(dc, n)
+nest.Connect(dc_2, n_2)
+nest.Connect(n, m)
+nest.Connect(n_2, m_2)
 print("create connect")
 
 '''
@@ -58,4 +58,3 @@ nest.Run(200.)
 nest.Run(200.)
 nest.Run(200.)
 nest.Cleanup()
-

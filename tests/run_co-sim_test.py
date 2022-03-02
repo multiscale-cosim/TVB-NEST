@@ -2,13 +2,13 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 
 from nest_elephant_tvb.launcher.run_exploration import run_exploration_2D
-from example.parameter import test_nest as parameter_test
+from analyse.parameter import test_nest as parameter_test
 
 # file for testing the co-simulation
 
 def run_exploration(path,begin,end,nb_VP,nb_mpi,cluster):
     parameter_test.param_co_simulation['co-simulation']=True
-    parameter_test.param_co_simulation['translation_thread'] = 2
+    parameter_test.param_co_simulation['transformation_thread'] = 2
     parameter_test.param_co_simulation['nb_MPI_nest']=nb_mpi
     parameter_test.param_nest['total_num_virtual_procs']=nb_VP
     parameter_test.param_nest_topology['nb_neuron_by_region'] = 1000

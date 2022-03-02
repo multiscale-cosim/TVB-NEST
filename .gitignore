@@ -24,3 +24,4 @@ lib/
 ./tests/test_nest_MPI_threading/files/*
 doc/UML/*.svg
 doc/UML/*.png
+analyse/LFPY/x86_64

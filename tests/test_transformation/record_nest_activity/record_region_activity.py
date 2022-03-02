@@ -49,6 +49,7 @@ def analyse(path):
         else:
             print(status_.Get_tag())
             break
+    comm.Barrier()
     comm.Disconnect()
     MPI.Close_port(port)
     os.remove(path_to_files)

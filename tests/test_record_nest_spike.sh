@@ -15,8 +15,8 @@ cd "$DIR" || exit
 mkdir test_nest_record
 sleep 1
 
-$RUN -n 1 python3 ./test_translation/record_nest_activity/record_region_activity.py  ./test_nest_record/3.txt &
-$RUN -n 1 python3 ./test_translation/record_nest_activity/record_region_activity.py  ./test_nest_record/4.txt &
+$RUN -n 1 python3 ./test_transformation/record_nest_activity/record_region_activity.py  ./test_nest_record/3.txt &
+$RUN -n 1 python3 ./test_transformation/record_nest_activity/record_region_activity.py  ./test_nest_record/4.txt &
 
 $RUN -n 1 python3 ./test_nest_file/spikedetector_mpi.py
 
