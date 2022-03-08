@@ -38,3 +38,12 @@ e.g.
 
 Using the environment variable defined above:
 ```python3 ${MULTISCALETVBNEST}/launcher/main.py --global-settings ${MULTISCALETVBNEST}/configuration_manager/global_settings.xml --action-plan ${MULTISCALETVBNEST}/launcher/tests/plans/mpi_intercommunicator_plan_on_cluster.xml --parameters ${MULTISCALETVBNEST}/launcher/tests/parameters/empty_parameters.xml```
+
+### Client/Server Memory Buffer MPI Data Types and MPI Socket Inter-Communication
+`python3 /home/user/TVB-NEST/launcher/main.py --action-plan /path/to/tests/plans/mpi_p2p_socket_plan_on_local.xml --parameters /path/to/tests/parameters/empty_parameters.xml`
+
+e.g.
+`python3 /home/user/TVB-NEST/launcher/main.py --action-plan /home/user/TVB-NEST/launcher/tests/plans/mpi_p2p_socket_plan_on_local.xml --parameters /home/user/TVB-NEST/launcher/tests/parameters/empty_parameters.xml`
+
+Using the environment variable defined above:
+```python3 ${MULTISCALETVBNEST}/launcher/main.py --global-settings ${MULTISCALETVBNEST}/configuration_manager/global_settings.xml --action-plan ${MULTISCALETVBNEST}/launcher/tests/plans/mpi_p2p_socket_plan_on_local.xml --parameters ${MULTISCALETVBNEST}/launcher/tests/parameters/empty_parameters.xml```
