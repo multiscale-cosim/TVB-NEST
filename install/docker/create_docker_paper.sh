@@ -26,11 +26,11 @@ cd "$DIR" || exit
 # copy the folder for compiling in the docker
 cp -r  ../../nest-io-dev .
 cp -r  ../../nest_elephant_tvb .
-cp -r  ../../example/analyse .
-cp -r  ../../example/parameter .
-sudo docker rmi local:NEST_TVB_IO_PAPER
-sudo docker build -t local:NEST_TVB_IO_PAPER --no-cache -f Nest_TVB_paper.dockerfile .
-rm -rd nest-io-dev analyse parameter nest_elephant_tvb
+cp -r  ../../analyse .
+cp -r  ../../timer .
+sudo docker rmi local:NEST_TVB_IO_PAPER_TIMER
+sudo docker build -t local:NEST_TVB_IO_PAPER_TIMER --no-cache -f Nest_TVB_paper.dockerfile .
+rm -rd nest-io-dev analyse nest_elephant_tvb timer
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

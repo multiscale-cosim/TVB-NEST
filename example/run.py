@@ -1,4 +1,4 @@
-from nest_elephant_tvb.orchestrator.run_exploration import run
+from nest_elephant_tvb.launcher.run_exploration import run
 
 if __name__ == "__main__":
     import sys

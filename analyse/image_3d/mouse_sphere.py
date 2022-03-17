@@ -3,7 +3,6 @@
 import vtk
 import numpy as np
 from tvb.datatypes.sensors import SensorsEEG
-import os
 
 
 def create_sphere(center, radius=0.8, color=[255 / 255, 104 / 255, 65 / 255]):

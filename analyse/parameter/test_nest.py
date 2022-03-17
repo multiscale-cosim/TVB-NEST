@@ -27,7 +27,10 @@ param_co_simulation = {
     'mpi': ['mpirun'],  # example : ['mpirun'] , ['srun','-N','1']
     # Number of process for the transformation : 3 => MPI internal communication and 1 => thread internal communication
     # thread version doesn't work for cluster due to python interruption of MPI function
-    'transformation_thread': False
+    'transformation_thread': False,
+    # Optional parameters for running with sarus or docker images
+    # 'singularity' : Nest_TVB_paper.simg
+    # 'sarus':"sarus": ["sarus","run","--mount=type=bind,source=./case_asynchronous/,destination=./case_asynchronous/","load/library/PAPER_v1"]
 }
 
 # parameter simulators
@@ -108,9 +111,9 @@ param_nest_topology = {
 }
 
 param_nest_connection = {
-    # file for connection homogeneous
+    # Saving parameters : file for connection homogeneous
     'path_homogeneous': path + '/connection_homogeneous_',
-    # file for connection heterogenous
+    # Saving parameters : file for connection heterogenous
     'path_heterogeneous': path + '/connection_heterogeneous_',
     # weigth in the population from excitatory neurons
     'weight_local': 1.0,

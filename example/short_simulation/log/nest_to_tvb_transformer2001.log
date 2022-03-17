@@ -1,0 +1,1441 @@
+2022-03-17 18:46:10,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read buffer
+2022-03-17 18:46:10,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write buffer
+2022-03-17 18:46:10,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : end Thread init
+2022-03-17 18:46:10,808 - nest_to_tvb_transformer2001 - INFO - MPI IO ext : end MPI extern init
+2022-03-17 18:46:10,815 - nest_to_tvb_transformer2001 - INFO - TRS : begin sim
+2022-03-17 18:46:10,820 - nest_to_tvb_transformer2001 - INFO - TRS : init rates
+2022-03-17 18:46:10,820 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2.0
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [0]
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[0.  3.5]
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(2, 35)
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - TRS : send init
+2022-03-17 18:46:10,821 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:10,822 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:10,822 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait [-2]
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 21
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [21]
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 21
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 21
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 21
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:12,497 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0005742857142857142
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :0
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:12,499 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[3.5 7. ]
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:12,505 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:12,808 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:12,810 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0007
+2022-03-17 18:46:12,810 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:12,810 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:12,810 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:12,810 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:12,810 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:12,810 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[ 7.  10.5]
+2022-03-17 18:46:12,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:12,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:12,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:12,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:12,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:12,815 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:12,816 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:12,816 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:13,110 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:13,110 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:13,111 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:13,111 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:13,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:13,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:13,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:13,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:13,111 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:13,112 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0007
+2022-03-17 18:46:13,112 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:13,112 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:13,112 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,112 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,112 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:13,113 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[10.5 14. ]
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:13,114 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:13,406 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:13,407 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0007
+2022-03-17 18:46:13,407 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:13,407 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:13,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:13,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[14.  17.5]
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:13,409 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:13,770 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:13,771 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0007
+2022-03-17 18:46:13,772 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:13,772 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:13,772 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,772 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,772 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:13,772 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[17.5 21. ]
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:13,773 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:14,076 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:14,076 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:14,076 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:14,077 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:14,077 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:14,077 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:14,077 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:14,079 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:14,079 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:14,080 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0006057142857142857
+2022-03-17 18:46:14,080 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :0
+2022-03-17 18:46:14,081 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:14,081 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:14,081 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,081 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,081 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:14,081 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[21.  24.5]
+2022-03-17 18:46:14,082 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:14,082 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:14,082 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,083 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,083 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:14,083 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:14,083 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:14,083 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:14,408 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:14,410 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 1.9999999999999998e-05
+2022-03-17 18:46:14,410 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:14,410 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:14,410 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,410 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,410 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:14,410 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[24.5 28. ]
+2022-03-17 18:46:14,411 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:14,411 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:14,411 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,411 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,412 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:14,412 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:14,412 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:14,412 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:14,704 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:14,706 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:14,706 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:14,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:14,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:14,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[28.  31.5]
+2022-03-17 18:46:14,707 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:14,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:14,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:14,708 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:14,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:14,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:15,056 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:15,058 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:15,058 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:15,058 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:15,058 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,058 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,058 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:15,058 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[31.5 35. ]
+2022-03-17 18:46:15,059 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:15,059 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:15,059 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,059 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,059 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:15,060 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:15,060 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:15,060 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:15,429 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:15,429 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:15,429 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:15,429 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:15,429 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:15,430 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:15,430 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:15,430 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:15,430 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:15,431 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:15,431 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:15,431 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:15,431 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,431 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,431 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:15,432 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[35.  38.5]
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:15,433 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:15,711 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:15,713 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:15,713 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :1
+2022-03-17 18:46:15,713 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:15,713 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:15,713 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,713 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,713 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:15,714 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[38.5 42. ]
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:15,715 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:16,039 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:16,041 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:16,041 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:16,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:16,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:16,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[42.  45.5]
+2022-03-17 18:46:16,042 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:16,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:16,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:16,043 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:16,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:16,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:16,413 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:16,413 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:16,413 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:16,413 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:16,413 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:16,413 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:16,414 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:16,414 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:16,414 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:16,415 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:16,415 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:16,415 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:16,415 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,415 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,415 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:16,416 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[45.5 49. ]
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:16,417 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:16,706 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:16,708 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:16,708 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:16,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:16,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:16,708 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[49.  52.5]
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:16,710 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:17,025 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:17,025 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:17,025 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:17,026 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:17,026 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:17,026 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:17,026 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:17,026 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:17,026 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:17,027 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:17,027 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:17,027 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:17,027 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,027 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,027 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:17,028 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[52.5 56. ]
+2022-03-17 18:46:17,029 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:17,029 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:17,029 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,029 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,029 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:17,029 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:17,029 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:17,030 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:17,383 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:17,383 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:17,383 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:17,383 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:17,383 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:17,383 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:17,384 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:17,384 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:17,384 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:17,385 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:17,385 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :2
+2022-03-17 18:46:17,385 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:17,386 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:17,386 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,386 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,386 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:17,386 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[56.  59.5]
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:17,387 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:17,642 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:17,644 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:17,644 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:17,644 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:17,644 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,644 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,644 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:17,644 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[59.5 63. ]
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:17,646 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:17,957 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:17,958 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:17,959 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:17,959 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:17,959 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,959 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,959 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:17,959 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[63.  66.5]
+2022-03-17 18:46:17,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:17,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:17,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:17,961 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:17,961 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:17,961 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:18,291 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:18,291 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:18,291 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:18,291 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:18,291 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:18,291 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:18,291 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:18,292 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:18,292 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:18,293 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:18,293 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:18,293 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:18,293 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,293 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,293 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:18,293 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[66.5 70. ]
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:18,295 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:18,666 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:18,666 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:18,666 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:18,666 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:18,666 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:18,667 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:18,667 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:18,667 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:18,667 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:18,668 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:18,668 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:18,668 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:18,668 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,668 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,668 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:18,669 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[70.  73.5]
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:18,670 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:19,003 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:19,003 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:19,003 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:19,003 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:19,003 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:19,003 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:19,004 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:19,004 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:19,004 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:19,005 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:19,005 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :3
+2022-03-17 18:46:19,006 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:19,006 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:19,006 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,006 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,006 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:19,006 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[73.5 77. ]
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:19,008 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:19,303 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:19,303 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:19,303 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:19,304 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:19,304 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:19,304 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:19,304 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:19,304 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:19,304 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:19,305 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:19,305 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:19,305 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:19,305 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,305 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,305 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:19,306 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[77.  80.5]
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:19,307 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:19,671 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:19,672 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:19,673 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:19,673 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:19,673 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:19,673 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,674 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,674 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:19,674 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[80.5 84. ]
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:19,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:19,913 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:19,913 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:19,913 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:19,913 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:19,913 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:19,914 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:19,914 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:19,914 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:19,914 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:19,915 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:19,915 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:19,915 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:19,915 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,915 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,915 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:19,916 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[84.  87.5]
+2022-03-17 18:46:19,917 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:19,917 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:19,917 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,917 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,917 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:19,917 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:19,917 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:19,918 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:20,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:20,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:20,253 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:20,253 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:20,253 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:20,253 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:20,253 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:20,253 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:20,253 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:20,254 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:20,254 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:20,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:20,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,255 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:20,255 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[87.5 91. ]
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:20,256 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:20,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:20,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:20,605 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:20,605 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:20,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:20,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:20,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:20,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:20,606 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:20,607 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:20,607 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :4
+2022-03-17 18:46:20,607 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:20,608 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:20,608 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,608 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,608 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:20,608 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[91.  94.5]
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:20,610 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:20,814 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:20,814 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:20,814 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:20,814 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:20,814 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:20,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:20,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:20,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:20,815 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:20,816 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:20,816 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:20,816 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:20,816 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,816 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,816 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:20,817 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[94.5 98. ]
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:20,818 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:21,152 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:21,152 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:21,152 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:21,153 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:21,153 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:21,153 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:21,153 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:21,153 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:21,153 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:21,154 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:21,154 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:21,154 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:21,154 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,154 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,155 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:21,155 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[ 98.  101.5]
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:21,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:21,443 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:21,444 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:21,445 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:21,445 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:21,445 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,445 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,445 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:21,445 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[101.5 105. ]
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:21,446 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:21,759 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:21,761 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:21,761 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:21,761 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:21,761 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,761 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,761 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:21,762 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[105.  108.5]
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:21,763 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:22,090 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:22,092 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:22,092 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :5
+2022-03-17 18:46:22,092 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:22,093 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:22,093 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,093 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,093 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:22,093 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[108.5 112. ]
+2022-03-17 18:46:22,094 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:22,094 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:22,094 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,094 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,094 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:22,094 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:22,095 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:22,095 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:22,436 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:22,437 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:22,438 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:22,439 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:22,439 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:22,439 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,439 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,439 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:22,439 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[112.  115.5]
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:22,441 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:22,753 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:22,755 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:22,755 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:22,755 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:22,755 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,755 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,755 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:22,755 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[115.5 119. ]
+2022-03-17 18:46:22,756 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:22,756 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:22,756 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,757 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,757 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:22,757 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:22,757 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:22,757 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:23,108 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:23,110 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:23,110 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:23,110 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:23,110 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,110 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,110 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:23,110 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[119.  122.5]
+2022-03-17 18:46:23,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:23,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:23,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,111 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:23,111 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:23,112 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:23,112 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:23,450 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:23,450 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:23,450 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:23,450 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:23,450 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:23,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:23,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:23,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:23,451 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:23,451 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:23,451 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:23,452 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:23,452 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,452 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,452 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:23,453 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[122.5 126. ]
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:23,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:23,776 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :6
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:23,778 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[126.  129.5]
+2022-03-17 18:46:23,780 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:23,783 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:23,783 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,783 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,783 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:23,783 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:23,784 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:23,784 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:24,098 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:24,100 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:24,100 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:24,100 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:24,100 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,100 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,100 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:24,100 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[129.5 133. ]
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:24,102 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:24,390 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:24,390 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:24,390 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:24,390 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:24,391 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:24,391 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:24,391 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:24,391 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:24,391 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:24,392 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:24,392 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:24,392 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:24,392 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,392 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,393 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:24,393 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[133.  136.5]
+2022-03-17 18:46:24,394 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:24,394 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:24,394 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,394 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,394 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:24,394 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:24,395 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:24,395 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:24,702 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:24,702 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:24,702 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:24,703 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:24,703 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:24,703 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:24,703 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:24,703 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:24,703 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:24,704 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:24,704 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:24,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:24,704 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,705 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,705 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:24,705 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[136.5 140. ]
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:24,706 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:25,038 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:25,038 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:25,039 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:25,039 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:25,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:25,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:25,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:25,039 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:25,039 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:25,040 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:25,040 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:25,040 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:25,040 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:25,041 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[140.  143.5]
+2022-03-17 18:46:25,042 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:25,042 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:25,042 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,042 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,042 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:25,042 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:25,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:25,043 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:25,362 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:25,364 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:25,364 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :7
+2022-03-17 18:46:25,364 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:25,364 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:25,364 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,365 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,365 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:25,365 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[143.5 147. ]
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:25,366 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:25,674 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:25,674 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:25,674 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:25,674 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:25,674 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:25,674 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:25,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:25,675 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:25,675 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:25,676 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:25,676 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:25,676 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:25,676 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,676 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,676 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:25,677 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[147.  150.5]
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:25,678 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:25,980 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:25,982 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:25,982 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:25,982 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:25,982 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,982 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,982 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:25,982 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[150.5 154. ]
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:25,984 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:26,294 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:26,295 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:26,296 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:26,296 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:26,296 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:26,296 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,296 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,296 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:26,297 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[154.  157.5]
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:26,298 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:26,558 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:26,560 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:26,560 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:26,560 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:26,560 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,560 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,560 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:26,560 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[157.5 161. ]
+2022-03-17 18:46:26,561 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:26,561 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:26,562 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,562 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,562 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:26,562 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:26,562 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:26,562 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:26,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:26,957 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:26,957 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:26,957 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:26,958 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:26,958 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:26,958 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:26,958 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:26,958 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:26,959 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:26,959 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :8
+2022-03-17 18:46:26,960 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:26,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:26,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:26,960 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[161.  164.5]
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:26,962 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:27,250 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:27,250 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:27,250 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:27,250 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:27,250 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:27,250 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:27,251 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:27,251 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:27,251 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:27,252 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:27,252 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:27,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:27,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:27,253 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[164.5 168. ]
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:27,254 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:27,578 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:27,578 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:27,578 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:27,578 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:27,578 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:27,579 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:27,579 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:27,579 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:27,579 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:27,580 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:27,580 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:27,580 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:27,580 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,580 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,580 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:27,581 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[168.  171.5]
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:27,582 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:27,934 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:27,936 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:27,936 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:27,936 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:27,936 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,936 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,936 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:27,936 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[171.5 175. ]
+2022-03-17 18:46:27,937 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:27,937 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:27,938 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,938 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,938 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:27,938 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:27,938 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:27,938 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:28,221 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:28,221 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:28,221 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:28,221 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:28,222 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:28,222 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:28,222 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:28,222 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:28,222 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:28,223 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:28,223 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:28,223 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:28,223 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,223 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,223 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:28,224 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[175.  178.5]
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:28,225 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:28,602 - nest_to_tvb_transformer2001 - INFO - TSR : save hist :9
+2022-03-17 18:46:28,603 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:28,604 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:28,604 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :9
+2022-03-17 18:46:28,604 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:28,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:28,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:28,605 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[178.5 182. ]
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:28,606 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:28,882 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:28,884 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:28,884 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:28,884 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:28,884 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,884 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,884 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:28,884 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[182.  185.5]
+2022-03-17 18:46:28,885 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:28,885 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:28,885 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,885 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,886 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:28,886 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:28,886 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:28,886 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:29,248 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:29,249 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:29,251 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:29,251 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:29,251 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:29,251 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,251 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,251 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:29,251 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[185.5 189. ]
+2022-03-17 18:46:29,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:29,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:29,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,252 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:29,252 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:29,253 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:29,253 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:29,542 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:29,544 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:29,544 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:29,544 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:29,544 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,544 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,544 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:29,544 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[189.  192.5]
+2022-03-17 18:46:29,545 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:29,546 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:29,546 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,546 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,546 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:29,546 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:29,546 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:29,546 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:29,905 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:29,907 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:29,907 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:29,907 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:29,907 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,907 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,907 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:29,907 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[192.5 196. ]
+2022-03-17 18:46:29,908 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:29,908 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:29,908 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,908 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,908 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:29,909 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:29,909 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:29,909 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:30,153 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:30,153 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:30,153 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:30,154 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:30,154 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:30,154 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:30,154 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:30,154 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:30,154 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:30,155 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:30,155 - nest_to_tvb_transformer2001 - INFO - TSR : save rate :10
+2022-03-17 18:46:30,156 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:30,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:30,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:30,156 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[196.  199.5]
+2022-03-17 18:46:30,157 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:30,157 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:30,157 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,158 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,158 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:30,158 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:30,158 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:30,158 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:30,450 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:30,451 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:30,453 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:30,453 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:30,453 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:30,453 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,453 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,453 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:30,453 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[199.5 203. ]
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:30,454 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:30,811 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end 0
+2022-03-17 18:46:30,811 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [0]
+2022-03-17 18:46:30,811 - nest_to_tvb_transformer2001 - INFO - TSR : add spikes 0
+2022-03-17 18:46:30,811 - nest_to_tvb_transformer2001 - INFO - TSR : add_spikes : size buffer : 0
+2022-03-17 18:46:30,812 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release)
+2022-03-17 18:46:30,812 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : begin 0
+2022-03-17 18:46:30,812 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:30,812 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(release) : end
+2022-03-17 18:46:30,812 - nest_to_tvb_transformer2001 - INFO - TSR : analise
+2022-03-17 18:46:30,813 - nest_to_tvb_transformer2001 - INFO - TSR : analyse : 0.0
+2022-03-17 18:46:30,813 - nest_to_tvb_transformer2001 - INFO - TSR : send data
+2022-03-17 18:46:30,813 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:30,813 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,813 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,813 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:30,814 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : time :[203.  206.5]
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : buffer :(3000000, 1)
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - TSR : receive data Nest
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready get spikes
+2022-03-17 18:46:30,815 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:30,831 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(ready) : buffer end -1
+2022-03-17 18:46:30,831 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(ready) : ready to write : [-1]
+2022-03-17 18:46:30,831 - nest_to_tvb_transformer2001 - INFO - TSR : break
+2022-03-17 18:46:30,831 - nest_to_tvb_transformer2001 - INFO - TSR : end methods
+2022-03-17 18:46:30,831 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(end) : begin
+2022-03-17 18:46:30,831 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(release): buffer -1
+2022-03-17 18:46:30,831 - nest_to_tvb_transformer2001 - INFO - Thread Internal : read(release): read buffer unlock -1
+2022-03-17 18:46:30,832 - nest_to_tvb_transformer2001 - INFO - Thread Internal : spike(end) : end
+2022-03-17 18:46:30,832 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(end) : begin True
+2022-03-17 18:46:30,832 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(release) : write buffer 2
+2022-03-17 18:46:31,018 - nest_to_tvb_transformer2001 - INFO - Thread Internal : write(release) : write buffer end -1
+2022-03-17 18:46:31,018 - nest_to_tvb_transformer2001 - INFO - Thread Internal : rate(end) : end
+2022-03-17 18:46:31,018 - nest_to_tvb_transformer2001 - INFO - TSR : end
+2022-03-17 18:46:31,018 - nest_to_tvb_transformer2001 - INFO - MPI IO ext : finalise
+2022-03-17 18:46:31,018 - nest_to_tvb_transformer2001 - INFO - Thread Internal : finalize
+2022-03-17 18:46:31,018 - nest_to_tvb_transformer2001 - INFO - MPI IO ext : real finalise

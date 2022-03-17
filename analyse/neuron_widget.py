@@ -66,18 +66,20 @@ def neuron_widget(nb_thread=4):
                            {'rate': R_max_ex * 0.5, 'amplitude': R_max_ex * 0.5, 'frequency': f_ex, 'phase': 0.0})
         G_in = nest.Create("sinusoidal_poisson_generator", N_in,
                            {'rate': R_max_in * 0.5, 'amplitude': R_max_in * 0.5, 'frequency': f_in, 'phase': 0.0})
-        nest.CopyModel("static_synapse", "excitatory", {"weight": w_ex})
-        nest.Connect(G_ex, neuron, {'rule': 'pairwise_bernoulli', 'p': p_ex}, syn_spec="excitatory")
-        nest.CopyModel("static_synapse", "inhibitory", {"weight": w_in})
-        nest.Connect(G_in, neuron, {'rule': 'pairwise_bernoulli', 'p': p_in}, syn_spec="inhibitory")
+        nest.Connect(G_ex, neuron, {'rule': 'pairwise_bernoulli', 'p': p_ex}, 
+                     syn_spec={'synapse_model': 'static_synapse',
+                 'weight': w_ex})
+        nest.Connect(G_in, neuron, {'rule': 'pairwise_bernoulli', 'p': p_in}, 
+                     syn_spec={'synapse_model': 'static_synapse',
+                 'weight': w_ex})
         # Run it
-        nest.CopyModel("spike_detector", "sd_ex", {"record_to": 'memory'})
+        nest.CopyModel("spike_recorder", "sd_ex", {"record_to": 'memory'})
         MG_ex = nest.Create("sd_ex")
         nest.Connect(G_ex, MG_ex, syn_spec='static_synapse')
-        nest.CopyModel("spike_detector", "sd_in", {"record_to": 'memory'})
+        nest.CopyModel("spike_recorder", "sd_in", {"record_to": 'memory'})
         MG_in = nest.Create("sd_in")
         nest.Connect(G_in, MG_in, syn_spec='static_synapse')
-        nest.CopyModel("spike_detector", "sd_n", {"record_to": 'memory'})
+        nest.CopyModel("spike_recorder", "sd_n", {"record_to": 'memory'})
         MSH = nest.Create("sd_n")
         nest.Connect(neuron, MSH, syn_spec='static_synapse')
         MH = nest.Create("multimeter", params={"record_to": 'memory', "record_from": ["V_m", 'w']})
@@ -131,7 +133,8 @@ def neuron_widget(nb_thread=4):
         plt.subplot(2, 2, 2)
         Vms = MH_sim["events"]["V_m"]
         ws = MH_sim["events"]["w"]
-        plt.xlim(xmax=v_spike, xmin=np.min(np.array(Vms)))
+        diff = 0.1*(np.max(np.array(Vms))-np.min(np.array(Vms)))
+        plt.xlim(xmax=np.max(np.array(Vms))+diff, xmin=np.min(np.array(Vms))-diff)
         plt.plot(Vms, ws)
         plt.xlabel("u [mV]")
         plt.ylabel("w [pAmp]")

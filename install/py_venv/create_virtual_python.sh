@@ -37,6 +37,7 @@ pip install h5py==3.2.1
 pip install cycler==0.10.0
 pip install jupyter==1.0.0
 pip install vtk==9.0.1
+pip install plotly==5.1.0
 
 # install TVB
 pip install tvb-data==2.0 tvb-gdist==2.1.0 tvb-library==2.0.10
@@ -71,7 +72,8 @@ pip install LFPy==2.2.1
 # install HybridLFPy from github
 git clone --branch nest-3-lio https://github.com/lionelkusch/hybridLFPy.git
 cd hybridLFPy
-python3.8 setup.py install
+python3.8 setup.py install --prefix $PATH_LIB/lib_py/
+
 cd ..
 rm -rfd hybridLFPy
 

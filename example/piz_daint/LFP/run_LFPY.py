@@ -1,4 +1,4 @@
-from example.analyse.LFPY.LFP import generate_LFP
+from analyse.LFPY.LFP import generate_LFP
 
 if __name__ == '__main__':
     import sys

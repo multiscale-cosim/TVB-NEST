@@ -32,7 +32,7 @@ if [ -z "$1" ]
 fi
 if [ $1 -eq 0 ]
 then
-  IMAGE=local:NEST_TVB_IO_PAPER
+  IMAGE=local:NEST_TVB_IO_PAPER_TIMER
   echo ' test image for paper Nest and TVB'
 else
   echo ' No image to test '
@@ -41,9 +41,12 @@ fi
 
 # Run the docker image
 cd ../../
-mkdir $(pwd)/tests/test_file/test_docker/
-sudo docker run -it --mount type=bind,source="$(pwd)",target=/home $IMAGE python3 /home/tests/run_co-sim_test.py /home/tests/test_file/test_docker/ 4 4 false
-sudo rm -rd $(pwd)/tests/test_file/test_docker/
+TEST_DIRECTOR=$(pwd)/tests
+DIRECTORY=$(pwd)/tests/test_file/test_docker/
+mkdir $DIRECTORY
+cd $DIRECTORY
+sudo docker run -it -e "PYTHONPATH=/usr/lib/nest/lib/python3.8/site-packages/:/home/:/usr/local/nrn/lib/python/" --mount type=bind,source="$TEST_DIRECTOR",target=/home/tests $IMAGE python3 /home/tests/run_co-sim_test.py /home/tests/test_file/test_docker/ 4 4 false
+sudo rm -rd $DIRECTORY
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

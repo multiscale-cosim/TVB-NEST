@@ -25,7 +25,8 @@ RUN apt-get update;\
 # install python
 RUN  apt-get install -y build-essential=12.6 cmake=3.13.4-1 zlib1g-dev=1:1.2.11.dfsg-1 libltdl-dev=2.4.6-9\
      libncurses5-dev=6.1+20181013-2+deb10u2 libgdbm-dev=1.18.1-4 libreadline-dev=7.0-5 \
-     libnss3-dev=2:3.42.1-1+deb10u3 libssl-dev=1.1.1d-0+deb10u6 libsqlite3-dev=3.27.2-3+deb10u1\
+     libnss3=2:3.42.1-1+deb10u3 \
+     libnss3-dev=2:3.42.1-1+deb10u3 libssl-dev=1.1.1d-0+deb10u7 libsqlite3-dev=3.27.2-3+deb10u1 libgl1-mesa-glx=18.3.6-2+deb10u1 \
      libffi-dev=3.2.1-9 libgsl-dev=2.5+dfsg-6 libbz2-dev=1.0.6-9.2~deb10u1 curl=7.64.0-4+deb10u2;\
      cd /root ;\
      curl -O https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz ;\
@@ -47,12 +48,14 @@ RUN cd /root ;\
     pip install --upgrade pip==21.1.2
 
 # install MPI
-RUN wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
+RUN wget -q --no-check-certificate http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz;\
     tar xf mpich-3.1.4.tar.gz;\
     cd mpich-3.1.4;\
     ./configure --disable-fortran --enable-fast=all,O3 --prefix=/usr;\
     make -j$(nproc);\
-    make install
+    make install;\
+    cd ..;\
+    rm -rdf mpich-3.1.4.tar.gz mpich-3.1.4
 
 # Install the dependance for Nest
 RUN pip install nose==1.3.7;\
@@ -68,13 +71,12 @@ RUN pip install nose==1.3.7;\
     pip install h5py==3.2.1;\
     pip install cycler==0.10.0;\
     pip install jupyter==1.0.0;\
-    pip install vtk==9.0.1;\
     pip install plotly==5.1.0
 
 # install TVB
 RUN apt-get install -y llvm-dev=1:7.0-47 llvm=1:7.0-47;\
     export LLVM_CONFIG=/usr/bin/llvm-config;\
-    pip install tvb-data==2.0 tvb-gdist==2.1.0 tvb-library==2.0.10
+    pip install tvb-data==2.0 tvb-gdist==2.0.0 tvb-library==2.0.10
 
 # install parameters
 RUN git clone https://github.com/NeuralEnsemble/parameters;\
@@ -96,7 +98,9 @@ RUN git clone https://github.com/neuronsimulator/nrn.git;\
     -DNRN_ENABLE_MPI=OFF \
     -DNRN_ENABLE_RX3D=OFF \
     -DCMAKE_INSTALL_PREFIX=/usr/local/nrn;\
-    cmake --build . --parallel 8 --target install
+    cmake --build . --parallel 8 --target install;\
+    cd ../..;\
+    rm -rdf nrn
 
 ENV PATH=/usr/local/nrn/bin:$PATH
 
@@ -137,11 +141,11 @@ RUN cd /home/;\
 
 # Copy files of the project
 COPY  ./nest_elephant_tvb /home/nest_elephant_tvb
-COPY  ./analyse /home/nest_elephant_tvb/analyse
-COPY  ./parameter /home/nest_elephant_tvb/parameter
+COPY  ./analyse /home/analyse
+COPY  ./timer /home/timer
 
 # initialisation of special synapse for Neuron
-RUN cd /home/nest_elephant_tvb/analyse/LFPY;\
+RUN cd /home/analyse/LFPY;\
     nrnivmodl
 
 # create python3 executable

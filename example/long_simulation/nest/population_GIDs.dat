@@ -1,4 +1,4 @@
-0  800 excitatory
-1000  1800 excitatory
-800  1000 inhibitory
-1800  2000 inhibitory
+0  500 excitatory
+1000  1500 excitatory
+500  1000 inhibitory
+1500  2000 inhibitory

@@ -42,7 +42,7 @@ TVB and Nest IO
     # install python
     apt-get install -y build-essential=12.6 cmake=3.13.4-1 zlib1g-dev=1:1.2.11.dfsg-1 libltdl-dev=2.4.6-9 libncurses5-dev=6.1+20181013-2+deb10u2 libgdbm-dev=1.18.1-4 libreadline-dev=7.0-5 \
      libnss3-dev=2:3.42.1-1+deb10u3 libssl-dev=1.1.1d-0+deb10u7 libsqlite3-dev=3.27.2-3+deb10u1 libffi-dev=3.2.1-9 libgsl-dev=2.5+dfsg-6 libbz2-dev=1.0.6-9.2~deb10u1 curl=7.64.0-4+deb10u2 \
-     libnss3=2:3.42.1-1+deb10u3
+     libnss3=2:3.42.1-1+deb10u3 libgl1-mesa-glx=18.3.6-2+deb10u1
     curl -O https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz
     tar -xf Python-3.8.10.tar.xz
     cd Python-3.8.10

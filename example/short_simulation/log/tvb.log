@@ -1,204 +1,972 @@
-2020-12-16 12:56:14,853 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#60437$ifname#127.0.1.1$
-2020-12-16 12:56:14,853 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#60437$ifname#127.0.1.1$
-2020-12-16 12:56:14,853 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#40863$ifname#127.0.1.1$
-2020-12-16 12:56:14,854 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#40863$ifname#127.0.1.1$
-2020-12-16 12:56:14,854 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#60273$ifname#127.0.1.1$
-2020-12-16 12:56:14,854 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#60273$ifname#127.0.1.1$
-2020-12-16 12:56:14,854 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#43825$ifname#127.0.1.1$
-2020-12-16 12:56:14,855 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#43825$ifname#127.0.1.1$
-2020-12-16 12:56:14,855 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:14,873 - tvb - INFO -  TVB start simulation 0.0
-2020-12-16 12:56:15,047 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:15,048 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:15,075 - tvb - INFO -  TVB start simulation 3.5
-2020-12-16 12:56:15,278 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:15,278 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:15,323 - tvb - INFO -  TVB start simulation 7.0
-2020-12-16 12:56:15,562 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:15,562 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:15,566 - tvb - INFO -  TVB start simulation 10.5
-2020-12-16 12:56:15,805 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:15,806 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:15,828 - tvb - INFO -  TVB start simulation 14.0
-2020-12-16 12:56:16,072 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:16,073 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:16,096 - tvb - INFO -  TVB start simulation 17.5
-2020-12-16 12:56:16,343 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:16,343 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:16,346 - tvb - INFO -  TVB start simulation 21.0
-2020-12-16 12:56:16,587 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:16,588 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:16,612 - tvb - INFO -  TVB start simulation 24.5
-2020-12-16 12:56:16,852 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:16,852 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:16,882 - tvb - INFO -  TVB start simulation 28.0
-2020-12-16 12:56:17,138 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:17,138 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:17,181 - tvb - INFO -  TVB start simulation 31.5
-2020-12-16 12:56:17,422 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:17,422 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:17,475 - tvb - INFO -  TVB start simulation 35.0
-2020-12-16 12:56:17,718 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:17,718 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:17,737 - tvb - INFO -  TVB start simulation 38.5
-2020-12-16 12:56:17,978 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:17,979 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:17,996 - tvb - INFO -  TVB start simulation 42.0
-2020-12-16 12:56:18,237 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:18,238 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:18,274 - tvb - INFO -  TVB start simulation 45.5
-2020-12-16 12:56:18,516 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:18,516 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:18,520 - tvb - INFO -  TVB start simulation 49.0
-2020-12-16 12:56:18,763 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:18,763 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:18,796 - tvb - INFO -  TVB start simulation 52.5
-2020-12-16 12:56:19,037 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:19,038 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:19,044 - tvb - INFO -  TVB start simulation 56.0
-2020-12-16 12:56:19,296 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:19,297 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:19,320 - tvb - INFO -  TVB start simulation 59.5
-2020-12-16 12:56:19,578 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:19,579 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:19,615 - tvb - INFO -  TVB start simulation 63.0
-2020-12-16 12:56:19,867 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:19,867 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:19,916 - tvb - INFO -  TVB start simulation 66.5
-2020-12-16 12:56:20,164 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:20,164 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:20,184 - tvb - INFO -  TVB start simulation 70.0
-2020-12-16 12:56:20,431 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:20,431 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:20,475 - tvb - INFO -  TVB start simulation 73.5
-2020-12-16 12:56:20,724 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:20,724 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:20,759 - tvb - INFO -  TVB start simulation 77.0
-2020-12-16 12:56:21,001 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:21,002 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:21,005 - tvb - INFO -  TVB start simulation 80.5
-2020-12-16 12:56:21,249 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:21,250 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:21,311 - tvb - INFO -  TVB start simulation 84.0
-2020-12-16 12:56:21,556 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:21,556 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:21,593 - tvb - INFO -  TVB start simulation 87.5
-2020-12-16 12:56:21,837 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:21,838 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:21,877 - tvb - INFO -  TVB start simulation 91.0
-2020-12-16 12:56:22,121 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:22,121 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:22,151 - tvb - INFO -  TVB start simulation 94.5
-2020-12-16 12:56:22,398 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:22,398 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:22,416 - tvb - INFO -  TVB start simulation 98.0
-2020-12-16 12:56:22,662 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:22,662 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:22,684 - tvb - INFO -  TVB start simulation 101.5
-2020-12-16 12:56:22,930 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:22,930 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:22,955 - tvb - INFO -  TVB start simulation 105.0
-2020-12-16 12:56:23,200 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:23,201 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:23,208 - tvb - INFO -  TVB start simulation 108.5
-2020-12-16 12:56:23,478 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:23,478 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:23,521 - tvb - INFO -  TVB start simulation 112.0
-2020-12-16 12:56:23,768 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:23,768 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:23,772 - tvb - INFO -  TVB start simulation 115.5
-2020-12-16 12:56:24,062 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:24,063 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:24,115 - tvb - INFO -  TVB start simulation 119.0
-2020-12-16 12:56:24,334 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:24,334 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:24,351 - tvb - INFO -  TVB start simulation 122.5
-2020-12-16 12:56:24,555 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:24,555 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:24,595 - tvb - INFO -  TVB start simulation 126.0
-2020-12-16 12:56:24,816 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:24,816 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:24,849 - tvb - INFO -  TVB start simulation 129.5
-2020-12-16 12:56:25,106 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:25,107 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:25,143 - tvb - INFO -  TVB start simulation 133.0
-2020-12-16 12:56:25,389 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:25,390 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:25,415 - tvb - INFO -  TVB start simulation 136.5
-2020-12-16 12:56:25,660 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:25,660 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:25,676 - tvb - INFO -  TVB start simulation 140.0
-2020-12-16 12:56:25,921 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:25,922 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:25,955 - tvb - INFO -  TVB start simulation 143.5
-2020-12-16 12:56:26,201 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:26,201 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:26,251 - tvb - INFO -  TVB start simulation 147.0
-2020-12-16 12:56:26,498 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:26,498 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:26,548 - tvb - INFO -  TVB start simulation 150.5
-2020-12-16 12:56:26,796 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:26,796 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:26,823 - tvb - INFO -  TVB start simulation 154.0
-2020-12-16 12:56:27,073 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:27,074 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:27,124 - tvb - INFO -  TVB start simulation 157.5
-2020-12-16 12:56:27,373 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:27,373 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:27,377 - tvb - INFO -  TVB start simulation 161.0
-2020-12-16 12:56:27,624 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:27,625 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:27,653 - tvb - INFO -  TVB start simulation 164.5
-2020-12-16 12:56:27,899 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:27,900 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:27,942 - tvb - INFO -  TVB start simulation 168.0
-2020-12-16 12:56:28,191 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:28,191 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:28,241 - tvb - INFO -  TVB start simulation 171.5
-2020-12-16 12:56:28,489 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:28,489 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:28,527 - tvb - INFO -  TVB start simulation 175.0
-2020-12-16 12:56:28,779 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:28,780 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:28,809 - tvb - INFO -  TVB start simulation 178.5
-2020-12-16 12:56:29,058 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:29,058 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:29,106 - tvb - INFO -  TVB start simulation 182.0
-2020-12-16 12:56:29,354 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:29,355 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:29,389 - tvb - INFO -  TVB start simulation 185.5
-2020-12-16 12:56:29,636 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:29,637 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:29,677 - tvb - INFO -  TVB start simulation 189.0
-2020-12-16 12:56:29,924 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:29,925 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:29,948 - tvb - INFO -  TVB start simulation 192.5
-2020-12-16 12:56:30,197 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:30,197 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:30,228 - tvb - INFO -  TVB start simulation 196.0
-2020-12-16 12:56:30,480 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:30,481 - tvb - INFO -  TVB receive data
-2020-12-16 12:56:30,530 - tvb - INFO -  TVB start simulation 199.5
-2020-12-16 12:56:30,729 - tvb - INFO -  TVB end simulation
-2020-12-16 12:56:30,730 - tvb - INFO -  TVB finish
-2020-12-16 12:56:30,731 - tvb - INFO - TVB close connection send tag#1$description#INS-Precision-7540$port#60273$ifname#127.0.1.1$
-2020-12-16 12:56:30,731 - tvb - INFO - TVB send check
-2020-12-16 12:56:30,756 - tvb - INFO - TVB send end simulation
-2020-12-16 12:56:30,756 - tvb - INFO - TVB disconnect communication
-2020-12-16 12:56:30,756 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#60273$ifname#127.0.1.1$
-2020-12-16 12:56:30,756 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#60273$ifname#127.0.1.1$
-2020-12-16 12:56:30,756 - tvb - INFO - TVB close connection send tag#1$description#INS-Precision-7540$port#43825$ifname#127.0.1.1$
-2020-12-16 12:56:30,756 - tvb - INFO - TVB send check
-2020-12-16 12:56:30,756 - tvb - INFO - TVB send end simulation
-2020-12-16 12:56:30,756 - tvb - INFO - TVB disconnect communication
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#43825$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#43825$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close connection receive tag#1$description#INS-Precision-7540$port#60437$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO - TVB disconnect communication
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#60437$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#60437$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close connection receive tag#1$description#INS-Precision-7540$port#40863$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO - TVB disconnect communication
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#40863$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#40863$ifname#127.0.1.1$
-2020-12-16 12:56:30,757 - tvb - INFO -  TVB exit
+2022-03-17 18:46:12,360 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#36835$ifname#127.0.1.1$
+2022-03-17 18:46:12,361 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#36835$ifname#127.0.1.1$
+2022-03-17 18:46:12,362 - tvb - INFO - wait connection tag#1$description#INS-Precision-7540$port#59221$ifname#127.0.1.1$
+2022-03-17 18:46:12,363 - tvb - INFO - connect to tag#1$description#INS-Precision-7540$port#59221$ifname#127.0.1.1$
+2022-03-17 18:46:12,363 - tvb - INFO - wait connection tag#0$description#INS-Precision-7540$port#47773$ifname#127.0.1.1$
+2022-03-17 18:46:12,364 - tvb - INFO - connect to tag#0$description#INS-Precision-7540$port#47773$ifname#127.0.1.1$
+2022-03-17 18:46:12,364 - tvb - INFO - wait connection tag#0$description#INS-Precision-7540$port#60793$ifname#127.0.1.1$
+2022-03-17 18:46:12,365 - tvb - INFO - connect to tag#0$description#INS-Precision-7540$port#60793$ifname#127.0.1.1$
+2022-03-17 18:46:12,365 - tvb - INFO - send initialisation of TVB : prepare data
+2022-03-17 18:46:12,378 - tvb - INFO - send initialisation of TVB : send data
+2022-03-17 18:46:12,378 - tvb - INFO - start send
+2022-03-17 18:46:12,378 - tvb - INFO - send accept
+2022-03-17 18:46:12,379 - tvb - INFO - get source
+2022-03-17 18:46:12,379 - tvb - INFO - end send
+2022-03-17 18:46:12,379 - tvb - INFO - start send
+2022-03-17 18:46:12,404 - tvb - INFO - send accept
+2022-03-17 18:46:12,404 - tvb - INFO - get source
+2022-03-17 18:46:12,404 - tvb - INFO - end send
+2022-03-17 18:46:12,404 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:12,405 - tvb - INFO - start receive
+2022-03-17 18:46:12,406 - tvb - INFO - end receive [0.  3.5]
+2022-03-17 18:46:12,406 - tvb - INFO - start receive
+2022-03-17 18:46:12,407 - tvb - INFO - end receive [0.  3.5]
+2022-03-17 18:46:12,407 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:12,407 - tvb - INFO -  TVB start simulation 0.0
+2022-03-17 18:46:12,701 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:12,701 - tvb - INFO - start send
+2022-03-17 18:46:12,702 - tvb - INFO - send accept
+2022-03-17 18:46:12,702 - tvb - INFO - get source
+2022-03-17 18:46:12,702 - tvb - INFO - end send
+2022-03-17 18:46:12,702 - tvb - INFO - start send
+2022-03-17 18:46:12,703 - tvb - INFO - send accept
+2022-03-17 18:46:12,703 - tvb - INFO - get source
+2022-03-17 18:46:12,703 - tvb - INFO - end send
+2022-03-17 18:46:12,703 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:12,703 - tvb - INFO - start receive
+2022-03-17 18:46:12,729 - tvb - INFO - end receive [3.5 7. ]
+2022-03-17 18:46:12,729 - tvb - INFO - start receive
+2022-03-17 18:46:12,744 - tvb - INFO - end receive [3.5 7. ]
+2022-03-17 18:46:12,744 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:12,745 - tvb - INFO -  TVB start simulation 3.5
+2022-03-17 18:46:13,012 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:13,013 - tvb - INFO - start send
+2022-03-17 18:46:13,013 - tvb - INFO - send accept
+2022-03-17 18:46:13,013 - tvb - INFO - get source
+2022-03-17 18:46:13,013 - tvb - INFO - end send
+2022-03-17 18:46:13,013 - tvb - INFO - start send
+2022-03-17 18:46:13,014 - tvb - INFO - send accept
+2022-03-17 18:46:13,014 - tvb - INFO - get source
+2022-03-17 18:46:13,014 - tvb - INFO - end send
+2022-03-17 18:46:13,014 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:13,014 - tvb - INFO - start receive
+2022-03-17 18:46:13,031 - tvb - INFO - end receive [ 7.  10.5]
+2022-03-17 18:46:13,031 - tvb - INFO - start receive
+2022-03-17 18:46:13,060 - tvb - INFO - end receive [ 7.  10.5]
+2022-03-17 18:46:13,060 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:13,060 - tvb - INFO -  TVB start simulation 7.0
+2022-03-17 18:46:13,330 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:13,330 - tvb - INFO - start send
+2022-03-17 18:46:13,330 - tvb - INFO - send accept
+2022-03-17 18:46:13,331 - tvb - INFO - get source
+2022-03-17 18:46:13,331 - tvb - INFO - end send
+2022-03-17 18:46:13,331 - tvb - INFO - start send
+2022-03-17 18:46:13,331 - tvb - INFO - send accept
+2022-03-17 18:46:13,331 - tvb - INFO - get source
+2022-03-17 18:46:13,331 - tvb - INFO - end send
+2022-03-17 18:46:13,332 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:13,332 - tvb - INFO - start receive
+2022-03-17 18:46:13,352 - tvb - INFO - end receive [10.5 14. ]
+2022-03-17 18:46:13,352 - tvb - INFO - start receive
+2022-03-17 18:46:13,380 - tvb - INFO - end receive [10.5 14. ]
+2022-03-17 18:46:13,381 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:13,381 - tvb - INFO -  TVB start simulation 10.5
+2022-03-17 18:46:13,651 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:13,651 - tvb - INFO - start send
+2022-03-17 18:46:13,652 - tvb - INFO - send accept
+2022-03-17 18:46:13,652 - tvb - INFO - get source
+2022-03-17 18:46:13,652 - tvb - INFO - end send
+2022-03-17 18:46:13,653 - tvb - INFO - start send
+2022-03-17 18:46:13,653 - tvb - INFO - send accept
+2022-03-17 18:46:13,653 - tvb - INFO - get source
+2022-03-17 18:46:13,653 - tvb - INFO - end send
+2022-03-17 18:46:13,654 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:13,654 - tvb - INFO - start receive
+2022-03-17 18:46:13,675 - tvb - INFO - end receive [14.  17.5]
+2022-03-17 18:46:13,676 - tvb - INFO - start receive
+2022-03-17 18:46:13,699 - tvb - INFO - end receive [14.  17.5]
+2022-03-17 18:46:13,700 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:13,700 - tvb - INFO -  TVB start simulation 14.0
+2022-03-17 18:46:13,976 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:13,976 - tvb - INFO - start send
+2022-03-17 18:46:13,977 - tvb - INFO - send accept
+2022-03-17 18:46:13,977 - tvb - INFO - get source
+2022-03-17 18:46:13,977 - tvb - INFO - end send
+2022-03-17 18:46:13,977 - tvb - INFO - start send
+2022-03-17 18:46:13,977 - tvb - INFO - send accept
+2022-03-17 18:46:13,977 - tvb - INFO - get source
+2022-03-17 18:46:13,977 - tvb - INFO - end send
+2022-03-17 18:46:13,977 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:13,978 - tvb - INFO - start receive
+2022-03-17 18:46:14,000 - tvb - INFO - end receive [17.5 21. ]
+2022-03-17 18:46:14,000 - tvb - INFO - start receive
+2022-03-17 18:46:14,013 - tvb - INFO - end receive [17.5 21. ]
+2022-03-17 18:46:14,013 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:14,014 - tvb - INFO -  TVB start simulation 17.5
+2022-03-17 18:46:14,297 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:14,298 - tvb - INFO - start send
+2022-03-17 18:46:14,298 - tvb - INFO - send accept
+2022-03-17 18:46:14,299 - tvb - INFO - get source
+2022-03-17 18:46:14,299 - tvb - INFO - end send
+2022-03-17 18:46:14,299 - tvb - INFO - start send
+2022-03-17 18:46:14,299 - tvb - INFO - send accept
+2022-03-17 18:46:14,299 - tvb - INFO - get source
+2022-03-17 18:46:14,299 - tvb - INFO - end send
+2022-03-17 18:46:14,300 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:14,300 - tvb - INFO - start receive
+2022-03-17 18:46:14,325 - tvb - INFO - end receive [21.  24.5]
+2022-03-17 18:46:14,325 - tvb - INFO - start receive
+2022-03-17 18:46:14,341 - tvb - INFO - end receive [21.  24.5]
+2022-03-17 18:46:14,342 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:14,342 - tvb - INFO -  TVB start simulation 21.0
+2022-03-17 18:46:14,610 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:14,611 - tvb - INFO - start send
+2022-03-17 18:46:14,611 - tvb - INFO - send accept
+2022-03-17 18:46:14,611 - tvb - INFO - get source
+2022-03-17 18:46:14,612 - tvb - INFO - end send
+2022-03-17 18:46:14,612 - tvb - INFO - start send
+2022-03-17 18:46:14,612 - tvb - INFO - send accept
+2022-03-17 18:46:14,613 - tvb - INFO - get source
+2022-03-17 18:46:14,613 - tvb - INFO - end send
+2022-03-17 18:46:14,613 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:14,613 - tvb - INFO - start receive
+2022-03-17 18:46:14,634 - tvb - INFO - end receive [24.5 28. ]
+2022-03-17 18:46:14,634 - tvb - INFO - start receive
+2022-03-17 18:46:14,660 - tvb - INFO - end receive [24.5 28. ]
+2022-03-17 18:46:14,660 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:14,660 - tvb - INFO -  TVB start simulation 24.5
+2022-03-17 18:46:14,930 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:14,931 - tvb - INFO - start send
+2022-03-17 18:46:14,931 - tvb - INFO - send accept
+2022-03-17 18:46:14,931 - tvb - INFO - get source
+2022-03-17 18:46:14,931 - tvb - INFO - end send
+2022-03-17 18:46:14,932 - tvb - INFO - start send
+2022-03-17 18:46:14,932 - tvb - INFO - send accept
+2022-03-17 18:46:14,932 - tvb - INFO - get source
+2022-03-17 18:46:14,932 - tvb - INFO - end send
+2022-03-17 18:46:14,932 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:14,932 - tvb - INFO - start receive
+2022-03-17 18:46:14,970 - tvb - INFO - end receive [28.  31.5]
+2022-03-17 18:46:14,970 - tvb - INFO - start receive
+2022-03-17 18:46:14,996 - tvb - INFO - end receive [28.  31.5]
+2022-03-17 18:46:14,996 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:14,996 - tvb - INFO -  TVB start simulation 28.0
+2022-03-17 18:46:15,265 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:15,266 - tvb - INFO - start send
+2022-03-17 18:46:15,266 - tvb - INFO - send accept
+2022-03-17 18:46:15,266 - tvb - INFO - get source
+2022-03-17 18:46:15,266 - tvb - INFO - end send
+2022-03-17 18:46:15,266 - tvb - INFO - start send
+2022-03-17 18:46:15,266 - tvb - INFO - send accept
+2022-03-17 18:46:15,266 - tvb - INFO - get source
+2022-03-17 18:46:15,266 - tvb - INFO - end send
+2022-03-17 18:46:15,267 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:15,267 - tvb - INFO - start receive
+2022-03-17 18:46:15,285 - tvb - INFO - end receive [31.5 35. ]
+2022-03-17 18:46:15,285 - tvb - INFO - start receive
+2022-03-17 18:46:15,312 - tvb - INFO - end receive [31.5 35. ]
+2022-03-17 18:46:15,312 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:15,313 - tvb - INFO -  TVB start simulation 31.5
+2022-03-17 18:46:15,587 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:15,587 - tvb - INFO - start send
+2022-03-17 18:46:15,588 - tvb - INFO - send accept
+2022-03-17 18:46:15,588 - tvb - INFO - get source
+2022-03-17 18:46:15,588 - tvb - INFO - end send
+2022-03-17 18:46:15,588 - tvb - INFO - start send
+2022-03-17 18:46:15,588 - tvb - INFO - send accept
+2022-03-17 18:46:15,588 - tvb - INFO - get source
+2022-03-17 18:46:15,589 - tvb - INFO - end send
+2022-03-17 18:46:15,589 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:15,589 - tvb - INFO - start receive
+2022-03-17 18:46:15,610 - tvb - INFO - end receive [35.  38.5]
+2022-03-17 18:46:15,610 - tvb - INFO - start receive
+2022-03-17 18:46:15,637 - tvb - INFO - end receive [35.  38.5]
+2022-03-17 18:46:15,637 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:15,637 - tvb - INFO -  TVB start simulation 35.0
+2022-03-17 18:46:15,927 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:15,928 - tvb - INFO - start send
+2022-03-17 18:46:15,928 - tvb - INFO - send accept
+2022-03-17 18:46:15,928 - tvb - INFO - get source
+2022-03-17 18:46:15,929 - tvb - INFO - end send
+2022-03-17 18:46:15,929 - tvb - INFO - start send
+2022-03-17 18:46:15,929 - tvb - INFO - send accept
+2022-03-17 18:46:15,929 - tvb - INFO - get source
+2022-03-17 18:46:15,930 - tvb - INFO - end send
+2022-03-17 18:46:15,930 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:15,930 - tvb - INFO - start receive
+2022-03-17 18:46:15,952 - tvb - INFO - end receive [38.5 42. ]
+2022-03-17 18:46:15,953 - tvb - INFO - start receive
+2022-03-17 18:46:15,980 - tvb - INFO - end receive [38.5 42. ]
+2022-03-17 18:46:15,980 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:15,980 - tvb - INFO -  TVB start simulation 38.5
+2022-03-17 18:46:16,261 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:16,262 - tvb - INFO - start send
+2022-03-17 18:46:16,262 - tvb - INFO - send accept
+2022-03-17 18:46:16,262 - tvb - INFO - get source
+2022-03-17 18:46:16,262 - tvb - INFO - end send
+2022-03-17 18:46:16,263 - tvb - INFO - start send
+2022-03-17 18:46:16,263 - tvb - INFO - send accept
+2022-03-17 18:46:16,263 - tvb - INFO - get source
+2022-03-17 18:46:16,263 - tvb - INFO - end send
+2022-03-17 18:46:16,263 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:16,263 - tvb - INFO - start receive
+2022-03-17 18:46:16,282 - tvb - INFO - end receive [42.  45.5]
+2022-03-17 18:46:16,282 - tvb - INFO - start receive
+2022-03-17 18:46:16,304 - tvb - INFO - end receive [42.  45.5]
+2022-03-17 18:46:16,304 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:16,305 - tvb - INFO -  TVB start simulation 42.0
+2022-03-17 18:46:16,585 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:16,585 - tvb - INFO - start send
+2022-03-17 18:46:16,585 - tvb - INFO - send accept
+2022-03-17 18:46:16,586 - tvb - INFO - get source
+2022-03-17 18:46:16,586 - tvb - INFO - end send
+2022-03-17 18:46:16,586 - tvb - INFO - start send
+2022-03-17 18:46:16,586 - tvb - INFO - send accept
+2022-03-17 18:46:16,586 - tvb - INFO - get source
+2022-03-17 18:46:16,586 - tvb - INFO - end send
+2022-03-17 18:46:16,586 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:16,586 - tvb - INFO - start receive
+2022-03-17 18:46:16,604 - tvb - INFO - end receive [45.5 49. ]
+2022-03-17 18:46:16,604 - tvb - INFO - start receive
+2022-03-17 18:46:16,624 - tvb - INFO - end receive [45.5 49. ]
+2022-03-17 18:46:16,624 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:16,624 - tvb - INFO -  TVB start simulation 45.5
+2022-03-17 18:46:16,906 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:16,907 - tvb - INFO - start send
+2022-03-17 18:46:16,907 - tvb - INFO - send accept
+2022-03-17 18:46:16,907 - tvb - INFO - get source
+2022-03-17 18:46:16,908 - tvb - INFO - end send
+2022-03-17 18:46:16,908 - tvb - INFO - start send
+2022-03-17 18:46:16,908 - tvb - INFO - send accept
+2022-03-17 18:46:16,908 - tvb - INFO - get source
+2022-03-17 18:46:16,908 - tvb - INFO - end send
+2022-03-17 18:46:16,909 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:16,909 - tvb - INFO - start receive
+2022-03-17 18:46:16,926 - tvb - INFO - end receive [49.  52.5]
+2022-03-17 18:46:16,926 - tvb - INFO - start receive
+2022-03-17 18:46:16,940 - tvb - INFO - end receive [49.  52.5]
+2022-03-17 18:46:16,940 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:16,941 - tvb - INFO -  TVB start simulation 49.0
+2022-03-17 18:46:17,222 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:17,223 - tvb - INFO - start send
+2022-03-17 18:46:17,223 - tvb - INFO - send accept
+2022-03-17 18:46:17,223 - tvb - INFO - get source
+2022-03-17 18:46:17,224 - tvb - INFO - end send
+2022-03-17 18:46:17,224 - tvb - INFO - start send
+2022-03-17 18:46:17,224 - tvb - INFO - send accept
+2022-03-17 18:46:17,224 - tvb - INFO - get source
+2022-03-17 18:46:17,224 - tvb - INFO - end send
+2022-03-17 18:46:17,225 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:17,225 - tvb - INFO - start receive
+2022-03-17 18:46:17,243 - tvb - INFO - end receive [52.5 56. ]
+2022-03-17 18:46:17,244 - tvb - INFO - start receive
+2022-03-17 18:46:17,245 - tvb - INFO - end receive [52.5 56. ]
+2022-03-17 18:46:17,245 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:17,245 - tvb - INFO -  TVB start simulation 52.5
+2022-03-17 18:46:17,528 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:17,528 - tvb - INFO - start send
+2022-03-17 18:46:17,529 - tvb - INFO - send accept
+2022-03-17 18:46:17,529 - tvb - INFO - get source
+2022-03-17 18:46:17,529 - tvb - INFO - end send
+2022-03-17 18:46:17,529 - tvb - INFO - start send
+2022-03-17 18:46:17,529 - tvb - INFO - send accept
+2022-03-17 18:46:17,529 - tvb - INFO - get source
+2022-03-17 18:46:17,529 - tvb - INFO - end send
+2022-03-17 18:46:17,529 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:17,529 - tvb - INFO - start receive
+2022-03-17 18:46:17,549 - tvb - INFO - end receive [56.  59.5]
+2022-03-17 18:46:17,549 - tvb - INFO - start receive
+2022-03-17 18:46:17,573 - tvb - INFO - end receive [56.  59.5]
+2022-03-17 18:46:17,574 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:17,574 - tvb - INFO -  TVB start simulation 56.0
+2022-03-17 18:46:17,857 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:17,857 - tvb - INFO - start send
+2022-03-17 18:46:17,858 - tvb - INFO - send accept
+2022-03-17 18:46:17,858 - tvb - INFO - get source
+2022-03-17 18:46:17,858 - tvb - INFO - end send
+2022-03-17 18:46:17,859 - tvb - INFO - start send
+2022-03-17 18:46:17,859 - tvb - INFO - send accept
+2022-03-17 18:46:17,859 - tvb - INFO - get source
+2022-03-17 18:46:17,859 - tvb - INFO - end send
+2022-03-17 18:46:17,860 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:17,860 - tvb - INFO - start receive
+2022-03-17 18:46:17,861 - tvb - INFO - end receive [59.5 63. ]
+2022-03-17 18:46:17,861 - tvb - INFO - start receive
+2022-03-17 18:46:17,896 - tvb - INFO - end receive [59.5 63. ]
+2022-03-17 18:46:17,896 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:17,897 - tvb - INFO -  TVB start simulation 59.5
+2022-03-17 18:46:18,173 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:18,173 - tvb - INFO - start send
+2022-03-17 18:46:18,173 - tvb - INFO - send accept
+2022-03-17 18:46:18,173 - tvb - INFO - get source
+2022-03-17 18:46:18,174 - tvb - INFO - end send
+2022-03-17 18:46:18,174 - tvb - INFO - start send
+2022-03-17 18:46:18,174 - tvb - INFO - send accept
+2022-03-17 18:46:18,174 - tvb - INFO - get source
+2022-03-17 18:46:18,175 - tvb - INFO - end send
+2022-03-17 18:46:18,175 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:18,175 - tvb - INFO - start receive
+2022-03-17 18:46:18,193 - tvb - INFO - end receive [63.  66.5]
+2022-03-17 18:46:18,194 - tvb - INFO - start receive
+2022-03-17 18:46:18,220 - tvb - INFO - end receive [63.  66.5]
+2022-03-17 18:46:18,220 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:18,221 - tvb - INFO -  TVB start simulation 63.0
+2022-03-17 18:46:18,498 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:18,498 - tvb - INFO - start send
+2022-03-17 18:46:18,498 - tvb - INFO - send accept
+2022-03-17 18:46:18,498 - tvb - INFO - get source
+2022-03-17 18:46:18,498 - tvb - INFO - end send
+2022-03-17 18:46:18,498 - tvb - INFO - start send
+2022-03-17 18:46:18,498 - tvb - INFO - send accept
+2022-03-17 18:46:18,499 - tvb - INFO - get source
+2022-03-17 18:46:18,499 - tvb - INFO - end send
+2022-03-17 18:46:18,499 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:18,499 - tvb - INFO - start receive
+2022-03-17 18:46:18,517 - tvb - INFO - end receive [66.5 70. ]
+2022-03-17 18:46:18,518 - tvb - INFO - start receive
+2022-03-17 18:46:18,544 - tvb - INFO - end receive [66.5 70. ]
+2022-03-17 18:46:18,544 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:18,545 - tvb - INFO -  TVB start simulation 66.5
+2022-03-17 18:46:18,821 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:18,821 - tvb - INFO - start send
+2022-03-17 18:46:18,821 - tvb - INFO - send accept
+2022-03-17 18:46:18,821 - tvb - INFO - get source
+2022-03-17 18:46:18,821 - tvb - INFO - end send
+2022-03-17 18:46:18,822 - tvb - INFO - start send
+2022-03-17 18:46:18,822 - tvb - INFO - send accept
+2022-03-17 18:46:18,822 - tvb - INFO - get source
+2022-03-17 18:46:18,822 - tvb - INFO - end send
+2022-03-17 18:46:18,822 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:18,822 - tvb - INFO - start receive
+2022-03-17 18:46:18,840 - tvb - INFO - end receive [70.  73.5]
+2022-03-17 18:46:18,841 - tvb - INFO - start receive
+2022-03-17 18:46:18,869 - tvb - INFO - end receive [70.  73.5]
+2022-03-17 18:46:18,869 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:18,869 - tvb - INFO -  TVB start simulation 70.0
+2022-03-17 18:46:19,145 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:19,145 - tvb - INFO - start send
+2022-03-17 18:46:19,146 - tvb - INFO - send accept
+2022-03-17 18:46:19,146 - tvb - INFO - get source
+2022-03-17 18:46:19,146 - tvb - INFO - end send
+2022-03-17 18:46:19,146 - tvb - INFO - start send
+2022-03-17 18:46:19,146 - tvb - INFO - send accept
+2022-03-17 18:46:19,146 - tvb - INFO - get source
+2022-03-17 18:46:19,146 - tvb - INFO - end send
+2022-03-17 18:46:19,146 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:19,147 - tvb - INFO - start receive
+2022-03-17 18:46:19,165 - tvb - INFO - end receive [73.5 77. ]
+2022-03-17 18:46:19,166 - tvb - INFO - start receive
+2022-03-17 18:46:19,193 - tvb - INFO - end receive [73.5 77. ]
+2022-03-17 18:46:19,193 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:19,194 - tvb - INFO -  TVB start simulation 73.5
+2022-03-17 18:46:19,474 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:19,474 - tvb - INFO - start send
+2022-03-17 18:46:19,475 - tvb - INFO - send accept
+2022-03-17 18:46:19,475 - tvb - INFO - get source
+2022-03-17 18:46:19,475 - tvb - INFO - end send
+2022-03-17 18:46:19,476 - tvb - INFO - start send
+2022-03-17 18:46:19,476 - tvb - INFO - send accept
+2022-03-17 18:46:19,476 - tvb - INFO - get source
+2022-03-17 18:46:19,476 - tvb - INFO - end send
+2022-03-17 18:46:19,477 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:19,477 - tvb - INFO - start receive
+2022-03-17 18:46:19,492 - tvb - INFO - end receive [77.  80.5]
+2022-03-17 18:46:19,493 - tvb - INFO - start receive
+2022-03-17 18:46:19,513 - tvb - INFO - end receive [77.  80.5]
+2022-03-17 18:46:19,513 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:19,514 - tvb - INFO -  TVB start simulation 77.0
+2022-03-17 18:46:19,796 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:19,797 - tvb - INFO - start send
+2022-03-17 18:46:19,797 - tvb - INFO - send accept
+2022-03-17 18:46:19,798 - tvb - INFO - get source
+2022-03-17 18:46:19,798 - tvb - INFO - end send
+2022-03-17 18:46:19,798 - tvb - INFO - start send
+2022-03-17 18:46:19,799 - tvb - INFO - send accept
+2022-03-17 18:46:19,799 - tvb - INFO - get source
+2022-03-17 18:46:19,799 - tvb - INFO - end send
+2022-03-17 18:46:19,799 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:19,800 - tvb - INFO - start receive
+2022-03-17 18:46:19,818 - tvb - INFO - end receive [80.5 84. ]
+2022-03-17 18:46:19,818 - tvb - INFO - start receive
+2022-03-17 18:46:19,837 - tvb - INFO - end receive [80.5 84. ]
+2022-03-17 18:46:19,837 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:19,838 - tvb - INFO -  TVB start simulation 80.5
+2022-03-17 18:46:20,120 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:20,121 - tvb - INFO - start send
+2022-03-17 18:46:20,121 - tvb - INFO - send accept
+2022-03-17 18:46:20,121 - tvb - INFO - get source
+2022-03-17 18:46:20,121 - tvb - INFO - end send
+2022-03-17 18:46:20,121 - tvb - INFO - start send
+2022-03-17 18:46:20,121 - tvb - INFO - send accept
+2022-03-17 18:46:20,122 - tvb - INFO - get source
+2022-03-17 18:46:20,122 - tvb - INFO - end send
+2022-03-17 18:46:20,122 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:20,122 - tvb - INFO - start receive
+2022-03-17 18:46:20,140 - tvb - INFO - end receive [84.  87.5]
+2022-03-17 18:46:20,141 - tvb - INFO - start receive
+2022-03-17 18:46:20,160 - tvb - INFO - end receive [84.  87.5]
+2022-03-17 18:46:20,160 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:20,160 - tvb - INFO -  TVB start simulation 84.0
+2022-03-17 18:46:20,438 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:20,438 - tvb - INFO - start send
+2022-03-17 18:46:20,438 - tvb - INFO - send accept
+2022-03-17 18:46:20,438 - tvb - INFO - get source
+2022-03-17 18:46:20,438 - tvb - INFO - end send
+2022-03-17 18:46:20,438 - tvb - INFO - start send
+2022-03-17 18:46:20,439 - tvb - INFO - send accept
+2022-03-17 18:46:20,439 - tvb - INFO - get source
+2022-03-17 18:46:20,439 - tvb - INFO - end send
+2022-03-17 18:46:20,439 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:20,439 - tvb - INFO - start receive
+2022-03-17 18:46:20,449 - tvb - INFO - end receive [87.5 91. ]
+2022-03-17 18:46:20,449 - tvb - INFO - start receive
+2022-03-17 18:46:20,450 - tvb - INFO - end receive [87.5 91. ]
+2022-03-17 18:46:20,450 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:20,450 - tvb - INFO -  TVB start simulation 87.5
+2022-03-17 18:46:20,704 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:20,704 - tvb - INFO - start send
+2022-03-17 18:46:20,705 - tvb - INFO - send accept
+2022-03-17 18:46:20,705 - tvb - INFO - get source
+2022-03-17 18:46:20,705 - tvb - INFO - end send
+2022-03-17 18:46:20,705 - tvb - INFO - start send
+2022-03-17 18:46:20,705 - tvb - INFO - send accept
+2022-03-17 18:46:20,705 - tvb - INFO - get source
+2022-03-17 18:46:20,706 - tvb - INFO - end send
+2022-03-17 18:46:20,706 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:20,706 - tvb - INFO - start receive
+2022-03-17 18:46:20,707 - tvb - INFO - end receive [91.  94.5]
+2022-03-17 18:46:20,707 - tvb - INFO - start receive
+2022-03-17 18:46:20,723 - tvb - INFO - end receive [91.  94.5]
+2022-03-17 18:46:20,723 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:20,724 - tvb - INFO -  TVB start simulation 91.0
+2022-03-17 18:46:21,027 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:21,028 - tvb - INFO - start send
+2022-03-17 18:46:21,028 - tvb - INFO - send accept
+2022-03-17 18:46:21,028 - tvb - INFO - get source
+2022-03-17 18:46:21,028 - tvb - INFO - end send
+2022-03-17 18:46:21,028 - tvb - INFO - start send
+2022-03-17 18:46:21,029 - tvb - INFO - send accept
+2022-03-17 18:46:21,029 - tvb - INFO - get source
+2022-03-17 18:46:21,029 - tvb - INFO - end send
+2022-03-17 18:46:21,029 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:21,029 - tvb - INFO - start receive
+2022-03-17 18:46:21,036 - tvb - INFO - end receive [94.5 98. ]
+2022-03-17 18:46:21,036 - tvb - INFO - start receive
+2022-03-17 18:46:21,037 - tvb - INFO - end receive [94.5 98. ]
+2022-03-17 18:46:21,037 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:21,038 - tvb - INFO -  TVB start simulation 94.5
+2022-03-17 18:46:21,321 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:21,321 - tvb - INFO - start send
+2022-03-17 18:46:21,321 - tvb - INFO - send accept
+2022-03-17 18:46:21,321 - tvb - INFO - get source
+2022-03-17 18:46:21,321 - tvb - INFO - end send
+2022-03-17 18:46:21,322 - tvb - INFO - start send
+2022-03-17 18:46:21,322 - tvb - INFO - send accept
+2022-03-17 18:46:21,322 - tvb - INFO - get source
+2022-03-17 18:46:21,322 - tvb - INFO - end send
+2022-03-17 18:46:21,322 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:21,322 - tvb - INFO - start receive
+2022-03-17 18:46:21,323 - tvb - INFO - end receive [ 98.  101.5]
+2022-03-17 18:46:21,323 - tvb - INFO - start receive
+2022-03-17 18:46:21,329 - tvb - INFO - end receive [ 98.  101.5]
+2022-03-17 18:46:21,329 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:21,329 - tvb - INFO -  TVB start simulation 98.0
+2022-03-17 18:46:21,620 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:21,621 - tvb - INFO - start send
+2022-03-17 18:46:21,621 - tvb - INFO - send accept
+2022-03-17 18:46:21,621 - tvb - INFO - get source
+2022-03-17 18:46:21,621 - tvb - INFO - end send
+2022-03-17 18:46:21,621 - tvb - INFO - start send
+2022-03-17 18:46:21,621 - tvb - INFO - send accept
+2022-03-17 18:46:21,622 - tvb - INFO - get source
+2022-03-17 18:46:21,622 - tvb - INFO - end send
+2022-03-17 18:46:21,622 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:21,622 - tvb - INFO - start receive
+2022-03-17 18:46:21,642 - tvb - INFO - end receive [101.5 105. ]
+2022-03-17 18:46:21,642 - tvb - INFO - start receive
+2022-03-17 18:46:21,668 - tvb - INFO - end receive [101.5 105. ]
+2022-03-17 18:46:21,668 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:21,669 - tvb - INFO -  TVB start simulation 101.5
+2022-03-17 18:46:21,953 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:21,953 - tvb - INFO - start send
+2022-03-17 18:46:21,954 - tvb - INFO - send accept
+2022-03-17 18:46:21,954 - tvb - INFO - get source
+2022-03-17 18:46:21,954 - tvb - INFO - end send
+2022-03-17 18:46:21,954 - tvb - INFO - start send
+2022-03-17 18:46:21,954 - tvb - INFO - send accept
+2022-03-17 18:46:21,954 - tvb - INFO - get source
+2022-03-17 18:46:21,955 - tvb - INFO - end send
+2022-03-17 18:46:21,955 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:21,955 - tvb - INFO - start receive
+2022-03-17 18:46:21,976 - tvb - INFO - end receive [105.  108.5]
+2022-03-17 18:46:21,976 - tvb - INFO - start receive
+2022-03-17 18:46:21,978 - tvb - INFO - end receive [105.  108.5]
+2022-03-17 18:46:21,978 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:21,979 - tvb - INFO -  TVB start simulation 105.0
+2022-03-17 18:46:22,287 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:22,287 - tvb - INFO - start send
+2022-03-17 18:46:22,287 - tvb - INFO - send accept
+2022-03-17 18:46:22,287 - tvb - INFO - get source
+2022-03-17 18:46:22,287 - tvb - INFO - end send
+2022-03-17 18:46:22,288 - tvb - INFO - start send
+2022-03-17 18:46:22,288 - tvb - INFO - send accept
+2022-03-17 18:46:22,288 - tvb - INFO - get source
+2022-03-17 18:46:22,288 - tvb - INFO - end send
+2022-03-17 18:46:22,288 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:22,288 - tvb - INFO - start receive
+2022-03-17 18:46:22,306 - tvb - INFO - end receive [108.5 112. ]
+2022-03-17 18:46:22,306 - tvb - INFO - start receive
+2022-03-17 18:46:22,336 - tvb - INFO - end receive [108.5 112. ]
+2022-03-17 18:46:22,337 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:22,337 - tvb - INFO -  TVB start simulation 108.5
+2022-03-17 18:46:22,626 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:22,627 - tvb - INFO - start send
+2022-03-17 18:46:22,627 - tvb - INFO - send accept
+2022-03-17 18:46:22,628 - tvb - INFO - get source
+2022-03-17 18:46:22,628 - tvb - INFO - end send
+2022-03-17 18:46:22,628 - tvb - INFO - start send
+2022-03-17 18:46:22,628 - tvb - INFO - send accept
+2022-03-17 18:46:22,629 - tvb - INFO - get source
+2022-03-17 18:46:22,629 - tvb - INFO - end send
+2022-03-17 18:46:22,629 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:22,629 - tvb - INFO - start receive
+2022-03-17 18:46:22,656 - tvb - INFO - end receive [112.  115.5]
+2022-03-17 18:46:22,657 - tvb - INFO - start receive
+2022-03-17 18:46:22,680 - tvb - INFO - end receive [112.  115.5]
+2022-03-17 18:46:22,680 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:22,681 - tvb - INFO -  TVB start simulation 112.0
+2022-03-17 18:46:22,964 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:22,964 - tvb - INFO - start send
+2022-03-17 18:46:22,964 - tvb - INFO - send accept
+2022-03-17 18:46:22,965 - tvb - INFO - get source
+2022-03-17 18:46:22,965 - tvb - INFO - end send
+2022-03-17 18:46:22,965 - tvb - INFO - start send
+2022-03-17 18:46:22,965 - tvb - INFO - send accept
+2022-03-17 18:46:22,966 - tvb - INFO - get source
+2022-03-17 18:46:22,966 - tvb - INFO - end send
+2022-03-17 18:46:22,966 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:22,967 - tvb - INFO - start receive
+2022-03-17 18:46:22,984 - tvb - INFO - end receive [115.5 119. ]
+2022-03-17 18:46:22,985 - tvb - INFO - start receive
+2022-03-17 18:46:23,003 - tvb - INFO - end receive [115.5 119. ]
+2022-03-17 18:46:23,004 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:23,004 - tvb - INFO -  TVB start simulation 115.5
+2022-03-17 18:46:23,295 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:23,295 - tvb - INFO - start send
+2022-03-17 18:46:23,296 - tvb - INFO - send accept
+2022-03-17 18:46:23,296 - tvb - INFO - get source
+2022-03-17 18:46:23,296 - tvb - INFO - end send
+2022-03-17 18:46:23,296 - tvb - INFO - start send
+2022-03-17 18:46:23,296 - tvb - INFO - send accept
+2022-03-17 18:46:23,297 - tvb - INFO - get source
+2022-03-17 18:46:23,297 - tvb - INFO - end send
+2022-03-17 18:46:23,297 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:23,297 - tvb - INFO - start receive
+2022-03-17 18:46:23,324 - tvb - INFO - end receive [119.  122.5]
+2022-03-17 18:46:23,324 - tvb - INFO - start receive
+2022-03-17 18:46:23,342 - tvb - INFO - end receive [119.  122.5]
+2022-03-17 18:46:23,342 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:23,342 - tvb - INFO -  TVB start simulation 119.0
+2022-03-17 18:46:23,626 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:23,627 - tvb - INFO - start send
+2022-03-17 18:46:23,628 - tvb - INFO - send accept
+2022-03-17 18:46:23,628 - tvb - INFO - get source
+2022-03-17 18:46:23,628 - tvb - INFO - end send
+2022-03-17 18:46:23,629 - tvb - INFO - start send
+2022-03-17 18:46:23,629 - tvb - INFO - send accept
+2022-03-17 18:46:23,629 - tvb - INFO - get source
+2022-03-17 18:46:23,629 - tvb - INFO - end send
+2022-03-17 18:46:23,629 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:23,630 - tvb - INFO - start receive
+2022-03-17 18:46:23,641 - tvb - INFO - end receive [122.5 126. ]
+2022-03-17 18:46:23,642 - tvb - INFO - start receive
+2022-03-17 18:46:23,658 - tvb - INFO - end receive [122.5 126. ]
+2022-03-17 18:46:23,659 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:23,659 - tvb - INFO -  TVB start simulation 122.5
+2022-03-17 18:46:23,947 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:23,948 - tvb - INFO - start send
+2022-03-17 18:46:23,948 - tvb - INFO - send accept
+2022-03-17 18:46:23,949 - tvb - INFO - get source
+2022-03-17 18:46:23,949 - tvb - INFO - end send
+2022-03-17 18:46:23,949 - tvb - INFO - start send
+2022-03-17 18:46:23,950 - tvb - INFO - send accept
+2022-03-17 18:46:23,950 - tvb - INFO - get source
+2022-03-17 18:46:23,950 - tvb - INFO - end send
+2022-03-17 18:46:23,951 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:23,951 - tvb - INFO - start receive
+2022-03-17 18:46:23,952 - tvb - INFO - end receive [126.  129.5]
+2022-03-17 18:46:23,953 - tvb - INFO - start receive
+2022-03-17 18:46:23,954 - tvb - INFO - end receive [126.  129.5]
+2022-03-17 18:46:23,954 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:23,954 - tvb - INFO -  TVB start simulation 126.0
+2022-03-17 18:46:24,243 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:24,244 - tvb - INFO - start send
+2022-03-17 18:46:24,245 - tvb - INFO - send accept
+2022-03-17 18:46:24,245 - tvb - INFO - get source
+2022-03-17 18:46:24,245 - tvb - INFO - end send
+2022-03-17 18:46:24,245 - tvb - INFO - start send
+2022-03-17 18:46:24,245 - tvb - INFO - send accept
+2022-03-17 18:46:24,245 - tvb - INFO - get source
+2022-03-17 18:46:24,246 - tvb - INFO - end send
+2022-03-17 18:46:24,246 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:24,246 - tvb - INFO - start receive
+2022-03-17 18:46:24,261 - tvb - INFO - end receive [129.5 133. ]
+2022-03-17 18:46:24,261 - tvb - INFO - start receive
+2022-03-17 18:46:24,285 - tvb - INFO - end receive [129.5 133. ]
+2022-03-17 18:46:24,285 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:24,286 - tvb - INFO -  TVB start simulation 129.5
+2022-03-17 18:46:24,582 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:24,582 - tvb - INFO - start send
+2022-03-17 18:46:24,582 - tvb - INFO - send accept
+2022-03-17 18:46:24,582 - tvb - INFO - get source
+2022-03-17 18:46:24,582 - tvb - INFO - end send
+2022-03-17 18:46:24,583 - tvb - INFO - start send
+2022-03-17 18:46:24,583 - tvb - INFO - send accept
+2022-03-17 18:46:24,583 - tvb - INFO - get source
+2022-03-17 18:46:24,583 - tvb - INFO - end send
+2022-03-17 18:46:24,583 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:24,583 - tvb - INFO - start receive
+2022-03-17 18:46:24,607 - tvb - INFO - end receive [133.  136.5]
+2022-03-17 18:46:24,608 - tvb - INFO - start receive
+2022-03-17 18:46:24,628 - tvb - INFO - end receive [133.  136.5]
+2022-03-17 18:46:24,628 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:24,629 - tvb - INFO -  TVB start simulation 133.0
+2022-03-17 18:46:24,915 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:24,916 - tvb - INFO - start send
+2022-03-17 18:46:24,916 - tvb - INFO - send accept
+2022-03-17 18:46:24,916 - tvb - INFO - get source
+2022-03-17 18:46:24,916 - tvb - INFO - end send
+2022-03-17 18:46:24,916 - tvb - INFO - start send
+2022-03-17 18:46:24,917 - tvb - INFO - send accept
+2022-03-17 18:46:24,917 - tvb - INFO - get source
+2022-03-17 18:46:24,917 - tvb - INFO - end send
+2022-03-17 18:46:24,917 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:24,917 - tvb - INFO - start receive
+2022-03-17 18:46:24,920 - tvb - INFO - end receive [136.5 140. ]
+2022-03-17 18:46:24,920 - tvb - INFO - start receive
+2022-03-17 18:46:24,933 - tvb - INFO - end receive [136.5 140. ]
+2022-03-17 18:46:24,933 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:24,934 - tvb - INFO -  TVB start simulation 136.5
+2022-03-17 18:46:25,216 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:25,217 - tvb - INFO - start send
+2022-03-17 18:46:25,217 - tvb - INFO - send accept
+2022-03-17 18:46:25,218 - tvb - INFO - get source
+2022-03-17 18:46:25,218 - tvb - INFO - end send
+2022-03-17 18:46:25,218 - tvb - INFO - start send
+2022-03-17 18:46:25,219 - tvb - INFO - send accept
+2022-03-17 18:46:25,219 - tvb - INFO - get source
+2022-03-17 18:46:25,219 - tvb - INFO - end send
+2022-03-17 18:46:25,220 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:25,220 - tvb - INFO - start receive
+2022-03-17 18:46:25,233 - tvb - INFO - end receive [140.  143.5]
+2022-03-17 18:46:25,233 - tvb - INFO - start receive
+2022-03-17 18:46:25,254 - tvb - INFO - end receive [140.  143.5]
+2022-03-17 18:46:25,255 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:25,255 - tvb - INFO -  TVB start simulation 140.0
+2022-03-17 18:46:25,535 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:25,536 - tvb - INFO - start send
+2022-03-17 18:46:25,536 - tvb - INFO - send accept
+2022-03-17 18:46:25,536 - tvb - INFO - get source
+2022-03-17 18:46:25,536 - tvb - INFO - end send
+2022-03-17 18:46:25,536 - tvb - INFO - start send
+2022-03-17 18:46:25,536 - tvb - INFO - send accept
+2022-03-17 18:46:25,536 - tvb - INFO - get source
+2022-03-17 18:46:25,537 - tvb - INFO - end send
+2022-03-17 18:46:25,537 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:25,537 - tvb - INFO - start receive
+2022-03-17 18:46:25,541 - tvb - INFO - end receive [143.5 147. ]
+2022-03-17 18:46:25,541 - tvb - INFO - start receive
+2022-03-17 18:46:25,568 - tvb - INFO - end receive [143.5 147. ]
+2022-03-17 18:46:25,568 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:25,569 - tvb - INFO -  TVB start simulation 143.5
+2022-03-17 18:46:25,850 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:25,850 - tvb - INFO - start send
+2022-03-17 18:46:25,851 - tvb - INFO - send accept
+2022-03-17 18:46:25,851 - tvb - INFO - get source
+2022-03-17 18:46:25,851 - tvb - INFO - end send
+2022-03-17 18:46:25,852 - tvb - INFO - start send
+2022-03-17 18:46:25,852 - tvb - INFO - send accept
+2022-03-17 18:46:25,852 - tvb - INFO - get source
+2022-03-17 18:46:25,852 - tvb - INFO - end send
+2022-03-17 18:46:25,852 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:25,852 - tvb - INFO - start receive
+2022-03-17 18:46:25,853 - tvb - INFO - end receive [147.  150.5]
+2022-03-17 18:46:25,854 - tvb - INFO - start receive
+2022-03-17 18:46:25,855 - tvb - INFO - end receive [147.  150.5]
+2022-03-17 18:46:25,855 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:25,855 - tvb - INFO -  TVB start simulation 147.0
+2022-03-17 18:46:26,134 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:26,135 - tvb - INFO - start send
+2022-03-17 18:46:26,135 - tvb - INFO - send accept
+2022-03-17 18:46:26,135 - tvb - INFO - get source
+2022-03-17 18:46:26,135 - tvb - INFO - end send
+2022-03-17 18:46:26,135 - tvb - INFO - start send
+2022-03-17 18:46:26,135 - tvb - INFO - send accept
+2022-03-17 18:46:26,136 - tvb - INFO - get source
+2022-03-17 18:46:26,136 - tvb - INFO - end send
+2022-03-17 18:46:26,136 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:26,136 - tvb - INFO - start receive
+2022-03-17 18:46:26,157 - tvb - INFO - end receive [150.5 154. ]
+2022-03-17 18:46:26,157 - tvb - INFO - start receive
+2022-03-17 18:46:26,178 - tvb - INFO - end receive [150.5 154. ]
+2022-03-17 18:46:26,178 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:26,178 - tvb - INFO -  TVB start simulation 150.5
+2022-03-17 18:46:26,458 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:26,459 - tvb - INFO - start send
+2022-03-17 18:46:26,459 - tvb - INFO - send accept
+2022-03-17 18:46:26,459 - tvb - INFO - get source
+2022-03-17 18:46:26,459 - tvb - INFO - end send
+2022-03-17 18:46:26,459 - tvb - INFO - start send
+2022-03-17 18:46:26,459 - tvb - INFO - send accept
+2022-03-17 18:46:26,460 - tvb - INFO - get source
+2022-03-17 18:46:26,460 - tvb - INFO - end send
+2022-03-17 18:46:26,460 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:26,460 - tvb - INFO - start receive
+2022-03-17 18:46:26,478 - tvb - INFO - end receive [154.  157.5]
+2022-03-17 18:46:26,479 - tvb - INFO - start receive
+2022-03-17 18:46:26,500 - tvb - INFO - end receive [154.  157.5]
+2022-03-17 18:46:26,500 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:26,500 - tvb - INFO -  TVB start simulation 154.0
+2022-03-17 18:46:26,785 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:26,786 - tvb - INFO - start send
+2022-03-17 18:46:26,786 - tvb - INFO - send accept
+2022-03-17 18:46:26,786 - tvb - INFO - get source
+2022-03-17 18:46:26,786 - tvb - INFO - end send
+2022-03-17 18:46:26,786 - tvb - INFO - start send
+2022-03-17 18:46:26,787 - tvb - INFO - send accept
+2022-03-17 18:46:26,787 - tvb - INFO - get source
+2022-03-17 18:46:26,787 - tvb - INFO - end send
+2022-03-17 18:46:26,787 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:26,787 - tvb - INFO - start receive
+2022-03-17 18:46:26,813 - tvb - INFO - end receive [157.5 161. ]
+2022-03-17 18:46:26,813 - tvb - INFO - start receive
+2022-03-17 18:46:26,841 - tvb - INFO - end receive [157.5 161. ]
+2022-03-17 18:46:26,841 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:26,842 - tvb - INFO -  TVB start simulation 157.5
+2022-03-17 18:46:27,127 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:27,128 - tvb - INFO - start send
+2022-03-17 18:46:27,128 - tvb - INFO - send accept
+2022-03-17 18:46:27,129 - tvb - INFO - get source
+2022-03-17 18:46:27,129 - tvb - INFO - end send
+2022-03-17 18:46:27,129 - tvb - INFO - start send
+2022-03-17 18:46:27,130 - tvb - INFO - send accept
+2022-03-17 18:46:27,130 - tvb - INFO - get source
+2022-03-17 18:46:27,130 - tvb - INFO - end send
+2022-03-17 18:46:27,130 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:27,131 - tvb - INFO - start receive
+2022-03-17 18:46:27,140 - tvb - INFO - end receive [161.  164.5]
+2022-03-17 18:46:27,140 - tvb - INFO - start receive
+2022-03-17 18:46:27,160 - tvb - INFO - end receive [161.  164.5]
+2022-03-17 18:46:27,160 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:27,160 - tvb - INFO -  TVB start simulation 161.0
+2022-03-17 18:46:27,445 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:27,445 - tvb - INFO - start send
+2022-03-17 18:46:27,445 - tvb - INFO - send accept
+2022-03-17 18:46:27,445 - tvb - INFO - get source
+2022-03-17 18:46:27,445 - tvb - INFO - end send
+2022-03-17 18:46:27,446 - tvb - INFO - start send
+2022-03-17 18:46:27,446 - tvb - INFO - send accept
+2022-03-17 18:46:27,446 - tvb - INFO - get source
+2022-03-17 18:46:27,446 - tvb - INFO - end send
+2022-03-17 18:46:27,446 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:27,446 - tvb - INFO - start receive
+2022-03-17 18:46:27,472 - tvb - INFO - end receive [164.5 168. ]
+2022-03-17 18:46:27,472 - tvb - INFO - start receive
+2022-03-17 18:46:27,494 - tvb - INFO - end receive [164.5 168. ]
+2022-03-17 18:46:27,494 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:27,495 - tvb - INFO -  TVB start simulation 164.5
+2022-03-17 18:46:27,779 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:27,779 - tvb - INFO - start send
+2022-03-17 18:46:27,779 - tvb - INFO - send accept
+2022-03-17 18:46:27,780 - tvb - INFO - get source
+2022-03-17 18:46:27,780 - tvb - INFO - end send
+2022-03-17 18:46:27,780 - tvb - INFO - start send
+2022-03-17 18:46:27,780 - tvb - INFO - send accept
+2022-03-17 18:46:27,780 - tvb - INFO - get source
+2022-03-17 18:46:27,780 - tvb - INFO - end send
+2022-03-17 18:46:27,780 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:27,780 - tvb - INFO - start receive
+2022-03-17 18:46:27,802 - tvb - INFO - end receive [168.  171.5]
+2022-03-17 18:46:27,802 - tvb - INFO - start receive
+2022-03-17 18:46:27,821 - tvb - INFO - end receive [168.  171.5]
+2022-03-17 18:46:27,821 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:27,821 - tvb - INFO -  TVB start simulation 168.0
+2022-03-17 18:46:28,103 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:28,104 - tvb - INFO - start send
+2022-03-17 18:46:28,104 - tvb - INFO - send accept
+2022-03-17 18:46:28,104 - tvb - INFO - get source
+2022-03-17 18:46:28,104 - tvb - INFO - end send
+2022-03-17 18:46:28,104 - tvb - INFO - start send
+2022-03-17 18:46:28,104 - tvb - INFO - send accept
+2022-03-17 18:46:28,104 - tvb - INFO - get source
+2022-03-17 18:46:28,105 - tvb - INFO - end send
+2022-03-17 18:46:28,105 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:28,105 - tvb - INFO - start receive
+2022-03-17 18:46:28,125 - tvb - INFO - end receive [171.5 175. ]
+2022-03-17 18:46:28,126 - tvb - INFO - start receive
+2022-03-17 18:46:28,127 - tvb - INFO - end receive [171.5 175. ]
+2022-03-17 18:46:28,127 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:28,127 - tvb - INFO -  TVB start simulation 171.5
+2022-03-17 18:46:28,409 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:28,410 - tvb - INFO - start send
+2022-03-17 18:46:28,410 - tvb - INFO - send accept
+2022-03-17 18:46:28,410 - tvb - INFO - get source
+2022-03-17 18:46:28,410 - tvb - INFO - end send
+2022-03-17 18:46:28,410 - tvb - INFO - start send
+2022-03-17 18:46:28,411 - tvb - INFO - send accept
+2022-03-17 18:46:28,411 - tvb - INFO - get source
+2022-03-17 18:46:28,411 - tvb - INFO - end send
+2022-03-17 18:46:28,411 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:28,411 - tvb - INFO - start receive
+2022-03-17 18:46:28,429 - tvb - INFO - end receive [175.  178.5]
+2022-03-17 18:46:28,430 - tvb - INFO - start receive
+2022-03-17 18:46:28,456 - tvb - INFO - end receive [175.  178.5]
+2022-03-17 18:46:28,457 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:28,457 - tvb - INFO -  TVB start simulation 175.0
+2022-03-17 18:46:28,750 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:28,751 - tvb - INFO - start send
+2022-03-17 18:46:28,751 - tvb - INFO - send accept
+2022-03-17 18:46:28,751 - tvb - INFO - get source
+2022-03-17 18:46:28,751 - tvb - INFO - end send
+2022-03-17 18:46:28,751 - tvb - INFO - start send
+2022-03-17 18:46:28,752 - tvb - INFO - send accept
+2022-03-17 18:46:28,752 - tvb - INFO - get source
+2022-03-17 18:46:28,752 - tvb - INFO - end send
+2022-03-17 18:46:28,752 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:28,752 - tvb - INFO - start receive
+2022-03-17 18:46:28,780 - tvb - INFO - end receive [178.5 182. ]
+2022-03-17 18:46:28,780 - tvb - INFO - start receive
+2022-03-17 18:46:28,797 - tvb - INFO - end receive [178.5 182. ]
+2022-03-17 18:46:28,797 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:28,798 - tvb - INFO -  TVB start simulation 178.5
+2022-03-17 18:46:29,080 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:29,081 - tvb - INFO - start send
+2022-03-17 18:46:29,081 - tvb - INFO - send accept
+2022-03-17 18:46:29,081 - tvb - INFO - get source
+2022-03-17 18:46:29,081 - tvb - INFO - end send
+2022-03-17 18:46:29,081 - tvb - INFO - start send
+2022-03-17 18:46:29,081 - tvb - INFO - send accept
+2022-03-17 18:46:29,081 - tvb - INFO - get source
+2022-03-17 18:46:29,082 - tvb - INFO - end send
+2022-03-17 18:46:29,082 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:29,082 - tvb - INFO - start receive
+2022-03-17 18:46:29,108 - tvb - INFO - end receive [182.  185.5]
+2022-03-17 18:46:29,108 - tvb - INFO - start receive
+2022-03-17 18:46:29,125 - tvb - INFO - end receive [182.  185.5]
+2022-03-17 18:46:29,125 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:29,125 - tvb - INFO -  TVB start simulation 182.0
+2022-03-17 18:46:29,407 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:29,408 - tvb - INFO - start send
+2022-03-17 18:46:29,408 - tvb - INFO - send accept
+2022-03-17 18:46:29,408 - tvb - INFO - get source
+2022-03-17 18:46:29,408 - tvb - INFO - end send
+2022-03-17 18:46:29,408 - tvb - INFO - start send
+2022-03-17 18:46:29,408 - tvb - INFO - send accept
+2022-03-17 18:46:29,409 - tvb - INFO - get source
+2022-03-17 18:46:29,409 - tvb - INFO - end send
+2022-03-17 18:46:29,409 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:29,409 - tvb - INFO - start receive
+2022-03-17 18:46:29,434 - tvb - INFO - end receive [185.5 189. ]
+2022-03-17 18:46:29,434 - tvb - INFO - start receive
+2022-03-17 18:46:29,460 - tvb - INFO - end receive [185.5 189. ]
+2022-03-17 18:46:29,460 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:29,461 - tvb - INFO -  TVB start simulation 185.5
+2022-03-17 18:46:29,753 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:29,753 - tvb - INFO - start send
+2022-03-17 18:46:29,753 - tvb - INFO - send accept
+2022-03-17 18:46:29,753 - tvb - INFO - get source
+2022-03-17 18:46:29,753 - tvb - INFO - end send
+2022-03-17 18:46:29,753 - tvb - INFO - start send
+2022-03-17 18:46:29,754 - tvb - INFO - send accept
+2022-03-17 18:46:29,754 - tvb - INFO - get source
+2022-03-17 18:46:29,754 - tvb - INFO - end send
+2022-03-17 18:46:29,754 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:29,754 - tvb - INFO - start receive
+2022-03-17 18:46:29,755 - tvb - INFO - end receive [189.  192.5]
+2022-03-17 18:46:29,755 - tvb - INFO - start receive
+2022-03-17 18:46:29,756 - tvb - INFO - end receive [189.  192.5]
+2022-03-17 18:46:29,756 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:29,757 - tvb - INFO -  TVB start simulation 189.0
+2022-03-17 18:46:30,038 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:30,038 - tvb - INFO - start send
+2022-03-17 18:46:30,038 - tvb - INFO - send accept
+2022-03-17 18:46:30,038 - tvb - INFO - get source
+2022-03-17 18:46:30,039 - tvb - INFO - end send
+2022-03-17 18:46:30,039 - tvb - INFO - start send
+2022-03-17 18:46:30,039 - tvb - INFO - send accept
+2022-03-17 18:46:30,039 - tvb - INFO - get source
+2022-03-17 18:46:30,039 - tvb - INFO - end send
+2022-03-17 18:46:30,039 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:30,039 - tvb - INFO - start receive
+2022-03-17 18:46:30,061 - tvb - INFO - end receive [192.5 196. ]
+2022-03-17 18:46:30,061 - tvb - INFO - start receive
+2022-03-17 18:46:30,062 - tvb - INFO - end receive [192.5 196. ]
+2022-03-17 18:46:30,062 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:30,062 - tvb - INFO -  TVB start simulation 192.5
+2022-03-17 18:46:30,344 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:30,345 - tvb - INFO - start send
+2022-03-17 18:46:30,345 - tvb - INFO - send accept
+2022-03-17 18:46:30,345 - tvb - INFO - get source
+2022-03-17 18:46:30,345 - tvb - INFO - end send
+2022-03-17 18:46:30,345 - tvb - INFO - start send
+2022-03-17 18:46:30,346 - tvb - INFO - send accept
+2022-03-17 18:46:30,346 - tvb - INFO - get source
+2022-03-17 18:46:30,346 - tvb - INFO - end send
+2022-03-17 18:46:30,347 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:30,347 - tvb - INFO - start receive
+2022-03-17 18:46:30,357 - tvb - INFO - end receive [196.  199.5]
+2022-03-17 18:46:30,357 - tvb - INFO - start receive
+2022-03-17 18:46:30,392 - tvb - INFO - end receive [196.  199.5]
+2022-03-17 18:46:30,392 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:30,393 - tvb - INFO -  TVB start simulation 196.0
+2022-03-17 18:46:30,680 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:30,680 - tvb - INFO - start send
+2022-03-17 18:46:30,680 - tvb - INFO - send accept
+2022-03-17 18:46:30,680 - tvb - INFO - get source
+2022-03-17 18:46:30,680 - tvb - INFO - end send
+2022-03-17 18:46:30,680 - tvb - INFO - start send
+2022-03-17 18:46:30,681 - tvb - INFO - send accept
+2022-03-17 18:46:30,681 - tvb - INFO - get source
+2022-03-17 18:46:30,681 - tvb - INFO - end send
+2022-03-17 18:46:30,681 - tvb - INFO -  TVB receive data start
+2022-03-17 18:46:30,681 - tvb - INFO - start receive
+2022-03-17 18:46:30,682 - tvb - INFO - end receive [199.5 203. ]
+2022-03-17 18:46:30,682 - tvb - INFO - start receive
+2022-03-17 18:46:30,702 - tvb - INFO - end receive [199.5 203. ]
+2022-03-17 18:46:30,702 - tvb - INFO -  TVB receive data values
+2022-03-17 18:46:30,703 - tvb - INFO -  TVB start simulation 199.5
+2022-03-17 18:46:30,984 - tvb - INFO -  TVB end simulation
+2022-03-17 18:46:30,984 - tvb - INFO - start send
+2022-03-17 18:46:30,984 - tvb - INFO - send accept
+2022-03-17 18:46:30,984 - tvb - INFO - get source
+2022-03-17 18:46:30,984 - tvb - INFO - end send
+2022-03-17 18:46:30,984 - tvb - INFO - start send
+2022-03-17 18:46:30,985 - tvb - INFO - send accept
+2022-03-17 18:46:30,985 - tvb - INFO - get source
+2022-03-17 18:46:30,985 - tvb - INFO - end send
+2022-03-17 18:46:30,985 - tvb - INFO -  TVB finish
+2022-03-17 18:46:30,986 - tvb - INFO - end comm send
+2022-03-17 18:46:30,986 - tvb - INFO - TVB close connection send tag#0$description#INS-Precision-7540$port#47773$ifname#127.0.1.1$
+2022-03-17 18:46:30,986 - tvb - INFO - TVB send check
+2022-03-17 18:46:30,987 - tvb - INFO - TVB send end simulation
+2022-03-17 18:46:31,000 - tvb - INFO - TVB disconnect communication
+2022-03-17 18:46:31,000 - tvb - INFO - TVB close tag#0$description#INS-Precision-7540$port#47773$ifname#127.0.1.1$
+2022-03-17 18:46:31,000 - tvb - INFO - TVB close connection tag#0$description#INS-Precision-7540$port#47773$ifname#127.0.1.1$
+2022-03-17 18:46:31,000 - tvb - INFO - end comm send
+2022-03-17 18:46:31,001 - tvb - INFO - TVB close connection send tag#0$description#INS-Precision-7540$port#60793$ifname#127.0.1.1$
+2022-03-17 18:46:31,001 - tvb - INFO - TVB send check
+2022-03-17 18:46:31,003 - tvb - INFO - TVB send end simulation
+2022-03-17 18:46:31,012 - tvb - INFO - TVB disconnect communication
+2022-03-17 18:46:31,013 - tvb - INFO - TVB close tag#0$description#INS-Precision-7540$port#60793$ifname#127.0.1.1$
+2022-03-17 18:46:31,013 - tvb - INFO - TVB close connection tag#0$description#INS-Precision-7540$port#60793$ifname#127.0.1.1$
+2022-03-17 18:46:31,013 - tvb - INFO - end comm receive
+2022-03-17 18:46:31,014 - tvb - INFO - TVB close connection receive tag#1$description#INS-Precision-7540$port#36835$ifname#127.0.1.1$
+2022-03-17 18:46:31,014 - tvb - INFO - TVB disconnect communication
+2022-03-17 18:46:31,015 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#36835$ifname#127.0.1.1$
+2022-03-17 18:46:31,015 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#36835$ifname#127.0.1.1$
+2022-03-17 18:46:31,015 - tvb - INFO - end comm receive
+2022-03-17 18:46:31,015 - tvb - INFO - TVB close connection receive tag#1$description#INS-Precision-7540$port#59221$ifname#127.0.1.1$
+2022-03-17 18:46:31,016 - tvb - INFO - TVB disconnect communication
+2022-03-17 18:46:31,017 - tvb - INFO - TVB close tag#1$description#INS-Precision-7540$port#59221$ifname#127.0.1.1$
+2022-03-17 18:46:31,017 - tvb - INFO - TVB close connection tag#1$description#INS-Precision-7540$port#59221$ifname#127.0.1.1$
+2022-03-17 18:46:31,018 - tvb - INFO -  TVB exit

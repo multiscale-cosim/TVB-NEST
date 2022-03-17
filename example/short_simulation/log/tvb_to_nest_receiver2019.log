@@ -1,0 +1,794 @@
+2022-03-17 18:46:10,883 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write buffer
+2022-03-17 18:46:10,883 - tvb_to_nest_receiver2019 - INFO - Thread Internal : end Thread init
+2022-03-17 18:46:10,883 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : end MPI extern init
+2022-03-17 18:46:10,897 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : run : create connection
+2022-03-17 18:46:10,897 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : create connection : Transform Receive: before open_port
+2022-03-17 18:46:10,897 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : create connection : Transform tvb_to_nest_receiver2019: after open_port: tag#0$description#INS-Precision-7540$port#47773$ifname#127.0.1.1$
+2022-03-17 18:46:10,898 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : create connection : Transform tvb_to_nest_receiver2019: path_file: /home/kusch/Documents/project/co_simulation/TVB-NEST-nest_PR/example/short_simulation//transformation/receive_from_tvb/29.txt
+2022-03-17 18:46:10,898 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : create connection : Wait for Transform : tag#0$description#INS-Precision-7540$port#47773$ifname#127.0.1.1$
+2022-03-17 18:46:12,364 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : create connection : Connection accepted
+2022-03-17 18:46:12,364 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start
+2022-03-17 18:46:12,364 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:12,364 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:12,379 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [0.  3.5] status : 0
+2022-03-17 18:46:12,379 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:12,379 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2.0
+2022-03-17 18:46:12,379 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [0]
+2022-03-17 18:46:12,379 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[0.  3.5]
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(2, 2)
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:12,380 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:12,702 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [3.6 7. ] status : 0
+2022-03-17 18:46:12,702 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[3.6 7. ]
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(2,)
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:12,703 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:12,718 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:12,718 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:13,013 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [ 7.1 10.5] status : 0
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[ 7.1 10.5]
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(2,)
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,014 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:13,015 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:13,015 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:13,331 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [10.6 14. ] status : 0
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[10.6 14. ]
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(8,)
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:13,332 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,333 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,333 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:13,333 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:13,333 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [14.1 17.5] status : 0
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[14.1 17.5]
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(9,)
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:13,653 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [17.6 21. ] status : 0
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[17.6 21. ]
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(24,)
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,978 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:13,979 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:13,979 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:14,299 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [21.1 24.5] status : 0
+2022-03-17 18:46:14,299 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:14,299 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,299 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,299 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[21.1 24.5]
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(61,)
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:14,300 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:14,612 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [24.6 28. ] status : 0
+2022-03-17 18:46:14,612 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:14,612 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,612 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,612 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[24.6 28. ]
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(67,)
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:14,613 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [28.1 31.5] status : 0
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[28.1 31.5]
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(116,)
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,932 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,933 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:14,933 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:14,933 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:15,266 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [31.6 35. ] status : 0
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[31.6 35. ]
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(140,)
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:15,267 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:15,588 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [35.1 38.5] status : 0
+2022-03-17 18:46:15,588 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:15,588 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[35.1 38.5]
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(290,)
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:15,589 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:15,929 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [38.6 42. ] status : 0
+2022-03-17 18:46:15,929 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:15,929 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,929 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,929 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[38.6 42. ]
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(444,)
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:15,930 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [42.1 45.5] status : 0
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[42.1 45.5]
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(413,)
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:16,263 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,264 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,264 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:16,264 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:16,264 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:16,586 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [45.6 49. ] status : 0
+2022-03-17 18:46:16,586 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:16,586 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,586 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,586 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:16,586 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[45.6 49. ]
+2022-03-17 18:46:16,587 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(408,)
+2022-03-17 18:46:16,587 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:16,587 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,587 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,587 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:16,587 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:16,587 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [49.1 52.5] status : 0
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[49.1 52.5]
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(506,)
+2022-03-17 18:46:16,908 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:16,909 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,909 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,909 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:16,909 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:16,909 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:17,224 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [52.6 56. ] status : 0
+2022-03-17 18:46:17,224 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:17,224 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,224 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,224 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[52.6 56. ]
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(642,)
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:17,225 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:17,529 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [56.1 59.5] status : 0
+2022-03-17 18:46:17,529 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:17,529 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,529 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,529 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[56.1 59.5]
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(516,)
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:17,530 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [59.6 63. ] status : 0
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[59.6 63. ]
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(578,)
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,859 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:17,860 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:17,860 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:18,174 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [63.1 66.5] status : 0
+2022-03-17 18:46:18,174 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:18,174 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,174 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,174 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[63.1 66.5]
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(635,)
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:18,175 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [66.6 70. ] status : 0
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[66.6 70. ]
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(583,)
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:18,499 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:18,500 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:18,822 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [70.1 73.5] status : 0
+2022-03-17 18:46:18,822 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:18,822 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,822 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,822 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:18,822 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[70.1 73.5]
+2022-03-17 18:46:18,822 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(712,)
+2022-03-17 18:46:18,823 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:18,823 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,823 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,823 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:18,823 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:18,823 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:19,146 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [73.6 77. ] status : 0
+2022-03-17 18:46:19,146 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:19,146 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,146 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,146 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[73.6 77. ]
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1005,)
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:19,147 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:19,475 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [77.1 80.5] status : 0
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[77.1 80.5]
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1028,)
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,476 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:19,477 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:19,477 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:19,798 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [80.6 84. ] status : 0
+2022-03-17 18:46:19,798 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:19,798 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,798 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[80.6 84. ]
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1058,)
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:19,799 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:20,121 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [84.1 87.5] status : 0
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[84.1 87.5]
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1019,)
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:20,122 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [87.6 91. ] status : 0
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[87.6 91. ]
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(888,)
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,439 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,440 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:20,440 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:20,440 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:20,705 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [91.1 94.5] status : 0
+2022-03-17 18:46:20,705 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:20,705 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,705 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,705 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[91.1 94.5]
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1049,)
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:20,706 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [94.6 98. ] status : 0
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[94.6 98. ]
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1216,)
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:21,029 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:21,030 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:21,322 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [ 98.1 101.5] status : 0
+2022-03-17 18:46:21,322 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:21,322 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,322 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,322 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:21,322 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[ 98.1 101.5]
+2022-03-17 18:46:21,323 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1088,)
+2022-03-17 18:46:21,323 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:21,323 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,323 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,323 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:21,323 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:21,323 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:21,621 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [101.6 105. ] status : 0
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[101.6 105. ]
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1033,)
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:21,622 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:21,954 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [105.1 108.5] status : 0
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[105.1 108.5]
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(950,)
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:21,955 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [108.6 112. ] status : 0
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[108.6 112. ]
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1135,)
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:22,288 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,289 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,289 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:22,289 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:22,301 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:22,628 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [112.1 115.5] status : 0
+2022-03-17 18:46:22,628 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:22,628 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,628 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[112.1 115.5]
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1158,)
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:22,629 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:22,965 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [115.6 119. ] status : 0
+2022-03-17 18:46:22,965 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:22,965 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,965 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[115.6 119. ]
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1141,)
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:22,966 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:23,296 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [119.1 122.5] status : 0
+2022-03-17 18:46:23,297 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:23,297 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,297 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,297 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:23,297 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[119.1 122.5]
+2022-03-17 18:46:23,297 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1067,)
+2022-03-17 18:46:23,297 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:23,298 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,298 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,298 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:23,298 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:23,298 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [122.6 126. ] status : 0
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[122.6 126. ]
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1086,)
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:23,632 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:23,633 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:23,949 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [126.1 129.5] status : 0
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[126.1 129.5]
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1038,)
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:23,950 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:24,245 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [129.6 133. ] status : 0
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[129.6 133. ]
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(949,)
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:24,246 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [133.1 136.5] status : 0
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[133.1 136.5]
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(955,)
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:24,583 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,584 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,584 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:24,584 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:24,584 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:24,917 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [136.6 140. ] status : 0
+2022-03-17 18:46:24,917 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[136.6 140. ]
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(934,)
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:24,918 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:25,218 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [140.1 143.5] status : 0
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[140.1 143.5]
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(943,)
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,219 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,235 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:25,235 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:25,235 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:25,536 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [143.6 147. ] status : 0
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[143.6 147. ]
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(875,)
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:25,537 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [147.1 150.5] status : 0
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[147.1 150.5]
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(848,)
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:25,852 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,853 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,853 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:25,853 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:25,853 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:26,135 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [150.6 154. ] status : 0
+2022-03-17 18:46:26,135 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:26,136 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,136 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,136 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:26,136 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[150.6 154. ]
+2022-03-17 18:46:26,136 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(765,)
+2022-03-17 18:46:26,136 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:26,136 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,137 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,137 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:26,137 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:26,137 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:26,459 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [154.1 157.5] status : 0
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[154.1 157.5]
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(824,)
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,460 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,473 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:26,473 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:26,473 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:26,788 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [157.6 161. ] status : 0
+2022-03-17 18:46:26,788 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:26,788 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,788 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,788 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:26,788 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[157.6 161. ]
+2022-03-17 18:46:26,789 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(813,)
+2022-03-17 18:46:26,789 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:26,789 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,789 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,789 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:26,789 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:26,789 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:27,129 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [161.1 164.5] status : 0
+2022-03-17 18:46:27,129 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:27,129 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[161.1 164.5]
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(748,)
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:27,130 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [164.6 168. ] status : 0
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[164.6 168. ]
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(823,)
+2022-03-17 18:46:27,446 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:27,447 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,447 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,447 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:27,451 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:27,459 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:27,780 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [168.1 171.5] status : 0
+2022-03-17 18:46:27,780 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:27,780 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,780 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[168.1 171.5]
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(872,)
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:27,781 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:28,104 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [171.6 175. ] status : 0
+2022-03-17 18:46:28,104 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:28,104 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[171.6 175. ]
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(780,)
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:28,105 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [175.1 178.5] status : 0
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[175.1 178.5]
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1125,)
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,411 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:28,412 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:28,412 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:28,751 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [178.6 182. ] status : 0
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[178.6 182. ]
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(991,)
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:28,752 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:28,753 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:29,081 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [182.1 185.5] status : 0
+2022-03-17 18:46:29,082 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:29,082 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,082 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,082 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:29,082 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[182.1 185.5]
+2022-03-17 18:46:29,083 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1089,)
+2022-03-17 18:46:29,083 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:29,083 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,083 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,083 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:29,083 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:29,083 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:29,408 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [185.6 189. ] status : 0
+2022-03-17 18:46:29,408 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:29,408 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[185.6 189. ]
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1119,)
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:29,409 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [189.1 192.5] status : 0
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[189.1 192.5]
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1068,)
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,754 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:29,755 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:29,755 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:30,039 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [192.6 196. ] status : 0
+2022-03-17 18:46:30,039 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:30,039 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,039 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,039 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[192.6 196. ]
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1031,)
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:30,040 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:30,345 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [196.1 199.5] status : 0
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[196.1 199.5]
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(1010,)
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:30,346 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:30,347 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [199.6 203. ] status : 0
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[199.6 203. ]
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(976,)
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:30,681 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,682 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,682 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:30,682 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:30,682 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [203.1 206.5] status : 0
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : begin
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : time :[203.1 206.5]
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : buffer :(930,)
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : data write
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(send) : end
+2022-03-17 18:46:30,985 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : start loop : wait all
+2022-03-17 18:46:30,986 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : receive all
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : get time_step [0. 0.] status : 1
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : end 
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(end) : begin True
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(release) : write buffer -2
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Thread Internal : write(release) : write buffer end -1
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Thread Internal : rate(end) : end
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : send end 
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : Barrier
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Consumer TVB Data : End of send function
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : close connection
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : close connection : delete file 
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : close connection : disconnect connection 
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : close connection : end close connection
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - MPI IO ext : finalise
+2022-03-17 18:46:31,000 - tvb_to_nest_receiver2019 - INFO - Thread Internal : finalize

@@ -1,0 +1,1261 @@
+2022-03-17 18:46:10,904 - tvb_to_nest_transform3019 - INFO - Thread Internal : read buffer
+2022-03-17 18:46:10,904 - tvb_to_nest_transform3019 - INFO - Thread Internal : write buffer
+2022-03-17 18:46:10,904 - tvb_to_nest_transform3019 - INFO - Thread Internal : end Thread init
+2022-03-17 18:46:10,904 - tvb_to_nest_transform3019 - INFO - MPI IO ext : end MPI extern init
+2022-03-17 18:46:10,904 - tvb_to_nest_transform3019 - INFO - TRS : end init transformation
+2022-03-17 18:46:10,916 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:10,916 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:10,917 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2.0
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[0.  3.5]
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:12,408 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:12,417 - tvb_to_nest_transform3019 - INFO - TRS : rate :3.500000000000001e-11 spikes :0
+2022-03-17 18:46:12,418 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:12,418 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:12,418 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait [-2]
+2022-03-17 18:46:12,418 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:12,418 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:12,418 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:12,418 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:12,419 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:12,419 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:12,419 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:12,419 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:12,419 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:12,721 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:12,721 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[3.6 7. ]
+2022-03-17 18:46:12,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:12,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:12,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:12,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:12,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:12,722 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:12,730 - tvb_to_nest_transform3019 - INFO - TRS : rate :803.5842237586972 spikes :0
+2022-03-17 18:46:12,745 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:12,745 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:12,745 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:12,745 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:12,745 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:12,746 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:12,746 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:12,746 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:12,746 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:12,746 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:12,746 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:12,746 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:13,032 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:13,032 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[ 7.1 10.5]
+2022-03-17 18:46:13,032 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:13,032 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:13,032 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:13,033 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:13,033 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:13,033 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:13,042 - tvb_to_nest_transform3019 - INFO - TRS : rate :31229.07449316702 spikes :7
+2022-03-17 18:46:13,044 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:13,044 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:13,044 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,044 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:13,045 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:13,350 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:13,350 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[10.6 14. ]
+2022-03-17 18:46:13,350 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:13,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:13,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:13,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:13,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:13,351 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:13,360 - tvb_to_nest_transform3019 - INFO - TRS : rate :167607.5931824744 spikes :16
+2022-03-17 18:46:13,364 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:13,364 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:13,364 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,364 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,364 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:13,365 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:13,365 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,365 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,365 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:13,365 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:13,365 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:13,365 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[14.1 17.5]
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:13,660 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:13,675 - tvb_to_nest_transform3019 - INFO - TRS : rate :495822.75889813906 spikes :47
+2022-03-17 18:46:13,678 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:13,678 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:13,678 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,678 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,678 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:13,679 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:13,679 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,679 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,679 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:13,679 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:13,679 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:13,679 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[17.6 21. ]
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:13,979 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:13,992 - tvb_to_nest_transform3019 - INFO - TRS : rate :747084.8608016968 spikes :67
+2022-03-17 18:46:13,995 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:13,995 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:13,995 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:13,995 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:13,995 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:13,996 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:13,996 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:13,996 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:13,996 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:13,996 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:13,996 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:13,996 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:14,328 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:14,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[21.1 24.5]
+2022-03-17 18:46:14,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:14,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:14,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:14,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:14,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:14,329 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:14,348 - tvb_to_nest_transform3019 - INFO - TRS : rate :1727356.557548046 spikes :181
+2022-03-17 18:46:14,350 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:14,350 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:14,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:14,352 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[24.6 28. ]
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:14,640 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:14,662 - tvb_to_nest_transform3019 - INFO - TRS : rate :1835566.9644474983 spikes :175
+2022-03-17 18:46:14,666 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,667 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:14,668 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:14,668 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:14,668 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:14,961 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:14,961 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[28.1 31.5]
+2022-03-17 18:46:14,961 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:14,961 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:14,961 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:14,961 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:14,961 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:14,962 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:14,987 - tvb_to_nest_transform3019 - INFO - TRS : rate :2572916.742861271 spikes :256
+2022-03-17 18:46:14,990 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:14,990 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:14,990 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:14,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:15,293 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:15,294 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[31.6 35. ]
+2022-03-17 18:46:15,294 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:15,294 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:15,294 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:15,294 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:15,294 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:15,294 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:15,332 - tvb_to_nest_transform3019 - INFO - TRS : rate :3298875.9380578995 spikes :306
+2022-03-17 18:46:15,341 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:15,341 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:15,341 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,341 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,341 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:15,342 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:15,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:15,343 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:15,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:15,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[35.1 38.5]
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:15,617 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:15,634 - tvb_to_nest_transform3019 - INFO - TRS : rate :3577467.628121376 spikes :329
+2022-03-17 18:46:15,637 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:15,637 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:15,637 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,637 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,637 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:15,638 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:15,638 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,638 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,638 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:15,638 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:15,638 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:15,638 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:15,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:15,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[38.6 42. ]
+2022-03-17 18:46:15,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:15,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:15,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:15,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:15,954 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:15,954 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:15,982 - tvb_to_nest_transform3019 - INFO - TRS : rate :3776408.3975553513 spikes :371
+2022-03-17 18:46:15,985 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:15,985 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:15,985 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:15,985 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:15,985 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:15,986 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:15,986 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:15,986 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:15,986 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:15,986 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:15,986 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:15,986 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[42.1 45.5]
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:16,285 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:16,336 - tvb_to_nest_transform3019 - INFO - TRS : rate :3886160.8850955963 spikes :393
+2022-03-17 18:46:16,343 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:16,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:16,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,343 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:16,344 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:16,344 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,344 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,345 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:16,345 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:16,345 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:16,345 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:16,613 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:16,614 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[45.6 49. ]
+2022-03-17 18:46:16,614 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:16,614 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:16,614 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:16,614 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:16,614 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:16,614 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:16,646 - tvb_to_nest_transform3019 - INFO - TRS : rate :3960774.5468616486 spikes :435
+2022-03-17 18:46:16,649 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:16,649 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:16,649 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,649 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,649 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:16,650 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:16,650 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,650 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,650 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:16,650 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:16,650 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:16,650 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[49.1 52.5]
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:16,931 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:16,949 - tvb_to_nest_transform3019 - INFO - TRS : rate :3995383.5773468018 spikes :361
+2022-03-17 18:46:16,952 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:16,952 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:16,952 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:16,952 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:16,952 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:16,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:16,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:16,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:16,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:16,953 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:16,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:16,953 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:17,251 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:17,251 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[52.6 56. ]
+2022-03-17 18:46:17,251 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:17,251 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:17,251 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:17,251 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:17,251 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:17,252 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:17,319 - tvb_to_nest_transform3019 - INFO - TRS : rate :5922085.447311401 spikes :572
+2022-03-17 18:46:17,326 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:17,327 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:17,327 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,327 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,327 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:17,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:17,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:17,329 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:17,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:17,329 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:17,548 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:17,548 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[56.1 59.5]
+2022-03-17 18:46:17,548 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:17,548 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:17,548 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:17,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:17,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:17,549 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:17,597 - tvb_to_nest_transform3019 - INFO - TRS : rate :7383717.6966667175 spikes :735
+2022-03-17 18:46:17,604 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:17,604 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:17,604 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,604 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:17,605 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:17,877 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:17,878 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[59.6 63. ]
+2022-03-17 18:46:17,878 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:17,878 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:17,878 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:17,878 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:17,878 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:17,878 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:17,918 - tvb_to_nest_transform3019 - INFO - TRS : rate :6965135.623216629 spikes :664
+2022-03-17 18:46:17,923 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:17,923 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:17,923 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:17,923 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:17,923 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:17,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:17,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:17,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:17,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:17,925 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:17,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:17,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[63.1 66.5]
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:18,190 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:18,240 - tvb_to_nest_transform3019 - INFO - TRS : rate :6539757.853746414 spikes :632
+2022-03-17 18:46:18,244 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:18,244 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:18,244 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,244 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,244 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:18,245 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:18,245 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,245 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,245 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:18,245 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:18,245 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:18,245 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[66.6 70. ]
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:18,517 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:18,563 - tvb_to_nest_transform3019 - INFO - TRS : rate :6199467.828273773 spikes :672
+2022-03-17 18:46:18,581 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:18,581 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:18,581 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,581 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,581 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:18,582 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:18,582 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,582 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,582 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:18,582 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:18,582 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:18,582 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:18,849 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:18,850 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[70.1 73.5]
+2022-03-17 18:46:18,850 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:18,850 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:18,850 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:18,850 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:18,850 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:18,850 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:18,917 - tvb_to_nest_transform3019 - INFO - TRS : rate :7107859.109640121 spikes :711
+2022-03-17 18:46:18,923 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:18,924 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:18,924 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:18,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:18,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:18,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:18,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:18,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:18,925 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:18,927 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:18,927 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:18,927 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[73.6 77. ]
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:19,173 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:19,222 - tvb_to_nest_transform3019 - INFO - TRS : rate :8702521.3265419 spikes :854
+2022-03-17 18:46:19,225 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:19,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:19,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:19,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:19,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:19,226 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:19,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:19,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[77.1 80.5]
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:19,505 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:19,566 - tvb_to_nest_transform3019 - INFO - TRS : rate :9020273.545980453 spikes :856
+2022-03-17 18:46:19,596 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:19,597 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:19,597 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,597 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,597 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:19,600 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:19,600 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,600 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,600 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:19,600 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:19,600 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:19,600 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:19,822 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:19,822 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[80.6 84. ]
+2022-03-17 18:46:19,822 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:19,822 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:19,822 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:19,822 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:19,823 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:19,823 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:19,863 - tvb_to_nest_transform3019 - INFO - TRS : rate :9549650.36392212 spikes :939
+2022-03-17 18:46:19,866 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:19,866 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:19,866 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:19,866 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:19,866 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:19,867 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:19,867 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:19,867 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:19,867 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:19,867 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:19,867 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:19,867 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[84.1 87.5]
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:20,136 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:20,181 - tvb_to_nest_transform3019 - INFO - TRS : rate :9265559.071302414 spikes :932
+2022-03-17 18:46:20,188 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:20,188 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:20,188 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,188 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,188 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:20,189 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:20,189 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,189 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,189 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:20,189 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:20,189 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:20,189 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:20,440 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:20,441 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[87.6 91. ]
+2022-03-17 18:46:20,441 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:20,441 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:20,441 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:20,441 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:20,441 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:20,441 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:20,503 - tvb_to_nest_transform3019 - INFO - TRS : rate :8651483.61325264 spikes :848
+2022-03-17 18:46:20,506 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:20,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:20,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:20,507 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:20,507 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,507 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,507 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:20,507 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:20,507 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:20,507 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:20,724 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:20,724 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[91.1 94.5]
+2022-03-17 18:46:20,724 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:20,724 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:20,724 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:20,724 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:20,725 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:20,725 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:20,771 - tvb_to_nest_transform3019 - INFO - TRS : rate :8374397.0584869385 spikes :843
+2022-03-17 18:46:20,779 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:20,779 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:20,779 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:20,780 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:20,780 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:20,781 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:20,781 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:20,781 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:20,781 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:20,781 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:20,781 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:20,781 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[94.6 98. ]
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:21,036 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:21,104 - tvb_to_nest_transform3019 - INFO - TRS : rate :10053383.456468582 spikes :918
+2022-03-17 18:46:21,107 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:21,107 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:21,107 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,107 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,107 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:21,108 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:21,108 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,108 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,108 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:21,110 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:21,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:21,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[ 98.1 101.5]
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:21,324 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:21,402 - tvb_to_nest_transform3019 - INFO - TRS : rate :10902556.807994843 spikes :1084
+2022-03-17 18:46:21,405 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:21,405 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:21,405 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,405 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,405 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:21,406 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:21,406 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,406 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,406 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:21,406 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:21,406 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:21,406 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:21,642 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:21,643 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[101.6 105. ]
+2022-03-17 18:46:21,643 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:21,643 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:21,643 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:21,643 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:21,643 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:21,643 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:21,718 - tvb_to_nest_transform3019 - INFO - TRS : rate :11314273.386001587 spikes :1129
+2022-03-17 18:46:21,722 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:21,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:21,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:21,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:21,722 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:21,723 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:21,723 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:21,723 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:21,723 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:21,723 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:21,723 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:21,724 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:21,975 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:21,975 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[105.1 108.5]
+2022-03-17 18:46:21,975 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:21,975 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:21,975 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:21,975 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:21,975 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:21,976 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:22,031 - tvb_to_nest_transform3019 - INFO - TRS : rate :12338042.664527893 spikes :1138
+2022-03-17 18:46:22,034 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:22,034 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:22,034 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,034 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,034 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:22,035 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:22,035 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,035 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,035 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:22,035 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:22,035 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:22,035 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:22,306 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:22,306 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[108.6 112. ]
+2022-03-17 18:46:22,306 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:22,306 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:22,306 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:22,306 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:22,307 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:22,307 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:22,347 - tvb_to_nest_transform3019 - INFO - TRS : rate :11804779.10041809 spikes :1130
+2022-03-17 18:46:22,351 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:22,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:22,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,351 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:22,352 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:22,352 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,352 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,352 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:22,352 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:22,352 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:22,352 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:22,633 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:22,633 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[112.1 115.5]
+2022-03-17 18:46:22,633 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:22,634 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:22,634 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:22,634 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:22,634 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:22,634 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:22,686 - tvb_to_nest_transform3019 - INFO - TRS : rate :10847952.117919922 spikes :1002
+2022-03-17 18:46:22,690 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:22,690 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:22,690 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:22,690 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:22,690 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:22,691 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:22,691 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:22,691 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:22,691 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:22,691 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:22,691 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:22,700 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:22,982 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:22,983 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[115.6 119. ]
+2022-03-17 18:46:22,983 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:22,983 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:22,983 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:22,983 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:22,983 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:22,983 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:23,038 - tvb_to_nest_transform3019 - INFO - TRS : rate :9755775.561332703 spikes :976
+2022-03-17 18:46:23,052 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:23,052 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:23,052 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,052 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,052 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:23,053 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:23,053 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,053 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,053 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:23,053 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:23,053 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:23,053 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:23,321 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:23,321 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[119.1 122.5]
+2022-03-17 18:46:23,321 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:23,321 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:23,321 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:23,322 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:23,322 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:23,322 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:23,367 - tvb_to_nest_transform3019 - INFO - TRS : rate :9884526.765346527 spikes :950
+2022-03-17 18:46:23,372 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:23,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:23,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:23,373 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:23,373 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,373 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,373 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:23,373 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:23,373 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:23,373 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[122.6 126. ]
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:23,657 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:23,714 - tvb_to_nest_transform3019 - INFO - TRS : rate :11023105.618953705 spikes :1101
+2022-03-17 18:46:23,725 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:23,725 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:23,725 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:23,725 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:23,725 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:23,726 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:23,726 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:23,726 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:23,726 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:23,726 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:23,726 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:23,726 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:23,978 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:23,978 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[126.1 129.5]
+2022-03-17 18:46:23,978 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:23,978 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:23,978 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:23,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:23,979 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:23,979 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:24,038 - tvb_to_nest_transform3019 - INFO - TRS : rate :10933997.480869293 spikes :1034
+2022-03-17 18:46:24,048 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:24,048 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:24,048 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,048 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,048 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:24,049 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:24,049 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,049 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,049 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:24,049 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:24,049 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:24,049 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:24,272 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:24,272 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[129.6 133. ]
+2022-03-17 18:46:24,272 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:24,272 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:24,273 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:24,273 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:24,273 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:24,273 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:24,328 - tvb_to_nest_transform3019 - INFO - TRS : rate :10985794.882774353 spikes :1012
+2022-03-17 18:46:24,332 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:24,332 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:24,332 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,332 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,332 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:24,333 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:24,333 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,333 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,333 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:24,333 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:24,333 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:24,333 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[133.1 136.5]
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:24,585 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:24,621 - tvb_to_nest_transform3019 - INFO - TRS : rate :10754625.763893127 spikes :1007
+2022-03-17 18:46:24,624 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:24,624 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:24,624 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,624 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,624 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:24,625 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:24,625 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,625 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,625 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:24,625 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:24,625 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:24,627 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[136.6 140. ]
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:24,945 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:24,985 - tvb_to_nest_transform3019 - INFO - TRS : rate :10722588.634490967 spikes :1039
+2022-03-17 18:46:24,989 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:24,989 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:24,989 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:24,989 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:24,989 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:24,990 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:24,990 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:24,990 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:24,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:24,991 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:24,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:24,991 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[140.1 143.5]
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:25,237 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:25,289 - tvb_to_nest_transform3019 - INFO - TRS : rate :10126564.974784851 spikes :1015
+2022-03-17 18:46:25,302 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:25,302 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:25,302 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,302 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,302 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:25,303 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:25,303 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,303 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,303 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:25,303 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:25,303 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:25,303 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[143.6 147. ]
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:25,549 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:25,587 - tvb_to_nest_transform3019 - INFO - TRS : rate :9362585.25967598 spikes :911
+2022-03-17 18:46:25,590 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:25,590 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:25,590 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,590 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,590 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:25,591 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:25,591 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,591 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,591 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:25,591 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:25,591 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:25,591 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[147.1 150.5]
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:25,870 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:25,917 - tvb_to_nest_transform3019 - INFO - TRS : rate :8414601.619243622 spikes :878
+2022-03-17 18:46:25,921 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:25,921 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:25,921 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:25,921 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:25,921 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:25,922 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:25,922 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:25,922 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:25,922 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:25,922 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:25,922 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:25,922 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:26,165 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:26,166 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[150.6 154. ]
+2022-03-17 18:46:26,166 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:26,166 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:26,166 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:26,166 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:26,166 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:26,166 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:26,221 - tvb_to_nest_transform3019 - INFO - TRS : rate :7822233.735322952 spikes :740
+2022-03-17 18:46:26,225 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:26,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:26,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,225 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:26,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:26,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:26,226 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:26,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:26,226 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[154.1 157.5]
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:26,462 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:26,490 - tvb_to_nest_transform3019 - INFO - TRS : rate :7431516.3230896 spikes :737
+2022-03-17 18:46:26,493 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:26,494 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:26,494 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,494 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,494 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:26,494 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:26,494 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,495 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,495 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:26,495 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:26,495 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:26,495 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:26,810 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:26,810 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[157.6 161. ]
+2022-03-17 18:46:26,810 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:26,810 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:26,811 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:26,811 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:26,811 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:26,811 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:26,862 - tvb_to_nest_transform3019 - INFO - TRS : rate :7673506.119251251 spikes :799
+2022-03-17 18:46:26,873 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:26,873 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:26,873 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:26,873 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:26,873 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:26,874 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:26,874 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:26,874 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:26,874 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:26,874 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:26,874 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:26,874 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[161.1 164.5]
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:27,157 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:27,210 - tvb_to_nest_transform3019 - INFO - TRS : rate :8341007.053852081 spikes :842
+2022-03-17 18:46:27,214 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:27,215 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:27,215 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,215 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,215 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:27,216 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:27,216 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,216 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,216 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:27,216 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:27,216 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:27,216 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[164.6 168. ]
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:27,451 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:27,490 - tvb_to_nest_transform3019 - INFO - TRS : rate :8575497.689247131 spikes :838
+2022-03-17 18:46:27,496 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:27,496 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:27,496 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,496 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,497 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:27,498 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:27,498 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,498 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,498 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:27,498 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:27,498 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:27,498 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[168.1 171.5]
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:27,806 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:27,873 - tvb_to_nest_transform3019 - INFO - TRS : rate :8163186.157941818 spikes :832
+2022-03-17 18:46:27,879 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:27,879 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:27,879 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:27,879 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:27,879 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:27,880 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:27,880 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:27,880 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:27,880 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:27,880 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:27,880 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:27,880 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[171.6 175. ]
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:28,106 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:28,138 - tvb_to_nest_transform3019 - INFO - TRS : rate :8753289.202451706 spikes :883
+2022-03-17 18:46:28,141 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:28,141 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:28,141 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,141 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,141 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:28,142 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:28,142 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,142 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,142 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:28,142 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:28,142 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:28,142 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:28,438 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:28,438 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[175.1 178.5]
+2022-03-17 18:46:28,438 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:28,438 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:28,438 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:28,438 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:28,439 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:28,446 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:28,498 - tvb_to_nest_transform3019 - INFO - TRS : rate :8566887.378692627 spikes :828
+2022-03-17 18:46:28,505 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:28,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:28,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,505 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:28,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:28,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:28,506 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:28,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:28,506 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:28,775 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:28,775 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[178.6 182. ]
+2022-03-17 18:46:28,775 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:28,775 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:28,776 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:28,776 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:28,776 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:28,776 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:28,811 - tvb_to_nest_transform3019 - INFO - TRS : rate :8341365.163326263 spikes :827
+2022-03-17 18:46:28,814 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:28,815 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:28,815 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:28,815 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:28,815 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:28,815 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:28,815 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:28,816 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:28,816 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:28,816 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:28,816 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:28,816 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:29,105 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:29,105 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[182.1 185.5]
+2022-03-17 18:46:29,105 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:29,105 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:29,105 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:29,105 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:29,106 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:29,106 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:29,159 - tvb_to_nest_transform3019 - INFO - TRS : rate :8337037.73856163 spikes :812
+2022-03-17 18:46:29,162 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:29,162 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:29,162 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,162 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,163 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:29,163 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:29,163 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,163 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,163 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:29,164 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:29,164 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:29,164 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:29,425 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:29,425 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[185.6 189. ]
+2022-03-17 18:46:29,426 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:29,426 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:29,426 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:29,426 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:29,426 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:29,426 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:29,468 - tvb_to_nest_transform3019 - INFO - TRS : rate :8831204.606294632 spikes :834
+2022-03-17 18:46:29,471 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:29,471 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:29,471 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,471 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,472 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:29,472 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:29,472 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,472 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,472 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:29,472 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:29,473 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:29,473 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[189.1 192.5]
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:29,764 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:29,797 - tvb_to_nest_transform3019 - INFO - TRS : rate :8753914.049863815 spikes :895
+2022-03-17 18:46:29,799 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:29,800 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:29,800 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:29,800 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:29,800 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:29,800 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:29,801 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:29,801 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:29,801 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:29,801 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:29,801 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:29,801 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:30,058 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:30,058 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[192.6 196. ]
+2022-03-17 18:46:30,059 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:30,059 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:30,059 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:30,059 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:30,059 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:30,059 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:30,105 - tvb_to_nest_transform3019 - INFO - TRS : rate :8217934.367656708 spikes :818
+2022-03-17 18:46:30,110 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:30,110 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:30,110 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,110 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,110 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:30,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:30,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:30,111 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:30,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:30,111 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:30,371 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:30,371 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[196.1 199.5]
+2022-03-17 18:46:30,371 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:30,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:30,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:30,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:30,372 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:30,372 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:30,401 - tvb_to_nest_transform3019 - INFO - TRS : rate :7903273.066282272 spikes :799
+2022-03-17 18:46:30,403 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:30,403 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:30,403 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,403 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,403 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:30,404 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:30,404 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,404 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,404 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:30,404 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:30,404 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:30,404 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:30,685 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:30,685 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[199.6 203. ]
+2022-03-17 18:46:30,686 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:30,686 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:30,686 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:30,686 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:30,686 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:30,686 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:30,746 - tvb_to_nest_transform3019 - INFO - TRS : rate :7973818.680047989 spikes :746
+2022-03-17 18:46:30,749 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:30,749 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:30,749 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:30,749 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-2]
+2022-03-17 18:46:30,749 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:30,750 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:30,750 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:30,750 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:30,750 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:30,750 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:30,750 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:30,750 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -2
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end 2
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : data request : time :[203.1 206.5]
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : end
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release)
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : begin 2
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(end) : buffer end -2
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(release) : end
+2022-03-17 18:46:31,004 - tvb_to_nest_transform3019 - INFO - TRS : generate spike
+2022-03-17 18:46:31,071 - tvb_to_nest_transform3019 - INFO - TRS : rate :8194797.641038895 spikes :803
+2022-03-17 18:46:31,075 - tvb_to_nest_transform3019 - INFO - TRS : send spike train
+2022-03-17 18:46:31,075 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : begin
+2022-03-17 18:46:31,075 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : wait -2
+2022-03-17 18:46:31,075 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(ready) : end wait [-1]
+2022-03-17 18:46:31,075 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : buffer
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : data write
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : begin
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(end) : end
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(send) : end
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - TRS : get rate
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get time rate
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer wait -1
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(ready) : buffer end -1
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(get) : get exit
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - TRS : break end sender
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - TRS : end method by TVB : True
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(end) : begin
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(release): buffer -1
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : read(release): read buffer unlock -1
+2022-03-17 18:46:31,076 - tvb_to_nest_transform3019 - INFO - Thread Internal : rate(end) : end
+2022-03-17 18:46:31,077 - tvb_to_nest_transform3019 - INFO - Thread Internal : spike(end) : end send
+2022-03-17 18:46:31,077 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(release) : write buffer 0
+2022-03-17 18:46:31,079 - tvb_to_nest_transform3019 - INFO - Thread Internal : write(release) : write buffer end -1
+2022-03-17 18:46:31,079 - tvb_to_nest_transform3019 - INFO - TRS : end
+2022-03-17 18:46:31,079 - tvb_to_nest_transform3019 - INFO - MPI IO ext : finalise
+2022-03-17 18:46:31,079 - tvb_to_nest_transform3019 - INFO - Thread Internal : finalize
