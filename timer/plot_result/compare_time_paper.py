@@ -175,7 +175,7 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
              color=[71 / 255, 164 / 255, 226 / 255], label='TVB IO')
     plt.plot(list_nb, function(time_sim, axis=1) / function(time_sim, axis=1) * 100,
              'y-', label='Co-simulation')
-    plt.ylim(ymin=0.0)
+    plt.ylim(ymin=-1.0)
     if log_option:
         plt.xscale('log')
     plt.tick_params(axis='both', labelsize=labelsize)
@@ -190,7 +190,7 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
              color=[255 / 255, 104 / 255, 65 / 255], label='NEST wait')
     plt.plot(list_nb, (function(time_nest_sim, axis=1)), '-',
              color=[255 / 255, 104 / 255, 65 / 255], label='NEST simulation')
-    plt.ylim(ymin=0.0)
+    plt.ylim(ymin=-np.max(np.concatenate((time_nest_sim, time_nest_wait, time_nest_IO)))*0.01)
     if log_option:
         plt.xscale('log')
     plt.legend(fontsize=labellegend)
