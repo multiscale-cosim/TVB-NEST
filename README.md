@@ -274,6 +274,35 @@ The file 'install/local_cluster/install.sh' is to compile and install all the py
 4. Debug the problems of the usage of vtk in the containers.
 
 ## Files<a name="files"></a>
+* analyse: the function for analysis of the output of examples
+    * image_3d: folder which contains the script for plotting figure in 3D
+        * logo_Nest.png: logo of NEST
+        * logo_TVB.png: logo of TVB
+        * mouse_sphere.py: print the mouse brain with or without the logo of TVB and NEST
+    * LFPY: folder contains the function for creating LFP from the spike trains using HYBRIDLFPY
+        * example_plotting.py: file for plotting the result for the HybridLFPy example
+        * expsuni.mod: exponential synapse for NEURON simulator
+        * LFP.py: file for creating LFP from a simulation
+        * run_LFP.py: file for running LFP from a docker or singularity image
+        * select_spikes.py: select the spike which is necessary for the generation of LFP.
+    * parameter: parameter for the simulation and the data
+      * data_mouse: data from Allen Institute of mouse connectome is composed of the file of the distance between each region and the weight of the connections
+      * test_nest.py: parameter for testing the installation 
+    * create_figure_title.py: create the figure for the example
+    * get_data.py: function for getting data from the simulation
+    * min_delay.py: get the minimum of delay from a connectome
+    * neuron_widget.py: notebook widget for see the dynamic of an individual neurons
+    * plot_electrode_morphologie.py: plot the electrode with neurons
+    * print_connectome.py: plot the connectome (weights and track length)
+    * print_electrode.py: plot the electrode alone
+    * print_figure_2_big_image.py: plot one part of the figure 2 of the paper
+    * print_figure_2_composite_image.py: plot the other part of the figure 2 of the paper
+    * print_figure_macro.py: plot the figure 4 of the paper
+    * print_figure_micro.py: plot the figure 3 of the paper
+    * print_figure_overview.py: plot the 4 figures of the first figure of the paper 
+    * trial_print_figure_macro_more.py: extra function plotting macro result
+    * trial_print_figure_micro.py: extra function for plotting micro result
+    * trial_print_figure_micro_0.py: extra function for plotting micro result
 * doc: Documentation of the project
     * UML: UML of communication and state of modules ( the file .uxl is the file for [UMLET](https://www.umlet.com/))
         * class_heritage.pdf/.uxf: Internal communication classes of the transformer and the link with the others classes.
@@ -291,40 +320,18 @@ The file 'install/local_cluster/install.sh' is to compile and install all the py
         * state_TVB.pdf/.uxf: state diagram of the wrapper TVB for the simulation part.
         * Thread_internal.pdf/.uxf: details of internal communication using MPI in the transformation modules.
         * transformation.pdf/.uxf: schematic of the transformation function
-        * transformation.pdf/.uxf: state diagram of the transformation component
+        * transformation_spike_rate.pdf/.uxf: state diagram of the transformation component
         * TVB_IO.pdf/.uxf: state diagram of communication of the wrapper of TVB
 * [example](#example): examples of the usage of the proof of concept
-    * analyse: the function for analysis of the output of examples
-        * image_3d: folder which contains the script for plotting figure in 3D
-            * logo_Nest.png: logo of NEST
-            * logo_TVB.png: logo of TVB
-            * mouse_sphere.py: print the mouse brain with or without the logo of TVB and NEST
-        * LFPY: folder contains the function for creating LFP from the spike trains using HYBRIDLFPY
-            * example_plotting.py: file for plotting the result for the HybridLFPy example
-            * expsuni.mod: exponential synapse for NEURON simulator
-            * LFP.py: file for creating LFP from a simulation
-            * run_LFP.py: file for running LFP from a docker or singularity image
-            * select_spikes.py: select the spike which is necessary for the generation of LFP.
-        * create_figure_title.py: create the figure for the example
-        * get_data.py: function for getting data from the simulation
-        * min_delay.py: get the minimum of delay from a connectome
-        * neuron_widget.py: notebook widget for see the dynamic of an individual neurons
-        * plot_electrode_morphologie.py: plot the electrode with neurons
-        * print_connectome.py: plot the connectome (weights and track length)
-        * print_electrode.py: plot the electrode alone
-        * print_figure_2_big_image.py: plot one part of the figure 2 of the paper
-        * print_figure_2_composite_image.py: plot the other part of the figure 2 of the paper
-        * print_figure_macro.py: plot the figure 4 of the paper
-        * print_figure_micro.py: plot the figure 3 of the paper
-        * trial_print_figure_macro_more.py: extra function plotting macro result
-        * trial_print_figure_micro.py: extra function for plotting micro result
-        * trial_print_figure_micro_0.py: extra function for plotting micro result
-    * run.py:
-        * example of function for running the co-simulation for local installation. 
     * docker: (example using the docker image)
         * run_docker.sh: example how to run the docker image for a co-simulation
     * singularity: (example using the singularity image)
         * run_singularty.sh: example how to run the singularity image for a co-simulation
+    * local: (example for running the example with local installation)
+        * run_local.sh: run the co-simulation example
+    * local_cluster: (example for running example on INS cluster)
+        * run_local.sh: run the co-simulation example
+        * run_job.sh: summit a job for co-simulation on the cluster
     * jusuf: (example for running simulation on jusuf)
         * run_cluster.sh: summit a job for co-simulation on the cluster
         * run_example.sh: run the co-simulation after loading and prepare the environment for the co-simulation.
@@ -339,9 +346,7 @@ The file 'install/local_cluster/install.sh' is to compile and install all the py
             * run_LFPY.py: function for calling the generator with the good parameters 
             * run_LFPY.sh: function for run the python script and loading the dependency
             * run_sarus.sh: function for running the co-simulation
-    * parameter: parameter for the simulation and the data
-        * data_mouse: data from Allen Institute of mouse connectome is composed of the file of the distance between each region and the weight of the connections
-        * test_nest.py: parameter for testing the installation 
+
     * <a name="short_sim">short_simulation</a>: folder of the result of the short simulation
         * log: folder contains all the log of the simulation
         * nest: generated files by the NEST module
@@ -381,9 +386,9 @@ The file 'install/local_cluster/install.sh' is to compile and install all the py
         * sarus
             load_image.sh: load docker image on the Piz Daint cluster
         install.sh: local install of the project
-        install_2.sh: loca
-        install_nest.sh: installation of NEST only
         run.sh: submit a job for launching the co-simulation
+        trial_install_nest.sh: installation of NEST only
+        trial_install_LFPy.sh: installation of LFPy only
     * py_venv
         create_virtual_python.sh: create the virtual environment
     * singularity
@@ -426,6 +431,7 @@ The file 'install/local_cluster/install.sh' is to compile and install all the py
         * helper_function_zerlaut.py: function for ECOG sensors and for finding the normal of a face
         * wrapper_TVB.py: wrapper of TVB without MPI (use for launching TVB alone)
         * wrapper_TVB_mpi.py: wrapper of TVB using MPI for communication with the transformer
+    * utils.py: files for creating loggers for the different modules
 * tests: contains all the [test](#tests)  
     * test_nest_file: (file for testing different configuration of NEST)
         * spike_detector_mpi.py: test spike detector with only MPI
@@ -461,43 +467,42 @@ The file 'install/local_cluster/install.sh' is to compile and install all the py
     * init_spikes.npy: initialization of the spikes for the first communication
     * run_co_sim.py: a simple co-simulation
     * run_co-sim_test.py: test of the co-simulation
-    * run_co-sim_test_docker.py: 
-    * run_nest.py: 
-    * test_co_sim.sh: 
-    * test_input_nest_current.sh: 
-    * test_input_nest_current_multi.sh: 
-    * test_input_nest_spike.sh: 
-    * test_input_nest_spike_dict.sh: 
-    * test_input_nest_spike_multi_dict.sh: 
-    * test_record_nest_spike.sh: 
-    * test_record_nest_spike_multi.sh: 
-    * test_transformer_nest_to_tvb.sh: 
-    * test_transformer_tvb_to_nest.sh: 
-* timer:
-    * plot_result
-        * analyse_timer.py: 
-        * compare_time_paper.py: 
-        * compare_time_paper_2.py: 
-        * compare_time_paper_jusuf.py: 
-        * get_time_data.py: 
-        * pot_figure_comparison.py: 
-        * trial_compare_time.py: 
-    * parameters.py: 
-    * run_co-sim_mpi.py: 
-    * run_co-sim_mpi_vp_2.py: 
-    * run_co-sim_mpi_vp_4.py: 
-    * run_co-sim_neuron.py: 
-    * run_co-sim_thread.py: 
-    * run_co-sim_neuron.py: 
-    * run_co-sim_time.py: 
-    * run_co-sim_TVB_ebrains.py: 
-    * run_timer_mpi.sh: 
-    * run_timer_mpi_vp_2.sh: 
-    * run_timer_mpi_vp_4.sh: 
-    * run_timer_neuron.sh: 
-    * run_timer_run_all.sh: 
-    * run_time_thread.sh: 
-    * run_timer_timer.sh: 
-    * Timer.py: 
+    * run_co-sim_test_docker.py: test of the co-simulation with docker
+    * run_nest.py: simulation of nest only
+    * test_co_sim.sh: run of co-simulation with multiple simulation
+    * test_input_nest_current.sh: test current devices with MPI backend of NEST
+    * test_input_nest_current_multi.sh: test current devices with MPI backend of NEST with multiple MPI configuration 
+    * test_input_nest_spike.sh: test spike generator with MPI backend of NEST 
+    * test_input_nest_spike_dict.sh: test spike generator with MPI backend of NEST with dictionary backend 
+    * test_input_nest_spike_multi_dict.sh: test spike generator with MPI backend of NEST with dictionary backend with multiple MPI configuration 
+    * test_record_nest_spike.sh: test spike recorder with MPI backend of NEST 
+    * test_record_nest_spike_multi.sh: test spike recorder with MPI backend of NEST with multiple MPI configuration  
+    * test_transformer_nest_to_tvb.sh: test transformer spikes to rates   
+    * test_transformer_tvb_to_nest.sh: test transformer rates to spikes
+* timer: File for timer recording and plotting
+    * plot_result: plot result timer
+        * analyse_timer.py: plot details result of 
+        * compare_time_paper.py: plot time of the result local run
+        * compare_time_paper_2.py: plot time of the result with comparison of NEST configuration
+        * compare_time_paper_jusuf.py: plot time for the running on jusuf
+        * get_time_data.py: get data of timer 
+        * pot_figure_comparison.py: plot details comparison 
+        * trial_compare_time.py: file for testing the printing results
+    * parameters.py: default parameters for timer
+    * run_co-sim_mpi.py: run co-simulation with timer and 1 thread by rank for NEST
+    * run_co-sim_mpi_vp_2.py: run co-simulation with timer and 2 thread by rank for NEST
+    * run_co-sim_mpi_vp_4.py: run co-simulation with timer and 4 thread by rank for NEST
+    * run_co-sim_neuron.py: run co-simulation with number of neurons 
+    * run_co-sim_thread.py: run co-simulation with different number of threads for NEST 
+    * run_co-sim_time.py: run co-simulation with different synchronize time between simulator 
+    * run_co-sim_TVB_ebrains.py: run tests for different configuration
+    * run_timer_mpi.sh: run all the co-simulation for different number of MPI and 1 thread by rank for NEST 
+    * run_timer_mpi_vp_2.sh: run all the co-simulation for different number of MPI and 2 thread by rank for NEST 
+    * run_timer_mpi_vp_4.sh: run all the co-simulation for different number of MPI and 4 thread by rank for NEST
+    * run_timer_neuron.sh: run all the co-simulation for different number of neurons
+    * run_timer_run_all.sh: run all the co-simulation with timer  
+    * run_time_thread.sh: run all the co-simulation for one MPI rank and different number of thread for NEST  
+    * run_timer_timer.sh: run all the co-simulation for different time of synchronization between  
+    * Timer.py: class of timer for record time in python
 * LICENSE: License of the project
 * NOTICE: notice for the License

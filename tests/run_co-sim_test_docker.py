@@ -3,7 +3,7 @@
 
 from nest_elephant_tvb.launcher.run_exploration import run_exploration_2D
 import mpi4py.MPI as MPI
-from example.parameter import test_nest as parameter_test
+from analyse.parameter import test_nest as parameter_test
 
 # File for testing the co-simulation with a docker image
 
