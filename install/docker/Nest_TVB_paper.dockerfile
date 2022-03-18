@@ -23,9 +23,9 @@ RUN apt-get update;\
     apt-get install -y g++=4:8.3.0-1 gcc=4:8.3.0-1 gfortran=4:8.3.0-1 make=4.2.1-1.2 strace=4.26-0.2 wget=1.20.1-1.1 git=1:2.20.1-2+deb10u3
 
 # install python
-RUN  apt-get install -y build-essential=12.6 cmake=3.13.4-1 zlib1g-dev=1:1.2.11.dfsg-1 libltdl-dev=2.4.6-9\
+RUN  apt-get install -y  --allow-downgrades build-essential=12.6 cmake=3.13.4-1 zlib1g-dev=1:1.2.11.dfsg-1 libltdl-dev=2.4.6-9\
      libncurses5-dev=6.1+20181013-2+deb10u2 libgdbm-dev=1.18.1-4 libreadline-dev=7.0-5 \
-     libnss3=2:3.42.1-1+deb10u3 \
+     libnss3=2:3.42.1-1+deb10u3  libssl1.1=1.1.1d-0+deb10u7 \
      libnss3-dev=2:3.42.1-1+deb10u3 libssl-dev=1.1.1d-0+deb10u7 libsqlite3-dev=3.27.2-3+deb10u1 libgl1-mesa-glx=18.3.6-2+deb10u1 \
      libffi-dev=3.2.1-9 libgsl-dev=2.5+dfsg-6 libbz2-dev=1.0.6-9.2~deb10u1 curl=7.64.0-4+deb10u2;\
      cd /root ;\
