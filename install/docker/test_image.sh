@@ -32,7 +32,7 @@ if [ -z "$1" ]
 fi
 if [ $1 -eq 0 ]
 then
-  IMAGE=local:NEST_TVB_IO_PAPER_TIMER
+  IMAGE=local:NEST_TVB_IO_PAPER
   echo ' test image for paper Nest and TVB'
 else
   echo ' No image to test '

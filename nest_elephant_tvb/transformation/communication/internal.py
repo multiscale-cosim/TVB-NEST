@@ -7,7 +7,7 @@ class CommunicationInternAbstract:
     Limitation of spike and rate exchange
     """
 
-    def __init__(self, logger=None, timer=None):
+    def __init__(self, logger=None):
         """
         Initialisation of the communication intern
         here: definition of the logger
@@ -16,7 +16,6 @@ class CommunicationInternAbstract:
         if logger is None:
             raise Exception('Internal Communication : missing logger for the internal communication')
         self.logger = logger
-        self.timer = timer
 
     def finalise(self):
         """

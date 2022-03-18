@@ -32,7 +32,6 @@ singularity run --app python
 ../../nest-io-dev /home/nest-io-dev
 ../../nest_elephant_tvb /home/nest_elephant_tvb
 ../../analyse /home/analyse
-../../timer /home/timer
 
 %post
     apk update

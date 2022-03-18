@@ -5,7 +5,6 @@ from mpi4py import MPI
 import pathlib
 import os
 from nest_elephant_tvb.utils import create_logger
-from timer.Timer import Timer
 
 
 class MPICommunicationExtern:
@@ -28,9 +27,7 @@ class MPICommunicationExtern:
         self.ports = []  # array to save the MPI port
         self.path_ports = []  # path for sharing the connection ports
         self.port_comms = []  # communication
-        self.timer = Timer(19, 100000)
-        self.communication_internal = communication_intern(self.logger, timer=self.timer,
-                                                           **karg)  # connection between function
+        self.communication_internal = communication_intern(self.logger, **karg)  # connection between function
         self.logger.info('MPI IO ext : end MPI extern init')
         self.path = path
 
@@ -39,23 +36,17 @@ class MPICommunicationExtern:
         running time of the function, it's the main function
         :param path_connection: path for the simulation
         """
-        self.timer.start(0)
         # Step 1 : creation of the connection
         if path_connection is not None:
             self.logger.info('MPI IO ext : run : create connection')
             self.create_connection(path_connection)
-        self.timer.change(0, 0)
         # Step 2 : simulation time / communication with the simulator during the simulation
         self.simulation_time()
-        self.timer.change(0, 0)
         # Step 3 : close the connection
         if path_connection is not None:
             self.close_connection()
-        self.timer.change(0, 0)
         # Finalise the MPI communication
         self.finalise()
-        self.timer.stop(0)
-        self.timer.save(self.path + "/timer_" + self.logger.name + '.npy')
 
     def create_connection(self, paths, info=MPI.INFO_NULL, comm=MPI.COMM_SELF, root_node=0):
         """
@@ -78,7 +69,6 @@ class MPICommunicationExtern:
             fport.close()
             pathlib.Path(path + '.unlock').touch()
             self.path_ports.append(path)
-        self.timer.change(0, 0)
         self.logger.info('MPI IO ext : create connection : Transform ' + self.name + ': path_file: ' + paths[-1])
         self.logger.info('MPI IO ext : create connection : Wait for Transform : ' + port)
         self.port_comms.append(comm.Accept(port, info, root_node))

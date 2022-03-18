@@ -142,7 +142,6 @@ RUN cd /home/;\
 # Copy files of the project
 COPY  ./nest_elephant_tvb /home/nest_elephant_tvb
 COPY  ./analyse /home/analyse
-COPY  ./timer /home/timer
 
 # initialisation of special synapse for Neuron
 RUN cd /home/analyse/LFPY;\

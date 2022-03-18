@@ -8,7 +8,6 @@ import time
 import json
 from nest_elephant_tvb.utils import create_logger
 import pathlib
-from timer.Timer import Timer
 
 
 def network_initialisation(results_path, param_nest):
@@ -540,29 +539,15 @@ def config_mpi_record(results_path, begin, end,
     :return the ids of spike_detector and of spike_generators for MPI connection
     """
     # Initialisation of the network
-    if nest.Rank() == 0:
-        timer_init = Timer(1, 10)
-        timer_init.start(0)
     network_initialisation(results_path, param_nest)
-
-    if nest.Rank() == 0:
-        timer_init.change(0, 0)
     dic_layer = network_initialisation_neurons(results_path, param_topology, cosimulation=cosimulation)
 
     # Connection and Device
-    if nest.Rank() == 0:
-        timer_init.change(0, 0)
     network_connection(dic_layer, param_topology, param_connection, cosimulation=cosimulation)
-
-    if nest.Rank() == 0:
-        timer_init.change(0, 0)
     spike_detector, spike_generator = network_device(results_path, dic_layer, begin, end, param_background,
                                                      param_connection, mpi=False, cosimulation=cosimulation)
-    if nest.Rank() == 0:
-        timer_init.stop(0)
-        return spike_detector, spike_generator, timer_init
-    else:
-        return spike_detector, spike_generator
+
+    return spike_detector, spike_generator
 
 
 def simulate_mpi_co_simulation(time_synch, end, logger):
@@ -573,31 +558,18 @@ def simulate_mpi_co_simulation(time_synch, end, logger):
     :param logger : logger simulation
     """
     # Simulation
-    if nest.Rank() == 0:
-        timer_sim = Timer(1, 100000)
-        timer_sim.start(0)
     count = 0.0
     logger.info("Nest Prepare")
     nest.Prepare()
-    if nest.Rank() == 0:
-        timer_sim.change(0, 0)
     while count * time_synch < end:  # FAT END POINT
-        if nest.Rank() == 0:
-            timer_sim.change(0, 0)
         logger.info(" Nest run time " + str(nest.GetKernelStatus('biological_time')))
         nest.Run(time_synch)
         logger.info(" Nest end")
         count += 1
     logger.info("cleanup")
-    if nest.Rank() == 0:
-        timer_sim.change(0, 0)
     nest.Cleanup()
     logger.info("finish")
-    if nest.Rank() == 0:
-        timer_sim.stop(0)
-        return timer_sim
-    else:
-        return
+    return
 
 
 def run_mpi(path_parameter):
@@ -606,9 +578,6 @@ def run_mpi(path_parameter):
     :param path_parameter: path to the parameter
     :return:
     """
-    if nest.Rank() == 0:
-        timer_master = Timer(1, 10)
-        timer_master.start(0)
     with open(path_parameter + '/parameter.json') as f:
         parameters = json.load(f)
     param_co_simulation = parameters['param_co_simulation']
@@ -623,19 +592,13 @@ def run_mpi(path_parameter):
 
     # initialise Nest
     logger.info('configuration Nest')
-    if nest.Rank() == 0:
-        timer_master.change(0, 0)
     res = config_mpi_record(results_path=results_path, begin=begin, end=end,
                                                         param_nest=parameters['param_nest'],
                                                         param_topology=parameters['param_nest_topology'],
                                                         param_connection=parameters['param_nest_connection'],
                                                         param_background=parameters['param_nest_background'],
                                                         cosimulation=parameters['param_co_simulation'])
-    if nest.Rank() == 0:
-        timer_master.change(0, 0)
-        spike_detector, spike_generator, timer_init = res
-    else:
-        spike_detector, spike_generator = res
+    spike_detector, spike_generator = res
     # save the id of the detector and wait until the file for the port are ready
     logger.info('save id ')
     if nest.Rank() == 0:
@@ -652,7 +615,6 @@ def run_mpi(path_parameter):
         np.savetxt(path_spike_detector, np.array(list_spike_detector, dtype=int), fmt='%i')
         pathlib.Path(path_spike_detector + '.unlock').touch()
 
-        timer_master.change(0, 0)
         logger.info('check if the port are file for the port are ready to use')
         for ids_spike_generator in list_spike_generator:
             for id_spike_generator in ids_spike_generator:
@@ -665,17 +627,11 @@ def run_mpi(path_parameter):
                     results_path + '/transformation/spike_detector/' + str(id_spike_detector[0]) + '.txt.unlock'):
                 time.sleep(1)
             os.remove(results_path + '/transformation/spike_detector/' + str(id_spike_detector[0]) + '.txt.unlock')
-        timer_master.change(0, 0)
 
     # launch the simulation
     logger.info('start the simulation')
-    timer_sim = simulate_mpi_co_simulation(time_synch, end, logger)
+    simulate_mpi_co_simulation(time_synch, end, logger)
     logger.info('exit')
-    if nest.Rank() == 0:
-        timer_master.stop(0)
-        timer_master.save(results_path+'timer_nest.npy')
-        timer_init.save(results_path+'timer_nest_init.npy')
-        timer_sim.save(results_path+'timer_nest_sim.npy')
     return
 
 

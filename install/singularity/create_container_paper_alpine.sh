@@ -24,8 +24,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR" || exit
 
 # delete the previous image if exit and after rebuilt it
-rm -f Nest_TVB_paper_timer_alpine.simg
-sudo /usr/local/bin/singularity build Nest_TVB_paper_timer_alpine.simg Nest_TVB_paper_alpine.singularity
+rm -f Nest_TVB_paper_alpine.simg
+sudo /usr/local/bin/singularity build Nest_TVB_paper_alpine.simg Nest_TVB_paper_alpine.singularity
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit

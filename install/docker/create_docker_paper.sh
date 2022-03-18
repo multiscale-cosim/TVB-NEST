@@ -27,10 +27,9 @@ cd "$DIR" || exit
 cp -r  ../../nest-io-dev .
 cp -r  ../../nest_elephant_tvb .
 cp -r  ../../analyse .
-cp -r  ../../timer .
-sudo docker rmi local:NEST_TVB_IO_PAPER_TIMER
-sudo docker build -t local:NEST_TVB_IO_PAPER_TIMER --no-cache -f Nest_TVB_paper.dockerfile .
-rm -rd nest-io-dev analyse nest_elephant_tvb timer
+sudo docker rmi local:NEST_TVB_IO_PAPER
+sudo docker build -t local:NEST_TVB_IO_PAPER --no-cache -f Nest_TVB_paper.dockerfile .
+rm -rd nest-io-dev analyse nest_elephant_tvb
 
 # return to the calling repertory
 cd "${CURRENT_REPERTORY}" || exit
