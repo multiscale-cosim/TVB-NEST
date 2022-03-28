@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+    <co_simulation_action>
+        <title>Simple Action</title>
+        <description>Simple Action</description>
+        <variables>
+            <var_000>
+                <var_name>__no_variable_name__</var_name>
+                <var_value>__no_variable_value__</var_value>
+            </var_000>
+        </variables>
+        <parameters>
+            <par_000>
+                <par_name>__no_parameter_name__</par_name>
+                <par_value>__no_parameter_value__</par_value>
+            </par_000>
+        </parameters>
+        <action>
+            <launcher>
+                <launcher_command>{CO_SIM_LAUNCHER}</launcher_command>
+                <launcher_arguments>
+                    <argv_1_option>-np</argv_1_option>
+                    <argv_1_value>3</argv_1_value>
+                </launcher_arguments>
+            </launcher>
+            <performer>
+                <performer_binary>python3</performer_binary>
+                <performer_arguments>
+                    <argv_1_empty>{CO_SIM_EMPTY}</argv_1_empty>
+                </performer_arguments>
+            </performer>
+            <routine>
+                <routine_code>{CO_SIM_ROUTINES_DIR}/mpi_p2p_socket_tester.py</routine_code>
+                <routine_arguments>
+                    <argv_1_results_dir>{CO_SIM_RESULTS_DIR}</argv_1_results_dir>
+                    <argv_2_shm_dir>{CO_SIM_RESULTS_DIR}/shm</argv_2_shm_dir>
+                    <argv_3_mmap_shm_filename>{CO_SIM_MMAP_SHM_FILENAME}</argv_3_mmap_shm_filename>
+                    <argv_4_server>server</argv_4_server>
+                </routine_arguments>
+            </routine>
+        </action>
+    </co_simulation_action>
+</settings>
