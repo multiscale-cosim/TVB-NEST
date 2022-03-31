@@ -96,6 +96,11 @@
                 <action_xml>test_receive_nest_to_tvb.xml</action_xml>
                 <action_launch_method>CO_SIM_CONCURRENT_ACTION</action_launch_method>
             </action_008>
+            <!-- <action_010>
+                <action_type>CO_SIM_ACTION</action_type>
+                <action_xml>transformer_tvb_to_nest.xml</action_xml>
+                <action_launch_method>CO_SIM_CONCURRENT_ACTION</action_launch_method>
+            </action_010> -->
 
             <!-- epilogue -->
             <action_010>

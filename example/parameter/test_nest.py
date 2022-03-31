@@ -106,9 +106,9 @@ param_nest_topology={
 
 param_nest_connection={
     #file for connection homogeneous
-    'path_homogeneous':path+'/connection_homogeneous_',
+    'path_homogeneous':path+'connection_homogeneous_',
     #file for connection heterogenous
-    'path_heterogeneous':path+'/connection_heterogeneous_',
+    'path_heterogeneous':path+'connection_heterogeneous_',
     # weigth in the population from excitatory neurons
     'weight_local':1.0,
     # ratio between excitatory weight and inhibitory weight
@@ -118,13 +118,13 @@ param_nest_connection={
     # number of external synapse:
     'nb_external_synapse':400,
     # path for the connectivity matrix (normalise in order to sum of input for region egual 1)
-    'path_weight':path+'/weights.npy',
+    'path_weight':path+'weights.npy',
     # path for the distance matrix
-    'path_distance':path+'/distance.npy',
+    'path_distance':path+'distance.npy',
     # path for the center of the node
-    'path_centers':path+'/centres.txt',
+    'path_centers':path+'centres.txt',
     # path for the distance matrix
-    'path_region_labels':path+'/region_labels.txt',
+    'path_region_labels':path+'region_labels.txt',
     #velocity of transmission in m/s
     'velocity':3.0,
     #Weight between region

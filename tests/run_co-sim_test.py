@@ -11,8 +11,8 @@ def run_exploration(path,begin,end,nb_VP,nb_mpi,cluster):
     parameter_test.param_co_simulation['cluster']=cluster
     parameter_test.param_co_simulation['nb_MPI_nest']=nb_mpi
     parameter_test.param_nest['total_num_virtual_procs']=nb_VP
-    parameter_test.param_nest_topology['nb_neuron_by_region'] = 100
-    parameter_test.param_co_simulation['id_region_nest']=[1,2]
+    parameter_test.param_nest_topology['nb_neuron_by_region'] = 100 # NOTE we changed it from 100
+    parameter_test.param_co_simulation['id_region_nest']=[1]  # NOTE we changed it from [1,2]
     parameter_test.param_co_simulation['synchronization']=3.5
     parameter_test.param_nest_background['multimeter']=False
     parameter_test.param_nest_background['record_spike']=False

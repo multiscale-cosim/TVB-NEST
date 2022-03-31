@@ -33,7 +33,7 @@ def init(path, param, comm, comm_receiver, comm_sender, loggers):
     # TODO: move this object creation to a proper place. They are passed through many functions.
     store = store_data(path+'/log/',param)
     analyse = analyse_data(path+'/log/',param)
-    
+
     ############ NEW Code: 
     # TODO: future work: mpi parallel, use rank 1-x for science and sending
     # TODO: use this MPI intracommunicator, without receiving rank 0
@@ -41,7 +41,7 @@ def init(path, param, comm, comm_receiver, comm_sender, loggers):
     # create the shared memory block / databuffer
     databuffer = _shared_mem_buffer(comm)
     ############# NEW Code end
-    
+ 
     ############ NEW Code: Receive/analyse/send
     if comm.Get_rank() == 0: # Receiver from NEST, rank 0
         # TODO: The choice of rank 0 here stems from the current communication with NEST. 
@@ -110,7 +110,7 @@ def _receive(comm_receiver, databuffer, logger):
     # TODO: the last two buffer entries are used for shared information
     # --> they replace the status_data variable from previous version
     # --> find more elegant solution?
-    databuffer[-1] = 1 # set buffer to 'ready to receive from nest'
+    databuffer[-1] = 0 # set buffer to 'ready to receive from nest'
     databuffer[-2] = 0 # marks the 'head' of the buffer
     
     while(True):
@@ -175,6 +175,7 @@ def _send(comm_sender, databuffer, logger, store, analyse):
 
     count=0
     status_ = MPI.Status()
+    logger.info('starting sending loop')
     while True:
         # TODO: this communication has the 'rank 0' problem described in the beginning
         accept = False

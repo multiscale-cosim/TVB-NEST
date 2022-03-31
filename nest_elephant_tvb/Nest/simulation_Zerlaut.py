@@ -8,6 +8,7 @@ import time
 import json
 import logging
 import pathlib
+from mpi4py import MPI
 
 def network_initialisation(results_path,param_nest):
     """
@@ -23,7 +24,7 @@ def network_initialisation(results_path,param_nest):
     # Numpy random generator
     np.random.seed(master_seed)
     # Nest Kernel
-    nest.set_verbosity(param_nest['verbosity'])
+    nest.set_verbosity(0)
     nest.ResetKernel()
     nest.SetKernelStatus({
         # Resolution of the simulation (in ms).
@@ -38,7 +39,7 @@ def network_initialisation(results_path,param_nest):
         "total_num_virtual_procs": total_num_virtual_procs,
         # "local_num_threads": total_num_virtual_procs,
         # Path to save the output data
-        'data_path': results_path+'/nest/',
+        'data_path': results_path+'nest/',
         # Masterseed for NEST and NumPy
         'grng_seed': master_seed + total_num_virtual_procs,
         # Seeds for the individual processes
@@ -147,6 +148,7 @@ def network_initialisation_neurons(results_path,param_topology,return_gids=False
         return dic_layer,gids_ex + gids_in
     else:
         return dic_layer
+
 
 def init_connection(dic_layer,param_topology,param_connection):
     """
@@ -304,7 +306,7 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
        param_spike_dec= {"start": min_time,
                           "stop": time_simulation,
                           "record_to": "mpi",
-                          'label': '/../translation/spike_detector'
+                          'label': '/../translation/spike_detector' # NOTE we reomve /../
                           }
        nest.CopyModel('spike_recorder', 'spike_detector_record_mpi')
        nest.SetDefaults("spike_detector_record_mpi", param_spike_dec)
@@ -321,7 +323,7 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
             #list_record
             spike_detector = nest.Create('spike_detector_record')
         else:
-            spike_detector = []
+            spike_detector = []  
 
     #Connection to population
     for name_pops,items in dic_layer.items():
@@ -438,7 +440,7 @@ def network_device(results_path,dic_layer,min_time,time_simulation,param_backgro
         param_spike_gen= {"start": 0.0,
                       "stop": time_simulation,
                       'stimulus_source': 'mpi',
-                      'label': '../translation/spike_generator'
+                      'label': '/../translation/spike_generator/'  # NOTE we reomve ../
                       }
         nest.CopyModel('spike_generator', 'spike_generator_mpi')
         nest.SetDefaults("spike_generator_mpi", param_spike_gen)
@@ -607,19 +609,30 @@ def run_mpi(path_parameter):
         pathlib.Path(path_spike_detector+'.unlock').touch()
 
         logger.info('check if the port are file for the port are ready to use')
-        for ids_spike_generator in list_spike_generator:
-            for id_spike_generator in ids_spike_generator: # FAT END POINT
-                while not os.path.exists(results_path+'/translation/spike_generator/'+str(id_spike_generator)+'.txt.unlock'):
-                    time.sleep(1)
-                os.remove(results_path+'/translation/spike_generator/'+str(id_spike_generator)+'.txt.unlock')
-        for id_spike_detector in list_spike_detector:       # FAT END POINT
-            while not os.path.exists(results_path+'/translation/spike_detector/'+str(id_spike_detector[0])+'.txt.unlock'):
+        logger.info(f' {__file__} PID:{os.getpid()}')
+        # for ids_spike_generator in list_spike_generator:
+        for id_spike_generator in list_spike_generator: # FAT END POINT
+            while not os.path.exists(results_path+'translation/spike_generator/'+str(id_spike_generator[0])+'.txt.unlock'):
                 time.sleep(1)
-            os.remove(results_path + '/translation/spike_detector/' +str(id_spike_detector[0])+'.txt.unlock')
+            os.remove(results_path+'translation/spike_generator/'+str(id_spike_generator[0])+'.txt.unlock')
+            break
+        for id_spike_detector in list_spike_detector:       # FAT END POINT
+            while not os.path.exists(results_path+'translation/spike_detector/'+str(id_spike_detector[0])+'.txt.unlock'):
+                time.sleep(1)
+            os.remove(results_path + 'translation/spike_detector/' +str(id_spike_detector[0])+'.txt.unlock')
+            break
 
     # launch the simulation
     logger.info('start the simulation')
     timer_sim = simulate_mpi_co_simulation(time_synch,end,logger)
+    # fport = open(results_path+'translation/spike_generator/'+str(id_spike_generator[0])+'.txt', "r")
+    # port=fport.readline()
+    # fport.close()
+    # logger.info(f"wait connection "+port);sys.stdout.flush()
+    # comm = MPI.COMM_WORLD.Connect(port)
+    # logger.info(f'connect to '+port);sys.stdout.flush()
+
+
     logger.info('exit')
     return
 
@@ -650,6 +663,7 @@ if __name__=='__main__':
             run_normal(sys.argv[2])
         elif sys.argv[1] == '1': # nest with mpi in co-simulation
             run_mpi(sys.argv[2])
+    # return comm
         else:
             raise Exception('bad option of running')
     else:

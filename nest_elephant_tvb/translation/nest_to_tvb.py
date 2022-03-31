@@ -64,8 +64,10 @@ if __name__ == "__main__":
     ############ Step 3: RichEndPoint -- open MPI connections
     ### TODO: make this a proper interface
     path_to_files_receive = path + file_spike_detector # TODO: use proper path operations
+    # print(f'DEBUG {__file__}=> path_to_files_receive: {path_to_files_receive}')
     path_to_files_send = path + TVB_recev_file
-    comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master)
+    # print(f'DEBUG {__file__}=> path_to_files_send: {path_to_files_send}')
+    comm, comm_receiver, port_receive, comm_sender, port_send = REP.make_connections(path_to_files_receive, path_to_files_send, logger_master, 1)
     #############
     
     ############ Step 4: MPI Transformer, init and start the co-simulation

@@ -258,8 +258,8 @@ def run_mpi(path):
     param_tvb_monitor['path_result']=result_path+'/tvb/'
     id_proxy = param_co_simulation['id_region_nest']
     time_synch = param_co_simulation['synchronization']
-    path_send = result_path+"/translation/send_to_tvb/"
-    path_receive = result_path+"/translation/receive_from_tvb/"
+    path_send = result_path+"translation/send_to_tvb/"
+    path_receive = result_path+"translation/receive_from_tvb/"
     simulator = init(param_tvb_connection,param_tvb_coupling,param_tvb_integrator,param_tvb_model,param_tvb_monitor,
                      {'id_proxy':np.array(id_proxy),
                       'time_synchronize':time_synch,
@@ -286,12 +286,14 @@ def run_mpi(path):
     # the loop of the simulation
     count = 0
     count_save = 0
+    logger.info(f' TVB pid:{os.getpid()}')
+    time.sleep(10)
     while count*time_synch < end: # FAT END POINT
         logger.info(" TVB receive data")
         #receive MPI data
         data_value = []
         for comm in comm_receive:
-            receive = receive_mpi(comm)
+            receive = receive_mpi(comm, logger)
             time_data = receive[0]
             data_value.append(receive[1])
         data=np.empty((2,),dtype=object)
@@ -322,10 +324,10 @@ def run_mpi(path):
 
         # prepare to send data with MPI
         nest_data = np.array(nest_data)
-        time = [nest_data[0,0],nest_data[-1,0]]
+        time1 = [nest_data[0,0],nest_data[-1,0]]
         rate = np.concatenate(nest_data[:,1])
         for index,comm in enumerate(comm_send):
-            send_mpi(comm,time,rate[:,index]*1e3)
+            send_mpi(comm,time1,rate[:,index]*1e3)
 
         #increment of the loop
         count+=1
@@ -348,11 +350,12 @@ def init_mpi(path,logger):
     :param path:
     :return:
     """
-    while not os.path.exists(path+'.unlock'): # FAT END POINT
-        logger.info(path+'.unlock')
-        logger.info("spike detector ids not found yet, retry in 1 second")
-        time.sleep(1)
-    os.remove(path+'.unlock')
+    # while not os.path.exists(path+'.unlock'): # FAT END POINT
+    #     logger.info(path+'.unlock')
+    #     logger.info("spike detector ids not found yet, retry in 1 second")
+    #     time.sleep(1)
+    # os.remove(path+'.unlock')
+    time.sleep(5)
     fport = open(path, "r")
     port=fport.readline()
     fport.close()
@@ -384,7 +387,7 @@ def send_mpi(comm,times,data):
     comm.Send([data, MPI.DOUBLE], dest=source, tag=0)
 
 
-def receive_mpi(comm):
+def receive_mpi(comm, logger):
     """
         receive proxy values the
     :param comm: MPI communicator
@@ -392,16 +395,16 @@ def receive_mpi(comm):
     """
     status_ = MPI.Status()
     # send to the translator : I want the next part
-    req = comm.isend(True, dest=0, tag=0)
+    req = comm.isend(True, dest=1, tag=0)
     req.wait()
     time_step = np.empty(2, dtype='d')
-    comm.Recv([time_step, 2, MPI.DOUBLE], source=0, tag=MPI.ANY_TAG, status=status_)
+    comm.Recv([time_step, 2, MPI.DOUBLE], source=1, tag=MPI.ANY_TAG, status=status_)
     # get the size of the rate
     size=np.empty(1,dtype='i')
-    comm.Recv([size, MPI.INT], source=0, tag=0)
+    comm.Recv([size, MPI.INT], source=1, tag=0)
     # get the rate
     rates = np.empty(size, dtype='d')
-    comm.Recv([rates,size, MPI.DOUBLE],source=0,tag=MPI.ANY_TAG,status=status_)
+    comm.Recv([rates,size, MPI.DOUBLE],source=1,tag=MPI.ANY_TAG,status=status_)
     # print the summary of the data
     if status_.Get_tag() == 0:
         return time_step,rates
@@ -438,7 +441,7 @@ def end_mpi(comm,path,sending,logger):
     else:
         logger.info("TVB close connection receive " + port)
         # send to the translator : I want the next part
-        req = comm.isend(True, dest=0, tag=1)
+        req = comm.isend(True, dest=1, tag=1)
         req.wait()
     # closing the connection at this end
     logger.info("TVB disconnect communication")

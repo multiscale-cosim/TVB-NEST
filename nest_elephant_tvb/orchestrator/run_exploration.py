@@ -143,8 +143,8 @@ def run(parameters_file):
                    dir_path,
                    mpirun,
                    results_path,
-                   "/translation/spike_detector/"+str(id_spike_detector)+".txt",
-                   "/translation/send_to_tvb/"+str(id_proxy[index])+".txt",
+                   "translation/spike_detector/"+str(id_spike_detector)+".txt",
+                   "translation/send_to_tvb/"+str(id_proxy[index])+".txt",
                    ]
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
@@ -153,15 +153,16 @@ def run(parameters_file):
 
         # create translator between TVB to Nest:
         # one by proxy/id_region
+        # NOTE create files for each region
         for index,ids_spike_generator in enumerate(spike_generator):
             dir_path = os.path.dirname(os.path.realpath(__file__))+"/../translation/run_mpi_tvb_to_nest.sh"
             argv=[ '/bin/sh',
                    dir_path,
                    mpirun,
-                   results_path+"/translation/spike_generator/",
+                   results_path,
                    str(ids_spike_generator[0]),
-                   str(len(ids_spike_generator)),
-                   "/../receive_from_tvb/"+str(id_proxy[index])+".txt",
+                  str(len(ids_spike_generator)),
+                   "translation/receive_from_tvb/"+str(id_proxy[index])+".txt",
                    ]
             processes.append(subprocess.Popen(argv,
                              #need to check if it's needed or not (doesn't work for me)
