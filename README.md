@@ -1,8 +1,8 @@
-# TVB-NEST PAPER TIMER
-EBRAINS The Virtual Brain - NEST co-simulation with timer 
+# TVB-NEST PAPER
+EBRAINS The Virtual Brain - NEST co-simulation
 
 ## Concept 
-This is the co-simulation between TVB and NEST with timer.
+This is the co-simulation between TVB and NEST.
 It should be flexible and scalable to adapt to any networks simulation and run in supercomputers.
 
 ## Table of Contents
@@ -240,7 +240,7 @@ There exist two types of monitors depending on your use of the model TVB. Interf
 
     These tests are based on the script 'tests/run_nest_co-sim_test.py'. They need a parameter to choose the image to test.\
     For docker, only one image 0 is for the debian distribution  (local:NEST_TVB_IO_PAPER_TIMER).\
-    For singularity, 0 is for the debian distribution (NEST_TVB_paper_timer.simg), 1 is for alpine distribution (NEST_TVB_paper_alpine_timer.simg).
+    For singularity, 0 is for the debian distribution (NEST_TVB_paper.simg), 1 is for alpine distribution (NEST_TVB_paper_alpine.simg).
 
 ## Cluster <a name="cluster"></a>
 For running the co-simulation on a cluster, all the test was done with [slurm](https://slurm.schedmd.com/). The option to slurm is pass in the parameters 'mpirun'. (see [example](https://slurm.schedmd.com/mpi_guide.html))
@@ -479,30 +479,5 @@ The file 'install/local_cluster/install.sh' is to compile and install all the py
     * test_record_nest_spike_multi.sh: test spike recorder with MPI backend of NEST with multiple MPI configuration  
     * test_transformer_nest_to_tvb.sh: test transformer spikes to rates   
     * test_transformer_tvb_to_nest.sh: test transformer rates to spikes
-* timer: File for timer recording and plotting
-    * plot_result: plot result timer
-        * analyse_timer.py: plot details result of 
-        * compare_time_paper.py: plot time of the result local run
-        * compare_time_paper_2.py: plot time of the result with comparison of NEST configuration
-        * compare_time_paper_jusuf.py: plot time for the running on jusuf
-        * get_time_data.py: get data of timer 
-        * pot_figure_comparison.py: plot details comparison 
-        * trial_compare_time.py: file for testing the printing results
-    * parameters.py: default parameters for timer
-    * run_co-sim_mpi.py: run co-simulation with timer and 1 thread by rank for NEST
-    * run_co-sim_mpi_vp_2.py: run co-simulation with timer and 2 thread by rank for NEST
-    * run_co-sim_mpi_vp_4.py: run co-simulation with timer and 4 thread by rank for NEST
-    * run_co-sim_neuron.py: run co-simulation with number of neurons 
-    * run_co-sim_thread.py: run co-simulation with different number of threads for NEST 
-    * run_co-sim_time.py: run co-simulation with different synchronize time between simulator 
-    * run_co-sim_TVB_ebrains.py: run tests for different configuration
-    * run_timer_mpi.sh: run all the co-simulation for different number of MPI and 1 thread by rank for NEST 
-    * run_timer_mpi_vp_2.sh: run all the co-simulation for different number of MPI and 2 thread by rank for NEST 
-    * run_timer_mpi_vp_4.sh: run all the co-simulation for different number of MPI and 4 thread by rank for NEST
-    * run_timer_neuron.sh: run all the co-simulation for different number of neurons
-    * run_timer_run_all.sh: run all the co-simulation with timer  
-    * run_time_thread.sh: run all the co-simulation for one MPI rank and different number of thread for NEST  
-    * run_timer_timer.sh: run all the co-simulation for different time of synchronization between  
-    * Timer.py: class of timer for record time in python
 * LICENSE: License of the project
 * NOTICE: notice for the License
