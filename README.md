@@ -4,6 +4,7 @@ EBRAINS The Virtual Brain - NEST co-simulation
 ## Concept 
 This is the co-simulation between TVB and NEST.
 It should be flexible and scalable to adapt to any networks simulation and run in supercomputers.
+You can find some results and singularity image of the project in this Zenedo depot : http://dx.doi.org/10.5281/zenodo.6370058
 
 ## Table of Contents
 1. [Installation and update](#installation)
