@@ -11,7 +11,7 @@ def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                title,
                function=np.mean,
                log_option=False,
-               ylabel='Wall time of the simulation in s',
+               ylabel='Wall clock time of the simulation in s',
                labelsize=40,
                labellegend=30,
                figsize=(20, 20),
@@ -86,9 +86,9 @@ def full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                 title,
                 function=np.mean,
                 log_option=False,
-                ylabel_1='Wall time of the simulation in s',
+                ylabel_1='Wall clock time of the simulation in s',
                 ylabel_2='Stack of percentage of\nsimulated time',
-                ylabel_3='Percentage of\nsimulated time',
+                ylabel_3='Wall clock time of\nthe different NEST functions in s',
                 figsize=(20, 20),
                 labelsize=20,
                 labellegend=15,
@@ -344,4 +344,4 @@ if __name__ == '__main__':
         plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_max.png',
                     dpi=150)
         plt.close('all')
-    # plt.show()
+        # plt.show()

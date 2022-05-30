@@ -127,7 +127,7 @@ if __name__ == '__main__':
         axes[i].legend(fontsize=labelfontlegend)
         axes[i].set_title(titles[i], fontdict={'fontsize': labelfont})
         axes[i].tick_params(axis='both', labelsize=ticks_size)
-        axes[i].set_ylabel('Wall time of\n the simulation in s', fontsize=labelfont)
+        axes[i].set_ylabel('Wall clock time of\n the simulation in s', fontsize=labelfont)
     for axe_id, axe in enumerate(axes):
         axe.vlines(8, 0, max[axe_id], linestyles='dashed')
 
@@ -149,7 +149,7 @@ if __name__ == '__main__':
         plt.legend(fontsize=labelfontlegend)
         # plt.title(titles[axe_id], fontdict={'fontsize': labelfont})
         plt.tick_params(axis='both', labelsize=ticks_size)
-        plt.ylabel('Wall time of\n the simulation in s', fontsize=labelfont)
+        plt.ylabel('Wall clock time of\n the simulation in s', fontsize=labelfont)
         plt.xlabel('Number of virtual processes of NEST', fontsize=labelfont)
         plt.subplots_adjust(left=0.09, right=0.99, bottom=0.06, top=0.99)
         plt.savefig(path_global + '/../../data/figure/timer/compare_MPI_thread_' + data_name[axe_id] + '.pdf', dpi=300)
