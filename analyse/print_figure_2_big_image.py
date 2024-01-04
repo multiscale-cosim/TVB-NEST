@@ -241,20 +241,18 @@ def print_figure_macro_one(param, begin, end, TVB_data,
     # print rate
     max_rate = np.nanmax(state_variable[:, 1, :]) * 1e3
     print(max_rate)
-    for i in range(nb_regions):
+    random_region = [0, 15, 17, 18, 21, 26, 29, 30, 35, 37, 38, 40, 41, 42, 43, 61, 63, 65, 78, 82, 93, 98]
+    for index, i in enumerate(random_region):#range(nb_regions):
         if i in [26, 78]:
-            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + i * max_rate, 'k', linewidth=1.0)
+            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + index * max_rate, 'k', linewidth=1.0)
         else:
-            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + i * max_rate, 'r', linewidth=0.8)
-            ax_rate.plot(state_times, state_variable[:, 1, i] * 1e3 + i * max_rate, 'b', linewidth=00.8)
-    position = [i * max_rate + max_rate / 2 for i in
-                np.array(np.around(np.linspace(0, nb_regions - 1, 5)), dtype=int)]
-    position_label = [i for i in np.array(np.around(np.linspace(0, nb_regions - 1, 5)), dtype=int)]
-    ax_rate.set_yticklabels(position_label)
-    ax_rate.set_yticks(position)
+            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + index * max_rate, 'r', linewidth=0.7)
+            ax_rate.plot(state_times, state_variable[:, 1, i] * 1e3 + index * max_rate, 'b', linewidth=0.7)
+    ax_rate.set_yticklabels([])
+    ax_rate.set_yticks([])
     ax_rate.set_xlabel('Time (ms)', labelpad=1, fontdict=font_labels)
-    ax_rate.set_ylabel('Region Id', labelpad=-4, fontdict=font_labels)
-    ax_rate.set_ylim(ymin=-max_rate, ymax=max_rate * (nb_regions + 1.0))
+    ax_rate.set_ylabel('Region Id', labelpad=1, fontdict=font_labels)
+    ax_rate.set_ylim(ymin=-max_rate, ymax=max_rate * (len(random_region) + 1.0))
     ax_rate.set_xlim(xmin=begin - 100, xmax=end + 100)
     ax_rate.tick_params(axis='both', labelsize=font_ticks_size)
     ax_rate.locator_params(axis='x', nbins=5)
@@ -262,13 +260,15 @@ def print_figure_macro_one(param, begin, end, TVB_data,
     ax_rate.spines["right"].set_visible(False)
     ax_rate.yaxis.set_ticks_position('left')
     ax_rate.xaxis.set_ticks_position('bottom')
+    ax_rate.plot([end + 100, end + 100], [0, 10], lw=2, color='k', clip_on=False)
+    ax_rate.text(end + 150, 0, '10 Hz', fontdict=font_labels, color='k', rotation='vertical')
 
     # ECOG
     max_ecog = np.nanmax(ECOG[:, :])
     custom_cycler = (cycler(color=plt.cm.jet(np.linspace(0, 1, 7))))
     ECOG_1.set_prop_cycle(custom_cycler)
     for i in range(8):
-        ECOG_1.plot(ECOG_time, ECOG[:, i + ECOG.shape[1] // 2] + i * max_ecog, linewidth=0.1)
+        ECOG_1.plot(ECOG_time, ECOG[:, i + ECOG.shape[1] // 2] + i * max_ecog, linewidth=1.0)
     ECOG_1.yaxis.set_ticks_position('left')
     plt.setp(ECOG_1.get_xticklabels(), visible=False)
     plt.setp(ECOG_1.get_yticklabels(), visible=False)
@@ -283,8 +283,10 @@ def print_figure_macro_one(param, begin, end, TVB_data,
     ECOG_1.spines["top"].set_visible(False)
     ECOG_1.spines["right"].set_visible(False)
     ECOG_1.xaxis.set_ticks_position('bottom')
+    ECOG_1.plot([end + 200, end + 200], [max_ecog, max_ecog + 10], lw=2, color='k', clip_on=False)
+    ECOG_1.text(end + 400, max_ecog, r'100 $\mu$V', fontdict=font_labels, color='k', rotation='vertical')
 
-    plt.subplots_adjust(top=0.98, bottom=0.12, left=0.05, right=0.99, hspace=0.21, wspace=0.23)
+    plt.subplots_adjust(top=0.98, bottom=0.12, left=0.05, right=0.97, hspace=0.21, wspace=0.1)
     plt.savefig(path_fig)
 
 
@@ -308,9 +310,9 @@ if __name__ == "__main__":
             V_excitatory=data['VM_pop_1_ex'], V_inhibitory=data['VM_pop_1_in'],
             W_excitatory=data['W_pop_1_ex'], W_inhibitory=data['W_pop_1_in'],
             size_neurons=0.1,
-            path_LFP='../LFPY/v2/pop_1_/',
+            path_LFP='../LFPY/v3/pop_1_/',
             LFP_inc=300.0,
-            LFP_start=0.0,
+            LFP_start=1000.0,
             figsize=(3.47, 2.57),
             path_fig=path+'/../data/figure/fig_2_neuron_activity.pdf'
         )
