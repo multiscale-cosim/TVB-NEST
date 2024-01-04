@@ -170,7 +170,7 @@ class MPICommunication(CommunicationInternAbstract):
         self.timer.start(10)
         self.logger.info("MPI Internal : read(ready) : receive size : rank "
                          + str(self.rank) + " from " + str(self.buffer_r_w[1]))
-        send_shape = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[1])
+        send_shape = MPI.COMM_WORLD.irecv(131072, source=self.buffer_r_w[1])
         self.logger.info("MPI Internal : read(ready) : receive size wait")
         res = send_shape.wait(status=status_)
         self.timer.stop(10)
@@ -197,7 +197,7 @@ class MPICommunication(CommunicationInternAbstract):
         if self.shape_buffer[0] != -1:
             self.timer.start(12)
             self.logger.info("MPI Internal : read(release) : transmit end ")
-            send_state = MPI.COMM_WORLD.irecv(source=self.buffer_r_w[1])
+            send_state = MPI.COMM_WORLD.irecv(131072, source=self.buffer_r_w[1])
             self.logger.info("MPI Internal : read(release) : receive end ")
             send_state.wait(status=status_)
             req_buffer = MPI.COMM_WORLD.isend(False, dest=self.buffer_r_w[1])
