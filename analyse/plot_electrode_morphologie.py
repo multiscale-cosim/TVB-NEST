@@ -95,7 +95,7 @@ def plot_electrode_neurons(ax, X, isometricangle, markers, colors,
             polycol = PolyCollection(zips,
                                      edgecolors='gray',
                                      facecolors=color,
-                                     linewidths=(0.01),
+                                     linewidths=0.0,
                                      zorder=somapos[j, 1],
                                      clip_on=False,
                                      rasterized=False)
