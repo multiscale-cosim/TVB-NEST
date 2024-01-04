@@ -4,6 +4,11 @@ from timer.plot_result.get_time_data import get_dictionnary
 import matplotlib.pyplot as plt
 from matplotlib.text import Text
 import numpy as np
+from matplotlib import rcParams, font_manager
+for s in font_manager.get_fontconfig_fonts():
+    if s.find('Myria') != -1:
+        font_manager.fontManager.addfont(s)
+rcParams['font.family'] = 'Myriad Pro'
 
 
 def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
@@ -212,17 +217,19 @@ if __name__ == '__main__':
         (path_global + '/../../data/timer/paper_nb_neurons/',
          np.array(np.around(np.logspace(1, 5, 30)) * 2, dtype=int),
          'Number of neurons simulated with NEST'),
-        (path_global + '/../../data/timer/paper_mpi/', np.arange(1, 13, 1),
-         'Number of MPI using by NEST ( 1 MPI = 1 VP)'),
-        (path_global + '/../../data/timer/paper_time_thread/', np.arange(1, 13, 1),
-         'Number of virtual processes of NEST (number of MPI : 1)'),
-        (path_global + '/../../data/timer/paper_mpi_vp_2/', np.arange(2, 13, 2),
-         'Number of virtual processes of NEST (number of MPI : 2)'),
-        (path_global + '/../../data/timer/paper_mpi_vp_4/', np.arange(4, 13, 4),
-         'Number of virtual processes of NEST (number of MPI : 4)'),
-        (path_global + '/../../data/timer/paper_time_synch/',
-         [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
-         'Time of synchronization between NEST and TVB (in ms)'),
+        # (path_global + '/../../data/timer/paper_mpi/', np.arange(1, 13, 1),
+        #  'Number of MPI using by NEST ( 1 MPI = 1 VP)'),
+        # (path_global + '/../../data/timer/paper_time_thread/', np.arange(1, 13, 1),
+        #  'Number of virtual processes of NEST (number of MPI : 1)'),
+        (path_global + '/../../data/timer/paper_time_thread_multiprocessing/', np.arange(1, 10, 1),
+         'Number of virtual processes of NEST with multiprocessing (number of MPI : 1)'),
+        # (path_global + '/../../data/timer/paper_mpi_vp_2/', np.arange(2, 13, 2),
+        #  'Number of virtual processes of NEST (number of MPI : 2)'),
+        # (path_global + '/../../data/timer/paper_mpi_vp_4/', np.arange(4, 13, 4),
+        #  'Number of virtual processes of NEST (number of MPI : 4)'),
+        # (path_global + '/../../data/timer/paper_time_synch/',
+        #  [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
+        #  'Time of synchronization between NEST and TVB (in ms)'),
     ]  # same data for the three case
     mpi = False
     folders = [[] for i in folders_list]  # same data for the three case
@@ -301,47 +308,63 @@ if __name__ == '__main__':
                     + tree.get('TVB').get('simulation').get('receive data').time
                     - tree.get('TVB').get('simulation').get('receive data').get('receive time').time
                     + tree.get('TVB').get('simulation').get('send data').time)
+        # wspase = 0.14 if index_run != 5 else 0.17
+        # fig = full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
+        #                   time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
+        #                   label, log_option=index_run < 1, wspase=wspase,
+        #                   labelsize=30, labellegend=30, fontsize=30, figsize=(28.75, 14.17))
+        # plt.subplots_adjust(bottom=0.055, left=0.05, right=0.995, top=0.995, hspace=0.08)
+        # plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/poster.png',
+        #             dpi=300, transparent=True)
         wspase = 0.17 if index_run != 5 else 0.20
         fig = full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                           time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
                           label, log_option=index_run < 1, wspase=wspase,
                           labelsize=7, labellegend=7, fontsize=7, figsize=(7.09, 7.28))
-        fig.add_artist(Text(0.01, 0.98, "a", fontproperties={'size': 7}))
-        fig.add_artist(Text(0.5, 0.98, "b", fontproperties={'size': 7}))
-        fig.add_artist(Text(0.5, 0.49, "c", fontproperties={'size': 7}))
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_mean.pdf',
+        fig.add_artist(Text(0.01, 0.98, "A", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.98, "B", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.49, "C", fontproperties={'size': 7}))
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_mean.pdf',
                     dpi=300)
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_mean.png',
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_mean.svg',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_mean.png',
                     dpi=150)
         print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                    time_TVB_sim, time_TVB_IO,
                    label, log_option=index_run < 1, wspase=wspase,
                    labelsize=7, labellegend=7, figsize=(7.09, 7.28))
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_time.pdf',
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_time.pdf',
                     dpi=300)
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_time.png',
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_time.svg',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_time.png',
                     dpi=150)
         fig = full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                           time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
                           label, function=np.min, log_option=index_run < 1, wspase=wspase,
                           labelsize=7, labellegend=7, fontsize=7, figsize=(7.09, 7.28))
-        fig.add_artist(Text(0.01, 0.98, "a", fontproperties={'size': 7}))
-        fig.add_artist(Text(0.5, 0.98, "b", fontproperties={'size': 7}))
-        fig.add_artist(Text(0.5, 0.49, "c", fontproperties={'size': 7}))
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_min.pdf',
+        fig.add_artist(Text(0.01, 0.98, "A", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.98, "B", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.49, "C", fontproperties={'size': 7}))
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_min.pdf',
                     dpi=300)
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_min.png',
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_min.svg',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_min.png',
                     dpi=150)
         fig = full_figure(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                           time_nest_tot, time_TVB_sim, time_TVB_IO, time_TVB_tot,
                           label, function=np.max, log_option=index_run < 1, wspase=wspase,
                           labelsize=7, labellegend=7, fontsize=7, figsize=(7.09, 7.28))
-        fig.add_artist(Text(0.01, 0.98, "a", fontproperties={'size': 7}))
-        fig.add_artist(Text(0.5, 0.98, "b", fontproperties={'size': 7}))
-        fig.add_artist(Text(0.5, 0.49, "c", fontproperties={'size': 7}))
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_max.pdf',
+        fig.add_artist(Text(0.01, 0.98, "A", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.98, "B", fontproperties={'size': 7}))
+        fig.add_artist(Text(0.5, 0.49, "C", fontproperties={'size': 7}))
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_max.pdf',
                     dpi=300)
-        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/full_figure_max.png',
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_max.svg',
+                    dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/' + folder[0].split('/')[-2] + '/science_full_figure_max.png',
                     dpi=150)
         plt.close('all')
         # plt.show()

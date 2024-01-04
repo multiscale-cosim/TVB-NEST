@@ -17,10 +17,10 @@ if __name__ == '__main__':
 
     path_global = os.path.dirname(os.path.realpath(__file__))
     mpi = False
-    figsize = (7.09, 7.28)  # (20, 20)
-    labelfont = 7  # 18
-    labelfontlegend = 7  # 15
-    ticks_size = 7  # 15
+    figsize = (10.0, 10.0)  # (20, 20)
+    labelfont = 20
+    labelfontlegend = 18
+    ticks_size = 18
 
     folders_list = [
         (path_global + '/../../data/timer/paper_mpi/', np.arange(1, 13, 1), 'only MPI'),
@@ -124,55 +124,21 @@ if __name__ == '__main__':
         for i in range(len(data)):
             if max[axe_id] < data[i][data_name[axe_id]].max():
                 max[axe_id] = data[i][data_name[axe_id]].max()
+    plt.close('all')
+    axe_id = 0
+    plt.figure(figsize=figsize)
     for i in range(len(data)):
-        for axe_id, axe in enumerate(axes):
-            axe.plot(folders_list[i][1], data[i][data_name[axe_id]], color[i], marker=markers[i],
-                     label=folders_list[i][2])
-    for i in range(len(axes)):
-        axes[i].legend(fontsize=labelfontlegend)
-        axes[i].set_title(titles[i], fontdict={'fontsize': labelfont})
-        axes[i].tick_params(axis='both', labelsize=ticks_size)
-        axes[i].set_ylabel('Wall clock time of\n the simulation in s', fontsize=labelfont)
-    for axe_id, axe in enumerate(axes):
-        axe.vlines(8, 0, max[axe_id], linestyles='dashed')
-
-    axes[-1].set_xlabel('Number of virtual processes of NEST', fontsize=labelfont)
-    plt.subplots_adjust(hspace=0.25, top=0.97, left=0.08, right=0.99, bottom=0.06)
-    fig.add_artist(Text(0.01, 0.98, "A", fontproperties={'size': 7}))
-    fig.add_artist(Text(0.01, 0.74, "B", fontproperties={'size': 7}))
-    fig.add_artist(Text(0.01, 0.50, "C", fontproperties={'size': 7}))
-    fig.add_artist(Text(0.01, 0.26, "D", fontproperties={'size': 7}))
-    plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread.pdf', dpi=300)
-    plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread.png', dpi=150)
-
-    for axe_id, axe in enumerate(axes):
-        plt.figure(figsize=figsize)
-        for i in range(len(data)):
-            plt.plot(folders_list[i][1], data[i][data_name[axe_id]], color[i], marker=markers[i],
-                     label=folders_list[i][2])
-        plt.vlines(8, 0, max[axe_id], linestyles='dashed')
-        plt.legend(fontsize=labelfontlegend)
-        # plt.title(titles[axe_id], fontdict={'fontsize': labelfont})
-        plt.tick_params(axis='both', labelsize=ticks_size)
-        plt.ylabel('Wall clock time of\n the simulation in s', fontsize=labelfont)
-        plt.xlabel('Number of virtual processes of NEST', fontsize=labelfont)
-        plt.subplots_adjust(left=0.09, right=0.99, bottom=0.06, top=0.99)
-        plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_' + data_name[axe_id] + '.pdf', dpi=300)
-        plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_' + data_name[axe_id] + '.png', dpi=150)
+        plt.plot(folders_list[i][1], data[i][data_name[axe_id]], color[i], marker=markers[i], markersize=10, label=folders_list[i][2],
+                 linewidth=2.0)
+    plt.vlines(8, 0, max[axe_id], linestyles='dashed')
+    plt.legend(fontsize=labelfontlegend)
+    # plt.title(titles[axe_id], fontdict={'fontsize': labelfont})
+    plt.tick_params(axis='both', labelsize=ticks_size)
+    plt.ylabel('Wall clock time of the simulation in s', fontsize=labelfont)
+    plt.xlabel('Number of virtual processes of NEST', fontsize=labelfont)
+    plt.subplots_adjust(left=0.09, right=0.99, bottom=0.06, top=0.99)
     # plt.show()
+    plt.savefig(path_global + '/../../data/figure/timer/compare_presentation.pdf', dpi=300)
+    plt.savefig(path_global + '/../../data/figure/timer/compare_presentation.png', dpi=300)
 
-    # figs = []
-    # titles = ['nest_sim', 'nest_IO', 'tvb_sim', 'sim']
-    # axes = []
-    # for i in range(len(titles)):
-    #     figs.append(plt.figure())
-    #     figs[i].add_subplot(1, 1, 1)
-    #     axes.append(figs[i].get_axes()[0])
-    # for i in range(len(folders_list)):
-    #     axes[0].plot(folders_list[i][1], data[i]['nest_sim'], color[i], marker='x', label=folders_list[i][2])
-    #     axes[1].plot(folders_list[i][1], data[i]['nest_IO'], color[i], marker='x', label=folders_list[i][2])
-    #     axes[2].plot(folders_list[i][1], data[i]['tvb_sim'], color[i], marker='x', label=folders_list[i][2])
-    #     axes[3].plot(folders_list[i][1], data[i]['sim'], color[i], marker='x', label=folders_list[i][2])
-    # for i in range(len(axes)):
-    #     axes[i].legend()
-    #     axes[i].set_title(titles[i])
+

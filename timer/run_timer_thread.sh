@@ -15,3 +15,11 @@ do
     python3 ./run_co-sim_thread.py './test_file/paper_time_thread/' $trail 0.0 1000.0 $i
   done
 done
+
+for i in {1..10}
+do
+  for trail in {0..10}
+  do
+    python3 ./run_co-sim_thread_multiprocessing.py './test_file/paper_time_thread_multiprocessing/' $trail 0.0 1000.0 $i
+  done
+done

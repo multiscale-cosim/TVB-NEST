@@ -4,7 +4,7 @@
 import os
 
 # PARAMETERS FOR UP AND DOWN STATES
-path = os.path.dirname(os.path.realpath(__file__)) + "/../example/parameter/data_mouse/"
+path = os.path.dirname(os.path.realpath(__file__)) + "/../analyse/parameter/data_mouse/"
 
 # ALL commented parameters are linked parameter manage by parameters_manager.py
 # For the exploration of parameters never use the same name two times in the dictionary param

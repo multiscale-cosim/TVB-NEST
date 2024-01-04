@@ -23,10 +23,8 @@ if __name__ == '__main__':
     ticks_size = 7  # 15
 
     folders_list = [
-        (path_global + '/../../data/timer/paper_mpi/', np.arange(1, 13, 1), 'only MPI'),
-        (path_global + '/../../data/timer/paper_time_thread/', np.arange(1, 13, 1), 'only Thread'),
-        (path_global + '/../../data/timer/paper_mpi_vp_2/', np.arange(2, 13, 2), 'Thread  and 2 MPI'),
-        (path_global + '/../../data/timer/paper_mpi_vp_4/', np.arange(4, 13, 4), 'Thread  and 4 MPI'),
+        (path_global + '/../../data/timer/paper_time_thread/', np.arange(1, 10, 1), 'TR multithreading'),
+        (path_global + '/../../data/timer/paper_time_thread_multiprocessing/', np.arange(1, 10, 1), 'TR multiprocessing'),
     ]  # same data for the three case
     folders = [[] for i in folders_list]  # same data for the three case
     data = [[] for i in folders_list]  # same data for the three case
@@ -40,6 +38,8 @@ if __name__ == '__main__':
                            'nest_IO': None,
                            'tvb_sim': None,
                            'sim': None,
+                           'TR_nest_to_TVB': None,
+                           'TR_TVB_to_nest': None,
                            }
         # get data
         time_sim = []
@@ -48,6 +48,10 @@ if __name__ == '__main__':
         time_nest_wait = []
         time_TR_1_wait = []
         time_TR_2_wait = []
+        time_TR_1 = []
+        time_TR_2 = []
+        time_TR_3 = []
+        time_TR_4 = []
         time_nest_tot = []
         time_TVB_sim = []
         time_TVB_IO = []
@@ -112,13 +116,16 @@ if __name__ == '__main__':
         data[index_run]['tvb_sim'] = np.mean(time_TVB_sim, axis=1)
         data[index_run]['sim'] = np.mean(time_sim, axis=1)
 
+
     fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, figsize=figsize)
     # fig.suptitle('Mean performance of 10 runs for 20000 neurons with NEST', fontsize=20)
     data_name = ['sim', 'nest_IO', 'nest_sim', 'tvb_sim']
     axes = [ax1, ax2, ax3, ax4]
     color = ['r', 'c', 'b', 'm']
     markers = ['x', 'd', 'H', "^"]
-    titles = ['Time of the co-simulation', 'Time of NEST IO', 'Time of NEST simulation', 'Time of TVB simulation']
+    titles = ['Time of the co-simulation', 'Time of NEST IO',
+              'Time of NEST simulation', 'Time of TVB simulation'
+              ]
     max = [0 for i in range(len(axes))]
     for axe_id in range(len(axes)):
         for i in range(len(data)):
@@ -142,8 +149,9 @@ if __name__ == '__main__':
     fig.add_artist(Text(0.01, 0.74, "B", fontproperties={'size': 7}))
     fig.add_artist(Text(0.01, 0.50, "C", fontproperties={'size': 7}))
     fig.add_artist(Text(0.01, 0.26, "D", fontproperties={'size': 7}))
-    plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread.pdf', dpi=300)
-    plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread.png', dpi=150)
+    # plt.show()
+    plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_TR.pdf', dpi=300)
+    plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_TR.png', dpi=150)
 
     for axe_id, axe in enumerate(axes):
         plt.figure(figsize=figsize)
@@ -157,9 +165,9 @@ if __name__ == '__main__':
         plt.ylabel('Wall clock time of\n the simulation in s', fontsize=labelfont)
         plt.xlabel('Number of virtual processes of NEST', fontsize=labelfont)
         plt.subplots_adjust(left=0.09, right=0.99, bottom=0.06, top=0.99)
-        plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_' + data_name[axe_id] + '.pdf', dpi=300)
-        plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_' + data_name[axe_id] + '.png', dpi=150)
-    # plt.show()
+        plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_TR_' + data_name[axe_id] + '.pdf', dpi=300)
+        plt.savefig(path_global + '/../../data/figure/timer/science_compare_MPI_thread_TR_' + data_name[axe_id] + '.png', dpi=150)
+    plt.show()
 
     # figs = []
     # titles = ['nest_sim', 'nest_IO', 'tvb_sim', 'sim']

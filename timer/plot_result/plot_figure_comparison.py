@@ -3,7 +3,14 @@
 from timer.plot_result.get_time_data import get_dictionnary
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+from matplotlib.patches import Patch
+from matplotlib.lines import Line2D
 import numpy as np
+from matplotlib import rcParams, font_manager
+for s in font_manager.get_fontconfig_fonts():
+    if s.find('Myria') != -1:
+        font_manager.fontManager.addfont(s)
+rcParams['font.family'] = 'Myriad Pro'
 
 
 def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
@@ -11,9 +18,9 @@ def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
                ax,
                function=np.mean,
                log_option=False,
-               ylabel='Wall time of the simulation in s',
-               xlabel='Wall time of the simulation in s',
-               font_ticks_size=7,
+               ylabel='Wall time of\nthe simulation in s',
+               xlabel='Wall time of\nthe simulation in s',
+               font_ticks_size=8,
                legend_position=1
                ):
     """
@@ -34,45 +41,76 @@ def print_time(list_nb, time_sim, time_nest_sim, time_nest_IO, time_nest_wait,
     :param legend_position: position of the legend (see matplotlib)
     :return: figure
     """
-    ax.fill_between(list_nb,
-                    (function(time_TVB_sim, axis=1) + function(time_TVB_IO, axis=1)),
-                    function(time_sim, axis=1),
-                    color='y', label='co-simulation', alpha=0.2)
-    ax.fill_between(list_nb,
-                    np.zeros_like(function(time_nest_sim, axis=1)),
-                    (function(time_nest_sim, axis=1)),
-                    color=[255 / 255, 104 / 255, 65 / 255], label='NEST simulation', alpha=0.5, hatch='o')
-    ax.fill_between(list_nb,
-                    (function(time_nest_sim, axis=1)),
-                    (function(time_nest_IO, axis=1) + function(time_nest_sim, axis=1)),
-                    color=[255 / 255, 104 / 255, 65 / 255], label='NEST IO', alpha=0.5, hatch='oo')
-    ax.fill_between(list_nb,
-                    (function(time_nest_IO, axis=1) + function(time_nest_sim, axis=1)),
-                    (function(time_nest_wait, axis=1) + function(time_nest_IO, axis=1) + function(time_nest_sim,
-                                                                                                  axis=1)),
-                    color=[255 / 255, 104 / 255, 65 / 255], label='NEST wait', alpha=0.5, hatch='.')
-    ax.fill_between(list_nb,
-                    np.zeros_like(function(time_TVB_sim, axis=1)),
-                    (function(time_TVB_sim, axis=1)),
-                    color=[71 / 255, 164 / 255, 226 / 255], label='TVB simulation', alpha=1.0, facecolor="none",
-                    hatch='|')
-    ax.fill_between(list_nb,
-                    (function(time_TVB_sim, axis=1)),
-                    (function(time_TVB_sim, axis=1) + function(time_TVB_IO, axis=1)),
-                    color=[71 / 255, 164 / 255, 226 / 255], label='TVB IO', alpha=1.0, hatch='\\', facecolor="none")
+    legends = []
+    line_total = ax.plot(list_nb,
+                         function(time_sim, axis=1),
+                         color='y', label='co-simulation', alpha=1.0)
+    legends.append({'label': line_total[0].get_label(), 'color': line_total[0].get_color(), 'hatch': None})
+    zone = ax.fill_between(list_nb,
+                           np.zeros_like(function(time_nest_wait, axis=1)),
+                           (function(time_nest_wait, axis=1)),
+                           color=[255 / 255, 104 / 255, 65 / 255], label='NEST wait', alpha=0.5, hatch='.')
+    legends.append({'label': zone.get_label(), 'color': zone.get_facecolor(),
+                    'edgecolor': zone.get_edgecolor(), 'hatch': zone.get_hatch()})
+    zone = ax.fill_between(list_nb,
+                           (function(time_nest_wait, axis=1)),
+                           (function(time_nest_sim, axis=1) + function(time_nest_wait, axis=1)),
+                           color=[255 / 255, 104 / 255, 65 / 255], label='NEST simulation', alpha=0.5, hatch='oo')
+    legends.append({'label': zone.get_label(), 'color': zone.get_facecolor(),
+                    'edgecolor': zone.get_edgecolor(), 'hatch': zone.get_hatch()})
+    zone = ax.fill_between(list_nb,
+                           (function(time_nest_sim, axis=1) + function(time_nest_wait, axis=1)),
+                           (function(time_nest_wait, axis=1) + function(time_nest_sim, axis=1) + function(time_nest_IO,
+                                                                                                          axis=1)),
+                           color=[255 / 255, 104 / 255, 65 / 255], label='NEST IO', alpha=0.5, hatch='oooo')
+    legends.append({'label': zone.get_label(), 'color': zone.get_facecolor(),
+                    'edgecolor': zone.get_edgecolor(), 'hatch': zone.get_hatch()})
+    zone = ax.fill_between(list_nb,
+                           np.zeros_like(function(time_TVB_IO, axis=1)),
+                           (function(time_TVB_IO, axis=1)),
+                           color=[71 / 255, 164 / 255, 226 / 255], label='TVB IO', alpha=1.0, hatch='\\',
+                           facecolor="none",
+                           )
+    legends.append({'label': zone.get_label(), 'color': zone.get_facecolor(),
+                    'edgecolor': zone.get_edgecolor(), 'hatch': zone.get_hatch()})
+    zone = ax.fill_between(list_nb,
+                           (function(time_TVB_IO, axis=1)),
+                           (function(time_TVB_IO, axis=1) + function(time_TVB_sim, axis=1)),
+                           color=[71 / 255, 164 / 255, 226 / 255], label='TVB simulation', alpha=1.0, hatch='|',
+                           facecolor="none")
+    legends.append({'label': zone.get_label(), 'color': zone.get_facecolor(),
+                    'edgecolor': zone.get_edgecolor(), 'hatch': zone.get_hatch()})
     # plt.ylim(ymin=0.0)
+    plt.yscale('log')
     if log_option:
         plt.xscale('log')
-    plt.legend(fontsize=font_ticks_size, loc=legend_position)
+    if legend_position != -1:
+        # construct proxy artist patches
+        leg_artists = []
+        labels = []
+        for i in range(len(legends)):
+            if legends[i]['hatch'] is None:
+                # p = Line2D([], [], color=legends[i]['color'])
+                p = ax.get_legend_handles_labels()[0][0]
+            else:
+                if legends[i]['color'].shape[0] == 0:
+                    p = Patch(facecolor='white', edgecolor=legends[i]['edgecolor'][0], hatch=legends[i]['hatch'])
+                else:
+                    p = Patch(facecolor=legends[i]['color'][0],
+                              edgecolor=legends[i]['edgecolor'][0], hatch=legends[i]['hatch'])
+
+            leg_artists.append(p)
+            labels.append(legends[i]['label'])
+        plt.legend(leg_artists, labels, fontsize=font_ticks_size, loc=legend_position)
     plt.tick_params(axis='both', labelsize=font_ticks_size, pad=1)
     ax.set_ylabel(ylabel, fontsize=font_ticks_size, labelpad=0)
     ax.set_xlabel(xlabel, fontsize=font_ticks_size, labelpad=0)
 
 
 def plot_compare(ax, data, folders_list,
-                 ylabel='Wall time of the simulation in s',
+                 ylabel='Wall time of\nthe simulation in s',
                  xlabel='Number of virtual processes of NEST',
-                 font_ticks_size=7,
+                 font_ticks_size=8,
                  legend_position=1, ymax=None):
     """
 
@@ -279,14 +317,14 @@ if __name__ == '__main__':
          'Number of neurons simulated with NEST'),
         (path_global + '/../../data/timer/paper_time_synch/',
          [0.1, 0.2, 0.4, 0.5, 0.8, 0.9, 1.0, 1.1, 1.3, 1.5, 1.6, 1.7, 1.8, 2.0, 2.1],
-         'Time of synchronization between\n NEST and TVB (in ms)'),
+         'Time of synchronization between NEST and TVB (in ms)                     '),
     ]  # same data for the three case
-    fig = plt.figure(figsize=(2.92, 5.35))
+    fig = plt.figure(figsize=(2.65, 4.4))
     grid = gridspec.GridSpec(3, 1, figure=fig)
     add_figure(fig.add_subplot(grid[0, 0]), folders_list_one[0][0], folders_list_one[0][1], folders_list_one[0][2],
-               log_option=True, legend_position=2)
+               log_option=True, legend_position=3)
     add_figure(fig.add_subplot(grid[1, 0]), folders_list_one[1][0], folders_list_one[1][1], folders_list_one[1][2],
-               log_option=False, legend_position=1)
+               log_option=False, legend_position=-1)
     folders_list_compare = [
         (path_global + '/../../data/timer/paper_mpi/', np.arange(1, 13, 1), 'only MPI'),
         (path_global + '/../../data/timer/paper_time_thread/', np.arange(1, 13, 1), 'only Thread'),
@@ -294,8 +332,10 @@ if __name__ == '__main__':
         (path_global + '/../../data/timer/paper_mpi_vp_4/', np.arange(4, 13, 4), 'Thread  and 4 MPI'),
     ]  # same data for the three case
     add_figure_compare(fig.add_subplot(grid[2, 0]), folders_list_compare, legend_position=2)
+    plt.xticks([0, 2, 4, 6, 8, 10, 12])
 
-    plt.subplots_adjust(top=0.98, bottom=0.06, left=0.14, right=0.99, hspace=0.26, wspace=0.25)
+    plt.subplots_adjust(top=0.998, bottom=0.072, left=0.2, right=0.99, hspace=0.27, wspace=0.25)
 
     # plt.show()
-    plt.savefig(path_global + '/../../data/figure/figure_3_compare.pdf')
+    plt.savefig(path_global + '/../../data/figure/figure_3_compare.pdf', dpi=300)
+    plt.savefig(path_global + '/../../data/figure/figure_3_compare.svg', dpi=300)
