@@ -37,7 +37,7 @@ if __name__ == "__main__":
                          electrodes_position=[[76, 62]], reverse=False
                          )
     plt.subplots_adjust(top=1.0, bottom=0., left=0.0, right=1.0, hspace=0.0, wspace=0.0)
-    plt.savefig(path + '/../data/figure/fig_2_cross_section.png', dpi=300)
+    plt.savefig(path + '/../data/figure/fig_2_cross_section.pdf', dpi=300)
 
     ## plot electrode
     path_LFP = path + "/../data/local_cluster/case_regular_burst/LFPY/v1/pop_1_/populations/"
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     MEAutility.plot_probe(electrodeParams['probe'], ax=ax)
     plt.axis('off')
     plt.subplots_adjust(top=1.0, bottom=0., left=0.0, right=1.0, hspace=0.0, wspace=0.0)
-    plt.savefig(path+'/../data/figure/fig_2_electrode.png', dpi=300)
+    plt.savefig(path+'/../data/figure/fig_2_electrode.pdf', dpi=300)
 
     # print electrode in the middle of neurons
     fig = plt.figure(figsize=(2.22, 1.01))
@@ -69,7 +69,7 @@ if __name__ == "__main__":
                            electrodeParams=electrodeParams,
                            fraction=0.1)
     plt.subplots_adjust(top=1.0, bottom=0., left=0.0, right=1.0, hspace=0.0, wspace=0.0)
-    plt.savefig(path + '/../data/figure/fig_2_electrode_neurons.png', dpi=300)
+    plt.savefig(path + '/../data/figure/fig_2_electrode_neurons.pdf', dpi=300)
 
     ## mouse brian with electrode
     print_mouse(path+'/parameter/data_mouse/', 'mouse_brain.stl', 'centres.txt',
@@ -77,7 +77,7 @@ if __name__ == "__main__":
                 Nest_node=[26, 78],
                 electrode='electrode_hypocampus.txt', electrode_ECOG='sensor_hypocampus.txt',
                 transparency=0.2,  # or 1.0
-                save_path=path + '../data/figure/fig_2_mouse_elect.png',
+                save_path=path + '../data/figure/fig_2_mouse_elect.pdf',
                 figsize=(1200, 1200)
                 )
 
