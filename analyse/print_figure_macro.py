@@ -12,7 +12,11 @@ from nest_elephant_tvb.transformation.transformation_function.rate_spike import 
 from analyse.get_data import get_data_all, get_rate
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
-
+from matplotlib import rcParams, font_manager
+for s in font_manager.get_fontconfig_fonts():
+    if s.find('Myria') != -1:
+        font_manager.fontManager.addfont(s)
+rcParams['font.family'] = 'Myriad Pro'
 
 def format_hist(dt):
     """
@@ -64,15 +68,15 @@ def bin_array(array, BIN, time_array, N, Dt):
 
 
 def print_figure_macro_one(param, begin, end, spikes_ex, spikes_in, TVB_data,
-                         grid=None, nb_grid=0, fig=None,
-                         font_ticks_size=7, font_labels={'size': 7}
+                         grid=None, nb_grid=0, fig=None, ax2=None,
+                         font_ticks_size=8, font_labels={'size': 8}
                          ):
     """
     print TVB figure
     :param param: parameter of the figure
     :param begin: start of measure
     :param end: en of measure
-    :param spikes_ex: spike of excitaotry neurons
+    :param spikes_ex: spike of excitatory neurons
     :param spikes_in: spikes of inhibitory neurons
     :param TVB_data: rate of regions
     :param grid: grid where to plot the result
@@ -143,7 +147,7 @@ def print_figure_macro_one(param, begin, end, spikes_ex, spikes_in, TVB_data,
     # histogram
     ax_hist_ex.plot(time_array + begin, hist_ex, 'r', linewidth=0.1, alpha=0.2)
     if nb_grid == 2:
-        ax_hist_ex.set_ylabel('IFR (Hz)    ', labelpad=-2, fontdict=font_labels, )
+        ax_hist_ex.set_ylabel('IFR (Hz)     ', labelpad=-2, fontdict=font_labels, )
     else:
         ax_hist_ex.set_ylabel('IFR (Hz)', labelpad=2, fontdict=font_labels, )
     # ax_hist_ex.set_xlabel('time in ms')
@@ -179,22 +183,50 @@ def print_figure_macro_one(param, begin, end, spikes_ex, spikes_in, TVB_data,
     # print rate
     max_rate = np.nanmax(state_variable[:, 1, :]) * 1e3
     print(max_rate)
-    for i in range(nb_regions):
+    random_region = [0, 15, 18, 21, 26, 29, 35, 37, 38, 40, 42, 43, 61, 63, 65, 78, 82, 98]
+    for index, i in enumerate(random_region):#range(nb_regions):
         if i in [26, 78]:
-            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + i * max_rate, 'k', linewidth=1.0)
+            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + index * max_rate, 'k', linewidth=1.0)
         else:
-            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + i * max_rate, 'r', linewidth=0.8)
-            ax_rate.plot(state_times, state_variable[:, 1, i] * 1e3 + i * max_rate, 'b', linewidth=00.8)
-    position = [i * max_rate + max_rate / 2 for i in
-                np.array(np.around(np.linspace(0, nb_regions - 1, 5)), dtype=int)]
-    position_label = [i for i in np.array(np.around(np.linspace(0, nb_regions - 1, 5)), dtype=int)]
+            ax_rate.plot(state_times, state_variable[:, 0, i] * 1e3 + index * max_rate, 'r', linewidth=0.5)
+            ax_rate.plot(state_times, state_variable[:, 1, i] * 1e3 + index * max_rate, 'b', linewidth=0.5)
+    position_label = random_region
+    position = [index * max_rate + max_rate / 2 for index, i in enumerate(random_region)]
     ax_rate.set_yticklabels(position_label)
     ax_rate.set_yticks(position)
     ax_rate.set_xlabel('Time (ms)', labelpad=1, fontdict=font_labels)
-    ax_rate.set_ylabel('Region Id', labelpad=-6, fontdict=font_labels)
-    ax_rate.set_ylim(ymin=-max_rate, ymax=max_rate * (nb_regions + 1.0))
+    ax_rate.set_ylabel('Region Id', labelpad=2, fontdict=font_labels)
+    ax_rate.set_ylim(ymin=-max_rate, ymax=max_rate * (len(random_region) + 1.0))
     ax_rate.set_xlim(xmin=begin - 100, xmax=end + 100)
     ax_rate.tick_params(axis='both', labelsize=font_ticks_size)
+    ax_rate.spines['right'].set_visible(False)
+    ax_rate.spines['top'].set_visible(False)
+    ax_rate.plot([end + 100, end + 100], [0, 10], lw=2, color='k', clip_on=False)
+    ax_rate.text(end + 150, 0, '10 Hz', fontdict=font_labels, color='k', rotation='vertical')
+
+
+    # print rate
+    if ax2 is not None:
+        for i in range(nb_regions):
+            if i in [26, 78]:
+                ax2.plot(state_times, state_variable[:, 0, i] * 1e3 + i * max_rate, 'k', linewidth=1.0)
+            else:
+                ax2.plot(state_times, state_variable[:, 0, i] * 1e3 + i * max_rate, 'r', linewidth=0.5)
+                ax2.plot(state_times, state_variable[:, 1, i] * 1e3 + i * max_rate, 'b', linewidth=0.5)
+        position = [i * max_rate + max_rate / 2 for i in
+                    np.array(np.around(np.linspace(0, nb_regions - 1, 5)), dtype=int)]
+        position_label = [i for i in np.array(np.around(np.linspace(0, nb_regions - 1, 5)), dtype=int)]
+        ax2.set_yticklabels(position_label)
+        ax2.set_yticks(position)
+        ax2.set_xlabel('Time (ms)', labelpad=1, fontdict=font_labels)
+        ax2.set_ylabel('Region Id', labelpad=2, fontdict=font_labels)
+        ax2.set_ylim(ymin=-max_rate, ymax=max_rate * (nb_regions + 1.0))
+        ax2.set_xlim(xmin=begin - 100, xmax=end + 100)
+        ax2.tick_params(axis='both', labelsize=font_ticks_size)
+        ax2.spines['right'].set_visible(False)
+        ax2.spines['top'].set_visible(False)
+        ax2.plot([end + 100, end + 100], [0, 10], lw=2, color='k', clip_on=False)
+        ax2.text(end + 150, 0, '10 Hz', fontdict=font_labels, color='k', rotation='vertical')
 
     # ECOG
     for index, ax in enumerate([ECOG_1, ECOG_2]):
@@ -211,10 +243,18 @@ def print_figure_macro_one(param, begin, end, spikes_ex, spikes_in, TVB_data,
     plt.setp(ECOG_1.get_xticklabels(), visible=True)
     ECOG_1.tick_params(axis='x', which='both', left='on',
                        bottom='on', labelbottom='on', length=1.0, labelsize=font_ticks_size)
+    ECOG_1.spines['right'].set_visible(False)
+    ECOG_1.spines['top'].set_visible(False)
+    ECOG_1.plot([end + 200, end + 200], [max_ecog, max_ecog + 10], lw=2, color='k', clip_on=False)
+    ECOG_1.text(end + 400, max_ecog, r'100 $\mu$V', fontdict=font_labels, color='k', rotation='vertical')
     ECOG_2.set_xlabel('Time (ms)', labelpad=1, fontdict=font_labels)
     plt.setp(ECOG_2.get_xticklabels(), visible=True)
     ECOG_2.tick_params(axis='x', which='both', left='on',
                        bottom='on', labelbottom='on', length=1.0, labelsize=font_ticks_size)
+    ECOG_2.spines['right'].set_visible(False)
+    ECOG_2.spines['top'].set_visible(False)
+    ECOG_2.plot([end + 200, end + 200], [max_ecog, max_ecog + 10], lw=2, color='k', clip_on=False)
+    ECOG_2.text(end + 400, max_ecog, r'100 $\mu$V', fontdict=font_labels, color='k', rotation='vertical')
 
 
 def print_figure_macro(parameters, begin, end, path):
@@ -226,28 +266,35 @@ def print_figure_macro(parameters, begin, end, path):
     :param path: path of the figure
     :return:
     """
-    fig = plt.figure(figsize=(6.8, 8.56))
-    plt.subplots_adjust(top=0.99, bottom=0.05, left=0.06, right=0.99, hspace=0.13, wspace=0.13)
+    fig = plt.figure(figsize=(6.8, 6.83))
     # plt.suptitle(param['title'])
     grid = gridspec.GridSpec(len(parameters), 1, figure=fig)
     for index, param in enumerate(parameters):
+        fig_2 = plt.figure(figsize=(6.8, 6.8))
+        ax2 = plt.gca()
         data = get_data_all(param['result_path'] + '/nest/')
         rates = get_rate(param['result_path'] + '/tvb/')
         rates[1] = np.load(param['result_path'] + '/tvb/ECOG.npy', allow_pickle=True)
         print_figure_macro_one(
             param, begin, end, data['pop_1_ex'], data['pop_1_in'], rates,
-            grid=grid, nb_grid=index, fig=fig
+            grid=grid, nb_grid=index, fig=fig, ax2=ax2
         )
         print(index)
+        fig_2.subplots_adjust(top=1.0, bottom=0.045, left=0.04, right=0.98)
+        fig_2.savefig(path+"/../data/figure/TVB_region"+str(index)+".pdf", dpi=300)
+        fig_2.savefig(path+"/../data/figure/TVB_region"+str(index)+".png", dpi=300)
+        plt.close(fig_2)
 
     # add letters
-    fig.add_artist(Text(0.01, 0.99, "a", fontproperties={'size': 7}))
-    fig.add_artist(Text(0.01, 0.66, "b", fontproperties={'size': 7}))
-    fig.add_artist(Text(0.01, 0.34, "c", fontproperties={'size': 7}))
+    fig.add_artist(Text(0.01, 0.985, "a", fontproperties={'size': 9, }))
+    fig.add_artist(Text(0.01, 0.66, "b", fontproperties={'size': 9}))
+    fig.add_artist(Text(0.01, 0.34, "c", fontproperties={'size': 9}))
+    fig.subplots_adjust(top=0.99, bottom=0.048, left=0.06, right=0.98, hspace=0.17, wspace=0.13)
 
     # plt.show()
-    plt.savefig(path+"/../data/figure/TVB_figure.pdf", dpi=300)
-    plt.savefig(path+"/../data/figure/TVB_figure.png", dpi=150)
+    fig.savefig(path+"/../data/figure/TVB_figure_science.pdf", dpi=300)
+    fig.savefig(path+"/../data/figure/TVB_figure_science.png", dpi=300)
+
 
 
 if __name__ == '__main__':

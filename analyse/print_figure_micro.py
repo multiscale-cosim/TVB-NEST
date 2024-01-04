@@ -2,7 +2,6 @@
 # "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "
 import copy
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.ticker as ticker
@@ -13,6 +12,11 @@ from analyse.LFPY.example_plotting import plot_signal_sum
 from analyse.get_data import get_data_all
 
 np.set_printoptions(linewidth=300, precision=1, threshold=100000)
+from matplotlib import rcParams, font_manager
+for s in font_manager.get_fontconfig_fonts():
+    if s.find('Myria') != -1:
+        font_manager.fontManager.addfont(s)
+rcParams['font.family'] = 'Myriad Pro'
 
 
 def compute_rate(data, time, N, Dt):
@@ -39,7 +43,7 @@ def compute_rate(data, time, N, Dt):
 def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
                            V_excitatory=None, V_inhibitory=None, W_excitatory=None, W_inhibitory=None,
                            size_neurons=0.1, spectogram=None, path_LFP='.', LFP_inc=300.0, LFP_start=0.0,
-                           grid=None, nb_grid=0, hspace=0.25, fig=None, font_ticks_size=7, font_labels={'size': 7},
+                           grid=None, nb_grid=0, hspace=0.25, fig=None, font_ticks_size=8, font_labels={'size': 8},
                            labelpad_hist_incr=0, nbins_x=5, nbins_y=4):
     """
     print the result of Nest
@@ -148,17 +152,17 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     else:
         grid = gridspec.GridSpecFromSubplotSpec(3, 3, subplot_spec=grid[nb_grid, 0], hspace=hspace)
 
-    grid_neuron = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=grid[:2, 0], hspace=0.001)
+    grid_neuron = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=grid[:2, 0], hspace=0.02)
     ax_V = fig.add_subplot(grid_neuron[0, 0])
     ax_W = fig.add_subplot(grid_neuron[1, 0])
-    grid_last = gridspec.GridSpecFromSubplotSpec(1, 90, subplot_spec=grid[2, :])
-    ax_LFP = fig.add_subplot(grid_last[0, :21])
-    grid_spike = gridspec.GridSpecFromSubplotSpec(7, 1, subplot_spec=grid[:2, 1:], hspace=0.01)
+    ax_LFP = fig.add_subplot(grid[2, 0]) #fig.add_subplot(grid_last[0, :30])
+    grid_spike = gridspec.GridSpecFromSubplotSpec(7, 1, subplot_spec=grid[:2, 1:], hspace=0.02)
     ax_spike_train = fig.add_subplot(grid_spike[:3, 0])
     ax_hist_ex = fig.add_subplot(grid_spike[3:5, 0])
     ax_hist_in = fig.add_subplot(grid_spike[5:, 0])
-    ax_frequency_1 = fig.add_subplot(grid_last[0, 30:35])
-    ax_frequency_2 = fig.add_subplot(grid_last[0, 35:85])
+    grid_last = gridspec.GridSpecFromSubplotSpec(1, 60, subplot_spec=grid[2, 1:])
+    ax_frequency_1 = fig.add_subplot(grid_last[0, 0:8])
+    ax_frequency_2 = fig.add_subplot(grid_last[0, 8:55])
 
     # Voltage
     for a in range(10):
@@ -171,8 +175,9 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_V.plot(time_V_in, max_V_in, 'b--', linewidth=0.1)
     ax_V.plot(time_V_in, min_V_in, 'b--', linewidth=0.1)
     ax_V.set_ylim([-90, -30])
+    ax_V.set_yticks([-80, -60, -30])
     ax_V.set_xlim([begin, end])
-    ax_V.set_ylabel('V in (mV)', labelpad=-1, fontdict=font_labels)
+    ax_V.set_ylabel('V in (mV)', labelpad=3, fontdict=font_labels)
     ax_V.spines["right"].set_visible(False)
     ax_V.yaxis.set_ticks_position('left')
     ax_V.spines["bottom"].set_visible(False)
@@ -194,11 +199,13 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_W.plot(time_W_in, max_W_in, 'b--', linewidth=0.1)
     ax_W.plot(time_W_in, min_W_in, 'b--', linewidth=0.1)
     if nb_grid == 0:
-        ax_W.set_ylabel('W in (pA)', labelpad=3, fontdict=font_labels)
+        ax_W.set_ylabel('W in (pA)', labelpad=2, fontdict=font_labels)
     else:
-        ax_W.set_ylabel('W in (pA)', labelpad=0, fontdict=font_labels)
+        ax_W.set_ylabel('W in (pA)', labelpad=-1, fontdict=font_labels)
     ax_W.set_xlabel('Time (ms)', fontdict=font_labels)
     ax_W.set_xlim([begin, end])
+    max_W = np.around(np.max(max_W_ex), decimals=1)
+    ax_W.set_yticks([0.0, np.around(max_W/2, decimals=1), max_W])
     ax_W.spines["right"].set_visible(False)
     ax_W.yaxis.set_ticks_position('left')
     ax_W.locator_params(axis='x', nbins=nbins_x)
@@ -247,6 +254,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_spike_train.spines["right"].set_visible(False)
     ax_spike_train.yaxis.set_ticks_position('left')
     ax_spike_train.xaxis.set_ticks_position('bottom')
+    ax_spike_train.set_yticks([2*1e3, 5*1e3, 10*1e3])
     ax_spike_train.get_yticklabels()[0].set_visible(False)
     plt.setp(ax_spike_train.get_xticklabels(), visible=False)
     ax_spike_train.tick_params(axis='both', labelsize=font_ticks_size)
@@ -255,29 +263,33 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
 
     # histogram
     ax_hist_ex.plot(time_array + begin, hist_ex, 'r', linewidth=0.1)
-    ax_hist_ex.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2)
+    ax_hist_ex.set_ylabel('IFR (Hz)                   ', fontdict=font_labels, labelpad=2)
     ax_hist_ex.set_xlim([begin - 100, end + 100])
     ax_hist_ex.spines["top"].set_visible(False)
     ax_hist_ex.spines["right"].set_visible(False)
     ax_hist_ex.yaxis.set_ticks_position('left')
     ax_hist_ex.xaxis.set_ticks_position('bottom')
+    max_hist_ex = np.around(np.max(hist_ex), decimals=0)
+    ax_hist_ex.set_yticks([0, np.around(max_hist_ex/2, decimals=0), max_hist_ex])
     plt.setp(ax_hist_ex.get_xticklabels(), visible=False)
     ax_hist_ex.get_yticklabels()[0].set_visible(False)
     ax_hist_ex.tick_params(axis='both', labelsize=font_ticks_size)
     ax_hist_ex.locator_params(axis='y', nbins=nbins_y)
     ax_hist_in.plot(time_array + begin, hist_in, 'b', linewidth=0.1)
     ax_hist_in.set_xlabel('Time (ms)', fontdict=font_labels, labelpad=2)
-    ax_hist_in.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2 - labelpad_hist_incr)
+    # ax_hist_in.set_ylabel('IFR (Hz)', fontdict=font_labels, labelpad=2 - labelpad_hist_incr)
     ax_hist_in.set_xlim([begin - 100, end + 100])
     ax_hist_in.spines["top"].set_visible(False)
     ax_hist_in.spines["right"].set_visible(False)
+    max_hist_in = np.around(np.max(hist_in), decimals=0)
+    ax_hist_in.set_yticks([0, np.around(max_hist_in/2, decimals=0), max_hist_in])
     ax_hist_in.yaxis.set_ticks_position('left')
     ax_hist_in.xaxis.set_ticks_position('bottom')
     ax_hist_in.locator_params(axis='y', nbins=nbins_y)
 
     @ticker.FuncFormatter
     def format_hist(x, pos):
-        s = '{}'.format(x * 1.0)
+        s = "%.0f" % (x * 1.0)
         return s
 
     ax_hist_in.xaxis.set_major_formatter(format_hist)
@@ -290,7 +302,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     cax = plt.axes(
         [position_axis[2] + position_axis[0] + 0.01, position_axis[1], 0.02, position_axis[3]])
     cb = plt.colorbar(spectogram_plot[-1], cax=cax)
-    cb.set_label('power spectral density(DB)', fontdict=font_labels)
+    cb.set_label('Power spectral density (dB)', fontdict=font_labels)
     cb.ax.tick_params(axis='y', labelsize=font_ticks_size)
     cb.ax.locator_params(axis='y', nbins=nbins_y)
     ax_frequency_2.set_ylim(ymax=fmax, ymin=fmin)
@@ -298,7 +310,7 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     # FuncFormatter can be used as a decorator
     @ticker.FuncFormatter
     def major_formatter(x, pos):
-        return "%.1f" % (x * 1e3 + begin)
+        return "%.0f" % (x * 1e3 + begin)
 
     ax_frequency_2.xaxis.set_major_formatter(major_formatter)
     ax_frequency_2.set_xlabel('Time (ms)', fontdict=font_labels, labelpad=2)
@@ -322,12 +334,13 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
     ax_frequency_1.set_ylim(ymax=fmax, ymin=fmin)
     ax_frequency_1.set_xlim(xmax=vmax, xmin=vmin)
     ax_frequency_1.invert_xaxis()
-    position = [i for i in np.linspace(fmin + 50, fmax, nb_f)] + [freqs[np.argmax(psd)]]
-    position_label = [str(i) for i in np.linspace(fmin + 50, fmax, nb_f)] + [str(int(freqs[np.argmax(psd)]))]
+    position = [i for i in np.linspace(fmin + 50, fmax-20, nb_f)] + [freqs[np.argmax(psd)]]
+    position_label = [str(i) for i in np.linspace(fmin + 50, fmax-20, nb_f)] + [str(int(freqs[np.argmax(psd)]))]
     ax_frequency_1.set_yticklabels(position_label)
     ax_frequency_1.set_yticks(position)
+    ax_frequency_1.tick_params('y', pad=1)
     ax_frequency_1.get_yticklabels()[-1].set_color('r')
-    ax_frequency_1.set_ylabel('Frequency (Hz)', fontdict=font_labels, labelpad=2)
+    ax_frequency_1.set_ylabel('Frequency (Hz)', fontdict=font_labels, labelpad=0)
     ax_frequency_1.vlines(x=10 * np.log10(psd[np.argmax(psd)]),
                           ymin=fmin,
                           ymax=freqs[np.argmax(psd)],
@@ -345,9 +358,10 @@ def print_figure_micro_one(param, begin, end, spikes_ex, spikes_in,
         ax_frequency_1.set_xticklabels(position_label)
         ax_frequency_1.set_xticks(position)
         ax_frequency_1.get_xticklabels()[-1].set_color('r')
-    ax_frequency_1.set_xlabel('power spectral density (DB)', fontdict=font_labels, labelpad=2)
+    ax_frequency_1.set_xlabel('Power spectral density (dB)', fontdict=font_labels, labelpad=2)
     ax_frequency_1.tick_params(axis='both')
     ax_frequency_1.yaxis.set_ticks_position('both')
+    ax_frequency_1.yaxis.set_major_formatter(format_hist)
     ax_frequency_1.xaxis.set_ticks_position('bottom')
     ax_frequency_1.tick_params(axis='both', labelsize=font_ticks_size)
     print(freqs[np.argmax(psd)], psd[np.argmax(psd)])
@@ -369,8 +383,8 @@ def print_figure_micro(parameters, begin, end, labelpad_hist_incr, size_neurons=
     :param LFP_start: start for plotting LFP
     :return:
     """
-    fig = plt.figure(figsize=(6.8, 8.56))
-    plt.subplots_adjust(top=0.98, bottom=0.05, left=0.06, right=0.95, hspace=0.21, wspace=0.25)
+    fig = plt.figure(figsize=(6.8, 6.83))
+    plt.subplots_adjust(top=0.98, bottom=0.06, left=0.06, right=0.95, hspace=0.24, wspace=0.25)
     # plt.suptitle(param['title'])
     grid = gridspec.GridSpec(len(parameters), 1, figure=fig)
     for index, param in enumerate(parameters):
@@ -387,15 +401,16 @@ def print_figure_micro(parameters, begin, end, labelpad_hist_incr, size_neurons=
             grid=grid,
             nb_grid=index,
             fig=fig,
+            hspace=0.33,
             labelpad_hist_incr=labelpad_hist_incr[index],
         )
         # plt.show()
 
     # add letter of the graph
-    fig.add_artist(Text(0.01, 0.97, "a", fontproperties={'size': 7}))
-    fig.add_artist(Text(0.01, 0.64, "b", fontproperties={'size': 7}))
-    fig.add_artist(Text(0.01, 0.32, "c", fontproperties={'size': 7}))
-    plt.show()
+    fig.add_artist(Text(0.01, 0.97, "a", fontproperties={'size': 9}))
+    fig.add_artist(Text(0.01, 0.65, "b", fontproperties={'size': 9}))
+    fig.add_artist(Text(0.01, 0.32, "c", fontproperties={'size': 9}))
+    # plt.show()
 
     plt.savefig("../data/figure/Nest_figure.pdf", dpi=300)
     plt.savefig("../data/figure/Nest_figure.png", dpi=150)
@@ -444,8 +459,8 @@ def print_figure_micro_zoom(parameters, begin, end, labelpad_hist_incr, size_neu
 
     # plt.show()
 
-    plt.savefig("../data/figure/Nest_zoom_figure.pdf", dpi=300)
-    plt.savefig("../data/figure/Nest_zoom_figure.png", dpi=150)
+    plt.savefig("../data/figure/Nest_zoom_figure_science.pdf", dpi=300)
+    plt.savefig("../data/figure/Nest_zoom_figure_science.png", dpi=300)
 
 if __name__ == '__main__':
     import os
@@ -479,12 +494,12 @@ if __name__ == '__main__':
                                    'DBmax': -25,
                                    'fmin': 0.0,
                                    'fmax': 200.0,
-                                   'nb_f': 4,
+                                   'nb_f': 3,
                                    },
-                       path_LFP='/../LFPY/v2/pop_1_/',
+                       path_LFP='/../LFPY/v3/pop_1_/',
                        LFP_inc=100.0,
-                       LFP_start=500.0,
-                       labelpad_hist_incr=[0, 0, 4]
+                       LFP_start=1000.0,
+                       labelpad_hist_incr=[0, 0, 2]
                        )
     plt.close()
 
@@ -495,8 +510,8 @@ if __name__ == '__main__':
                                    'fmax': 200.0,
                                    'nb_f': 4,
                                    },
-                       path_LFP='/../LFPY/v2/pop_1_/',
+                       path_LFP='/../LFPY/v3/pop_1_/',
                        LFP_inc=100.0,
-                       LFP_start=500.0,
+                       LFP_start=2000.0,
                        labelpad_hist_incr=[4]
                        )
