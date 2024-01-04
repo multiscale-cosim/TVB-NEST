@@ -808,13 +808,13 @@ if __name__ == '__main__':
             os.system('nrnivmodl')
         COMM.Barrier()
     pathes = [
-        path_global + '/../../data/local_cluster/case_up_down/',
+        # path_global + '/../../data/local_cluster/case_up_down/',
         # path_global + '/../../data/local_cluster/case_asynchronous/',
-        # path_global + '/../../data/local_cluster/case_regular_burst_2/',
+        path_global + '/../../data/local_cluster/case_regular_burst/',
     ]
     for path in pathes:
-        generate_LFP(path, 'pop_1_', 44000.0, 44200.0, [0, 80], [8000, 20], name='/test/')
-        # generate_LFP(path, 'pop_1_', 42500.0, 53500.0, [0, 8000], [8000, 2000], name='/run/')
+        # generate_LFP(path, 'pop_1_', 44000.0, 44200.0, [0, 8000], [8000, 2000], name='/test/')
+        generate_LFP(path, 'pop_1_', 41000.0, 43000.0, [0, 8000], [8000, 2000], name='/run/')
         # generate_LFP(path,'pop_1_',[0,  8000],[8000,  2000],name='/small_init_test_3/')
         # generate_LFP(path,'small_pop_2',[10000,  8000],[18000,  2000],name='/small_init/')
         # generate_LFP(path,'pop_1_',[0,  8000],[8000,  2000],name='/small_init_test_image/')
